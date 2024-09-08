@@ -14,6 +14,7 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "preserve",
+        "types": ["element-plus/global"],
 
         /* Linting */
         "strict": true,
