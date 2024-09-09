@@ -24,7 +24,7 @@
                 </div>
             </div>
             <!-- 新建按钮 -->
-            <div class="newProject">
+            <div class="newProject" @click="pushEdit">
                 <el-icon><Plus /></el-icon>
             </div>
         </div>
@@ -32,7 +32,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { appWindow } from '@tauri-apps/api/window'
+
+const router = useRouter()
 
 const appList = ref([
     {
@@ -46,6 +50,15 @@ const appList = ref([
         appDesc: '我的第一个让UN就爱你',
     },
 ])
+
+// 跳转到新建页面
+const pushEdit = () => {
+    router.push('/edit')
+}
+
+onMounted(() => {
+    appWindow.setTitle('TurnApp')
+})
 </script>
 
 <style lang="scss" scoped>

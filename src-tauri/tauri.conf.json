@@ -15,6 +15,12 @@
             "shell": {
                 "all": false,
                 "open": true
+            },
+            "window": {
+                "all": true,
+                "create": true,
+                "center": true,
+                "setResizable": true
             }
         },
         "windows": [
