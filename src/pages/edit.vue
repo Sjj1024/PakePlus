@@ -3,7 +3,6 @@
         <div class="mainEdit">
             <el-form
                 ref="ruleFormRef"
-                style="max-width: 600px"
                 :model="ruleForm"
                 :rules="rules"
                 label-width="auto"
@@ -17,14 +16,16 @@
                 <el-form-item label="APP名称" prop="name">
                     <el-input v-model="ruleForm.name" />
                 </el-form-item>
-                <el-form-item label="APP标识" prop="name">
+                <el-form-item label="英文名称" prop="rename">
+                    <el-input v-model="ruleForm.rename" />
+                </el-form-item>
+                <el-form-item label="APP标识" prop="appid">
                     <el-input v-model="ruleForm.appid" />
                 </el-form-item>
-                <el-form-item label="打包平台" prop="platform">
+                <el-form-item label="预览平台" prop="platform">
                     <el-radio-group v-model="ruleForm.platform">
                         <el-radio value="desktop">桌面端</el-radio>
                         <el-radio value="phone">移动端</el-radio>
-                        <el-radio value="all">全平台</el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="APP描述" prop="desc">
@@ -33,9 +34,13 @@
             </el-form>
         </div>
         <div class="footerBox">
-            <el-button @click="backHome">返回</el-button>
+            <el-button @click="backHome">
+                <el-icon><ArrowLeft /></el-icon>
+            </el-button>
             <el-button @click="preview">预览</el-button>
-            <el-button>下一步</el-button>
+            <el-button @click="createRepo">
+                <el-icon><ArrowRight /></el-icon>
+            </el-button>
         </div>
     </div>
 </template>
@@ -46,6 +51,7 @@ import { appWindow } from '@tauri-apps/api/window'
 import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/tauri'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
+import github from '@/apis/github'
 
 const router = useRouter()
 
@@ -54,86 +60,52 @@ const ruleFormRef = ref<FormInstance>()
 const ruleForm = reactive({
     url: 'https://juejin.cn/',
     name: '掘金',
+    rename: 'Juejin',
     appid: 'HelloJuejin',
     platform: 'desktop',
-    region: '',
-    count: '',
-    date1: '',
-    date2: '',
-    delivery: false,
-    location: '',
-    type: [],
-    resource: '',
     desc: '',
 })
 
-const locationOptions = ['Home', 'Company', 'School']
-
 const rules = reactive<FormRules>({
-    name: [
-        {
-            required: true,
-            message: 'Please input Activity name',
-            trigger: 'blur',
-        },
-        { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
-    ],
-    region: [
+    url: [
         {
             required: true,
             message: 'Please select Activity zone',
             trigger: 'change',
         },
     ],
-    count: [
+    name: [
         {
             required: true,
-            message: 'Please select Activity count',
+            message: '请输入APP名称',
+            trigger: 'blur',
+        },
+    ],
+    rename: [
+        {
+            required: true,
+            message: '请输入APP英文名称',
+            trigger: 'blur',
+        },
+    ],
+    appid: [
+        {
+            required: true,
+            message: '请输入APPID',
             trigger: 'change',
         },
     ],
-    date1: [
-        {
-            type: 'date',
-            required: true,
-            message: 'Please pick a date',
-            trigger: 'change',
-        },
-    ],
-    date2: [
-        {
-            type: 'date',
-            required: true,
-            message: 'Please pick a time',
-            trigger: 'change',
-        },
-    ],
-    location: [
+    platform: [
         {
             required: true,
-            message: 'Please select a location',
-            trigger: 'change',
-        },
-    ],
-    type: [
-        {
-            type: 'array',
-            required: true,
-            message: 'Please select at least one activity type',
-            trigger: 'change',
-        },
-    ],
-    resource: [
-        {
-            required: true,
-            message: 'Please select activity resource',
+            message: '请选择预览平台',
             trigger: 'change',
         },
     ],
     desc: [
         {
-            required: true,
-            message: 'Please input activity form',
+            required: false,
+            message: '请输入APP描述',
             trigger: 'blur',
         },
     ],
@@ -144,30 +116,34 @@ const backHome = () => {
     router.push('/')
 }
 
-const submitForm = async (formEl: FormInstance | undefined) => {
+const resetForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return
-    await formEl.validate((valid, fields) => {
+    formEl.resetFields()
+}
+
+// 预览页面
+const preview = () => {
+    ruleFormRef.value?.validate((valid, fields) => {
         if (valid) {
-            console.log('submit!')
+            console.log('submit!', ruleForm)
+            invoke('open_docs', {
+                appUrl: ruleForm.url,
+                appName: ruleForm.name,
+                platform: ruleForm.platform,
+            })
         } else {
             console.log('error submit!', fields)
         }
     })
 }
 
-const resetForm = (formEl: FormInstance | undefined) => {
-    if (!formEl) return
-    formEl.resetFields()
-}
-
-const options = Array.from({ length: 10000 }).map((_, idx) => ({
-    value: `${idx + 1}`,
-    label: `${idx + 1}`,
-}))
-
-// 预览页面
-const preview = () => {
-    invoke('open_docs')
+// 创建仓库
+const createRepo = async () => {
+    const res: any = await github.creatProgect({
+        name: 'PakePlus',
+        default_branch_only: true,
+    })
+    console.log('createRepo', res)
 }
 
 onMounted(() => {
@@ -179,6 +155,7 @@ onMounted(() => {
 .editBox {
     .mainEdit {
         margin-top: 20px;
+        padding: 10px;
     }
     .footerBox {
         position: fixed;

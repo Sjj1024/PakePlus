@@ -1,10 +1,20 @@
 <template>
     <div class="homeBox">
         <div class="homeHeader">
-            <div class="headerTitle">APP管理</div>
-            <div class="headerTool">
-                <div class="toolTips">创建，编辑，调试APP</div>
-                <div class="control">管理</div>
+            <div>
+                <div class="headerTitle">
+                    <span>APP管理</span>
+                </div>
+                <div class="toolTips">
+                    <span>
+                        开源免费创建，编辑，调试打包跨平台APP，仅仅只需要一个Token
+                    </span>
+                    <el-icon class="tipsIcon"><InfoFilled /></el-icon>
+                </div>
+            </div>
+            <!-- 设置按钮 -->
+            <div class="setting" @click="dialogVisible = true">
+                <el-icon :size="26"><Setting /></el-icon>
             </div>
         </div>
         <div class="projectBox">
@@ -24,10 +34,34 @@
                 </div>
             </div>
             <!-- 新建按钮 -->
-            <div class="newProject" @click="pushEdit">
-                <el-icon><Plus /></el-icon>
+            <div class="project newProject" @click="pushEdit">
+                <el-icon :size="26"><Plus /></el-icon>
             </div>
         </div>
+        <el-dialog v-model="dialogVisible" width="500">
+            <template #header>
+                <div class="diaHeader">
+                    <span>配置Token</span>
+                    <el-icon class="diaTipsIcon"><Warning /></el-icon>
+                </div>
+            </template>
+            <div class="diaContent">
+                <el-input
+                    v-model="token"
+                    placeholder="请输入Token"
+                    class="tokenInput"
+                />
+                <el-button @click="testToken">测试</el-button>
+            </div>
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button @click="dialogVisible = false">取消</el-button>
+                    <el-button type="primary" @click="saveToken">
+                        确定
+                    </el-button>
+                </div>
+            </template>
+        </el-dialog>
     </div>
 </template>
 
@@ -35,8 +69,15 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { appWindow } from '@tauri-apps/api/window'
+import { ElMessageBox } from 'element-plus'
+import githubApi from '@/apis/github'
+import { ElMessage } from 'element-plus'
 
 const router = useRouter()
+
+const token = ref(localStorage.getItem('token') || '')
+
+const dialogVisible = ref(false)
 
 const appList = ref([
     {
@@ -56,27 +97,59 @@ const pushEdit = () => {
     router.push('/edit')
 }
 
+// 存储token
+const saveToken = () => {
+    dialogVisible.value = false
+    localStorage.setItem('token', token.value)
+}
+
+// 测试token是否可用
+const testToken = async () => {
+    const res: any = await githubApi.gitRatelimit()
+    // const res: any = getApiLimit()
+    console.log('testToken', res)
+    if (res.status === 200) {
+        ElMessage.success('Token可用')
+    } else {
+        ElMessage.error('Token不可用.')
+    }
+}
+
 onMounted(() => {
-    appWindow.setTitle('TurnApp')
+    appWindow.setTitle('PakePlus')
 })
 </script>
 
 <style lang="scss" scoped>
 .homeBox {
     .homeHeader {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
         .headerTitle {
             font-size: large;
             font-weight: bold;
+        }
+
+        .toolTips {
+            color: gray;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+
+            .tipsIcon {
+                margin-left: 6px;
+                cursor: pointer;
+            }
         }
 
         .headerTool {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-
-            .toolTips {
-                color: gray;
-            }
 
             .control {
                 color: #2a598a;
@@ -93,7 +166,6 @@ onMounted(() => {
         margin-top: 10px;
 
         .project {
-            width: 100%;
             height: 200px;
             border-radius: 5px;
             border: 1px solid gray;
@@ -120,15 +192,36 @@ onMounted(() => {
             }
         }
         .newProject {
-            width: 100%;
-            height: 200px;
-            border-radius: 5px;
-            border: 1px solid gray;
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
         }
+    }
+}
+
+.diaHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+
+    .diaTipsIcon {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+}
+
+.diaContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .tokenInput {
+        margin-right: 10px;
     }
 }
 </style>

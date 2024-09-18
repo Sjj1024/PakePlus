@@ -1,11 +1,17 @@
 #[tauri::command]
-pub async fn open_docs(handle: tauri::AppHandle) {
+pub async fn open_docs(
+    handle: tauri::AppHandle,
+    app_url: String,
+    app_name: String,
+    platform: String,
+) {
+    println!("Opening docs in external window: {}", app_url);
     let docs_window = tauri::WindowBuilder::new(
         &handle,
         "externaltauri", /* the unique window label */
-        tauri::WindowUrl::External("https://tauri.app/".parse().unwrap()),
+        tauri::WindowUrl::External(app_url.parse().unwrap()),
     )
-    .title("预览")
+    .title(app_name)
     .position(200.4, 100.4)
     .build()
     .unwrap();
