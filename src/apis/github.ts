@@ -27,4 +27,18 @@ export default {
             body,
         })
     },
+    // creat file contents
+    updateConfigFile(body: any) {
+        return http(`/repos/{owner}/{repo}/contents/{path}`, {
+            method: 'post',
+            body,
+        })
+    },
+    // creat file contents
+    updateMainRsFile(body: any) {
+        return http(`/repos/{owner}/{repo}/contents/{path}`, {
+            method: 'post',
+            body,
+        })
+    },
 }
