@@ -52,6 +52,7 @@ import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/tauri'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import github from '@/apis/github'
+import { ElMessage } from 'element-plus'
 
 const router = useRouter()
 
@@ -144,6 +145,14 @@ const createRepo = async () => {
         default_branch_only: true,
     })
     console.log('createRepo', res)
+    // 202 is ok
+    if (res.status === 202) {
+        localStorage.setItem('repoInfo', JSON.stringify(res.data))
+        ElMessage.success('Fork成功')
+    } else {
+        console.log('createRepo', res)
+        ElMessage.success('Fork失败')
+    }
 }
 
 onMounted(() => {
