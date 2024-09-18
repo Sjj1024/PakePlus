@@ -12,6 +12,10 @@
     "tauri": {
         "allowlist": {
             "all": false,
+            "http": {
+                "all": true,
+                "scope": ["https://api.github.com/*"]
+            },
             "shell": {
                 "all": false,
                 "open": true

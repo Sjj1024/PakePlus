@@ -53,6 +53,7 @@ export const getApiLimit = () => {
 const http = async (url: string, options: any = {}) => {
     if (!options.headers)
         options.headers = {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
             'User-Agent': 'PostmanRuntime/7.41.2',
         }
     if (options?.body) {

@@ -3,9 +3,13 @@ import { ResponseType } from '@tauri-apps/api/http'
 
 export default {
     // get github api rate limit
-    gitRatelimit() {
+    gitRatelimit(token: string) {
         return http('/rate_limit', {
             method: 'get',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'User-Agent': 'PostmanRuntime/7.41.2',
+            },
             responseType: ResponseType.JSON,
         })
     },

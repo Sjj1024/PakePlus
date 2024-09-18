@@ -69,7 +69,6 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { appWindow } from '@tauri-apps/api/window'
-import { ElMessageBox } from 'element-plus'
 import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 
@@ -105,11 +104,12 @@ const saveToken = () => {
 
 // 测试token是否可用
 const testToken = async () => {
-    const res: any = await githubApi.gitRatelimit()
+    const res: any = await githubApi.gitRatelimit(token.value)
     // const res: any = getApiLimit()
     console.log('testToken', res)
     if (res.status === 200) {
         ElMessage.success('Token可用')
+        localStorage.setItem('token', token.value)
     } else {
         ElMessage.error('Token不可用.')
     }
