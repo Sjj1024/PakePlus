@@ -142,7 +142,7 @@ const preview = () => {
 const createRepo = async () => {
     const res: any = await github.creatProgect({
         name: 'PakePlus',
-        default_branch_only: true,
+        default_branch_only: false,
     })
     console.log('createRepo', res)
     // 202 is ok
