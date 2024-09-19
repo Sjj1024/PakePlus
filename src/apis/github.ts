@@ -14,15 +14,38 @@ export default {
         })
     },
     // get github user info
-    gitUserInfo() {
+    gitUserInfo(token: string) {
         return http('/user', {
             method: 'get',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'User-Agent': 'PostmanRuntime/7.41.2',
+            },
             responseType: ResponseType.JSON,
         })
     },
+    // start repository
+    startProgect() {
+        return http(`/user/starred/Sjj1024/PakePlus`, {
+            method: 'put',
+        })
+    },
     // creat project repository
-    creatProgect(body: any) {
+    forkProgect(body: any) {
         return http(`/repos/Sjj1024/PakePlus/forks`, {
+            method: 'post',
+            body,
+        })
+    },
+    // get commit sha
+    getCommitSha(user: string, repo: string) {
+        return http(`/repos/${user}/${repo}/commits`, {
+            method: 'get',
+        })
+    },
+    // creat branch
+    createBranch(user: string, repo: string, body: any) {
+        return http(`/repos/${user}/${repo}/git/refs`, {
             method: 'post',
             body,
         })

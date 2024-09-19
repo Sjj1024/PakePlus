@@ -53,8 +53,11 @@ import { invoke } from '@tauri-apps/api/tauri'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import github from '@/apis/github'
 import { ElMessage } from 'element-plus'
+import { usePakeStore } from '@/store'
 
 const router = useRouter()
+
+const store = usePakeStore()
 
 const formSize = ref<ComponentSize>('default')
 const ruleFormRef = ref<FormInstance>()
@@ -138,20 +141,32 @@ const preview = () => {
     })
 }
 
-// 创建仓库
+// 创建分支
 const createRepo = async () => {
-    const res: any = await github.creatProgect({
-        name: 'PakePlus',
-        default_branch_only: false,
-    })
-    console.log('createRepo', res)
-    // 202 is ok
-    if (res.status === 202) {
-        localStorage.setItem('repoInfo', JSON.stringify(res.data))
-        ElMessage.success('Fork成功')
+    // 创建分支：需要有上一次提交的commit sha
+    const res: any = await github.createBranch(
+        store.userInfo.login,
+        'PakePlus',
+        {
+            ref: `refs/heads/${ruleForm.rename}`,
+            sha: store.commit.sha,
+        }
+    )
+    console.log('createBranch', res)
+    // 201 is ok
+    if (res.status === 201) {
+        const branchInfo = {
+            name: ruleForm.rename,
+            ...res.data,
+        }
+        console.log('branchInfo success', branchInfo)
+        store.setCurrentProject(branchInfo)
+        ElMessage.success('项目创建成功')
+    } else if (res.status === 422) {
+        ElMessage.success('项目已经存在')
     } else {
-        console.log('createRepo', res)
-        ElMessage.success('Fork失败')
+        console.log('branchInfo error', res)
+        ElMessage.success(`项目创建失败: ${res.data.message}`)
     }
 }
 

@@ -14,6 +14,7 @@
             </div>
             <!-- 设置按钮 -->
             <div class="setting" @click="dialogVisible = true">
+                <span class="userName">{{ store.userInfo.login }}</span>
                 <el-icon :size="26"><Setting /></el-icon>
             </div>
         </div>
@@ -71,8 +72,11 @@ import { useRouter } from 'vue-router'
 import { appWindow } from '@tauri-apps/api/window'
 import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
+import { usePakeStore } from '@/store'
 
 const router = useRouter()
+
+const store = usePakeStore()
 
 const token = ref(localStorage.getItem('token') || '')
 
@@ -93,6 +97,8 @@ const appList = ref([
 
 // 跳转到新建页面
 const pushEdit = () => {
+    // 先获取一次sha，为后续工作做准备
+    getCommitSha()
     router.push('/edit')
 }
 
@@ -104,14 +110,47 @@ const saveToken = () => {
 
 // 测试token是否可用
 const testToken = async () => {
-    const res: any = await githubApi.gitRatelimit(token.value)
-    // const res: any = getApiLimit()
+    const res: any = await githubApi.gitUserInfo(token.value)
     console.log('testToken', res)
     if (res.status === 200) {
         ElMessage.success('Token可用')
+        // 本地存储并且fork仓库
         localStorage.setItem('token', token.value)
+        store.setUser(res.data)
+        forkProgect()
     } else {
         ElMessage.error('Token不可用.')
+    }
+}
+
+// fork仓库以及准备工作
+const forkProgect = async () => {
+    // fork仓库
+    const forkRes = await githubApi.forkProgect({
+        name: 'PakePlus',
+        default_branch_only: false,
+    })
+    console.log('forkRes', forkRes)
+    if (forkRes.status === 202) {
+        store.setRepository(forkRes.data)
+    }
+    // start仓库
+    const startRes = await githubApi.startProgect()
+    console.log('startRes', startRes)
+    if (startRes.status === 204) {
+        console.log('start仓库成功')
+    }
+}
+
+// 获取最后一次提交的commit sha
+const getCommitSha = async () => {
+    const res: any = await githubApi.getCommitSha(
+        store.userInfo.login,
+        'PakePlus'
+    )
+    console.log('getCommitSha', res.data[0])
+    if (res.status === 200) {
+        store.setCommitSha(res.data[0])
     }
 }
 
@@ -143,6 +182,16 @@ onMounted(() => {
             .tipsIcon {
                 margin-left: 6px;
                 cursor: pointer;
+            }
+        }
+
+        .setting {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            .userName {
+                margin-right: 6px;
             }
         }
 
