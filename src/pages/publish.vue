@@ -1,13 +1,9 @@
 <template>
-    <div>项目发布历史</div>
+    <div>发布页面</div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-
-// 打包后的历史记录
-
-// 可以提供下载地址
 </script>
 
 <style lang="scss" scoped></style>
