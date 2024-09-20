@@ -94,7 +94,7 @@
                     </el-radio-group>
                 </el-form-item>
             </el-form>
-            <span>注： 打包发布大概需要3分钟左右的时间，请耐心等待......</span>
+            <span>注： 打包发布大概需要5分钟左右的时间，请耐心等待......</span>
             <template #footer>
                 <div class="dialog-footer">
                     <el-button @click="centerDialogVisible = false"

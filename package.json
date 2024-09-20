@@ -8,6 +8,7 @@
         "build": "vue-tsc --noEmit && vite build",
         "preview": "vite preview",
         "tauri": "tauri",
+        "icon": "tauri icon",
         "tauri dev": "tauri dev"
     },
     "dependencies": {
