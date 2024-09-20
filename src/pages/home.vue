@@ -39,7 +39,7 @@
                 <el-icon :size="26"><Plus /></el-icon>
             </div>
         </div>
-        <el-dialog v-model="dialogVisible" width="500">
+        <el-dialog v-model="dialogVisible" width="500" center>
             <template #header>
                 <div class="diaHeader">
                     <span>配置Token</span>
@@ -57,6 +57,7 @@
             <template #footer>
                 <div class="dialog-footer">
                     <el-button @click="dialogVisible = false">取消</el-button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button type="primary" @click="saveToken">
                         确定
                     </el-button>
@@ -252,7 +253,7 @@ onMounted(() => {
 .diaHeader {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     font-size: 18px;
     font-weight: bold;
