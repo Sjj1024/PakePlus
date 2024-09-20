@@ -94,6 +94,7 @@
                     </el-radio-group>
                 </el-form-item>
             </el-form>
+            <span>注： 打包发布大概需要3分钟左右的时间，请耐心等待......</span>
             <template #footer>
                 <div class="dialog-footer">
                     <el-button @click="centerDialogVisible = false"
@@ -241,35 +242,42 @@ const preview = () => {
 
 // 创建分支
 const createRepo = async () => {
-    centerDialogVisible.value = true
-    // 创建分支：需要有上一次提交的commit sha
-    const res: any = await github.createBranch(
-        store.userInfo.login,
-        'PakePlus',
-        {
-            ref: `refs/heads/${appForm.rename}`,
-            sha: store.commit.sha,
+    appFormRef.value?.validate(async (valid, fields) => {
+        if (valid) {
+            console.log('submit!', appForm)
+            centerDialogVisible.value = true
+            // 创建分支：需要有上一次提交的commit sha
+            const res: any = await github.createBranch(
+                store.userInfo.login,
+                'PakePlus',
+                {
+                    ref: `refs/heads/${appForm.rename}`,
+                    sha: store.commit.sha,
+                }
+            )
+            console.log('createBranch', res)
+            // 201 is ok
+            if (res.status === 201) {
+                const branchInfo = {
+                    name: appForm.rename,
+                    ...res.data,
+                }
+                console.log('branchInfo success', branchInfo)
+                store.setCurrentProject(branchInfo)
+                ElMessage.success('项目创建成功')
+                // router.push('/publish')
+            } else if (res.status === 422) {
+                console.log('项目已经存在')
+                // ElMessage.success('项目已经存在')
+                // router.push('/publish')
+            } else {
+                console.log('branchInfo error', res)
+                ElMessage.success(`项目创建失败: ${res.data.message}`)
+            }
+        } else {
+            console.log('error submit!', fields)
         }
-    )
-    console.log('createBranch', res)
-    // 201 is ok
-    if (res.status === 201) {
-        const branchInfo = {
-            name: appForm.rename,
-            ...res.data,
-        }
-        console.log('branchInfo success', branchInfo)
-        store.setCurrentProject(branchInfo)
-        ElMessage.success('项目创建成功')
-        // router.push('/publish')
-    } else if (res.status === 422) {
-        console.log('项目已经存在')
-        // ElMessage.success('项目已经存在')
-        // router.push('/publish')
-    } else {
-        console.log('branchInfo error', res)
-        ElMessage.success(`项目创建失败: ${res.data.message}`)
-    }
+    })
 }
 
 // do not use same name with ref
