@@ -51,17 +51,21 @@ export default {
         })
     },
     // get file contents sha
-    getFileSha(user: string, repo: string, path: string) {
+    getFileSha(user: string, repo: string, path: string, params: any) {
         return http(`/repos/${user}/${repo}/contents/${path}`, {
             method: 'get',
+            params,
         })
     },
     // update build yml contents
     updateBuildYmlFile(user: string, repo: string, body: any) {
-        return http(`/repos/{owner}/{repo}/contents/{path}`, {
-            method: 'post',
-            body,
-        })
+        return http(
+            `/repos/${user}/${repo}/contents/.github/workflows/build.yml`,
+            {
+                method: 'put',
+                body,
+            }
+        )
     },
     // creat file contents
     updateConfigFile(user: string, repo: string, body: any) {

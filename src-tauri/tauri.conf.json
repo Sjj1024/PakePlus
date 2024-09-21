@@ -47,7 +47,11 @@
             "active": true,
             "targets": "all",
             "identifier": "com.pakeplus.app",
-            "resources": ["./data/example.json"],
+            "resources": [
+                "./data/example.json",
+                "./data/appbuild.yml",
+                "./data/appconfig.json"
+            ],
             "icon": [
                 "icons/32x32.png",
                 "icons/128x128.png",

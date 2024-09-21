@@ -251,32 +251,15 @@ const createRepo = async () => {
     })
 }
 
-// 获取需要更新的文件sha
-const getFileSha = async (filePath: string) => {
-    const res: any = await github.getFileSha(
-        store.userInfo.login,
-        'PakePlus',
-        filePath
-    )
-    console.log('getBranch', res)
-}
-
-// 更新build.yml文件内容
-const updateBuildYml = async () => {
-    const res: any = await github.updateBuildYmlFile(
-        store.userInfo.login,
-        'PakePlus',
-        {
-            message: 'update from 1024huijia',
-            content: 'Y3JlYXRlIGZpbGUgZnJvbSBJTlNPTU5JQQoK5oiR54ix5L2g54ix',
-            branch: '',
-        }
-    )
-    console.log('getBranch', res)
-    const branchInfo = res.data
-    const commitSha = branchInfo.commit.sha
-    console.log('commitSha', commitSha)
-}
+// // 获取需要更新的文件sha
+// const getFileSha = async (filePath: string) => {
+//     const res: any = await github.getFileSha(
+//         store.userInfo.login,
+//         'PakePlus',
+//         filePath
+//     )
+//     console.log('getBranch', res)
+// }
 
 // do not use same name with ref
 const form = reactive({

@@ -83,7 +83,7 @@
                 <div class="dialog-footer">
                     <el-button @click="branchDialog = false">取消</el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <el-button type="primary" @click="creatBranch">
+                    <el-button type="primary" @click="updateBuildYml">
                         确定
                     </el-button>
                 </div>
@@ -99,6 +99,7 @@ import { appWindow } from '@tauri-apps/api/window'
 import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
+import { invoke } from '@tauri-apps/api/tauri'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -191,6 +192,18 @@ const getCommitSha = async () => {
     }
 }
 
+// 获取需要更新的文件sha
+const getFileSha = async (filePath: string, branch: string) => {
+    const res: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
+        filePath,
+        { ref: branch }
+    )
+    console.log('getBranch', res)
+    return res.data.sha
+}
+
 // creat project branch
 const creatBranch = async () => {
     // checkout branch name is english
@@ -230,6 +243,33 @@ const creatBranch = async () => {
     } else {
         ElMessage.error('请输入纯英文项目名称')
     }
+}
+
+// 更新build.yml文件内容
+const updateBuildYml = async () => {
+    // get build.yml file sha
+    const shaRes = await getFileSha(
+        '.github/workflows/build.yml',
+        branchName.value
+    )
+    console.log('get build.yml file sha', shaRes)
+    // get build.yml file content
+    const content = await invoke('update_build_file', {
+        branch: branchName.value,
+    })
+    console.log('content', content)
+    // update build.yml file content
+    const updateRes: any = await githubApi.updateBuildYmlFile(
+        store.userInfo.login,
+        'PakePlus',
+        {
+            message: 'update from pakeplus',
+            content: content,
+            sha: shaRes,
+            branch: branchName.value,
+        }
+    )
+    console.log('updateRes', updateRes)
 }
 
 onMounted(() => {

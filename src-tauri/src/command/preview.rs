@@ -1,3 +1,6 @@
+use base64::prelude::*;
+use std::io::Read;
+
 #[tauri::command]
 pub async fn open_docs(
     handle: tauri::AppHandle,
@@ -26,4 +29,20 @@ pub async fn read_json_file(handle: tauri::AppHandle) -> String {
     let file = std::fs::File::open(&resource_path).unwrap();
     let lang_de: serde_json::Value = serde_json::from_reader(file).unwrap();
     return lang_de.to_string();
+}
+
+#[tauri::command]
+pub async fn update_build_file(handle: tauri::AppHandle, branch: String) -> String {
+    let resource_path = handle
+        .path_resolver()
+        .resolve_resource("data/appbuild.yml")
+        .expect("failed to resolve resource");
+    let mut build_file = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    build_file.read_to_string(&mut contents).unwrap();
+    contents = contents.replace("PROJECTNAME", branch.as_str());
+    println!("Updated build file: {}", contents);
+    // The new file content, using Base64 encoding
+    let encoded_contents = BASE64_STANDARD.encode(contents);
+    return encoded_contents;
 }

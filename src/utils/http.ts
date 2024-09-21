@@ -62,6 +62,10 @@ const http = async (url: string, options: any = {}) => {
             options.headers['Content-Type'] = 'multipart/form-data'
         }
     }
+    // get params
+    if (options?.params) {
+        url = `${url}?${new URLSearchParams(options.params)}`
+    }
     options = { ...commonOptions, ...options }
     console.log('request-------', buildFullPath(baseURL, url), options)
     return fetch(buildFullPath(baseURL, url), options)

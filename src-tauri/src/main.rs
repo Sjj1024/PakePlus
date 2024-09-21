@@ -8,7 +8,8 @@ fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             command::preview::open_docs,
-            command::preview::read_json_file
+            command::preview::read_json_file,
+            command::preview::update_build_file,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
