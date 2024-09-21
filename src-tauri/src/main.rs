@@ -6,7 +6,10 @@ mod command;
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![command::preview::open_docs])
+        .invoke_handler(tauri::generate_handler![
+            command::preview::open_docs,
+            command::preview::read_json_file
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

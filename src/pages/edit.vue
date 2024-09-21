@@ -37,6 +37,7 @@
                 <el-form-item label="APP图标" prop="icon">
                     <el-input
                         v-model="appForm.icon"
+                        readonly
                         @click="uploadIcon"
                         placeholder="例如：本地上传，支持png、jpg、jpeg格式"
                     />
@@ -101,10 +102,7 @@
                         >取消</el-button
                     >
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <el-button
-                        type="primary"
-                        @click="centerDialogVisible = false"
-                    >
+                    <el-button type="primary" @click="onSubmit">
                         确认
                     </el-button>
                 </div>
@@ -122,6 +120,7 @@ import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import github from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
+import { readTextFile, BaseDirectory } from '@tauri-apps/api/fs'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -134,8 +133,8 @@ const appForm = reactive({
     name: '掘金',
     rename: 'Juejin',
     appid: 'HelloJuejin',
-    icon: '',
-    version: '',
+    icon: 'default.png',
+    version: '1.0.1',
     platform: 'desktop',
     desc: '',
 })
@@ -286,10 +285,15 @@ const form = reactive({
     model: 'close',
 })
 
-const checkList = ref(['Value selected and disabled', 'Value A'])
-
-const onSubmit = () => {
-    console.log('submit!')
+const onSubmit = async () => {
+    centerDialogVisible.value = false
+    try {
+        const jsonContent: any = await invoke('read_json_file')
+        const data = JSON.parse(jsonContent)
+        console.log('json data:', data)
+    } catch (error) {
+        console.error('Error reading JSON file:', error)
+    }
 }
 
 onMounted(() => {

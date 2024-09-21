@@ -1,5 +1,5 @@
 {
-    "name": "turnapp",
+    "name": "pakeplus",
     "private": true,
     "version": "0.1.0",
     "type": "module",
@@ -9,7 +9,9 @@
         "preview": "vite preview",
         "tauri": "tauri",
         "icon": "tauri icon",
-        "tauri dev": "tauri dev"
+        "tauri dev": "tauri dev",
+        "tauri build": "tauri build",
+        "tauri preview": "tauri preview"
     },
     "dependencies": {
         "@element-plus/icons-vue": "^2.3.1",
