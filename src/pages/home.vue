@@ -83,7 +83,7 @@
                 <div class="dialog-footer">
                     <el-button @click="branchDialog = false">取消</el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <el-button type="primary" @click="updateBuildYml">
+                    <el-button type="primary" @click="creatBranch">
                         确定
                     </el-button>
                 </div>
@@ -166,7 +166,7 @@ const forkProgect = async () => {
     // fork仓库
     const forkRes = await githubApi.forkProgect({
         name: 'PakePlus',
-        default_branch_only: false,
+        default_branch_only: true,
     })
     console.log('forkRes', forkRes)
     if (forkRes.status === 202) {
@@ -201,7 +201,7 @@ const getFileSha = async (filePath: string, branch: string) => {
         { ref: branch }
     )
     console.log('getBranch', res)
-    return res.data.sha
+    return res
 }
 
 // creat project branch
@@ -226,12 +226,10 @@ const creatBranch = async () => {
             }
             console.log('branchInfo success', branchInfo)
             store.setCurrentProject(branchInfo)
-            ElMessage.success('项目创建成功')
             // update new branch build.yml文件内容
-
+            updateBuildYml()
             //  并更新tauri.config.json里面的内容
-
-            // router.push('/publish')
+            router.push('/publish')
         } else if (res.status === 422) {
             console.log('项目已经存在')
             // ElMessage.success('项目已经存在')
@@ -253,23 +251,31 @@ const updateBuildYml = async () => {
         branchName.value
     )
     console.log('get build.yml file sha', shaRes)
-    // get build.yml file content
-    const content = await invoke('update_build_file', {
-        branch: branchName.value,
-    })
-    console.log('content', content)
-    // update build.yml file content
-    const updateRes: any = await githubApi.updateBuildYmlFile(
-        store.userInfo.login,
-        'PakePlus',
-        {
-            message: 'update from pakeplus',
-            content: content,
-            sha: shaRes,
+    if (shaRes.status === 200) {
+        // get build.yml file content
+        const content = await invoke('update_build_file', {
             branch: branchName.value,
+        })
+        console.log('content', content)
+        // update build.yml file content
+        const updateRes: any = await githubApi.updateBuildYmlFile(
+            store.userInfo.login,
+            'PakePlus',
+            {
+                message: 'update from pakeplus',
+                content: content,
+                sha: shaRes.data.sha,
+                branch: branchName.value,
+            }
+        )
+        if (updateRes.status === 200) {
+            console.log('updateRes', updateRes)
+        } else {
+            console.log('updateRes error', updateRes)
         }
-    )
-    console.log('updateRes', updateRes)
+    } else {
+        console.log('getFileSha error', shaRes)
+    }
 }
 
 onMounted(() => {
