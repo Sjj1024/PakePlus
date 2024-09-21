@@ -245,38 +245,37 @@ const createRepo = async () => {
         if (valid) {
             console.log('submit!', appForm)
             centerDialogVisible.value = true
-            // 创建分支：需要有上一次提交的commit sha
-            const res: any = await github.createBranch(
-                store.userInfo.login,
-                'PakePlus',
-                {
-                    ref: `refs/heads/${appForm.rename}`,
-                    sha: store.commit.sha,
-                }
-            )
-            console.log('createBranch', res)
-            // 201 is ok
-            if (res.status === 201) {
-                const branchInfo = {
-                    name: appForm.rename,
-                    ...res.data,
-                }
-                console.log('branchInfo success', branchInfo)
-                store.setCurrentProject(branchInfo)
-                ElMessage.success('项目创建成功')
-                // router.push('/publish')
-            } else if (res.status === 422) {
-                console.log('项目已经存在')
-                // ElMessage.success('项目已经存在')
-                // router.push('/publish')
-            } else {
-                console.log('branchInfo error', res)
-                ElMessage.success(`项目创建失败: ${res.data.message}`)
-            }
         } else {
             console.log('error submit!', fields)
         }
     })
+}
+
+// 获取需要更新的文件sha
+const getFileSha = async (filePath: string) => {
+    const res: any = await github.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
+        filePath
+    )
+    console.log('getBranch', res)
+}
+
+// 更新build.yml文件内容
+const updateBuildYml = async () => {
+    const res: any = await github.updateBuildYmlFile(
+        store.userInfo.login,
+        'PakePlus',
+        {
+            message: 'update from 1024huijia',
+            content: 'Y3JlYXRlIGZpbGUgZnJvbSBJTlNPTU5JQQoK5oiR54ix5L2g54ix',
+            branch: '',
+        }
+    )
+    console.log('getBranch', res)
+    const branchInfo = res.data
+    const commitSha = branchInfo.commit.sha
+    console.log('commitSha', commitSha)
 }
 
 // do not use same name with ref

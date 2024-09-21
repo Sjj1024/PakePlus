@@ -50,8 +50,21 @@ export default {
             body,
         })
     },
+    // get file contents sha
+    getFileSha(user: string, repo: string, path: string) {
+        return http(`/repos/${user}/${repo}/contents/${path}`, {
+            method: 'get',
+        })
+    },
+    // update build yml contents
+    updateBuildYmlFile(user: string, repo: string, body: any) {
+        return http(`/repos/{owner}/{repo}/contents/{path}`, {
+            method: 'post',
+            body,
+        })
+    },
     // creat file contents
-    updateConfigFile(body: any) {
+    updateConfigFile(user: string, repo: string, body: any) {
         return http(`/repos/{owner}/{repo}/contents/{path}`, {
             method: 'post',
             body,

@@ -3,7 +3,7 @@
         <div class="homeHeader">
             <div>
                 <div class="headerTitle">
-                    <span>APP管理</span>
+                    <span>项目管理</span>
                 </div>
                 <div class="toolTips">
                     <span>
@@ -13,7 +13,7 @@
                 </div>
             </div>
             <!-- 设置按钮 -->
-            <div class="setting" @click="dialogVisible = true">
+            <div class="setting" @click="tokenDialog = true">
                 <span class="userName">{{ store.userInfo.login }}</span>
                 <el-icon :size="26"><Setting /></el-icon>
             </div>
@@ -34,12 +34,13 @@
                     <div class="appDesc">我的第一个让UN就爱你</div>
                 </div>
             </div>
-            <!-- 新建按钮 -->
-            <div class="project newProject" @click="pushEdit">
+            <!-- new project -->
+            <div class="project newProject" @click="showBranchDialog">
                 <el-icon :size="26"><Plus /></el-icon>
             </div>
         </div>
-        <el-dialog v-model="dialogVisible" width="500" center>
+        <!-- config github token -->
+        <el-dialog v-model="tokenDialog" width="500" center>
             <template #header>
                 <div class="diaHeader">
                     <span>配置Token</span>
@@ -52,13 +53,37 @@
                     placeholder="请输入Token"
                     class="tokenInput"
                 />
-                <el-button @click="testToken">测试</el-button>
+                <el-button @click="testToken(true)">测试</el-button>
             </div>
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button @click="dialogVisible = false">取消</el-button>
+                    <el-button @click="tokenDialog = false">取消</el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <el-button type="primary" @click="saveToken">
+                    <el-button type="primary" @click="testToken(false)">
+                        确定
+                    </el-button>
+                </div>
+            </template>
+        </el-dialog>
+        <!-- config new branch name -->
+        <el-dialog v-model="branchDialog" width="400" center>
+            <template #header>
+                <div class="diaHeader">
+                    <span>项目名称</span>
+                </div>
+            </template>
+            <div class="diaContent">
+                <el-input
+                    v-model="branchName"
+                    placeholder="请输入英文项目名称，例如：PakePlus"
+                    class="tokenInput"
+                />
+            </div>
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button @click="branchDialog = false">取消</el-button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <el-button type="primary" @click="creatBranch">
                         确定
                     </el-button>
                 </div>
@@ -76,12 +101,12 @@ import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
 
 const router = useRouter()
-
 const store = usePakeStore()
 
 const token = ref(localStorage.getItem('token') || '')
-
-const dialogVisible = ref(false)
+const tokenDialog = ref(false)
+const branchDialog = ref(false)
+const branchName = ref('')
 
 const appList = ref([
     {
@@ -96,31 +121,42 @@ const appList = ref([
     },
 ])
 
+// new barnch config
+const showBranchDialog = () => {
+    // checkout has github token
+    if (localStorage.getItem('token')) {
+        // need creat new branch, first input project name
+        branchDialog.value = true
+    } else {
+        tokenDialog.value = true
+        ElMessage.error('请先配置Token')
+        return
+    }
+}
+
 // 跳转到新建页面
 const pushEdit = () => {
     // 先获取一次sha，为后续工作做准备
     getCommitSha()
+    // need creat new branch, first input project name
     router.push('/edit')
 }
 
-// 存储token
-const saveToken = () => {
-    dialogVisible.value = false
-    localStorage.setItem('token', token.value)
-}
-
 // 测试token是否可用
-const testToken = async () => {
+const testToken = async (tips: boolean = true) => {
     const res: any = await githubApi.gitUserInfo(token.value)
     console.log('testToken', res)
     if (res.status === 200) {
-        ElMessage.success('Token可用')
+        tips && ElMessage.success('Token可用')
+        if (!tips) {
+            tokenDialog.value = false
+        }
         // 本地存储并且fork仓库
         localStorage.setItem('token', token.value)
         store.setUser(res.data)
         forkProgect()
     } else {
-        ElMessage.error('Token不可用.')
+        ElMessage.error('Token不可用')
     }
 }
 
@@ -155,6 +191,47 @@ const getCommitSha = async () => {
     }
 }
 
+// creat project branch
+const creatBranch = async () => {
+    // checkout branch name is english
+    if (branchName.value && /^[A-Za-z0-9]+$/.test(branchName.value)) {
+        console.log('branchName.value', branchName.value)
+        const res: any = await githubApi.createBranch(
+            store.userInfo.login,
+            'PakePlus',
+            {
+                ref: `refs/heads/${branchName.value}`,
+                sha: store.commit.sha,
+            }
+        )
+        console.log('createBranch', res)
+        // 201 is ok
+        if (res.status === 201) {
+            const branchInfo = {
+                name: branchName.value,
+                ...res.data,
+            }
+            console.log('branchInfo success', branchInfo)
+            store.setCurrentProject(branchInfo)
+            ElMessage.success('项目创建成功')
+            // update new branch build.yml文件内容
+
+            //  并更新tauri.config.json里面的内容
+
+            // router.push('/publish')
+        } else if (res.status === 422) {
+            console.log('项目已经存在')
+            // ElMessage.success('项目已经存在')
+            // router.push('/publish')
+        } else {
+            console.log('branchInfo error', res)
+            ElMessage.success(`项目创建失败: ${res.data.message}`)
+        }
+    } else {
+        ElMessage.error('请输入纯英文项目名称')
+    }
+}
+
 onMounted(() => {
     appWindow.setTitle('PakePlus')
 })
@@ -162,6 +239,8 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .homeBox {
+    // background-color: red;
+
     .homeHeader {
         display: flex;
         flex-direction: row;
@@ -219,7 +298,6 @@ onMounted(() => {
             height: 200px;
             border-radius: 5px;
             border: 1px solid gray;
-            margin-right: 10px;
             margin-bottom: 10px;
 
             .appIcon {
