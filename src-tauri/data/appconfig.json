@@ -2,6 +2,7 @@
     "build": {
         "beforeDevCommand": "pnpm dev",
         "beforeBuildCommand": "pnpm build",
+        "beforeBundleCommand": "pnpm tauri icon",
         "devPath": "http://localhost:1420",
         "distDir": "../dist"
     },
