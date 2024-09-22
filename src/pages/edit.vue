@@ -1,5 +1,9 @@
 <template>
-    <div class="editBox">
+    <div
+        class="editBox"
+        v-loading="buildLoading"
+        element-loading-text="Loading..."
+    >
         <div class="mainEdit">
             <el-form
                 ref="appFormRef"
@@ -22,12 +26,12 @@
                         placeholder="例如：派克加"
                     />
                 </el-form-item>
-                <el-form-item label="英文名称" prop="rename">
+                <!-- <el-form-item label="英文名称" prop="rename">
                     <el-input
                         v-model="appForm.rename"
                         placeholder="例如：pakeplus"
                     />
-                </el-form-item>
+                </el-form-item> -->
                 <el-form-item label="APP标识" prop="appid">
                     <el-input
                         v-model="appForm.appid"
@@ -130,8 +134,7 @@ const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
 const appForm = reactive({
     url: 'https://www.kuaishou.com/new-reco',
-    name: '快手',
-    rename: 'Kuaishou',
+    name: 'Kuaishou',
     appid: 'hello.kuaishou.com',
     icon: 'default.png',
     version: '0.0.2',
@@ -151,13 +154,6 @@ const appRules = reactive<FormRules>({
         {
             required: true,
             message: '请输入APP名称',
-            trigger: 'blur',
-        },
-    ],
-    rename: [
-        {
-            required: true,
-            message: '请输入APP英文名称',
             trigger: 'blur',
         },
     ],
@@ -306,33 +302,78 @@ const form = reactive({
     model: 'close',
 })
 
+const buildLoading = ref(false)
+
 const onSubmit = async () => {
-    centerDialogVisible.value = false
+    const configSha: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
+        'src-tauri/tauri.conf.json',
+        { ref: store.currentProject.name }
+    )
+    console.log('configSha---', configSha)
     try {
-        const jsonContent: any = await invoke('read_json_file')
-        const data = JSON.parse(jsonContent)
-        console.log('json data:', data)
+        const configContent: any = await invoke('update_config_file', {
+            name: appForm.name,
+            version: appForm.version,
+            url: appForm.url,
+            id: appForm.appid,
+        })
+        console.log('config data:', configContent)
+        // update config file
+        const updateRes: any = await githubApi.updateConfigFile(
+            store.userInfo.login,
+            'PakePlus',
+            {
+                message: 'update config from pakeplus',
+                content: configContent,
+                sha: configSha.data.sha,
+                branch: store.currentProject.name,
+            }
+        )
+        if (updateRes.status === 200) {
+            console.log('updateRes', updateRes)
+            dispatchAction()
+        } else {
+            console.log('updateRes error', updateRes)
+        }
     } catch (error) {
         console.error('Error reading JSON file:', error)
     }
 }
 
+// dispatch workflow action
+const dispatchAction = async () => {
+    const dispatchRes: any = await githubApi.dispatchWorkflow(
+        store.userInfo.login,
+        'PakePlus',
+        {
+            ref: store.currentProject.name,
+            inputs: {
+                branch: store.currentProject.name,
+            },
+        }
+    )
+    console.log('dispatchRes---', dispatchRes)
+}
+
 onMounted(() => {
-    appWindow.setTitle('新建项目')
+    appWindow.setTitle(`${store.currentProject.name}项目`)
 })
 </script>
 
 <style lang="scss" scoped>
 .editBox {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     .mainEdit {
         margin-top: 20px;
         padding: 10px;
     }
     .footerBox {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 10px;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;

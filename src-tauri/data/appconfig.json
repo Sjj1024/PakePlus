@@ -30,7 +30,8 @@
             {
                 "title": "PROJECTNAME",
                 "width": 800,
-                "height": 600
+                "height": 600,
+                "url": "PROJECTURL"
             }
         ],
         "security": {

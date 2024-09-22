@@ -83,10 +83,13 @@ export default {
     },
     // creat file contents
     updateConfigFile(user: string, repo: string, body: any) {
-        return http(`/repos/{owner}/{repo}/contents/{path}`, {
-            method: 'post',
-            body,
-        })
+        return http(
+            `/repos/${user}/${repo}/contents/src-tauri/tauri.conf.json`,
+            {
+                method: 'put',
+                body,
+            }
+        )
     },
     // creat file contents
     updateMainRsFile(body: any) {
@@ -94,5 +97,15 @@ export default {
             method: 'post',
             body,
         })
+    },
+    // dispatch workflow
+    dispatchWorkflow(user: string, repo: string, body: any) {
+        return http(
+            `/repos/${user}/${repo}/actions/workflows/build.yml/dispatches`,
+            {
+                method: 'post',
+                body,
+            }
+        )
     },
 }

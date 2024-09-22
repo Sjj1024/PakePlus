@@ -86,7 +86,7 @@
                     <el-button
                         type="primary"
                         @click="creatBranch"
-                        :loadin="creatLoading"
+                        :loading="creatLoading"
                     >
                         确定
                     </el-button>
@@ -236,10 +236,10 @@ const creatBranch = async () => {
         } else if (res.status === 422) {
             console.log('项目已经存在')
             creatLoading.value = false
-            // ElMessage.success('项目已经存在')
+            ElMessage.success('项目已经存在')
             // router.push('/publish')
         } else {
-            creatLoading.value = false
+            // creatLoading.value = false
             console.log('branchInfo error', res)
             ElMessage.success(`项目创建失败: ${res.data.message}`)
         }
@@ -288,7 +288,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .homeBox {
-    // background-color: red;
+    padding: 10px;
 
     .homeHeader {
         display: flex;
