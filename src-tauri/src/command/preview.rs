@@ -41,7 +41,7 @@ pub async fn update_build_file(handle: tauri::AppHandle, branch: String) -> Stri
     let mut contents = String::new();
     build_file.read_to_string(&mut contents).unwrap();
     contents = contents.replace("PROJECTNAME", branch.as_str());
-    println!("Updated build file: {}", contents);
+    // println!("Updated build file: {}", contents);
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);
     return encoded_contents;
