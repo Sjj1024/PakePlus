@@ -132,11 +132,11 @@ const appForm = reactive({
     url: 'https://www.kuaishou.com/new-reco',
     name: '快手',
     rename: 'Kuaishou',
-    appid: 'HelloPakePlus',
+    appid: 'hello.kuaishou.com',
     icon: 'default.png',
-    version: '1.0.1',
+    version: '0.0.2',
     platform: 'desktop',
-    desc: '',
+    desc: '简单描述',
 })
 
 const appRules = reactive<FormRules>({

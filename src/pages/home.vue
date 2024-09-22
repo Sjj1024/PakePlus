@@ -130,6 +130,7 @@ const appList = ref([
 const showBranchDialog = () => {
     // dev need config
     // router.push('/edit')
+    getCommitSha()
     // checkout has github token
     if (localStorage.getItem('token')) {
         // need creat new branch, first input project name
@@ -139,14 +140,6 @@ const showBranchDialog = () => {
         ElMessage.error('请先配置Token')
         return
     }
-}
-
-// 跳转到新建页面
-const pushEdit = () => {
-    // 先获取一次sha，为后续工作做准备
-    getCommitSha()
-    // need creat new branch, first input project name
-    router.push('/edit')
 }
 
 // 测试token是否可用
