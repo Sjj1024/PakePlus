@@ -1,8 +1,8 @@
 name: Release
 on:
     push:
-        branches: ['main']
-    workflow_dispatch:
+        tags:
+            - 'v*' # 当以 'v' 开头的标签被创建时，触发工作流
 
 jobs:
     release:
