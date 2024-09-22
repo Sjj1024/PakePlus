@@ -117,7 +117,7 @@ import { appWindow } from '@tauri-apps/api/window'
 import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/tauri'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
-import github from '@/apis/github'
+import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
 import { readTextFile, BaseDirectory } from '@tauri-apps/api/fs'
@@ -129,10 +129,10 @@ const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
 const appForm = reactive({
-    url: 'https://juejin.cn/',
-    name: '掘金',
-    rename: 'Juejin',
-    appid: 'HelloJuejin',
+    url: 'https://www.kuaishou.com/new-reco',
+    name: '快手',
+    rename: 'Kuaishou',
+    appid: 'HelloPakePlus',
     icon: 'default.png',
     version: '1.0.1',
     platform: 'desktop',
@@ -204,13 +204,52 @@ const uploadIcon = () => {
     document.getElementById('open')!.click()
 }
 
+// update icon file content
+const updateIcon = async (content: string) => {
+    // 获取app-icon.png的文件sha
+    const iconSha: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
+        'app-icon.png',
+        { ref: store.currentProject.name }
+    )
+    console.log('iconSha---', iconSha)
+    // update icon file content
+    if (iconSha.status === 200) {
+        const updateRes: any = await githubApi.updateIconFile(
+            store.userInfo.login,
+            'PakePlus',
+            {
+                message: 'update icon from pakeplus',
+                content: content,
+                sha: iconSha.data.sha,
+                branch: store.currentProject.name,
+            }
+        )
+        if (updateRes.status === 200) {
+            console.log('updateRes', updateRes)
+        } else {
+            console.log('updateRes error', updateRes)
+        }
+    }
+}
+
 // iconInput change
-const changeFile = () => {
-    const fu: any = document.getElementById('open')
-    if (fu === null || !fu.files[0]) return
-    const fileName = fu.files[0].name
-    console.log('fu---', fileName)
-    appForm.icon = fileName
+const changeFile = (event: any) => {
+    // get base64 content
+    const file = event.target.files[0] // 获取文件
+    if (file) {
+        appForm.icon = file.name
+        console.log('file---', event.target.files)
+        // appForm.icon = event.target.files.name
+        const reader = new FileReader() // 创建FileReader对象
+        reader.onload = function (e: any) {
+            const base64String = e.target.result.split('base64,')[1] // 获取Base64编码
+            console.log('base64String---', base64String) // 打印Base64编码内容
+            updateIcon(base64String) // 更新icon文件内容
+        }
+        reader.readAsDataURL(file) // 将文件读取为Base64
+    }
 }
 
 // 跳转到新建页面

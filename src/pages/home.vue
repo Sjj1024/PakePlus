@@ -83,7 +83,11 @@
                 <div class="dialog-footer">
                     <el-button @click="branchDialog = false">取消</el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <el-button type="primary" @click="creatBranch">
+                    <el-button
+                        type="primary"
+                        @click="creatBranch"
+                        :loadin="creatLoading"
+                    >
                         确定
                     </el-button>
                 </div>
@@ -124,6 +128,8 @@ const appList = ref([
 
 // new barnch config
 const showBranchDialog = () => {
+    // dev need config
+    // router.push('/edit')
     // checkout has github token
     if (localStorage.getItem('token')) {
         // need creat new branch, first input project name
@@ -204,8 +210,12 @@ const getFileSha = async (filePath: string, branch: string) => {
     return res
 }
 
+// button loading
+const creatLoading = ref(false)
+
 // creat project branch
 const creatBranch = async () => {
+    creatLoading.value = true
     // checkout branch name is english
     if (branchName.value && /^[A-Za-z0-9]+$/.test(branchName.value)) {
         console.log('branchName.value', branchName.value)
@@ -224,17 +234,19 @@ const creatBranch = async () => {
                 name: branchName.value,
                 ...res.data,
             }
-            console.log('branchInfo success', branchInfo)
+            console.log('branch Info success', branchInfo)
             store.setCurrentProject(branchInfo)
+            creatLoading.value = false
+            router.push('/edit')
             // update new branch build.yml文件内容
             updateBuildYml()
-            //  并更新tauri.config.json里面的内容
-            router.push('/publish')
         } else if (res.status === 422) {
             console.log('项目已经存在')
+            creatLoading.value = false
             // ElMessage.success('项目已经存在')
             // router.push('/publish')
         } else {
+            creatLoading.value = false
             console.log('branchInfo error', res)
             ElMessage.success(`项目创建失败: ${res.data.message}`)
         }

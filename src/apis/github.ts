@@ -57,6 +57,13 @@ export default {
             params,
         })
     },
+    // update file contents
+    updateFileContent(user: string, repo: string, path: string, body: any) {
+        return http(`/repos/${user}/${repo}/contents/${path}`, {
+            method: 'put',
+            body,
+        })
+    },
     // update build yml contents
     updateBuildYmlFile(user: string, repo: string, body: any) {
         return http(
@@ -66,6 +73,13 @@ export default {
                 body,
             }
         )
+    },
+    // update icon file contents
+    updateIconFile(user: string, repo: string, body: any) {
+        return http(`/repos/${user}/${repo}/contents/app-icon.png`, {
+            method: 'put',
+            body,
+        })
     },
     // creat file contents
     updateConfigFile(user: string, repo: string, body: any) {
