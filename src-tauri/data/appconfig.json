@@ -7,8 +7,8 @@
         "distDir": "../dist"
     },
     "package": {
-        "productName": "PakePlus",
-        "version": "0.1.0"
+        "productName": "PROJECTNAME",
+        "version": "PROJECTVERSION"
     },
     "tauri": {
         "allowlist": {
@@ -19,14 +19,6 @@
                 "writeFile": true,
                 "scope": ["$APPCONFIG/*"]
             },
-            "http": {
-                "all": true,
-                "scope": ["https://api.github.com/*"]
-            },
-            "shell": {
-                "all": false,
-                "open": true
-            },
             "window": {
                 "all": true,
                 "create": true,
@@ -36,7 +28,7 @@
         },
         "windows": [
             {
-                "title": "TurnApp",
+                "title": "PROJECTNAME",
                 "width": 800,
                 "height": 600
             }
@@ -47,8 +39,7 @@
         "bundle": {
             "active": true,
             "targets": "all",
-            "identifier": "com.pakeplus.app",
-            "resources": ["./data/example.json"],
+            "identifier": "PROJECTID",
             "icon": [
                 "icons/32x32.png",
                 "icons/128x128.png",
