@@ -253,16 +253,14 @@ const updateBuildYml = async () => {
     console.log('get build.yml file sha', shaRes)
     if (shaRes.status === 200) {
         // get build.yml file content
-        const content = await invoke('update_build_file', {
-            branch: branchName.value,
-        })
+        const content = await invoke('update_build_file')
         console.log('content', content)
         // update build.yml file content
         const updateRes: any = await githubApi.updateBuildYmlFile(
             store.userInfo.login,
             'PakePlus',
             {
-                message: 'update from pakeplus',
+                message: 'update build.yml from pakeplus',
                 content: content,
                 sha: shaRes.data.sha,
                 branch: branchName.value,
