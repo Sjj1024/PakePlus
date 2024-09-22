@@ -108,4 +108,34 @@ export default {
             }
         )
     },
+    // enable workflow
+    enableWorkflow(user: string, repo: string) {
+        return http(`/repos/${user}/${repo}/actions/permissions`, {
+            method: 'put',
+            body: {
+                enabled: true,
+                allowed_actions: 'all',
+            },
+        })
+    },
+    // delete build yml
+    deleteBuildYml(user: string, repo: string, body: any) {
+        return http(
+            `/repos/${user}/${repo}/contents/.github/workflows/build.yml`,
+            {
+                method: 'delete',
+                body,
+            }
+        )
+    },
+    // Creates build yml
+    createBuildYml(user: string, repo: string, body: any) {
+        return http(
+            `/repos/${user}/${repo}/contents/.github/workflows/build.yml`,
+            {
+                method: 'put',
+                body,
+            }
+        )
+    },
 }

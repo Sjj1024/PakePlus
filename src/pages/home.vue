@@ -177,6 +177,8 @@ const forkProgect = async () => {
     if (startRes.status === 204) {
         console.log('start仓库成功')
     }
+    // enable github action
+    deleteBuildYml()
 }
 
 // 获取最后一次提交的commit sha
@@ -232,7 +234,7 @@ const creatBranch = async () => {
             creatLoading.value = false
             router.push('/edit')
             // update new branch build.yml文件内容
-            updateBuildYml()
+            updateBuildYml(branchName.value)
         } else if (res.status === 422) {
             console.log('项目已经存在')
             creatLoading.value = false
@@ -248,15 +250,36 @@ const creatBranch = async () => {
     }
 }
 
-// 更新build.yml文件内容
-const updateBuildYml = async () => {
-    // get build.yml file sha
-    const shaRes = await getFileSha(
-        '.github/workflows/build.yml',
-        branchName.value
-    )
+// delete build yml file
+const deleteBuildYml = async (branchName: string = 'main') => {
+    const shaRes = await getFileSha('.github/workflows/build.yml', branchName)
     console.log('get build.yml file sha', shaRes)
     if (shaRes.status === 200) {
+        const deleteRes: any = await githubApi.deleteBuildYml(
+            store.userInfo.login,
+            'PakePlus',
+            {
+                message: 'delete build.yml from pakeplus',
+                sha: shaRes.data.sha,
+                branch: branchName,
+            }
+        )
+        if (deleteRes.status === 200) {
+            console.log('deleteRes', deleteRes)
+            // new branch build.yml
+            updateBuildYml(branchName)
+        } else {
+            console.log('deleteRes error', deleteRes)
+        }
+    }
+}
+
+// 更新build.yml文件内容
+const updateBuildYml = async (branchName: string) => {
+    // get build.yml file sha
+    const shaRes = await getFileSha('.github/workflows/build.yml', branchName)
+    console.log('get build.yml file sha', shaRes)
+    if (shaRes.status === 200 || shaRes.status === 404) {
         // get build.yml file content
         const content = await invoke('update_build_file')
         console.log('content', content)
@@ -268,7 +291,7 @@ const updateBuildYml = async () => {
                 message: 'update build.yml from pakeplus',
                 content: content,
                 sha: shaRes.data.sha,
-                branch: branchName.value,
+                branch: branchName,
             }
         )
         if (updateRes.status === 200) {
