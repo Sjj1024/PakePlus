@@ -377,6 +377,7 @@ onMounted(() => {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
+        margin-bottom: 10px;
     }
 }
 

@@ -67,7 +67,7 @@ pub async fn update_config_file(
         .replace("PROJECTVERSION", version.as_str())
         .replace("PROJECTURL", url.as_str())
         .replace("PROJECTID", id.as_str());
-    println!("Updated config file: {}", contents);
+    // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);
     return encoded_contents;
