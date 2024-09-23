@@ -129,7 +129,7 @@ const appList = ref([
 // new barnch config
 const showBranchDialog = () => {
     // dev need config
-    // router.push('/edit')
+    router.push('/edit')
     getCommitSha()
     // checkout has github token
     if (localStorage.getItem('token')) {

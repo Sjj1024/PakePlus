@@ -66,6 +66,7 @@
         </div>
         <div class="footerBox">
             <el-button @click="backHome">返回</el-button>
+            <el-button @click="saveProject">保存</el-button>
             <el-button @click="preview">预览</el-button>
             <el-button @click="createRepo">发布</el-button>
         </div>
@@ -84,16 +85,20 @@
                     <span>打包发布</span>
                 </div>
             </template>
-            <el-form :model="form" label-width="auto" style="max-width: 600px">
+            <el-form
+                :model="pubForm"
+                label-width="auto"
+                style="max-width: 600px"
+            >
                 <el-form-item label="发布平台">
-                    <el-checkbox-group v-model="form.platform">
+                    <el-checkbox-group v-model="pubForm.platform">
                         <el-checkbox label="桌面端" value="desktop" />
                         <el-checkbox label="移动端" value="mobile" />
                         <el-checkbox label="源代码" value="source" />
                     </el-checkbox-group>
                 </el-form-item>
                 <el-form-item label="发布模式">
-                    <el-radio-group v-model="form.model">
+                    <el-radio-group v-model="pubForm.model">
                         <el-radio value="close">关闭Debug</el-radio>
                         <el-radio value="debug">开启Debug</el-radio>
                     </el-radio-group>
@@ -258,11 +263,34 @@ const resetForm = (formEl: FormInstance | undefined) => {
     formEl.resetFields()
 }
 
+// save project
+const saveProject = async () => {
+    appFormRef.value?.validate(async (valid, fields) => {
+        if (valid) {
+            console.log('save!', appForm)
+            store.addProject({
+                name: store.currentProject.name,
+                url: appForm.url,
+                showName: appForm.name,
+                id: appForm.appid,
+                icon: appForm.icon,
+                version: appForm.version,
+                platform: appForm.platform,
+                desc: appForm.desc,
+                debug: pubForm.model,
+            })
+        } else {
+            console.log('error submit!', fields)
+        }
+    })
+}
+
 // 预览页面
 const preview = () => {
     appFormRef.value?.validate((valid, fields) => {
         if (valid) {
             console.log('submit!', appForm)
+            saveProject()
             invoke('open_docs', {
                 appUrl: appForm.url,
                 appName: appForm.name,
@@ -278,6 +306,7 @@ const preview = () => {
 const createRepo = async () => {
     appFormRef.value?.validate(async (valid, fields) => {
         if (valid) {
+            saveProject()
             console.log('submit!', appForm)
             centerDialogVisible.value = true
         } else {
@@ -297,7 +326,7 @@ const createRepo = async () => {
 // }
 
 // do not use same name with ref
-const form = reactive({
+const pubForm = reactive({
     platform: ['desktop'],
     model: 'close',
 })

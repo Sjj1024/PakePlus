@@ -570,6 +570,9 @@ export const usePakeStore = defineStore('pakeplus', {
                           url: 'https://api.github.com/repos/codegirle/PakePlus/git/commits/f42ea4b062330e78b5af81b4187f5fd59dd3372e',
                       },
                   },
+            projectList: localStorage.getItem('projectList')
+                ? JSON.parse(localStorage.getItem('projectList') as string)
+                : ([] as Project[]),
             age: 25,
             sex: '男',
         }
@@ -595,6 +598,20 @@ export const usePakeStore = defineStore('pakeplus', {
         setCurrentProject(info: any) {
             this.currentProject = info
             localStorage.setItem('currentProject', JSON.stringify(info))
+        },
+        addProject(project: Project) {
+            const exist = this.projectList.findIndex((item: Project) => {
+                item.name === this.currentProject.name
+            })
+            if (exist !== -1) {
+                this.projectList[exist] = project
+            } else {
+                this.projectList.push(project)
+            }
+            localStorage.setItem(
+                'projectList',
+                JSON.stringify(this.projectList)
+            )
         },
     },
 })
