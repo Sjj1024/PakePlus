@@ -383,6 +383,8 @@ onMounted(() => {
             flex-direction: row;
             justify-content: flex-start;
             align-items: center;
+            margin-right: 20px;
+
             .userName {
                 margin-right: 6px;
             }
@@ -405,7 +407,7 @@ onMounted(() => {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         grid-gap: 10px;
         gap: 10px;
-        margin-top: 10px;
+        margin-top: 20px;
 
         .project {
             height: 200px;
@@ -447,8 +449,8 @@ onMounted(() => {
 
     .version {
         position: fixed;
-        bottom: 10px;
-        right: 10px;
+        bottom: 20px;
+        right: 20px;
         color: gray;
         cursor: pointer;
     }

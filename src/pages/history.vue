@@ -13,6 +13,7 @@
                 <div class="toolTips">
                     <span>
                         {{ releaseData.body }}
+                        <!-- 开源免费创建，编辑，调试打包跨平台APP，仅仅只需要一个Token -->
                     </span>
                 </div>
             </div>
