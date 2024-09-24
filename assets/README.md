@@ -1,11 +1,11 @@
-<h4 align="right"><strong>English</strong></h4>
+<h4 align="right"><strong>English</strong> | <a href="https://github.com/tw93/Pake/blob/master/README_CN.md">简体中文</a> | <a href="https://github.com/tw93/Pake/blob/master/README_JP.md">日本語</a></h4>
 <p align="center">
     <img src="./app-icon.png" width=138/>
 </p>
 <h1 align="center">PakePlus</h1>
 <p align="center"><strong>Turn any webpage into desktop app and mobile app with Rust <em>is ease</em>.</strong></p>
 
-<div align="left">PakePlus supports Mac, Windows, and Linux. Check out README for <a href="#popular-packages">Popular Packages</a>, <a href="#development">Customized Development</a> information. Feel free to share your suggestions in <a href=https://github.com/Sjj1024/PakePlus/discussions>Discussions</a>.</div>
+<div align="left">PakePlus supports Mac, Windows, and Linux. Check out README for <a href="#popular-packages">Popular Packages</a>, <a href="#command-line-packaging">Command-Line Packaging</a>, and <a href="#development">Customized Development</a> information. Feel free to share your suggestions in <a href=https://github.com/tw93/Pake/discussions>Discussions</a>.</div>
 
 ## Features
 
@@ -115,19 +115,13 @@
     </tr>
 </table>
 
+<summary>🏂 You can download more applications from <a href="https://github.com/tw93/Pake/releases">Releases</a>. <b>Click here to expand the shortcuts reference!</b></summary>
+
 ## Before starting
 
-1.download the application from the release page
-
-2.double-click to install and run the application
-
-3.create a new project and config it
-
-4.you can preview the application in the new window
-
-5.chick the publish button to pack the application
-
-6.you can download the application from the release page
+1. **For beginners**: Play with Popular Packages to find out Pake's capabilities, or try to pack your application with [GitHub Actions](<https://github.com/tw93/Pake/wiki/Online-Compilation-(used-by-ordinary-users)>). Don't hesitate to reach for assistance at [Discussion](https://github.com/tw93/Pake/discussions)!
+2. **For developers**: “Command-Line Packaging” supports macOS fully. For Windows/Linux users, it requires some tinkering. [Configure your environment](https://tauri.app/v1/guides/getting-started/prerequisites) before getting started.
+3. **For hackers**: For people who are good at both front-end development and Rust, how about customizing your apps' function more with the following [Customized Development](#development)?
 
 ## Development
 
@@ -137,11 +131,11 @@ If you are unfamiliar with these, it is better to try out the above tool to pack
 
 ```sh
 # Install Dependencies
-pnpm i
+npm i
 
 # Local development [Right-click to open debug mode.]
-pnpm run dev
+npm run dev
 
 # Pack application
-pnpm run build
+npm run build
 ```

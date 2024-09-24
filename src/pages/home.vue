@@ -383,7 +383,7 @@ onMounted(() => {
             flex-direction: row;
             justify-content: flex-start;
             align-items: center;
-            margin-right: 20px;
+            margin-right: 10px;
 
             .userName {
                 margin-right: 6px;
