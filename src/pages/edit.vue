@@ -143,8 +143,13 @@
                         <el-radio value="debug">开启Debug</el-radio>
                     </el-radio-group>
                 </el-form-item>
+                <el-form-item label="发布说明">
+                    <el-input v-model="pubForm.desc" type="textarea" />
+                </el-form-item>
             </el-form>
-            <span>注： 打包发布大概需要6分钟左右的时间，请耐心等待......</span>
+            <span style="color: #aaa">
+                注： 打包发布大概需要6分钟左右的时间，请耐心等待......
+            </span>
             <template #footer>
                 <div class="dialog-footer">
                     <el-button @click="centerDialogVisible = false"
@@ -295,7 +300,7 @@ const changeFile = (event: any) => {
 
 // 跳转到新建页面
 const backHome = () => {
-    router.push('/')
+    router.go(-1)
 }
 
 // click menu item
@@ -386,6 +391,7 @@ const createRepo = async () => {
 const pubForm = reactive({
     platform: ['desktop'],
     model: 'close',
+    desc: '',
 })
 
 const buildLoading = ref(false)
@@ -575,10 +581,6 @@ onMounted(() => {
                 // margin-right: 10px;
                 .userName {
                     margin-right: 6px;
-                }
-
-                .dropdownLink {
-                    // cursor: pointer;
                 }
             }
 

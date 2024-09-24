@@ -8,7 +8,7 @@
                         <span>返回</span>
                     </div>
                     <el-divider direction="vertical" />
-                    <span>PakePlus v0.1.2</span>
+                    <span>{{ releaseData.tag_name }} v0.1.2</span>
                 </div>
                 <div class="toolTips">
                     <span>
@@ -20,7 +20,7 @@
             <div class="setting">
                 <!-- <span class="userName">更多</span> -->
                 <!-- <el-icon :size="26"><Menu /></el-icon> -->
-                <el-icon :size="26"><Delete /></el-icon>
+                <el-icon :size="26" @click="deleteRelease"><Delete /></el-icon>
                 <!-- <el-dropdown>
                     <span class="el-dropdown-link">
                         <el-icon :size="26"><Operation /></el-icon>
@@ -36,71 +36,61 @@
             </div>
         </div>
         <!-- only get latest version by tag name -->
-        <div>
-            <el-table :data="releaseData.assets" style="width: 100%">
-                <el-table-column prop="name" label="资源名称" width="380" />
-                <el-table-column prop="size" label="资源大小" width="180" />
-                <el-table-column prop="updated_at" label="发布日期" />
-            </el-table>
-        </div>
+        <el-table :data="releaseData.assets" style="width: 100%">
+            <!-- <el-table-column prop="name" label="资源名称" width="380" /> -->
+            <el-table-column label="资源名称" width="460">
+                <template #default="scope">
+                    <div style="display: flex; align-items: center">
+                        <span @click="copyDownlink(scope.row)" class="fileLink">
+                            {{ scope.row.name }}
+                        </span>
+                        <span class="copyLink" @click="openDownlink(scope.row)">
+                            下载
+                        </span>
+                    </div>
+                </template>
+            </el-table-column>
+            <el-table-column label="资源大小" width="120">
+                <template #default="scope">
+                    <div style="display: flex; align-items: center">
+                        <span>
+                            {{ (scope.row.size / 1024 / 1024).toFixed(2) }}
+                            MB
+                        </span>
+                    </div>
+                </template>
+            </el-table-column>
+            <el-table-column prop="updated_at" label="发布日期" />
+        </el-table>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
-import { InfoFilled } from '@element-plus/icons-vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePakeStore } from '@/store'
 import githubApi from '@/apis/github'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { open } from '@tauri-apps/api/shell'
+import { writeText } from '@tauri-apps/api/clipboard'
 
 const router = useRouter()
 const store = usePakeStore()
 
 // back
 const backHome = () => {
-    router.push('/edit')
+    router.go(-1)
 }
 
 const releaseData = ref({
-    url: 'https://api.github.com/repos/codegirle/PakePlus/releases/176366612',
-    assets_url:
-        'https://api.github.com/repos/codegirle/PakePlus/releases/176366612/assets',
-    upload_url:
-        'https://uploads.github.com/repos/codegirle/PakePlus/releases/176366612/assets{?name,label}',
-    html_url: 'https://github.com/codegirle/PakePlus/releases/tag/ewewer',
-    id: 176366612,
-    author: {
-        login: 'github-actions[bot]',
-        id: 41898282,
-        node_id: 'MDM6Qm90NDE4OTgyODI=',
-        avatar_url: 'https://avatars.githubusercontent.com/in/15368?v=4',
-        gravatar_id: '',
-        url: 'https://api.github.com/users/github-actions%5Bbot%5D',
-        html_url: 'https://github.com/apps/github-actions',
-        followers_url:
-            'https://api.github.com/users/github-actions%5Bbot%5D/followers',
-        following_url:
-            'https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}',
-        gists_url:
-            'https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}',
-        starred_url:
-            'https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}',
-        subscriptions_url:
-            'https://api.github.com/users/github-actions%5Bbot%5D/subscriptions',
-        organizations_url:
-            'https://api.github.com/users/github-actions%5Bbot%5D/orgs',
-        repos_url: 'https://api.github.com/users/github-actions%5Bbot%5D/repos',
-        events_url:
-            'https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}',
-        received_events_url:
-            'https://api.github.com/users/github-actions%5Bbot%5D/received_events',
-        type: 'Bot',
-        site_admin: false,
-    },
-    node_id: 'RE_kwDOM1oqhs4KgyQU',
+    url: '',
+    assets_url: '',
+    upload_url: '',
+    html_url: '',
+    id: 1,
+    node_id: '',
     tag_name: 'ewewer',
-    target_commitish: 'fdfcbfd0e7022842ccbdedecd137060849d61d3b',
+    target_commitish: '',
     name: 'PakePlus v0.0.9',
     draft: false,
     prerelease: false,
@@ -423,10 +413,8 @@ const releaseData = ref({
                 'https://github.com/codegirle/PakePlus/releases/download/ewewer/bilibili_aarch64.app.tar.gz',
         },
     ],
-    tarball_url:
-        'https://api.github.com/repos/codegirle/PakePlus/tarball/ewewer',
-    zipball_url:
-        'https://api.github.com/repos/codegirle/PakePlus/zipball/ewewer',
+    tarball_url: '',
+    zipball_url: '',
     body: 'See the assets to download and install this version.',
 })
 
@@ -444,6 +432,28 @@ const getLatestRelease = async () => {
         console.log('releaseRes error', releaseRes)
         ElMessage.error('获取发布历史失败')
     }
+}
+
+// delete release
+const deleteRelease = async () => {
+    ElMessageBox.confirm('确定要删除这个版本吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+    }).then(() => {
+        console.log('delete project')
+    })
+}
+
+// open downlink by chrome
+const openDownlink = async (asset: any) => {
+    await open(asset.browser_download_url)
+}
+
+// copy downlink
+const copyDownlink = async (asset: any) => {
+    await writeText(asset.browser_download_url)
+    ElMessage.success('复制成功')
 }
 
 // 打包后的历史记录
@@ -516,6 +526,28 @@ onMounted(() => {
                 cursor: pointer;
             }
         }
+    }
+}
+
+.fileLink {
+    color: #0969da;
+    cursor: pointer;
+    // font-weight: bold;
+
+    &:hover {
+        text-decoration: underline;
+        text-decoration-color: #0969da;
+        text-underline-offset: 1px;
+    }
+}
+
+.copyLink {
+    margin-left: 10px;
+    cursor: pointer;
+    color: #0969da;
+    &:hover {
+        color: #1163c1;
+        font-weight: bold;
     }
 }
 </style>

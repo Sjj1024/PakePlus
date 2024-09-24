@@ -4,6 +4,9 @@
             <div>
                 <div class="headerTitle">
                     <span>项目管理</span>
+                    <img :src="githubImg" alt="github" class="githubIcon" />
+                    <!-- <img :src="zhifubaoImg" alt="github" class="githubIcon" /> -->
+                    <!-- <img :src="weixinImg" alt="github" class="wxIcon" /> -->
                 </div>
                 <div class="toolTips">
                     <span>
@@ -49,6 +52,8 @@
                 <el-icon :size="26"><Plus /></el-icon>
             </div>
         </div>
+        <!-- version -->
+        <div class="version" @click="goAbout">v1.0.1</div>
         <!-- config github token -->
         <el-dialog v-model="tokenDialog" width="500" center>
             <template #header>
@@ -114,6 +119,10 @@ import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
 import { invoke } from '@tauri-apps/api/tauri'
+import { open } from '@tauri-apps/api/shell'
+import githubImg from '@/assets/images/github.png'
+import weixinImg from '@/assets/images/weixin.png'
+import { pakeUrlMap } from '@/utils/common'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -126,6 +135,16 @@ const branchName = ref('')
 // go project detail
 const goProject = () => {
     router.push('/edit')
+}
+
+// open url by chrome
+const openUrl = async (url: string) => {
+    await open(url)
+}
+
+// go about
+const goAbout = () => {
+    router.push('/about')
 }
 
 // new barnch config
@@ -322,8 +341,23 @@ onMounted(() => {
         align-items: center;
 
         .headerTitle {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
             font-size: 20px;
             font-weight: bold;
+
+            .githubIcon {
+                width: 20px;
+                height: 20px;
+                margin-left: 10px;
+            }
+
+            .wxIcon {
+                width: 22px;
+                height: 22px;
+                margin-left: 10px;
+            }
         }
 
         .toolTips {
@@ -404,6 +438,28 @@ onMounted(() => {
             justify-content: center;
             align-items: center;
         }
+    }
+
+    .version {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        color: gray;
+        cursor: pointer;
+    }
+}
+
+.diaBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .diaContent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }
 
