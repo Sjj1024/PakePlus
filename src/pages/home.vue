@@ -20,18 +20,28 @@
         </div>
         <div class="projectBox">
             <!-- 已有项目列表 -->
-            <div class="project" v-for="i in 8" :key="i">
+            <div
+                class="project"
+                v-for="pro in store.projectList"
+                :key="pro.id"
+                @click="goProject"
+            >
                 <img
                     src="https://hadoappusage.oss-cn-shanghai.aliyuncs.com/static/pad_image/blueBg.png"
                     class="appIcon"
                     alt="appIcon"
                 />
+                <!-- <iframe
+                    class="appPreview"
+                    src="https://www.kuaishou.com"
+                    frameborder="0"
+                ></iframe> -->
                 <div class="infoBox">
                     <div class="appBox">
-                        <div class="appName">测试阮家</div>
-                        <div class="appVersion">1.01</div>
+                        <div class="appName">{{ pro.name }}</div>
+                        <div class="appVersion">{{ pro.version }}</div>
                     </div>
-                    <div class="appDesc">我的第一个让UN就爱你</div>
+                    <div class="appDesc">{{ pro.desc }}</div>
                 </div>
             </div>
             <!-- new project -->
@@ -113,23 +123,15 @@ const tokenDialog = ref(false)
 const branchDialog = ref(false)
 const branchName = ref('')
 
-const appList = ref([
-    {
-        appName: '测试阮家',
-        appIcon:
-            'https://hadoappusage.oss-cn-shanghai.aliyuncs.com/static/pad_image/blueBg.png',
-        appVersion: '1.0',
-        appResp: 'https://github.com/',
-        appUrl: 'https://www.csdn.net/',
-        appId: 'sdfafsasofja',
-        appDesc: '我的第一个让UN就爱你',
-    },
-])
+// go project detail
+const goProject = () => {
+    router.push('/edit')
+}
 
 // new barnch config
 const showBranchDialog = () => {
     // dev need config
-    router.push('/edit')
+    // router.push('/edit')
     getCommitSha()
     // checkout has github token
     if (localStorage.getItem('token')) {
@@ -320,7 +322,7 @@ onMounted(() => {
         align-items: center;
 
         .headerTitle {
-            font-size: large;
+            font-size: 20px;
             font-weight: bold;
         }
 
@@ -373,6 +375,11 @@ onMounted(() => {
             margin-bottom: 10px;
 
             .appIcon {
+                width: 100%;
+                height: 66%;
+            }
+
+            .appPreview {
                 width: 100%;
                 height: 66%;
             }

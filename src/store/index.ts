@@ -601,8 +601,10 @@ export const usePakeStore = defineStore('pakeplus', {
         },
         addProject(project: Project) {
             const exist = this.projectList.findIndex((item: Project) => {
-                item.name === this.currentProject.name
+                console.log('item---', item, project)
+                return item.name === project.name
             })
+            console.log('exist---', exist, project, this.projectList)
             if (exist !== -1) {
                 this.projectList[exist] = project
             } else {

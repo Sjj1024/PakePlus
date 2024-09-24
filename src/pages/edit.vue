@@ -5,12 +5,52 @@
         element-loading-text="Loading..."
     >
         <div class="mainEdit">
+            <div class="homeHeader">
+                <div>
+                    <div class="headerTitle">
+                        <div class="backBox" @click="backHome">
+                            <el-icon><ArrowLeft /></el-icon>
+                            <span>返回</span>
+                        </div>
+                        <el-divider direction="vertical" />
+                        <span>项目配置</span>
+                    </div>
+                    <div class="toolTips">
+                        <span>
+                            配置当前项目网站地址、APP显示名称、英文名称、APP标识等。
+                        </span>
+                    </div>
+                </div>
+                <!-- 设置按钮 -->
+                <div class="setting">
+                    <!-- <span class="userName">更多</span> -->
+                    <!-- <el-icon :size="26"><Menu /></el-icon> -->
+                    <el-dropdown>
+                        <span class="dropdownLink">
+                            <el-icon :size="26"><Operation /></el-icon>
+                        </span>
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                                <el-dropdown-item @click="toHistory">
+                                    发布历史
+                                </el-dropdown-item>
+                                <el-dropdown-item @click="resetForm">
+                                    重制配置
+                                </el-dropdown-item>
+                                <el-dropdown-item @click="deleteProject">
+                                    删除项目
+                                </el-dropdown-item>
+                            </el-dropdown-menu>
+                        </template>
+                    </el-dropdown>
+                </div>
+            </div>
             <el-form
                 ref="appFormRef"
                 :model="appForm"
                 :rules="appRules"
                 label-width="auto"
-                class="demo-appForm"
+                class="configForm"
                 :size="formSize"
                 status-icon
             >
@@ -65,8 +105,8 @@
             </el-form>
         </div>
         <div class="footerBox">
-            <el-button @click="backHome">返回</el-button>
-            <el-button @click="saveProject">保存</el-button>
+            <!-- <el-button @click="backHome">返回</el-button> -->
+            <el-button @click="saveProject(true)">保存</el-button>
             <el-button @click="preview">预览</el-button>
             <el-button @click="createRepo">发布</el-button>
         </div>
@@ -104,7 +144,7 @@
                     </el-radio-group>
                 </el-form-item>
             </el-form>
-            <span>注： 打包发布大概需要5分钟左右的时间，请耐心等待......</span>
+            <span>注： 打包发布大概需要6分钟左右的时间，请耐心等待......</span>
             <template #footer>
                 <div class="dialog-footer">
                     <el-button @click="centerDialogVisible = false"
@@ -127,9 +167,9 @@ import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/tauri'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePakeStore } from '@/store'
-import { readTextFile, BaseDirectory } from '@tauri-apps/api/fs'
+import { ArrowLeft } from '@element-plus/icons-vue'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -138,13 +178,13 @@ const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
 const appForm = reactive({
-    url: 'https://www.kuaishou.com/new-reco',
-    name: 'Kuaishou',
-    appid: 'hello.kuaishou.com',
-    icon: 'default.png',
-    version: '0.0.2',
+    url: 'https://www.bilibili.com/',
+    name: 'bilibili',
+    appid: 'hello.bilibili.com',
+    icon: '',
+    version: '0.0.9',
     platform: 'desktop',
-    desc: '简单描述',
+    desc: '简短描述',
 })
 
 const appRules = reactive<FormRules>({
@@ -258,16 +298,32 @@ const backHome = () => {
     router.push('/')
 }
 
-const resetForm = (formEl: FormInstance | undefined) => {
-    if (!formEl) return
-    formEl.resetFields()
+// click menu item
+const toHistory = () => {
+    console.log('toHistory')
+    router.push('/history')
+}
+
+const resetForm = () => {
+    appFormRef.value?.resetFields()
+}
+
+// delete current project
+const deleteProject = () => {
+    ElMessageBox.confirm('确定要删除当前项目吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+    }).then(() => {
+        console.log('delete project')
+    })
 }
 
 // save project
-const saveProject = async () => {
+const saveProject = async (tips: boolean = true) => {
     appFormRef.value?.validate(async (valid, fields) => {
         if (valid) {
-            console.log('save!', appForm)
+            // console.log('save!', appForm)
             store.addProject({
                 name: store.currentProject.name,
                 url: appForm.url,
@@ -279,6 +335,7 @@ const saveProject = async () => {
                 desc: appForm.desc,
                 debug: pubForm.model,
             })
+            tips && ElMessage.success('保存成功')
         } else {
             console.log('error submit!', fields)
         }
@@ -290,7 +347,7 @@ const preview = () => {
     appFormRef.value?.validate((valid, fields) => {
         if (valid) {
             console.log('submit!', appForm)
-            saveProject()
+            saveProject(false)
             invoke('open_docs', {
                 appUrl: appForm.url,
                 appName: appForm.name,
@@ -306,7 +363,7 @@ const preview = () => {
 const createRepo = async () => {
     appFormRef.value?.validate(async (valid, fields) => {
         if (valid) {
-            saveProject()
+            saveProject(false)
             console.log('submit!', appForm)
             centerDialogVisible.value = true
         } else {
@@ -332,8 +389,16 @@ const pubForm = reactive({
 })
 
 const buildLoading = ref(false)
+// const loadingText = ref('开始构建...')
+// check dispatch workflow timer
+let buildTime = 0
+let buildStatus = ''
+let buildSecondTimer: any = null
+let checkDispatchTimer: any = null
 
 const onSubmit = async () => {
+    centerDialogVisible.value = false
+    buildLoading.value = true
     const configSha: any = await githubApi.getFileSha(
         store.userInfo.login,
         'PakePlus',
@@ -362,6 +427,8 @@ const onSubmit = async () => {
         )
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
+            document.querySelector('.el-loading-text')!.innerHTML =
+                '开始构建...'
             dispatchAction()
         } else {
             console.log('updateRes error', updateRes)
@@ -384,9 +451,69 @@ const dispatchAction = async () => {
         }
     )
     console.log('dispatchRes---', dispatchRes)
+    // 统计构建用时
+    buildSecondTimer = setInterval(() => {
+        buildTime += 1
+        // 计算用时多少分多少秒
+        const minute = Math.floor(buildTime / 60)
+        const second = buildTime % 60
+        // 构建进度
+        const buildRate = Math.floor((buildTime / 480) * 100)
+        // loadingText.value = `${buildStatus}...${minute}分${second}秒`
+        const loadingText = `${buildStatus}${buildRate}%...${minute}分${second}秒`
+        console.log('loadingText---', loadingText)
+        document.querySelector('.el-loading-text')!.innerHTML = loadingText
+    }, 1000)
+    // 每10秒检查一次构建状态
+    checkDispatchTimer = setInterval(async () => {
+        checkBuildStatus()
+    }, 10000)
+}
+
+// status map
+const statusMap: any = {
+    pending: '等待中',
+    in_progress: '构建中',
+    success: '构建成功',
+    failure: '构建失败',
+    cancelled: '构建取消',
+    waiting: '等待中',
+    queued: '构建队列中',
+    timed_out: '构建超时',
+    completed: '构建完成',
+}
+
+// check build workflow status
+const checkBuildStatus = async () => {
+    const checkRes: any = await githubApi.getWorkflowRuns(
+        store.userInfo.login,
+        'PakePlus',
+        {
+            branch: store.currentProject.name,
+            event: 'workflow_dispatch',
+        }
+    )
+    console.log('checkRes---', checkRes)
+    if (checkRes.status === 200 && checkRes.data.total_count > 0) {
+        const build_runs = checkRes.data.workflow_runs[0]
+        // check build status
+        const { status, conclusion } = build_runs
+        buildStatus = statusMap[status] || '构建中'
+        document.querySelector('.el-loading-text')!.innerHTML = '构建成功'
+        if (status === 'completed' && conclusion === 'success') {
+            document.querySelector('.el-loading-text')!.innerHTML = '构建成功'
+            // 清理构建定时器
+            buildSecondTimer && clearInterval(buildSecondTimer)
+            checkDispatchTimer && clearInterval(checkDispatchTimer)
+            // 关闭弹窗，并跳转到发布页面
+        }
+    } else {
+        document.querySelector('.el-loading-text')!.innerHTML = '构建失败'
+    }
 }
 
 onMounted(() => {
+    buildTime = 0
     appWindow.setTitle(`${store.currentProject.name}项目`)
 })
 </script>
@@ -399,8 +526,77 @@ onMounted(() => {
     justify-content: space-between;
 
     .mainEdit {
-        margin-top: 20px;
         padding: 10px;
+
+        .homeHeader {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .headerTitle {
+                font-size: 20px;
+                font-weight: bold;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+
+                .backBox {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    // color: var(--el-text-color-regular);
+                    cursor: pointer;
+                }
+            }
+
+            .toolTips {
+                color: gray;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                margin-left: 2px;
+
+                .tipsIcon {
+                    margin-left: 6px;
+                    cursor: pointer;
+                }
+            }
+
+            .setting {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                // margin-right: 10px;
+                .userName {
+                    margin-right: 6px;
+                }
+
+                .dropdownLink {
+                    // cursor: pointer;
+                }
+            }
+
+            .headerTool {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .control {
+                    color: #2a598a;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .configForm {
+            margin-top: 10px;
+        }
     }
     .footerBox {
         display: flex;

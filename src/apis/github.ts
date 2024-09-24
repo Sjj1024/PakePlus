@@ -138,4 +138,17 @@ export default {
             }
         )
     },
+    // get workflow runs
+    getWorkflowRuns(user: string, repo: string, params: any) {
+        return http(`/repos/${user}/${repo}/actions/runs`, {
+            method: 'get',
+            params,
+        })
+    },
+    // get workflow run releases
+    getReleasesAssets(user: string, repo: string, tag: string) {
+        return http(`/repos/${user}/${repo}/releases/tags/${tag}`, {
+            method: 'get',
+        })
+    },
 }
