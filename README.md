@@ -145,3 +145,12 @@ pnpm run dev
 # Pack application
 pnpm run build
 ```
+
+## Support
+
+1. If you think PakePlus delights your life, you can feed it some energy.
+ <p align="center">
+         <img src="./assets/pay.png" />
+ </p>
+
+2. I hope that you enjoy playing with it. Let us know if you find a website that would be great for a Mac App!
