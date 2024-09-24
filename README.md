@@ -1,6 +1,6 @@
 <h4 align="right"><strong>English</strong></h4>
 <p align="center">
-    <img src="./app-icon.png" width=138/>
+    <img src="assets/pakeplus.png" width=138/>
 </p>
 <h1 align="center">PakePlus</h1>
 <p align="center"><strong>Turn any webpage into desktop app and mobile app with Rust <em>is ease</em>.</strong></p>
