@@ -532,14 +532,14 @@ onMounted(() => {
     justify-content: space-between;
 
     .mainEdit {
-        padding: 10px;
+        padding: 20px;
 
         .homeHeader {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
 
             .headerTitle {
                 font-size: 20px;
@@ -578,7 +578,7 @@ onMounted(() => {
                 flex-direction: row;
                 justify-content: flex-start;
                 align-items: center;
-                // margin-right: 10px;
+                margin-right: 20px;
                 .userName {
                     margin-right: 6px;
                 }

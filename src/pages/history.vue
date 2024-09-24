@@ -464,7 +464,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .historyBox {
-    padding: 10px;
+    padding: 20px;
 
     .homeHeader {
         display: flex;

@@ -4,7 +4,12 @@
             <div>
                 <div class="headerTitle">
                     <span>项目管理</span>
-                    <img :src="githubImg" alt="github" class="githubIcon" />
+                    <img
+                        :src="githubImg"
+                        alt="github"
+                        class="githubIcon"
+                        @click="openUrl(pakeUrlMap.github)"
+                    />
                     <!-- <img :src="zhifubaoImg" alt="github" class="githubIcon" /> -->
                     <!-- <img :src="weixinImg" alt="github" class="wxIcon" /> -->
                 </div>
@@ -332,7 +337,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .homeBox {
-    padding: 10px;
+    padding: 20px;
 
     .homeHeader {
         display: flex;
