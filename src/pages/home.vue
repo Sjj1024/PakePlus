@@ -124,10 +124,9 @@ import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
 import { invoke } from '@tauri-apps/api/tauri'
-import { open } from '@tauri-apps/api/shell'
 import githubImg from '@/assets/images/github.png'
 import weixinImg from '@/assets/images/weixin.png'
-import { pakeUrlMap } from '@/utils/common'
+import { pakeUrlMap, openUrl } from '@/utils/common'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -140,11 +139,6 @@ const branchName = ref('')
 // go project detail
 const goProject = () => {
     router.push('/edit')
-}
-
-// open url by chrome
-const openUrl = async (url: string) => {
-    await open(url)
 }
 
 // go about
