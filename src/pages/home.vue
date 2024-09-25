@@ -63,7 +63,7 @@
         <el-dialog v-model="tokenDialog" width="500" center>
             <template #header>
                 <div class="diaHeader">
-                    <span>配置Token</span>
+                    <span>Github Token</span>
                     <el-icon class="diaTipsIcon"><Warning /></el-icon>
                 </div>
             </template>
