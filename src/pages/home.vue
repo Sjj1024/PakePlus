@@ -14,7 +14,8 @@
             </div>
             <!-- 设置按钮 -->
             <div class="toolBox">
-                <div class="theme">
+                <!-- TODO theme change -->
+                <!-- <div class="theme">
                     <el-dropdown>
                         <span class="dropdownLink">
                             <span class="iconfont themeIcon">&#xe635;</span>
@@ -30,7 +31,7 @@
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
-                </div>
+                </div> -->
                 <div class="language">
                     <el-dropdown>
                         <span class="dropdownLink">
@@ -379,7 +380,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .homeBox {
-    padding: 20px;
+    padding: 10px 20px;
 
     .homeHeader {
         display: flex;

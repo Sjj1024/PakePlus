@@ -63,6 +63,15 @@
             </el-table-column>
             <el-table-column prop="updated_at" label="发布日期" />
         </el-table>
+        <!-- share and push bug -->
+        <!-- <div class="shareBox">
+            <el-button type="primary">
+                <span>发布页面</span>
+            </el-button>
+            <el-button type="primary">
+                <span>报告问题</span>
+            </el-button>
+        </div> -->
     </div>
 </template>
 
@@ -465,7 +474,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .historyBox {
-    padding: 20px;
+    padding: 10px 20px;
 
     .homeHeader {
         display: flex;

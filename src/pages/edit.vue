@@ -109,6 +109,7 @@
             <el-button @click="saveProject(true)">保存</el-button>
             <el-button @click="preview">预览</el-button>
             <el-button @click="createRepo">发布</el-button>
+            <img :src="localImagePath" alt="临时图标" style="width: 100px" />
         </div>
         <!-- icon输入 -->
         <input
@@ -174,6 +175,10 @@ import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePakeStore } from '@/store'
+import { writeBinaryFile, BaseDirectory } from '@tauri-apps/api/fs'
+import { resourceDir, join } from '@tauri-apps/api/path'
+import { convertFileSrc } from '@tauri-apps/api/tauri'
+import { open } from '@tauri-apps/api/dialog'
 import { ArrowLeft } from '@element-plus/icons-vue'
 
 const router = useRouter()
@@ -244,8 +249,11 @@ const appRules = reactive<FormRules>({
     ],
 })
 
+// local image path
+const localImagePath = ref('')
+
 // 上传icon
-const uploadIcon = () => {
+const uploadIcon = async () => {
     console.log('uploadIcon')
     document.getElementById('open')!.click()
 }
@@ -284,6 +292,7 @@ const updateIcon = async (content: string) => {
 const changeFile = (event: any) => {
     // get base64 content
     const file = event.target.files[0] // 获取文件
+    console.log('file---', file)
     if (file) {
         appForm.icon = file.name
         console.log('file---', event.target.files)
@@ -293,9 +302,49 @@ const changeFile = (event: any) => {
             const base64String = e.target.result.split('base64,')[1] // 获取Base64编码
             console.log('base64String---', base64String) // 打印Base64编码内容
             updateIcon(base64String) // 更新icon文件内容
+            // save image to datadir
+            saveImage(file.name, base64String)
         }
         reader.readAsDataURL(file) // 将文件读取为Base64
     }
+}
+
+// save image file to datadir
+const saveImage = async (fileName: string, base64: string) => {
+    // base64 to arraybuffer
+    const imageArrayBuffer = base64ToArrayBuffer(base64)
+    // save file
+    const imageData = new Uint8Array(imageArrayBuffer)
+    // 获取应用数据目录
+    const appDataPath = await resourceDir()
+    console.log('appDataPath------', appDataPath)
+    // 拼接文件保存路径
+    const savePath = `${appDataPath}${fileName}`
+    // 将图片保存到应用数据目录
+    await writeBinaryFile(savePath, imageData, {
+        dir: BaseDirectory.Cache,
+    })
+    console.log(`Image saved to: ${savePath}`)
+    appForm.desc = savePath
+    const filePath = await join(appDataPath, fileName)
+    console.log('filePath---', filePath)
+    const assetUrl = convertFileSrc(filePath)
+    console.log('assetUrl---', assetUrl)
+    localImagePath.value = assetUrl
+}
+
+// 将base64转换为ArrayBuffer
+const base64ToArrayBuffer = (base64: string) => {
+    // 创建一个新的 ArrayBuffer
+    const binaryString = atob(base64)
+    const len = binaryString.length
+    const arrayBuffer = new ArrayBuffer(len)
+    const uint8Array = new Uint8Array(arrayBuffer)
+    // 将二进制字符串中的字符逐个存入 Uint8Array
+    for (let i = 0; i < len; i++) {
+        uint8Array[i] = binaryString.charCodeAt(i)
+    }
+    return arrayBuffer
 }
 
 // 跳转到新建页面
@@ -532,7 +581,7 @@ onMounted(() => {
     justify-content: space-between;
 
     .mainEdit {
-        padding: 20px;
+        padding: 10px 20px;
 
         .homeHeader {
             display: flex;

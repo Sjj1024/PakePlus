@@ -7,20 +7,43 @@
     },
     "package": {
         "productName": "PakePlus",
-        "version": "0.1.0"
+        "version": "0.1.1"
     },
     "tauri": {
         "allowlist": {
             "all": false,
+            "path": {
+                "all": true
+            },
             "fs": {
                 "all": true,
                 "readFile": true,
                 "writeFile": true,
-                "scope": ["$APPCONFIG/*"]
+                "readDir": true,
+                "copyFile": true,
+                "createDir": true,
+                "removeDir": true,
+                "removeFile": true,
+                "renameFile": true,
+                "exists": true,
+                "scope": ["$RESOURCE/*"]
             },
             "http": {
                 "all": true,
                 "scope": ["https://api.github.com/*"]
+            },
+            "dialog": {
+                "all": true,
+                "ask": true,
+                "confirm": true,
+                "message": true,
+                "open": true,
+                "save": true
+            },
+            "protocol": {
+                "all": true,
+                "asset": true,
+                "assetScope": ["$RESOURCE/*"]
             },
             "shell": {
                 "all": false,
@@ -46,7 +69,7 @@
             }
         ],
         "security": {
-            "csp": null
+            "csp": "default-src 'self'; img-src 'self'; asset: https://asset.localhost"
         },
         "bundle": {
             "active": true,

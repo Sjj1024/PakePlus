@@ -1,0 +1,45 @@
+/* 默认dark主题 */
+:root[theme='dark'] {
+    --bg-color: #0d1117;
+    --text-color: #f0f6fc;
+    --box-shadow: unset;
+    --input-color: black;
+    --menu-ative-bg: rgba(201, 211, 225, 0.08);
+    --scroll-thumb: rgba(255, 255, 255, 0.2);
+    --scroll-track: rgba(251, 249, 249, 0.1);
+    --api-process: #363637;
+    --filt-item: rgba(201, 211, 225, 0.08);
+    --selected-item: rgba(218, 223, 231, 0.247);
+    --file-menu-color: #181818;
+    --file-menu-hover: rgb(145, 145, 145);
+    --file-loading-mask: #0d1117ba;
+    --file-loading-hover: rgba(201, 211, 225, 0);
+    --img-pre-btn-bg: rgb(31 45 61 / 11%);
+    --img-pre-btn-bg-hover: rgb(31 45 61 / 33%);
+    --gpt-message-bg-hover: rgba(201, 211, 225, 0.2);
+    --gpt-me-message-bg: rgb(123, 194, 87);
+    --gpt-me-message-bg-hover: rgb(134, 212, 95);
+}
+
+/* light主题 */
+:root[theme='light'] {
+    --bg-color: #fff;
+    --text-color: #181818;
+    --box-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #f9f9f9;
+    --input-color: #181818;
+    --menu-ative-bg: rgba(9, 30, 66, 0.08);
+    --scroll-thumb: rgba(0, 0, 0, 0.2);
+    --scroll-track: rgba(0, 0, 0, 0.1);
+    --api-process: #cdcdcd;
+    --filt-item: #ecf5ff;
+    --selected-item: #d4e7fd;
+    --file-menu-color: #181818;
+    --file-menu-hover: rgb(200, 200, 200);
+    --file-loading-mask: #ecf5ff6a;
+    --file-loading-hover: #ecf5ff3a;
+    --img-pre-btn-bg: rgba(31, 45, 61, 0.11);
+    --img-pre-btn-bg-hover: rgba(31, 45, 61, 0.53);
+    --gpt-message-bg-hover: rgba(9, 30, 66, 0.15);
+    --gpt-me-message-bg: rgb(149, 236, 105);
+    --gpt-me-message-bg-hover: rgb(137, 217, 97);
+}
