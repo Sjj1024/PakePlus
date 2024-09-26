@@ -1,0 +1,95 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4685520 */
+  src: url('iconfont.woff2?t=1727269405585') format('woff2'),
+       url('iconfont.woff?t=1727269405585') format('woff'),
+       url('iconfont.ttf?t=1727269405585') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-setting1:before {
+  content: "\e667";
+}
+
+.icon-tips:before {
+  content: "\e66f";
+}
+
+.icon-tips1:before {
+  content: "\e666";
+}
+
+.icon-tips2:before {
+  content: "\e6b5";
+}
+
+.icon-icon_tips:before {
+  content: "\e676";
+}
+
+.icon-twitter:before {
+  content: "\e63d";
+}
+
+.icon-yooxi:before {
+  content: "\e604";
+}
+
+.icon-zhifeiji:before {
+  content: "\e6a0";
+}
+
+.icon-email:before {
+  content: "\e602";
+}
+
+.icon-youtube:before {
+  content: "\ec32";
+}
+
+.icon-tiktok:before {
+  content: "\eb73";
+}
+
+.icon-theme:before {
+  content: "\e635";
+}
+
+.icon-zhongyingwenqiehuan_zhongwen:before {
+  content: "\e6a2";
+}
+
+.icon-zhongyingwenqiehuan_EN:before {
+  content: "\e6a3";
+}
+
+.icon-wangluo:before {
+  content: "\e600";
+}
+
+.icon-github:before {
+  content: "\e709";
+}
+
+.icon-iconfontweixin:before {
+  content: "\e638";
+}
+
+.icon-weixin:before {
+  content: "\e64b";
+}
+
+.icon-zhifubaozhifu:before {
+  content: "\e654";
+}
+
+.icon-zhifubaozhifu1:before {
+  content: "\e634";
+}
+

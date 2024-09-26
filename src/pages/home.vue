@@ -3,27 +3,58 @@
         <div class="homeHeader">
             <div>
                 <div class="headerTitle">
-                    <span>项目管理</span>
-                    <img
-                        :src="githubImg"
-                        alt="github"
-                        class="githubIcon"
-                        @click="openUrl(pakeUrlMap.github)"
-                    />
-                    <!-- <img :src="zhifubaoImg" alt="github" class="githubIcon" /> -->
-                    <!-- <img :src="weixinImg" alt="github" class="wxIcon" /> -->
+                    <span>{{ t('projectTitle') }}</span>
                 </div>
                 <div class="toolTips">
                     <span>
-                        开源免费创建，编辑，调试打包跨平台APP，仅仅只需要一个Token
+                        {{ t('projectTips') }}
                     </span>
-                    <el-icon class="tipsIcon"><InfoFilled /></el-icon>
+                    <span class="iconfont githubIcon">&#xe709;</span>
                 </div>
             </div>
             <!-- 设置按钮 -->
-            <div class="setting" @click="tokenDialog = true">
-                <span class="userName">{{ store.userInfo.login }}</span>
-                <el-icon :size="26"><Setting /></el-icon>
+            <div class="toolBox">
+                <div class="theme">
+                    <el-dropdown>
+                        <span class="dropdownLink">
+                            <span class="iconfont themeIcon">&#xe635;</span>
+                        </span>
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                                <el-dropdown-item>{{
+                                    t('darkMode')
+                                }}</el-dropdown-item>
+                                <el-dropdown-item>{{
+                                    t('lightMode')
+                                }}</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </template>
+                    </el-dropdown>
+                </div>
+                <div class="language">
+                    <el-dropdown>
+                        <span class="dropdownLink">
+                            <span class="iconfont langIcon">
+                                {{ locale === 'en' ? '&#xe6a3;' : '&#xe6a2;' }}
+                            </span>
+                        </span>
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                                <el-dropdown-item @click="changeLang('en')"
+                                    >English</el-dropdown-item
+                                >
+                                <el-dropdown-item @click="changeLang('zh')"
+                                    >简体中文</el-dropdown-item
+                                >
+                                <el-dropdown-item>繁体中文</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </template>
+                    </el-dropdown>
+                </div>
+                <div class="setting" @click="tokenDialog = true">
+                    <!-- <span class="userName">{{ store.userInfo.login }}</span> -->
+                    <span class="iconfont setIcon">&#xe667;</span>
+                </div>
             </div>
         </div>
         <div class="projectBox">
@@ -39,11 +70,6 @@
                     class="appIcon"
                     alt="appIcon"
                 />
-                <!-- <iframe
-                    class="appPreview"
-                    src="https://www.kuaishou.com"
-                    frameborder="0"
-                ></iframe> -->
                 <div class="infoBox">
                     <div class="appBox">
                         <div class="appName">{{ pro.name }}</div>
@@ -54,11 +80,11 @@
             </div>
             <!-- new project -->
             <div class="project newProject" @click="showBranchDialog">
-                <el-icon :size="26"><Plus /></el-icon>
+                <el-icon class="addIcon" :size="26"><Plus /></el-icon>
             </div>
         </div>
         <!-- version -->
-        <div class="version" @click="goAbout">v1.0.1</div>
+        <div class="version" @click="goAbout">v{{ version }}</div>
         <!-- config github token -->
         <el-dialog v-model="tokenDialog" width="500" center>
             <template #header>
@@ -73,14 +99,18 @@
                     placeholder="请输入Token"
                     class="tokenInput"
                 />
-                <el-button @click="testToken(true)">测试</el-button>
+                <el-button @click="testToken(true)">{{
+                    t('testToken')
+                }}</el-button>
             </div>
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button @click="tokenDialog = false">取消</el-button>
+                    <el-button @click="tokenDialog = false">{{
+                        t('cancel')
+                    }}</el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button type="primary" @click="testToken(false)">
-                        确定
+                        {{ t('confirm') }}
                     </el-button>
                 </div>
             </template>
@@ -89,26 +119,28 @@
         <el-dialog v-model="branchDialog" width="400" center>
             <template #header>
                 <div class="diaHeader">
-                    <span>项目名称</span>
+                    <span>{{ t('projectName') }}</span>
                 </div>
             </template>
             <div class="diaContent">
                 <el-input
                     v-model="branchName"
-                    placeholder="请输入英文项目名称，例如：PakePlus"
+                    :placeholder="t('projectNamePlaceholder')"
                     class="tokenInput"
                 />
             </div>
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button @click="branchDialog = false">取消</el-button>
+                    <el-button @click="branchDialog = false">{{
+                        t('cancel')
+                    }}</el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button
                         type="primary"
                         @click="creatBranch"
                         :loading="creatLoading"
                     >
-                        确定
+                        {{ t('confirm') }}
                     </el-button>
                 </div>
             </template>
@@ -124,14 +156,17 @@ import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
 import { invoke } from '@tauri-apps/api/tauri'
-import githubImg from '@/assets/images/github.png'
-import weixinImg from '@/assets/images/weixin.png'
 import { pakeUrlMap, openUrl } from '@/utils/common'
+import { useI18n } from 'vue-i18n'
+
+import { getVersion } from '@tauri-apps/api/app'
 
 const router = useRouter()
 const store = usePakeStore()
+const { t, locale } = useI18n()
 
 const token = ref(localStorage.getItem('token') || '')
+const version = ref('')
 const tokenDialog = ref(false)
 const branchDialog = ref(false)
 const branchName = ref('')
@@ -160,6 +195,12 @@ const showBranchDialog = () => {
         ElMessage.error('请先配置Token')
         return
     }
+}
+
+// 语言切换
+const changeLang = (lang: string) => {
+    locale.value = lang
+    localStorage.setItem('lang', lang)
 }
 
 // 测试token是否可用
@@ -324,8 +365,15 @@ const updateBuildYml = async (branchName: string) => {
     }
 }
 
+const getPakePlusInfo = async () => {
+    const pakeVersion = await getVersion()
+    console.log('pakeVersion', pakeVersion)
+    version.value = pakeVersion
+}
+
 onMounted(() => {
     appWindow.setTitle('PakePlus')
+    getPakePlusInfo()
 })
 </script>
 
@@ -345,12 +393,8 @@ onMounted(() => {
             align-items: center;
             font-size: 20px;
             font-weight: bold;
-
-            .githubIcon {
-                width: 20px;
-                height: 20px;
-                margin-left: 10px;
-            }
+            height: 30px;
+            line-height: 30px;
 
             .wxIcon {
                 width: 22px;
@@ -365,22 +409,65 @@ onMounted(() => {
             flex-direction: row;
             justify-content: flex-start;
             align-items: center;
+            height: 22px;
+            line-height: 22px;
 
             .tipsIcon {
                 margin-left: 6px;
                 cursor: pointer;
             }
+
+            .githubIcon {
+                width: 20px;
+                height: 20px;
+                font-size: 18px;
+                margin-left: 10px;
+                cursor: pointer;
+                &:hover {
+                    color: black;
+                }
+            }
         }
 
-        .setting {
+        .toolBox {
             display: flex;
             flex-direction: row;
-            justify-content: flex-start;
             align-items: center;
-            margin-right: 10px;
 
-            .userName {
-                margin-right: 6px;
+            .dropdownLink {
+                margin-right: 20px;
+                user-select: none;
+                cursor: default;
+
+                .themeIcon,
+                .langIcon,
+                .setIcon {
+                    font-size: 20px;
+                    color: gray;
+                    &:hover {
+                        color: black;
+                    }
+                }
+            }
+
+            .setting {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+
+                .userName {
+                    margin-right: 6px;
+                }
+
+                .setIcon {
+                    font-size: 20px;
+                    color: gray;
+                    cursor: pointer;
+                    &:hover {
+                        color: black;
+                    }
+                }
             }
         }
 
@@ -438,15 +525,30 @@ onMounted(() => {
             flex-direction: row;
             justify-content: center;
             align-items: center;
+            &:hover {
+                color: black;
+                border: 1px solid black;
+                .addIcon {
+                    color: black;
+                }
+            }
+
+            .addIcon {
+                color: gray;
+            }
         }
     }
 
     .version {
         position: fixed;
-        bottom: 20px;
+        bottom: 16px;
         right: 20px;
         color: gray;
         cursor: pointer;
+
+        &:hover {
+            color: black;
+        }
     }
 }
 

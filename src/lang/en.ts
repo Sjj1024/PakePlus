@@ -1,16 +1,14 @@
 export default {
-    login: {
-        login: 'login',
-        userName: 'userName',
-        password: 'password',
-    },
-    captcha: 'Captcha',
-    forgetPassword: 'Forget Password?',
-    loginTip: 'The login result is random. Just fill in the captcha',
-    editpassword: 'Edit Password',
-    logout: 'Logout',
-    errMsg: {
-        inputRequired: 'Please Input {cont}',
-        selectRequired: 'Please Select {cont}',
-    },
+    projectTitle: 'Project Manager',
+    projectTips:
+        'Open source free creation, editing, debugging, and packaging of cross platform apps',
+    darkMode: 'Dark Mode',
+    lightMode: 'Light Mode',
+    testToken: 'Test',
+    testPlaceholder: 'Please enter your github token',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
+    testSuccess: 'Test success',
+    projectName: 'Project Name',
+    projectNamePlaceholder: 'Please enter the project name, example: PakePlus',
 }

@@ -18,6 +18,8 @@ pub async fn open_docs(
     .position(200.4, 100.4)
     .build()
     .unwrap();
+    let theme = docs_window.theme().expect("failed to get theme");
+    println!("Theme: {}", theme);
 }
 
 #[tauri::command]

@@ -1,16 +1,14 @@
 export default {
-    login: {
-        login: '登录',
-        userName: '用户名',
-        password: '密码',
-    },
-    captcha: '验证码',
-    forgetPassword: '忘记密码了？',
-    loginTip: '当前登录结果随机。验证码随便填',
-    editpassword: '修改密码',
-    logout: '退出登录',
-    errMsg: {
-        inputRequired: '请输入{cont}',
-        selectRequired: '请选择{cont}',
-    },
+    projectTitle: '项目管理',
+    projectTips:
+        '开源免费创建，编辑，调试打包跨平台APP，仅仅只需要一个Github Token',
+    darkMode: '暗黑主题',
+    lightMode: '亮白主题',
+    testToken: '测试',
+    testPlaceholder: '请输入Github Token',
+    cancel: '取消',
+    confirm: '确定',
+    testSuccess: 'Token可用',
+    projectName: '项目名称',
+    projectNamePlaceholder: '请输入英文项目名称，例如：PakePlus',
 }
