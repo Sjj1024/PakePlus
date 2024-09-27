@@ -11,6 +11,7 @@
         "icon": "tauri icon",
         "tauri dev": "tauri dev",
         "tauri build": "tauri build",
+        "tauri debug": "tauri build --debug",
         "tauri preview": "tauri preview"
     },
     "dependencies": {
