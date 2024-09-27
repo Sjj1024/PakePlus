@@ -26,7 +26,7 @@
                 "removeFile": true,
                 "renameFile": true,
                 "exists": true,
-                "scope": ["$RESOURCE/*"]
+                "scope": ["$CACHE/*"]
             },
             "http": {
                 "all": true,
@@ -43,7 +43,7 @@
             "protocol": {
                 "all": true,
                 "asset": true,
-                "assetScope": ["$RESOURCE/*"]
+                "assetScope": ["$CACHE/*"]
             },
             "shell": {
                 "all": false,

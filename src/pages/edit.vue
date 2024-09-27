@@ -175,10 +175,9 @@ import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePakeStore } from '@/store'
-import { writeBinaryFile, BaseDirectory } from '@tauri-apps/api/fs'
-import { resourceDir, join } from '@tauri-apps/api/path'
+import { writeBinaryFile, BaseDirectory, exists } from '@tauri-apps/api/fs'
+import { cacheDir, join } from '@tauri-apps/api/path'
 import { convertFileSrc } from '@tauri-apps/api/tauri'
-import { open } from '@tauri-apps/api/dialog'
 import { ArrowLeft } from '@element-plus/icons-vue'
 
 const router = useRouter()
@@ -316,8 +315,10 @@ const saveImage = async (fileName: string, base64: string) => {
     // save file
     const imageData = new Uint8Array(imageArrayBuffer)
     // 获取应用数据目录
-    const appDataPath = await resourceDir()
+    const appDataPath = await cacheDir()
     console.log('appDataPath------', appDataPath)
+    // const pathExist = await exists(appDataPath)
+    // console.log('pathExist---', pathExist)
     // 拼接文件保存路径
     const savePath = `${appDataPath}${fileName}`
     // 将图片保存到应用数据目录
