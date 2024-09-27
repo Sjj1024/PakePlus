@@ -69,7 +69,7 @@
             }
         ],
         "security": {
-            "csp": "default-src 'self'; img-src 'self' asset://localhost data:; asset: https://asset.localhost"
+            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' asset://localhost data:; asset: https://asset.localhost"
         },
         "bundle": {
             "active": true,
