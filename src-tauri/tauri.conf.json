@@ -26,7 +26,7 @@
                 "removeFile": true,
                 "renameFile": true,
                 "exists": true,
-                "scope": ["$CACHE/*"]
+                "scope": ["$APPDATA/*", "$APPDATA/assets/*"]
             },
             "http": {
                 "all": true,
@@ -43,7 +43,7 @@
             "protocol": {
                 "all": true,
                 "asset": true,
-                "assetScope": ["$CACHE/*"]
+                "assetScope": ["$APPDATA/*", "$APPDATA/assets/*"]
             },
             "shell": {
                 "all": false,
@@ -74,7 +74,7 @@
         "bundle": {
             "active": true,
             "targets": "all",
-            "identifier": "com.pakeplus.app",
+            "identifier": "com.pakeplus.desktop",
             "resources": [
                 "./data/example.json",
                 "./data/appbuild.yml",

@@ -176,7 +176,7 @@ import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePakeStore } from '@/store'
 import { writeBinaryFile, BaseDirectory, exists } from '@tauri-apps/api/fs'
-import { cacheDir, join } from '@tauri-apps/api/path'
+import { appDataDir, join } from '@tauri-apps/api/path'
 import { convertFileSrc } from '@tauri-apps/api/tauri'
 import { ArrowLeft } from '@element-plus/icons-vue'
 
@@ -315,21 +315,20 @@ const saveImage = async (fileName: string, base64: string) => {
     // save file
     const imageData = new Uint8Array(imageArrayBuffer)
     // 获取应用数据目录
-    const appDataPath = await cacheDir()
+    const appDataPath = await appDataDir()
     console.log('appDataPath------', appDataPath)
     // const pathExist = await exists(appDataPath)
     // console.log('pathExist---', pathExist)
     // 拼接文件保存路径
-    const savePath = `${appDataPath}${fileName}`
+    // const savePath = `${appDataPath}${fileName}`
+    const savePath = await join(appDataPath, 'assets', fileName)
     // 将图片保存到应用数据目录
-    await writeBinaryFile(savePath, imageData, {
-        dir: BaseDirectory.Cache,
-    })
+    await writeBinaryFile(savePath, imageData)
     console.log(`Image saved to: ${savePath}`)
     appForm.desc = savePath
-    const filePath = await join(appDataPath, fileName)
-    console.log('filePath---', filePath)
-    const assetUrl = convertFileSrc(filePath)
+    // const filePath = await join(appDataPath, fileName)
+    console.log('filePath---', savePath)
+    const assetUrl = convertFileSrc(savePath)
     console.log('assetUrl---', assetUrl)
     localImagePath.value = assetUrl
 }

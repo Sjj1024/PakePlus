@@ -1,7 +1,6 @@
 export default {
     projectTitle: 'Project Manager',
-    projectTips:
-        'Open source free creation, editing, debugging, and packaging of cross platform apps',
+    projectTips: 'Open source free web packaging of cross platform apps',
     darkMode: 'Dark Mode',
     lightMode: 'Light Mode',
     testToken: 'Test',

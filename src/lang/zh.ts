@@ -1,7 +1,6 @@
 export default {
     projectTitle: '项目管理',
-    projectTips:
-        '开源免费创建，编辑，调试打包跨平台APP，仅仅只需要一个Github Token',
+    projectTips: '开源免费，Web网页打包跨平台APP，仅仅只需要一个Github Token',
     darkMode: '暗黑主题',
     lightMode: '亮白主题',
     testToken: '测试',

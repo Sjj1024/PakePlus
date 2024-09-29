@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { cacheDir, join } from '@tauri-apps/api/path'
-import { exists, BaseDirectory } from '@tauri-apps/api/fs'
+import { appDataDir } from '@tauri-apps/api/path'
+import { createDir, BaseDirectory } from '@tauri-apps/api/fs'
 
 const userLanguage = navigator.language
 console.log('System language:', userLanguage)
 
 const initEnv = async () => {
     // checkout appdata dir exists
-    const dataDir = await cacheDir()
-    const existRes = await exists(dataDir)
-    console.log('App data dir exists:', existRes)
+    const dataDir = await appDataDir()
+    // const existRes = await createDir(dataDir)
+    await createDir('assets', { dir: BaseDirectory.AppData, recursive: true })
+    console.log('App data dir exists:', dataDir)
 }
 
 onMounted(() => {
-    // initEnv()
+    initEnv()
     let theme = localStorage.getItem('theme') || 'dark'
     if (theme !== 'dark') {
         document.documentElement.setAttribute('theme', 'light')
