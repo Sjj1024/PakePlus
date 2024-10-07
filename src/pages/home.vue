@@ -64,10 +64,10 @@
                 class="project"
                 v-for="pro in store.projectList"
                 :key="pro.id"
-                @click="goProject"
+                @click="goProject(pro)"
             >
                 <img
-                    src="https://hadoappusage.oss-cn-shanghai.aliyuncs.com/static/pad_image/blueBg.png"
+                    :src="pro.icon || pakePlusIcon"
                     class="appIcon"
                     alt="appIcon"
                 />
@@ -76,7 +76,9 @@
                         <div class="appName">{{ pro.name }}</div>
                         <div class="appVersion">{{ pro.version }}</div>
                     </div>
-                    <div class="appDesc">{{ pro.desc }}</div>
+                    <span class="appDesc">
+                        {{ pro.desc || 'this is a pakeplus project' }}
+                    </span>
                 </div>
             </div>
             <!-- new project -->
@@ -158,6 +160,7 @@ import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
 import { invoke } from '@tauri-apps/api/tauri'
 import { pakeUrlMap, openUrl } from '@/utils/common'
+import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
 
 import { getVersion } from '@tauri-apps/api/app'
@@ -173,7 +176,8 @@ const branchDialog = ref(false)
 const branchName = ref('')
 
 // go project detail
-const goProject = () => {
+const goProject = (pro: Project) => {
+    store.setCurrentProject(pro)
     router.push('/edit')
 }
 
@@ -288,8 +292,15 @@ const creatBranch = async () => {
         // 201 is ok
         if (res.status === 201) {
             const branchInfo = {
-                name: branchName.value,
                 ...res.data,
+                name: branchName.value,
+                desc: 'this is a pakeplus project',
+                url: '',
+                showName: 'pakeplus',
+                appid: 'com.pakeplus.desktop',
+                icon: '',
+                version: '0.0.1',
+                platform: 'desktop',
             }
             console.log('branch Info success', branchInfo)
             store.setCurrentProject(branchInfo)
@@ -500,6 +511,8 @@ onMounted(() => {
             .appIcon {
                 width: 100%;
                 height: 66%;
+                object-fit: cover;
+                border-radius: 5px;
             }
 
             .appPreview {
@@ -509,6 +522,7 @@ onMounted(() => {
 
             .infoBox {
                 padding: 5px;
+
                 .appBox {
                     display: flex;
                     flex-direction: row;
@@ -516,8 +530,15 @@ onMounted(() => {
                 }
 
                 .appDesc {
+                    max-width: 124px;
+                    display: -webkit-box;
                     font-size: small;
                     color: gray;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    -webkit-line-clamp: 2;
+                    line-clamp: 2;
+                    -webkit-box-orient: vertical;
                 }
             }
         }

@@ -60,9 +60,9 @@
                         placeholder="例如：https://www.pakeplus.com"
                     />
                 </el-form-item>
-                <el-form-item label="APP名称" prop="name">
+                <el-form-item label="APP名称" prop="showName">
                     <el-input
-                        v-model="appForm.name"
+                        v-model="appForm.showName"
                         placeholder="例如：派克加"
                     />
                 </el-form-item>
@@ -80,7 +80,7 @@
                 </el-form-item>
                 <el-form-item label="APP图标" prop="icon">
                     <el-input
-                        v-model="appForm.icon"
+                        v-model="appForm.icon.split('assets%2F')[1]"
                         readonly
                         @click="uploadIcon"
                         placeholder="例如：本地上传，支持png、jpg、jpeg格式"
@@ -109,16 +109,16 @@
             <el-button @click="saveProject(true)">保存</el-button>
             <el-button @click="preview">预览</el-button>
             <el-button @click="createRepo">发布</el-button>
-            <img :src="localImagePath" alt="临时图标" style="width: 100px" />
         </div>
         <!-- icon输入 -->
-        <input
+        <!-- <input
             id="open"
             type="file"
+            accept=".jpg,.png"
             name="filename"
             style="display: none"
             @change="changeFile"
-        />
+        /> -->
         <!-- 发布 -->
         <el-dialog v-model="centerDialogVisible" width="500" center>
             <template #header>
@@ -175,9 +175,10 @@ import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePakeStore } from '@/store'
-import { writeBinaryFile, BaseDirectory, exists } from '@tauri-apps/api/fs'
+import { writeBinaryFile, readBinaryFile } from '@tauri-apps/api/fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
 import { convertFileSrc } from '@tauri-apps/api/tauri'
+import { open } from '@tauri-apps/api/dialog'
 import { ArrowLeft } from '@element-plus/icons-vue'
 
 const router = useRouter()
@@ -187,10 +188,10 @@ const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
 const appForm = reactive({
-    url: 'https://www.bilibili.com/',
-    name: 'bilibili',
-    appid: 'hello.bilibili.com',
-    icon: '',
+    url: store.currentProject.url,
+    showName: 'bilibili',
+    appid: 'com.bilibili.desktop',
+    icon: store.currentProject.icon,
     version: '0.0.9',
     platform: 'desktop',
     desc: '简短描述',
@@ -204,7 +205,7 @@ const appRules = reactive<FormRules>({
             trigger: 'change',
         },
     ],
-    name: [
+    showName: [
         {
             required: true,
             message: '请输入APP名称',
@@ -254,7 +255,33 @@ const localImagePath = ref('')
 // 上传icon
 const uploadIcon = async () => {
     console.log('uploadIcon')
-    document.getElementById('open')!.click()
+    // document.getElementById('open')!.click()
+    // use tauri open api, bacause input cant seleted file type
+    const selectedFilePath: any = await open({
+        multiple: false, // 只允许选择一个文件
+        filters: [
+            {
+                name: 'Images',
+                extensions: ['png'],
+            },
+        ],
+    })
+
+    if (!selectedFilePath) {
+        console.log('No file selected')
+        return null
+    }
+    const fileName = selectedFilePath.split('/').pop()
+    console.log('Selected file path:', selectedFilePath, fileName)
+    appForm.icon = 'assets%2F' + fileName
+    // get file name
+    const binaryData = await readBinaryFile(selectedFilePath)
+    const base64Data = arrayBufferToBase64(binaryData)
+    console.log('Base64 encoded image:', base64Data)
+    // update icon file content
+    updateIcon(base64Data) // 更新icon文件内容
+    // save image to datadir
+    saveImage(fileName, base64Data)
 }
 
 // update icon file content
@@ -287,27 +314,6 @@ const updateIcon = async (content: string) => {
     }
 }
 
-// iconInput change
-const changeFile = (event: any) => {
-    // get base64 content
-    const file = event.target.files[0] // 获取文件
-    console.log('file---', file)
-    if (file) {
-        appForm.icon = file.name
-        console.log('file---', event.target.files)
-        // appForm.icon = event.target.files.name
-        const reader = new FileReader() // 创建FileReader对象
-        reader.onload = function (e: any) {
-            const base64String = e.target.result.split('base64,')[1] // 获取Base64编码
-            console.log('base64String---', base64String) // 打印Base64编码内容
-            updateIcon(base64String) // 更新icon文件内容
-            // save image to datadir
-            saveImage(file.name, base64String)
-        }
-        reader.readAsDataURL(file) // 将文件读取为Base64
-    }
-}
-
 // save image file to datadir
 const saveImage = async (fileName: string, base64: string) => {
     // base64 to arraybuffer
@@ -325,12 +331,20 @@ const saveImage = async (fileName: string, base64: string) => {
     // 将图片保存到应用数据目录
     await writeBinaryFile(savePath, imageData)
     console.log(`Image saved to: ${savePath}`)
-    appForm.desc = savePath
+    // appForm.desc = savePath
     // const filePath = await join(appDataPath, fileName)
     console.log('filePath---', savePath)
     const assetUrl = convertFileSrc(savePath)
     console.log('assetUrl---', assetUrl)
     localImagePath.value = assetUrl
+    // save image asseturl to project
+    store.addUpdatePro({
+        ...appForm,
+        name: store.currentProject.name,
+        id: appForm.appid,
+        debug: pubForm.model,
+        icon: assetUrl,
+    })
 }
 
 // 将base64转换为ArrayBuffer
@@ -345,6 +359,17 @@ const base64ToArrayBuffer = (base64: string) => {
         uint8Array[i] = binaryString.charCodeAt(i)
     }
     return arrayBuffer
+}
+
+// arrayBufferToBase64
+const arrayBufferToBase64 = (buffer: ArrayBuffer) => {
+    let binary = ''
+    const bytes = new Uint8Array(buffer)
+    const len = bytes.byteLength
+    for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i])
+    }
+    return btoa(binary)
 }
 
 // 跳转到新建页面
@@ -378,10 +403,10 @@ const saveProject = async (tips: boolean = true) => {
     appFormRef.value?.validate(async (valid, fields) => {
         if (valid) {
             // console.log('save!', appForm)
-            store.addProject({
+            store.addUpdatePro({
                 name: store.currentProject.name,
                 url: appForm.url,
-                showName: appForm.name,
+                showName: appForm.showName,
                 id: appForm.appid,
                 icon: appForm.icon,
                 version: appForm.version,
@@ -404,7 +429,7 @@ const preview = () => {
             saveProject(false)
             invoke('open_docs', {
                 appUrl: appForm.url,
-                appName: appForm.name,
+                appName: appForm.showName,
                 platform: appForm.platform,
             })
         } else {
@@ -425,16 +450,6 @@ const createRepo = async () => {
         }
     })
 }
-
-// // 获取需要更新的文件sha
-// const getFileSha = async (filePath: string) => {
-//     const res: any = await github.getFileSha(
-//         store.userInfo.login,
-//         'PakePlus',
-//         filePath
-//     )
-//     console.log('getBranch', res)
-// }
 
 // do not use same name with ref
 const pubForm = reactive({
@@ -463,7 +478,7 @@ const onSubmit = async () => {
     console.log('configSha---', configSha)
     try {
         const configContent: any = await invoke('update_config_file', {
-            name: appForm.name,
+            name: appForm.showName,
             version: appForm.version,
             url: appForm.url,
             id: appForm.appid,

@@ -560,15 +560,15 @@ export const usePakeStore = defineStore('pakeplus', {
             currentProject: localStorage.getItem('currentProject')
                 ? JSON.parse(localStorage.getItem('currentProject') as string)
                 : {
-                      ref: 'refs/heads/newbranch',
                       name: '',
                       node_id: '',
                       url: '',
-                      object: {
-                          sha: 'f42ea4b062330e78b5af81b4187f5fd59dd3372e',
-                          type: 'commit',
-                          url: 'https://api.github.com/repos/codegirle/PakePlus/git/commits/f42ea4b062330e78b5af81b4187f5fd59dd3372e',
-                      },
+                      showName: 'pakeplus',
+                      appid: 'com.pakeplus.desktop',
+                      icon: '',
+                      version: '0.0.1',
+                      platform: 'desktop',
+                      desc: '简短描述',
                   },
             projectList: localStorage.getItem('projectList')
                 ? JSON.parse(localStorage.getItem('projectList') as string)
@@ -597,9 +597,11 @@ export const usePakeStore = defineStore('pakeplus', {
         },
         setCurrentProject(info: any) {
             this.currentProject = info
+            // if project not in projectList, add it
+            this.addUpdatePro(info)
             localStorage.setItem('currentProject', JSON.stringify(info))
         },
-        addProject(project: Project) {
+        addUpdatePro(project: Project) {
             const exist = this.projectList.findIndex((item: Project) => {
                 console.log('item---', item, project)
                 return item.name === project.name
