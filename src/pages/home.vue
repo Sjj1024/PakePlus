@@ -463,7 +463,10 @@ onMounted(() => {
 
             .dropdownLink {
                 margin-right: 20px;
-                user-select: none;
+                -webkit-user-select: none; /* Safari */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* IE10+/Edge */
+                user-select: none; /* Standard syntax */
                 cursor: default;
 
                 .themeIcon,
@@ -524,6 +527,10 @@ onMounted(() => {
             border: 1px solid gray;
             margin-bottom: 10px;
 
+            &:hover {
+                box-shadow: #ccc 0px 0px 10px;
+            }
+
             .appIcon {
                 width: 100%;
                 height: 66%;
@@ -538,6 +545,11 @@ onMounted(() => {
 
             .infoBox {
                 padding: 5px;
+                -webkit-user-select: none; /* Safari */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* IE10+/Edge */
+                user-select: none; /* Standard syntax */
+                cursor: default;
 
                 .appBox {
                     display: flex;
