@@ -130,7 +130,7 @@
                     <el-checkbox-group v-model="pubForm.platform">
                         <el-checkbox label="桌面端" value="desktop" />
                         <el-checkbox label="移动端" value="mobile" />
-                        <el-checkbox label="源代码" value="source" />
+                        <!-- <el-checkbox label="源代码" value="source" /> -->
                     </el-checkbox-group>
                 </el-form-item>
                 <el-form-item label="发布模式">
@@ -148,7 +148,7 @@
                 </el-form-item>
             </el-form>
             <span style="color: #aaa">
-                注： 打包发布大概需要6分钟左右的时间，请耐心等待......
+                注： 打包发布大概需要8分钟左右的时间，请耐心等待......
             </span>
             <template #footer>
                 <div class="dialog-footer">
