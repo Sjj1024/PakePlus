@@ -23,17 +23,6 @@ pub async fn open_docs(
 }
 
 #[tauri::command]
-pub async fn read_json_file(handle: tauri::AppHandle) -> String {
-    let resource_path = handle
-        .path_resolver()
-        .resolve_resource("data/example.json")
-        .expect("failed to resolve resource");
-    let file = std::fs::File::open(&resource_path).unwrap();
-    let lang_de: serde_json::Value = serde_json::from_reader(file).unwrap();
-    return lang_de.to_string();
-}
-
-#[tauri::command]
 pub async fn update_build_file(handle: tauri::AppHandle) -> String {
     let resource_path = handle
         .path_resolver()

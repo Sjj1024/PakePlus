@@ -100,25 +100,20 @@
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="APP描述" prop="desc">
-                    <el-input v-model="appForm.desc" type="textarea" />
+                    <el-input
+                        v-model="appForm.desc"
+                        type="textarea"
+                        :rows="3"
+                        placeholder="请输入项目描述"
+                    />
                 </el-form-item>
             </el-form>
         </div>
         <div class="footerBox">
-            <!-- <el-button @click="backHome">返回</el-button> -->
             <el-button @click="saveProject(true)">保存</el-button>
             <el-button @click="preview">预览</el-button>
             <el-button @click="createRepo">发布</el-button>
         </div>
-        <!-- icon输入 -->
-        <!-- <input
-            id="open"
-            type="file"
-            accept=".jpg,.png"
-            name="filename"
-            style="display: none"
-            @change="changeFile"
-        /> -->
         <!-- 发布 -->
         <el-dialog v-model="centerDialogVisible" width="500" center>
             <template #header>
@@ -145,7 +140,11 @@
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="发布说明">
-                    <el-input v-model="pubForm.desc" type="textarea" />
+                    <el-input
+                        v-model="pubForm.desc"
+                        type="textarea"
+                        placeholder="请输入发布说明"
+                    />
                 </el-form-item>
             </el-form>
             <span style="color: #aaa">
@@ -192,9 +191,9 @@ const appForm = reactive({
     showName: 'bilibili',
     appid: 'com.bilibili.desktop',
     icon: store.currentProject.icon,
-    version: '0.0.9',
+    version: '0.0.1',
     platform: 'desktop',
-    desc: '简短描述',
+    desc: '',
 })
 
 const appRules = reactive<FormRules>({
@@ -612,14 +611,22 @@ onMounted(() => {
                 flex-direction: row;
                 justify-content: flex-start;
                 align-items: center;
+                -webkit-user-select: none; /* Safari */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* IE10+/Edge */
+                user-select: none; /* Standard syntax */
+                cursor: default;
 
                 .backBox {
                     display: flex;
                     flex-direction: row;
                     justify-content: flex-start;
                     align-items: center;
-                    // color: var(--el-text-color-regular);
                     cursor: pointer;
+
+                    &:hover {
+                        font-weight: bold;
+                    }
                 }
             }
 
@@ -630,6 +637,11 @@ onMounted(() => {
                 justify-content: flex-start;
                 align-items: center;
                 margin-left: 2px;
+                -webkit-user-select: none; /* Safari */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* IE10+/Edge */
+                user-select: none; /* Standard syntax */
+                cursor: default;
 
                 .tipsIcon {
                     margin-left: 6px;
@@ -652,6 +664,11 @@ onMounted(() => {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+                -webkit-user-select: none; /* Safari */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* IE10+/Edge */
+                user-select: none; /* Standard syntax */
+                cursor: default;
 
                 .control {
                     color: #2a598a;

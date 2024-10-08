@@ -407,6 +407,11 @@ onMounted(() => {
             font-weight: bold;
             height: 30px;
             line-height: 30px;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard syntax */
+            cursor: default;
 
             .wxIcon {
                 width: 22px;
@@ -423,6 +428,11 @@ onMounted(() => {
             align-items: center;
             height: 22px;
             line-height: 22px;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard syntax */
+            cursor: default;
 
             .tipsIcon {
                 margin-left: 6px;
@@ -445,6 +455,11 @@ onMounted(() => {
             display: flex;
             flex-direction: row;
             align-items: center;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard syntax */
+            cursor: default;
 
             .dropdownLink {
                 margin-right: 20px;
@@ -456,6 +471,7 @@ onMounted(() => {
                 .setIcon {
                     font-size: 20px;
                     color: gray;
+                    user-select: none;
                     &:hover {
                         color: black;
                     }

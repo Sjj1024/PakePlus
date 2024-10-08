@@ -19,21 +19,7 @@
             </div>
             <!-- 设置按钮 -->
             <div class="setting">
-                <!-- <span class="userName">更多</span> -->
-                <!-- <el-icon :size="26"><Menu /></el-icon> -->
                 <el-icon :size="26" @click="deleteRelease"><Delete /></el-icon>
-                <!-- <el-dropdown>
-                    <span class="el-dropdown-link">
-                        <el-icon :size="26"><Operation /></el-icon>
-                    </span>
-                    <template #dropdown>
-                        <el-dropdown-menu>
-                            <el-dropdown-item> 发布历史 </el-dropdown-item>
-                            <el-dropdown-item> 重制配置 </el-dropdown-item>
-                            <el-dropdown-item> 删除项目 </el-dropdown-item>
-                        </el-dropdown-menu>
-                    </template>
-                </el-dropdown> -->
             </div>
         </div>
         <!-- only get latest version by tag name -->
@@ -64,14 +50,17 @@
             <el-table-column prop="updated_at" label="发布日期" />
         </el-table>
         <!-- share and push bug -->
-        <!-- <div class="shareBox">
-            <el-button type="primary">
+        <div class="shareBox">
+            <!-- <el-button type="primary">
                 <span>发布页面</span>
             </el-button>
             <el-button type="primary">
                 <span>报告问题</span>
-            </el-button>
-        </div> -->
+            </el-button> -->
+            <div class="tips">
+                资源说明：dmg结尾的是macOS版本，deb结尾的是Linux版本，exe和msi结尾的是Windows版本，点击资源名称可以复制下载链接，点击下载会使用浏览器下载软件包。
+            </div>
+        </div>
     </div>
 </template>
 
@@ -520,10 +509,7 @@ onMounted(() => {
             flex-direction: row;
             justify-content: flex-start;
             align-items: center;
-            // margin-right: 10px;
-            .userName {
-                margin-right: 6px;
-            }
+            cursor: pointer;
         }
 
         .headerTool {
@@ -535,6 +521,15 @@ onMounted(() => {
                 color: #2a598a;
                 cursor: pointer;
             }
+        }
+    }
+
+    .shareBox {
+        margin-top: 10px;
+
+        .tips {
+            color: gray;
+            font-size: 14px;
         }
     }
 }

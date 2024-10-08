@@ -13,11 +13,47 @@
     "tauri": {
         "allowlist": {
             "all": false,
+            "path": {
+                "all": true
+            },
             "fs": {
                 "all": true,
                 "readFile": true,
                 "writeFile": true,
-                "scope": ["$APPCONFIG/*"]
+                "readDir": true,
+                "copyFile": true,
+                "createDir": true,
+                "removeDir": true,
+                "removeFile": true,
+                "renameFile": true,
+                "exists": true,
+                "scope": ["$APPDATA/*", "$APPDATA/assets/*"]
+            },
+            "http": {
+                "all": true,
+                "scope": ["https://api.github.com/*"]
+            },
+            "dialog": {
+                "all": true,
+                "ask": true,
+                "confirm": true,
+                "message": true,
+                "open": true,
+                "save": true
+            },
+            "protocol": {
+                "all": true,
+                "asset": true,
+                "assetScope": ["$APPDATA/*", "$APPDATA/assets/*"]
+            },
+            "shell": {
+                "all": false,
+                "open": true
+            },
+            "clipboard": {
+                "all": true,
+                "writeText": true,
+                "readText": true
             },
             "window": {
                 "all": true,
@@ -35,7 +71,7 @@
             }
         ],
         "security": {
-            "csp": null
+            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' asset://localhost data:; font-src 'self' asset://localhost data:; asset: https://asset.localhost"
         },
         "bundle": {
             "active": true,

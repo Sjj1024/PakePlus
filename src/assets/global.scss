@@ -18,3 +18,7 @@ body {
 :focus-visible {
     outline: none;
 }
+
+.el-textarea__inner {
+    resize: none;
+}

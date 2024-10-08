@@ -5,9 +5,9 @@ import { createPinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import i18n from './lang/index'
 import '@/assets/fonts/iconfont.css'
-import '@/assets/global.scss'
 import 'element-plus/dist/index.css'
 import '@/assets/theme.css'
+import '@/assets/global.scss'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 const app = createApp(App)
