@@ -74,12 +74,6 @@
                         placeholder="例如：派克加"
                     />
                 </el-form-item>
-                <!-- <el-form-item label="英文名称" prop="rename">
-                    <el-input
-                        v-model="appForm.rename"
-                        placeholder="例如：pakeplus"
-                    />
-                </el-form-item> -->
                 <el-form-item label="APP标识" prop="appid">
                     <el-input
                         v-model="appForm.appid"
@@ -92,7 +86,7 @@
                 </el-form-item>
                 <el-form-item label="APP图标" prop="icon">
                     <el-input
-                        v-model="appForm.icon.split('assets%2F')[1]"
+                        :value="appForm.icon.split('assets%2F')[1]"
                         readonly
                         @click="uploadIcon"
                         placeholder="例如：本地上传，支持png、jpg、jpeg格式"
@@ -163,6 +157,10 @@
                     <el-input
                         v-model="pubForm.desc"
                         type="textarea"
+                        autocomplete="off"
+                        autoCapitalize="off"
+                        autoCorrect="off"
+                        spellCheck="false"
                         placeholder="请输入发布说明"
                     />
                 </el-form-item>
@@ -269,7 +267,7 @@ const appRules = reactive<FormRules>({
 })
 
 // local image path
-const localImagePath = ref('')
+// const localImagePath = ref('')
 
 // 上传icon
 const uploadIcon = async () => {
@@ -355,7 +353,8 @@ const saveImage = async (fileName: string, base64: string) => {
     console.log('filePath---', savePath)
     const assetUrl = convertFileSrc(savePath)
     console.log('assetUrl---', assetUrl)
-    localImagePath.value = assetUrl
+    // localImagePath.value = assetUrl
+    appForm.icon = assetUrl
     // save image asseturl to project
     store.addUpdatePro({
         ...appForm,
@@ -481,7 +480,7 @@ const buildLoading = ref(false)
 // const loadingText = ref('开始构建...')
 // check dispatch workflow timer
 let buildTime = 0
-let buildStatus = ''
+let buildStatus = '开始构建...'
 let buildSecondTimer: any = null
 let checkDispatchTimer: any = null
 
