@@ -532,8 +532,10 @@ onMounted(() => {
         .project {
             height: 200px;
             border-radius: 5px;
-            border: 1px solid gray;
+            border: 1px solid #ccc;
             margin-bottom: 10px;
+            background-color: #f7f7f7;
+            overflow: hidden;
 
             &:hover {
                 box-shadow: #ccc 0px 0px 10px;
@@ -544,6 +546,7 @@ onMounted(() => {
                 height: 66%;
                 object-fit: cover;
                 border-radius: 5px 5px 0 0;
+                background-color: white;
             }
 
             .appPreview {
@@ -578,6 +581,7 @@ onMounted(() => {
                 }
             }
         }
+
         .newProject {
             display: flex;
             flex-direction: row;
@@ -585,9 +589,9 @@ onMounted(() => {
             align-items: center;
             &:hover {
                 color: black;
-                border: 1px solid black;
+                border: 1px solid #ccc;
                 .addIcon {
-                    color: black;
+                    color: rgb(90, 90, 90);
                 }
             }
 
