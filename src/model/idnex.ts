@@ -2,7 +2,7 @@ interface Project {
     name: string
     url: string
     showName: string
-    id: string
+    appid: string
     icon: string
     version: string
     platform: string

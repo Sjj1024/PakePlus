@@ -99,6 +99,10 @@
             <div class="diaContent">
                 <el-input
                     v-model="token"
+                    autocomplete="off"
+                    autoCapitalize="off"
+                    autoCorrect="off"
+                    spellCheck="false"
                     placeholder="请输入Token"
                     class="tokenInput"
                 />
@@ -128,6 +132,10 @@
             <div class="diaContent">
                 <el-input
                     v-model="branchName"
+                    autocomplete="off"
+                    autoCapitalize="off"
+                    autoCorrect="off"
+                    spellCheck="false"
                     :placeholder="t('projectNamePlaceholder')"
                     class="tokenInput"
                 />

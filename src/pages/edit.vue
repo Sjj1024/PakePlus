@@ -2,7 +2,7 @@
     <div
         class="editBox"
         v-loading="buildLoading"
-        element-loading-text="Loading..."
+        element-loading-text="开始构建..."
     >
         <div class="mainEdit">
             <div class="homeHeader">
@@ -57,12 +57,20 @@
                 <el-form-item label="网站地址" prop="url">
                     <el-input
                         v-model="appForm.url"
+                        autocomplete="off"
+                        autoCapitalize="off"
+                        autoCorrect="off"
+                        spellCheck="false"
                         placeholder="例如：https://www.pakeplus.com"
                     />
                 </el-form-item>
                 <el-form-item label="APP名称" prop="showName">
                     <el-input
                         v-model="appForm.showName"
+                        autocomplete="off"
+                        autoCapitalize="off"
+                        autoCorrect="off"
+                        spellCheck="false"
                         placeholder="例如：派克加"
                     />
                 </el-form-item>
@@ -75,6 +83,10 @@
                 <el-form-item label="APP标识" prop="appid">
                     <el-input
                         v-model="appForm.appid"
+                        autocomplete="off"
+                        autoCapitalize="off"
+                        autoCorrect="off"
+                        spellCheck="false"
                         placeholder="例如：pakeplus.com.cn"
                     />
                 </el-form-item>
@@ -89,6 +101,10 @@
                 <el-form-item label="APP版本" prop="version">
                     <el-input
                         v-model="appForm.version"
+                        autocomplete="off"
+                        autoCapitalize="off"
+                        autoCorrect="off"
+                        spellCheck="false"
                         placeholder="例如：1.0.0"
                     />
                 </el-form-item>
@@ -103,6 +119,10 @@
                     <el-input
                         v-model="appForm.desc"
                         type="textarea"
+                        autocomplete="off"
+                        autoCapitalize="off"
+                        autoCorrect="off"
+                        spellCheck="false"
                         :rows="3"
                         placeholder="请输入项目描述"
                     />
@@ -188,12 +208,12 @@ const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
 const appForm = reactive({
     url: store.currentProject.url,
-    showName: 'bilibili',
-    appid: 'com.bilibili.desktop',
+    showName: store.currentProject.showName,
+    appid: store.currentProject.appid,
     icon: store.currentProject.icon,
-    version: '0.0.1',
+    version: store.currentProject.version,
     platform: 'desktop',
-    desc: '',
+    desc: store.currentProject.desc,
 })
 
 const appRules = reactive<FormRules>({
@@ -340,7 +360,7 @@ const saveImage = async (fileName: string, base64: string) => {
     store.addUpdatePro({
         ...appForm,
         name: store.currentProject.name,
-        id: appForm.appid,
+        appid: appForm.appid,
         debug: pubForm.model,
         icon: assetUrl,
     })
@@ -406,7 +426,7 @@ const saveProject = async (tips: boolean = true) => {
                 name: store.currentProject.name,
                 url: appForm.url,
                 showName: appForm.showName,
-                id: appForm.appid,
+                appid: appForm.appid,
                 icon: appForm.icon,
                 version: appForm.version,
                 platform: appForm.platform,
@@ -529,7 +549,7 @@ const dispatchAction = async () => {
         // 构建进度
         const buildRate = Math.floor((buildTime / 480) * 100)
         // loadingText.value = `${buildStatus}...${minute}分${second}秒`
-        const loadingText = `${buildStatus}${buildRate}%...${minute}分${second}秒`
+        const loadingText = `<div>${minute}分${second}秒</div><div>${buildStatus}${buildRate}%...</div>`
         console.log('loadingText---', loadingText)
         document.querySelector('.el-loading-text')!.innerHTML = loadingText
     }, 1000)
@@ -568,15 +588,30 @@ const checkBuildStatus = async () => {
         // check build status
         const { status, conclusion } = build_runs
         buildStatus = statusMap[status] || '构建中'
-        document.querySelector('.el-loading-text')!.innerHTML = '构建成功'
+        // 除了第一次，别的都不需要
+        // document.querySelector('.el-loading-text')!.innerHTML = '构建成功'
         if (status === 'completed' && conclusion === 'success') {
             document.querySelector('.el-loading-text')!.innerHTML = '构建成功'
             // 清理构建定时器
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)
             // 关闭弹窗，并跳转到发布页面
+            buildLoading.value = false
+            buildTime = 0
+            router.push('/history')
+        } else if (status === 'completed' && conclusion === 'cancelled') {
+            document.querySelector('.el-loading-text')!.innerHTML = '构建取消'
+            buildLoading.value = false
+            buildTime = 0
+            // 清理构建定时器
+            buildSecondTimer && clearInterval(buildSecondTimer)
+            checkDispatchTimer && clearInterval(checkDispatchTimer)
         }
     } else {
+        buildTime = 0
+        // 清理构建定时器
+        buildSecondTimer && clearInterval(buildSecondTimer)
+        checkDispatchTimer && clearInterval(checkDispatchTimer)
         document.querySelector('.el-loading-text')!.innerHTML = '构建失败'
     }
 }

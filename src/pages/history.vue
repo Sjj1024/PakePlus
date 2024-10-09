@@ -1,5 +1,9 @@
 <template>
-    <div class="historyBox">
+    <div
+        class="historyBox"
+        v-loading="getLoading"
+        element-loading-text="请求中..."
+    >
         <div class="homeHeader">
             <div>
                 <div class="headerTitle">
@@ -88,341 +92,28 @@ const releaseData = ref({
     html_url: '',
     id: 1,
     node_id: '',
-    tag_name: 'ewewer',
+    tag_name: store.currentProject.name,
     target_commitish: '',
-    name: 'PakePlus v0.0.9',
+    name: '',
     draft: false,
     prerelease: false,
     created_at: '2024-09-23T10:46:29Z',
     published_at: '2024-09-23T10:48:30Z',
-    assets: [
-        {
-            url: 'https://api.github.com/repos/codegirle/PakePlus/releases/assets/194344310',
-            id: 194344310,
-            node_id: 'RA_kwDOM1oqhs4LlXV2',
-            name: 'bilibili-0.0.9-1.x86_64.rpm',
-            label: '',
-            uploader: {
-                login: 'github-actions[bot]',
-                id: 41898282,
-                node_id: 'MDM6Qm90NDE4OTgyODI=',
-                avatar_url:
-                    'https://avatars.githubusercontent.com/in/15368?v=4',
-                gravatar_id: '',
-                url: 'https://api.github.com/users/github-actions%5Bbot%5D',
-                html_url: 'https://github.com/apps/github-actions',
-                followers_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/followers',
-                following_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}',
-                gists_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}',
-                starred_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}',
-                subscriptions_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/subscriptions',
-                organizations_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/orgs',
-                repos_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/repos',
-                events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}',
-                received_events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/received_events',
-                type: 'Bot',
-                site_admin: false,
-            },
-            content_type: 'application/zip',
-            state: 'uploaded',
-            size: 2403329,
-            download_count: 0,
-            created_at: '2024-09-23T10:51:34Z',
-            updated_at: '2024-09-23T10:51:34Z',
-            browser_download_url:
-                'https://github.com/codegirle/PakePlus/releases/download/ewewer/bilibili-0.0.9-1.x86_64.rpm',
-        },
-        {
-            url: 'https://api.github.com/repos/codegirle/PakePlus/releases/assets/194343776',
-            id: 194343776,
-            node_id: 'RA_kwDOM1oqhs4LlXNg',
-            name: 'bilibili_0.0.9_aarch64.dmg',
-            label: '',
-            uploader: {
-                login: 'github-actions[bot]',
-                id: 41898282,
-                node_id: 'MDM6Qm90NDE4OTgyODI=',
-                avatar_url:
-                    'https://avatars.githubusercontent.com/in/15368?v=4',
-                gravatar_id: '',
-                url: 'https://api.github.com/users/github-actions%5Bbot%5D',
-                html_url: 'https://github.com/apps/github-actions',
-                followers_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/followers',
-                following_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}',
-                gists_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}',
-                starred_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}',
-                subscriptions_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/subscriptions',
-                organizations_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/orgs',
-                repos_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/repos',
-                events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}',
-                received_events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/received_events',
-                type: 'Bot',
-                site_admin: false,
-            },
-            content_type: 'application/zip',
-            state: 'uploaded',
-            size: 3027037,
-            download_count: 0,
-            created_at: '2024-09-23T10:48:30Z',
-            updated_at: '2024-09-23T10:48:31Z',
-            browser_download_url:
-                'https://github.com/codegirle/PakePlus/releases/download/ewewer/bilibili_0.0.9_aarch64.dmg',
-        },
-        {
-            url: 'https://api.github.com/repos/codegirle/PakePlus/releases/assets/194344311',
-            id: 194344311,
-            node_id: 'RA_kwDOM1oqhs4LlXV3',
-            name: 'bilibili_0.0.9_amd64.AppImage',
-            label: '',
-            uploader: {
-                login: 'github-actions[bot]',
-                id: 41898282,
-                node_id: 'MDM6Qm90NDE4OTgyODI=',
-                avatar_url:
-                    'https://avatars.githubusercontent.com/in/15368?v=4',
-                gravatar_id: '',
-                url: 'https://api.github.com/users/github-actions%5Bbot%5D',
-                html_url: 'https://github.com/apps/github-actions',
-                followers_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/followers',
-                following_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}',
-                gists_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}',
-                starred_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}',
-                subscriptions_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/subscriptions',
-                organizations_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/orgs',
-                repos_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/repos',
-                events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}',
-                received_events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/received_events',
-                type: 'Bot',
-                site_admin: false,
-            },
-            content_type: 'application/zip',
-            state: 'uploaded',
-            size: 71898304,
-            download_count: 0,
-            created_at: '2024-09-23T10:51:34Z',
-            updated_at: '2024-09-23T10:51:36Z',
-            browser_download_url:
-                'https://github.com/codegirle/PakePlus/releases/download/ewewer/bilibili_0.0.9_amd64.AppImage',
-        },
-        {
-            url: 'https://api.github.com/repos/codegirle/PakePlus/releases/assets/194344309',
-            id: 194344309,
-            node_id: 'RA_kwDOM1oqhs4LlXV1',
-            name: 'bilibili_0.0.9_amd64.deb',
-            label: '',
-            uploader: {
-                login: 'github-actions[bot]',
-                id: 41898282,
-                node_id: 'MDM6Qm90NDE4OTgyODI=',
-                avatar_url:
-                    'https://avatars.githubusercontent.com/in/15368?v=4',
-                gravatar_id: '',
-                url: 'https://api.github.com/users/github-actions%5Bbot%5D',
-                html_url: 'https://github.com/apps/github-actions',
-                followers_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/followers',
-                following_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}',
-                gists_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}',
-                starred_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}',
-                subscriptions_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/subscriptions',
-                organizations_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/orgs',
-                repos_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/repos',
-                events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}',
-                received_events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/received_events',
-                type: 'Bot',
-                site_admin: false,
-            },
-            content_type: 'application/zip',
-            state: 'uploaded',
-            size: 2405404,
-            download_count: 0,
-            created_at: '2024-09-23T10:51:33Z',
-            updated_at: '2024-09-23T10:51:34Z',
-            browser_download_url:
-                'https://github.com/codegirle/PakePlus/releases/download/ewewer/bilibili_0.0.9_amd64.deb',
-        },
-        {
-            url: 'https://api.github.com/repos/codegirle/PakePlus/releases/assets/194344735',
-            id: 194344735,
-            node_id: 'RA_kwDOM1oqhs4LlXcf',
-            name: 'bilibili_0.0.9_x64-setup.exe',
-            label: '',
-            uploader: {
-                login: 'github-actions[bot]',
-                id: 41898282,
-                node_id: 'MDM6Qm90NDE4OTgyODI=',
-                avatar_url:
-                    'https://avatars.githubusercontent.com/in/15368?v=4',
-                gravatar_id: '',
-                url: 'https://api.github.com/users/github-actions%5Bbot%5D',
-                html_url: 'https://github.com/apps/github-actions',
-                followers_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/followers',
-                following_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}',
-                gists_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}',
-                starred_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}',
-                subscriptions_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/subscriptions',
-                organizations_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/orgs',
-                repos_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/repos',
-                events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}',
-                received_events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/received_events',
-                type: 'Bot',
-                site_admin: false,
-            },
-            content_type: 'application/zip',
-            state: 'uploaded',
-            size: 1678289,
-            download_count: 0,
-            created_at: '2024-09-23T10:53:55Z',
-            updated_at: '2024-09-23T10:53:56Z',
-            browser_download_url:
-                'https://github.com/codegirle/PakePlus/releases/download/ewewer/bilibili_0.0.9_x64-setup.exe',
-        },
-        {
-            url: 'https://api.github.com/repos/codegirle/PakePlus/releases/assets/194344733',
-            id: 194344733,
-            node_id: 'RA_kwDOM1oqhs4LlXcd',
-            name: 'bilibili_0.0.9_x64_en-US.msi',
-            label: '',
-            uploader: {
-                login: 'github-actions[bot]',
-                id: 41898282,
-                node_id: 'MDM6Qm90NDE4OTgyODI=',
-                avatar_url:
-                    'https://avatars.githubusercontent.com/in/15368?v=4',
-                gravatar_id: '',
-                url: 'https://api.github.com/users/github-actions%5Bbot%5D',
-                html_url: 'https://github.com/apps/github-actions',
-                followers_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/followers',
-                following_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}',
-                gists_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}',
-                starred_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}',
-                subscriptions_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/subscriptions',
-                organizations_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/orgs',
-                repos_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/repos',
-                events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}',
-                received_events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/received_events',
-                type: 'Bot',
-                site_admin: false,
-            },
-            content_type: 'application/zip',
-            state: 'uploaded',
-            size: 2600960,
-            download_count: 0,
-            created_at: '2024-09-23T10:53:55Z',
-            updated_at: '2024-09-23T10:53:55Z',
-            browser_download_url:
-                'https://github.com/codegirle/PakePlus/releases/download/ewewer/bilibili_0.0.9_x64_en-US.msi',
-        },
-        {
-            url: 'https://api.github.com/repos/codegirle/PakePlus/releases/assets/194343777',
-            id: 194343777,
-            node_id: 'RA_kwDOM1oqhs4LlXNh',
-            name: 'bilibili_aarch64.app.tar.gz',
-            label: '',
-            uploader: {
-                login: 'github-actions[bot]',
-                id: 41898282,
-                node_id: 'MDM6Qm90NDE4OTgyODI=',
-                avatar_url:
-                    'https://avatars.githubusercontent.com/in/15368?v=4',
-                gravatar_id: '',
-                url: 'https://api.github.com/users/github-actions%5Bbot%5D',
-                html_url: 'https://github.com/apps/github-actions',
-                followers_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/followers',
-                following_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}',
-                gists_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}',
-                starred_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}',
-                subscriptions_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/subscriptions',
-                organizations_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/orgs',
-                repos_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/repos',
-                events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}',
-                received_events_url:
-                    'https://api.github.com/users/github-actions%5Bbot%5D/received_events',
-                type: 'Bot',
-                site_admin: false,
-            },
-            content_type: 'application/zip',
-            state: 'uploaded',
-            size: 2569924,
-            download_count: 0,
-            created_at: '2024-09-23T10:48:31Z',
-            updated_at: '2024-09-23T10:48:32Z',
-            browser_download_url:
-                'https://github.com/codegirle/PakePlus/releases/download/ewewer/bilibili_aarch64.app.tar.gz',
-        },
-    ],
+    assets: [],
     tarball_url: '',
     zipball_url: '',
-    body: 'See the assets to download and install this version.',
+    body: '',
 })
+
+// getLoading
+const getLoading = ref(false)
 
 // get latest release assets by tag name
 const getLatestRelease = async () => {
     const releaseRes: any = await githubApi.getReleasesAssets(
         store.userInfo.login,
         'PakePlus',
-        'ewewer'
+        store.currentProject.name
     )
     console.log('releaseRes', releaseRes)
     if (releaseRes.status === 200) {
@@ -431,6 +122,7 @@ const getLatestRelease = async () => {
         console.log('releaseRes error', releaseRes)
         ElMessage.error('获取发布历史失败')
     }
+    getLoading.value = false
 }
 
 // delete release
@@ -457,6 +149,7 @@ const copyDownlink = async (asset: any) => {
 
 // 打包后的历史记录
 onMounted(() => {
+    getLoading.value = true
     getLatestRelease()
 })
 </script>
