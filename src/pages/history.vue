@@ -12,7 +12,10 @@
                         <span>返回</span>
                     </div>
                     <el-divider direction="vertical" />
-                    <span>{{ releaseData.tag_name }} v0.1.2</span>
+                    <span>
+                        {{ releaseData.tag_name }}
+                        v{{ store.currentProject.version }}
+                    </span>
                 </div>
                 <div class="toolTips">
                     <span>
