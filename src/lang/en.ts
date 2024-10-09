@@ -10,4 +10,5 @@ export default {
     testSuccess: 'Test success',
     projectName: 'Project Name',
     projectNamePlaceholder: 'Please enter the project name, example: PakePlus',
+    releaseBody: 'See the assets to download and install this version.',
 }

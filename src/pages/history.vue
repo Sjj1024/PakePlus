@@ -19,7 +19,7 @@
                 </div>
                 <div class="toolTips">
                     <span>
-                        {{ releaseData.body }}
+                        {{ releaseData.body || t('releaseBody') }}
                         <!-- 开源免费创建，编辑，调试打包跨平台APP，仅仅只需要一个Token -->
                     </span>
                 </div>
@@ -79,9 +79,11 @@ import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { open } from '@tauri-apps/api/shell'
 import { writeText } from '@tauri-apps/api/clipboard'
+import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
 const store = usePakeStore()
+const { t } = useI18n()
 
 // back
 const backHome = () => {

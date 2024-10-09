@@ -10,4 +10,5 @@ export default {
     testSuccess: 'Token可用',
     projectName: '项目名称',
     projectNamePlaceholder: '请输入英文项目名称，例如：PakePlus',
+    releaseBody: '请参阅下载和安装此版本的资源。',
 }

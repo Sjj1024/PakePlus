@@ -2,7 +2,7 @@
     <div
         class="editBox"
         v-loading="buildLoading"
-        element-loading-text="开始构建..."
+        element-loading-text="准备环境..."
     >
         <div class="mainEdit">
             <div class="homeHeader">
@@ -266,9 +266,6 @@ const appRules = reactive<FormRules>({
     ],
 })
 
-// local image path
-// const localImagePath = ref('')
-
 // 上传icon
 const uploadIcon = async () => {
     console.log('uploadIcon')
@@ -480,18 +477,19 @@ const buildLoading = ref(false)
 // const loadingText = ref('开始构建...')
 // check dispatch workflow timer
 let buildTime = 0
-let buildStatus = '开始构建...'
+let buildStatus = '开始编译...'
 let buildSecondTimer: any = null
 let checkDispatchTimer: any = null
 
 const onSubmit = async () => {
     centerDialogVisible.value = false
     buildLoading.value = true
-    const configSha: any = await githubApi.getFileSha(
-        store.userInfo.login,
-        'PakePlus',
+    // update build yml
+    await updateBuildYml()
+    // update tauri config json
+    const configSha: any = await getFileSha(
         'src-tauri/tauri.conf.json',
-        { ref: store.currentProject.name }
+        store.currentProject.name
     )
     console.log('configSha---', configSha)
     try {
@@ -516,13 +514,61 @@ const onSubmit = async () => {
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
             document.querySelector('.el-loading-text')!.innerHTML =
-                '开始构建...'
+                '准备编译...'
             dispatchAction()
         } else {
             console.log('updateRes error', updateRes)
         }
     } catch (error) {
         console.error('Error reading JSON file:', error)
+    }
+}
+
+// 获取需要更新的文件sha
+const getFileSha = async (filePath: string, branch: string) => {
+    const res: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
+        filePath,
+        { ref: branch }
+    )
+    console.log('getBranch', res)
+    return res
+}
+
+// 更新build.yml文件内容
+const updateBuildYml = async () => {
+    // get build.yml file sha
+    const shaRes = await getFileSha(
+        '.github/workflows/build.yml',
+        store.currentProject.name
+    )
+    console.log('get build.yml file sha', shaRes)
+    if (shaRes.status === 200 || shaRes.status === 404) {
+        // get build.yml file content
+        const content = await invoke('update_build_file', {
+            name: appForm.showName,
+            body: pubForm.desc,
+        })
+        console.log('content', content)
+        // update build.yml file content
+        const updateRes: any = await githubApi.updateBuildYmlFile(
+            store.userInfo.login,
+            'PakePlus',
+            {
+                message: 'update build.yml from pakeplus',
+                content: content,
+                sha: shaRes.data.sha,
+                branch: store.currentProject.name,
+            }
+        )
+        if (updateRes.status === 200) {
+            console.log('updateRes', updateRes)
+        } else {
+            console.log('updateRes error', updateRes)
+        }
+    } else {
+        console.log('getFileSha error', shaRes)
     }
 }
 
@@ -546,7 +592,7 @@ const dispatchAction = async () => {
         const minute = Math.floor(buildTime / 60)
         const second = buildTime % 60
         // 构建进度
-        const buildRate = Math.floor((buildTime / 480) * 100)
+        const buildRate = Math.floor((buildTime / 720) * 100)
         // loadingText.value = `${buildStatus}...${minute}分${second}秒`
         const loadingText = `<div>${minute}分${second}秒</div><div>${buildStatus}${buildRate}%...</div>`
         console.log('loadingText---', loadingText)

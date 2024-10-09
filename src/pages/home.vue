@@ -9,7 +9,12 @@
                     <span>
                         {{ t('projectTips') }}
                     </span>
-                    <span class="iconfont githubIcon">&#xe709;</span>
+                    <span
+                        @click="openUrl(pakeUrlMap.github)"
+                        class="iconfont githubIcon"
+                    >
+                        &#xe709;
+                    </span>
                 </div>
             </div>
             <!-- 设置按钮 -->
@@ -166,11 +171,9 @@ import { appWindow } from '@tauri-apps/api/window'
 import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
-import { invoke } from '@tauri-apps/api/tauri'
 import { pakeUrlMap, openUrl } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
-
 import { getVersion } from '@tauri-apps/api/app'
 
 const router = useRouter()
@@ -315,7 +318,7 @@ const creatBranch = async () => {
             creatLoading.value = false
             router.push('/edit')
             // update new branch build.yml文件内容
-            updateBuildYml(branchName.value)
+            // updateBuildYml(branchName.value)
         } else if (res.status === 422) {
             console.log('项目已经存在')
             creatLoading.value = false
@@ -331,7 +334,7 @@ const creatBranch = async () => {
     }
 }
 
-// delete build yml file
+// delete build yml file, must do, because main branch need action promise
 const deleteBuildYml = async (branchName: string = 'main') => {
     const shaRes = await getFileSha('.github/workflows/build.yml', branchName)
     console.log('get build.yml file sha', shaRes)
@@ -347,41 +350,9 @@ const deleteBuildYml = async (branchName: string = 'main') => {
         )
         if (deleteRes.status === 200) {
             console.log('deleteRes', deleteRes)
-            // new branch build.yml
-            updateBuildYml(branchName)
         } else {
             console.log('deleteRes error', deleteRes)
         }
-    }
-}
-
-// 更新build.yml文件内容
-const updateBuildYml = async (branchName: string) => {
-    // get build.yml file sha
-    const shaRes = await getFileSha('.github/workflows/build.yml', branchName)
-    console.log('get build.yml file sha', shaRes)
-    if (shaRes.status === 200 || shaRes.status === 404) {
-        // get build.yml file content
-        const content = await invoke('update_build_file')
-        console.log('content', content)
-        // update build.yml file content
-        const updateRes: any = await githubApi.updateBuildYmlFile(
-            store.userInfo.login,
-            'PakePlus',
-            {
-                message: 'update build.yml from pakeplus',
-                content: content,
-                sha: shaRes.data.sha,
-                branch: branchName,
-            }
-        )
-        if (updateRes.status === 200) {
-            console.log('updateRes', updateRes)
-        } else {
-            console.log('updateRes error', updateRes)
-        }
-    } else {
-        console.log('getFileSha error', shaRes)
     }
 }
 
