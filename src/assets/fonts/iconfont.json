@@ -6,6 +6,20 @@
   "description": "PakePlus",
   "glyphs": [
     {
+      "icon_id": "1138742",
+      "name": "close",
+      "font_class": "close",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "11313779",
+      "name": "close",
+      "font_class": "close1",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
       "icon_id": "1084703",
       "name": "setting",
       "font_class": "setting1",

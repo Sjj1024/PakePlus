@@ -11,4 +11,6 @@ export default {
     projectName: '项目名称',
     projectNamePlaceholder: '请输入英文项目名称，例如：PakePlus',
     releaseBody: '请参阅下载和安装此版本的资源。',
+    aboutTitle: '关于PakePlus',
+    aboutTips: '开源免费，Web网页打包跨平台APP，仅仅只需要一个Github Token',
 }
