@@ -106,7 +106,7 @@
                 <el-form-item label="预览平台" prop="platform">
                     <el-radio-group v-model="appForm.platform">
                         <el-radio value="desktop">桌面端</el-radio>
-                        <el-radio value="phone">移动端</el-radio>
+                        <!-- <el-radio value="phone">移动端</el-radio> -->
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="APP描述" prop="desc">
@@ -143,7 +143,7 @@
                 <el-form-item label="发布平台">
                     <el-checkbox-group v-model="pubForm.platform">
                         <el-checkbox label="桌面端" value="desktop" />
-                        <el-checkbox label="移动端" value="mobile" />
+                        <!-- <el-checkbox label="移动端" value="mobile" /> -->
                         <!-- <el-checkbox label="源代码" value="source" /> -->
                     </el-checkbox-group>
                 </el-form-item>

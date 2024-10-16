@@ -26,8 +26,16 @@
                 </p>
             </div>
             <div class="tools">
-                <p>开源地址：https://www.bilibili.com/video/BV1SvtWe5EVg/</p>
-                <p>使用教程：https://www.bilibili.com/video/BV1SvtWe5EVg/</p>
+                <p>
+                    <span>开源地址：</span>
+                    <span class="link" @click="openUrl(pakeUrlMap.github)">
+                        {{ pakeUrlMap.github }}
+                    </span>
+                </p>
+                <p>
+                    <span>使用教程：</span>
+                    <span>https://www.bilibili.com/video/BV1SvtWe5EVg/</span>
+                </p>
                 <p>关注小神：CSDN 掘金 github 抖音 哔哩哔哩 微信群 YouTube X</p>
             </div>
             <div class="payMe">
@@ -48,6 +56,7 @@ import zhifubao from '@/assets/images/zhifubao.png'
 import weixin from '@/assets/images/weixin.png'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import { pakeUrlMap, openUrl } from '@/utils/common'
 
 const { t, locale } = useI18n()
 
@@ -116,6 +125,11 @@ const goBack = () => {
                 font-weight: 600;
                 color: #000000;
             }
+        }
+
+        .link {
+            cursor: pointer;
+            color: #0969da;
         }
     }
 }

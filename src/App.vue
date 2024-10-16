@@ -43,7 +43,7 @@ const disableRightClick = () => {
 
 const initEnv = async () => {
     // checkout appdata dir exists
-    const dataDir = await appDataDir()
+    // const dataDir = await appDataDir()
     // const existRes = await createDir(dataDir)
     await createDir('assets', { dir: BaseDirectory.AppData, recursive: true })
     console.log('App data dir exists:', import.meta.env.DEV)
