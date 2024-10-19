@@ -30,7 +30,7 @@
             </div>
         </div>
         <!-- only get latest version by tag name -->
-        <el-table :data="releaseData.assets" style="width: 100%">
+        <el-table :data="releaseAssets" style="width: 100%">
             <!-- <el-table-column prop="name" label="资源名称" width="380" /> -->
             <el-table-column label="资源名称" width="460">
                 <template #default="scope">
@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePakeStore } from '@/store'
 import githubApi from '@/apis/github'
@@ -110,6 +110,16 @@ const releaseData = ref({
     body: '',
 })
 
+// get latest release assets by tag name
+const releaseAssets = computed(() => {
+    return releaseData.value.assets.filter((item: any) => {
+        return (
+            item.name.includes(store.currentProject.version) ||
+            item.name.includes('tar.gz')
+        )
+    })
+})
+
 // getLoading
 const getLoading = ref(false)
 
@@ -122,6 +132,7 @@ const getLatestRelease = async () => {
     )
     console.log('releaseRes', releaseRes)
     if (releaseRes.status === 200) {
+        // filter current project version
         releaseData.value = releaseRes.data
     } else {
         console.log('releaseRes error', releaseRes)

@@ -182,7 +182,7 @@
                 </el-form-item>
             </el-form>
             <span style="color: #aaa">
-                注： 打包发布大概需要8分钟左右的时间，请耐心等待......
+                注： 打包发布大概需要15分钟左右的时间，请耐心等待......
             </span>
             <template #footer>
                 <div class="dialog-footer">
@@ -227,8 +227,8 @@ const appForm = reactive({
     icon: store.currentProject.icon,
     version: store.currentProject.version,
     platform: 'desktop',
-    width: store.currentProject.width,
-    height: store.currentProject.height,
+    width: store.currentProject.width || 800,
+    height: store.currentProject.height || 600,
     desc: store.currentProject.desc,
 })
 
