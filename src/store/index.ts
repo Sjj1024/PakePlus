@@ -568,6 +568,8 @@ export const usePakeStore = defineStore('pakeplus', {
                       icon: '',
                       version: '0.0.1',
                       platform: 'desktop',
+                      width: 800,
+                      height: 600,
                       desc: '简短描述',
                   },
             projectList: localStorage.getItem('projectList')

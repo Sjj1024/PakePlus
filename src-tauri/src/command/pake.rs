@@ -1,12 +1,14 @@
 use base64::prelude::*;
-use std::io::Read;
+use std::{io::Read, mem::replace};
 
 #[tauri::command]
-pub async fn open_docs(
+pub async fn open_window(
     handle: tauri::AppHandle,
     app_url: String,
     app_name: String,
     platform: String,
+    width: f64,
+    height: f64,
 ) {
     println!("Opening docs in external window: {}, {}", app_url, platform);
     let docs_window = tauri::WindowBuilder::new(
@@ -15,6 +17,7 @@ pub async fn open_docs(
         tauri::WindowUrl::External(app_url.parse().unwrap()),
     )
     .title(app_name)
+    .inner_size(width, height)
     .position(200.4, 100.4)
     .build()
     .unwrap();
@@ -47,6 +50,8 @@ pub async fn update_config_file(
     version: String,
     url: String,
     id: String,
+    width: String,
+    height: String,
 ) -> String {
     let resource_path = handle
         .path_resolver()
@@ -59,7 +64,9 @@ pub async fn update_config_file(
         .replace("PROJECTNAME", name.as_str())
         .replace("PROJECTVERSION", version.as_str())
         .replace("PROJECTURL", url.as_str())
-        .replace("PROJECTID", id.as_str());
+        .replace("PROJECTID", id.as_str())
+        .replace("-1", width.as_str())
+        .replace("-2", height.as_str());
     // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);

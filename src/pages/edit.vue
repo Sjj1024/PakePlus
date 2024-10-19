@@ -109,6 +109,22 @@
                         <!-- <el-radio value="phone">移动端</el-radio> -->
                     </el-radio-group>
                 </el-form-item>
+                <!-- window size -->
+                <el-form-item label="窗口大小" prop="size">
+                    <el-input
+                        type="number"
+                        v-model.number="appForm.width"
+                        style="width: 100px"
+                        placeholder="Please input"
+                    />
+                    <span class="iconfont divider"> &#xe62f; </span>
+                    <el-input
+                        type="number"
+                        v-model.number="appForm.height"
+                        style="width: 100px"
+                        placeholder="Please input"
+                    />
+                </el-form-item>
                 <el-form-item label="APP描述" prop="desc">
                     <el-input
                         v-model="appForm.desc"
@@ -211,6 +227,8 @@ const appForm = reactive({
     icon: store.currentProject.icon,
     version: store.currentProject.version,
     platform: 'desktop',
+    width: store.currentProject.width,
+    height: store.currentProject.height,
     desc: store.currentProject.desc,
 })
 
@@ -426,6 +444,8 @@ const saveProject = async (tips: boolean = true) => {
                 icon: appForm.icon,
                 version: appForm.version,
                 platform: appForm.platform,
+                width: appForm.width,
+                height: appForm.height,
                 desc: appForm.desc,
                 debug: pubForm.model,
             })
@@ -442,10 +462,12 @@ const preview = () => {
         if (valid) {
             console.log('submit!', appForm)
             saveProject(false)
-            invoke('open_docs', {
+            invoke('open_window', {
                 appUrl: appForm.url,
                 appName: appForm.showName,
                 platform: appForm.platform,
+                width: appForm.width,
+                height: appForm.height,
             })
         } else {
             console.log('error submit!', fields)
@@ -498,6 +520,8 @@ const onSubmit = async () => {
             version: appForm.version,
             url: appForm.url,
             id: appForm.appid,
+            width: appForm.width.toString(),
+            height: appForm.height.toString(),
         })
         console.log('config data:', configContent)
         // update config file
@@ -759,6 +783,12 @@ onMounted(() => {
 
         .configForm {
             margin-top: 10px;
+
+            .divider {
+                margin: 0 10px;
+                font-size: 10px;
+                font-weight: 300;
+            }
         }
     }
     .footerBox {

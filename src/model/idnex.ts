@@ -6,6 +6,8 @@ interface Project {
     icon: string
     version: string
     platform: string
+    width: number
+    height: number
     desc: string
     debug: string
 }

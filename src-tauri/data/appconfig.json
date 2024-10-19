@@ -30,8 +30,7 @@
                 "scope": ["$APPDATA/*", "$APPDATA/assets/*"]
             },
             "http": {
-                "all": true,
-                "scope": ["https://api.github.com/*"]
+                "all": true
             },
             "dialog": {
                 "all": true,
@@ -65,8 +64,8 @@
         "windows": [
             {
                 "title": "PROJECTNAME",
-                "width": 800,
-                "height": 600,
+                "width": -1,
+                "height": -2,
                 "url": "PROJECTURL"
             }
         ],

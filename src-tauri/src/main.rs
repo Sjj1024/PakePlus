@@ -7,7 +7,7 @@ mod command;
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
-            command::pake::open_docs,
+            command::pake::open_window,
             command::pake::update_build_file,
             command::pake::update_config_file
         ])
