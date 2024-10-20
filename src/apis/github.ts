@@ -165,7 +165,7 @@ export default {
     },
     // get update file contents
     getUpdateFile() {
-        return http(``, {
+        return http(`https://sjj1024.github.io/PakePlus/update.json`, {
             method: 'get',
         })
     },

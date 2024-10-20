@@ -359,12 +359,14 @@ const deleteBuildYml = async (branchName: string = 'main') => {
 // check update
 const checkUpdate = async () => {
     const updateJson = await githubApi.getUpdateFile()
+    console.log('updateJson', updateJson)
 }
 
 const getPakePlusInfo = async () => {
     const pakeVersion = await getVersion()
     console.log('pakeVersion', pakeVersion)
     version.value = pakeVersion
+    await checkUpdate()
 }
 
 // reset release info
