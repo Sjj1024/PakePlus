@@ -163,4 +163,10 @@ export default {
             method: 'delete',
         })
     },
+    // get update file contents
+    getUpdateFile() {
+        return http(``, {
+            method: 'get',
+        })
+    },
 }
