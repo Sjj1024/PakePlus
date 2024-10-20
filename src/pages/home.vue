@@ -17,7 +17,7 @@
                     </span>
                 </div>
             </div>
-            <!-- 设置按钮 -->
+            <!-- set button -->
             <div class="toolBox">
                 <!-- TODO theme change -->
                 <!-- <div class="theme">
@@ -52,7 +52,7 @@
                                 <el-dropdown-item @click="changeLang('zh')"
                                     >简体中文</el-dropdown-item
                                 >
-                                <el-dropdown-item>繁体中文</el-dropdown-item>
+                                <!-- <el-dropdown-item>繁体中文</el-dropdown-item> -->
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="projectBox">
-            <!-- 已有项目列表 -->
+            <!-- project list -->
             <div
                 class="project"
                 v-for="pro in store.projectList"
@@ -127,7 +127,7 @@
                 </div>
             </template>
         </el-dialog>
-        <!-- config new branch name -->
+        <!-- config new project name -->
         <el-dialog v-model="branchDialog" width="400" center>
             <template #header>
                 <div class="diaHeader">
@@ -161,6 +161,7 @@
                 </div>
             </template>
         </el-dialog>
+        <!-- tips new version -->
     </div>
 </template>
 
@@ -208,38 +209,36 @@ const showBranchDialog = () => {
         branchDialog.value = true
     } else {
         tokenDialog.value = true
-        ElMessage.error('请先配置Token')
+        ElMessage.error(t('configToken'))
         return
     }
 }
 
-// 语言切换
 const changeLang = (lang: string) => {
     locale.value = lang
     localStorage.setItem('lang', lang)
 }
 
-// 测试token是否可用
+// check token
 const testToken = async (tips: boolean = true) => {
     const res: any = await githubApi.gitUserInfo(token.value)
     console.log('testToken', res)
     if (res.status === 200) {
-        tips && ElMessage.success('Token可用')
+        tips && ElMessage.success(t('tokenOk'))
         if (!tips) {
             tokenDialog.value = false
         }
-        // 本地存储并且fork仓库
         localStorage.setItem('token', token.value)
         store.setUser(res.data)
         forkProgect()
     } else {
-        ElMessage.error('Token不可用')
+        ElMessage.error(t('tokenError'))
     }
 }
 
-// fork仓库以及准备工作
+// fork and start
 const forkProgect = async () => {
-    // fork仓库
+    // fork
     const forkRes = await githubApi.forkProgect({
         name: 'PakePlus',
         default_branch_only: true,
@@ -248,17 +247,17 @@ const forkProgect = async () => {
     if (forkRes.status === 202) {
         store.setRepository(forkRes.data)
     }
-    // start仓库
+    // start
     const startRes = await githubApi.startProgect()
     console.log('startRes', startRes)
     if (startRes.status === 204) {
-        console.log('start仓库成功')
+        console.log('start success')
     }
     // enable github action
     deleteBuildYml()
 }
 
-// 获取最后一次提交的commit sha
+// get commit sha
 const getCommitSha = async () => {
     const res: any = await githubApi.getCommitSha(
         store.userInfo.login,
@@ -317,20 +316,20 @@ const creatBranch = async () => {
             store.setCurrentProject(branchInfo)
             creatLoading.value = false
             router.push('/edit')
-            // update new branch build.yml文件内容
+            // update new branch build.yml file
             // updateBuildYml(branchName.value)
         } else if (res.status === 422) {
-            console.log('项目已经存在')
+            console.log('project existed')
             creatLoading.value = false
-            ElMessage.success('项目已经存在')
+            ElMessage.success(t('projectExist'))
             // router.push('/publish')
         } else {
             // creatLoading.value = false
             console.log('branchInfo error', res)
-            ElMessage.success(`项目创建失败: ${res.data.message}`)
+            ElMessage.success(`${t('creatProjectError')}: ${res.data.message}`)
         }
     } else {
-        ElMessage.error('请输入纯英文项目名称')
+        ElMessage.error(t('englishName'))
     }
 }
 

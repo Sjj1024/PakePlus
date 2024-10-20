@@ -2,7 +2,7 @@
     <div
         class="editBox"
         v-loading="buildLoading"
-        element-loading-text="准备环境..."
+        :element-loading-text="t('preEnvironment')"
     >
         <div class="mainEdit">
             <div class="homeHeader">
@@ -10,20 +10,19 @@
                     <div class="headerTitle">
                         <div class="backBox" @click="backHome">
                             <el-icon><ArrowLeft /></el-icon>
-                            <span>返回</span>
+                            <span>{{ t('back') }}</span>
                         </div>
                         <el-divider direction="vertical" />
-                        <span>项目配置</span>
+                        <span>{{ t('configProject') }}</span>
                     </div>
                     <div class="toolTips">
                         <span>
-                            配置当前项目网站地址、APP显示名称、英文名称、APP标识等。
+                            {{ t('configProjectTips') }}
                         </span>
                     </div>
                 </div>
-                <!-- 设置按钮 -->
+                <!-- tools -->
                 <div class="setting">
-                    <!-- <span class="userName">更多</span> -->
                     <!-- <el-icon :size="26"><Menu /></el-icon> -->
                     <el-dropdown>
                         <span class="dropdownLink">
@@ -35,13 +34,10 @@
                                     :disabled="store.release.id === 0"
                                     @click="toHistory"
                                 >
-                                    发布历史
+                                    {{ t('relHistore') }}
                                 </el-dropdown-item>
-                                <!-- <el-dropdown-item @click="resetForm">
-                                    重制配置
-                                </el-dropdown-item> -->
                                 <el-dropdown-item @click="deleteProject">
-                                    删除项目
+                                    {{ t('delProject') }}
                                 </el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
@@ -57,78 +53,79 @@
                 :size="formSize"
                 status-icon
             >
-                <el-form-item label="网站地址" prop="url">
+                <el-form-item :label="t('webUrl')" prop="url">
                     <el-input
                         v-model="appForm.url"
                         autocomplete="off"
                         autoCapitalize="off"
                         autoCorrect="off"
                         spellCheck="false"
-                        placeholder="例如：https://www.pakeplus.com"
+                        :placeholder="`${t(
+                            'example'
+                        )}：https://www.pakeplus.com'`"
                     />
                 </el-form-item>
-                <el-form-item label="APP名称" prop="showName">
+                <el-form-item :label="t('appName')" prop="showName">
                     <el-input
                         v-model="appForm.showName"
                         autocomplete="off"
                         autoCapitalize="off"
                         autoCorrect="off"
                         spellCheck="false"
-                        placeholder="例如：派克加"
+                        :placeholder="`${t('example')}：PakePlus`"
                     />
                 </el-form-item>
-                <el-form-item label="APP标识" prop="appid">
+                <el-form-item :label="t('appId')" prop="appid">
                     <el-input
                         v-model="appForm.appid"
                         autocomplete="off"
                         autoCapitalize="off"
                         autoCorrect="off"
                         spellCheck="false"
-                        placeholder="例如：com.pakeplus.app"
+                        :placeholder="`${t('example')}：com.pakeplus.app`"
                     />
                 </el-form-item>
-                <el-form-item label="APP图标" prop="icon">
+                <el-form-item :label="t('appIcon')" prop="icon">
                     <el-input
                         :value="appForm.icon.split('assets%2F')[1]"
                         readonly
                         @click="uploadIcon"
-                        placeholder="例如：本地上传，支持png、jpg、jpeg格式"
+                        :placeholder="`${t('onlyPng')}`"
                     />
                 </el-form-item>
-                <el-form-item label="APP版本" prop="version">
+                <el-form-item :label="t('appVersion')" prop="version">
                     <el-input
                         v-model="appForm.version"
                         autocomplete="off"
                         autoCapitalize="off"
                         autoCorrect="off"
                         spellCheck="false"
-                        placeholder="例如：1.0.0"
+                        :placeholder="`${t('example')}：1.0.0`"
                     />
                 </el-form-item>
-                <!-- 可以增加快速过滤网页内容的选项，填写对应标签的id就可以过滤掉 -->
-                <el-form-item label="预览平台" prop="platform">
+                <el-form-item :label="t('platform')" prop="platform">
                     <el-radio-group v-model="appForm.platform">
-                        <el-radio value="desktop">桌面端</el-radio>
+                        <el-radio value="desktop">{{ t('desktop') }}</el-radio>
                         <!-- <el-radio value="phone">移动端</el-radio> -->
                     </el-radio-group>
                 </el-form-item>
                 <!-- window size -->
-                <el-form-item label="窗口大小" prop="size">
+                <el-form-item :label="t('winSize')" prop="size">
                     <el-input
                         type="number"
                         v-model.number="appForm.width"
                         style="width: 100px"
-                        placeholder="Please input"
+                        :placeholder="t('width')"
                     />
                     <span class="iconfont divider"> &#xe62f; </span>
                     <el-input
                         type="number"
                         v-model.number="appForm.height"
                         style="width: 100px"
-                        placeholder="Please input"
+                        :placeholder="t('height')"
                     />
                 </el-form-item>
-                <el-form-item label="APP描述" prop="desc">
+                <el-form-item :label="t('appDes')" prop="desc">
                     <el-input
                         v-model="appForm.desc"
                         type="textarea"
@@ -137,21 +134,21 @@
                         autoCorrect="off"
                         spellCheck="false"
                         :rows="3"
-                        placeholder="请输入项目描述"
+                        :placeholder="t('desTips')"
                     />
                 </el-form-item>
             </el-form>
         </div>
         <div class="footerBox">
-            <el-button @click="saveProject(true)">保存</el-button>
-            <el-button @click="preview">预览</el-button>
-            <el-button @click="createRepo">发布</el-button>
+            <el-button @click="saveProject(true)">{{ t('save') }}</el-button>
+            <el-button @click="preview">{{ t('preview') }}</el-button>
+            <el-button @click="createRepo">{{ t('publish') }}</el-button>
         </div>
-        <!-- 发布 -->
+        <!-- build -->
         <el-dialog v-model="centerDialogVisible" width="500" center>
             <template #header>
                 <div class="diaHeader">
-                    <span>打包发布</span>
+                    <span>{{ t('build') }}</span>
                 </div>
             </template>
             <el-form
@@ -159,20 +156,20 @@
                 label-width="auto"
                 style="max-width: 600px"
             >
-                <el-form-item label="发布平台">
+                <el-form-item :label="t('pubPlatform')">
                     <el-checkbox-group v-model="pubForm.platform">
-                        <el-checkbox label="桌面端" value="desktop" />
+                        <el-checkbox :label="t('desktop')" value="desktop" />
                         <!-- <el-checkbox label="移动端" value="mobile" /> -->
                         <!-- <el-checkbox label="源代码" value="source" /> -->
                     </el-checkbox-group>
                 </el-form-item>
-                <el-form-item label="发布模式">
+                <el-form-item :label="t('pubMode')">
                     <el-radio-group v-model="pubForm.model">
-                        <el-radio value="close">关闭Debug</el-radio>
-                        <el-radio value="debug">开启Debug</el-radio>
+                        <el-radio value="close">{{ t('closeDebug') }}</el-radio>
+                        <el-radio value="debug">{{ t('openDebug') }}</el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <el-form-item label="发布说明">
+                <el-form-item :label="t('releaseNotes')">
                     <el-input
                         v-model="pubForm.desc"
                         type="textarea"
@@ -180,21 +177,21 @@
                         autoCapitalize="off"
                         autoCorrect="off"
                         spellCheck="false"
-                        placeholder="请输入发布说明"
+                        :placeholder="t('inputRelNotes')"
                     />
                 </el-form-item>
             </el-form>
             <span style="color: #aaa">
-                注： 打包发布大概需要15分钟左右的时间，请耐心等待......
+                {{ t('pubNotesTips') }}
             </span>
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button @click="centerDialogVisible = false"
-                        >取消</el-button
-                    >
+                    <el-button @click="centerDialogVisible = false">
+                        {{ t('cancel') }}
+                    </el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button type="primary" @click="onSubmit">
-                        确认
+                        {{ t('confirm') }}
                     </el-button>
                 </div>
             </template>
@@ -216,9 +213,11 @@ import { appDataDir, join } from '@tauri-apps/api/path'
 import { convertFileSrc } from '@tauri-apps/api/tauri'
 import { open } from '@tauri-apps/api/dialog'
 import { ArrowLeft } from '@element-plus/icons-vue'
+import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
 const store = usePakeStore()
+const { t } = useI18n()
 
 const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
@@ -730,7 +729,7 @@ const getLatestRelease = async () => {
 onMounted(() => {
     getLatestRelease()
     buildTime = 0
-    appWindow.setTitle(`${store.currentProject.name}项目`)
+    appWindow.setTitle(`${store.currentProject.name}`)
 })
 </script>
 

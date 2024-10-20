@@ -58,7 +58,7 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { pakeUrlMap, openUrl } from '@/utils/common'
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 
 const router = useRouter()
 
