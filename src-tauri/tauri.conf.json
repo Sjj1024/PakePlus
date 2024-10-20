@@ -30,7 +30,10 @@
             },
             "http": {
                 "all": true,
-                "scope": ["https://api.github.com/*"]
+                "scope": [
+                    "https://api.github.com/*",
+                    "https://sjj1024.github.io/*"
+                ]
             },
             "dialog": {
                 "all": true,
