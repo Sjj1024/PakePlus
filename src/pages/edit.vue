@@ -31,12 +31,15 @@
                         </span>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item @click="toHistory">
+                                <el-dropdown-item
+                                    :disabled="store.release.id === 0"
+                                    @click="toHistory"
+                                >
                                     发布历史
                                 </el-dropdown-item>
-                                <el-dropdown-item @click="resetForm">
+                                <!-- <el-dropdown-item @click="resetForm">
                                     重制配置
-                                </el-dropdown-item>
+                                </el-dropdown-item> -->
                                 <el-dropdown-item @click="deleteProject">
                                     删除项目
                                 </el-dropdown-item>
@@ -81,7 +84,7 @@
                         autoCapitalize="off"
                         autoCorrect="off"
                         spellCheck="false"
-                        placeholder="例如：pakeplus.com.cn"
+                        placeholder="例如：com.pakeplus.app"
                     />
                 </el-form-item>
                 <el-form-item label="APP图标" prop="icon">
@@ -428,6 +431,13 @@ const deleteProject = () => {
         type: 'warning',
     }).then(() => {
         console.log('delete project')
+        githubApi.deleteBranch(
+            store.userInfo.login,
+            'PakePlus',
+            store.currentProject.name
+        )
+        store.delProject(store.currentProject)
+        router.push('/')
     })
 }
 
@@ -503,9 +513,24 @@ let buildStatus = '开始编译...'
 let buildSecondTimer: any = null
 let checkDispatchTimer: any = null
 
+// delete lasted release
+const deleteRelease = async () => {
+    if (store.release.id !== 0) {
+        const releaseRes: any = await githubApi.deleteRelease(
+            store.userInfo.login,
+            'PakePlus',
+            store.release.id
+        )
+        console.log('deleteRelease', releaseRes)
+    }
+}
+
+// del pre publish version
 const onSubmit = async () => {
     centerDialogVisible.value = false
     buildLoading.value = true
+    // delete release
+    deleteRelease()
     // update build yml
     await updateBuildYml()
     // update tauri config json
@@ -685,7 +710,25 @@ const checkBuildStatus = async () => {
     }
 }
 
+// check preview release assets
+const getLatestRelease = async () => {
+    const releaseRes: any = await githubApi.getReleasesAssets(
+        store.userInfo.login,
+        'PakePlus',
+        store.currentProject.name
+    )
+    console.log('releaseRes', releaseRes)
+    if (releaseRes.status === 200) {
+        // filter current project version
+        store.setRelease(releaseRes.data)
+    } else {
+        console.log('releaseRes error', releaseRes)
+        // ElMessage.error('获取发布历史失败')
+    }
+}
+
 onMounted(() => {
+    getLatestRelease()
     buildTime = 0
     appWindow.setTitle(`${store.currentProject.name}项目`)
 })

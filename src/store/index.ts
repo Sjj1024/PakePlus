@@ -575,6 +575,25 @@ export const usePakeStore = defineStore('pakeplus', {
             projectList: localStorage.getItem('projectList')
                 ? JSON.parse(localStorage.getItem('projectList') as string)
                 : ([] as Project[]),
+            release: {
+                url: '',
+                assets_url: '',
+                upload_url: '',
+                html_url: '',
+                id: 0,
+                node_id: '',
+                tag_name: '',
+                target_commitish: '',
+                name: '',
+                draft: false,
+                prerelease: false,
+                created_at: '2024-09-23T10:46:29Z',
+                published_at: '2024-09-23T10:48:30Z',
+                assets: [],
+                tarball_url: '',
+                zipball_url: '',
+                body: '',
+            },
             age: 25,
             sex: '男',
         }
@@ -619,6 +638,21 @@ export const usePakeStore = defineStore('pakeplus', {
                 'projectList',
                 JSON.stringify(this.projectList)
             )
+        },
+        delProject(project: Project) {
+            const exist = this.projectList.findIndex((item: Project) => {
+                return item.name === project.name
+            })
+            if (exist !== -1) {
+                this.projectList.splice(exist, 1)
+                localStorage.setItem(
+                    'projectList',
+                    JSON.stringify(this.projectList)
+                )
+            }
+        },
+        setRelease(info: any) {
+            this.release = info
         },
     },
 })

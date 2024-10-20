@@ -362,9 +362,17 @@ const getPakePlusInfo = async () => {
     version.value = pakeVersion
 }
 
+// reset release info
+const resetReleaseInfo = () => {
+    store.setRelease({
+        id: 0,
+    })
+}
+
 onMounted(() => {
     appWindow.setTitle('PakePlus')
     getPakePlusInfo()
+    resetReleaseInfo()
 })
 </script>
 

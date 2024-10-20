@@ -1,5 +1,5 @@
 use base64::prelude::*;
-use std::{io::Read, mem::replace};
+use std::io::Read;
 
 #[tauri::command]
 pub async fn open_window(

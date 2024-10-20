@@ -95,9 +95,9 @@ const releaseData = ref({
     assets_url: '',
     upload_url: '',
     html_url: '',
-    id: 1,
+    id: 0,
     node_id: '',
-    tag_name: store.currentProject.name,
+    tag_name: '',
     target_commitish: '',
     name: '',
     draft: false,
@@ -141,6 +141,21 @@ const getLatestRelease = async () => {
     getLoading.value = false
 }
 
+// delete lasted release
+const deleteRelAssets = async () => {
+    if (releaseData.value.id !== 0) {
+        const releaseRes: any = await githubApi.deleteRelease(
+            store.userInfo.login,
+            'PakePlus',
+            releaseData.value.id
+        )
+        console.log('deleteRelease', releaseRes)
+        ElMessage.success('删除成功')
+        store.setRelease({ id: 0 })
+        router.go(-1)
+    }
+}
+
 // delete release
 const deleteRelease = async () => {
     ElMessageBox.confirm('确定要删除这个版本吗？', '提示', {
@@ -149,6 +164,7 @@ const deleteRelease = async () => {
         type: 'warning',
     }).then(() => {
         console.log('delete project')
+        deleteRelAssets()
     })
 }
 
@@ -165,8 +181,13 @@ const copyDownlink = async (asset: any) => {
 
 // 打包后的历史记录
 onMounted(() => {
-    getLoading.value = true
-    getLatestRelease()
+    // must do, edit page submit will creat new release
+    if (store.release.id === 0) {
+        getLoading.value = true
+        getLatestRelease()
+    } else {
+        releaseData.value = store.release
+    }
 })
 </script>
 

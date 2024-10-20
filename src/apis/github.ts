@@ -50,6 +50,12 @@ export default {
             body,
         })
     },
+    // delete branch
+    deleteBranch(user: string, repo: string, branch: string) {
+        return http(`/repos/${user}/${repo}/git/refs/heads/${branch}`, {
+            method: 'delete',
+        })
+    },
     // get file contents sha
     getFileSha(user: string, repo: string, path: string, params: any) {
         return http(`/repos/${user}/${repo}/contents/${path}`, {
@@ -149,6 +155,12 @@ export default {
     getReleasesAssets(user: string, repo: string, tag: string) {
         return http(`/repos/${user}/${repo}/releases/tags/${tag}`, {
             method: 'get',
+        })
+    },
+    // Delete a release
+    deleteRelease(user: string, repo: string, release_id: number) {
+        return http(`/repos/${user}/${repo}/releases/${release_id}`, {
+            method: 'delete',
         })
     },
 }
