@@ -1,44 +1,11 @@
-<!DOCTYPE html charset="UTF-8">
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>Google Maps 地址标注示例</title>
-        <script src="https://maps.googleapis.com/maps/api/js?key=api key"></script>
-        <script>
-            function initMap() {
-                const address = '1600 Amphitheatre Parkway, Mountain View, CA' // 示例地址
-                const geocoder = new google.maps.Geocoder()
-
-                geocoder.geocode(
-                    { address: address },
-                    function (results, status) {
-                        if (status === 'OK') {
-                            const location = results[0].geometry.location
-                            const map = new google.maps.Map(
-                                document.getElementById('map'),
-                                {
-                                    zoom: 12,
-                                    center: location,
-                                }
-                            )
-                            const marker = new google.maps.Marker({
-                                position: location,
-                                map: map,
-                                title: '目的地位置',
-                            })
-                        } else {
-                            console.error(
-                                'Geocode was not successful for the following reason: ' +
-                                    status
-                            )
-                        }
-                    }
-                )
-            }
-
-            window.onload = initMap
-        </script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
     </head>
     <body>
-        <div id="map"></div>
+        这是Pake的文档页面
     </body>
 </html>
