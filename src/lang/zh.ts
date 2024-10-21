@@ -70,7 +70,7 @@ export default {
     queued: '构建队列中',
     timed_out: '构建超时',
     completed: '构建完成',
-    requesting: '请求中',
+    requesting: '请求中...',
     assetName: '资源名称',
     download: '下载',
     assetSize: '资源大小',
@@ -81,4 +81,8 @@ export default {
     navigation: '使用教程',
     buyCoffee: '如果对你有帮助，可以请我喝杯咖啡',
     onlyPng: '仅支持png格式的图片',
+    hour: '时',
+    minute: '分',
+    second: '秒',
+    copySuccess: '复制成功',
 }

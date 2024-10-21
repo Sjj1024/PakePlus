@@ -218,6 +218,7 @@ import { writeBinaryFile, readBinaryFile } from '@tauri-apps/api/fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
 import { convertFileSrc } from '@tauri-apps/api/tauri'
 import { open } from '@tauri-apps/api/dialog'
+import { readDir } from '@tauri-apps/api/fs'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import { useI18n } from 'vue-i18n'
@@ -307,6 +308,24 @@ const confirmIcon = (base64Data: string) => {
     saveImage(iconFileName.value, base64Img)
 }
 
+// get base64 image size
+const getImageSize = (base64String: any) => {
+    return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.onload = () => {
+            const dimensions = {
+                width: img.width,
+                height: img.height,
+            }
+            resolve(dimensions)
+        }
+        img.onerror = (error) => {
+            reject(error)
+        }
+        img.src = base64String
+    })
+}
+
 // upload icon
 const uploadIcon = async () => {
     console.log('uploadIcon')
@@ -329,18 +348,30 @@ const uploadIcon = async () => {
     const fileName = selectedFilePath.split('/').pop()
     iconFileName.value = fileName
     console.log('Selected file path:', selectedFilePath, fileName)
-    appForm.icon = 'assets%2F' + fileName
+    // const fileStat = await readDir(selectedFilePath)
+    // const { size } = fileStat;
+    console.log(`File Name: ${fileName}`)
+    // console.log(`File Size: ${fileStat} bytes`)
+    // appForm.icon = 'assets%2F' + fileName
     // get file name
     const binaryData = await readBinaryFile(selectedFilePath)
     const base64Data = arrayBufferToBase64(binaryData)
     console.log('Base64 encoded image:', base64Data)
-    iconBase64.value = 'data:image/jpg;base64,' + base64Data
-    cutVisible.value = true
+    const base64String = 'data:image/jpg;base64,' + base64Data
+    iconBase64.value = base64String
+    // if file is not png, and size is not 512x512, then cut it
+    const imageSize: any = await getImageSize(base64String)
+    // console.log('imageSize', imageSize)
+    if (imageSize.width === imageSize.height && fileName.endsWith('.png')) {
+        confirmIcon(base64String)
+    } else {
+        cutVisible.value = true
+    }
 }
 
 // update icon file content
 const updateIcon = async (content: string) => {
-    // 获取app-icon.png的文件sha
+    // get app-icon.png sha
     const iconSha: any = await githubApi.getFileSha(
         store.userInfo.login,
         'PakePlus',
@@ -374,22 +405,16 @@ const saveImage = async (fileName: string, base64: string) => {
     const imageArrayBuffer = base64ToArrayBuffer(base64)
     // save file
     const imageData = new Uint8Array(imageArrayBuffer)
-    // 获取应用数据目录
+    // get app data dir
     const appDataPath = await appDataDir()
     console.log('appDataPath------', appDataPath)
-    // const pathExist = await exists(appDataPath)
-    // console.log('pathExist---', pathExist)
-    // 拼接文件保存路径
-    // const savePath = `${appDataPath}${fileName}`
     const savePath = await join(appDataPath, 'assets', fileName)
-    // 将图片保存到应用数据目录
+    // save file to app data dir
     await writeBinaryFile(savePath, imageData)
     console.log(`Image saved to: ${savePath}`)
-    // appForm.desc = savePath
-    // const filePath = await join(appDataPath, fileName)
-    console.log('filePath---', savePath)
+    // console.log('filePath---', savePath)
     const assetUrl = convertFileSrc(savePath)
-    console.log('assetUrl---', assetUrl)
+    // console.log('assetUrl---', assetUrl)
     // localImagePath.value = assetUrl
     appForm.icon = assetUrl
     // save image asseturl to project
@@ -402,14 +427,13 @@ const saveImage = async (fileName: string, base64: string) => {
     })
 }
 
-// 将base64转换为ArrayBuffer
+// turn base64 to ArrayBuffer
 const base64ToArrayBuffer = (base64: string) => {
-    // 创建一个新的 ArrayBuffer
+    // creat new ArrayBuffer
     const binaryString = atob(base64)
     const len = binaryString.length
     const arrayBuffer = new ArrayBuffer(len)
     const uint8Array = new Uint8Array(arrayBuffer)
-    // 将二进制字符串中的字符逐个存入 Uint8Array
     for (let i = 0; i < len; i++) {
         uint8Array[i] = binaryString.charCodeAt(i)
     }
@@ -427,7 +451,6 @@ const arrayBufferToBase64 = (buffer: ArrayBuffer) => {
     return btoa(binary)
 }
 
-// 跳转到新建页面
 const backHome = () => {
     router.go(-1)
 }
@@ -438,26 +461,26 @@ const toHistory = () => {
     router.push('/history')
 }
 
-const resetForm = () => {
-    appFormRef.value?.resetFields()
-}
-
 // delete current project
 const deleteProject = () => {
-    ElMessageBox.confirm('确定要删除当前项目吗？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+    ElMessageBox.confirm(t('confirmDelProject'), t('tips'), {
+        confirmButtonText: t('confirm'),
+        cancelButtonText: t('cancel'),
         type: 'warning',
-    }).then(() => {
-        console.log('delete project')
-        githubApi.deleteBranch(
-            store.userInfo.login,
-            'PakePlus',
-            store.currentProject.name
-        )
-        store.delProject(store.currentProject)
-        router.push('/')
     })
+        .then(() => {
+            console.log('delete project')
+            githubApi.deleteBranch(
+                store.userInfo.login,
+                'PakePlus',
+                store.currentProject.name
+            )
+            store.delProject(store.currentProject)
+            router.push('/')
+        })
+        .catch(() => {
+            console.log('catch project')
+        })
 }
 
 // save project
@@ -478,14 +501,13 @@ const saveProject = async (tips: boolean = true) => {
                 desc: appForm.desc,
                 debug: pubForm.model,
             })
-            tips && ElMessage.success('保存成功')
+            tips && ElMessage.success(t('saveSuccess'))
         } else {
             console.log('error submit!', fields)
         }
     })
 }
 
-// 预览页面
 const preview = () => {
     appFormRef.value?.validate((valid, fields) => {
         if (valid) {
@@ -504,7 +526,6 @@ const preview = () => {
     })
 }
 
-// 创建分支
 const createRepo = async () => {
     appFormRef.value?.validate(async (valid, fields) => {
         if (valid) {
@@ -525,10 +546,9 @@ const pubForm = reactive({
 })
 
 const buildLoading = ref(false)
-// const loadingText = ref('开始构建...')
 // check dispatch workflow timer
 let buildTime = 0
-let buildStatus = '开始编译...'
+let buildStatus = t('startCompile') + '...'
 let buildSecondTimer: any = null
 let checkDispatchTimer: any = null
 
@@ -582,7 +602,7 @@ const onSubmit = async () => {
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
             document.querySelector('.el-loading-text')!.innerHTML =
-                '准备编译...'
+                t('preCompile') + '...'
             dispatchAction()
         } else {
             console.log('updateRes error', updateRes)
@@ -592,7 +612,6 @@ const onSubmit = async () => {
     }
 }
 
-// 获取需要更新的文件sha
 const getFileSha = async (filePath: string, branch: string) => {
     const res: any = await githubApi.getFileSha(
         store.userInfo.login,
@@ -604,7 +623,7 @@ const getFileSha = async (filePath: string, branch: string) => {
     return res
 }
 
-// 更新build.yml文件内容
+// update build.yml file content
 const updateBuildYml = async () => {
     // get build.yml file sha
     const shaRes = await getFileSha(
@@ -653,36 +672,22 @@ const dispatchAction = async () => {
         }
     )
     console.log('dispatchRes---', dispatchRes)
-    // 统计构建用时
     buildSecondTimer = setInterval(() => {
         buildTime += 1
-        // 计算用时多少分多少秒
         const minute = Math.floor(buildTime / 60)
         const second = buildTime % 60
-        // 构建进度
         const buildRate = Math.floor((buildTime / 720) * 100)
         // loadingText.value = `${buildStatus}...${minute}分${second}秒`
-        const loadingText = `<div>${minute}分${second}秒</div><div>${buildStatus}${buildRate}%...</div>`
+        const loadingText = `<div>${minute}${t('minute')}${second}${t(
+            'second'
+        )}</div><div>${buildStatus}${buildRate}%...</div>`
         console.log('loadingText---', loadingText)
         document.querySelector('.el-loading-text')!.innerHTML = loadingText
     }, 1000)
-    // 每10秒检查一次构建状态
+    // check build status
     checkDispatchTimer = setInterval(async () => {
         checkBuildStatus()
     }, 10000)
-}
-
-// status map
-const statusMap: any = {
-    pending: '等待中',
-    in_progress: '构建中',
-    success: '构建成功',
-    failure: '构建失败',
-    cancelled: '构建取消',
-    waiting: '等待中',
-    queued: '构建队列中',
-    timed_out: '构建超时',
-    completed: '构建完成',
 }
 
 // check build workflow status
@@ -696,43 +701,44 @@ const checkBuildStatus = async () => {
         }
     )
     console.log('checkRes---', checkRes)
+    // check build status
+    const build_runs = checkRes.data.workflow_runs[0]
+    const { status, conclusion, html_url } = build_runs
+    buildStatus = t(status) || t('inProgress')
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
-        const build_runs = checkRes.data.workflow_runs[0]
-        // check build status
-        const { status, conclusion, html_url } = build_runs
-        buildStatus = statusMap[status] || '构建中'
-        // 除了第一次，别的都不需要
-        // document.querySelector('.el-loading-text')!.innerHTML = '构建成功'
         if (status === 'completed' && conclusion === 'success') {
-            document.querySelector('.el-loading-text')!.innerHTML = '构建成功'
-            // 清理构建定时器
+            document.querySelector('.el-loading-text')!.innerHTML =
+                t('buildSuccess')
+            // clear timer
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)
-            // 关闭弹窗，并跳转到发布页面
+            // close loading
             buildLoading.value = false
             buildTime = 0
             router.push('/history')
         } else if (status === 'completed' && conclusion === 'cancelled') {
-            document.querySelector('.el-loading-text')!.innerHTML = '构建取消'
+            document.querySelector('.el-loading-text')!.innerHTML =
+                t('cancelled')
             buildLoading.value = false
             buildTime = 0
-            // 清理构建定时器
+            // clear interval
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)
         } else if (status === 'failure') {
             buildLoading.value = false
             buildTime = 0
             openUrl(html_url)
-            document.querySelector('.el-loading-text')!.innerHTML = '构建失败'
+            document.querySelector('.el-loading-text')!.innerHTML = t('failure')
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)
         }
     } else {
         buildTime = 0
-        // 清理构建定时器
+        buildLoading.value = false
+        openUrl(html_url)
         buildSecondTimer && clearInterval(buildSecondTimer)
         checkDispatchTimer && clearInterval(checkDispatchTimer)
-        document.querySelector('.el-loading-text')!.innerHTML = '构建失败'
+        document.querySelector('.el-loading-text')!.innerHTML = t('failure')
     }
 }
 
@@ -744,12 +750,11 @@ const getLatestRelease = async () => {
         store.currentProject.name
     )
     console.log('releaseRes', releaseRes)
-    if (releaseRes.status === 200) {
+    if (releaseRes.status === 200 && releaseRes.data.assets.length > 3) {
         // filter current project version
         store.setRelease(releaseRes.data)
     } else {
         console.log('releaseRes error', releaseRes)
-        // ElMessage.error('获取发布历史失败')
     }
 }
 
@@ -823,11 +828,14 @@ onMounted(() => {
             }
 
             .setting {
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                align-items: center;
-                margin-right: 20px;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                -webkit-user-select: none; /* Safari */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* IE10+/Edge */
+                user-select: none; /* Standard syntax */
+
                 .userName {
                     margin-right: 6px;
                 }

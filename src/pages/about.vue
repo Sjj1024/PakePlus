@@ -27,19 +27,21 @@
             </div>
             <div class="tools">
                 <p>
-                    <span>开源地址：</span>
+                    <span>{{ t('githubRepo') }}：</span>
                     <span class="link" @click="openUrl(pakeUrlMap.github)">
                         {{ pakeUrlMap.github }}
                     </span>
                 </p>
                 <p>
-                    <span>使用教程：</span>
-                    <span>https://www.bilibili.com/video/BV1SvtWe5EVg/</span>
+                    <span>{{ t('navigation') }}：</span>
+                    <span class="link" @click="openUrl(pakeUrlMap.github)">
+                        {{ pakeUrlMap.github }}
+                    </span>
                 </p>
                 <p>关注小神：CSDN 掘金 github 抖音 哔哩哔哩 微信群 YouTube X</p>
             </div>
             <div class="payMe">
-                <p>如果对你有帮助，可以请我喝杯咖啡：</p>
+                <p>{{ t('buyCoffee') }}：</p>
                 <div class="payCode">
                     <!-- <img :src="zhifubao" alt="zhifubao" />
                     <img :src="weixin" alt="weixin" /> -->

@@ -2,14 +2,14 @@
     <div
         class="historyBox"
         v-loading="getLoading"
-        element-loading-text="请求中..."
+        :element-loading-text="t('requesting')"
     >
         <div class="homeHeader">
             <div>
                 <div class="headerTitle">
                     <div class="backBox" @click="backHome">
                         <el-icon><ArrowLeft /></el-icon>
-                        <span>返回</span>
+                        <span>{{ t('back') }}</span>
                     </div>
                     <el-divider direction="vertical" />
                     <span>
@@ -18,33 +18,30 @@
                     </span>
                 </div>
                 <div class="toolTips">
-                    <span>
+                    <div class="tipsBody">
                         {{ releaseData.body || t('releaseBody') }}
-                        <!-- 开源免费创建，编辑，调试打包跨平台APP，仅仅只需要一个Token -->
-                    </span>
+                    </div>
                 </div>
             </div>
-            <!-- 设置按钮 -->
             <div class="setting">
                 <el-icon :size="26" @click="deleteRelease"><Delete /></el-icon>
             </div>
         </div>
         <!-- only get latest version by tag name -->
         <el-table :data="releaseAssets" style="width: 100%">
-            <!-- <el-table-column prop="name" label="资源名称" width="380" /> -->
-            <el-table-column label="资源名称" width="460">
+            <el-table-column :label="t('assetName')" width="460">
                 <template #default="scope">
                     <div style="display: flex; align-items: center">
                         <span @click="copyDownlink(scope.row)" class="fileLink">
                             {{ scope.row.name }}
                         </span>
                         <span class="copyLink" @click="openDownlink(scope.row)">
-                            下载
+                            {{ t('download') }}
                         </span>
                     </div>
                 </template>
             </el-table-column>
-            <el-table-column label="资源大小" width="120">
+            <el-table-column :label="t('assetSize')" width="120">
                 <template #default="scope">
                     <div style="display: flex; align-items: center">
                         <span>
@@ -54,7 +51,7 @@
                     </div>
                 </template>
             </el-table-column>
-            <el-table-column prop="updated_at" label="发布日期" />
+            <el-table-column prop="updated_at" :label="t('releaseDate')" />
         </el-table>
         <!-- share and push bug -->
         <div class="shareBox">
@@ -65,7 +62,7 @@
                 <span>报告问题</span>
             </el-button> -->
             <div class="tips">
-                资源说明：dmg结尾的是macOS版本，deb结尾的是Linux版本，exe和msi结尾的是Windows版本，点击资源名称可以复制下载链接，点击下载会使用浏览器下载软件包。
+                {{ t('assetDesc') }}
             </div>
         </div>
     </div>
@@ -131,14 +128,14 @@ const getLatestRelease = async () => {
         store.currentProject.name
     )
     console.log('releaseRes', releaseRes)
-    if (releaseRes.status === 200 && releaseRes.data.length > 3) {
+    if (releaseRes.status === 200 && releaseRes.data.assets.length > 3) {
         // filter current project version
         releaseData.value = releaseRes.data
         getLoading.value = false
     } else {
         console.log('releaseRes error', releaseRes)
         // sometime get one assets
-        setTimeout(() => getLatestRelease(), 1000)
+        setTimeout(getLatestRelease, 1000)
     }
 }
 
@@ -159,14 +156,18 @@ const deleteRelAssets = async () => {
 
 // delete release
 const deleteRelease = async () => {
-    ElMessageBox.confirm('确定要删除这个版本吗？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+    ElMessageBox.confirm(t('confirmDelProject'), t('tips'), {
+        confirmButtonText: t('confirm'),
+        cancelButtonText: t('cancel'),
         type: 'warning',
-    }).then(() => {
-        console.log('delete project')
-        deleteRelAssets()
     })
+        .then(() => {
+            console.log('delete project')
+            deleteRelAssets()
+        })
+        .catch(() => {
+            console.log('catch project')
+        })
 }
 
 // open downlink by chrome
@@ -177,10 +178,9 @@ const openDownlink = async (asset: any) => {
 // copy downlink
 const copyDownlink = async (asset: any) => {
     await writeText(asset.browser_download_url)
-    ElMessage.success('复制成功')
+    ElMessage.success(t('copySuccess'))
 }
 
-// 打包后的历史记录
 onMounted(() => {
     // must do, edit page submit will creat new release
     if (store.release.id === 0) {
@@ -194,9 +194,11 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .historyBox {
+    // width: 100%;
     padding: 10px 20px;
 
     .homeHeader {
+        width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -204,6 +206,7 @@ onMounted(() => {
         margin-bottom: 10px;
 
         .headerTitle {
+            width: 100%;
             font-size: 20px;
             font-weight: bold;
             display: flex;
@@ -222,12 +225,23 @@ onMounted(() => {
         }
 
         .toolTips {
+            width: 95%;
             color: gray;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
             align-items: center;
             margin-left: 2px;
+
+            .tipsBody {
+                width: 100%;
+                word-break: break-all;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                line-clamp: 1;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
 
             .tipsIcon {
                 margin-left: 6px;
@@ -236,10 +250,13 @@ onMounted(() => {
         }
 
         .setting {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard syntax */
             cursor: pointer;
         }
 
