@@ -131,14 +131,15 @@ const getLatestRelease = async () => {
         store.currentProject.name
     )
     console.log('releaseRes', releaseRes)
-    if (releaseRes.status === 200) {
+    if (releaseRes.status === 200 && releaseRes.data.length > 3) {
         // filter current project version
         releaseData.value = releaseRes.data
+        getLoading.value = false
     } else {
         console.log('releaseRes error', releaseRes)
-        ElMessage.error('获取发布历史失败')
+        // sometime get one assets
+        setTimeout(() => getLatestRelease(), 1000)
     }
-    getLoading.value = false
 }
 
 // delete lasted release
