@@ -729,6 +729,19 @@ const checkBuildStatus = async () => {
             document.querySelector('.el-loading-text')!.innerHTML = t('failure')
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)
+        } else if (conclusion === 'failure') {
+            buildLoading.value = false
+            buildTime = 0
+            openUrl(html_url)
+            document.querySelector('.el-loading-text')!.innerHTML = t('failure')
+            buildSecondTimer && clearInterval(buildSecondTimer)
+            checkDispatchTimer && clearInterval(checkDispatchTimer)
+        } else if (status === 'completed') {
+            buildLoading.value = false
+            buildTime = 0
+            openUrl(html_url)
+            buildSecondTimer && clearInterval(buildSecondTimer)
+            checkDispatchTimer && clearInterval(checkDispatchTimer)
         }
     } else {
         buildTime = 0
