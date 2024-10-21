@@ -249,49 +249,49 @@ const appRules = reactive<FormRules>({
     url: [
         {
             required: true,
-            message: '请输入网站地址',
+            message: t('inputWebPlaceholder'),
             trigger: 'change',
         },
     ],
     showName: [
         {
             required: true,
-            message: '请输入APP名称',
+            message: t('inputAppNamePlaceholder'),
             trigger: 'blur',
         },
     ],
     appid: [
         {
             required: true,
-            message: '请输入APPID',
+            message: t('inputAppIdPlaceholder'),
             trigger: 'change',
         },
     ],
     icon: [
         {
             required: true,
-            message: '请上传APP图标',
+            message: t('inputAppIconPlaceholder'),
             trigger: 'change',
         },
     ],
     version: [
         {
             required: true,
-            message: '请输入APP版本号',
+            message: t('inputAppVersionPlaceholder'),
             trigger: 'change',
         },
     ],
     platform: [
         {
             required: true,
-            message: '请选择预览平台',
+            message: t('inputPrePlatformPlaceholder'),
             trigger: 'change',
         },
     ],
     desc: [
         {
             required: false,
-            message: '请输入APP描述',
+            message: t('inputAppDesPlaceholder'),
             trigger: 'blur',
         },
     ],
@@ -329,7 +329,6 @@ const getImageSize = (base64String: any) => {
 // upload icon
 const uploadIcon = async () => {
     console.log('uploadIcon')
-    // document.getElementById('open')!.click()
     // use tauri open api, bacause input cant seleted file type
     const selectedFilePath: any = await open({
         multiple: false,
