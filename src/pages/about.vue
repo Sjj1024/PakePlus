@@ -19,10 +19,10 @@
             <div class="description">
                 <p>
                     虽然它叫PakePlus，但是它和Pake没有关系哦，就像JavaScript和Java一样。开源免费，Web网页打包跨平台APP，仅仅只需要一个Github
-                    Token 开源免费，Web网页打包跨平台APP，仅仅只需要一个Github
-                    Token 开源免费，Web网页打包跨平台APP，仅仅只需要一个Github
-                    Token 开源免费，Web网页打包跨平台APP，仅仅只需要一个Github
-                    Token
+                    Token，就可以将你的网页打包成一个独立可执行程序，目前支持Windows,
+                    macOS, Linux系统，未来还会支持Android,
+                    iOS等移动端。有问题可以加我微信：lanxingme，备注：PakePlus，或者给我发送邮件:
+                    {{ pakeUrlMap.email }}
                 </p>
             </div>
             <div class="tools">
@@ -38,15 +38,25 @@
                         {{ pakeUrlMap.github }}
                     </span>
                 </p>
-                <p>关注小神：CSDN 掘金 github 抖音 哔哩哔哩 微信群 YouTube X</p>
+                <p>
+                    <span>关注小神：</span>
+                    <span class="link" @click="openUrl(pakeUrlMap.csdn)">
+                        CSDN
+                    </span>
+                    <span class="link" @click="openUrl(pakeUrlMap.juejin)">
+                        掘金
+                    </span>
+                    <span class="link" @click="openUrl(pakeUrlMap.github)">
+                        Github
+                    </span>
+                </p>
             </div>
-            <div class="payMe">
+            <!-- <div class="payMe">
                 <p>{{ t('buyCoffee') }}：</p>
                 <div class="payCode">
-                    <!-- <img :src="zhifubao" alt="zhifubao" />
-                    <img :src="weixin" alt="weixin" /> -->
+                    <img :src="weixin" alt="weixin" class="weixin" />
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -54,8 +64,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
-import zhifubao from '@/assets/images/zhifubao.png'
-import weixin from '@/assets/images/weixin.png'
+import weixin from '@/assets/images/pay.png'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { pakeUrlMap, openUrl } from '@/utils/common'
@@ -132,6 +141,25 @@ const goBack = () => {
         .link {
             cursor: pointer;
             color: #0969da;
+            margin-right: 16px;
+        }
+
+        .tools {
+            margin-top: 10px;
+        }
+
+        .payMe {
+            margin-top: 10px;
+
+            .payCode {
+                width: 100%;
+                // height: 200px;
+
+                .weixin {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
         }
     }
 }

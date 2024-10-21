@@ -5,7 +5,7 @@
 <h1 align="center">PakePlus</h1>
 <p align="center"><strong>Turn any webpage into desktop app and mobile app with Rust <em>is ease</em>.</strong></p>
 
-<div align="left">PakePlus supports Mac, Windows, and Linux. Check out README for <a href="#popular-packages">Popular Packages</a>, <a href="#development">Customized Development</a> information. Feel free to share your suggestions in <a href=https://github.com/Sjj1024/PakePlus/discussions>Discussions</a>.</div>
+<div align="left">PakePlus supports Mac, Windows, and Linux. Will soon support Android and iOS, No need to install complex dependency environments locally。Check out README for <a href="#popular-packages">Popular Packages</a>, <a href="#development">Customized Development</a> information. Feel free to share your suggestions in <a href=https://github.com/Sjj1024/PakePlus/discussions>Discussions</a>.</div>
 
 ## Features
 
@@ -13,6 +13,7 @@
 -   🚀 With Rust Tauri, PakePlus is much more lightweight and faster than JS-based frameworks.
 -   📦 Battery-included package — shortcut pass-through, immersive windows, and minimalist customization.
 -   👻 PakePlus is just a simple tool — replace the old bundle approach with Tauri (though PWA is good enough).
+-   🤗 PakePlus is easy to use, just a github token, and you can get a desktop app.
 
 ## Popular Packages
 
@@ -150,7 +151,7 @@ pnpm run build
 
 1. If you think PakePlus delights your life, you can feed it some energy.
  <p align="center">
-         <img src="./assets/pay.png" />
+         <img src="./pay.png" />
  </p>
 
 2. I hope that you enjoy playing with it. Let us know if you find a website that would be great for a Mac App!
