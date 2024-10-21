@@ -8,6 +8,7 @@ import '@/assets/fonts/iconfont.css'
 import 'element-plus/dist/index.css'
 import '@/assets/theme.css'
 import '@/assets/global.scss'
+import 'vue-cropper/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 const app = createApp(App)

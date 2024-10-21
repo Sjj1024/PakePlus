@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { appDataDir } from '@tauri-apps/api/path'
 import { createDir, BaseDirectory } from '@tauri-apps/api/fs'
 
 const userLanguage = navigator.language

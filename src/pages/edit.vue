@@ -196,6 +196,12 @@
                 </div>
             </template>
         </el-dialog>
+        <!-- cutter img -->
+        <CutterImg
+            v-model="cutVisible"
+            :imgUrl="iconBase64"
+            :confirm="confirmIcon"
+        ></CutterImg>
     </div>
 </template>
 
@@ -213,12 +219,15 @@ import { appDataDir, join } from '@tauri-apps/api/path'
 import { convertFileSrc } from '@tauri-apps/api/tauri'
 import { open } from '@tauri-apps/api/dialog'
 import { ArrowLeft } from '@element-plus/icons-vue'
+import CutterImg from '@/components/CutterImg.vue'
 import { useI18n } from 'vue-i18n'
+import { openUrl } from '@/utils/common'
 
 const router = useRouter()
 const store = usePakeStore()
 const { t } = useI18n()
-
+const iconBase64 = ref('')
+const cutVisible = ref(false)
 const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
@@ -233,6 +242,7 @@ const appForm = reactive({
     height: store.currentProject.height || 600,
     desc: store.currentProject.desc,
 })
+const iconFileName = ref('')
 
 const appRules = reactive<FormRules>({
     url: [
@@ -286,17 +296,28 @@ const appRules = reactive<FormRules>({
     ],
 })
 
-// 上传icon
+// icon confirm
+const confirmIcon = (base64Data: string) => {
+    cutVisible.value = false
+    console.log('confirmIcon base64Data', base64Data)
+    const base64Img = base64Data.split('base64,')[1]
+    // update icon file content
+    updateIcon(base64Img)
+    // save image to datadir
+    saveImage(iconFileName.value, base64Img)
+}
+
+// upload icon
 const uploadIcon = async () => {
     console.log('uploadIcon')
     // document.getElementById('open')!.click()
     // use tauri open api, bacause input cant seleted file type
     const selectedFilePath: any = await open({
-        multiple: false, // 只允许选择一个文件
+        multiple: false,
         filters: [
             {
                 name: 'Images',
-                extensions: ['png'],
+                extensions: ['png', 'jpg', 'jpeg'],
             },
         ],
     })
@@ -306,16 +327,15 @@ const uploadIcon = async () => {
         return null
     }
     const fileName = selectedFilePath.split('/').pop()
+    iconFileName.value = fileName
     console.log('Selected file path:', selectedFilePath, fileName)
     appForm.icon = 'assets%2F' + fileName
     // get file name
     const binaryData = await readBinaryFile(selectedFilePath)
     const base64Data = arrayBufferToBase64(binaryData)
     console.log('Base64 encoded image:', base64Data)
-    // update icon file content
-    updateIcon(base64Data) // 更新icon文件内容
-    // save image to datadir
-    saveImage(fileName, base64Data)
+    iconBase64.value = 'data:image/jpg;base64,' + base64Data
+    cutVisible.value = true
 }
 
 // update icon file content
@@ -679,7 +699,7 @@ const checkBuildStatus = async () => {
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
         const build_runs = checkRes.data.workflow_runs[0]
         // check build status
-        const { status, conclusion } = build_runs
+        const { status, conclusion, html_url } = build_runs
         buildStatus = statusMap[status] || '构建中'
         // 除了第一次，别的都不需要
         // document.querySelector('.el-loading-text')!.innerHTML = '构建成功'
@@ -697,6 +717,13 @@ const checkBuildStatus = async () => {
             buildLoading.value = false
             buildTime = 0
             // 清理构建定时器
+            buildSecondTimer && clearInterval(buildSecondTimer)
+            checkDispatchTimer && clearInterval(checkDispatchTimer)
+        } else if (status === 'failure') {
+            buildLoading.value = false
+            buildTime = 0
+            openUrl(html_url)
+            document.querySelector('.el-loading-text')!.innerHTML = '构建失败'
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)
         }

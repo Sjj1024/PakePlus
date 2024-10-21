@@ -111,7 +111,7 @@
                     placeholder="请输入Token"
                     class="tokenInput"
                 />
-                <el-button @click="testToken(true)">{{
+                <el-button @click="testToken(true)" :loading="testLoading">{{
                     t('testToken')
                 }}</el-button>
             </div>
@@ -176,6 +176,7 @@ import { pakeUrlMap, openUrl } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
 import { getVersion } from '@tauri-apps/api/app'
+import { invoke } from '@tauri-apps/api/tauri'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -186,6 +187,7 @@ const version = ref('')
 const tokenDialog = ref(false)
 const branchDialog = ref(false)
 const branchName = ref('')
+const testLoading = ref(false)
 
 // go project detail
 const goProject = (pro: Project) => {
@@ -219,33 +221,36 @@ const changeLang = (lang: string) => {
     localStorage.setItem('lang', lang)
 }
 
-// check token
+// check token and confirm token is ok
 const testToken = async (tips: boolean = true) => {
+    testLoading.value = true
     const res: any = await githubApi.gitUserInfo(token.value)
     console.log('testToken', res)
     if (res.status === 200) {
-        tips && ElMessage.success(t('tokenOk'))
-        if (!tips) {
-            tokenDialog.value = false
-        }
         localStorage.setItem('token', token.value)
         store.setUser(res.data)
-        forkProgect()
+        forkProgect(tips)
     } else {
         ElMessage.error(t('tokenError'))
     }
 }
 
 // fork and start
-const forkProgect = async () => {
-    // fork
-    const forkRes = await githubApi.forkProgect({
+const forkProgect = async (tips: boolean = true) => {
+    // fork action is async
+    const forkRes: any = await githubApi.forkProgect({
         name: 'PakePlus',
         default_branch_only: true,
     })
     console.log('forkRes', forkRes)
     if (forkRes.status === 202) {
         store.setRepository(forkRes.data)
+    } else if (forkRes.status === 403) {
+        // maybe account has locked
+        ElMessage.error(forkRes.data.message)
+    } else {
+        console.log('fork error', forkRes)
+        ElMessage.error(forkRes.data.message)
     }
     // start
     const startRes = await githubApi.startProgect()
@@ -253,8 +258,22 @@ const forkProgect = async () => {
     if (startRes.status === 204) {
         console.log('start success')
     }
-    // enable github action
-    deleteBuildYml()
+    // wait fork done, enable github action
+    const timer = setInterval(async () => {
+        const status = await getCommitSha()
+        console.log('wait fork done', status)
+        if (status) {
+            deleteBuildYml()
+            timer && clearInterval(timer)
+            ElMessage.success(t('tokenOk'))
+            testLoading.value = false
+            if (!tips) {
+                tokenDialog.value = false
+            }
+        } else {
+            console.log('wait fork done')
+        }
+    }, 1000)
 }
 
 // get commit sha
@@ -266,6 +285,9 @@ const getCommitSha = async () => {
     console.log('getCommitSha', res.data[0])
     if (res.status === 200) {
         store.setCommitSha(res.data[0])
+        return true
+    } else {
+        return false
     }
 }
 
@@ -287,6 +309,7 @@ const creatLoading = ref(false)
 // creat project branch
 const creatBranch = async () => {
     creatLoading.value = true
+    await uploadBuildYml()
     // checkout branch name is english
     if (branchName.value && /^[A-Za-z0-9]+$/.test(branchName.value)) {
         console.log('branchName.value', branchName.value)
@@ -330,6 +353,30 @@ const creatBranch = async () => {
         }
     } else {
         ElMessage.error(t('englishName'))
+    }
+}
+
+// creat build yml
+const uploadBuildYml = async (branchName: string = 'main') => {
+    // get build.yml file content
+    const content = await invoke('update_build_file', {
+        name: 'PakePlus',
+        body: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.',
+    })
+    console.log('content', content)
+    // update build.yml file content
+    const updateRes: any = await githubApi.createBuildYml(
+        store.userInfo.login,
+        'PakePlus',
+        {
+            message: 'update build.yml from pakeplus',
+            content: content,
+        }
+    )
+    if (updateRes.status === 200 || updateRes.status === 201) {
+        console.log('updateRes', updateRes)
+    } else {
+        console.log('updateRes error', updateRes)
     }
 }
 

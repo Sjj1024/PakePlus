@@ -26,6 +26,9 @@ dependencies:
   vue:
     specifier: ^3.3.4
     version: 3.5.3(typescript@5.5.4)
+  vue-cropper:
+    specifier: ^1.1.4
+    version: 1.1.4
   vue-i18n:
     specifier: ^10.0.0
     version: 10.0.0(vue@3.5.3)
@@ -1175,6 +1178,10 @@ packages:
   /vscode-uri@3.0.8:
     resolution: {integrity: sha512-AyFQ0EVmsOZOlAnxoFOGOq1SQDWAB7C6aqMGS23svWAllfOaxbuFvcT8D1i8z3Gyn8fraVeZNNmN6e9bxxXkKw==}
     dev: true
+
+  /vue-cropper@1.1.4:
+    resolution: {integrity: sha512-5m98vBsCEI9rbS4JxELxXidtAui3qNyTHLHg67Qbn7g8cg+E6LcnC+hh3SM/p94x6mFh6KRxT1ttnta+wCYqWA==}
+    dev: false
 
   /vue-demi@0.14.10(vue@3.5.3):
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
