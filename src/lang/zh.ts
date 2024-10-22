@@ -87,4 +87,5 @@ export default {
     minute: '分',
     second: '秒',
     copySuccess: '复制成功',
+    delSuccess: '删除成功',
 }

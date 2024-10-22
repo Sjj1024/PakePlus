@@ -216,7 +216,6 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePakeStore } from '@/store'
 import { writeBinaryFile, readBinaryFile } from '@tauri-apps/api/fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
-// import { convertFileSrc } from '@tauri-apps/api/tauri'
 import { open } from '@tauri-apps/api/dialog'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
@@ -346,11 +345,7 @@ const uploadIcon = async () => {
     const fileName = selectedFilePath.split('/').pop()
     iconFileName.value = fileName
     console.log('Selected file path:', selectedFilePath, fileName)
-    // const fileStat = await readDir(selectedFilePath)
-    // const { size } = fileStat;
     console.log(`File Name: ${fileName}`)
-    // console.log(`File Size: ${fileStat} bytes`)
-    // appForm.icon = 'assets%2F' + fileName
     // get file name
     const binaryData = await readBinaryFile(selectedFilePath)
     const base64Data = arrayBufferToBase64(binaryData)
@@ -451,7 +446,6 @@ const backHome = () => {
 
 // click menu item
 const toHistory = () => {
-    console.log('toHistory')
     router.push('/history')
 }
 

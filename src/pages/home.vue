@@ -104,7 +104,7 @@
                     autoCapitalize="off"
                     autoCorrect="off"
                     spellCheck="false"
-                    placeholder="请输入Token"
+                    placeholder="github token"
                     class="tokenInput"
                 />
                 <el-button @click="testToken(true)" :loading="testLoading">{{
@@ -200,8 +200,8 @@ const goAbout = () => {
 // get img url
 const getImgUrl = (filePath: string) => {
     if (filePath) {
-        const timestamp = new Date().getTime() // 生成时间戳
-        return `${convertFileSrc(filePath)}?t=${timestamp}` // 动态添加时间戳
+        const timestamp = new Date().getTime()
+        return `${convertFileSrc(filePath)}?t=${timestamp}`
     } else {
         return pakePlusIcon
     }

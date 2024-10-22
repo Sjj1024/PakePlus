@@ -88,4 +88,5 @@ export default {
     minute: 'm',
     second: 's',
     copySuccess: 'Copy successful',
+    delSuccess: 'Delete successful',
 }

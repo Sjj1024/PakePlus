@@ -74,7 +74,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePakeStore } from '@/store'
 import githubApi from '@/apis/github'
@@ -148,7 +148,7 @@ const deleteRelAssets = async () => {
             releaseData.value.id
         )
         console.log('deleteRelease', releaseRes)
-        ElMessage.success('删除成功')
+        ElMessage.success(t('delSuccess'))
         store.setRelease({ id: 0 })
         router.go(-1)
     }
