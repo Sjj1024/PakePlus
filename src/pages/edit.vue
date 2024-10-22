@@ -669,7 +669,7 @@ const dispatchAction = async () => {
         const loadingText = `<div>${minute}${t('minute')}${second}${t(
             'second'
         )}</div><div>${buildStatus}${buildRate}%...</div>`
-        console.log('loadingText---', loadingText)
+        // console.log('loadingText---', loadingText)
         document.querySelector('.el-loading-text')!.innerHTML = loadingText
     }, 1000)
     // check build status

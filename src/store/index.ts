@@ -626,10 +626,8 @@ export const usePakeStore = defineStore('pakeplus', {
             this.currentProject = project
             localStorage.setItem('currentProject', JSON.stringify(project))
             const exist = this.projectList.findIndex((item: Project) => {
-                console.log('item---', item, project)
                 return item.name === project.name
             })
-            console.log('exist---', exist, project, this.projectList)
             if (exist !== -1) {
                 this.projectList[exist] = project
             } else {

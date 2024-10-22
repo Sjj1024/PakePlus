@@ -69,7 +69,7 @@ pub async fn update_config_file(
         .replace("-1", width.as_str())
         .replace("-2", height.as_str());
     if ascii {
-        contents = contents.replace("-3", r#"["all"]"#);
+        contents = contents.replace("-3", r#""all""#);
     } else {
         contents = contents.replace(
             "-3",
