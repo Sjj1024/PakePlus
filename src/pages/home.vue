@@ -71,11 +71,7 @@
                 :key="pro.id"
                 @click="goProject(pro)"
             >
-                <img
-                    :src="pro.icon || pakePlusIcon"
-                    class="appIcon"
-                    alt="appIcon"
-                />
+                <img :src="getImgUrl(pro.icon)" class="appIcon" alt="appIcon" />
                 <div class="infoBox">
                     <div class="appBox">
                         <div class="appName">{{ pro.name }}</div>
@@ -175,6 +171,7 @@ import { usePakeStore } from '@/store'
 import { pakeUrlMap, openUrl } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
+import { convertFileSrc } from '@tauri-apps/api/tauri'
 import { getVersion } from '@tauri-apps/api/app'
 import { invoke } from '@tauri-apps/api/tauri'
 
@@ -198,6 +195,16 @@ const goProject = (pro: Project) => {
 // go about
 const goAbout = () => {
     router.push('/about')
+}
+
+// get img url
+const getImgUrl = (filePath: string) => {
+    if (filePath) {
+        const timestamp = new Date().getTime() // 生成时间戳
+        return `${convertFileSrc(filePath)}?t=${timestamp}` // 动态添加时间戳
+    } else {
+        return pakePlusIcon
+    }
 }
 
 // new barnch config

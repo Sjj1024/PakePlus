@@ -87,7 +87,7 @@
                 </el-form-item>
                 <el-form-item :label="t('appIcon')" prop="icon">
                     <el-input
-                        :value="appForm.icon.split('assets%2F')[1]"
+                        :value="appForm.icon.split('assets/')[1]"
                         readonly
                         @click="uploadIcon"
                         :placeholder="`${t('onlyPng')}`"
@@ -216,7 +216,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePakeStore } from '@/store'
 import { writeBinaryFile, readBinaryFile } from '@tauri-apps/api/fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
-import { convertFileSrc } from '@tauri-apps/api/tauri'
+// import { convertFileSrc } from '@tauri-apps/api/tauri'
 import { open } from '@tauri-apps/api/dialog'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
@@ -410,18 +410,14 @@ const saveImage = async (fileName: string, base64: string) => {
     // save file to app data dir
     await writeBinaryFile(savePath, imageData)
     console.log(`Image saved to: ${savePath}`)
-    // console.log('filePath---', savePath)
-    const assetUrl = convertFileSrc(savePath)
-    // console.log('assetUrl---', assetUrl)
-    // localImagePath.value = assetUrl
-    appForm.icon = assetUrl
+    appForm.icon = savePath
     // save image asseturl to project
     store.addUpdatePro({
         ...appForm,
         name: store.currentProject.name,
         appid: appForm.appid,
         debug: pubForm.model,
-        icon: assetUrl,
+        icon: savePath,
     })
 }
 
