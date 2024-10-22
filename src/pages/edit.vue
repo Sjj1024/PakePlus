@@ -565,7 +565,6 @@ const onSubmit = async () => {
         'src-tauri/tauri.conf.json',
         store.currentProject.name
     )
-    console.log('configSha---', configSha)
     try {
         // if name is ASCII
         const configContent: any = await invoke('update_config_file', {
@@ -577,7 +576,6 @@ const onSubmit = async () => {
             height: appForm.height.toString(),
             ascii: isAlphanumeric(appForm.showName),
         })
-        console.log('config data:', configContent)
         // update config file
         const updateRes: any = await githubApi.updateConfigFile(
             store.userInfo.login,

@@ -69,12 +69,12 @@ pub async fn update_config_file(
         .replace("-1", width.as_str())
         .replace("-2", height.as_str());
     if ascii {
+        contents = contents.replace("-3", r#"["all"]"#);
+    } else {
         contents = contents.replace(
             "-3",
             r#"["deb", "appimage", "nsis", "app", "dmg", "updater"]"#,
         );
-    } else {
-        contents = contents.replace("-3", r#"["all"]"#);
     }
     // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
