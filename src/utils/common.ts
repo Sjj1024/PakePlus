@@ -15,3 +15,8 @@ export const pakeUrlMap = {
 export const openUrl = async (url: string) => {
     await open(url)
 }
+
+export const isAlphanumeric = (str: string) => {
+    const regex = /^[a-zA-Z0-9]+$/
+    return regex.test(str)
+}

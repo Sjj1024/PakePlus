@@ -52,6 +52,7 @@ pub async fn update_config_file(
     id: String,
     width: String,
     height: String,
+    ascii: bool,
 ) -> String {
     let resource_path = handle
         .path_resolver()
@@ -67,6 +68,14 @@ pub async fn update_config_file(
         .replace("PROJECTID", id.as_str())
         .replace("-1", width.as_str())
         .replace("-2", height.as_str());
+    if ascii {
+        contents = contents.replace(
+            "-3",
+            r#"["deb", "appimage", "nsis", "app", "dmg", "updater"]"#,
+        );
+    } else {
+        contents = contents.replace("-3", r#"["all"]"#);
+    }
     // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);

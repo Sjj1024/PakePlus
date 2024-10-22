@@ -221,7 +221,7 @@ import { open } from '@tauri-apps/api/dialog'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import { useI18n } from 'vue-i18n'
-import { openUrl } from '@/utils/common'
+import { isAlphanumeric, openUrl } from '@/utils/common'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -577,6 +577,7 @@ const onSubmit = async () => {
     )
     console.log('configSha---', configSha)
     try {
+        // if name is ASCII
         const configContent: any = await invoke('update_config_file', {
             name: appForm.showName,
             version: appForm.version,
@@ -584,6 +585,7 @@ const onSubmit = async () => {
             id: appForm.appid,
             width: appForm.width.toString(),
             height: appForm.height.toString(),
+            ascii: isAlphanumeric(appForm.showName),
         })
         console.log('config data:', configContent)
         // update config file
@@ -763,7 +765,17 @@ const getLatestRelease = async () => {
     console.log('releaseRes', releaseRes)
     if (releaseRes.status === 200 && releaseRes.data.assets.length > 3) {
         // filter current project version
-        store.setRelease(releaseRes.data)
+        const assets = releaseRes.data.assets.filter((item: any) => {
+            return (
+                item.name.includes(store.currentProject.version) ||
+                item.name.includes('tar')
+            )
+        })
+        const releaseData = {
+            ...releaseRes.data,
+            assets,
+        }
+        store.setRelease(releaseData)
     } else {
         console.log('releaseRes error', releaseRes)
     }

@@ -28,12 +28,17 @@
             </div>
         </div>
         <!-- only get latest version by tag name -->
-        <el-table :data="releaseAssets" style="width: 100%">
+        <el-table :data="releaseData.assets" style="width: 100%">
             <el-table-column :label="t('assetName')" width="460">
                 <template #default="scope">
                     <div style="display: flex; align-items: center">
                         <span @click="copyDownlink(scope.row)" class="fileLink">
-                            {{ scope.row.name }}
+                            {{
+                                scope.row.name.startsWith('_')
+                                    ? store.currentProject.showName +
+                                      scope.row.name
+                                    : scope.row.name
+                            }}
                         </span>
                         <span class="copyLink" @click="openDownlink(scope.row)">
                             {{ t('download') }}
@@ -99,22 +104,8 @@ const releaseData = ref({
     name: '',
     draft: false,
     prerelease: false,
-    created_at: '2024-09-23T10:46:29Z',
-    published_at: '2024-09-23T10:48:30Z',
     assets: [],
-    tarball_url: '',
-    zipball_url: '',
     body: '',
-})
-
-// get latest release assets by tag name
-const releaseAssets = computed(() => {
-    return releaseData.value.assets.filter((item: any) => {
-        return (
-            item.name.includes(store.currentProject.version) ||
-            item.name.includes('tar.gz')
-        )
-    })
 })
 
 // getLoading
@@ -130,7 +121,16 @@ const getLatestRelease = async () => {
     console.log('releaseRes', releaseRes)
     if (releaseRes.status === 200 && releaseRes.data.assets.length > 3) {
         // filter current project version
-        releaseData.value = releaseRes.data
+        const assets = releaseRes.data.assets.filter((item: any) => {
+            return (
+                item.name.includes(store.currentProject.version) ||
+                item.name.includes('tar')
+            )
+        })
+        releaseData.value = {
+            ...releaseRes.data,
+            assets,
+        }
         getLoading.value = false
     } else {
         console.log('releaseRes error', releaseRes)

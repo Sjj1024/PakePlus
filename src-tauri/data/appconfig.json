@@ -74,7 +74,7 @@
         },
         "bundle": {
             "active": true,
-            "targets": "all",
+            "targets": -3,
             "identifier": "PROJECTID",
             "icon": [
                 "icons/32x32.png",
