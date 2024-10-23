@@ -2188,6 +2188,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "os_info"
+version = "3.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "52a07930afc1bd77ac9e1101dc18d3fc4986c6568e939c31d1c26657eb0ccbf5"
+dependencies = [
+ "log",
+ "serde",
+ "windows-sys 0.52.0",
+]
+
+[[package]]
 name = "os_pipe"
 version = "1.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3201,6 +3212,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2047c6ded9c721764247e62cd3b03c09ffc529b2ba5b10ec482ae507a4a70160"
 
 [[package]]
+name = "sys-locale"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e801cf239ecd6ccd71f03d270d67dd53d13e90aab208bf4b8fe4ad957ea949b0"
+dependencies = [
+ "libc",
+]
+
+[[package]]
 name = "system-configuration"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3348,6 +3368,7 @@ dependencies = [
  "objc",
  "once_cell",
  "open",
+ "os_info",
  "percent-encoding",
  "rand 0.8.5",
  "raw-window-handle",
@@ -3360,6 +3381,7 @@ dependencies = [
  "serde_repr",
  "serialize-to-javascript",
  "state",
+ "sys-locale",
  "tar",
  "tauri-macros",
  "tauri-runtime",

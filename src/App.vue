@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import { os } from '@tauri-apps/api'
 import { createDir, BaseDirectory } from '@tauri-apps/api/fs'
 
 const userLanguage = navigator.language
@@ -41,9 +42,11 @@ const disableRightClick = () => {
 }
 
 const initEnv = async () => {
-    // checkout appdata dir exists
-    // const dataDir = await appDataDir()
-    // const existRes = await createDir(dataDir)
+    const locale = await os.locale()
+    console.log(`系统语言: ${locale}`)
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const currentTheme = mediaQuery.matches ? 'dark' : 'light'
+    console.log(`当前系统主题: ${currentTheme}`)
     await createDir('assets', { dir: BaseDirectory.AppData, recursive: true })
     console.log('App data dir exists:', import.meta.env.DEV)
     // if env is dev
