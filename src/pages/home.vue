@@ -439,6 +439,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .homeBox {
     padding: 10px 20px;
+    position: relative;
 
     .homeHeader {
         display: flex;
@@ -641,7 +642,7 @@ onMounted(() => {
     }
 
     .version {
-        position: fixed;
+        position: absolute;
         bottom: 16px;
         right: 20px;
         color: gray;

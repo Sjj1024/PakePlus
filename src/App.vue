@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { os } from '@tauri-apps/api'
 import { createDir, BaseDirectory } from '@tauri-apps/api/fs'
-
-const userLanguage = navigator.language
-console.log('System language:', userLanguage)
 
 const disableRightClick = () => {
     //禁止F12
@@ -42,8 +38,6 @@ const disableRightClick = () => {
 }
 
 const initEnv = async () => {
-    const locale = await os.locale()
-    console.log(`系统语言: ${locale}`)
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const currentTheme = mediaQuery.matches ? 'dark' : 'light'
     console.log(`当前系统主题: ${currentTheme}`)
