@@ -46,13 +46,18 @@
                         </span>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item @click="changeLang('en')"
-                                    >English</el-dropdown-item
-                                >
-                                <el-dropdown-item @click="changeLang('zh')"
-                                    >简体中文</el-dropdown-item
-                                >
-                                <!-- <el-dropdown-item>繁体中文</el-dropdown-item> -->
+                                <el-dropdown-item @click="changeLang('en')">
+                                    English
+                                </el-dropdown-item>
+                                <el-dropdown-item @click="changeLang('zh')">
+                                    简体中文
+                                </el-dropdown-item>
+                                <el-dropdown-item @click="changeLang('zhTw')">
+                                    繁体中文
+                                </el-dropdown-item>
+                                <el-dropdown-item @click="changeLang('ja')">
+                                    日本語
+                                </el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
@@ -94,7 +99,7 @@
             <template #header>
                 <div class="diaHeader">
                     <span>Github Token</span>
-                    <el-icon class="diaTipsIcon"><Warning /></el-icon>
+                    <!-- <el-icon class="diaTipsIcon"><Warning /></el-icon> -->
                 </div>
             </template>
             <div class="diaContent">
@@ -239,6 +244,7 @@ const testToken = async (tips: boolean = true) => {
         forkProgect(tips)
     } else {
         ElMessage.error(t('tokenError'))
+        testLoading.value = false
     }
 }
 
@@ -354,12 +360,13 @@ const creatBranch = async () => {
             ElMessage.success(t('projectExist'))
             // router.push('/publish')
         } else {
-            // creatLoading.value = false
+            creatLoading.value = false
             console.log('branchInfo error', res)
             ElMessage.success(`${t('creatProjectError')}: ${res.data.message}`)
         }
     } else {
         ElMessage.error(t('englishName'))
+        creatLoading.value = false
     }
 }
 

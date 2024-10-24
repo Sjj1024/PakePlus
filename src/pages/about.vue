@@ -51,27 +51,57 @@
                     </span>
                 </p>
             </div>
-            <!-- <div class="payMe">
-                <p>{{ t('buyCoffee') }}：</p>
-                <div class="payCode">
-                    <img :src="weixin" alt="weixin" class="weixin" />
-                </div>
-            </div> -->
+            <div class="payMe">
+                <p>
+                    {{ t('buyCoffee') }}：
+                    <span class="iconfont weixin" @click="showCode(weixin)">
+                        &#xe64b;
+                    </span>
+                    <span class="iconfont zhifubao" @click="showCode(zhifubao)">
+                        &#xe654;
+                    </span>
+                </p>
+            </div>
         </div>
+        <!-- pay -->
+        <el-dialog
+            v-model="dialogVisible"
+            title=""
+            width="300"
+            :before-close="handleClose"
+        >
+            <div class="codeBox">
+                <img :src="codeImg" alt="" class="code" />
+                <!-- <div>非常感谢</div> -->
+            </div>
+        </el-dialog>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
-import weixin from '@/assets/images/pay.png'
+import weixin from '@/assets/images/weixin.png'
+import zhifubao from '@/assets/images/zhifubao.png'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { pakeUrlMap, openUrl } from '@/utils/common'
+import { ref } from 'vue'
 
 const { t } = useI18n()
 
 const router = useRouter()
+const dialogVisible = ref(false)
+const codeImg = ref(weixin)
+
+const showCode = (img: any) => {
+    dialogVisible.value = true
+    codeImg.value = img
+}
+
+const handleClose = () => {
+    console.log('handleClose')
+    dialogVisible.value = false
+}
 
 const goBack = () => {
     router.go(-1)
@@ -149,18 +179,32 @@ const goBack = () => {
         }
 
         .payMe {
-            margin-top: 10px;
+            margin-top: 6px;
 
-            .payCode {
-                width: 100%;
-                // height: 200px;
+            .zhifubao {
+                font-size: 36px;
+                color: #009fe8;
+                cursor: pointer;
+            }
 
-                .weixin {
-                    width: 100%;
-                    height: 100%;
-                }
+            .weixin {
+                font-size: 38px;
+                color: #3daf34;
+                margin-right: 20px;
+                cursor: pointer;
             }
         }
+    }
+}
+
+.codeBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .code {
+        width: 260px;
+        // height: 240px;
     }
 }
 </style>
