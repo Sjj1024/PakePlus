@@ -88,4 +88,7 @@ export default {
     second: '秒',
     copySuccess: '复制成功',
     delSuccess: '删除成功',
+    aboutGuide:
+        '虽然它叫PakePlus，但是它和Pake没有关系哦，就像JavaScript和Java一样。开源免费，Web网页打包跨平台APP，仅仅只需要一个GithubToken，就可以将你的网页打包成一个独立可执行程序，目前支持Windows,macOS, Linux系统，未来还会支持Android,iOS等移动端。有问题可以加我微信：lanxingme，备注：PakePlus，或者给我发送邮件',
+    followme: '关注小神',
 }

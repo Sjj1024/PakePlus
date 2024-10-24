@@ -89,4 +89,7 @@ export default {
     second: 's',
     copySuccess: 'Copy successful',
     delSuccess: 'Delete successful',
+    aboutGuide:
+        "Although it's called PakePlus, it has no relation to Pake, just like JavaScript and Java are unrelated. It is open-source and free, allowing you to package web pages into cross-platform apps. All you need is a Github Token to package your web page into a standalone executable program. It currently supports Windows, macOS, and Linux systems, with future plans to support mobile platforms like Android and iOS. If you have any questions, feel free to add me on WeChat: lanxingme (please note 'PakePlus'), or send me an email.",
+    followme: 'Follow me',
 }

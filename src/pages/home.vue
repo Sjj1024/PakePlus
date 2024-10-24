@@ -649,7 +649,7 @@ onMounted(() => {
     }
 
     .version {
-        position: absolute;
+        position: fixed;
         bottom: 16px;
         right: 20px;
         color: gray;
