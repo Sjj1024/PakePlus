@@ -1,6 +1,5 @@
 // index.ts
 import { createI18n } from 'vue-i18n'
-import { os } from '@tauri-apps/api'
 import zh from './zh_cn'
 import en from './en_us'
 import zhTw from './zh_tw'
@@ -15,30 +14,16 @@ const messages = {
     ko,
 }
 
-// Create an async function to handle the language setup
-const setupI18n = async () => {
-    // Detect OS language
-    const language = await os.locale()
-    let lang = 'en' // Default to English
-    if (language?.includes('zh-Hans')) {
-        lang = 'zh' // Simplified Chinese
-    } else if (language?.includes('zh-Hant')) {
-        lang = 'zhTw' // Traditional Chinese
-    } else if (language?.includes('ja')) {
-        lang = 'ja' // Japanese
-    } else if (language?.includes('ko')) {
-        lang = 'ko' // Korean
-    }
-    console.log(`系统语言: ${lang}`)
-    const i18n = createI18n({
-        locale: localStorage.getItem('lang') || lang,
-        fallbackLocale: 'zh', // Fallback language
-        messages,
-        legacy: false,
-        globalInjection: true,
-    })
+// 这是获取浏览器的语言
+const language = navigator.language
+const lang = language?.includes('zh') ? 'zh' : 'en'
+const i18n = createI18n({
+    // 首先从缓存里拿，没有的话就用浏览器语言，
+    locale: localStorage.getItem('lang') || lang,
+    fallbackLocale: 'zh', // 设置备用语言
+    messages,
+    legacy: false,
+    globalInjection: true,
+})
 
-    return i18n
-}
-
-export default await setupI18n()
+export default i18n
