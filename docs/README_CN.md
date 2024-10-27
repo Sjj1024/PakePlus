@@ -13,7 +13,7 @@
 -   🚀 使用 Rust Tauri，PakePlus 比基于 JS 的框架更轻量、更快。
 -   📦 内置丰富功能包——支持快捷方式、沉浸式窗口、极简自定义。
 -   👻 PakePlus 只是一个简单的工具——用 Tauri 替代旧的打包方式（虽然 PWA 也够用了）。
--   🤗 PakePlus 易于使用，只需一个 GitHub Token，即可获得桌面应用。
+-   🤗 PakePlus 易于操作使用，只需一个 GitHub Token，即可获得桌面应用。
 -   🌹 不需要在本地安装任何复杂的依赖环境，使用 Github Action 云端自动打包。
 -   🧑‍🤝‍🧑 支持国际化，对全球用户都非常友好，并且会自动跟随你的电脑系统语言。
 
@@ -56,12 +56,33 @@
 
 ## 开始之前
 
-1.从发布页面下载应用程序  
-2.双击安装并运行应用程序  
-3.创建一个新项目并进行配置  
-4.你可以在新窗口中预览应用程序  
-5.点击发布按钮打包应用程序  
-6.你可以从发布页面下载应用程序
+1.从发布页面下载应用程序，双击安装并运行应用程序  
+2.配置 Github Token，并创建一个新项目并进行配置
+
+```
+Github token权限说明：
+1.bate版本token需要的权限说明：
+All repositories：要fork一个原始模板仓库
+Actions：操作github action
+Administration：对仓库进行fork和文件管理
+Contents：对仓库内容进行添加/删除/修改/查找等操作
+Issues：向PakePlus提交问题
+
+2.classic版本需要的token权限说明：
+repo：fork和管理模板代码
+workflow：编译和发布你的软件
+```
+
+3.你可以在新窗口中预览应用程序，点击发布按钮打包应用程序  
+4.你可以从发布页面下载应用程序
+
+## 常见问题
+
+1. mac 用户安装提示：文件已损坏，执行下面命令后重新打开就可以了：
+
+```sh
+sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
+```
 
 ## 开发 PakePlus
 
