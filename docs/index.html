@@ -40,281 +40,203 @@
 
             <div id="content_views" class="htmledit_views">
                 <p style="text-align: center">
-                    <img alt="" height="199" src="./pakeplus.png" width="197" />
+                    <img alt="" src="./pakeplus.png" width="197" />
                 </p>
                 <p>
-                    PakePlus是一个开源免费的软件，支持 Mac、Windows 和
-                    Linux，很快也将支持 Android 和
-                    iOS。无需在本地安装复杂的依赖环境，只需要一个Github
-                    Token就可以了。查看 README
-                    以获取热门包和自定义开发信息。欢迎在<a
+                    PakePlus is an open-source and free software that supports
+                    Mac, Windows, and Linux, and will soon support Android and
+                    iOS. There is no need to install complex dependencies
+                    locally; just a GitHub Token is enough. Check the README for
+                    popular packages and custom development information. Feel
+                    free to share your suggestions in the
+                    <a
                         href="https://github.com/Sjj1024/PakePlus/discussions"
-                        title="讨论区"
-                        >讨论区</a
-                    >分享你的建议。开源地址：<a
+                        title="Discussion Area"
+                        >discussion area</a
+                    >. Open-source link:
+                    <a
                         href="https://github.com/Sjj1024/PakePlus"
                         title="https://github.com/Sjj1024/PakePlus"
                         >https://github.com/Sjj1024/PakePlus</a
                     >
                 </p>
-                <h2 id="%E7%89%B9%E6%80%A7"><a name="t2"></a>特性</h2>
-                <p>- 🎐 体积比 Electron 包小约 20 倍（约 5M！）</p>
+                <h2 id="%E7%89%B9%E6%80%A7"><a name="t2"></a>Features</h2>
                 <p>
-                    - 🚀 使用 Rust Tauri，PakePlus 比基于 JS
-                    的框架更轻量、更快。
+                    - 🎐 Approximately 20 times smaller than an Electron package
+                    (about 5M!)
                 </p>
                 <p>
-                    - 📦 内置丰富功能包——支持快捷方式、沉浸式窗口、极简自定义。
+                    - 🚀 Built with Rust Tauri, PakePlus is lighter and faster
+                    than JS-based frameworks.
                 </p>
                 <p>
-                    - 👻 PakePlus 只是一个简单的工具——用 Tauri
-                    替代旧的打包方式（虽然 PWA 也够用了）。
+                    - 📦 Rich built-in feature packages—supports shortcuts,
+                    immersive windows, minimal customization.
                 </p>
                 <p>
-                    - 🤗 PakePlus 易于使用，只需一个 GitHub
-                    Token，即可获得桌面应用。
+                    - 👻 PakePlus is a simple tool—using Tauri as a replacement
+                    for old packaging methods (although PWA is also sufficient).
                 </p>
                 <p>
-                    - 🌹 不需要在本地安装任何复杂的依赖环境，使用 Github Action
-                    云端自动打包。
+                    - 🤗 PakePlus is easy to use; just one GitHub Token allows
+                    you to obtain a desktop app.
                 </p>
                 <p>
-                    - 🧑‍🤝‍🧑
-                    支持国际化，对全球用户都非常友好，并且会自动跟随你的电脑系统语言。
+                    - 🌹 No need to install any complex dependencies locally, as
+                    GitHub Action enables cloud-based auto-packaging.
+                </p>
+                <p>
+                    - 🧑‍🤝‍🧑 Internationalization support, very user-friendly for
+                    global users, and automatically follows your computer's
+                    system language.
                 </p>
                 <p></p>
-                <h2><a name="t3"></a>获取Github Token</h2>
+                <h2><a name="t3"></a>Get a GitHub Token</h2>
                 <p>
-                    为什么要Github
-                    Token？因为这个编译和打包流程全部依托在github平台上进行，而且还有你要打包的web代码也都在github上管理，所以需要使用github
-                    token来操作这些事情，所以就需要这个github
-                    token有某些权限，例如不同版本的token需要不同的权限。
+                    Why do you need a GitHub Token? Because the compilation and
+                    packaging process relies entirely on the GitHub platform,
+                    and your web code to be packaged is also managed on GitHub,
+                    so a GitHub Token is needed to operate these tasks, which
+                    requires specific permissions for different versions of the
+                    token.
                 </p>
-                <h3><a name="t4"></a>1.bate版本token</h3>
-                <p>使用权限说明：</p>
-                <p>All repositories：要fork一个原始模板仓库</p>
-                <p>Actions：操作github action</p>
-                <p>Administration：对仓库进行fork和文件管理</p>
-                <p>Contents：对仓库内容进行添加/删除/修改/查找等操作</p>
-                <p>Issues：向PakePlus提交问题</p>
-                <p>Workflows：用来编译打包你的软件</p>
+                <h3><a name="t4"></a>1. Beta Version Token</h3>
+                <p>Permission Description:</p>
+                <p>All repositories: To fork an original template repository</p>
+                <p>Actions: Operate GitHub Action</p>
+                <p>Administration: Fork and manage repository files</p>
+                <p>Contents: Add/delete/modify/search repository content</p>
+                <p>Issues: Submit issues to PakePlus</p>
+                <p>Workflows: Used to compile and package your software</p>
                 <p>
-                    先登录你的github账号，然后点击链接获取：<a
+                    First, log in to your GitHub account, then click the link to
+                    get it:
+                    <a
                         href="https://github.com/settings/tokens?type=beta"
                         title="https://github.com/settings/tokens?type=beta"
                         >https://github.com/settings/tokens?type=beta</a
-                    >，或者到<a
-                        href="https://github.com/settings"
-                        title="&nbsp;Settings"
+                    >, or go to
+                    <a href="https://github.com/settings" title="&nbsp;Settings"
                         >&nbsp;Settings</a
                     >
                     &gt;&nbsp;<a
                         href="https://github.com/settings/apps"
                         title="Developer Settings"
                         >Developer Settings</a
-                    >&nbsp;下面获取：
+                    >&nbsp; to obtain it:
                 </p>
                 <p>
-                    <img
-                        alt=""
-                        height="1060"
-                        src="https://i-blog.csdnimg.cn/direct/5f4d8b906f3b4fff9dae333b52f63e71.png"
-                        width="1200"
-                    />
+                    <img alt="" src="./token1.png" width="1200" />
                 </p>
-                <p>Generate new token：</p>
+                <p>Generate new token:</p>
                 <p>
-                    添写一个token的名字，然后选择过期时间为不过器，描述随便写，然后选择All
-                    repositories
+                    Enter a name for the token, set the expiration date to
+                    “Never,” write any description, and select All repositories.
                 </p>
                 <p>
-                    <img
-                        alt=""
-                        height="1200"
-                        src="https://i-blog.csdnimg.cn/direct/f0383ae861fd4259a248c33ff6502982.png"
-                        width="1200"
-                    />
+                    <img alt="" src="./token2.png" width="1200" />
                 </p>
                 <p>
-                    配置权限：赋予红框标注的权限，Access选择:&nbsp;&nbsp;Read
-                    and write&nbsp;
+                    Configure permissions: Assign permissions marked in the red
+                    box, Access selection: &nbsp;&nbsp;Read and write&nbsp;
                 </p>
                 <p>
-                    <img
-                        alt=""
-                        height="792"
-                        src="https://i-blog.csdnimg.cn/direct/9a0e6d66812f45399f488d1407d86d05.png"
-                        width="1200"
-                    />
+                    <img alt="" src="./token3.png" width="1200" />
                 </p>
                 <p>
-                    <img
-                        alt=""
-                        height="218"
-                        src="https://i-blog.csdnimg.cn/direct/15cb452bc06249148e112ac420860d29.png"
-                        width="1200"
-                    />
+                    <img alt="" src="./token4.png" width="1200" />
                 </p>
                 <p>
-                    <img
-                        alt=""
-                        height="180"
-                        src="https://i-blog.csdnimg.cn/direct/817ce33600244556877d6f6cb621fb39.png"
-                        width="1200"
-                    />
+                    <img alt="" src="./token5.png" width="1200" />
                 </p>
                 <p>
-                    <img
-                        alt=""
-                        height="172"
-                        src="https://i-blog.csdnimg.cn/direct/d25be12bc89247709dfa42a92b4b9364.png"
-                        width="1200"
-                    />
+                    <img alt="" src="./token7.png" width="1200" />
                 </p>
-                <p>然后点击最底部的Generate token就可以了：&nbsp;</p>
+                <p>Then click Generate token at the bottom:&nbsp;</p>
                 <p>
-                    <img
-                        alt=""
-                        height="1102"
-                        src="https://i-blog.csdnimg.cn/direct/af8e6d7a33b748f58456ee9aaf22141a.png"
-                        width="1200"
-                    />
+                    <img alt="" src="./token8.png" width="1200" />
                 </p>
-                <p>把得到的token复制到PakePlus就可以了：</p>
+                <p>Copy the token you received into PakePlus:</p>
                 <p>
-                    <img
-                        alt=""
-                        height="630"
-                        src="https://i-blog.csdnimg.cn/direct/cc942026f2ac45f2a37d0ed05ed737fb.png"
-                        width="1200"
-                    />
+                    <img alt="" src="./token9.png" width="1200" />
                 </p>
                 <p></p>
-                <h3><a name="t5"></a>2.classic版本token</h3>
-                <p>使用权限说明：</p>
-                <p>repo：fork和管理模板代码</p>
-                <p>workflow：编译和发布你的软件</p>
+                <h3><a name="t5"></a>2. Classic Version Token</h3>
+                <p>Permission Description:</p>
+                <p>repo: Fork and manage template code</p>
+                <p>workflow: Compile and release your software</p>
                 <p></p>
                 <p>
-                    先登录你的github账号，然后点击链接获取：<a
+                    First, log in to your GitHub account, then click the link to
+                    get it:
+                    <a
                         href="https://github.com/settings/tokens"
                         title="https://github.com/settings/tokens"
                         >https://github.com/settings/tokens</a
-                    >，或者到<a
-                        href="https://github.com/settings"
-                        title="&nbsp;Settings"
+                    >, or go to
+                    <a href="https://github.com/settings" title="&nbsp;Settings"
                         >&nbsp;Settings</a
                     >
                     &gt;&nbsp;<a
                         href="https://github.com/settings/apps"
                         title="Developer Settings"
                         >Developer Settings</a
-                    >&nbsp;下面获取：
+                    >&nbsp; to obtain it:
                 </p>
                 <p>
-                    <img
-                        alt=""
-                        height="550"
-                        src="https://i-blog.csdnimg.cn/direct/134e63c5cb2c4919afd592103cdcae36.png"
-                        width="1200"
-                    />
-                </p>
-                <p>只需要勾选下面的权限就可以了：</p>
-                <p>
-                    <img
-                        alt=""
-                        height="1200"
-                        src="https://i-blog.csdnimg.cn/direct/e6937c78a83444dfabf9fb9ba525a6c0.png"
-                        width="1200"
-                    />
-                </p>
-                <p>然后将得到的token复制到PakePlus就可以了：</p>
-                <p>
-                    <img
-                        alt=""
-                        height="670"
-                        src="https://i-blog.csdnimg.cn/direct/e1d7d0286e7347a39d975be04815e36e.png"
-                        width="1200"
-                    />
-                </p>
-                <p>提示Token可用说明成功了：</p>
-                <p>
-                    <img
-                        alt=""
-                        height="552"
-                        src="https://i-blog.csdnimg.cn/direct/54994432ebda4e4daf5b97fd39513a0c.png"
-                        width="1200"
-                    />
+                    <img alt="" src="./token10.png" width="1200" />
                 </p>
                 <p>
-                    将Token填写到PakePlus之后，最好测试一下是否可用，然后再开始后面的步骤。&nbsp;
+                    Only the following permissions are needed: repo and workflow
+                </p>
+                <p>
+                    <img alt="" src="./token11.png" width="1200" />
+                </p>
+                <p>Then copy the token you received into PakePlus:</p>
+                <p>
+                    <img alt="" src="./token12.png" width="1200" />
+                </p>
+                <p>If the Token is usable, it will show as successful:</p>
+                <p>
+                    <img alt="" src="./token13.png" width="1200" />
+                </p>
+                <p>
+                    After filling in the Token into PakePlus, it's best to test
+                    if it's usable before proceeding with the next steps. &nbsp;
                 </p>
                 <p></p>
-                <h2><a name="t6"></a>创建项目和配置</h2>
+                <h2><a name="t6"></a>Create Project and Configure</h2>
                 <p>
-                    创建项目必须使用英文名称，填写之后点击确定，等待几分钟，就可以到下一个页面，配置你要打包的网站地址和APP名称等信息，并且上传一个Icon图标，最好本地先做好一个png格式的正方形图标，直接上传就可以使用，否则会进行裁剪操作，导致你的Icon并不是很满意。
+                    The project name must be in English. After entering it,
+                    click Confirm and wait a few minutes. On the next page,
+                    configure the website address and APP name you want to
+                    package, and upload an Icon. It is best to prepare a square
+                    png icon locally for direct upload. Otherwise, cropping will
+                    occur, which might not yield the desired result.
                 </p>
                 <p>
-                    <img
-                        alt=""
-                        height="1200"
-                        src="https://i-blog.csdnimg.cn/direct/4b073a71783044e28623f574571109b4.png"
-                        width="1200"
-                    />
+                    <img alt="" src="./token14.png" width="1200" />
                 </p>
                 <p>
-                    项目配置好之后，可以点击预览，会弹出一个窗口展示你程序的最终效果：如果可以正常打开，说明没有问题，也可以做一些窗口大小的配置，让页面更友好。
+                    After configuring the project, you can click Preview, which
+                    will open a window displaying the final effect of your
+                    program. If it opens correctly, everything is fine. You can
+                    also make some window size configurations to make the page
+                    more user-friendly.
                 </p>
                 <p>
-                    <img
-                        alt=""
-                        height="1200"
-                        src="https://i-blog.csdnimg.cn/direct/2eabc42f71a241c488d9257aaca3b0c7.png"
-                        width="1200"
-                    />
+                    <img alt="" src="./token15.png" width="1200" />
                 </p>
-                <p>确定没有问题之后，就可以点击发布：</p>
-                <p>
-                    <img
-                        alt=""
-                        height="872"
-                        src="https://i-blog.csdnimg.cn/direct/b675bd4001924dd3a39a50b7808ffc77.png"
-                        width="1200"
-                    />
-                </p>
-                <p>点击确定之后，需要等待Github云平台打包大概15分钟左后：</p>
-                <p>
-                    <img
-                        alt=""
-                        height="1200"
-                        src="https://i-blog.csdnimg.cn/direct/ba1dd6a53d224a45b1cca94be18fb735.png"
-                        width="1200"
-                    />&nbsp;
-                </p>
-                <p>
-                    打包完成之后，会跳转到资源下载页面，可以点击下载安装，并使用了：
-                </p>
-                <p>
-                    <img
-                        alt=""
-                        height="1200"
-                        src="https://i-blog.csdnimg.cn/direct/ec733f37e4974a6696d7cac272c4829c.png"
-                        width="1200"
-                    />&nbsp;
-                </p>
-            </div>
-            <div
-                data-report-view='{"mod":"1585297308_001","spm":"1001.2101.3001.6548","dest":"https://xiaoshen.blog.csdn.net/article/details/143214498","extend1":"pc","ab":"new"}'
-            >
-                <div></div>
             </div>
         </div>
         <div class="langBox">
-            <a class="lang" href="https://sjj1024.github.io/PakePlus/">中文</a>
+            <a class="lang" href="https://sjj1024.github.io/PakePlus/index.html"
+                >English</a
+            >
             <a
                 class="lang"
-                href="https://sjj1024.github.io/PakePlus/index_en.html"
-                >English</a
+                href="https://sjj1024.github.io/PakePlus/index_zh.html"
+                >中文</a
             >
             <a
                 class="lang"
