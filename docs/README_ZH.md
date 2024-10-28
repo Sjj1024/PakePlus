@@ -60,8 +60,9 @@
 
 ## 开始之前
 
-1.从发布页面下载应用程序，双击安装并运行应用程序  
-2.配置 Github Token，并创建一个新项目并进行配置
+1.从发布页面下载应用程序：https://github.com/Sjj1024/PakePlus/releases，双击安装并运行应用程序  
+2.配置 Github Token，并创建一个新项目并进行配置。
+Token 获取方法: <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 10px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>
 
 ```
 Github token权限说明：

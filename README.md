@@ -61,8 +61,8 @@ style="margin: 0 10px;" >简体中文</a>
 
 ## Getting Started
 
-1. Download the app from the release page, double-click to install, and run the app.
-2. Configure a Github Token, create a new project, and set up the configurations.
+1. Download the app from the release page：https://github.com/Sjj1024/PakePlus/releases, double-click to install, and run the app.
+2. Configure a Github Token, create a new project, and set up the configurations. get token guide: <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 10px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>
 
 ```
 Explanation of Github Token permissions:
@@ -73,13 +73,13 @@ Administration: Fork and manage files in the repository
 Contents: Add, delete, modify, and find repository contents
 Issues: Submit issues to PakePlus
 
-2. For the classic version, token permissions required:
+1. For the classic version, token permissions required:
 repo: Fork and manage template code
 workflow: Compile and release your software
 ```
 
-3. You can preview the app in a new window and click the publish button to package the app.
-4. You can download the app from the release page.
+1. You can preview the app in a new window and click the publish button to package the app.
+2. You can download the app from the release page.
 
 ## FAQ
 
