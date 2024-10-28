@@ -61,9 +61,9 @@ const initEnv = async () => {
     await createDir('assets', { dir: BaseDirectory.AppData, recursive: true })
     console.log('App data dir exists:', import.meta.env.DEV)
     // if env is dev
-    // if (!import.meta.env.DEV) {
-    //     disableRightClick()
-    // }
+    if (!import.meta.env.DEV) {
+        disableRightClick()
+    }
 }
 
 onMounted(() => {

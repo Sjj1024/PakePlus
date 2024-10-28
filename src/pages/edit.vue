@@ -90,6 +90,7 @@
                         :value="iconFileName"
                         readonly
                         @click="uploadIcon"
+                        class="iconInput"
                         :placeholder="`${t('onlyPng')}`"
                     />
                 </el-form-item>
@@ -778,7 +779,9 @@ const getLatestRelease = async () => {
 onMounted(async () => {
     getLatestRelease()
     buildTime = 0
-    iconFileName.value = await basename(store.currentProject.icon)
+    if (store.currentProject.icon) {
+        iconFileName.value = await basename(store.currentProject.icon)
+    }
     appWindow.setTitle(`${store.currentProject.name}`)
 })
 </script>
@@ -901,5 +904,11 @@ onMounted(async () => {
     align-items: center;
     font-size: 18px;
     font-weight: bold;
+}
+</style>
+
+<style scoped>
+:deep(.iconInput .el-input__inner) {
+    cursor: pointer !important;
 }
 </style>
