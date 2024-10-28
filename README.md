@@ -1,27 +1,32 @@
-<h4 align="right"><strong>中文</strong></h4>  
+<h4 align="right"> 
+<a href="./docs/README.md">English</a> 
+<a href="./docs/README_ZH.md" 
+style="margin: 0 10px;" >简体中文</a> 
+<a href="./docs/README_JP.md">日本语</a>
+</h4>  
 <p align="center">
     <img src="./docs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
-<p align="center"><strong>9分钟就可以将任何网页变成桌面应用和移动应用，简单易用。</strong></p>
+<p align="center"><strong>Turn any webpage into a desktop or mobile app in just 9 minutes. Simple and easy to use.</strong></p>
 
-<div align="left">PakePlus 支持 Mac、Windows 和 Linux，很快也将支持 Android 和 iOS。无需在本地安装复杂的依赖环境，只需要一个Github Token就可以了，而且PakePlus本身也才仅仅5M左右小大，最新版本下载请看：<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">发布地址</a>。查看 README 以获取<a href="#popular-packages">热门包</a>和<a href="#development">自定义开发</a>信息。欢迎在<a href=https://github.com/Sjj1024/PakePlus/discussions>讨论区</a>分享你的建议。</div>
+<div align="left">PakePlus supports Mac, Windows, and Linux, and will soon support Android and iOS. There’s no need to install complex dependencies locally— all you need is a Github Token. Plus, PakePlus is only about 5MB in size. For the latest version, please see the <a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">release page</a>. Check the README for information on <a href="#popular-packages">popular packages</a> and <a href="#development">custom development</a>. Feel free to share your suggestions in the <a href="https://github.com/Sjj1024/PakePlus/discussions">discussion area</a>.</div>
 
-## 特性
+## Features
 
--   🎐 体积比 Electron 包小约 20 倍（约 5M！）
--   🚀 使用 Rust Tauri，PakePlus 比基于 JS 的框架更轻量、更快。
--   📦 内置丰富功能包——支持快捷方式、沉浸式窗口、极简自定义。
--   👻 PakePlus 只是一个简单的工具——用 Tauri 替代旧的打包方式（虽然 PWA 也够用了）。
--   🤗 PakePlus 易于操作使用，只需一个 GitHub Token，即可获得桌面应用。
--   🌹 不需要在本地安装任何复杂的依赖环境，使用 Github Action 云端自动打包。
--   🧑‍🤝‍🧑 支持国际化，对全球用户都非常友好，并且会自动跟随你的电脑系统语言。
+-   🎐 About 20 times smaller than Electron packages (approximately 5MB!)
+-   🚀 Powered by Rust and Tauri, PakePlus is lighter and faster than JS-based frameworks.
+-   📦 Rich built-in feature packs—supporting shortcuts, immersive windows, and minimal customization.
+-   👻 PakePlus is just a simple tool—using Tauri to replace older packaging methods (even though PWA is often sufficient).
+-   🤗 PakePlus is easy to use; all you need is a GitHub Token to get a desktop app.
+-   🌹 No need to install complex dependencies locally; use Github Action for cloud-based auto-packaging.
+-   🧑‍🤝‍🧑 Supports internationalization, user-friendly for a global audience, and it follows your system language automatically.
 
-## 热门包
+## Popular Packages
 
 <table>
     <tr>
-        <td>微信读书
+        <td>WeChat Reading
             <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead.dmg">Mac</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead_x64.msi">Windows</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead_x86_64.deb">Linux</a>
@@ -42,7 +47,7 @@
             <a href="https://github.com/tw93/Pake/releases/latest/download/Flomo_x64.msi">Windows</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/Flomo_x86_64.deb">Linux</a>
         </td>
-        <td>小红书
+        <td>Xiaohongshu (Little Red Book)
             <a href="https://github.com/tw93/Pake/releases/latest/download/XiaoHongShu.dmg">Mac</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/XiaoHongShu_x64.msi">Windows</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/XiaoHongShu_x86_64.deb">Linux</a>
@@ -54,56 +59,56 @@
     </tr>
 </table>
 
-## 开始之前
+## Getting Started
 
-1.从发布页面下载应用程序，双击安装并运行应用程序  
-2.配置 Github Token，并创建一个新项目并进行配置
+1. Download the app from the release page, double-click to install, and run the app.
+2. Configure a Github Token, create a new project, and set up the configurations.
 
 ```
-Github token权限说明：
-1.bate版本token需要的权限说明：
-All repositories：要fork一个原始模板仓库
-Actions：操作github action
-Administration：对仓库进行fork和文件管理
-Contents：对仓库内容进行添加/删除/修改/查找等操作
-Issues：向PakePlus提交问题
+Explanation of Github Token permissions:
+1. For the beta version, token permissions required:
+All repositories: Fork an original template repository
+Actions: Manage GitHub actions
+Administration: Fork and manage files in the repository
+Contents: Add, delete, modify, and find repository contents
+Issues: Submit issues to PakePlus
 
-2.classic版本需要的token权限说明：
-repo：fork和管理模板代码
-workflow：编译和发布你的软件
+2. For the classic version, token permissions required:
+repo: Fork and manage template code
+workflow: Compile and release your software
 ```
 
-3.你可以在新窗口中预览应用程序，点击发布按钮打包应用程序  
-4.你可以从发布页面下载应用程序
+3. You can preview the app in a new window and click the publish button to package the app.
+4. You can download the app from the release page.
 
-## 常见问题
+## FAQ
 
-1. mac 用户安装提示：文件已损坏，执行下面命令后重新打开就可以了：
+1. Mac users may see an “App is damaged” warning on installation. Run the following command, then reopen the app:
 
 ```sh
 sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
 ```
 
-## 开发 PakePlus
+## Developing PakePlus
 
-如果你想在本地开发 PakePlus，在开始之前，准备好你的环境。确保你已在计算机上安装了 Rust `>=1.63` 和 Node `>=16`（例如 `16.18.1`）。有关安装指南，请参阅 [Tauri 文档](https://tauri.app/v1/guides/getting-started/prerequisites)。
+If you want to develop PakePlus locally, ensure your environment is prepared beforehand. Make sure Rust `>=1.63` and Node `>=16` (e.g., `16.18.1`) are installed on your computer. For installation guidance, please refer to the [Tauri Documentation](https://tauri.app/v1/guides/getting-started/prerequisites).
 
-如果你不熟悉这些，最好尝试上述的一键打包工具。
+If you’re unfamiliar with these, it’s best to try the one-click packaging tool above.
 
 ```sh
-# 安装依赖
+# Install dependencies
 pnpm i
 
-# 本地开发 [右键单击以打开调试模式。]
+# Local development [Right-click to open debug mode.]
 pnpm run dev
 
-# 打包应用程序
+# Package the app
 pnpm run build
 ```
 
-## 支持
+## Support
 
-1. 如果你觉得 PakePlus 给你的生活带来了乐趣，你可以为它充点能量。
+1. If PakePlus has brought joy to your life, feel free to support it.
  <p align="center">
          <img src="./docs/pay.png" />
  </p>
