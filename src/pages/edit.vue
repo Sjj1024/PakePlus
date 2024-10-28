@@ -214,9 +214,10 @@ import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePakeStore } from '@/store'
-import { writeBinaryFile, readBinaryFile } from '@tauri-apps/api/fs'
+import { writeBinaryFile, readBinaryFile, createDir } from '@tauri-apps/api/fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
 import { open } from '@tauri-apps/api/dialog'
+import { basename } from '@tauri-apps/api/path'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import { useI18n } from 'vue-i18n'
@@ -342,7 +343,8 @@ const uploadIcon = async () => {
         console.log('No file selected')
         return null
     }
-    const fileName = selectedFilePath.split('/').pop()
+    const fileName = await basename(selectedFilePath)
+    // const fileName = selectedFilePath.split('/').pop()
     iconFileName.value = fileName
     console.log('Selected file path:', selectedFilePath, fileName)
     console.log(`File Name: ${fileName}`)
@@ -401,7 +403,11 @@ const saveImage = async (fileName: string, base64: string) => {
     // get app data dir
     const appDataPath = await appDataDir()
     console.log('appDataPath------', appDataPath)
-    const savePath = await join(appDataPath, 'assets', fileName)
+    const targetDir = await join(appDataPath, 'assets')
+    const savePath = await join(targetDir, fileName)
+    // 确保目标目录存在
+    await createDir(targetDir, { recursive: true })
+    // const savePath = await join(appDataPath, 'assets', fileName)
     // save file to app data dir
     await writeBinaryFile(savePath, imageData)
     console.log(`Image saved to: ${savePath}`)

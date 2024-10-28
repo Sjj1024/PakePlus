@@ -7,7 +7,7 @@
     },
     "package": {
         "productName": "PakePlus",
-        "version": "0.1.81"
+        "version": "0.1.82"
     },
     "tauri": {
         "allowlist": {
@@ -29,7 +29,7 @@
                 "removeFile": true,
                 "renameFile": true,
                 "exists": true,
-                "scope": ["$APPDATA/*", "$APPDATA/assets/*"]
+                "scope": ["$APPDATA/**/*", "$APPDATA/*", "$APPDATA/assets/*"]
             },
             "http": {
                 "all": true,
@@ -49,7 +49,11 @@
             "protocol": {
                 "all": true,
                 "asset": true,
-                "assetScope": ["$APPDATA/*", "$APPDATA/assets/*"]
+                "assetScope": [
+                    "$APPDATA/**/*",
+                    "$APPDATA/*",
+                    "$APPDATA/assets/*"
+                ]
             },
             "shell": {
                 "all": false,
