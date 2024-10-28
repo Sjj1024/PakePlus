@@ -1,6 +1,6 @@
 <h4 align="right"><strong>中文</strong></h4>  
 <p align="center">
-    <img src="pakeplus.png" width=138/>
+    <img src="./docs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>9分钟就可以将任何网页变成桌面应用和移动应用，简单易用。</strong></p>
@@ -105,5 +105,5 @@ pnpm run build
 
 1. 如果你觉得 PakePlus 给你的生活带来了乐趣，你可以为它充点能量。
  <p align="center">
-         <img src="./pay.png" />
+         <img src="./docs/pay.png" />
  </p>

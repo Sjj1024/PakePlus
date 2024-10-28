@@ -1,25 +1,27 @@
-<h4 align="right"><strong>English</strong></h4>
+<h4 align="right"><strong>English</strong></h4>  
 <p align="center">
-    <img src="pakeplus.png" width=138/>
-</p>
-<h1 align="center">PakePlus</h1>
-<p align="center"><strong>Turn any webpage into desktop app and mobile app with Rust <em>is ease</em>.</strong></p>
+    <img src="./docs/pakeplus.png" width=138/>
+</p>  
+<h1 align="center">PakePlus</h1>  
+<p align="center"><strong>Turn any webpage into a desktop or mobile app in just 9 minutes. Simple and easy to use.</strong></p>
 
-<div align="left">PakePlus supports Mac, Windows, and Linux. Will soon support Android and iOS, No need to install complex dependency environments locally。Check out README for <a href="#popular-packages">Popular Packages</a>, <a href="#development">Customized Development</a> information. Feel free to share your suggestions in <a href=https://github.com/Sjj1024/PakePlus/discussions>Discussions</a>.</div>
+<div align="left">PakePlus supports Mac, Windows, and Linux, and will soon support Android and iOS. There’s no need to install complex dependencies locally— all you need is a Github Token. Plus, PakePlus is only about 5MB in size. For the latest version, please see the <a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">release page</a>. Check the README for information on <a href="#popular-packages">popular packages</a> and <a href="#development">custom development</a>. Feel free to share your suggestions in the <a href="https://github.com/Sjj1024/PakePlus/discussions">discussion area</a>.</div>
 
 ## Features
 
--   🎐 Nearly 20 times smaller than an Electron package (around 5M!)
--   🚀 With Rust Tauri, PakePlus is much more lightweight and faster than JS-based frameworks.
--   📦 Battery-included package — shortcut pass-through, immersive windows, and minimalist customization.
--   👻 PakePlus is just a simple tool — replace the old bundle approach with Tauri (though PWA is good enough).
--   🤗 PakePlus is easy to use, just a github token, and you can get a desktop app.
+-   🎐 About 20 times smaller than Electron packages (approximately 5MB!)
+-   🚀 Powered by Rust and Tauri, PakePlus is lighter and faster than JS-based frameworks.
+-   📦 Rich built-in feature packs—supporting shortcuts, immersive windows, and minimal customization.
+-   👻 PakePlus is just a simple tool—using Tauri to replace older packaging methods (even though PWA is often sufficient).
+-   🤗 PakePlus is easy to use; all you need is a GitHub Token to get a desktop app.
+-   🌹 No need to install complex dependencies locally; use Github Action for cloud-based auto-packaging.
+-   🧑‍🤝‍🧑 Supports internationalization, user-friendly for a global audience, and it follows your system language automatically.
 
 ## Popular Packages
 
 <table>
     <tr>
-        <td>WeRead
+        <td>WeChat Reading
             <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead.dmg">Mac</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead_x64.msi">Windows</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead_x86_64.deb">Linux</a>
@@ -35,76 +37,12 @@
         <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/Twitter.jpg width=600/></td>
     </tr>
     <tr>
-        <td>ChatGPT
-            <a href="https://github.com/tw93/Pake/releases/latest/download/ChatGPT.dmg">Mac</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/ChatGPT_x64.msi">Windows</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/ChatGPT_x86_64.deb">Linux</a>
-        </td>
-        <td>Poe
-            <a href="https://github.com/tw93/Pake/releases/latest/download/Poe.dmg">Mac</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/Poe_x64.msi">Windows</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/Poe_x86_64.deb">Linux</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/ChatGPT.png width=600/></td>
-        <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/Poe.png width=600/></td>
-    </tr>
-    <tr>
-      <td>YouTube Music
-            <a href="https://github.com/tw93/Pake/releases/latest/download/YouTubeMusic.dmg">Mac</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/YouTubeMusic_x64.msi">Windows</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/YouTubeMusic_x86_64.deb">Linux</a>
-      </td>
-      <td>YouTube
-            <a href="https://github.com/tw93/Pake/releases/latest/download/YouTube.dmg">Mac</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/YouTube_x64.msi">Windows</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/YouTube_x86_64.deb">Linux</a>
-      </td>
-    </tr>
-    <tr>
-        <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/YouTubeMusic.png width=600 /></td>
-        <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/YouTube.jpg width=600 /></td>
-    </tr>
-    <tr>
-        <td>LiZhi
-            <a href="https://github.com/tw93/Pake/releases/latest/download/LiZhi.dmg">Mac</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/LiZhi_x64.msi">Windows</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/LiZhi_x86_64.deb">Linux</a>
-        </td>
-        <td>ProgramMusic
-            <a href="https://github.com/tw93/Pake/releases/latest/download/ProgramMusic.dmg">Mac</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/ProgramMusic_x64.msi">Windows</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/ProgramMusic_x86_64.deb">Linux</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/LiZhi.jpg width=600/></td>
-        <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/ProgramMusic.jpg width=600/></td>
-    </tr>
-    <tr>
-        <td>Qwerty
-            <a href="https://github.com/tw93/Pake/releases/latest/download/Qwerty.dmg">Mac</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/Qwerty_x64.msi">Windows</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/Qwerty_x86_64.deb">Linux</a>
-        </td>
-        <td>CodeRunner
-            <a href="https://github.com/tw93/Pake/releases/latest/download/CodeRunner.dmg">Mac</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/CodeRunner_x64.msi">Windows</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/CodeRunner_x86_64.deb">Linux</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/Qwerty.png width=600/></td>
-        <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/CodeRunner.jpg width=600/></td>
-    </tr>
-        <tr>
         <td>Flomo
             <a href="https://github.com/tw93/Pake/releases/latest/download/Flomo.dmg">Mac</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/Flomo_x64.msi">Windows</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/Flomo_x86_64.deb">Linux</a>
         </td>
-        <td>XiaoHongShu
+        <td>Xiaohongshu (Little Red Book)
             <a href="https://github.com/tw93/Pake/releases/latest/download/XiaoHongShu.dmg">Mac</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/XiaoHongShu_x64.msi">Windows</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/XiaoHongShu_x86_64.deb">Linux</a>
@@ -116,42 +54,56 @@
     </tr>
 </table>
 
-## Before starting
+## Getting Started
 
-1.download the application from the release page
+1. Download the app from the release page, double-click to install, and run the app.
+2. Configure a Github Token, create a new project, and set up the configurations.
 
-2.double-click to install and run the application
+```
+Explanation of Github Token permissions:
+1. For the beta version, token permissions required:
+All repositories: Fork an original template repository
+Actions: Manage GitHub actions
+Administration: Fork and manage files in the repository
+Contents: Add, delete, modify, and find repository contents
+Issues: Submit issues to PakePlus
 
-3.create a new project and config it
+2. For the classic version, token permissions required:
+repo: Fork and manage template code
+workflow: Compile and release your software
+```
 
-4.you can preview the application in the new window
+3. You can preview the app in a new window and click the publish button to package the app.
+4. You can download the app from the release page.
 
-5.chick the publish button to pack the application
+## FAQ
 
-6.you can download the application from the release page
-
-## Development
-
-Prepare your environment before starting. Make sure you have Rust `>=1.63` and Node `>=16` (e.g., `16.18.1`) installed on your computer. For installation guidance, see [Tauri documentation](https://tauri.app/v1/guides/getting-started/prerequisites).
-
-If you are unfamiliar with these, it is better to try out the above tool to pack with one click.
+1. Mac users may see an “App is damaged” warning on installation. Run the following command, then reopen the app:
 
 ```sh
-# Install Dependencies
+sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
+```
+
+## Developing PakePlus
+
+If you want to develop PakePlus locally, ensure your environment is prepared beforehand. Make sure Rust `>=1.63` and Node `>=16` (e.g., `16.18.1`) are installed on your computer. For installation guidance, please refer to the [Tauri Documentation](https://tauri.app/v1/guides/getting-started/prerequisites).
+
+If you’re unfamiliar with these, it’s best to try the one-click packaging tool above.
+
+```sh
+# Install dependencies
 pnpm i
 
 # Local development [Right-click to open debug mode.]
 pnpm run dev
 
-# Pack application
+# Package the app
 pnpm run build
 ```
 
 ## Support
 
-1. If you think PakePlus delights your life, you can feed it some energy.
+1. If PakePlus has brought joy to your life, feel free to support it.
  <p align="center">
-         <img src="./pay.png" />
+         <img src="./docs/pay.png" />
  </p>
-
-2. I hope that you enjoy playing with it. Let us know if you find a website that would be great for a Mac App!

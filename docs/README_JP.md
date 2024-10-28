@@ -1,25 +1,27 @@
 <h4 align="right"><strong>日本語</strong></h4>  
 <p align="center">
-    <img src="pakeplus.png" width=138/>
+    <img src="./docs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
-<p align="center"><strong>Rustを使って、任意のウェブページをデスクトップアプリやモバイルアプリに簡単に変換。</strong></p>
+<p align="center"><strong>9分で任意のウェブページをデスクトップアプリやモバイルアプリに変換。シンプルで使いやすい。</strong></p>
 
-<div align="left">PakePlusはMac、Windows、Linuxをサポートしており、まもなくAndroidとiOSもサポート予定です。複雑な依存関係の環境をローカルにインストールする必要はありません。<a href="#popular-packages">人気のパッケージ</a>や<a href="#development">カスタマイズ開発</a>に関する情報をREADMEで確認してください。<a href=https://github.com/Sjj1024/PakePlus/discussions>ディスカッション</a>で提案を共有してください。</div>
+<div align="left">PakePlus は Mac、Windows、および Linux に対応しており、Android と iOS も間もなくサポート予定です。ローカルに複雑な依存環境をインストールする必要はなく、Github トークンだけで利用できます。また、PakePlus 自体のサイズはわずか約5MBです。最新バージョンについては<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">リリースページ</a>をご確認ください。<a href="#popular-packages">人気パッケージ</a>や<a href="#development">カスタム開発</a>については README をご覧ください。<a href="https://github.com/Sjj1024/PakePlus/discussions">ディスカッションエリア</a>でご意見をお待ちしています。</div>
 
 ## 特徴
 
--   🎐 Electron パッケージより約 20 倍小さい（約 5M！）
--   🚀 Rust Tauri を使用しており、PakePlus は JS ベースのフレームワークより軽量で高速です。
--   📦 充実した機能パッケージ—ショートカットパススルー、没入型ウィンドウ、ミニマルなカスタマイズをサポート。
--   👻 PakePlus はシンプルなツール—古いバンドルアプローチを Tauri に置き換えます（PWA でも十分です）。
--   🤗 PakePlus は簡単に使用でき、GitHub トークンさえあればデスクトップアプリを作成できます。
+-   🎐 Electron パッケージの約 20 分の 1 のサイズ（約 5MB！）
+-   🚀 Rust と Tauri を活用し、JS ベースのフレームワークよりも軽量で高速。
+-   📦 便利な機能パックが豊富に内蔵—ショートカット、イマーシブウィンドウ、ミニマルカスタマイズをサポート。
+-   👻 PakePlus は単なるツールであり、古いパッケージング方法の代わりに Tauri を使用しています（PWA も十分に使えます）。
+-   🤗 PakePlus は操作が簡単で、GitHub トークンだけでデスクトップアプリを取得可能。
+-   🌹 ローカルに複雑な依存環境をインストールする必要はなく、Github Action によるクラウド自動パッケージングが可能。
+-   🧑‍🤝‍🧑 国際化対応、グローバルユーザーに親しみやすく、システムの言語を自動的に追従。
 
-## 人気のパッケージ
+## 人気パッケージ
 
 <table>
     <tr>
-        <td>WeRead
+        <td>WeChat Reading
             <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead.dmg">Mac</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead_x64.msi">Windows</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead_x86_64.deb">Linux</a>
@@ -40,7 +42,7 @@
             <a href="https://github.com/tw93/Pake/releases/latest/download/Flomo_x64.msi">Windows</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/Flomo_x86_64.deb">Linux</a>
         </td>
-        <td>小紅書（XiaoHongShu）
+        <td>小紅書
             <a href="https://github.com/tw93/Pake/releases/latest/download/XiaoHongShu.dmg">Mac</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/XiaoHongShu_x64.msi">Windows</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/XiaoHongShu_x86_64.deb">Linux</a>
@@ -54,35 +56,54 @@
 
 ## 始める前に
 
-1. リリースページからアプリケーションをダウンロードしてください。
-2. ダブルクリックしてアプリケーションをインストール・実行します。
-3. 新しいプロジェクトを作成し、設定します。
-4. 新しいウィンドウでアプリケーションをプレビューできます。
-5. 発行ボタンをクリックしてアプリケーションをパックします。
-6. リリースページからアプリケーションをダウンロードできます。
+1. リリースページからアプリをダウンロードし、ダブルクリックしてインストールし、実行します。
+2. Github トークンを設定し、新しいプロジェクトを作成して設定を行います。
 
-## 開発
+```
+Github トークン権限の説明：
+1. ベータ版に必要なトークン権限：
+All repositories：元のテンプレートリポジトリのフォーク
+Actions：GitHub アクションの管理
+Administration：リポジトリのフォークとファイル管理
+Contents：リポジトリ内容の追加/削除/修正/検索など
+Issues：PakePlus への問題の提出
 
-開発を始める前に環境を準備してください。コンピュータに Rust `>=1.63` と Node `>=16`（例：`16.18.1`）がインストールされていることを確認してください。インストールガイドについては [Tauri ドキュメント](https://tauri.app/v1/guides/getting-started/prerequisites)をご覧ください。
+2. クラシック版に必要なトークン権限：
+repo：テンプレートコードのフォークと管理
+workflow：ソフトウェアのコンパイルとリリース
+```
 
-これらに不慣れな場合は、上記のワンクリックパッキングツールを試すことをお勧めします。
+3. 新しいウィンドウでアプリをプレビューし、パッケージングボタンをクリックしてアプリをビルドします。
+4. リリースページからアプリをダウンロード可能です。
+
+## よくある質問
+
+1. Mac ユーザーはインストール時に「アプリが壊れています」という警告が表示されることがあります。以下のコマンドを実行してから、アプリを再度開いてください。
 
 ```sh
-# 依存関係をインストール
+sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
+```
+
+## PakePlus の開発
+
+PakePlus をローカルで開発したい場合、まず環境を整えてください。Rust `>=1.63` と Node `>=16`（例：`16.18.1`）がコンピュータにインストールされていることを確認してください。インストールガイドについては、[Tauri ドキュメント](https://tauri.app/v1/guides/getting-started/prerequisites)をご参照ください。
+
+これらに不慣れな場合、上記のワンクリックパッケージングツールを試すのが良いでしょう。
+
+```sh
+# 依存関係のインストール
 pnpm i
 
 # ローカル開発 [右クリックでデバッグモードを開きます。]
 pnpm run dev
 
-# アプリケーションをパック
+# アプリのパッケージング
 pnpm run build
 ```
 
 ## サポート
 
-1. PakePlus が生活を楽しくしてくれたと思ったら、少しエネルギーを与えてください。
+1. PakePlus があなたの生活に楽しみをもたらしたなら、サポートしていただけると嬉しいです。
  <p align="center">
-         <img src="./pay.png" />
+         <img src="./docs/pay.png" />
  </p>
-
-2. 楽しく遊んでいただければ幸いです。Mac アプリに適したウェブサイトが見つかったら、お知らせください！

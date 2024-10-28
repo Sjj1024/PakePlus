@@ -105,5 +105,5 @@ pnpm run build
 
 1. 如果你觉得 PakePlus 给你的生活带来了乐趣，你可以为它充点能量。
  <p align="center">
-         <img src="./pay.png" />
+         <img src="./docs/pay.png" />
  </p>
