@@ -87,7 +87,7 @@
                 </el-form-item>
                 <el-form-item :label="t('appIcon')" prop="icon">
                     <el-input
-                        :value="appForm.icon.split('assets/')[1]"
+                        :value="iconFileName"
                         readonly
                         @click="uploadIcon"
                         :placeholder="`${t('onlyPng')}`"
@@ -405,7 +405,7 @@ const saveImage = async (fileName: string, base64: string) => {
     console.log('appDataPath------', appDataPath)
     const targetDir = await join(appDataPath, 'assets')
     const savePath = await join(targetDir, fileName)
-    // 确保目标目录存在
+    // confirm target dir
     await createDir(targetDir, { recursive: true })
     // const savePath = await join(appDataPath, 'assets', fileName)
     // save file to app data dir
@@ -775,9 +775,10 @@ const getLatestRelease = async () => {
     }
 }
 
-onMounted(() => {
+onMounted(async () => {
     getLatestRelease()
     buildTime = 0
+    iconFileName.value = await basename(store.currentProject.icon)
     appWindow.setTitle(`${store.currentProject.name}`)
 })
 </script>
