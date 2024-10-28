@@ -7,7 +7,7 @@
     },
     "package": {
         "productName": "PakePlus",
-        "version": "0.1.8"
+        "version": "0.1.81"
     },
     "tauri": {
         "allowlist": {
@@ -75,7 +75,7 @@
             }
         ],
         "security": {
-            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' asset://localhost data:; font-src 'self' asset://localhost data:; asset: https://asset.localhost"
+            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' asset://localhost data:; img-src 'self' blob: data:; font-src 'self' asset://localhost data:; asset: https://asset.localhost"
         },
         "bundle": {
             "active": true,
