@@ -11,3 +11,12 @@ interface Project {
     desc: string
     debug: string
 }
+
+interface PlatformInfo {
+    name: string
+    userAgent: string
+    platform: string
+    width: number
+    height: number
+    direction: string
+}

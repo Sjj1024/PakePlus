@@ -85,15 +85,6 @@
                         :placeholder="`${t('example')}：com.pakeplus.app`"
                     />
                 </el-form-item>
-                <el-form-item :label="t('appIcon')" prop="icon">
-                    <el-input
-                        :value="iconFileName"
-                        readonly
-                        @click="uploadIcon"
-                        class="iconInput"
-                        :placeholder="`${t('onlyPng')}`"
-                    />
-                </el-form-item>
                 <el-form-item :label="t('appVersion')" prop="version">
                     <el-input
                         v-model="appForm.version"
@@ -104,10 +95,25 @@
                         :placeholder="`${t('example')}：1.0.0`"
                     />
                 </el-form-item>
+                <el-form-item :label="t('appIcon')" prop="icon">
+                    <el-input
+                        :value="iconFileName"
+                        readonly
+                        @click="uploadIcon"
+                        class="iconInput"
+                        :placeholder="`${t('onlyPng')}`"
+                    />
+                </el-form-item>
                 <el-form-item :label="t('platform')" prop="platform">
-                    <el-radio-group v-model="appForm.platform">
+                    <el-radio-group
+                        v-model="appForm.platform"
+                        @change="platformChange"
+                    >
                         <el-radio value="desktop">{{ t('desktop') }}</el-radio>
-                        <!-- <el-radio value="phone">移动端</el-radio> -->
+                        <el-radio value="iPhone">iPhone</el-radio>
+                        <el-radio value="Android">Android</el-radio>
+                        <el-radio value="iPad">iPad</el-radio>
+                        <el-radio value="custom">自定义</el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <!-- window size -->
@@ -125,6 +131,9 @@
                         style="width: 100px"
                         :placeholder="t('height')"
                     />
+                    <span class="iconfont rotateIcon" @click="rotateWH">
+                        &#xe66b;
+                    </span>
                 </el-form-item>
                 <el-form-item :label="t('appDes')" prop="desc">
                     <el-input
@@ -223,6 +232,7 @@ import { ArrowLeft } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import { useI18n } from 'vue-i18n'
 import { isAlphanumeric, openUrl } from '@/utils/common'
+import { platforms } from '@/utils/config'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -238,7 +248,7 @@ const appForm = reactive({
     appid: store.currentProject.appid,
     icon: store.currentProject.icon,
     version: store.currentProject.version,
-    platform: 'desktop',
+    platform: store.currentProject.platform || 'desktop',
     width: store.currentProject.width || 800,
     height: store.currentProject.height || 600,
     desc: store.currentProject.desc,
@@ -269,7 +279,7 @@ const appRules = reactive<FormRules>({
     ],
     icon: [
         {
-            required: true,
+            required: false,
             message: t('inputAppIconPlaceholder'),
             trigger: 'change',
         },
@@ -283,7 +293,7 @@ const appRules = reactive<FormRules>({
     ],
     platform: [
         {
-            required: true,
+            required: false,
             message: t('inputPrePlatformPlaceholder'),
             trigger: 'change',
         },
@@ -324,6 +334,22 @@ const getImageSize = (base64String: any) => {
         }
         img.src = base64String
     })
+}
+
+// platform change
+const platformChange = (value: any) => {
+    console.log('platformChange', value)
+    const platformInfo = platforms[value]
+    console.log('platformInfo', platformInfo)
+    appForm.width = platformInfo.width
+    appForm.height = platformInfo.height
+}
+
+// rotate width and height
+const rotateWH = () => {
+    const temp = appForm.width
+    appForm.width = appForm.height
+    appForm.height = temp
 }
 
 // upload icon
@@ -512,6 +538,7 @@ const preview = () => {
                 appUrl: appForm.url,
                 appName: appForm.showName,
                 platform: appForm.platform,
+                userAgent: platforms[appForm.platform].userAgent,
                 width: appForm.width,
                 height: appForm.height,
             })
@@ -886,6 +913,12 @@ onMounted(async () => {
                 margin: 0 10px;
                 font-size: 10px;
                 font-weight: 300;
+            }
+
+            .rotateIcon {
+                font-size: 24px;
+                margin-left: 20px;
+                cursor: pointer;
             }
         }
     }

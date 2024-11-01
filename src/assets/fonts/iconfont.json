@@ -6,6 +6,27 @@
   "description": "PakePlus",
   "glyphs": [
     {
+      "icon_id": "703569",
+      "name": "rotate-right-variant",
+      "font_class": "rotaterightvariant",
+      "unicode": "ea57",
+      "unicode_decimal": 59991
+    },
+    {
+      "icon_id": "1445216",
+      "name": "rotate-left-variant",
+      "font_class": "rotate-left-variant",
+      "unicode": "e880",
+      "unicode_decimal": 59520
+    },
+    {
+      "icon_id": "18997353",
+      "name": "rotate",
+      "font_class": "rotate",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
       "icon_id": "1138742",
       "name": "close",
       "font_class": "close",

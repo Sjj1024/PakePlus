@@ -1,23 +1,42 @@
 use base64::prelude::*;
 use std::io::Read;
+use std::time::Instant;
+use tauri::{AppHandle, Manager};
 
 #[tauri::command]
 pub async fn open_window(
-    handle: tauri::AppHandle,
+    handle: AppHandle,
     app_url: String,
     app_name: String,
     platform: String,
+    user_agent: String,
     width: f64,
     height: f64,
 ) {
+    let window_label = "previewWeb";
+    if let Some(existing_window) = handle.get_window(window_label) {
+        existing_window.close().unwrap();
+        println!("Existing window closed.");
+        // 等待窗口完全关闭，清理标签
+        let start = Instant::now();
+        while handle.get_window(window_label).is_some() {
+            if start.elapsed().as_secs() > 2 {
+                println!("Window close took too long. Aborting.");
+                return;
+            }
+            // 加入少量操作以防止阻塞
+            std::thread::yield_now();
+        }
+    }
     println!("Opening docs in external window: {}, {}", app_url, platform);
     let docs_window = tauri::WindowBuilder::new(
         &handle,
-        "externaltauri", /* the unique window label */
+        "previewWeb", /* the unique window label */
         tauri::WindowUrl::External(app_url.parse().unwrap()),
     )
     .title(app_name)
     .inner_size(width, height)
+    .user_agent(user_agent.as_str())
     .position(200.4, 100.4)
     .build()
     .unwrap();
