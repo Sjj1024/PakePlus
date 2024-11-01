@@ -586,6 +586,79 @@ const deleteRelease = async () => {
     }
 }
 
+// update build.yml file content
+const updateBuildYml = async () => {
+    // get build.yml file sha
+    const shaRes = await getFileSha(
+        '.github/workflows/build.yml',
+        store.currentProject.name
+    )
+    console.log('get build.yml file sha', shaRes)
+    if (shaRes.status === 200 || shaRes.status === 404) {
+        // get build.yml file content
+        const content = await invoke('update_build_file', {
+            name: appForm.showName,
+            body: pubForm.desc,
+        })
+        console.log('content', content)
+        // update build.yml file content
+        const updateRes: any = await githubApi.updateBuildYmlFile(
+            store.userInfo.login,
+            'PakePlus',
+            {
+                message: 'update build.yml from pakeplus',
+                content: content,
+                sha: shaRes.data.sha,
+                branch: store.currentProject.name,
+            }
+        )
+        if (updateRes.status === 200) {
+            console.log('updateRes', updateRes)
+        } else {
+            console.log('updateRes error', updateRes)
+        }
+    } else {
+        console.log('getFileSha error', shaRes)
+    }
+}
+
+// update build.yml file content
+const updateCargoToml = async () => {
+    // get CargoToml file sha
+    const shaRes = await getFileSha(
+        'src-tauri/Cargo.toml',
+        store.currentProject.name
+    )
+    console.log('get CargoToml file sha', shaRes)
+    if (shaRes.status === 200 || shaRes.status === 404) {
+        // get CargoToml file content
+        const configContent: any = await invoke('update_cargo_file', {
+            name: appForm.showName,
+            version: appForm.version,
+            desc: appForm.desc,
+            debug: pubForm.model === 'debug',
+        })
+        // update config file
+        const updateRes: any = await githubApi.updateCargoFile(
+            store.userInfo.login,
+            'PakePlus',
+            {
+                message: 'update Cargo.toml from pakeplus',
+                content: configContent,
+                sha: shaRes.data.sha,
+                branch: store.currentProject.name,
+            }
+        )
+        if (updateRes.status === 200) {
+            console.log('updateRes', updateRes)
+        } else {
+            console.log('updateRes error', updateRes)
+        }
+    } else {
+        console.log('getFileSha error', shaRes)
+    }
+}
+
 // del pre publish version
 const onSubmit = async () => {
     centerDialogVisible.value = false
@@ -594,6 +667,8 @@ const onSubmit = async () => {
     deleteRelease()
     // update build yml
     await updateBuildYml()
+    // update Cargo.toml
+    await updateCargoToml()
     // update tauri config json
     const configSha: any = await getFileSha(
         'src-tauri/tauri.conf.json',
@@ -643,42 +718,6 @@ const getFileSha = async (filePath: string, branch: string) => {
     )
     console.log('getBranch', res)
     return res
-}
-
-// update build.yml file content
-const updateBuildYml = async () => {
-    // get build.yml file sha
-    const shaRes = await getFileSha(
-        '.github/workflows/build.yml',
-        store.currentProject.name
-    )
-    console.log('get build.yml file sha', shaRes)
-    if (shaRes.status === 200 || shaRes.status === 404) {
-        // get build.yml file content
-        const content = await invoke('update_build_file', {
-            name: appForm.showName,
-            body: pubForm.desc,
-        })
-        console.log('content', content)
-        // update build.yml file content
-        const updateRes: any = await githubApi.updateBuildYmlFile(
-            store.userInfo.login,
-            'PakePlus',
-            {
-                message: 'update build.yml from pakeplus',
-                content: content,
-                sha: shaRes.data.sha,
-                branch: store.currentProject.name,
-            }
-        )
-        if (updateRes.status === 200) {
-            console.log('updateRes', updateRes)
-        } else {
-            console.log('updateRes error', updateRes)
-        }
-    } else {
-        console.log('getFileSha error', shaRes)
-    }
 }
 
 // dispatch workflow action
@@ -916,9 +955,19 @@ onMounted(async () => {
             }
 
             .rotateIcon {
-                font-size: 24px;
+                font-size: 22px;
                 margin-left: 20px;
                 cursor: pointer;
+                color: gray;
+                user-select: none;
+                -webkit-user-select: none; /* Safari */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* IE10+/Edge */
+                user-select: none; /* Standard syntax */
+
+                &:hover {
+                    color: black;
+                }
             }
         }
     }

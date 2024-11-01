@@ -105,7 +105,7 @@ pub async fn update_cargo_file(
     name: String,
     version: String,
     desc: String,
-    ascii: bool,
+    debug: bool,
 ) -> String {
     let resource_path = handle
         .path_resolver()
@@ -118,14 +118,11 @@ pub async fn update_cargo_file(
         .replace("PROJECTNAME", name.as_str())
         .replace("PROJECTVERSION", version.as_str())
         .replace("PROJECTDESC", desc.as_str());
-    if ascii {
-        // "shell-open", "devtools"]
-        contents = contents.replace("-3", r#""all""#);
+    if debug {
+        // "shell-open", "devtools"
+        contents = contents.replace("-3", r#""shell-open", "devtools""#);
     } else {
-        contents = contents.replace(
-            "-3",
-            r#"["deb", "appimage", "nsis", "app", "dmg", "updater"]"#,
-        );
+        contents = contents.replace("-3", r#""shell-open""#);
     }
     // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding

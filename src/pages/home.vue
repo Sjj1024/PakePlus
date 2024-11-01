@@ -359,10 +359,13 @@ const creatBranch = async () => {
             creatLoading.value = false
             ElMessage.success(t('projectExist'))
             // router.push('/publish')
+        } else if (res.status === 401) {
+            ElMessage.error(t('tokenError'))
+            creatLoading.value = false
         } else {
             creatLoading.value = false
             console.log('branchInfo error', res)
-            ElMessage.success(`${t('creatProjectError')}: ${res.data.message}`)
+            ElMessage.error(`${t('creatProjectError')}: ${res.data.message}`)
         }
     } else {
         ElMessage.error(t('englishName'))

@@ -97,6 +97,13 @@ export default {
             }
         )
     },
+    // update Cargo.toml file contents
+    updateCargoFile(user: string, repo: string, body: any) {
+        return http(`/repos/${user}/${repo}/contents/src-tauri/Cargo.toml`, {
+            method: 'put',
+            body,
+        })
+    },
     // creat file contents
     updateMainRsFile(body: any) {
         return http(`/repos/{owner}/{repo}/contents/{path}`, {
