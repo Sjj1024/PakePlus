@@ -17,14 +17,12 @@ pub async fn open_window(
     if let Some(existing_window) = handle.get_window(window_label) {
         existing_window.close().unwrap();
         println!("Existing window closed.");
-        // 等待窗口完全关闭，清理标签
         let start = Instant::now();
         while handle.get_window(window_label).is_some() {
             if start.elapsed().as_secs() > 2 {
                 println!("Window close took too long. Aborting.");
                 return;
             }
-            // 加入少量操作以防止阻塞
             std::thread::yield_now();
         }
     }
@@ -88,6 +86,40 @@ pub async fn update_config_file(
         .replace("-1", width.as_str())
         .replace("-2", height.as_str());
     if ascii {
+        contents = contents.replace("-3", r#""all""#);
+    } else {
+        contents = contents.replace(
+            "-3",
+            r#"["deb", "appimage", "nsis", "app", "dmg", "updater"]"#,
+        );
+    }
+    // println!("Updated config file: {}", contents);
+    // The new file content, using Base64 encoding
+    let encoded_contents = BASE64_STANDARD.encode(contents);
+    return encoded_contents;
+}
+
+#[tauri::command]
+pub async fn update_cargo_file(
+    handle: tauri::AppHandle,
+    name: String,
+    version: String,
+    desc: String,
+    ascii: bool,
+) -> String {
+    let resource_path = handle
+        .path_resolver()
+        .resolve_resource("data/Cargo.toml")
+        .expect("failed to resolve resource");
+    let mut config_file = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    config_file.read_to_string(&mut contents).unwrap();
+    contents = contents
+        .replace("PROJECTNAME", name.as_str())
+        .replace("PROJECTVERSION", version.as_str())
+        .replace("PROJECTDESC", desc.as_str());
+    if ascii {
+        // "shell-open", "devtools"]
         contents = contents.replace("-3", r#""all""#);
     } else {
         contents = contents.replace(
