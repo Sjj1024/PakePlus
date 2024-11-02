@@ -85,7 +85,11 @@
             "active": true,
             "targets": "all",
             "identifier": "com.pakeplus.desktop",
-            "resources": ["./data/appbuild.yml", "./data/appconfig.json"],
+            "resources": [
+                "./data/appbuild.yml",
+                "./data/appconfig.json",
+                "./data/Cargo.toml"
+            ],
             "icon": [
                 "icons/32x32.png",
                 "icons/128x128.png",

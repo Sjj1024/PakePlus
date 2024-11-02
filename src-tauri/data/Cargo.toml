@@ -2,7 +2,7 @@
 name = "PROJECTNAME"
 version = "PROJECTVERSION"
 description = "PROJECTDESC"
-authors = ["you"]
+authors = ["1024xiaoshen"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
