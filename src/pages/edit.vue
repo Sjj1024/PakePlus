@@ -151,7 +151,7 @@
         </div>
         <div class="footerBox">
             <el-button @click="saveProject(true)">{{ t('save') }}</el-button>
-            <el-button @click="preview">{{ t('preview') }}</el-button>
+            <el-button @click="preview(false)">{{ t('preview') }}</el-button>
             <el-button @click="createRepo">{{ t('publish') }}</el-button>
         </div>
         <!-- build -->
@@ -350,6 +350,7 @@ const rotateWH = () => {
     const temp = appForm.width
     appForm.width = appForm.height
     appForm.height = temp
+    preview(true)
 }
 
 // upload icon
@@ -529,7 +530,7 @@ const saveProject = async (tips: boolean = true) => {
     })
 }
 
-const preview = () => {
+const preview = (resize: boolean) => {
     appFormRef.value?.validate((valid, fields) => {
         if (valid) {
             console.log('submit!', appForm)
@@ -539,6 +540,7 @@ const preview = () => {
                 appName: appForm.showName,
                 platform: appForm.platform,
                 userAgent: platforms[appForm.platform].userAgent,
+                resize,
                 width: appForm.width,
                 height: appForm.height,
             })
@@ -683,6 +685,7 @@ const onSubmit = async () => {
             id: appForm.appid,
             width: appForm.width.toString(),
             height: appForm.height.toString(),
+            userAgent: platforms[appForm.platform].userAgent,
             ascii: isAlphanumeric(appForm.showName),
         })
         // update config file

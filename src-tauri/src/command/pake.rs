@@ -1,7 +1,7 @@
 use base64::prelude::*;
 use std::io::Read;
 use std::time::Instant;
-use tauri::{AppHandle, Manager};
+use tauri::{AppHandle, LogicalSize, Manager};
 
 #[tauri::command]
 pub async fn open_window(
@@ -10,36 +10,47 @@ pub async fn open_window(
     app_name: String,
     platform: String,
     user_agent: String,
+    resize: bool,
     width: f64,
     height: f64,
 ) {
     let window_label = "previewWeb";
     if let Some(existing_window) = handle.get_window(window_label) {
-        existing_window.close().unwrap();
-        println!("Existing window closed.");
-        let start = Instant::now();
-        while handle.get_window(window_label).is_some() {
-            if start.elapsed().as_secs() > 2 {
-                println!("Window close took too long. Aborting.");
-                return;
+        if resize {
+            let new_size = LogicalSize::new(width, height);
+            match existing_window.set_size(new_size) {
+                Ok(_) => println!("Window resized to {}x{}", width, height),
+                Err(e) => eprintln!("Failed to resize window: {}", e),
             }
-            std::thread::yield_now();
+        } else {
+            existing_window.close().unwrap();
+            println!("Existing window closed.");
+            let start = Instant::now();
+            while handle.get_window(window_label).is_some() {
+                if start.elapsed().as_secs() > 2 {
+                    println!("Window close took too long. Aborting.");
+                    return;
+                }
+                std::thread::yield_now();
+            }
         }
     }
     println!("Opening docs in external window: {}, {}", app_url, platform);
-    let docs_window = tauri::WindowBuilder::new(
-        &handle,
-        "previewWeb", /* the unique window label */
-        tauri::WindowUrl::External(app_url.parse().unwrap()),
-    )
-    .title(app_name)
-    .inner_size(width, height)
-    .user_agent(user_agent.as_str())
-    .position(200.4, 100.4)
-    .build()
-    .unwrap();
-    let theme = docs_window.theme().expect("failed to get theme");
-    println!("Theme: {}", theme);
+    if !resize {
+        let docs_window = tauri::WindowBuilder::new(
+            &handle,
+            "previewWeb", /* the unique window label */
+            tauri::WindowUrl::External(app_url.parse().unwrap()),
+        )
+        .title(app_name)
+        .inner_size(width, height)
+        .user_agent(user_agent.as_str())
+        .position(200.4, 100.4)
+        .build()
+        .unwrap();
+        let theme = docs_window.theme().expect("failed to get theme");
+        println!("Theme: {}", theme);
+    }
 }
 
 #[tauri::command]
@@ -69,6 +80,7 @@ pub async fn update_config_file(
     id: String,
     width: String,
     height: String,
+    user_agent: String,
     ascii: bool,
 ) -> String {
     let resource_path = handle
@@ -83,6 +95,7 @@ pub async fn update_config_file(
         .replace("PROJECTVERSION", version.as_str())
         .replace("PROJECTURL", url.as_str())
         .replace("PROJECTID", id.as_str())
+        .replace("PROJECTUSERAGENT", user_agent.as_str())
         .replace("-1", width.as_str())
         .replace("-2", height.as_str());
     if ascii {
