@@ -586,6 +586,26 @@ const deleteRelease = async () => {
         )
         console.log('deleteRelease', releaseRes)
     }
+    // reset release
+    store.setRelease({
+        url: '',
+        assets_url: '',
+        upload_url: '',
+        html_url: '',
+        id: 0,
+        node_id: '',
+        tag_name: '',
+        target_commitish: '',
+        name: '',
+        draft: false,
+        prerelease: false,
+        created_at: '',
+        published_at: '',
+        assets: [],
+        tarball_url: '',
+        zipball_url: '',
+        body: '',
+    })
 }
 
 // update build.yml file content
@@ -776,7 +796,6 @@ const checkBuildStatus = async () => {
             // clear timer
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)
-            // close loading
             buildLoading.value = false
             buildTime = 0
             router.push('/history')

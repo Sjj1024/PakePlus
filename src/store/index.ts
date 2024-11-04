@@ -159,15 +159,15 @@ export const usePakeStore = defineStore('pakeplus', {
                           pull: true,
                       },
                       parent: {
-                          id: 855186891,
+                          id: 0,
                           node_id: 'R_kgDOMvkdyw',
                           name: 'PakePlus',
                           full_name: 'Sjj1024/PakePlus',
                           private: false,
                           owner: {
                               login: 'Sjj1024',
-                              id: 48399687,
-                              node_id: 'MDQ6VXNlcjQ4Mzk5Njg3',
+                              id: 0,
+                              node_id: '0',
                               avatar_url:
                                   'https://avatars.githubusercontent.com/u/48399687?v=4',
                               gravatar_id: '',
@@ -306,15 +306,15 @@ export const usePakeStore = defineStore('pakeplus', {
                           default_branch: 'main',
                       },
                       source: {
-                          id: 855186891,
-                          node_id: 'R_kgDOMvkdyw',
+                          id: 0,
+                          node_id: '0',
                           name: 'PakePlus',
                           full_name: 'Sjj1024/PakePlus',
                           private: false,
                           owner: {
                               login: 'Sjj1024',
-                              id: 48399687,
-                              node_id: 'MDQ6VXNlcjQ4Mzk5Njg3',
+                              id: 0,
+                              node_id: '0',
                               avatar_url:
                                   'https://avatars.githubusercontent.com/u/48399687?v=4',
                               gravatar_id: '',
