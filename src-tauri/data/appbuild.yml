@@ -48,6 +48,9 @@ jobs:
               # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
               run: pnpm install # Change this to npm, yarn or pnpm.
 
+            - name: Regenerate Icons
+              run: pnpm tauri icon
+
             - name: Build the app
               uses: tauri-apps/tauri-action@v0
 
