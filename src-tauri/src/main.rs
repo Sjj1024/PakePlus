@@ -25,7 +25,10 @@ fn main() {
                 "PakePlus",
                 tauri::WindowUrl::App("https://juejin.cn/".into()),
             )
-            .initialization_script("console.log('Hello from initialization script!');")
+            .initialization_script(include_str!("./extension/event.js"))
+            .initialization_script(include_str!("./extension/style.js"))
+            .initialization_script(include_str!("./extension/component.js"))
+            .initialization_script(include_str!("./extension/custom.js"))
             .title("PakePlus")
             .build()?;
             Ok(())
