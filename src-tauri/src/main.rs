@@ -23,11 +23,11 @@ fn main() {
             let _window = tauri::WindowBuilder::new(
                 app,
                 "PakePlus",
-                tauri::WindowUrl::App("https://juejin.cn/".into()),
+                tauri::WindowUrl::App("https://www.weixin.com/".into()),
             )
-            .initialization_script(include_str!("./extension/event.js"))
-            .initialization_script(include_str!("./extension/style.js"))
-            .initialization_script(include_str!("./extension/component.js"))
+            // .initialization_script(include_str!("./extension/event.js"))
+            // .initialization_script(include_str!("./extension/style.js"))
+            // .initialization_script(include_str!("./extension/component.js"))
             .initialization_script(include_str!("./extension/custom.js"))
             .title("PakePlus")
             .build()?;
