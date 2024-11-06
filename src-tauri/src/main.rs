@@ -19,6 +19,17 @@ fn main() {
             .add_native_item(MenuItem::Quit),
     );
     tauri::Builder::default()
+        .setup(|app| {
+            let _window = tauri::WindowBuilder::new(
+                app,
+                "PakePlus",
+                tauri::WindowUrl::App("https://juejin.cn/".into()),
+            )
+            .initialization_script("console.log('Hello from initialization script!');")
+            .title("PakePlus")
+            .build()?;
+            Ok(())
+        })
         .menu(Menu::new().add_submenu(edit_menu))
         .invoke_handler(tauri::generate_handler![
             command::pake::open_window,

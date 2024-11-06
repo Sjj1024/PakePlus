@@ -36,6 +36,8 @@
                                 >
                                     {{ t('relHistore') }}
                                 </el-dropdown-item>
+                                <!-- TODO: 更多配置 -->
+                                <!-- <el-dropdown-item> 更多配置 </el-dropdown-item> -->
                                 <el-dropdown-item @click="deleteProject">
                                     {{ t('delProject') }}
                                 </el-dropdown-item>
