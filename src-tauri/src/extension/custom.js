@@ -4,25 +4,48 @@
  * Additionally, you can directly include any script files in this file
  * that you wish to attach to the application.
  */
+
 document.addEventListener('DOMContentLoaded', () => {
-    // 获取页面的 HTML 内容
     let htmlContent = document.documentElement.innerHTML
-    // 使用正则表达式替换所有 target="_blank" 为 target="_self"
     htmlContent = htmlContent.replace(/target="_blank"/g, 'target="_self"')
-    // 将修改后的内容重新设置到页面
     document.documentElement.innerHTML = htmlContent
-    console.log(
-        'All target="_blank" attributes have been replaced with target="_self".'
-    )
+    console.log('have been replaced with target="_self".')
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 保存原始的 window.open 函数
     const originalWindowOpen = window.open
-    // 重写 window.open，强制其在当前页面打开
     window.open = function (url, target, features) {
-        // 将 target 替换为 '_self'（当前页面）
         return originalWindowOpen.call(window, url, '_self', features)
     }
     console.log('window.open has been overridden to open in the current page.')
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+    const targetNode = document.body
+
+    // 配置观察选项
+    const config = {
+        childList: true,
+        subtree: true,
+    }
+
+    const observer = new MutationObserver((mutationsList, observer) => {
+        let htmlContent = document.documentElement.innerHTML
+        for (const mutation of mutationsList) {
+            if (
+                mutation.type === 'childList' &&
+                htmlContent.includes('_blank')
+            ) {
+                const links = document.querySelectorAll('a[target="_blank"]')
+                links.forEach((link) => {
+                    link.addEventListener('click', function (event) {
+                        event.preventDefault()
+                        window.location.href = link.href
+                    })
+                })
+            }
+        }
+    })
+
+    observer.observe(targetNode, config)
 })
