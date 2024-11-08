@@ -1,7 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use tauri::{Menu, MenuItem, Submenu};
+use tauri::{Manager, Menu, MenuItem, Submenu};
 // 对command单独管理
 mod command;
 
@@ -19,18 +19,26 @@ fn main() {
             .add_native_item(MenuItem::Quit),
     );
     tauri::Builder::default()
+        // .setup(|app| {
+        //     let _window = tauri::WindowBuilder::new(
+        //         app,
+        //         "PakePlus",
+        //         tauri::WindowUrl::App("https://juejin.cn/".into()),
+        //     )
+        //     // .initialization_script(include_str!("./extension/event.js"))
+        //     // .initialization_script(include_str!("./extension/style.js"))
+        //     // .initialization_script(include_str!("./extension/component.js"))
+        //     .initialization_script(include_str!("./extension/custom.js"))
+        //     .title("PakePlus")
+        //     .build()?;
+        //     Ok(())
+        // })
         .setup(|app| {
-            let _window = tauri::WindowBuilder::new(
-                app,
-                "PakePlus",
-                tauri::WindowUrl::App("https://juejin.cn/".into()),
-            )
-            // .initialization_script(include_str!("./extension/event.js"))
-            // .initialization_script(include_str!("./extension/style.js"))
-            // .initialization_script(include_str!("./extension/component.js"))
-            .initialization_script(include_str!("./extension/custom.js"))
-            .title("PakePlus")
-            .build()?;
+            let main_window = app.get_window("main").unwrap();
+            // 在窗口加载时注入脚本
+            main_window
+                .eval(include_str!("./extension/custom.js"))
+                .unwrap();
             Ok(())
         })
         .menu(Menu::new().add_submenu(edit_menu))

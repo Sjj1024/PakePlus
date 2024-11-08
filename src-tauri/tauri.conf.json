@@ -75,11 +75,18 @@
             {
                 "title": "PakePlus",
                 "width": 800,
-                "height": 600
+                "height": 600,
+                "url": "https://weixin.qq.com/"
             }
         ],
         "security": {
-            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' asset://localhost blob: data: https://asset.localhost; font-src 'self' asset://localhost data:;"
+            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' asset://localhost blob: data: https://asset.localhost; font-src 'self' asset://localhost data:;",
+            "dangerousRemoteDomainIpcAccess": [
+                {
+                    "domain": "*.*",
+                    "windows": ["main"]
+                }
+            ]
         },
         "bundle": {
             "active": true,

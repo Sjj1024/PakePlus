@@ -5,12 +5,12 @@
  * that you wish to attach to the application.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-    let htmlContent = document.documentElement.innerHTML
-    htmlContent = htmlContent.replace(/target="_blank"/g, 'target="_self"')
-    document.documentElement.innerHTML = htmlContent
-    console.log('have been replaced with target="_self".')
-})
+// document.addEventListener('DOMContentLoaded', () => {
+//     let htmlContent = document.documentElement.innerHTML
+//     htmlContent = htmlContent.replace(/target="_blank"/g, 'target="_self"')
+//     document.documentElement.innerHTML = htmlContent
+//     console.log('have been replaced with target="_self".')
+// })
 
 document.addEventListener('DOMContentLoaded', () => {
     const originalWindowOpen = window.open
@@ -22,15 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const targetNode = document.body
-
     // 配置观察选项
     const config = {
         childList: true,
         subtree: true,
     }
-
     const observer = new MutationObserver((mutationsList, observer) => {
         let htmlContent = document.documentElement.innerHTML
+        console.log(
+            'window.open has been overridden to open in the current page.'
+        )
         for (const mutation of mutationsList) {
             if (
                 mutation.type === 'childList' &&
@@ -46,6 +47,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     })
-
     observer.observe(targetNode, config)
+})
+
+window.addEventListener('popstate', function (event) {
+    console.log('URL has changed due to browser navigation (back or forward).')
+    this.alert('URL has changed due to browser navigation ')
+})
+
+window.addEventListener('hashchange', function () {
+    console.log('URL hash has changed')
+    this.alert('URL has changed due to browser navigation ')
+})
+
+window.addEventListener('beforeunload', function (event) {
+    console.log('Page is about to be unloaded or navigated away from.')
+    this.alert('URL has changed due to browser navigation ')
 })
