@@ -49,18 +49,3 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     observer.observe(targetNode, config)
 })
-
-window.addEventListener('popstate', function (event) {
-    console.log('URL has changed due to browser navigation (back or forward).')
-    this.alert('URL has changed due to browser navigation ')
-})
-
-window.addEventListener('hashchange', function () {
-    console.log('URL hash has changed')
-    this.alert('URL has changed due to browser navigation ')
-})
-
-window.addEventListener('beforeunload', function (event) {
-    console.log('Page is about to be unloaded or navigated away from.')
-    this.alert('URL has changed due to browser navigation ')
-})
