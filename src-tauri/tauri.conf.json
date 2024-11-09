@@ -81,9 +81,7 @@
             {
                 "title": "PakePlus",
                 "width": 800,
-                "height": 600,
-                "url": "https://juejin.cn/",
-                "visible": false
+                "height": 600
             }
         ],
         "security": {
@@ -101,8 +99,9 @@
             "targets": "all",
             "identifier": "com.pakeplus.desktop",
             "resources": [
-                "./data/appbuild.yml",
-                "./data/appconfig.json",
+                "./data/build.yml",
+                "./data/config.json",
+                "./data/main.rs",
                 "./data/Cargo.toml"
             ],
             "icon": [

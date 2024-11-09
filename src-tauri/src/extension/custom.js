@@ -5,12 +5,12 @@
  * that you wish to attach to the application.
  */
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     let htmlContent = document.documentElement.innerHTML
-//     htmlContent = htmlContent.replace(/target="_blank"/g, 'target="_self"')
-//     document.documentElement.innerHTML = htmlContent
-//     console.log('have been replaced with target="_self".')
-// })
+document.addEventListener('DOMContentLoaded', () => {
+    let htmlContent = document.documentElement.innerHTML
+    htmlContent = htmlContent.replace(/target="_blank"/g, 'target="_self"')
+    document.documentElement.innerHTML = htmlContent
+    console.log('have been replaced with target="_self".')
+})
 
 document.addEventListener('DOMContentLoaded', () => {
     const originalWindowOpen = window.open

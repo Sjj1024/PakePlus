@@ -105,9 +105,9 @@ export default {
         })
     },
     // creat file contents
-    updateMainRsFile(body: any) {
-        return http(`/repos/{owner}/{repo}/contents/{path}`, {
-            method: 'post',
+    updateMainRsFile(user: string, repo: string, body: any) {
+        return http(`/repos/${user}/${repo}/contents/src-tauri/src/main.rs`, {
+            method: 'put',
             body,
         })
     },

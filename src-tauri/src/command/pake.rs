@@ -45,7 +45,7 @@ pub async fn open_window(
         .title(app_name)
         .inner_size(width, height)
         .user_agent(user_agent.as_str())
-        .position(200.4, 100.4)
+        .center()
         .build()
         .unwrap();
         let theme = docs_window.theme().expect("failed to get theme");
@@ -57,7 +57,7 @@ pub async fn open_window(
 pub async fn update_build_file(handle: tauri::AppHandle, name: String, body: String) -> String {
     let resource_path = handle
         .path_resolver()
-        .resolve_resource("data/appbuild.yml")
+        .resolve_resource("data/build.yml")
         .expect("failed to resolve resource");
     let mut build_file = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
@@ -85,7 +85,7 @@ pub async fn update_config_file(
 ) -> String {
     let resource_path = handle
         .path_resolver()
-        .resolve_resource("data/appconfig.json")
+        .resolve_resource("data/config.json")
         .expect("failed to resolve resource");
     let mut config_file = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
@@ -137,6 +137,34 @@ pub async fn update_cargo_file(
     } else {
         contents = contents.replace("-3", r#""shell-open""#);
     }
+    // println!("Updated config file: {}", contents);
+    // The new file content, using Base64 encoding
+    let encoded_contents = BASE64_STANDARD.encode(contents);
+    return encoded_contents;
+}
+
+#[tauri::command]
+pub async fn update_main_rust(
+    handle: tauri::AppHandle,
+    app_url: String,
+    app_name: String,
+    user_agent: String,
+    width: f64,
+    height: f64,
+) -> String {
+    let resource_path = handle
+        .path_resolver()
+        .resolve_resource("data/main.rs")
+        .expect("failed to resolve resource");
+    let mut main_rust = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    main_rust.read_to_string(&mut contents).unwrap();
+    contents = contents
+        .replace("PROJECTNAME", app_name.as_str())
+        .replace("PROJECTURL", app_url.as_str())
+        .replace("PROJECTUSERAGENT", user_agent.as_str())
+        .replace("-1", width.to_string().as_str())
+        .replace("-2", height.to_string().as_str());
     // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);
