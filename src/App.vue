@@ -41,6 +41,19 @@ const disableRightClick = () => {
     }
 }
 
+const chageTheme = (theme: string) => {
+    if (theme === 'light') {
+        document.documentElement.setAttribute('theme', 'light')
+        document.querySelector('html')?.classList.remove('dark')
+        document.querySelector('html')?.classList.add('light')
+    } else {
+        document.documentElement.setAttribute('theme', 'dark')
+        document.querySelector('html')?.classList.remove('light')
+        document.querySelector('html')?.classList.add('dark')
+    }
+    localStorage.setItem('theme', theme)
+}
+
 const initEnv = async () => {
     const language = await os.locale()
     let lang = 'en' // Default to English
@@ -58,6 +71,8 @@ const initEnv = async () => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const currentTheme = mediaQuery.matches ? 'dark' : 'light'
     console.log(`当前系统主题: ${currentTheme}`)
+    const localTheme = localStorage.getItem('theme')
+    chageTheme(localTheme || currentTheme)
     await createDir('assets', { dir: BaseDirectory.AppData, recursive: true })
     console.log('App data dir exists:', import.meta.env.DEV)
     // if env is dev
@@ -66,20 +81,16 @@ const initEnv = async () => {
     }
 }
 
+window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (e) => {
+        const newTheme = e.matches ? 'dark' : 'light'
+        console.log('theme change', newTheme)
+        chageTheme(newTheme)
+    })
+
 onMounted(() => {
     initEnv()
-    let theme = localStorage.getItem('theme') || 'dark'
-    if (theme !== 'dark') {
-        document.documentElement.setAttribute('theme', 'light')
-        document.querySelector('html')?.classList.remove('dark')
-        document.querySelector('html')?.classList.add('light')
-        // userStore.setTheme('light')
-    } else {
-        document.documentElement.setAttribute('theme', 'dark')
-        document.querySelector('html')?.classList.remove('light')
-        document.querySelector('html')?.classList.add('dark')
-        // userStore.setTheme('dark')
-    }
 })
 </script>
 

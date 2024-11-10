@@ -160,7 +160,7 @@ const goBack = () => {
             .pakeplus {
                 font-size: 26px;
                 font-weight: 600;
-                color: #000000;
+                color: var(--text-color);
             }
         }
 
