@@ -50,9 +50,6 @@ jobs:
               # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
               run: pnpm install # Change this to npm, yarn or pnpm.
 
-            - name: Set release body
-              run: echo "releaseBody=$(cat RELEASE.md)" >> $GITHUB_ENV
-
             - name: Build the app
               uses: tauri-apps/tauri-action@v0
 
@@ -61,7 +58,11 @@ jobs:
               with:
                   tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
                   releaseName: 'PakePlus v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
-                  releaseBody: ${{ env.releaseBody }}
+                  releaseBody: |
+                      ## 主要更新内容
+                      - 新增功能：添加主题切换支持，默认系统主题
+                      - 修复问题：修复已知bug
+                      ![示例图片](https://github.com/Sjj1024/PakePlus/blob/main/docs/pakeplus.png)
                   releaseDraft: false
                   prerelease: false
                   publish: true
