@@ -132,13 +132,27 @@
                             :placeholder="`${t('onlyPng')}`"
                         />
                     </el-form-item>
-                    <el-form-item label="脚本文件" prop="icon" class="formItem">
-                        <el-input
-                            :value="iconFileName"
-                            @click="uploadIcon"
-                            class="iconInput"
-                            :placeholder="`${t('onlyPng')}`"
-                        />
+                    <el-form-item
+                        label="脚本文件"
+                        prop="jsFile"
+                        class="formItem"
+                    >
+                        <el-select
+                            v-model="appForm.jsFile"
+                            multiple
+                            collapse-tags
+                            filterable
+                            ref="selJs"
+                            placeholder="js file"
+                            @change="jsChange"
+                        >
+                            <el-option
+                                v-for="item in jsFileList"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                            />
+                        </el-select>
                     </el-form-item>
                 </div>
                 <el-form-item :label="t('platform')" prop="platform">
@@ -202,6 +216,7 @@
             <el-button @click="saveProject(true)">{{ t('save') }}</el-button>
             <el-button @click="preview(false)">{{ t('preview') }}</el-button>
             <el-button @click="createRepo">{{ t('publish') }}</el-button>
+            <!-- <el-button @click="mouseover">test</el-button> -->
         </div>
         <!-- build -->
         <el-dialog v-model="centerDialogVisible" width="500" center>
@@ -291,20 +306,24 @@ const cutVisible = ref(false)
 const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
-const appForm = reactive({
+const appForm: any = reactive({
     url: store.currentProject.url,
     showName: store.currentProject.showName,
     appid: store.currentProject.appid,
     icon: store.currentProject.icon,
-    jsFile: '',
+    jsFile: [],
     version: store.currentProject.version,
     platform: store.currentProject.platform || 'desktop',
     width: store.currentProject.width || 800,
     height: store.currentProject.height || 600,
-    filterCss: '',
+    filterCss: 'A',
     desc: store.currentProject.desc,
 })
+
 const iconFileName = ref('')
+const selJs = ref<any>(null)
+
+const jsFileList: any = ref<any>([])
 
 const appRules = reactive<FormRules>({
     url: [
@@ -357,6 +376,54 @@ const appRules = reactive<FormRules>({
         },
     ],
 })
+
+const jsChange = () => {
+    console.log('js file', appForm.jsFile)
+}
+
+const mouseover = () => {
+    console.log('selJs.value', selJs.value.suffixRef)
+    selJs.value?.toggleMenu()
+}
+
+const jsHandle = async () => {
+    console.log('js hangle')
+    const selected: any = await open({
+        multiple: true,
+        filters: [
+            {
+                name: 'File',
+                extensions: ['js'],
+            },
+        ],
+    })
+    if (Array.isArray(selected)) {
+        // user selected multiple directories
+        console.log('selected list', selected)
+        const jsFiles: any = []
+        const jsOptions: any = []
+        for (let file of selected) {
+            const fileName = await basename(file)
+            console.log('filename', fileName)
+            jsOptions.push({
+                label: fileName,
+                value: fileName,
+            })
+            jsFiles.push(fileName)
+        }
+        console.log('jsFiles', jsFiles)
+        console.log('jsFiles', jsOptions)
+        appForm.jsFile = jsFiles
+        jsFileList.value = jsOptions
+    } else if (selected === null) {
+        // user cancelled the selection
+        console.log('No file selected')
+        return null
+    } else {
+        // user selected a single directory
+        console.log('user selected a single directory')
+    }
+}
 
 // icon confirm
 const confirmIcon = (base64Data: string) => {
