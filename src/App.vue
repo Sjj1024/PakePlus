@@ -81,6 +81,7 @@ const initEnv = async () => {
     }
 }
 
+// listen theme change
 window
     .matchMedia('(prefers-color-scheme: dark)')
     .addEventListener('change', (e) => {
