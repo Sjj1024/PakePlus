@@ -135,7 +135,6 @@
                     <el-form-item label="脚本文件" prop="icon" class="formItem">
                         <el-input
                             :value="iconFileName"
-                            readonly
                             @click="uploadIcon"
                             class="iconInput"
                             :placeholder="`${t('onlyPng')}`"
@@ -175,13 +174,14 @@
                 </el-form-item>
                 <el-form-item label="过滤元素" prop="desc">
                     <el-input
+                        v-model="appForm.filterCss"
                         type="textarea"
                         autocomplete="off"
                         autoCapitalize="off"
                         autoCorrect="off"
                         spellCheck="false"
                         :rows="3"
-                        :placeholder="t('desTips')"
+                        placeholder="请输入xpath选择器，以英文分号分割"
                     />
                 </el-form-item>
                 <el-form-item :label="t('appDes')" prop="desc">
@@ -296,10 +296,12 @@ const appForm = reactive({
     showName: store.currentProject.showName,
     appid: store.currentProject.appid,
     icon: store.currentProject.icon,
+    jsFile: '',
     version: store.currentProject.version,
     platform: store.currentProject.platform || 'desktop',
     width: store.currentProject.width || 800,
     height: store.currentProject.height || 600,
+    filterCss: '',
     desc: store.currentProject.desc,
 })
 const iconFileName = ref('')
