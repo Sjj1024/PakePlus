@@ -453,10 +453,22 @@ const resetReleaseInfo = () => {
     })
 }
 
+// merge and update pakeplus
+const mergeUpdateRep = async () => {
+    if (token.value) {
+        const res = await githubApi.mergeUpdateRep(
+            store.userInfo.login,
+            'PakePlus'
+        )
+        console.log('merge update PakePlus', res)
+    }
+}
+
 onMounted(() => {
     appWindow.setTitle('PakePlus')
     getPakePlusInfo()
     resetReleaseInfo()
+    mergeUpdateRep()
 })
 </script>
 
@@ -667,7 +679,7 @@ onMounted(() => {
 
                 .addIcon {
                     color: var(--box-shadow);
-                    font-size: 40px !important;
+                    font-size: 36px !important;
                     font-weight: bold;
                 }
             }
