@@ -112,3 +112,11 @@ pnpm run build
  <p align="center">
          <img src="./docs/pay.png" />
  </p>
+
+## TODO
+
+1. initialization javascript file;
+2. rewrite github action build.yml
+3. add tauri window config to view
+4. add view control button to page
+5. add build android and ios file

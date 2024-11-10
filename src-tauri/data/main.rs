@@ -2,8 +2,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use tauri::{Menu, MenuItem, Submenu};
-// 对command单独管理
-mod command;
 
 fn main() {
     let edit_menu = Submenu::new(
@@ -19,14 +17,21 @@ fn main() {
             .add_native_item(MenuItem::Quit),
     );
     tauri::Builder::default()
+        .setup(|app| {
+            let _window = tauri::WindowBuilder::new(
+                app,
+                "PakePlus",
+                tauri::WindowUrl::App("PROJECTURL".into()),
+            )
+            .initialization_script(include_str!("./extension/custom.js"))
+            .title("PROJECTNAME")
+            .inner_size(-1.0, -2.0)
+            .center()
+            .user_agent("PROJECTUSERAGENT")
+            .build()?;
+            Ok(())
+        })
         .menu(Menu::new().add_submenu(edit_menu))
-        .invoke_handler(tauri::generate_handler![
-            command::pake::open_window,
-            command::pake::update_build_file,
-            command::pake::update_config_file,
-            command::pake::update_cargo_file,
-            command::pake::update_main_rust
-        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

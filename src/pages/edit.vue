@@ -36,6 +36,8 @@
                                 >
                                     {{ t('relHistore') }}
                                 </el-dropdown-item>
+                                <!-- TODO: 更多配置 -->
+                                <!-- <el-dropdown-item> 更多配置 </el-dropdown-item> -->
                                 <el-dropdown-item @click="deleteProject">
                                     {{ t('delProject') }}
                                 </el-dropdown-item>
@@ -681,6 +683,43 @@ const updateCargoToml = async () => {
     }
 }
 
+// update build.yml file content
+const updateMainRs = async () => {
+    // get CargoToml file sha
+    const shaRes = await getFileSha(
+        'src-tauri/src/main.rs',
+        store.currentProject.name
+    )
+    console.log('get CargoToml file sha', shaRes)
+    if (shaRes.status === 200 || shaRes.status === 404) {
+        // get CargoToml file content
+        const configContent: any = await invoke('update_main_rust', {
+            appUrl: appForm.url,
+            appName: appForm.showName,
+            userAgent: platforms[appForm.platform].userAgent,
+            width: appForm.width,
+            height: appForm.height,
+        })
+        const updateRes: any = await githubApi.updateMainRsFile(
+            store.userInfo.login,
+            'PakePlus',
+            {
+                message: 'update main rust from pakeplus',
+                content: configContent,
+                sha: shaRes.data.sha,
+                branch: store.currentProject.name,
+            }
+        )
+        if (updateRes.status === 200) {
+            console.log('updateRes', updateRes)
+        } else {
+            console.log('updateRes error', updateRes)
+        }
+    } else {
+        console.log('getFileSha error', shaRes)
+    }
+}
+
 // del pre publish version
 const onSubmit = async () => {
     centerDialogVisible.value = false
@@ -691,6 +730,8 @@ const onSubmit = async () => {
     await updateBuildYml()
     // update Cargo.toml
     await updateCargoToml()
+    // update main rust
+    await updateMainRs()
     // update tauri config json
     const configSha: any = await getFileSha(
         'src-tauri/tauri.conf.json',
