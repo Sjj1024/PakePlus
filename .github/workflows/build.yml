@@ -58,7 +58,10 @@ jobs:
               with:
                   tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
                   releaseName: 'PakePlus v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
-                  releaseBody: 'See the assets to download and install this version.'
+                  releaseBody: |
+                      ## 主要更新内容
+                      - 新增功能：添加主题切换支持，默认系统主题
+                      - 修复问题：修复已知bug
                   releaseDraft: false
                   prerelease: false
                   publish: true

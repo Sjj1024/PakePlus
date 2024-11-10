@@ -37,7 +37,7 @@ pub async fn open_window(
     }
     println!("Opening docs in external window: {}, {}", app_url, platform);
     if !resize {
-        let docs_window = tauri::WindowBuilder::new(
+        let _window = tauri::WindowBuilder::new(
             &handle,
             "previewWeb", /* the unique window label */
             tauri::WindowUrl::External(app_url.parse().unwrap()),
@@ -49,8 +49,6 @@ pub async fn open_window(
         .initialization_script(include_str!("../extension/custom.js"))
         .build()
         .unwrap();
-        let theme = docs_window.theme().expect("failed to get theme");
-        println!("Theme: {}", theme);
     }
 }
 

@@ -176,4 +176,11 @@ export default {
             method: 'get',
         })
     },
+    // update and merge
+    mergeUpdateRep(user: string, repo: string) {
+        return http(`/repos/${user}/${repo}/merge-upstream`, {
+            method: 'post',
+            body: { branch: 'main' },
+        })
+    },
 }

@@ -19,24 +19,24 @@
             </div>
             <!-- set button -->
             <div class="toolBox">
-                <!-- TODO theme change -->
-                <!-- <div class="theme">
+                <!-- theme change -->
+                <div class="theme">
                     <el-dropdown>
                         <span class="dropdownLink">
                             <span class="iconfont themeIcon">&#xe635;</span>
                         </span>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item>{{
-                                    t('darkMode')
-                                }}</el-dropdown-item>
-                                <el-dropdown-item>{{
-                                    t('lightMode')
-                                }}</el-dropdown-item>
+                                <el-dropdown-item @click="chageTheme('dark')">
+                                    {{ t('darkMode') }}
+                                </el-dropdown-item>
+                                <el-dropdown-item @click="chageTheme('light')">
+                                    {{ t('lightMode') }}
+                                </el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
-                </div> -->
+                </div>
                 <div class="language">
                     <el-dropdown>
                         <span class="dropdownLink">
@@ -191,6 +191,19 @@ const branchDialog = ref(false)
 const branchName = ref('')
 const testLoading = ref(false)
 
+const chageTheme = (theme: string) => {
+    if (theme === 'light') {
+        document.documentElement.setAttribute('theme', 'light')
+        document.querySelector('html')?.classList.remove('dark')
+        document.querySelector('html')?.classList.add('light')
+    } else {
+        document.documentElement.setAttribute('theme', 'dark')
+        document.querySelector('html')?.classList.remove('light')
+        document.querySelector('html')?.classList.add('dark')
+    }
+    localStorage.setItem('theme', theme)
+}
+
 // go project detail
 const goProject = (pro: Project) => {
     store.setCurrentProject(pro)
@@ -278,10 +291,11 @@ const forkProgect = async (tips: boolean = true) => {
         if (status) {
             deleteBuildYml()
             timer && clearInterval(timer)
-            ElMessage.success(t('tokenOk'))
             testLoading.value = false
             if (!tips) {
                 tokenDialog.value = false
+            } else {
+                ElMessage.success(t('tokenOk'))
             }
         } else {
             console.log('wait fork done')
@@ -439,10 +453,22 @@ const resetReleaseInfo = () => {
     })
 }
 
+// merge and update pakeplus
+const mergeUpdateRep = async () => {
+    if (token.value) {
+        const res = await githubApi.mergeUpdateRep(
+            store.userInfo.login,
+            'PakePlus'
+        )
+        console.log('merge update PakePlus', res)
+    }
+}
+
 onMounted(() => {
     appWindow.setTitle('PakePlus')
     getPakePlusInfo()
     resetReleaseInfo()
+    mergeUpdateRep()
 })
 </script>
 
@@ -450,6 +476,9 @@ onMounted(() => {
 .homeBox {
     padding: 10px 20px;
     position: relative;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.5s, color 0.5s;
 
     .homeHeader {
         display: flex;
@@ -534,7 +563,7 @@ onMounted(() => {
                     color: gray;
                     user-select: none;
                     &:hover {
-                        color: black;
+                        color: var(--text-color);
                     }
                 }
             }
@@ -554,7 +583,7 @@ onMounted(() => {
                     color: gray;
                     cursor: pointer;
                     &:hover {
-                        color: black;
+                        color: var(--text-color);
                     }
                 }
             }
@@ -582,21 +611,26 @@ onMounted(() => {
         .project {
             height: 200px;
             border-radius: 5px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--box-shadow);
             margin-bottom: 10px;
-            background-color: #f7f7f7;
+            background-color: var(--project-bg);
             overflow: hidden;
+            transition: background-color 0.5s, color 0.5s;
 
             &:hover {
-                box-shadow: #ccc 0px 0px 10px;
+                box-shadow: var(--box-shadow) 0px 0px 10px;
+                transform: scale(1.01);
             }
 
             .appIcon {
+                z-index: 1;
                 width: 100%;
                 height: 66%;
                 object-fit: cover;
                 border-radius: 2px 2px 0 0;
-                background-color: white;
+                background-color: var(--project-bg);
+                transition: transform 0.3s ease;
+                transition: background-color 0.5s, color 0.5s;
             }
 
             .appPreview {
@@ -605,6 +639,7 @@ onMounted(() => {
             }
 
             .infoBox {
+                z-index: 2;
                 padding: 5px;
                 -webkit-user-select: none; /* Safari */
                 -moz-user-select: none; /* Firefox */
@@ -639,14 +674,19 @@ onMounted(() => {
             align-items: center;
             &:hover {
                 color: black;
-                border: 1px solid #ccc;
+                border: 1px solid var(--box-shadow);
+                transition: background-color 0.5s, color 0.5s;
+
                 .addIcon {
-                    color: rgb(90, 90, 90);
+                    color: var(--box-shadow);
+                    font-size: 36px !important;
+                    font-weight: bold;
                 }
             }
 
             .addIcon {
-                color: gray;
+                color: var(--box-shadow);
+                transition: font-size 0.1s, font-weight 0.5s;
             }
         }
     }
@@ -659,7 +699,7 @@ onMounted(() => {
         cursor: pointer;
 
         &:hover {
-            color: black;
+            color: var(--text-color);
         }
     }
 }
