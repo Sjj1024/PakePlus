@@ -50,6 +50,9 @@ jobs:
               # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
               run: pnpm install # Change this to npm, yarn or pnpm.
 
+            - name: Set release body
+              run: echo "releaseBody=$(cat RELEASE.md)" >> $GITHUB_ENV
+
             - name: Build the app
               uses: tauri-apps/tauri-action@v0
 
@@ -58,7 +61,7 @@ jobs:
               with:
                   tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
                   releaseName: 'PakePlus v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
-                  releaseBody: 'See the assets to download and install this version.'
+                  releaseBody: ${{ env.releaseBody }}
                   releaseDraft: false
                   prerelease: false
                   publish: true
