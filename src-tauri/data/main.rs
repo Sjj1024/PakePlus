@@ -23,7 +23,7 @@ fn main() {
                 "PakePlus",
                 tauri::WindowUrl::App("PROJECTURL".into()),
             )
-            // .initialization_script(include_str!("./extension/custom.js"))
+            .initialization_script(include_str!("./extension/custom.js"))
             .title("PROJECTNAME")
             .inner_size(-1.0, -2.0)
             .center()

@@ -46,6 +46,7 @@ pub async fn open_window(
         .inner_size(width, height)
         .user_agent(user_agent.as_str())
         .center()
+        .initialization_script(include_str!("../extension/custom.js"))
         .build()
         .unwrap();
         let theme = docs_window.theme().expect("failed to get theme");
