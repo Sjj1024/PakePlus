@@ -259,6 +259,11 @@ onMounted(() => {
             -ms-user-select: none; /* IE10+/Edge */
             user-select: none; /* Standard syntax */
             cursor: pointer;
+            color: gray;
+
+            &:hover {
+                color: var(--text-color);
+            }
         }
 
         .headerTool {

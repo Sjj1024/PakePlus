@@ -30,14 +30,15 @@
                         </span>
                         <template #dropdown>
                             <el-dropdown-menu>
+                                <el-dropdown-item disabled>
+                                    更多配置
+                                </el-dropdown-item>
                                 <el-dropdown-item
                                     :disabled="store.release.id === 0"
                                     @click="toHistory"
                                 >
                                     {{ t('relHistore') }}
                                 </el-dropdown-item>
-                                <!-- TODO: 更多配置 -->
-                                <!-- <el-dropdown-item> 更多配置 </el-dropdown-item> -->
                                 <el-dropdown-item @click="deleteProject">
                                     {{ t('delProject') }}
                                 </el-dropdown-item>
@@ -55,57 +56,92 @@
                 :size="formSize"
                 status-icon
             >
-                <el-form-item :label="t('webUrl')" prop="url">
-                    <el-input
-                        v-model="appForm.url"
-                        autocomplete="off"
-                        autoCapitalize="off"
-                        autoCorrect="off"
-                        spellCheck="false"
-                        :placeholder="`${t(
-                            'example'
-                        )}：https://www.pakeplus.com'`"
-                    />
-                </el-form-item>
-                <el-form-item :label="t('appName')" prop="showName">
-                    <el-input
-                        v-model="appForm.showName"
-                        autocomplete="off"
-                        autoCapitalize="off"
-                        autoCorrect="off"
-                        spellCheck="false"
-                        :placeholder="`${t('example')}：PakePlus`"
-                    />
-                </el-form-item>
-                <el-form-item :label="t('appId')" prop="appid">
-                    <el-input
-                        v-model="appForm.appid"
-                        autocomplete="off"
-                        autoCapitalize="off"
-                        autoCorrect="off"
-                        spellCheck="false"
-                        :placeholder="`${t('example')}：com.pakeplus.app`"
-                    />
-                </el-form-item>
-                <el-form-item :label="t('appVersion')" prop="version">
-                    <el-input
-                        v-model="appForm.version"
-                        autocomplete="off"
-                        autoCapitalize="off"
-                        autoCorrect="off"
-                        spellCheck="false"
-                        :placeholder="`${t('example')}：1.0.0`"
-                    />
-                </el-form-item>
-                <el-form-item :label="t('appIcon')" prop="icon">
-                    <el-input
-                        :value="iconFileName"
-                        readonly
-                        @click="uploadIcon"
-                        class="iconInput"
-                        :placeholder="`${t('onlyPng')}`"
-                    />
-                </el-form-item>
+                <div class="inLine">
+                    <el-form-item
+                        :label="t('appName')"
+                        prop="showName"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model="appForm.showName"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：PakePlus`"
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        :label="t('webUrl')"
+                        prop="url"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model="appForm.url"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t(
+                                'example'
+                            )}：https://www.pakeplus.com'`"
+                        />
+                    </el-form-item>
+                </div>
+                <div class="inLine">
+                    <el-form-item
+                        :label="t('appId')"
+                        prop="appid"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model="appForm.appid"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：com.pakeplus.app`"
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        :label="t('appVersion')"
+                        prop="version"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model="appForm.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：1.0.0`"
+                        />
+                    </el-form-item>
+                </div>
+                <div class="inLine">
+                    <el-form-item
+                        :label="t('appIcon')"
+                        prop="icon"
+                        class="formItem"
+                    >
+                        <el-input
+                            :value="iconFileName"
+                            readonly
+                            @click="uploadIcon"
+                            class="iconInput"
+                            :placeholder="`${t('onlyPng')}`"
+                        />
+                    </el-form-item>
+                    <el-form-item label="脚本文件" prop="icon" class="formItem">
+                        <el-input
+                            :value="iconFileName"
+                            readonly
+                            @click="uploadIcon"
+                            class="iconInput"
+                            :placeholder="`${t('onlyPng')}`"
+                        />
+                    </el-form-item>
+                </div>
                 <el-form-item :label="t('platform')" prop="platform">
                     <el-radio-group
                         v-model="appForm.platform"
@@ -136,6 +172,17 @@
                     <span class="iconfont rotateIcon" @click="rotateWH">
                         &#xe66b;
                     </span>
+                </el-form-item>
+                <el-form-item label="过滤元素" prop="desc">
+                    <el-input
+                        type="textarea"
+                        autocomplete="off"
+                        autoCapitalize="off"
+                        autoCorrect="off"
+                        spellCheck="false"
+                        :rows="3"
+                        :placeholder="t('desTips')"
+                    />
                 </el-form-item>
                 <el-form-item :label="t('appDes')" prop="desc">
                     <el-input
@@ -171,8 +218,8 @@
                 <el-form-item :label="t('pubPlatform')">
                     <el-checkbox-group v-model="pubForm.platform">
                         <el-checkbox :label="t('desktop')" value="desktop" />
-                        <!-- <el-checkbox label="移动端" value="mobile" /> -->
-                        <!-- <el-checkbox label="源代码" value="source" /> -->
+                        <el-checkbox label="移动端" value="mobile" disabled />
+                        <el-checkbox label="源代码" value="source" disabled />
                     </el-checkbox-group>
                 </el-form-item>
                 <el-form-item :label="t('pubMode')">
@@ -986,8 +1033,12 @@ onMounted(async () => {
                 -ms-user-select: none; /* IE10+/Edge */
                 user-select: none; /* Standard syntax */
 
-                .userName {
-                    margin-right: 6px;
+                .dropdownLink {
+                    color: gray;
+
+                    &:hover {
+                        color: var(--text-color);
+                    }
                 }
             }
 
@@ -1011,6 +1062,16 @@ onMounted(async () => {
         .configForm {
             margin-top: 10px;
 
+            .inLine {
+                display: flex;
+                flex-direction: row;
+
+                .formItem {
+                    flex: 1;
+                    margin-right: 10px;
+                }
+            }
+
             .divider {
                 margin: 0 10px;
                 font-size: 10px;
@@ -1029,11 +1090,12 @@ onMounted(async () => {
                 user-select: none; /* Standard syntax */
 
                 &:hover {
-                    color: black;
+                    color: var(--text-color);
                 }
             }
         }
     }
+
     .footerBox {
         display: flex;
         flex-direction: row;
