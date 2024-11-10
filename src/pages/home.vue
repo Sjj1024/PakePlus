@@ -278,10 +278,11 @@ const forkProgect = async (tips: boolean = true) => {
         if (status) {
             deleteBuildYml()
             timer && clearInterval(timer)
-            ElMessage.success(t('tokenOk'))
             testLoading.value = false
             if (!tips) {
                 tokenDialog.value = false
+            } else {
+                ElMessage.success(t('tokenOk'))
             }
         } else {
             console.log('wait fork done')
