@@ -393,8 +393,14 @@ const mouseover = () => {
 }
 
 const jsHandle = async (event: any) => {
+    console.log('js hangle', event)
     console.log('js hangle', event.offsetX, event.offsetY)
-    if (event.offsetX > 260 && event.offsetY > 0) {
+    if (
+        (event.offsetX > 230 && event.offsetY > 0) ||
+        event.target instanceof SVGElement ||
+        (event.target instanceof HTMLDivElement &&
+            event.target.classList.contains('el-select__suffix'))
+    ) {
         console.log('Clicked on an SVG')
     } else {
         console.log('Clicked on an element other than SVG')
