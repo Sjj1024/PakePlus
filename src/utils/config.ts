@@ -22,8 +22,8 @@ export const platforms: { [key: string]: PlatformInfo } = {
         userAgent:
             'Mozilla/5.0 (Linux; Android 14; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36',
         platform: 'android',
-        width: 430,
-        height: 932,
+        width: 412,
+        height: 915,
         direction: 'vertical',
     },
     iPad: {
