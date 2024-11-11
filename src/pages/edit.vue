@@ -145,6 +145,7 @@
                             ref="selJs"
                             placeholder="js file"
                             @change="jsChange"
+                            @click="jsHandle"
                         >
                             <el-option
                                 v-for="item in jsFileList"
@@ -280,7 +281,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import { appWindow } from '@tauri-apps/api/window'
 import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/tauri'
@@ -323,7 +324,12 @@ const appForm: any = reactive({
 const iconFileName = ref('')
 const selJs = ref<any>(null)
 
-const jsFileList: any = ref<any>([])
+const jsFileList: any = ref<any>([
+    { label: 'A', value: 'A' },
+    { label: 'B', value: 'B' },
+    { label: 'C', value: 'C' },
+    { label: 'D', value: 'D' },
+])
 
 const appRules = reactive<FormRules>({
     url: [
@@ -386,42 +392,47 @@ const mouseover = () => {
     selJs.value?.toggleMenu()
 }
 
-const jsHandle = async () => {
-    console.log('js hangle')
-    const selected: any = await open({
-        multiple: true,
-        filters: [
-            {
-                name: 'File',
-                extensions: ['js'],
-            },
-        ],
-    })
-    if (Array.isArray(selected)) {
-        // user selected multiple directories
-        console.log('selected list', selected)
-        const jsFiles: any = []
-        const jsOptions: any = []
-        for (let file of selected) {
-            const fileName = await basename(file)
-            console.log('filename', fileName)
-            jsOptions.push({
-                label: fileName,
-                value: fileName,
-            })
-            jsFiles.push(fileName)
-        }
-        console.log('jsFiles', jsFiles)
-        console.log('jsFiles', jsOptions)
-        appForm.jsFile = jsFiles
-        jsFileList.value = jsOptions
-    } else if (selected === null) {
-        // user cancelled the selection
-        console.log('No file selected')
-        return null
+const jsHandle = async (event: any) => {
+    console.log('js hangle', event.offsetX, event.offsetY)
+    if (event.offsetX > 260 && event.offsetY > 0) {
+        console.log('Clicked on an SVG')
     } else {
-        // user selected a single directory
-        console.log('user selected a single directory')
+        console.log('Clicked on an element other than SVG')
+        const selected: any = await open({
+            multiple: true,
+            filters: [
+                {
+                    name: 'File',
+                    extensions: ['js'],
+                },
+            ],
+        })
+        if (Array.isArray(selected)) {
+            // user selected multiple directories
+            console.log('selected list', selected)
+            const jsFiles: any = []
+            const jsOptions: any = []
+            for (let file of selected) {
+                const fileName = await basename(file)
+                console.log('filename', fileName)
+                jsOptions.push({
+                    label: fileName,
+                    value: fileName,
+                })
+                jsFiles.push(fileName)
+            }
+            console.log('jsFiles', jsFiles)
+            console.log('jsFiles', jsOptions)
+            appForm.jsFile = jsFiles
+            jsFileList.value = jsOptions
+        } else if (selected === null) {
+            // user cancelled the selection
+            console.log('No file selected')
+            return null
+        } else {
+            // user selected a single directory
+            console.log('user selected a single directory')
+        }
     }
 }
 
