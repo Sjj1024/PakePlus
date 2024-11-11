@@ -387,11 +387,6 @@ const jsChange = () => {
     console.log('js file', appForm.jsFile)
 }
 
-const mouseover = () => {
-    console.log('selJs.value', selJs.value.suffixRef)
-    selJs.value?.toggleMenu()
-}
-
 const jsHandle = async (event: any) => {
     console.log('js hangle', event)
     console.log('js hangle', event.offsetX, event.offsetY)
