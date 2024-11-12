@@ -146,6 +146,7 @@
                             placeholder="请选择js脚本文件"
                             @change="jsChange"
                             @click="jsHandle"
+                            @visible-change="optionVisible"
                         >
                             <el-option
                                 v-for="item in jsFileList"
@@ -281,7 +282,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { appWindow } from '@tauri-apps/api/window'
 import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/tauri'
@@ -324,12 +325,7 @@ const appForm: any = reactive({
 const iconFileName = ref('')
 const selJs = ref<any>(null)
 
-const jsFileList: any = ref<any>([
-    { label: 'A', value: 'A' },
-    { label: 'B', value: 'B' },
-    { label: 'C', value: 'C' },
-    { label: 'D', value: 'D' },
-])
+const jsFileList: any = ref<any>([])
 
 const appRules = reactive<FormRules>({
     url: [
@@ -384,7 +380,19 @@ const appRules = reactive<FormRules>({
 })
 
 const jsChange = () => {
-    console.log('js file', appForm.jsFile)
+    console.log('js file change', appForm.jsFile)
+}
+
+const optionVisible = (value: boolean) => {
+    console.log('optionVisible', value)
+    if (!value) {
+        jsFileList.value = appForm.jsFile.map((item: any) => {
+            return {
+                label: item,
+                value: item,
+            }
+        })
+    }
 }
 
 const jsHandle = async (event: any) => {
