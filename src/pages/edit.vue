@@ -143,7 +143,7 @@
                             collapse-tags
                             filterable
                             ref="selJs"
-                            placeholder="js file"
+                            placeholder="请选择js脚本文件"
                             @change="jsChange"
                             @click="jsHandle"
                         >
@@ -385,11 +385,6 @@ const appRules = reactive<FormRules>({
 
 const jsChange = () => {
     console.log('js file', appForm.jsFile)
-}
-
-const mouseover = () => {
-    console.log('selJs.value', selJs.value.suffixRef)
-    selJs.value?.toggleMenu()
 }
 
 const jsHandle = async (event: any) => {

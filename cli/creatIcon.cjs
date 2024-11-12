@@ -9,7 +9,7 @@ const inputPath = path.join(__dirname, './app.png')
 // 临时输出带圆角和 padding 的 PNG 文件路径
 const processedOutputPath = path.join(__dirname, './processed-image.png')
 // 输出 ICNS 文件路径
-const icnsOutputPath = path.join(__dirname, './output.icns')
+const icnsOutputPath = path.join(__dirname, '../src-tauri/icons/icon.icns')
 
 // 给图片添加圆角并添加 padding
 sharp(inputPath)
@@ -62,26 +62,6 @@ sharp(inputPath)
                         console.log(
                             'ICNS file created successfully:',
                             icnsOutputPath
-                        )
-                        // copy icns to /Users/song/Project/my/PakePlus/src-tauri/icons
-                        fs.copyFile(
-                            icnsOutputPath,
-                            path.join(
-                                __dirname,
-                                '../src-tauri/icons/icon.icns'
-                            ),
-                            (copyErr) => {
-                                if (copyErr) {
-                                    console.error(
-                                        'Error copying ICNS file:',
-                                        copyErr
-                                    )
-                                } else {
-                                    console.log(
-                                        'ICNS file copied successfully.'
-                                    )
-                                }
-                            }
                         )
                     }
                 })
