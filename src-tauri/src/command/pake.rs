@@ -13,6 +13,7 @@ pub async fn open_window(
     resize: bool,
     width: f64,
     height: f64,
+    js_content: String,
 ) {
     let window_label = "previewWeb";
     if let Some(existing_window) = handle.get_window(window_label) {
@@ -36,6 +37,7 @@ pub async fn open_window(
         }
     }
     println!("Opening docs in external window: {}, {}", app_url, platform);
+    println!("js_content: {}", js_content);
     if !resize {
         let _window = tauri::WindowBuilder::new(
             &handle,
@@ -46,7 +48,7 @@ pub async fn open_window(
         .inner_size(width, height)
         .user_agent(user_agent.as_str())
         .center()
-        .initialization_script(include_str!("../extension/custom.js"))
+        .initialization_script(js_content.as_str())
         .build()
         .unwrap();
     }

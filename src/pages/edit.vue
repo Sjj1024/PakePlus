@@ -290,14 +290,19 @@ import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePakeStore } from '@/store'
-import { writeBinaryFile, readBinaryFile, createDir } from '@tauri-apps/api/fs'
+import {
+    writeBinaryFile,
+    readBinaryFile,
+    createDir,
+    readTextFile,
+} from '@tauri-apps/api/fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
 import { open } from '@tauri-apps/api/dialog'
 import { basename } from '@tauri-apps/api/path'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import { useI18n } from 'vue-i18n'
-import { isAlphanumeric, openUrl } from '@/utils/common'
+import { CSSFILTER, isAlphanumeric, openUrl } from '@/utils/common'
 import { platforms } from '@/utils/config'
 
 const router = useRouter()
@@ -318,13 +323,13 @@ const appForm: any = reactive({
     platform: store.currentProject.platform || 'desktop',
     width: store.currentProject.width || 800,
     height: store.currentProject.height || 600,
-    filterCss: 'A',
+    filterCss: '',
     desc: store.currentProject.desc,
 })
 
 const iconFileName = ref('')
 const selJs = ref<any>(null)
-
+const jsFileContents = ref('')
 const jsFileList: any = ref<any>([])
 
 const appRules = reactive<FormRules>({
@@ -421,7 +426,11 @@ const jsHandle = async (event: any) => {
             console.log('selected list', selected)
             const jsFiles: any = []
             const jsOptions: any = []
+            let jsContents: any = ''
             for (let file of selected) {
+                // read js file content
+                const jsContent = await readTextFile(file)
+                jsContents += jsContent
                 const fileName = await basename(file)
                 console.log('filename', fileName)
                 jsOptions.push({
@@ -434,6 +443,7 @@ const jsHandle = async (event: any) => {
             console.log('jsFiles', jsOptions)
             appForm.jsFile = jsFiles
             jsFileList.value = jsOptions
+            jsFileContents.value = jsContents
         } else if (selected === null) {
             // user cancelled the selection
             console.log('No file selected')
@@ -668,11 +678,34 @@ const saveProject = async (tips: boolean = true) => {
     })
 }
 
+// get initialization_script
+const getInitializationScript = async () => {
+    // creat css filter content
+    const cssFilterContent = appForm.filterCss
+        .split(';')
+        .map((item: string, index: number) => {
+            return `const element${index} = document.querySelector('${item}');
+                if (element${index}) {
+                    element${index}.style.display = 'none';
+                }`
+        })
+        .join(';')
+    const initializationScript = CSSFILTER.replace(
+        'CSSFILTER',
+        cssFilterContent
+    )
+    // read js file content
+    jsFileContents.value += initializationScript
+    console.log('getInitializationScript', jsFileContents.value)
+}
+
 const preview = (resize: boolean) => {
     appFormRef.value?.validate((valid, fields) => {
         if (valid) {
             console.log('submit!', appForm)
             saveProject(false)
+            // initialization_script
+            getInitializationScript()
             invoke('open_window', {
                 appUrl: appForm.url,
                 appName: appForm.showName,
@@ -681,6 +714,7 @@ const preview = (resize: boolean) => {
                 resize,
                 width: appForm.width,
                 height: appForm.height,
+                jsContent: jsFileContents.value,
             })
         } else {
             console.log('error submit!', fields)
