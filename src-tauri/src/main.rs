@@ -25,7 +25,8 @@ fn main() {
             command::pake::update_build_file,
             command::pake::update_config_file,
             command::pake::update_cargo_file,
-            command::pake::update_main_rust
+            command::pake::update_main_rust,
+            command::pake::update_custom_js,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

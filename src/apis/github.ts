@@ -111,6 +111,16 @@ export default {
             body,
         })
     },
+    // update custom js file
+    updateCustomJsFile(user: string, repo: string, body: any) {
+        return http(
+            `/repos/${user}/${repo}/contents/src-tauri/src/extension/custom.js`,
+            {
+                method: 'put',
+                body,
+            }
+        )
+    },
     // dispatch workflow
     dispatchWorkflow(user: string, repo: string, body: any) {
         return http(

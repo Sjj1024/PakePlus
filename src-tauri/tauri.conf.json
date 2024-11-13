@@ -102,7 +102,8 @@
                 "./data/build.yml",
                 "./data/config.json",
                 "./data/main.rs",
-                "./data/Cargo.toml"
+                "./data/Cargo.toml",
+                "./data/custom.js"
             ],
             "icon": [
                 "icons/32x32.png",

@@ -22,6 +22,7 @@ export const isAlphanumeric = (str: string) => {
 }
 
 export const CSSFILTER = `
+// css filter
 document.addEventListener('DOMContentLoaded', () => {
     const targetNode = document.body
     // 配置观察选项
@@ -38,4 +39,5 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     observer.observe(targetNode, config)
 })
+// end css filter
 `

@@ -171,3 +171,19 @@ pub async fn update_main_rust(
     let encoded_contents = BASE64_STANDARD.encode(contents);
     return encoded_contents;
 }
+
+#[tauri::command]
+pub async fn update_custom_js(handle: tauri::AppHandle, js_content: String) -> String {
+    let resource_path = handle
+        .path_resolver()
+        .resolve_resource("data/custom.js")
+        .expect("failed to resolve resource");
+    let mut custom_js = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    custom_js.read_to_string(&mut contents).unwrap();
+    contents += js_content.as_str();
+    // println!("Updated config file: {}", contents);
+    // The new file content, using Base64 encoding
+    let encoded_contents = BASE64_STANDARD.encode(contents);
+    return encoded_contents;
+}

@@ -394,7 +394,7 @@ const jsChange = () => {
     let jsContent = ''
     for (let jsFile of appForm.jsFile) {
         const reContent = jsFileContents.value.match(
-            new RegExp(`// ${jsFile}\n(.*)// end ${jsFile}`, 's')
+            new RegExp(`// ${jsFile}\n(.*)// end ${jsFile}\n`, 's')
         )
         if (reContent) {
             jsContent += reContent[1]
@@ -455,10 +455,7 @@ const jsHandle = async (event: any) => {
                 // read js file content
                 const jsContent = await readTextFile(file)
                 const fileName = await basename(file)
-                jsContents += `// ${fileName}
-${jsContent}
-// end ${fileName}
-                `
+                jsContents += `// ${fileName}\n${jsContent}\n// end ${fileName}\n`
                 console.log('filename', fileName)
                 jsOptions.push({
                     label: fileName,
@@ -921,6 +918,40 @@ const updateMainRs = async () => {
     }
 }
 
+// update build.yml file content
+const updateCustomJs = async () => {
+    // get CargoToml file sha
+    const shaRes = await getFileSha(
+        'src-tauri/src/extension/custom.js',
+        store.currentProject.name
+    )
+    console.log('get CargoToml file sha', shaRes)
+    if (shaRes.status === 200 || shaRes.status === 404) {
+        // get CargoToml file content
+        const initCssScript = getInitializationScript()
+        const jsFileContent: any = await invoke('update_custom_js', {
+            jsContent: jsFileContents.value + initCssScript,
+        })
+        const updateRes: any = await githubApi.updateCustomJsFile(
+            store.userInfo.login,
+            'PakePlus',
+            {
+                message: 'update custom js from pakeplus',
+                content: jsFileContent,
+                sha: shaRes.data.sha,
+                branch: store.currentProject.name,
+            }
+        )
+        if (updateRes.status === 200) {
+            console.log('updateRes', updateRes)
+        } else {
+            console.log('updateRes error', updateRes)
+        }
+    } else {
+        console.log('getFileSha error', shaRes)
+    }
+}
+
 // del pre publish version
 const onSubmit = async () => {
     centerDialogVisible.value = false
@@ -933,6 +964,8 @@ const onSubmit = async () => {
     await updateCargoToml()
     // update main rust
     await updateMainRs()
+    // update custom js
+    await updateCustomJs()
     // update tauri config json
     const configSha: any = await getFileSha(
         'src-tauri/tauri.conf.json',
