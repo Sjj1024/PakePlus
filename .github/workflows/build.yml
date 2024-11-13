@@ -61,6 +61,7 @@ jobs:
                   releaseBody: |
                       ## 主要更新内容
                       - 新增功能：添加主题切换支持，默认系统主题
+                      - 新增功能：添加自定义js支持，支持js注入
                       - 修复问题：修复已知bug
                   releaseDraft: false
                   prerelease: false
