@@ -2,8 +2,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use tauri::{Menu, MenuItem, Submenu};
-// 对command单独管理
-mod command;
 
 fn main() {
     let edit_menu = Submenu::new(
@@ -19,15 +17,21 @@ fn main() {
             .add_native_item(MenuItem::Quit),
     );
     tauri::Builder::default()
+        .setup(|app| {
+            let _window = tauri::WindowBuilder::new(
+                app,
+                "PakePlus",
+                tauri::WindowUrl::App("https://juejin.cn/".into()),
+            )
+            .initialization_script(include_str!("./extension/custom.js"))
+            .title("掘金")
+            .inner_size(1300.0, 900.0)
+            .center()
+            .user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36")
+            .build()?;
+            Ok(())
+        })
         .menu(Menu::new().add_submenu(edit_menu))
-        .invoke_handler(tauri::generate_handler![
-            command::pake::open_window,
-            command::pake::update_build_file,
-            command::pake::update_config_file,
-            command::pake::update_cargo_file,
-            command::pake::update_main_rust,
-            command::pake::update_custom_js,
-        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
