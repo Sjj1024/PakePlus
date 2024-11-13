@@ -150,7 +150,7 @@
                             @visible-change="optionVisible"
                         >
                             <el-option
-                                v-for="item in jsFileList"
+                                v-for="item in jsSelOptions"
                                 :key="item.value"
                                 :label="item.label"
                                 :value="item.value"
@@ -333,8 +333,7 @@ const appForm: any = reactive({
 const iconFileName = ref('')
 const selJs = ref<any>(null)
 const jsFileContents = ref('')
-const jsFileList: any = ref<any>([])
-const jsOptionVisible = ref(false)
+const jsSelOptions: any = ref<any>([])
 
 const appRules = reactive<FormRules>({
     url: [
@@ -390,7 +389,6 @@ const appRules = reactive<FormRules>({
 
 const jsChange = () => {
     console.log('js file change', appForm.jsFile)
-    console.log('jsOptionVisible', jsOptionVisible.value)
     let jsContent = ''
     for (let jsFile of appForm.jsFile) {
         const reContent = jsFileContents.value.match(
@@ -402,7 +400,7 @@ const jsChange = () => {
     }
     console.log('jsContent', jsContent)
     jsFileContents.value = jsContent
-    jsFileList.value = appForm.jsFile?.map((item: any) => {
+    jsSelOptions.value = appForm.jsFile?.map((item: any) => {
         return {
             label: item,
             value: item,
@@ -412,10 +410,9 @@ const jsChange = () => {
 
 const optionVisible = (value: boolean) => {
     console.log('optionVisible', value)
-    jsOptionVisible.value = value
     if (!value) {
         // close show js option
-        jsFileList.value = appForm.jsFile?.map((item: any) => {
+        jsSelOptions.value = appForm.jsFile?.map((item: any) => {
             return {
                 label: item,
                 value: item,
@@ -464,7 +461,7 @@ const jsHandle = async (event: any) => {
                 jsFiles.push(fileName)
             }
             appForm.jsFile = jsFiles
-            jsFileList.value = jsOptions
+            jsSelOptions.value = jsOptions
             jsFileContents.value = jsContents
             console.log('jsFileContents', jsFileContents.value)
         } else if (selected === null) {
@@ -1151,6 +1148,12 @@ const initJsFileContents = async () => {
         jsFileContents.value = jsFileContent
         console.log('initJsFileContents', jsFileContent)
     }
+    jsSelOptions.value = appForm.jsFile?.map((item: any) => {
+        return {
+            label: item,
+            value: item,
+        }
+    })
 }
 
 onMounted(async () => {
