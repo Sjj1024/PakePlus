@@ -321,12 +321,12 @@ const appForm: any = reactive({
     showName: store.currentProject.showName,
     appid: store.currentProject.appid,
     icon: store.currentProject.icon,
-    jsFile: store.currentProject.jsFile,
+    jsFile: store.currentProject.jsFile || [],
     version: store.currentProject.version,
     platform: store.currentProject.platform || 'desktop',
     width: store.currentProject.width || 800,
     height: store.currentProject.height || 600,
-    filterCss: store.currentProject.filterCss,
+    filterCss: store.currentProject.filterCss || '',
     desc: store.currentProject.desc,
 })
 
@@ -707,20 +707,28 @@ const saveProject = async (tips: boolean = true) => {
 // get initialization_script
 const getInitializationScript = () => {
     // creat css filter content
-    const cssFilterContent = appForm.filterCss
-        .split(';')
-        .map((item: string, index: number) => {
-            return `const element${index} = document.querySelector('${item}');
+    let initJsScript = ''
+    if (appForm.filterCss !== '') {
+        const cssFilterContent = appForm.filterCss
+            .split(';')
+            .map((item: string, index: number) => {
+                return `const element${index} = document.querySelector('${item}');
                 if (element${index}) {
                     element${index}.style.display = 'none';
                 }`
-        })
-        .join(';')
-    const initCssScript = CSSFILTER.replace('CSSFILTER', cssFilterContent)
-    // read js file content
-    return initCssScript
-    // jsFileContents.value += initializationScript
-    // console.log('getInitializationScript', jsFileContents.value)
+            })
+            .join(';')
+        console.log('cssFilterContent', cssFilterContent)
+        const initCssScript = CSSFILTER.replace('CSSFILTER', cssFilterContent)
+        // read js file content
+        initJsScript = initCssScript
+    }
+    // if jsFileContents is not empty, then add initJsScript
+    if (jsFileContents.value) {
+        initJsScript = initJsScript + jsFileContents.value
+    }
+    console.log('initJsScript', initJsScript)
+    return initJsScript
 }
 
 const preview = async (resize: boolean) => {
@@ -729,7 +737,7 @@ const preview = async (resize: boolean) => {
             console.log('submit!', appForm)
             saveProject(false)
             // initialization_script
-            const initCssScript = getInitializationScript()
+            const initJsScript = getInitializationScript()
             // console.log('initCssScript', initCssScript)
             invoke('open_window', {
                 appUrl: appForm.url,
@@ -739,7 +747,7 @@ const preview = async (resize: boolean) => {
                 resize,
                 width: appForm.width,
                 height: appForm.height,
-                jsContent: jsFileContents.value + initCssScript,
+                jsContent: initJsScript,
             })
         } else {
             console.log('error submit!', fields)
@@ -925,9 +933,9 @@ const updateCustomJs = async () => {
     console.log('get CargoToml file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
-        const initCssScript = getInitializationScript()
+        const initJsScript = getInitializationScript()
         const jsFileContent: any = await invoke('update_custom_js', {
-            jsContent: jsFileContents.value + initCssScript,
+            jsContent: initJsScript,
         })
         const updateRes: any = await githubApi.updateCustomJsFile(
             store.userInfo.login,

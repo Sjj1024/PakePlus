@@ -354,9 +354,9 @@ const creatBranch = async () => {
             const branchInfo: Project = {
                 ...res.data,
                 name: branchName.value,
-                desc: 'this is a pakeplus project',
+                desc: '',
                 url: '',
-                showName: 'pakeplus',
+                showName: 'PakePlus',
                 appid: 'com.pakeplus.desktop',
                 icon: '',
                 version: '0.0.1',

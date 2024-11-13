@@ -38,6 +38,15 @@ pub async fn open_window(
     }
     println!("Opening docs in external window: {}, {}", app_url, platform);
     // println!("js_content: {}", js_content);
+    let resource_path = handle
+        .path_resolver()
+        .resolve_resource("data/custom.js")
+        .expect("failed to resolve resource");
+    let mut custom_js = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    custom_js.read_to_string(&mut contents).unwrap();
+    contents += js_content.as_str();
+    // println!("js file contents: {}", contents);
     if !resize {
         let _window = tauri::WindowBuilder::new(
             &handle,
@@ -48,7 +57,7 @@ pub async fn open_window(
         .inner_size(width, height)
         .user_agent(user_agent.as_str())
         .center()
-        .initialization_script(js_content.as_str())
+        .initialization_script(contents.as_str())
         .build()
         .unwrap();
     }
