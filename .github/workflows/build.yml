@@ -1,14 +1,12 @@
 name: Release
 on:
-    push:
-        tags:
-            - 'v*'
     workflow_dispatch:
         inputs:
             branch:
                 description: 'Branch to run the workflow on'
                 required: true
                 default: 'template'
+
 jobs:
     release:
         permissions:
@@ -50,6 +48,9 @@ jobs:
               # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
               run: pnpm install # Change this to npm, yarn or pnpm.
 
+            - name: Regenerate Icons
+              run: pnpm tauri icon
+
             - name: Create apple icon
               run: node ./cli/creatIcon.cjs
 
@@ -61,11 +62,7 @@ jobs:
               with:
                   tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
                   releaseName: 'PakePlus v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
-                  releaseBody: |
-                      ## 主要更新内容
-                      - 新增功能：添加主题切换支持，默认系统主题
-                      - 新增功能：添加自定义js支持，支持js注入
-                      - 修复问题：修复已知bug
+                  releaseBody: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.'
                   releaseDraft: false
                   prerelease: false
                   publish: true

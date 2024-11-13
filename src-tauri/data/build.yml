@@ -51,6 +51,9 @@ jobs:
             - name: Regenerate Icons
               run: pnpm tauri icon
 
+            - name: Create apple icon
+              run: node ./cli/creatIcon.cjs
+
             - name: Build the app
               uses: tauri-apps/tauri-action@v0
 
