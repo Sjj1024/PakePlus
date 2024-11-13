@@ -4,7 +4,7 @@ const sharp = require('sharp')
 const png2icons = require('png2icons')
 
 // 输入 PNG 文件路径
-const inputPath = path.join(__dirname, './app.png')
+const inputPath = path.join(__dirname, '../app-icon.png')
 // const inputPath = path.join(__dirname, './pakeplusicon.png')
 // 临时输出带圆角和 padding 的 PNG 文件路径
 const processedOutputPath = path.join(__dirname, './processed-image.png')
