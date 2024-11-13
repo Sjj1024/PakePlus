@@ -351,7 +351,7 @@ const creatBranch = async () => {
         console.log('createBranch', res)
         // 201 is ok
         if (res.status === 201) {
-            const branchInfo = {
+            const branchInfo: Project = {
                 ...res.data,
                 name: branchName.value,
                 desc: 'this is a pakeplus project',

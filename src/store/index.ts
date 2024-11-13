@@ -571,6 +571,8 @@ export const usePakeStore = defineStore('pakeplus', {
                       width: 800,
                       height: 600,
                       desc: '',
+                      jsFile: [],
+                      filterCss: '',
                   },
             projectList: localStorage.getItem('projectList')
                 ? JSON.parse(localStorage.getItem('projectList') as string)

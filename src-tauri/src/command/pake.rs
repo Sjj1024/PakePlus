@@ -37,7 +37,7 @@ pub async fn open_window(
         }
     }
     println!("Opening docs in external window: {}, {}", app_url, platform);
-    println!("js_content: {}", js_content);
+    // println!("js_content: {}", js_content);
     if !resize {
         let _window = tauri::WindowBuilder::new(
             &handle,

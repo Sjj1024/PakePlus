@@ -144,6 +144,7 @@
                             filterable
                             ref="selJs"
                             placeholder="请选择js脚本文件"
+                            class="jsSelect"
                             @change="jsChange"
                             @click="jsHandle"
                             @visible-change="optionVisible"
@@ -295,6 +296,8 @@ import {
     readBinaryFile,
     createDir,
     readTextFile,
+    writeTextFile,
+    exists,
 } from '@tauri-apps/api/fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
 import { open } from '@tauri-apps/api/dialog'
@@ -318,12 +321,12 @@ const appForm: any = reactive({
     showName: store.currentProject.showName,
     appid: store.currentProject.appid,
     icon: store.currentProject.icon,
-    jsFile: [],
+    jsFile: store.currentProject.jsFile,
     version: store.currentProject.version,
     platform: store.currentProject.platform || 'desktop',
     width: store.currentProject.width || 800,
     height: store.currentProject.height || 600,
-    filterCss: '',
+    filterCss: store.currentProject.filterCss,
     desc: store.currentProject.desc,
 })
 
@@ -331,6 +334,7 @@ const iconFileName = ref('')
 const selJs = ref<any>(null)
 const jsFileContents = ref('')
 const jsFileList: any = ref<any>([])
+const jsOptionVisible = ref(false)
 
 const appRules = reactive<FormRules>({
     url: [
@@ -386,22 +390,42 @@ const appRules = reactive<FormRules>({
 
 const jsChange = () => {
     console.log('js file change', appForm.jsFile)
+    console.log('jsOptionVisible', jsOptionVisible.value)
+    let jsContent = ''
+    for (let jsFile of appForm.jsFile) {
+        const reContent = jsFileContents.value.match(
+            new RegExp(`// ${jsFile}\n(.*)// end ${jsFile}`, 's')
+        )
+        if (reContent) {
+            jsContent += reContent[1]
+        }
+    }
+    console.log('jsContent', jsContent)
+    jsFileContents.value = jsContent
+    jsFileList.value = appForm.jsFile?.map((item: any) => {
+        return {
+            label: item,
+            value: item,
+        }
+    })
 }
 
 const optionVisible = (value: boolean) => {
     console.log('optionVisible', value)
+    jsOptionVisible.value = value
     if (!value) {
-        jsFileList.value = appForm.jsFile.map((item: any) => {
+        // close show js option
+        jsFileList.value = appForm.jsFile?.map((item: any) => {
             return {
                 label: item,
                 value: item,
             }
         })
+        //
     }
 }
 
 const jsHandle = async (event: any) => {
-    console.log('js hangle', event)
     console.log('js hangle', event.offsetX, event.offsetY)
     if (
         (event.offsetX > 230 && event.offsetY > 0) ||
@@ -430,8 +454,11 @@ const jsHandle = async (event: any) => {
             for (let file of selected) {
                 // read js file content
                 const jsContent = await readTextFile(file)
-                jsContents += jsContent
                 const fileName = await basename(file)
+                jsContents += `// ${fileName}
+${jsContent}
+// end ${fileName}
+                `
                 console.log('filename', fileName)
                 jsOptions.push({
                     label: fileName,
@@ -439,11 +466,10 @@ const jsHandle = async (event: any) => {
                 })
                 jsFiles.push(fileName)
             }
-            console.log('jsFiles', jsFiles)
-            console.log('jsFiles', jsOptions)
             appForm.jsFile = jsFiles
             jsFileList.value = jsOptions
             jsFileContents.value = jsContents
+            console.log('jsFileContents', jsFileContents.value)
         } else if (selected === null) {
             // user cancelled the selection
             console.log('No file selected')
@@ -653,24 +679,30 @@ const deleteProject = () => {
         })
 }
 
+// save js file content to appDataDir
+const saveJsFile = async () => {
+    console.log('saveJsFile', jsFileContents.value)
+    // get app data dir
+    const appDataPath = await appDataDir()
+    console.log('appDataPath------', appDataPath)
+    const targetDir = await join(appDataPath, 'assets')
+    const savePath = await join(targetDir, `${store.currentProject.name}.js`)
+    // save file
+    await writeTextFile(savePath, jsFileContents.value)
+    console.log(`js file saved to: ${savePath}`)
+}
+
 // save project
 const saveProject = async (tips: boolean = true) => {
     appFormRef.value?.validate(async (valid, fields) => {
         if (valid) {
-            // console.log('save!', appForm)
             store.addUpdatePro({
+                ...appForm,
                 name: store.currentProject.name,
-                url: appForm.url,
-                showName: appForm.showName,
-                appid: appForm.appid,
-                icon: appForm.icon,
-                version: appForm.version,
-                platform: appForm.platform,
-                width: appForm.width,
-                height: appForm.height,
-                desc: appForm.desc,
                 debug: pubForm.model,
             })
+            // save js file content to appDataDir
+            saveJsFile()
             tips && ElMessage.success(t('saveSuccess'))
         } else {
             console.log('error submit!', fields)
@@ -679,7 +711,7 @@ const saveProject = async (tips: boolean = true) => {
 }
 
 // get initialization_script
-const getInitializationScript = async () => {
+const getInitializationScript = () => {
     // creat css filter content
     const cssFilterContent = appForm.filterCss
         .split(';')
@@ -690,22 +722,21 @@ const getInitializationScript = async () => {
                 }`
         })
         .join(';')
-    const initializationScript = CSSFILTER.replace(
-        'CSSFILTER',
-        cssFilterContent
-    )
+    const initCssScript = CSSFILTER.replace('CSSFILTER', cssFilterContent)
     // read js file content
-    jsFileContents.value += initializationScript
-    console.log('getInitializationScript', jsFileContents.value)
+    return initCssScript
+    // jsFileContents.value += initializationScript
+    // console.log('getInitializationScript', jsFileContents.value)
 }
 
-const preview = (resize: boolean) => {
+const preview = async (resize: boolean) => {
     appFormRef.value?.validate((valid, fields) => {
         if (valid) {
             console.log('submit!', appForm)
             saveProject(false)
             // initialization_script
-            getInitializationScript()
+            const initCssScript = getInitializationScript()
+            // console.log('initCssScript', initCssScript)
             invoke('open_window', {
                 appUrl: appForm.url,
                 appName: appForm.showName,
@@ -714,7 +745,7 @@ const preview = (resize: boolean) => {
                 resize,
                 width: appForm.width,
                 height: appForm.height,
-                jsContent: jsFileContents.value,
+                jsContent: jsFileContents.value + initCssScript,
             })
         } else {
             console.log('error submit!', fields)
@@ -1075,8 +1106,23 @@ const getLatestRelease = async () => {
     }
 }
 
+// init jsFileContents from jsFile
+const initJsFileContents = async () => {
+    // read js file content from appDataDir assets dir
+    const appDataPath = await appDataDir()
+    const targetDir = await join(appDataPath, 'assets')
+    const jsFilePath = await join(targetDir, `${store.currentProject.name}.js`)
+    // if file not exist, return
+    if (await exists(jsFilePath)) {
+        const jsFileContent = await readTextFile(jsFilePath)
+        jsFileContents.value = jsFileContent
+        console.log('initJsFileContents', jsFileContent)
+    }
+}
+
 onMounted(async () => {
     getLatestRelease()
+    initJsFileContents()
     buildTime = 0
     if (store.currentProject.icon) {
         iconFileName.value = await basename(store.currentProject.icon)
@@ -1240,5 +1286,9 @@ onMounted(async () => {
 <style scoped>
 :deep(.iconInput .el-input__inner) {
     cursor: pointer !important;
+}
+
+:deep(.jsSelect .el-select__input-wrapper) {
+    display: none !important;
 }
 </style>

@@ -10,6 +10,8 @@ interface Project {
     height: number
     desc: string
     debug: string
+    jsFile: string[]
+    filterCss: string
 }
 
 interface PlatformInfo {
