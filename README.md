@@ -21,6 +21,7 @@ style="margin: 0 10px;" >简体中文</a>
 -   🤗 PakePlus is easy to use; all you need is a GitHub Token to get a desktop app.
 -   🌹 No need to install complex dependencies locally; use Github Action for cloud-based auto-packaging.
 -   🧑‍🤝‍🧑 Supports internationalization, user-friendly for a global audience, and it follows your system language automatically.
+-   💡 Supports custom js injection. you can write your own js code to inject into the page.
 
 ## Popular Packages
 
