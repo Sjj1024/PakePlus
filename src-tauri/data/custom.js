@@ -4,6 +4,10 @@
  * Additionally, you can directly include any script files in this file
  * that you wish to attach to the application.
  */
+console.log(
+    '%cbuild from PakePlus： https://github.com/Sjj1024/PakePlus',
+    'color:orangered;font-weight:bolder'
+)
 
 document.addEventListener('DOMContentLoaded', () => {
     let htmlContent = document.documentElement.innerHTML
