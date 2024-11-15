@@ -1,7 +1,6 @@
 export default {
     projectTitle: 'プロジェクト管理',
-    projectTips:
-        'オープンソースで無料、Webページをパッケージしてクロスプラットフォームアプリを作成するには、Githubトークンが1つだけ必要です',
+    projectTips: 'このソフトウェアはオープンソースで無料です。',
     darkMode: 'ダークテーマ',
     lightMode: 'ライトテーマ',
     testToken: 'テスト',
@@ -36,9 +35,9 @@ export default {
     appId: 'アプリID',
     appIcon: 'アプリアイコン',
     appVersion: 'アプリバージョン',
-    platform: 'プレビューのプラットフォーム',
+    platform: 'ぶたい',
     desktop: 'デスクトップ版',
-    winSize: 'ウィンドウサイズ',
+    winSize: 'サイズ',
     width: '幅',
     height: '高さ',
     appDes: 'アプリの説明',
@@ -93,4 +92,12 @@ export default {
     second: '秒',
     copySuccess: 'コピー成功',
     delSuccess: '削除成功',
+    moreConfig: 'より多くの設定',
+    scriptFile: 'スクリプトファイル',
+    selectJsScriptFile: 'jsスクリプトファイルを選択してください',
+    customize: 'カスタマイズ',
+    filterElements: 'ろ過',
+    inputXpathSelectors: 'xpath選択器を入力してください',
+    mobileEnd: 'モバイル端末',
+    sourceCode: 'ソースコード',
 }

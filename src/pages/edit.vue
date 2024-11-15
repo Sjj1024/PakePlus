@@ -31,7 +31,7 @@
                         <template #dropdown>
                             <el-dropdown-menu>
                                 <el-dropdown-item disabled>
-                                    更多配置
+                                    {{ t('moreConfig') }}
                                 </el-dropdown-item>
                                 <el-dropdown-item
                                     :disabled="store.release.id === 0"
@@ -133,7 +133,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="脚本文件"
+                        :label="t('scriptFile')"
                         prop="jsFile"
                         class="formItem"
                     >
@@ -143,7 +143,7 @@
                             collapse-tags
                             filterable
                             ref="selJs"
-                            placeholder="请选择js脚本文件"
+                            :placeholder="t('selectJsScriptFile')"
                             class="jsSelect"
                             @change="jsChange"
                             @click="jsHandle"
@@ -167,7 +167,7 @@
                         <el-radio value="iPhone">iPhone</el-radio>
                         <el-radio value="Android">Android</el-radio>
                         <el-radio value="iPad">iPad</el-radio>
-                        <el-radio value="custom">自定义</el-radio>
+                        <el-radio value="custom">{{ t('customize') }}</el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <!-- window size -->
@@ -189,7 +189,7 @@
                         &#xe66b;
                     </span>
                 </el-form-item>
-                <el-form-item label="过滤元素" prop="desc">
+                <el-form-item :label="t('filterElements')" prop="desc">
                     <el-input
                         v-model="appForm.filterCss"
                         type="textarea"
@@ -198,7 +198,7 @@
                         autoCorrect="off"
                         spellCheck="false"
                         :rows="3"
-                        placeholder="请输入xpath选择器，以英文分号分割"
+                        :placeholder="t('inputXpathSelectors')"
                     />
                 </el-form-item>
                 <el-form-item :label="t('appDes')" prop="desc">
@@ -236,8 +236,16 @@
                 <el-form-item :label="t('pubPlatform')">
                     <el-checkbox-group v-model="pubForm.platform">
                         <el-checkbox :label="t('desktop')" value="desktop" />
-                        <el-checkbox label="移动端" value="mobile" disabled />
-                        <el-checkbox label="源代码" value="source" disabled />
+                        <el-checkbox
+                            :label="t('mobileEnd')"
+                            value="mobile"
+                            disabled
+                        />
+                        <el-checkbox
+                            :label="t('sourceCode')"
+                            value="source"
+                            disabled
+                        />
                     </el-checkbox-group>
                 </el-form-item>
                 <el-form-item :label="t('pubMode')">

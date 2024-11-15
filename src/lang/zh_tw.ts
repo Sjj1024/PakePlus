@@ -88,4 +88,12 @@ export default {
     second: '秒',
     copySuccess: '複製成功',
     delSuccess: '刪除成功',
+    moreConfig: '更多配置',
+    scriptFile: '腳本文件',
+    selectJsScriptFile: '請選擇js腳本文件',
+    customize: '自定義',
+    filterElements: '過濾元素',
+    inputXpathSelectors: '請輸入xpath選擇器，以英文分號分割',
+    mobileEnd: '移動端',
+    sourceCode: '源代碼',
 }
