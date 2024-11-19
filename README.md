@@ -28,14 +28,14 @@ style="margin: 0 10px;" >简体中文</a>
 <table>
     <tr>
         <td>Apple
-            <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead.dmg">Mac</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead_x64.msi">Windows</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead_x86_64.deb">Linux</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Apple/Apple_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Apple/Apple_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Apple/apple_0.0.1_amd64.deb">Linux</a>
         </td>
         <td>X
-            <a href="https://github.com/tw93/Pake/releases/latest/download/Twitter.dmg">Mac</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/Twitter_x64.msi">Windows</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/Twitter_x86_64.deb">Linux</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/X/X_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/X/X_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/X/x_0.0.1_amd64.deb">Linux</a>
         </td>
     </tr>
     <tr>
@@ -84,10 +84,16 @@ workflow: Compile and release your software
 
 ## FAQ
 
-1. Mac users may see an “App is damaged” warning on installation. Run the following command, then reopen the app:
+1. Mac users may see an “App is damaged” warning on installation. click cancel and Run the following command, then reopen the app:
 
 ```sh
 sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
+```
+
+2. When you package the app, Mac users may see an “App is damaged” warning on installation. click cancel and Run the following command, then reopen the app:
+
+```sh
+sudo xattr -r -d com.apple.quarantine /Applications/YourAppName.app
 ```
 
 ## Developing PakePlus
