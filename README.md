@@ -27,19 +27,19 @@ style="margin: 0 10px;" >简体中文</a>
 
 <table>
     <tr>
-        <td>WeChat Reading
+        <td>Apple
             <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead.dmg">Mac</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead_x64.msi">Windows</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/WeRead_x86_64.deb">Linux</a>
         </td>
-        <td>Twitter
+        <td>X
             <a href="https://github.com/tw93/Pake/releases/latest/download/Twitter.dmg">Mac</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/Twitter_x64.msi">Windows</a>
             <a href="https://github.com/tw93/Pake/releases/latest/download/Twitter_x86_64.deb">Linux</a>
         </td>
     </tr>
     <tr>
-        <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/WeRead.jpg width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/apple.png width=600/></td>
         <td><img src=https://sjj1024.github.io/PakePlus/xtwitter.png width=600/></td>
     </tr>
     <tr>
