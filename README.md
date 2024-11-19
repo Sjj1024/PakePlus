@@ -118,3 +118,4 @@ pnpm run build
 
 1. add tauri window config to view
 2. add view control button to page
+3. edit js content injection to preview page with tauri window
