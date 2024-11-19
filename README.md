@@ -44,9 +44,9 @@ style="margin: 0 10px;" >简体中文</a>
     </tr>
     <tr>
         <td>Flomo
-            <a href="https://github.com/tw93/Pake/releases/latest/download/Flomo.dmg">Mac</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/Flomo_x64.msi">Windows</a>
-            <a href="https://github.com/tw93/Pake/releases/latest/download/Flomo_x86_64.deb">Linux</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/YouTube_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/YouTube_0.0.1_x64_en-US.msi">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/you-tube_0.0.1_amd64.deb">Linux</a>
         </td>
         <td>Xiaohongshu (Little Red Book)
             <a href="https://github.com/tw93/Pake/releases/latest/download/XiaoHongShu.dmg">Mac</a>
@@ -55,7 +55,7 @@ style="margin: 0 10px;" >简体中文</a>
         </td>
     </tr>
     <tr>
-        <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/Flomo.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/xtwitter.png width=600/></td>
         <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/XiaoHongShu.png width=600/></td>
     </tr>
 </table>
