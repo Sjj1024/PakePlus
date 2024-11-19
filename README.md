@@ -43,7 +43,7 @@ style="margin: 0 10px;" >简体中文</a>
         <td><img src=https://sjj1024.github.io/PakePlus/xtwitter.png width=600/></td>
     </tr>
     <tr>
-        <td>Flomo
+        <td>YouTube
             <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/YouTube_0.0.1_aarch64.dmg">Mac</a>
             <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/YouTube_0.0.1_x64_en-US.msi">Windows</a>
             <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/you-tube_0.0.1_amd64.deb">Linux</a>

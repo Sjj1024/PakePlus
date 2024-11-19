@@ -538,7 +538,7 @@ const uploadIcon = async () => {
         filters: [
             {
                 name: 'Images',
-                extensions: ['png', 'jpg', 'jpeg'],
+                extensions: ['png', 'jpg', 'jpeg', 'webp'],
             },
         ],
     })
