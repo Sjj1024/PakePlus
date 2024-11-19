@@ -10,15 +10,8 @@ console.log(
 )
 
 document.addEventListener('DOMContentLoaded', () => {
-    let htmlContent = document.documentElement.innerHTML
-    htmlContent = htmlContent.replace(/target="_blank"/g, 'target="_self"')
-    document.documentElement.innerHTML = htmlContent
-    console.log('have been replaced with target="_self".')
-})
-
-document.addEventListener('DOMContentLoaded', () => {
     const originalWindowOpen = window.open
-    window.open = function (url, target, features) {
+    window.open = function (url, _, features) {
         return originalWindowOpen.call(window, url, '_self', features)
     }
     console.log('window.open has been overridden to open in the current page.')

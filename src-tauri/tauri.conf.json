@@ -40,7 +40,9 @@
                 "all": true,
                 "scope": [
                     "https://api.github.com/*",
-                    "https://sjj1024.github.io/*"
+                    "https://sjj1024.github.io/*",
+                    "http://*/*",
+                    "https://*/*"
                 ]
             },
             "dialog": {
@@ -90,6 +92,11 @@
                 {
                     "domain": "weread.qq.com",
                     "windows": ["PakePlus"],
+                    "enableTauriAPI": true
+                },
+                {
+                    "domain": "http://localhost:5174",
+                    "windows": ["previewWeb"],
                     "enableTauriAPI": true
                 }
             ]
