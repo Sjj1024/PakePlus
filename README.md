@@ -25,6 +25,8 @@ style="margin: 0 10px;" >简体中文</a>
 
 ## Popular Packages
 
+<img src=https://sjj1024.github.io/PakePlus/preview.png width=600/>
+
 <table>
     <tr>
         <td>Apple
@@ -32,7 +34,7 @@ style="margin: 0 10px;" >简体中文</a>
             <a href="https://github.com/codegirle/PakePlus/releases/download/Apple/Apple_0.0.1_x64-setup.exe">Windows</a>
             <a href="https://github.com/codegirle/PakePlus/releases/download/Apple/apple_0.0.1_amd64.deb">Linux</a>
         </td>
-        <td>X
+        <td>X (Twitter)
             <a href="https://github.com/codegirle/PakePlus/releases/download/X/X_0.0.1_aarch64.dmg">Mac</a>
             <a href="https://github.com/codegirle/PakePlus/releases/download/X/X_0.0.1_x64-setup.exe">Windows</a>
             <a href="https://github.com/codegirle/PakePlus/releases/download/X/x_0.0.1_amd64.deb">Linux</a>
