@@ -55,7 +55,7 @@ style="margin: 0 10px;" >简体中文</a>
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/xtwitter.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/youtube.png width=600/></td>
         <td><img src=https://raw.githubusercontent.com/tw93/static/main/pake/XiaoHongShu.png width=600/></td>
     </tr>
 </table>
