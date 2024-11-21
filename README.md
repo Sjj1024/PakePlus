@@ -22,6 +22,7 @@ style="margin: 0 10px;" >简体中文</a>
 -   🌹 No need to install complex dependencies locally; use Github Action for cloud-based auto-packaging.
 -   🧑‍🤝‍🧑 Supports internationalization, user-friendly for a global audience, and it follows your system language automatically.
 -   💡 Supports custom js injection. you can write your own js code to inject into the page.
+-   🎨 ui is more beautiful, more comfortable to use.
 
 ## Popular Packages
 
