@@ -61,6 +61,22 @@ style="margin: 0 10px;" >简体中文</a>
         <td><img src=https://sjj1024.github.io/PakePlus/youtube.png width=600/></td>
         <td><img src=https://sjj1024.github.io/PakePlus/hongshu.png width=600/></td>
     </tr>
+        <tr>
+        <td>Tiktok
+            <a href="https://github.com/codegirle/PakePlus/releases/download/TikTok/TikTok_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/TikTok/TikTok_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/TikTok/tik-tok_0.0.1_amd64.deb">Linux</a>
+        </td>
+        <td>抖音
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/_0.0.1_amd64.deb">Linux</a>
+        </td>
+    </tr>
+    <tr>
+        <td><img src=https://sjj1024.github.io/PakePlus/tiktok.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/douyin.png width=600/></td>
+    </tr>
 </table>
 
 ## Getting Started
