@@ -25,7 +25,7 @@ style="margin: 0 10px;" >简体中文</a>
 
 ## Popular Packages
 
-<img src=https://sjj1024.github.io/PakePlus/preview.png  width=1920/>
+<img src=https://sjj1024.github.io/PakePlus/preview.webp  width=1920/>
 
 <table>
     <tr>
