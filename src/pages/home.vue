@@ -273,9 +273,11 @@ const forkProgect = async (tips: boolean = true) => {
         store.setRepository(forkRes.data)
     } else if (forkRes.status === 403) {
         // maybe account has locked
+        testLoading.value = false
         ElMessage.error(forkRes.data.message)
     } else {
         console.log('fork error', forkRes)
+        testLoading.value = false
         ElMessage.error(forkRes.data.message)
     }
     // start
