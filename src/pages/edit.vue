@@ -297,12 +297,22 @@
         <!-- more config -->
         <el-dialog
             v-model="configDialogVisible"
-            title="更多配置"
             width="90%"
             center
             align-center
+            @closed="closeConfigDialog"
         >
-            <TauriConfig />
+            <template #header="{ titleId, titleClass }">
+                <div class="configHeader">
+                    <h4 :id="titleId" :class="titleClass" class="titleLine">
+                        <span class="titleText">更多配置</span>
+                        <el-icon class="switchIcon" @click="isJson = !isJson">
+                            <Switch />
+                        </el-icon>
+                    </h4>
+                </div>
+            </template>
+            <TauriConfig :tauriConfig="tauriConfig" :isJson="isJson" />
         </el-dialog>
     </div>
 </template>
@@ -413,6 +423,52 @@ const appRules = reactive<FormRules>({
         },
     ],
 })
+
+// is json config
+const isJson = ref(false)
+
+// tauri config
+const tauriConfig = reactive({
+    windows: {
+        label: store.currentProject.name,
+        url: store.currentProject.url,
+        userAgent: platforms[store.currentProject.platform].userAgent,
+        fileDropEnabled: true,
+        center: false,
+        width: store.currentProject.width,
+        height: store.currentProject.height,
+        minWidth: null,
+        minHeight: null,
+        maxWidth: null,
+        maxHeight: null,
+        resizable: true,
+        maximizable: true,
+        minimizable: true,
+        closable: true,
+        title: store.currentProject.showName,
+        fullscreen: false,
+        focus: false,
+        transparent: false,
+        maximized: false,
+        visible: true,
+        decorations: true,
+        alwaysOnTop: false,
+        contentProtected: false,
+        skipTaskbar: false,
+        theme: 'Light',
+        titleBarStyle: 'Visible',
+        hiddenTitle: false,
+        acceptFirstMouse: false,
+        tabbingIdentifier: '',
+        additionalBrowserArgs: '',
+    },
+})
+
+// close tauri config dialog
+const closeConfigDialog = () => {
+    configDialogVisible.value = false
+    console.log('closeConfigDialog', tauriConfig)
+}
 
 const jsChange = () => {
     console.log('js file change', appForm.jsFile)
@@ -1221,6 +1277,23 @@ onMounted(async () => {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    .configHeader {
+        .titleText {
+            margin-right: 4px;
+        }
+
+        .switchIcon {
+            cursor: pointer;
+        }
+
+        .titleLine {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+    }
 
     .mainEdit {
         padding: 10px 20px;

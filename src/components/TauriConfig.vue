@@ -1,6 +1,16 @@
 <template>
     <div class="tauriConfig">
-        <el-collapse v-model="activeName" accordion>
+        <!-- json config -->
+        <div v-if="isJson" class="jsonInput">
+            <Codemirror
+                v-model="code"
+                :options="cmOptions"
+                :extensions="extensions"
+                :style="{ height: '100%' }"
+            ></Codemirror>
+        </div>
+        <!-- ui config -->
+        <el-collapse v-else v-model="activeName" accordion>
             <el-collapse-item title="windows" name="1">
                 <div class="windowsConfig">
                     <el-form
@@ -264,51 +274,33 @@
 </template>
 
 <script setup lang="ts">
-import { usePakeStore } from '@/store'
-import { platforms } from '@/utils/config'
-import { ref, reactive } from 'vue'
-import { useI18n } from 'vue-i18n'
-
-const store = usePakeStore()
-const { t } = useI18n()
+import { Codemirror } from 'vue-codemirror'
+import { json } from '@codemirror/lang-json'
+import { oneDark } from '@codemirror/theme-one-dark'
+import { ref } from 'vue'
 
 const activeName = ref('1')
 
-// tauri config
-const tauriConfig = reactive({
-    windows: {
-        label: store.currentProject.name,
-        url: store.currentProject.url,
-        userAgent: platforms[store.currentProject.platform].userAgent,
-        fileDropEnabled: true,
-        center: false,
-        width: store.currentProject.width,
-        height: store.currentProject.height,
-        minWidth: null,
-        minHeight: null,
-        maxWidth: null,
-        maxHeight: null,
-        resizable: true,
-        maximizable: true,
-        minimizable: true,
-        closable: true,
-        title: store.currentProject.showName,
-        fullscreen: false,
-        focus: false,
-        transparent: false,
-        maximized: false,
-        visible: true,
-        decorations: true,
-        alwaysOnTop: false,
-        contentProtected: false,
-        skipTaskbar: false,
-        theme: 'Light',
-        titleBarStyle: 'Visible',
-        hiddenTitle: false,
-        acceptFirstMouse: false,
-        tabbingIdentifier: '',
-        additionalBrowserArgs: '',
-    },
+defineModel('isJson', {
+    required: true,
+    type: Boolean,
+})
+
+const tauriConfig = defineModel('tauriConfig', {
+    required: true,
+    type: Object,
+})
+
+const code = ref(JSON.stringify(tauriConfig.value, null, 2))
+
+const extensions = [json(), oneDark]
+
+const cmOptions = ref({
+    tabSize: 4,
+    mode: 'text/json',
+    theme: 'base16-dark',
+    lineNumbers: true,
+    line: true,
 })
 
 const onSubmit = () => {
@@ -320,6 +312,11 @@ const onSubmit = () => {
 .tauriConfig {
     width: 100%;
     height: 100%;
+
+    .jsonInput {
+        width: 100%;
+        height: 400px;
+    }
 
     .windowsConfig {
         width: 100%;

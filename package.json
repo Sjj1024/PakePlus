@@ -15,13 +15,17 @@
         "tauri preview": "tauri preview"
     },
     "dependencies": {
+        "@codemirror/lang-json": "^6.0.1",
+        "@codemirror/theme-one-dark": "^6.1.2",
         "@element-plus/icons-vue": "^2.3.1",
         "@tauri-apps/api": "^1",
+        "codemirror": "^6.0.1",
         "element-plus": "^2.8.2",
         "pinia": "^2.2.2",
         "sass": "^1.78.0",
         "sass-loader": "^16.0.1",
         "vue": "^3.3.4",
+        "vue-codemirror": "^6.1.1",
         "vue-cropper": "^1.1.4",
         "vue-i18n": "^10.0.0",
         "vue-router": "4"
