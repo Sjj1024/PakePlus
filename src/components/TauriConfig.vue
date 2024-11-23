@@ -137,13 +137,6 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="hiddenTitle" prop="size">
-                                <el-checkbox
-                                    v-model="tauriConfig.windows.hiddenTitle"
-                                    name="type"
-                                >
-                                </el-checkbox>
-                            </el-form-item>
                             <el-form-item label="maximizable" prop="size">
                                 <el-checkbox
                                     v-model="tauriConfig.windows.maximizable"
@@ -172,6 +165,13 @@
                             <el-form-item label="visible" prop="size">
                                 <el-checkbox
                                     v-model="tauriConfig.windows.visible"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="hiddenTitle" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.hiddenTitle"
                                     name="type"
                                 >
                                 </el-checkbox>

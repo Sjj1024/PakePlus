@@ -82,7 +82,7 @@ export default {
     githubRepo: '开源地址',
     navigation: '使用教程',
     buyCoffee: '如果对你有帮助，可以请我喝杯咖啡',
-    onlyPng: '仅支持png格式的图片',
+    onlyPng: '支持png、jpg、jpeg、webp等格式图片',
     hour: '时',
     minute: '分',
     second: '秒',

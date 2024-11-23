@@ -83,7 +83,7 @@ export default {
     githubRepo: 'Github',
     navigation: 'Guides',
     buyCoffee: 'If you find this helpful, you can buy me a cup of coffee.',
-    onlyPng: 'Only png format images are supported',
+    onlyPng: 'Support png, jpg, jpeg, webp, etc',
     hour: 'h',
     minute: 'm',
     second: 's',

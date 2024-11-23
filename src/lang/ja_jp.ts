@@ -86,7 +86,7 @@ export default {
     githubRepo: 'オープンソースリポジトリ',
     navigation: '使用ガイド',
     buyCoffee: '助けになった場合は、コーヒーを一杯おごってください',
-    onlyPng: 'png形式の画像のみ対応',
+    onlyPng: 'png、jpg、jpeg、webp等の画像形式をサポート',
     hour: '時',
     minute: '分',
     second: '秒',
