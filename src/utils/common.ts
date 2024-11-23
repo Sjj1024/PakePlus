@@ -41,3 +41,20 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 // end css filter
 `
+
+export const initProject = {
+    name: '',
+    node_id: '',
+    url: '',
+    showName: '',
+    appid: '',
+    icon: '',
+    version: '',
+    platform: 'desktop',
+    width: 800,
+    height: 600,
+    desc: '',
+    jsFile: [],
+    filterCss: '',
+    more: {},
+}

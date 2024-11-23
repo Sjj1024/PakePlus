@@ -1,59 +1,167 @@
 <template>
     <div class="tauriConfig">
         <el-collapse v-model="activeName" accordion>
-            <el-collapse-item title="Consistency" name="1">
-                <div>
-                    Consistent with real life: in line with the process and
-                    logic of real life, and comply with languages and habits
-                    that the users are used to;
-                </div>
-                <div>
-                    Consistent within interface: all elements should be
-                    consistent, such as: design style, icons and texts, position
-                    of elements, etc.
-                </div>
-                <div>
-                    Consistent with real life: in line with the process and
-                    logic of real life, and comply with languages and habits
-                    that the users are used to;
-                </div>
-                <div>
-                    Consistent within interface: all elements should be
-                    consistent, such as: design style, icons and texts, position
-                    of elements, etc.
-                </div>
-                <div>
-                    Consistent with real life: in line with the process and
-                    logic of real life, and comply with languages and habits
-                    that the users are used to;
-                </div>
-                <div>
-                    Consistent within interface: all elements should be
-                    consistent, such as: design style, icons and texts, position
-                    of elements, etc.
-                </div>
-                <div>
-                    Consistent with real life: in line with the process and
-                    logic of real life, and comply with languages and habits
-                    that the users are used to;
-                </div>
-                <div>
-                    Consistent within interface: all elements should be
-                    consistent, such as: design style, icons and texts, position
-                    of elements, etc.
-                </div>
-                <div>
-                    Consistent with real life: in line with the process and
-                    logic of real life, and comply with languages and habits
-                    that the users are used to;
-                </div>
-                <div>
-                    Consistent within interface: all elements should be
-                    consistent, such as: design style, icons and texts, position
-                    of elements, etc.
+            <el-collapse-item title="windows" name="1">
+                <div class="windowsConfig">
+                    <el-form
+                        :model="tauriConfig.windows"
+                        label-width="auto"
+                        class="configForm"
+                    >
+                        <div class="inLine">
+                            <el-form-item label="minWidth" prop="size">
+                                <el-input
+                                    type="number"
+                                    v-model.number="
+                                        tauriConfig.windows.minWidth
+                                    "
+                                    style="width: 80px"
+                                    placeholder="minWidth"
+                                />
+                            </el-form-item>
+                            <el-form-item label="minHeight" prop="size">
+                                <el-input
+                                    type="number"
+                                    v-model.number="
+                                        tauriConfig.windows.minHeight
+                                    "
+                                    style="width: 80px"
+                                    placeholder="minHeight"
+                                />
+                            </el-form-item>
+                            <el-form-item label="maxWidth" prop="size">
+                                <el-input
+                                    type="number"
+                                    v-model.number="
+                                        tauriConfig.windows.maxWidth
+                                    "
+                                    style="width: 80px"
+                                    placeholder="maxWidth"
+                                />
+                            </el-form-item>
+                            <el-form-item label="maxHeight" prop="size">
+                                <el-input
+                                    type="number"
+                                    v-model.number="
+                                        tauriConfig.windows.maxHeight
+                                    "
+                                    style="width: 80px"
+                                    placeholder="maxHeight"
+                                />
+                            </el-form-item>
+                        </div>
+                        <div class="lineBool">
+                            <el-form-item label="fileDropEnabled" prop="size">
+                                <el-checkbox
+                                    v-model="
+                                        tauriConfig.windows.fileDropEnabled
+                                    "
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="center" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.center"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="resizable" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.resizable"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="fullscreen" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.fullscreen"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="focus" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.focus"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="transparent" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.transparent"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="maximized" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.maximized"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="visible" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.visible"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                        </div>
+                        <div class="lineBool">
+                            <el-form-item label="decorations" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.decorations"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="alwaysOnTop" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.alwaysOnTop"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="contentProtected" prop="size">
+                                <el-checkbox
+                                    v-model="
+                                        tauriConfig.windows.contentProtected
+                                    "
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="skipTaskbar" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.skipTaskbar"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="hiddenTitle" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.hiddenTitle"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                            <el-form-item label="acceptFirstMouse" prop="size">
+                                <el-checkbox
+                                    v-model="
+                                        tauriConfig.windows.acceptFirstMouse
+                                    "
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
+                        </div>
+                    </el-form>
                 </div>
             </el-collapse-item>
-            <el-collapse-item title="Feedback" name="2">
+            <el-collapse-item title="cli" name="2" disabled>
                 <div>
                     Operation feedback: enable the users to clearly perceive
                     their operations by style updates and interactive effects;
@@ -63,7 +171,7 @@
                     rearranging elements of the page.
                 </div>
             </el-collapse-item>
-            <el-collapse-item title="Efficiency" name="3">
+            <el-collapse-item title="bundle" name="3" disabled>
                 <div>
                     Simplify the process: keep operating process simple and
                     intuitive;
@@ -78,45 +186,37 @@
                     memorizing and recalling.
                 </div>
             </el-collapse-item>
-            <el-collapse-item title="Controllability" name="4">
-                <div>
-                    Decision making: giving advices about operations is
-                    acceptable, but do not make decisions for the users;
-                </div>
-                <div>
-                    Controlled consequences: users should be granted the freedom
-                    to operate, including canceling, aborting or terminating
-                    current operation.
-                </div>
-            </el-collapse-item>
         </el-collapse>
     </div>
 </template>
 
 <script setup lang="ts">
+import { usePakeStore } from '@/store'
+import { platforms } from '@/utils/config'
 import { ref, reactive } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const store = usePakeStore()
+const { t } = useI18n()
 
 const activeName = ref('1')
 
 // tauri config
 const tauriConfig = reactive({
-    pattern: 'tauri',
     windows: {
-        label: 'main',
-        url: 'index.html',
-        userAgent: 'tauri',
+        label: store.currentProject.name,
+        url: store.currentProject.url,
+        userAgent: platforms[store.currentProject.platform].userAgent,
         fileDropEnabled: true,
         center: true,
-        x: 0,
-        y: 0,
-        width: 1000,
-        height: 800,
+        width: store.currentProject.width,
+        height: store.currentProject.height,
         minWidth: 400,
         minHeight: 300,
         maxWidth: 1000,
         maxHeight: 800,
         resizable: true,
-        title: 'Tauri App',
+        title: store.currentProject.showName,
         fullscreen: false,
         focus: true,
         transparent: false,
@@ -126,204 +226,66 @@ const tauriConfig = reactive({
         alwaysOnTop: false,
         contentProtected: false,
         skipTaskbar: false,
-        theme: 'light',
-        titleBarStyle: 'overlay',
+        theme: 'Light',
+        titleBarStyle: 'Visible',
         hiddenTitle: false,
         acceptFirstMouse: true,
         tabbingIdentifier: '',
         additionalBrowserArgs: '',
     },
-    cli: {
-        description: '',
-        longDescription: '',
-        beforeHelp: '',
-        afterHelp: '',
-        args: [],
-        subcommands: [],
-    },
-    bundle: {
-        active: true,
-        targets: [],
-        identifier: '',
-        publisher: '',
-        icon: '',
-        resources: '',
-        copyright: '',
-        category: '',
-        shortDescription: '',
-        longDescription: '',
-        appimage: {
-            bundleMediaFramework: false,
-        },
-        deb: {
-            compression: 'none',
-        },
-        macOS: {
-            frameworks: [],
-            minimumSystemVersion: '',
-            exceptionDomain: '',
-            license: '',
-            signingIdentity: '',
-            providerShortName: '',
-            entitlements: '',
-        },
-        externalBin: [],
-        windows: {
-            digestAlgorithm: '',
-            certificateThumbprint: '',
-            timestampUrl: '',
-            tsp: '',
-            webviewInstallMode: '',
-            webviewFixedRuntimePath: '',
-            allowDowngrades: false,
-            wix: {
-                language: '',
-                template: '',
-                skipWebviewInstall: false,
-                license: '',
-                enableElevatedUpdateTask: false,
-                bannerPath: '',
-                dialogImagePath: '',
-            },
-            nsis: {
-                license: '',
-                headerImage: '',
-                sidebarImage: '',
-                installerIcon: '',
-                installMode: '',
-                languages: '',
-                displayLanguageSelector: false,
-            },
-        },
-        allowlist: {
-            all: false,
-            fs: {
-                scope: [],
-                all: false,
-                readFile: false,
-                writeFile: false,
-                readDir: false,
-                writeDir: false,
-                copyFile: false,
-                createDir: false,
-                removeDir: false,
-                removeFile: false,
-                renameFile: false,
-                exists: false,
-            },
-            window: {
-                all: false,
-                create: false,
-                center: false,
-                requestUserAttention: false,
-                setResizable: false,
-                setTitle: false,
-                maximize: false,
-                unmaximize: false,
-                minimize: false,
-                unminimize: false,
-                show: false,
-                hide: false,
-                close: false,
-                setDecorations: false,
-                setAlwaysOnTop: false,
-                setContentProtected: false,
-                setSize: false,
-                setMinSize: false,
-                setMaxSize: false,
-                setPosition: false,
-                setFullscreen: false,
-                setFocus: false,
-                setIcon: false,
-                setSkipTaskbar: false,
-                setCursorGrab: false,
-                setCursorVisible: false,
-                setCursorIcon: false,
-                setCursorPosition: false,
-                setIgnoreCursorEvents: false,
-                startDragging: false,
-                print: false,
-            },
-            shell: {
-                scope: [],
-                all: false,
-                execute: false,
-                sidecar: false,
-                open: false,
-            },
-            dialog: {
-                all: false,
-                open: false,
-                save: false,
-                message: false,
-                ask: false,
-                confirm: false,
-            },
-            http: {
-                scope: [],
-                all: false,
-                request: false,
-            },
-            notification: {
-                all: false,
-            },
-            globalShortcut: {
-                all: false,
-            },
-            os: {
-                all: false,
-            },
-            path: {
-                all: false,
-            },
-            protocol: {
-                assetScope: [],
-                all: false,
-                asset: false,
-            },
-            process: {
-                all: false,
-                relaunch: false,
-                relaunchDangerousAllowSymlinkMacos: false,
-                exit: false,
-            },
-            clipboard: {
-                all: false,
-                writeText: false,
-                readText: false,
-            },
-            app: {
-                all: false,
-                show: false,
-                hide: false,
-            },
-        },
-        security: {
-            csp: '',
-        },
-        updater: {
-            active: false,
-            dialog: false,
-            endpoints: [],
-            pubkey: '',
-            windows: {
-                installerArgs: '',
-                installMode: '',
-            },
-        },
-        systemTray: {
-            iconPath: '',
-            iconAsTemplate: false,
-            menuOnLeftClick: false,
-            title: '',
-        },
-    },
 })
+
+const onSubmit = () => {
+    console.log('submit!')
+}
 </script>
 
 <style scoped lang="scss">
 .tauriConfig {
     width: 100%;
     height: 100%;
+
+    .windowsConfig {
+        width: 100%;
+
+        .configForm {
+            width: 100%;
+
+            :deep(.el-form-item--label-right) {
+                margin-bottom: 6px !important;
+            }
+
+            .inLine {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                :deep(.el-form-item__label-wrap) {
+                    margin-left: 0px !important;
+                }
+            }
+
+            .lineBool {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+
+                :deep(.el-form-item__label) {
+                    padding: 0px 2px 0px 0px !important;
+                }
+
+                :deep(.el-form-item--label-right) {
+                    margin-right: 10px !important;
+                }
+
+                :deep(.el-form-item__label-wrap) {
+                    margin-left: 0px !important;
+                }
+            }
+        }
+    }
 }
 </style>

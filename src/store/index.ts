@@ -1,3 +1,4 @@
+import { initProject } from '@/utils/common'
 import { defineStore } from 'pinia'
 
 export const usePakeStore = defineStore('pakeplus', {
@@ -559,21 +560,7 @@ export const usePakeStore = defineStore('pakeplus', {
                   },
             currentProject: localStorage.getItem('currentProject')
                 ? JSON.parse(localStorage.getItem('currentProject') as string)
-                : {
-                      name: '',
-                      node_id: '',
-                      url: '',
-                      showName: '',
-                      appid: '',
-                      icon: '',
-                      version: '',
-                      platform: '',
-                      width: 800,
-                      height: 600,
-                      desc: '',
-                      jsFile: [],
-                      filterCss: '',
-                  },
+                : initProject,
             projectList: localStorage.getItem('projectList')
                 ? JSON.parse(localStorage.getItem('projectList') as string)
                 : ([] as Project[]),

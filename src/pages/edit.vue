@@ -773,14 +773,27 @@ const preview = async (resize: boolean) => {
             // initialization_script
             const initJsScript = getInitializationScript()
             // console.log('initCssScript', initCssScript)
-            invoke('open_window', {
-                appUrl: appForm.url,
-                appName: appForm.showName,
-                platform: appForm.platform,
-                userAgent: platforms[appForm.platform].userAgent,
+            invoke('preview_from_config', {
                 resize,
-                width: appForm.width,
-                height: appForm.height,
+                config: {
+                    label: 'preview',
+                    url: appForm.url,
+                    userAgent: platforms[appForm.platform].userAgent,
+                    center: true,
+                    width: appForm.width,
+                    height: appForm.height,
+                    resizable: true,
+                    maximizable: true,
+                    minimizable: true,
+                    closable: true,
+                    title: appForm.showName,
+                    fullscreen: false,
+                    focus: false,
+                    transparent: false,
+                    maximized: false,
+                    visible: true,
+                    decorations: true,
+                },
                 jsContent: initJsScript,
             })
         } else {
