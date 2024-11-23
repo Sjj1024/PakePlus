@@ -1,7 +1,7 @@
 use base64::prelude::*;
 use std::io::Read;
 use std::time::Instant;
-use tauri::{AppHandle, LogicalSize, Manager};
+use tauri::{utils::config::WindowConfig, AppHandle, LogicalSize, Manager, WindowBuilder};
 
 #[tauri::command]
 pub async fn open_window(
@@ -60,6 +60,52 @@ pub async fn open_window(
         .initialization_script(contents.as_str())
         .build()
         .unwrap();
+    }
+}
+
+#[tauri::command]
+pub async fn preview_from_config(
+    handle: AppHandle,
+    resize: bool,
+    config: WindowConfig,
+    js_content: String,
+) {
+    let window_label = "previewWeb";
+    if let Some(existing_window) = handle.get_window(window_label) {
+        if resize {
+            let new_size = LogicalSize::new(config.width, config.height);
+            match existing_window.set_size(new_size) {
+                Ok(_) => println!("Window resized to {}x{}", config.width, config.height),
+                Err(e) => eprintln!("Failed to resize window: {}", e),
+            }
+        } else {
+            existing_window.close().unwrap();
+            println!("Existing window closed.");
+            let start = Instant::now();
+            while handle.get_window(window_label).is_some() {
+                if start.elapsed().as_secs() > 2 {
+                    println!("Window close took too long. Aborting.");
+                    return;
+                }
+                std::thread::yield_now();
+            }
+        }
+    }
+    // println!("js_content: {}", js_content);
+    let resource_path = handle
+        .path_resolver()
+        .resolve_resource("data/custom.js")
+        .expect("failed to resolve resource");
+    let mut custom_js = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    custom_js.read_to_string(&mut contents).unwrap();
+    contents += js_content.as_str();
+    // println!("js file contents: {}", contents);
+    if !resize {
+        let _window = WindowBuilder::from_config(&handle, config)
+            .initialization_script(contents.as_str())
+            .build()
+            .unwrap();
     }
 }
 

@@ -22,6 +22,7 @@ fn main() {
         .menu(Menu::new().add_submenu(edit_menu))
         .invoke_handler(tauri::generate_handler![
             command::pake::open_window,
+            command::pake::preview_from_config,
             command::pake::update_build_file,
             command::pake::update_config_file,
             command::pake::update_cargo_file,
