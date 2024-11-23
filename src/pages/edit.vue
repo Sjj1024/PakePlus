@@ -224,7 +224,12 @@
             <!-- <el-button @click="mouseover">test</el-button> -->
         </div>
         <!-- build -->
-        <el-dialog v-model="centerDialogVisible" width="500" center>
+        <el-dialog
+            v-model="centerDialogVisible"
+            width="500"
+            center
+            align-center
+        >
             <template #header>
                 <div class="diaHeader">
                     <span>{{ t('build') }}</span>
@@ -295,21 +300,9 @@
             title="更多配置"
             width="90%"
             center
+            align-center
         >
             <TauriConfig />
-            <template #footer>
-                <div class="dialog-footer">
-                    <el-button @click="configDialogVisible = false"
-                        >取消</el-button
-                    >
-                    <el-button
-                        type="primary"
-                        @click="configDialogVisible = false"
-                    >
-                        确定
-                    </el-button>
-                </div>
-            </template>
         </el-dialog>
     </div>
 </template>
