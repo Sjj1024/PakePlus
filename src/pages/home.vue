@@ -356,10 +356,10 @@ const creatBranch = async () => {
                 name: branchName.value,
                 desc: '',
                 url: '',
-                showName: 'PakePlus',
-                appid: 'com.pakeplus.desktop',
+                showName: '',
+                appid: '',
                 icon: '',
-                version: '0.0.1',
+                version: '',
                 platform: 'desktop',
             }
             console.log('branch Info success', branchInfo)

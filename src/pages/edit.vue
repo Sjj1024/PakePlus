@@ -30,7 +30,9 @@
                         </span>
                         <template #dropdown>
                             <el-dropdown-menu>
-                                <el-dropdown-item disabled>
+                                <el-dropdown-item
+                                    @click="configDialogVisible = true"
+                                >
                                     {{ t('moreConfig') }}
                                 </el-dropdown-item>
                                 <el-dropdown-item
@@ -287,6 +289,28 @@
             :imgUrl="iconBase64"
             :confirm="confirmIcon"
         ></CutterImg>
+        <!-- more config -->
+        <el-dialog
+            v-model="configDialogVisible"
+            title="更多配置"
+            width="90%"
+            center
+        >
+            <TauriConfig />
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button @click="configDialogVisible = false"
+                        >取消</el-button
+                    >
+                    <el-button
+                        type="primary"
+                        @click="configDialogVisible = false"
+                    >
+                        确定
+                    </el-button>
+                </div>
+            </template>
+        </el-dialog>
     </div>
 </template>
 
@@ -315,6 +339,7 @@ import CutterImg from '@/components/CutterImg.vue'
 import { useI18n } from 'vue-i18n'
 import { CSSFILTER, isAlphanumeric, openUrl } from '@/utils/common'
 import { platforms } from '@/utils/config'
+import TauriConfig from '@/components/TauriConfig.vue'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -342,6 +367,7 @@ const iconFileName = ref('')
 const selJs = ref<any>(null)
 const jsFileContents = ref('')
 const jsSelOptions: any = ref<any>([])
+const configDialogVisible = ref(false)
 
 const appRules = reactive<FormRules>({
     url: [

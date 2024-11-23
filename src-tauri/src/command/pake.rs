@@ -196,3 +196,11 @@ pub async fn update_custom_js(handle: tauri::AppHandle, js_content: String) -> S
     let encoded_contents = BASE64_STANDARD.encode(contents);
     return encoded_contents;
 }
+
+#[tauri::command]
+pub async fn content_to_base64(_: tauri::AppHandle, content: String) -> String {
+    // println!("Updated config file: {}", contents);
+    // The new file content, using Base64 encoding
+    let encoded_contents = BASE64_STANDARD.encode(content);
+    return encoded_contents;
+}
