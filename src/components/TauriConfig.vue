@@ -3,10 +3,11 @@
         <!-- json config -->
         <div v-if="isJson" class="jsonInput">
             <Codemirror
-                v-model="code"
+                v-model="uiCode"
                 :options="cmOptions"
                 :extensions="extensions"
                 :style="{ height: '100%' }"
+                @change="codeChange"
             ></Codemirror>
         </div>
         <!-- ui config -->
@@ -277,13 +278,15 @@
 import { Codemirror } from 'vue-codemirror'
 import { json } from '@codemirror/lang-json'
 import { oneDark } from '@codemirror/theme-one-dark'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
 const activeName = ref('1')
 
-defineModel('isJson', {
-    required: true,
-    type: Boolean,
+const props = defineProps({
+    isJson: {
+        type: Boolean,
+        required: true,
+    },
 })
 
 const tauriConfig = defineModel('tauriConfig', {
@@ -291,9 +294,7 @@ const tauriConfig = defineModel('tauriConfig', {
     type: Object,
 })
 
-const code = computed(() => {
-    return JSON.stringify(tauriConfig.value, null, 2)
-})
+const uiCode = ref(JSON.stringify(tauriConfig.value, null, 2))
 
 const extensions = [json(), oneDark]
 
@@ -305,9 +306,25 @@ const cmOptions = ref({
     line: true,
 })
 
-const onSubmit = () => {
-    console.log('submit!')
+const codeChange = (code: string) => {
+    console.log('codeChange!', code)
+    try {
+        const codeObj = JSON.parse(code)
+        console.log('codeObj', codeObj)
+        Object.assign(tauriConfig.value, codeObj)
+    } catch (error) {
+        console.error('codeChange error!', error)
+    }
 }
+
+const updateCode = () => {
+    console.log('updateCode!')
+    uiCode.value = JSON.stringify(tauriConfig.value, null, 2)
+}
+
+defineExpose({
+    updateCode,
+})
 </script>
 
 <style scoped lang="scss">

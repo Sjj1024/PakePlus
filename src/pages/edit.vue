@@ -70,6 +70,7 @@
                             autoCapitalize="off"
                             autoCorrect="off"
                             spellCheck="false"
+                            @change="changeAppName"
                             :placeholder="`${t('example')}：PakePlus`"
                         />
                     </el-form-item>
@@ -84,6 +85,7 @@
                             autoCapitalize="off"
                             autoCorrect="off"
                             spellCheck="false"
+                            @change="changeUrl"
                             :placeholder="`${t(
                                 'example'
                             )}：https://www.pakeplus.com'`"
@@ -116,7 +118,7 @@
                             autoCapitalize="off"
                             autoCorrect="off"
                             spellCheck="false"
-                            :placeholder="`${t('example')}：1.0.0`"
+                            :placeholder="`${t('example')}：0.0.1`"
                         />
                     </el-form-item>
                 </div>
@@ -312,13 +314,17 @@
                     </h4>
                 </div>
             </template>
-            <TauriConfig :tauriConfig="tauriConfig" :isJson="isJson" />
+            <TauriConfig
+                ref="tauriConfigRef"
+                :tauriConfig="tauriConfig"
+                :isJson="isJson"
+            />
         </el-dialog>
     </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import { appWindow } from '@tauri-apps/api/window'
 import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/tauri'
@@ -352,19 +358,7 @@ const cutVisible = ref(false)
 const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
-const appForm: any = reactive({
-    url: store.currentProject.url,
-    showName: store.currentProject.showName,
-    appid: store.currentProject.appid,
-    icon: store.currentProject.icon,
-    jsFile: store.currentProject.jsFile || [],
-    version: store.currentProject.version,
-    platform: store.currentProject.platform || 'desktop',
-    width: store.currentProject.width || 800,
-    height: store.currentProject.height || 600,
-    filterCss: store.currentProject.filterCss || '',
-    desc: store.currentProject.desc,
-})
+const appForm: any = reactive(store.currentProject)
 
 const iconFileName = ref('')
 const selJs = ref<any>(null)
@@ -426,42 +420,67 @@ const appRules = reactive<FormRules>({
 
 // is json config
 const isJson = ref(false)
+const tauriConfigRef = ref<any>(null)
 
 // tauri config
-const tauriConfig = reactive({
-    windows: {
-        label: store.currentProject.name,
-        url: store.currentProject.url,
-        userAgent: platforms[store.currentProject.platform].userAgent,
-        fileDropEnabled: true,
-        center: false,
-        width: store.currentProject.width,
-        height: store.currentProject.height,
-        minWidth: null,
-        minHeight: null,
-        maxWidth: null,
-        maxHeight: null,
-        resizable: true,
-        maximizable: true,
-        minimizable: true,
-        closable: true,
-        title: store.currentProject.showName,
-        fullscreen: false,
-        focus: false,
-        transparent: false,
-        maximized: false,
-        visible: true,
-        decorations: true,
-        alwaysOnTop: false,
-        contentProtected: false,
-        skipTaskbar: false,
-        theme: 'Light',
-        titleBarStyle: 'Visible',
-        hiddenTitle: false,
-        acceptFirstMouse: false,
-        tabbingIdentifier: '',
-        additionalBrowserArgs: '',
-    },
+const tauriConfig = reactive(
+    store.currentProject.more || {
+        windows: {
+            label: store.currentProject.name,
+            url: store.currentProject.url,
+            userAgent: platforms[store.currentProject.platform].userAgent,
+            fileDropEnabled: true,
+            center: false,
+            width: store.currentProject.width,
+            height: store.currentProject.height,
+            minWidth: null,
+            minHeight: null,
+            maxWidth: null,
+            maxHeight: null,
+            resizable: true,
+            maximizable: true,
+            minimizable: true,
+            closable: true,
+            title: store.currentProject.showName,
+            fullscreen: false,
+            focus: false,
+            transparent: false,
+            maximized: false,
+            visible: true,
+            decorations: true,
+            alwaysOnTop: false,
+            contentProtected: false,
+            skipTaskbar: false,
+            theme: 'Light',
+            titleBarStyle: 'Visible',
+            hiddenTitle: false,
+            acceptFirstMouse: false,
+            tabbingIdentifier: '',
+            additionalBrowserArgs: '',
+        },
+    }
+)
+
+// change app name
+const changeAppName = (value: string) => {
+    console.log('changeAppName', value)
+    tauriConfig.windows.title = value
+}
+
+// change url
+const changeUrl = (value: string) => {
+    console.log('changeUrl', value)
+    tauriConfig.windows.url = value
+}
+
+watch(tauriConfig, () => {
+    console.log('tauriConfig change', tauriConfig)
+    if (isJson.value) {
+        appForm.showName = tauriConfig.windows.title
+        appForm.url = tauriConfig.windows.url
+    } else {
+        tauriConfigRef.value?.updateCode()
+    }
 })
 
 // close tauri config dialog
@@ -698,6 +717,7 @@ const saveImage = async (fileName: string, base64: string) => {
         appid: appForm.appid,
         debug: pubForm.model,
         icon: savePath,
+        more: tauriConfig,
     })
 }
 
@@ -777,9 +797,12 @@ const saveProject = async (tips: boolean = true) => {
                 ...appForm,
                 name: store.currentProject.name,
                 debug: pubForm.model,
+                more: tauriConfig,
             })
             // save js file content to appDataDir
-            saveJsFile()
+            if (jsFileContents.value) {
+                saveJsFile()
+            }
             tips && ElMessage.success(t('saveSuccess'))
         } else {
             console.log('error submit!', fields)
@@ -1279,6 +1302,13 @@ onMounted(async () => {
     justify-content: space-between;
 
     .configHeader {
+        user-select: none;
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard syntax */
+        cursor: default;
+
         .titleText {
             margin-right: 4px;
         }
