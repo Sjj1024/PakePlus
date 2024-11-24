@@ -190,6 +190,7 @@
                             <el-form-item label="theme:">
                                 <el-select
                                     v-model="tauriConfig.windows.theme"
+                                    placeholder="theme"
                                     class="themeSel"
                                 >
                                     <el-option label="Light" value="Light" />
@@ -199,6 +200,7 @@
                             <el-form-item label="titleBarStyle:">
                                 <el-select
                                     v-model="tauriConfig.windows.titleBarStyle"
+                                    placeholder="titleBarStyle"
                                     class="themeSel"
                                 >
                                     <el-option
@@ -227,6 +229,7 @@
                                 autoCapitalize="off"
                                 autoCorrect="off"
                                 spellCheck="false"
+                                placeholder="tabbingIdentifier"
                             />
                         </el-form-item>
                     </el-form>
@@ -241,6 +244,7 @@
                             autoCapitalize="off"
                             autoCorrect="off"
                             spellCheck="false"
+                            placeholder="additionalBrowserArgs"
                         />
                     </el-form-item>
                 </div>
