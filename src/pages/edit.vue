@@ -423,43 +423,40 @@ const isJson = ref(false)
 const tauriConfigRef = ref<any>(null)
 
 // tauri config
-const tauriConfig = reactive(
-    store.currentProject.more || {
-        windows: {
-            label: store.currentProject.name,
-            url: store.currentProject.url,
-            userAgent: platforms[store.currentProject.platform].userAgent,
-            fileDropEnabled: true,
-            center: false,
-            width: store.currentProject.width,
-            height: store.currentProject.height,
-            minWidth: null,
-            minHeight: null,
-            maxWidth: null,
-            maxHeight: null,
-            resizable: true,
-            maximizable: true,
-            minimizable: true,
-            closable: true,
-            title: store.currentProject.showName,
-            fullscreen: false,
-            focus: false,
-            transparent: false,
-            maximized: false,
-            visible: true,
-            decorations: true,
-            alwaysOnTop: false,
-            contentProtected: false,
-            skipTaskbar: false,
-            theme: 'Light',
-            titleBarStyle: 'Visible',
-            hiddenTitle: false,
-            acceptFirstMouse: false,
-            tabbingIdentifier: '',
-            additionalBrowserArgs: '',
-        },
-    }
-)
+const tauriConfig = reactive({
+    windows: {
+        label: store.currentProject.name,
+        url: appForm.url,
+        userAgent: platforms[appForm.platform].userAgent,
+        fileDropEnabled: true,
+        center: true,
+        width: appForm.width,
+        height: appForm.height,
+        minWidth: null,
+        minHeight: null,
+        maxWidth: null,
+        maxHeight: null,
+        resizable: true,
+        maximizable: true,
+        minimizable: true,
+        closable: true,
+        title: appForm.showName,
+        fullscreen: false,
+        focus: false,
+        transparent: false,
+        maximized: false,
+        visible: true,
+        decorations: true,
+        alwaysOnTop: false,
+        contentProtected: false,
+        skipTaskbar: false,
+        titleBarStyle: 'Visible',
+        hiddenTitle: false,
+        acceptFirstMouse: false,
+        tabbingIdentifier: '',
+        additionalBrowserArgs: '',
+    },
+})
 
 // change app name
 const changeAppName = (value: string) => {
@@ -1025,6 +1022,39 @@ const updateMainRs = async () => {
 }
 
 // update build.yml file content
+const mainRsConfig = async () => {
+    // get CargoToml file sha
+    const shaRes = await getFileSha(
+        'src-tauri/src/main.rs',
+        store.currentProject.name
+    )
+    console.log('get CargoToml file sha', shaRes)
+    if (shaRes.status === 200 || shaRes.status === 404) {
+        // get CargoToml file content
+        const configContent: any = await invoke('rust_main_window', {
+            config: JSON.stringify(tauriConfig.windows),
+        })
+        const updateRes: any = await githubApi.updateMainRsFile(
+            store.userInfo.login,
+            'PakePlus',
+            {
+                message: 'update main rust from pakeplus',
+                content: configContent,
+                sha: shaRes.data.sha,
+                branch: store.currentProject.name,
+            }
+        )
+        if (updateRes.status === 200) {
+            console.log('updateRes', updateRes)
+        } else {
+            console.log('updateRes error', updateRes)
+        }
+    } else {
+        console.log('getFileSha error', shaRes)
+    }
+}
+
+// update build.yml file content
 const updateCustomJs = async () => {
     // get CargoToml file sha
     const shaRes = await getFileSha(
@@ -1069,7 +1099,8 @@ const onPublish = async () => {
     // update Cargo.toml
     await updateCargoToml()
     // update main rust
-    await updateMainRs()
+    // await updateMainRs()
+    await mainRsConfig()
     // update custom js
     await updateCustomJs()
     // update tauri config json

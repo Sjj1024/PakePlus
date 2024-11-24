@@ -30,6 +30,7 @@ fn main() {
             command::pakeplus::update_custom_js,
             command::pakeplus::content_to_base64,
             command::pakeplus::update_config_json,
+            command::pakeplus::rust_main_window,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

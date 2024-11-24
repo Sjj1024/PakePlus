@@ -269,6 +269,22 @@ pub async fn update_main_rust(
 }
 
 #[tauri::command]
+pub async fn rust_main_window(handle: tauri::AppHandle, config: String) -> String {
+    let resource_path = handle
+        .path_resolver()
+        .resolve_resource("data/main.rs")
+        .expect("failed to resolve resource");
+    let mut main_rust = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    main_rust.read_to_string(&mut contents).unwrap();
+    contents = contents.replace("WINDOWCONFIG", config.as_str());
+    // println!("Updated config file: {}", contents);
+    // The new file content, using Base64 encoding
+    let encoded_contents = BASE64_STANDARD.encode(contents);
+    return encoded_contents;
+}
+
+#[tauri::command]
 pub async fn update_custom_js(handle: tauri::AppHandle, js_content: String) -> String {
     let resource_path = handle
         .path_resolver()

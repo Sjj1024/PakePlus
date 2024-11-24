@@ -3,8 +3,8 @@
 use serde_json::Error;
 use tauri::{utils::config::WindowConfig, Menu, MenuItem, Submenu, WindowBuilder};
 
-fn json_to_window_config(json: &str) -> Result<WindowConfig, Error> {
-    serde_json::from_str(json)
+fn json_to_window_config(window_json: &str) -> Result<WindowConfig, Error> {
+    serde_json::from_str(window_json)
 }
 
 fn main() {
@@ -23,8 +23,8 @@ fn main() {
     tauri::Builder::default()
         .setup(|app| {
             let app_handle = app.handle();
-            let json = r#"{"label":"submain","url":"https://juejin.cn/"}"#;
-            match json_to_window_config(json) {
+            let window_json = r#"WINDOWCONFIG"#;
+            match json_to_window_config(window_json) {
                 Ok(config) => {
                     println!("Parsed WindowConfig: {:?}", config);
                     let _main_window = WindowBuilder::from_config(&app_handle, config)
