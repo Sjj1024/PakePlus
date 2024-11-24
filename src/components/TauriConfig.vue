@@ -277,7 +277,7 @@
 import { Codemirror } from 'vue-codemirror'
 import { json } from '@codemirror/lang-json'
 import { oneDark } from '@codemirror/theme-one-dark'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const activeName = ref('1')
 
@@ -291,7 +291,9 @@ const tauriConfig = defineModel('tauriConfig', {
     type: Object,
 })
 
-const code = ref(JSON.stringify(tauriConfig.value, null, 2))
+const code = computed(() => {
+    return JSON.stringify(tauriConfig.value, null, 2)
+})
 
 const extensions = [json(), oneDark]
 
