@@ -847,25 +847,7 @@ const preview = async (resize: boolean) => {
             // console.log('initCssScript', initCssScript)
             invoke('preview_from_config', {
                 resize,
-                config: {
-                    label: 'preview',
-                    url: appForm.url,
-                    userAgent: platforms[appForm.platform].userAgent,
-                    center: true,
-                    width: appForm.width,
-                    height: appForm.height,
-                    resizable: true,
-                    maximizable: true,
-                    minimizable: true,
-                    closable: true,
-                    title: appForm.showName,
-                    fullscreen: false,
-                    focus: false,
-                    transparent: false,
-                    maximized: false,
-                    visible: true,
-                    decorations: true,
-                },
+                config: tauriConfig.windows,
                 jsContent: initJsScript,
             })
         } else {
@@ -1388,6 +1370,7 @@ onMounted(async () => {
                 -moz-user-select: none; /* Firefox */
                 -ms-user-select: none; /* IE10+/Edge */
                 user-select: none; /* Standard syntax */
+                z-index: 1000;
 
                 .dropdownLink {
                     color: gray;
