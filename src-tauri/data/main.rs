@@ -1,7 +1,11 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+use serde_json::Error;
+use tauri::{utils::config::WindowConfig, Menu, MenuItem, Submenu, WindowBuilder};
 
-use tauri::{Menu, MenuItem, Submenu};
+fn json_to_window_config(json: &str) -> Result<WindowConfig, Error> {
+    serde_json::from_str(json)
+}
 
 fn main() {
     let edit_menu = Submenu::new(
@@ -18,17 +22,19 @@ fn main() {
     );
     tauri::Builder::default()
         .setup(|app| {
-            let _window = tauri::WindowBuilder::new(
-                app,
-                "PakePlus",
-                tauri::WindowUrl::App("PROJECTURL".into()),
-            )
-            .initialization_script(include_str!("./extension/custom.js"))
-            .title("PROJECTNAME")
-            .inner_size(-1.0, -2.0)
-            .center()
-            .user_agent("PROJECTUSERAGENT")
-            .build()?;
+            let app_handle = app.handle();
+            let json = r#"{"label":"submain","url":"https://juejin.cn/"}"#;
+            match json_to_window_config(json) {
+                Ok(config) => {
+                    println!("Parsed WindowConfig: {:?}", config);
+                    let _main_window = WindowBuilder::from_config(&app_handle, config)
+                        .build()
+                        .unwrap();
+                }
+                Err(err) => {
+                    eprintln!("Failed to parse JSON: {}", err);
+                }
+            }
             Ok(())
         })
         .menu(Menu::new().add_submenu(edit_menu))
