@@ -284,7 +284,7 @@
                         {{ t('cancel') }}
                     </el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <el-button type="primary" @click="onSubmit">
+                    <el-button type="primary" @click="onPublish">
                         {{ t('confirm') }}
                     </el-button>
                 </div>
@@ -1059,7 +1059,7 @@ const updateCustomJs = async () => {
 }
 
 // del pre publish version
-const onSubmit = async () => {
+const onPublish = async () => {
     centerDialogVisible.value = false
     buildLoading.value = true
     // delete release

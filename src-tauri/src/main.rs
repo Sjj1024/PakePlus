@@ -21,14 +21,14 @@ fn main() {
     tauri::Builder::default()
         .menu(Menu::new().add_submenu(edit_menu))
         .invoke_handler(tauri::generate_handler![
-            command::pake::open_window,
-            command::pake::preview_from_config,
-            command::pake::update_build_file,
-            command::pake::update_config_file,
-            command::pake::update_cargo_file,
-            command::pake::update_main_rust,
-            command::pake::update_custom_js,
-            command::pake::content_to_base64,
+            command::pakeplus::open_window,
+            command::pakeplus::preview_from_config,
+            command::pakeplus::update_build_file,
+            command::pakeplus::update_config_file,
+            command::pakeplus::update_cargo_file,
+            command::pakeplus::update_main_rust,
+            command::pakeplus::update_custom_js,
+            command::pakeplus::content_to_base64,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

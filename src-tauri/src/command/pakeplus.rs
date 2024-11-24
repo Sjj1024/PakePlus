@@ -169,6 +169,47 @@ pub async fn update_config_file(
 }
 
 #[tauri::command]
+pub async fn update_config_json(
+    handle: tauri::AppHandle,
+    name: String,
+    version: String,
+    url: String,
+    id: String,
+    width: String,
+    height: String,
+    user_agent: String,
+    ascii: bool,
+) -> String {
+    let resource_path = handle
+        .path_resolver()
+        .resolve_resource("data/config.json")
+        .expect("failed to resolve resource");
+    let mut config_file = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    config_file.read_to_string(&mut contents).unwrap();
+    contents = contents
+        .replace("PROJECTNAME", name.as_str())
+        .replace("PROJECTVERSION", version.as_str())
+        .replace("PROJECTURL", url.as_str())
+        .replace("PROJECTID", id.as_str())
+        .replace("PROJECTUSERAGENT", user_agent.as_str())
+        .replace("-1", width.as_str())
+        .replace("-2", height.as_str());
+    if ascii {
+        contents = contents.replace("-3", r#""all""#);
+    } else {
+        contents = contents.replace(
+            "-3",
+            r#"["deb", "appimage", "nsis", "app", "dmg", "updater"]"#,
+        );
+    }
+    // println!("Updated config file: {}", contents);
+    // The new file content, using Base64 encoding
+    let encoded_contents = BASE64_STANDARD.encode(contents);
+    return encoded_contents;
+}
+
+#[tauri::command]
 pub async fn update_cargo_file(
     handle: tauri::AppHandle,
     name: String,
