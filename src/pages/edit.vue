@@ -307,7 +307,7 @@
             <template #header="{ titleId, titleClass }">
                 <div class="configHeader">
                     <h4 :id="titleId" :class="titleClass" class="titleLine">
-                        <span class="titleText">更多配置</span>
+                        <span class="titleText">{{ t('moreConfig') }}</span>
                         <el-icon class="switchIcon" @click="isJson = !isJson">
                             <Switch />
                         </el-icon>
