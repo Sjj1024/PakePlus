@@ -14,9 +14,7 @@ style="margin: 0 10px;" >简体中文</a>
 
 video:
 https://sjj1024.github.io/PakePlus/youtube.mp4
-<video src="https://sjj1024.github.io/PakePlus/youtube.mp4" controls="controls" width="1920"></video>
-
-<iframe width="560" height="315" src="https://youtu.be/ft7FlllfWyE" frameborder="0" allowfullscreen></iframe>
+<video src="./docs/youtube.mp4" controls="controls" width="1920"></video>
 
 ## Features
 
