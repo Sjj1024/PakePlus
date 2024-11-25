@@ -610,6 +610,10 @@ const platformChange = (value: any) => {
     console.log('platformInfo', platformInfo)
     appForm.width = platformInfo.width
     appForm.height = platformInfo.height
+    tauriConfig.windows.width = platformInfo.width
+    tauriConfig.windows.height = platformInfo.height
+    tauriConfig.windows.userAgent = platformInfo.userAgent
+    tauriConfigRef.value?.updateCode()
 }
 
 // rotate width and height
