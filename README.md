@@ -13,8 +13,7 @@ style="margin: 0 10px;" >简体中文</a>
 <div align="left">PakePlus supports Mac, Windows, and Linux, and will soon support Android and iOS. There’s no need to install complex dependencies locally— all you need is a Github Token. Plus, PakePlus is only about 5MB in size. For the latest version, please see the <a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">release page</a>. Check the README for information on <a href="#popular-packages">popular packages</a> and <a href="#development">custom development</a>. Feel free to share your suggestions in the <a href="https://github.com/Sjj1024/PakePlus/discussions">discussion area</a>.</div>
 
 
-
-https://github.com/user-attachments/assets/47bb0912-ac2f-4a8c-a485-4f485bb36f80
+https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
 
 
