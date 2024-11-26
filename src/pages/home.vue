@@ -248,7 +248,7 @@ const changeLang = (lang: string) => {
 
 // check token and confirm token is ok
 const testToken = async (tips: boolean = true) => {
-    if (localStorage.getItem('token') !== token.value) {
+    if (localStorage.getItem('token') !== token.value || tips) {
         testLoading.value = true
         const res: any = await githubApi.gitUserInfo(token.value)
         console.log('testToken', res)

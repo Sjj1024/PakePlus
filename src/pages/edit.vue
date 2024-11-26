@@ -373,6 +373,17 @@ const appRules = reactive<FormRules>({
             message: t('inputWebPlaceholder'),
             trigger: 'change',
         },
+        {
+            validator: (rule, value, callback) => {
+                // check url start with http or https
+                if (value.startsWith('http')) {
+                    callback()
+                } else {
+                    callback(new Error(t('urlInvalid')))
+                }
+            },
+            trigger: 'blur',
+        },
     ],
     showName: [
         {
@@ -386,6 +397,17 @@ const appRules = reactive<FormRules>({
             required: true,
             message: t('inputAppIdPlaceholder'),
             trigger: 'change',
+        },
+        {
+            validator: (rule, value, callback) => {
+                // check appid must be alphanumeric and dot
+                if (/^[a-zA-Z0-9.]+$/.test(value)) {
+                    callback()
+                } else {
+                    callback(new Error(t('appIdInvalid')))
+                }
+            },
+            trigger: 'blur',
         },
     ],
     icon: [
@@ -405,9 +427,7 @@ const appRules = reactive<FormRules>({
             validator: (rule, value, callback) => {
                 const versionPattern = /^\d+\.\d+\.\d+$/ // 匹配如 1.8.8 或 1.9.23
                 if (!versionPattern.test(value)) {
-                    callback(
-                        new Error('版本号格式不正确，必须是类似 1.8.8 的格式')
-                    )
+                    callback(new Error(t('versionSemVer')))
                 } else {
                     callback()
                 }
@@ -1337,10 +1357,10 @@ onMounted(async () => {
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+/Edge */
         user-select: none; /* Standard syntax */
-        cursor: default;
 
         .titleText {
             margin-right: 4px;
+            cursor: default;
         }
 
         .switchIcon {
