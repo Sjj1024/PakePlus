@@ -11,6 +11,8 @@
 
 <div align="left">PakePlus 支持 Mac、Windows 和 Linux，很快也将支持 Android 和 iOS。无需在本地安装复杂的依赖环境，只需要一个Github Token就可以了，而且PakePlus本身也才仅仅5M左右小大，最新版本下载请看：<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">发布地址</a>。查看 README 以获取<a href="#popular-packages">热门包</a>和<a href="#development">自定义开发</a>信息。欢迎在<a href=https://github.com/Sjj1024/PakePlus/discussions>讨论区</a>分享你的建议。</div>
 
+https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
+
 ## 特性
 
 -   🎐 体积比 Electron 包小约 20 倍（约 5M！）
