@@ -401,6 +401,19 @@ const appRules = reactive<FormRules>({
             message: t('inputAppVersionPlaceholder'),
             trigger: 'change',
         },
+        {
+            validator: (rule, value, callback) => {
+                const versionPattern = /^\d+\.\d+\.\d+$/ // 匹配如 1.8.8 或 1.9.23
+                if (!versionPattern.test(value)) {
+                    callback(
+                        new Error('版本号格式不正确，必须是类似 1.8.8 的格式')
+                    )
+                } else {
+                    callback()
+                }
+            },
+            trigger: 'blur',
+        },
     ],
     platform: [
         {

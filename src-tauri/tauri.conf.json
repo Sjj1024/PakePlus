@@ -7,7 +7,7 @@
     },
     "package": {
         "productName": "PakePlus",
-        "version": "0.3.1"
+        "version": "../package.json"
     },
     "tauri": {
         "allowlist": {

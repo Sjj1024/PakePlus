@@ -248,16 +248,20 @@ const changeLang = (lang: string) => {
 
 // check token and confirm token is ok
 const testToken = async (tips: boolean = true) => {
-    testLoading.value = true
-    const res: any = await githubApi.gitUserInfo(token.value)
-    console.log('testToken', res)
-    if (res.status === 200) {
-        localStorage.setItem('token', token.value)
-        store.setUser(res.data)
-        forkProgect(tips)
+    if (localStorage.getItem('token') !== token.value) {
+        testLoading.value = true
+        const res: any = await githubApi.gitUserInfo(token.value)
+        console.log('testToken', res)
+        if (res.status === 200) {
+            localStorage.setItem('token', token.value)
+            store.setUser(res.data)
+            forkProgect(tips)
+        } else {
+            ElMessage.error(t('tokenError'))
+            testLoading.value = false
+        }
     } else {
-        ElMessage.error(t('tokenError'))
-        testLoading.value = false
+        tokenDialog.value = false
     }
 }
 
