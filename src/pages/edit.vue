@@ -1223,6 +1223,16 @@ const dispatchAction = async () => {
     }, 10000)
 }
 
+// create issue
+const createIssue = async (url: string) => {
+    const issueRes: any = await githubApi.createIssue({
+        body: `编译出错：${url}`,
+        labels: ['failure'],
+        title: `${store.currentProject.name}编译出错`,
+    })
+    console.log('issueRes---', issueRes)
+}
+
 // check build workflow status
 const checkBuildStatus = async () => {
     const checkRes: any = await githubApi.getWorkflowRuns(
@@ -1259,6 +1269,7 @@ const checkBuildStatus = async () => {
         } else if (status === 'failure') {
             buildLoading.value = false
             buildTime = 0
+            createIssue(html_url)
             openUrl(html_url)
             document.querySelector('.el-loading-text')!.innerHTML = t('failure')
             buildSecondTimer && clearInterval(buildSecondTimer)
@@ -1266,6 +1277,7 @@ const checkBuildStatus = async () => {
         } else if (conclusion === 'failure') {
             buildLoading.value = false
             buildTime = 0
+            createIssue(html_url)
             openUrl(html_url)
             document.querySelector('.el-loading-text')!.innerHTML = t('failure')
             buildSecondTimer && clearInterval(buildSecondTimer)
@@ -1273,6 +1285,7 @@ const checkBuildStatus = async () => {
         } else if (status === 'completed') {
             buildLoading.value = false
             buildTime = 0
+            createIssue(html_url)
             openUrl(html_url)
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)

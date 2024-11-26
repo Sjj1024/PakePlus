@@ -193,4 +193,11 @@ export default {
             body: { branch: 'main' },
         })
     },
+    // creat issue
+    createIssue(body: any) {
+        return http(`/repos/Sjj1024/PakePlus/issues`, {
+            method: 'post',
+            body,
+        })
+    },
 }
