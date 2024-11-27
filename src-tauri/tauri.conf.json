@@ -3,7 +3,8 @@
         "beforeDevCommand": "pnpm dev",
         "beforeBuildCommand": "pnpm build",
         "devPath": "http://localhost:1420",
-        "distDir": "../dist"
+        "distDir": "../dist",
+        "withGlobalTauri": true
     },
     "package": {
         "productName": "PakePlus",
