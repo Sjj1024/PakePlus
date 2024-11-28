@@ -17,19 +17,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                include:
-                    - platform: 'macos-latest'
-                      target: 'aarch64-apple-darwin'
-                    - platform: 'macos-latest'
-                      target: 'x86_64-apple-darwin'
-
-                    - platform: 'windows-latest'
-                      target: 'x86_64-pc-windows-msvc'
-                    - platform: 'windows-latest'
-                      target: 'i686-pc-windows-msvc'
-                    - platform: 'windows-latest'
-                      target: 'aarch64-pc-windows-msvc'
-
+                platform: [macos-latest, ubuntu-20.04, windows-latest]
         runs-on: ${{ matrix.platform }}
 
         steps:
