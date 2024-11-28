@@ -96,14 +96,13 @@ jobs:
             # 执行构建，以及推送 github release
             - name: Build the app
               uses: tauri-apps/tauri-action@v0
+
               env:
-                  CI: false
-                  PLATFORM: ${{ matrix.platform }}
-                  GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  tagName: ${{ github.ref_name }}
-                  releaseName: 'PakePlus v__VERSION__'
+                  tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
+                  releaseName: 'PakePlus v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
                   releaseBody: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.'
-                  releaseDraft: true
+                  releaseDraft: false
                   prerelease: false
-                  args: --target ${{ matrix.target }}
+                  publish: true
