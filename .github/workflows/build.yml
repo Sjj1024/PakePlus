@@ -27,12 +27,18 @@ jobs:
                     - platform: 'windows-latest'
                       target: 'x86_64-pc-windows-msvc'
                     - platform: 'windows-latest'
+                      target: 'i686-pc-windows-msvc'
+                    - platform: 'windows-latest'
+                      target: 'aarch64-pc-windows-msvc'
                       args: '--target aarch64-pc-windows-msvc'
 
         runs-on: ${{ matrix.platform }}
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
+
+            - name: Install rust target
+              run: rustup target add ${{ matrix.target }}
 
             - name: Install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-20.04'
