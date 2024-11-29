@@ -29,7 +29,7 @@ jobs:
                       args: ''
                     - platform: 'windows-latest'
                       target: 'x86_64-pc-windows-msvc'
-                      args: '--target x86_64-pc-windows-msvc'
+
                     - platform: 'windows-latest'
                       target: 'i686-pc-windows-msvc'
                     - platform: 'windows-latest'
@@ -82,23 +82,13 @@ jobs:
               # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
               run: pnpm install # change this to npm or pnpm depending on which one you use.
 
-            # Step 3: 读取 Note.md 的内容
-            - name: Read Note.md content
-              id: read-note
-              shell: pwsh
-              run: |
-                  $content = Get-Content -Path "Note.md" -Raw
-                  echo "note_body<<EOF" >> $env:GITHUB_ENV
-                  echo $content >> $env:GITHUB_ENV
-                  echo "EOF" >> $env:GITHUB_ENV
-
             - uses: tauri-apps/tauri-action@v0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
                   releaseName: 'PakePlus v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
-                  body: ${{ env.note_body }}
+                  releaseBody: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.'
                   releaseDraft: false
                   prerelease: false
                   publish: true
