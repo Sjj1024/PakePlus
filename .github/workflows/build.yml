@@ -29,7 +29,15 @@ jobs:
 
         runs-on: ${{ matrix.platform }}
         steps:
-            - uses: actions/checkout@v4
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Install dependencies (ubuntu only)
+              if: matrix.platform == 'ubuntu-20.04'
+              # You can remove libayatana-appindicator3-dev if you don't use the system tray feature.
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libayatana-appindicator3-dev librsvg2-dev
 
             - name: Setup node
               uses: actions/setup-node@v4
@@ -39,12 +47,6 @@ jobs:
             - uses: pnpm/action-setup@v3
               with:
                   version: latest
-
-            - name: install dependencies (ubuntu only)
-              if: matrix.platform == 'ubuntu-20.04' # This must match the platform value defined above.
-              run: |
-                  sudo apt-get update
-                  sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
             # 获取 pnpm 缓存
             - name: Sync node version and setup cache
