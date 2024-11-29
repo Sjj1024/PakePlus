@@ -88,7 +88,7 @@ jobs:
               with:
                   tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
                   releaseName: 'PakePlus v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
-                  releaseBody: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.'
+                  body_path: ./Note.md
                   releaseDraft: false
                   prerelease: false
                   publish: true
