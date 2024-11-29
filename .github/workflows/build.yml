@@ -85,20 +85,22 @@ jobs:
             # Step 3: 读取 Note.md 的内容
             - name: Read Note.md content
               id: read-note
+              shell: pwsh
               run: |
-                  content=$(cat Note.md)
-                  echo "note_body<<EOF" >> $GITHUB_ENV
-                  echo "$content" >> $GITHUB_ENV
-                  echo "EOF" >> $GITHUB_ENV
+                  # 使用 PowerShell 读取 Note.md 内容
+                  $content = Get-Content -Path "Note.md" -Raw
+                  echo "note_body<<EOF" >> $env:GITHUB_ENV
+                  echo $content >> $env:GITHUB_ENV
+                  echo "EOF" >> $env:GITHUB_ENV
 
-            - uses: tauri-apps/tauri-action@v0
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
-                  releaseName: 'PakePlus v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
-                  body: ${{ env.note_body }}
-                  releaseDraft: false
-                  prerelease: false
-                  publish: true
-                  args: ${{ matrix.args }}
+      - uses: tauri-apps/tauri-action@v0
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+            tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
+            releaseName: 'PakePlus v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
+            body: ${{ env.note_body }}
+            releaseDraft: false
+            prerelease: false
+            publish: true
+            args: ${{ matrix.args }}
