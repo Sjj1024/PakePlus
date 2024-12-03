@@ -100,7 +100,7 @@ export default {
     selectJsScriptFile: 'jsスクリプトファイルを選択してください',
     customize: 'カスタマイズ',
     filterElements: 'ろ過',
-    inputXpathSelectors: 'xpath選択器を入力してください',
+    inputXpathSelectors: 'selector選択器を入力してください',
     mobileEnd: 'モバイル端末',
     sourceCode: 'ソースコード',
 }

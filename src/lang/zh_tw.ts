@@ -96,7 +96,7 @@ export default {
     selectJsScriptFile: '請選擇js腳本文件',
     customize: '自定義',
     filterElements: '過濾元素',
-    inputXpathSelectors: '請輸入xpath選擇器，以英文分號分割',
+    inputXpathSelectors: '請輸入selector選擇器，以英文分號分割',
     mobileEnd: '移動端',
     sourceCode: '源代碼',
 }

@@ -101,7 +101,7 @@ export default {
     customize: 'Customize',
     filterElements: 'Filter Elements',
     inputXpathSelectors:
-        'Please enter the xpath selectors, separated by semicolons',
+        'Please enter the selector selectors, separated by semicolons',
     mobileEnd: 'Mobile End',
     sourceCode: 'Source Code',
 }
