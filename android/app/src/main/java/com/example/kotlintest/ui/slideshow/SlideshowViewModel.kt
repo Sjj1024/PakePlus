@@ -1,4 +1,4 @@
-package com.pakeandroid.pakeandroid.ui.slideshow
+package com.example.kotlintest.ui.slideshow
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

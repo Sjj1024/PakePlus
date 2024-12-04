@@ -1,4 +1,4 @@
-package com.pakeandroid.pakeandroid
+package com.example.kotlintest
 
 import org.junit.Test
 

@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PakeAndroid"
+rootProject.name = "kotlinTest"
 include(":app")
