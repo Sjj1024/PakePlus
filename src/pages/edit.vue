@@ -654,6 +654,8 @@ const rotateWH = () => {
     const temp = appForm.width
     appForm.width = appForm.height
     appForm.height = temp
+    tauriConfig.windows.width = appForm.width
+    tauriConfig.windows.height = appForm.height
     preview(true)
 }
 
