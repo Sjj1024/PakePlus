@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.pakeandroid.pakeandroid"
+    namespace = "com.example.kotlintest"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.pakeandroid.pakeandroid"
+        applicationId = "com.example.kotlintest"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -20,10 +20,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {

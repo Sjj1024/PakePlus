@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.pakeandroid.pakeandroid.ui.home.HomeFragment"
+        android:name="com.example.kotlintest.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.pakeandroid.pakeandroid.ui.gallery.GalleryFragment"
+        android:name="com.example.kotlintest.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.pakeandroid.pakeandroid.ui.slideshow.SlideshowFragment"
+        android:name="com.example.kotlintest.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>
