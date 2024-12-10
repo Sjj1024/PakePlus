@@ -1,17 +1,29 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use tauri::{Menu, MenuItem, Submenu};
+
 // 对command单独管理
 mod command;
 
 fn main() {
+    #[cfg(any(target_os = "linux", target_os = "windows"))]
+    let menu = Menu::new();
+    #[cfg(target_os = "macos")]
+    let menu = Menu::new().add_submenu(Submenu::new(
+        "Edit",
+        Menu::new()
+            .add_native_item(MenuItem::Undo)
+            .add_native_item(MenuItem::Redo)
+            .add_native_item(MenuItem::Copy)
+            .add_native_item(MenuItem::Cut)
+            .add_native_item(MenuItem::Paste)
+            .add_native_item(MenuItem::SelectAll)
+            .add_native_item(MenuItem::CloseWindow)
+            .add_native_item(MenuItem::Quit),
+    ));
     tauri::Builder::default()
-        .setup(|app| {
-            // Make the docker NOT to have an active app when started
-            #[cfg(target_os = "macos")]
-            app.set_activation_policy(tauri::ActivationPolicy::Accessory);
-            Ok(())
-        })
+        .menu(menu)
         .invoke_handler(tauri::generate_handler![
             command::pakeplus::open_window,
             command::pakeplus::preview_from_config,
