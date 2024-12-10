@@ -132,6 +132,11 @@ pnpm run dev
 
 # Package the app
 pnpm run build
+
+# github action
+releaseDraft: false：表示这个版本不会是草稿版本，它会被视为正式发布的版本。
+prerelease: false：表示这个版本不是预发布版本，也就是说这是一个稳定版本。
+publish: false：表示这个版本不会立即发布，虽然它会被创建，但不会公开显示。
 ```
 
 <!-- ## Support
