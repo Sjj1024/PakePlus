@@ -91,5 +91,5 @@ jobs:
                   body_path: ./Note.md
                   releaseDraft: false
                   prerelease: false
-                  publish: true
+                  publish: false
                   args: ${{ matrix.args }}
