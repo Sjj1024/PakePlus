@@ -144,3 +144,6 @@ pnpm run build
 ## TODO
 
 1. add auto update feature
+2. support build android apk and build ios ipa
+3. add upload front build dist to build
+4.
