@@ -1,14 +1,5 @@
 name: Test
-on:
-    push:
-        tags:
-            - 'v*'
-    workflow_dispatch:
-        inputs:
-            branch:
-                description: 'Branch to run the workflow on'
-                required: true
-                default: 'template'
+on: push
 
 jobs:
     publish-tauri:
