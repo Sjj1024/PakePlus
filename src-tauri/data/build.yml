@@ -11,18 +11,37 @@ on:
                 default: 'template'
 
 jobs:
-    release:
+    publish-tauri:
         permissions:
             contents: write
         strategy:
             fail-fast: false
             matrix:
-                platform: [macos-latest, ubuntu-20.04, windows-latest]
-        runs-on: ${{ matrix.platform }}
+                include:
+                    - platform: 'macos-latest' # for Arm based macs (M1 and above).
+                      target: 'aarch64-apple-darwin'
+                      args: '--target aarch64-apple-darwin'
+                    - platform: 'macos-latest' # for Intel based macs.
+                      target: 'x86_64-apple-darwin'
+                      args: '--target x86_64-apple-darwin'
+                    - platform: 'ubuntu-20.04'
+                      target: 'x86_64-unknown-linux-gnu'
+                      args: ''
+                    - platform: 'windows-latest'
+                      target: 'x86_64-pc-windows-msvc'
+                    - platform: 'windows-latest'
+                      target: 'i686-pc-windows-msvc'
+                    - platform: 'windows-latest'
+                      target: 'aarch64-pc-windows-msvc'
+                      args: '--target aarch64-pc-windows-msvc'
 
+        runs-on: ${{ matrix.platform }}
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
+
+            - name: Install rust target
+              run: rustup target add ${{ matrix.target }}
 
             - name: Install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-20.04'
@@ -31,25 +50,36 @@ jobs:
                   sudo apt-get update
                   sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libayatana-appindicator3-dev librsvg2-dev
 
-            - name: Rust setup
-              uses: dtolnay/rust-toolchain@stable
+            - name: Setup node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - uses: pnpm/action-setup@v3
+              with:
+                  version: latest
+
+            # 获取 pnpm 缓存
+            - name: Sync node version and setup cache
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: pnpm
+
+            - name: install Rust stable
+              uses: dtolnay/rust-toolchain@stable # Set this to dtolnay/rust-toolchain@nightly
+              with:
+                  # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builds.
+                  targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
             - name: Rust cache
               uses: swatinem/rust-cache@v2
               with:
                   workspaces: './src-tauri -> target'
 
-            - name: Sync node version and setup cache
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-
-            - name: Install PNPM
-              run: npm i -g pnpm
-
-            - name: Install frontend dependencies
+            - name: install frontend dependencies
               # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
-              run: pnpm install # Change this to npm, yarn or pnpm.
+              run: pnpm install # change this to npm or pnpm depending on which one you use.
 
             - name: Regenerate Icons
               run: pnpm tauri icon
