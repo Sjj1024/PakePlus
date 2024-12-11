@@ -90,4 +90,5 @@ jobs:
                   releaseName: 'PakePlus v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
                   body_path: ./Note.md
                   releaseDraft: true
+                  prerelease: false
                   args: ${{ matrix.args }}
