@@ -80,7 +80,6 @@ jobs:
                   tagName: ${{ github.ref_name }}
                   releaseName: 'PakePlus v__VERSION__'
                   releaseBody: 'This is a draft version'
-                  draft: true
                   releaseDraft: true
                   prerelease: false
                   publish: false
