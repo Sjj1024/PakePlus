@@ -77,8 +77,11 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
-                  releaseName: 'PakePlus v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
+                  tagName: ${{ github.ref_name }}
+                  releaseName: 'PakePlus v__VERSION__'
                   releaseBody: 'This is a draft version'
                   draft: true
+                  releaseDraft: true
+                  prerelease: false
+                  publish: false
                   args: ${{ matrix.args }}
