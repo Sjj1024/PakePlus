@@ -23,7 +23,6 @@ jobs:
                       args: ''
                     - platform: 'windows-latest'
                       target: 'x86_64-pc-windows-msvc'
-
                     - platform: 'windows-latest'
                       target: 'i686-pc-windows-msvc'
                     - platform: 'windows-latest'
@@ -76,7 +75,6 @@ jobs:
               # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
               run: pnpm install # change this to npm or pnpm depending on which one you use.
 
-            - name: Build the app
             - uses: tauri-apps/tauri-action@v0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
