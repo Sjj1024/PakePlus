@@ -5,7 +5,7 @@
             <Codemirror
                 v-model="uiCode"
                 :options="cmOptions"
-                :extensions="extensions"
+                :extensions="localTheme === 'dark' ? extensions : []"
                 :style="{ height: '100%' }"
                 @change="codeChange"
             ></Codemirror>
@@ -285,6 +285,7 @@ import { oneDark } from '@codemirror/theme-one-dark'
 import { ref } from 'vue'
 
 const activeName = ref('1')
+const localTheme = localStorage.getItem('theme')
 
 const props = defineProps({
     isJson: {
@@ -299,13 +300,11 @@ const tauriConfig = defineModel('tauriConfig', {
 })
 
 const uiCode = ref(JSON.stringify(tauriConfig.value, null, 2))
-
-const extensions = [json(), oneDark]
+const extensions: any = [json(), oneDark]
 
 const cmOptions = ref({
     tabSize: 4,
     mode: 'text/json',
-    theme: 'base16-dark',
     lineNumbers: true,
     line: true,
 })
