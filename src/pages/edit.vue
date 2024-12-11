@@ -1310,7 +1310,7 @@ const getLatestRelease = async () => {
         store.currentProject.name
     )
     console.log('releaseRes', releaseRes)
-    if (releaseRes.status === 200 && releaseRes.data.assets.length > 3) {
+    if (releaseRes.status === 200 && releaseRes.data.assets.length >= 3) {
         // filter current project version
         const assets = releaseRes.data.assets.filter((item: any) => {
             return (
