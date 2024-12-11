@@ -8,7 +8,10 @@ fn json_to_window_config(window_json: &str) -> Result<WindowConfig, Error> {
 }
 
 fn main() {
-    let edit_menu = Submenu::new(
+    #[cfg(any(target_os = "linux", target_os = "windows"))]
+    let menu = Menu::new();
+    #[cfg(target_os = "macos")]
+    let menu = Menu::new().add_submenu(Submenu::new(
         "Edit",
         Menu::new()
             .add_native_item(MenuItem::Undo)
@@ -19,7 +22,7 @@ fn main() {
             .add_native_item(MenuItem::SelectAll)
             .add_native_item(MenuItem::CloseWindow)
             .add_native_item(MenuItem::Quit),
-    );
+    ));
     tauri::Builder::default()
         .setup(|app| {
             let app_handle = app.handle();
@@ -37,7 +40,7 @@ fn main() {
             }
             Ok(())
         })
-        .menu(Menu::new().add_submenu(edit_menu))
+        .menu(menu)
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
