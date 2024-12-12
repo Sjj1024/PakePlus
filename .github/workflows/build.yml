@@ -29,7 +29,6 @@ jobs:
                       args: ''
                     - platform: 'windows-latest'
                       target: 'x86_64-pc-windows-msvc'
-
                     - platform: 'windows-latest'
                       target: 'i686-pc-windows-msvc'
                     - platform: 'windows-latest'
