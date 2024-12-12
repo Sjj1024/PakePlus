@@ -9,6 +9,9 @@ jobs:
     publish-tauri:
         permissions:
             contents: write
+        concurrency:
+            group: ${{ matrix.platform }}-build-tauri
+            cancel-in-progress: true
         strategy:
             fail-fast: false
             matrix:
@@ -36,6 +39,7 @@ jobs:
                       args: '--target aarch64-pc-windows-msvc'
 
         runs-on: ${{ matrix.platform }}
+        timeout-minutes: 60
         steps:
             - uses: actions/checkout@v4
 
