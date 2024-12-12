@@ -71,9 +71,9 @@ jobs:
             - name: install frontend dependencies
               run: pnpm install # change this to npm, pnpm or bun depending on which one you use.
 
-            - name: Build Other app
-              if: matrix.os == 'windows-latest' || matrix.os == 'ubuntu-22.04'
-              run: pnpm tauri build
+            # - name: Build Other app
+            #   if: matrix.os == 'windows-latest' || matrix.os == 'ubuntu-22.04'
+            #   run: pnpm tauri build
 
             - uses: tauri-apps/tauri-action@v0
               env:
