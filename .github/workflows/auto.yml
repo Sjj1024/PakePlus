@@ -5,7 +5,6 @@ on:
         branches:
             - main
 
-
 jobs:
     publish-tauri:
         permissions:
@@ -44,7 +43,7 @@ jobs:
               with:
                   version: latest
 
-           - name: Sync node version and setup cache
+            - name: Sync node version and setup cache
               uses: actions/setup-node@v4
               with:
                   node-version: 20
