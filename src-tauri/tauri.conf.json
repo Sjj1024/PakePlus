@@ -121,6 +121,14 @@
                 "icons/icon.icns",
                 "icons/icon.ico"
             ]
+        },
+        "updater": {
+            "active": false,
+            "dialog": true,
+            "endpoints": [
+                "https://releases.myapp.com/{{target}}/{{current_version}}"
+            ],
+            "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEVERjVEMTNDNDI1RkQ0QjAKUldTdzFGOUNQTkgxN1RRSHVWSlhIVnpodFh4UVZtY1Z0N00zbG1nUmpNZFIrK2tzTGRzUzhuaEkK"
         }
     }
 }

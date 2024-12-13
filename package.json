@@ -12,7 +12,9 @@
         "tauri dev": "tauri dev",
         "tauri build": "tauri build",
         "tauri debug": "tauri build --debug",
-        "tauri preview": "tauri preview"
+        "tauri preview": "tauri preview",
+        "updater": "node cli/updater.mjs",
+        "release": "node cli/release.mjs"
     },
     "dependencies": {
         "@codemirror/lang-json": "^6.0.1",
