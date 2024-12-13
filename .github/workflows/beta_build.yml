@@ -174,25 +174,25 @@ jobs:
             - name: Rename macos
               if: startsWith(matrix.os, 'macos')
               run: |
-                  mv target/aarch64-apple-darwin/release/bundle/dmg/*.dmg target/${{ env.FILE_PREFIX }}_aarch64.dmg
-                  mv target/x86_64-apple-darwin/release/bundle/dmg/*.dmg target/${{ env.FILE_PREFIX }}_x64.dmg
+                  mv target/aarch64-apple-darwin/release/bundle/dmg/*.dmg target/PakePlus_aarch64.dmg
+                  mv target/x86_64-apple-darwin/release/bundle/dmg/*.dmg target/PakePlus_x64.dmg
 
             - name: Rename windows
               if: matrix.os == 'windows-latest'
-              run: mv target/release/bundle/nsis/*.exe target/${{ env.FILE_PREFIX }}_x64-setup.exe
+              run: mv target/release/bundle/nsis/*.exe target/PakePlus_x64-setup.exe
 
             - name: Rename linux
               if: startsWith(matrix.os, 'ubuntu')
               run: |
-                  mv target/release/bundle/deb/*.deb target/${{ env.FILE_PREFIX }}_amd64.deb
-                  mv target/release/bundle/rpm/*.rpm target/${{ env.FILE_PREFIX }}_x64.rpm
-                  mv target/release/bundle/appimage/*.AppImage target/${{ env.FILE_PREFIX }}_amd64.AppImage
+                  mv target/release/bundle/deb/*.deb target/PakePlus_amd64.deb
+                  mv target/release/bundle/rpm/*.rpm target/PakePlus_x64.rpm
+                  mv target/release/bundle/appimage/*.AppImage target/PakePlus_amd64.AppImage
 
             - name: Upload artifacts (Windows)
               if: matrix.os == 'windows-latest'
               uses: actions/upload-artifact@v4
               with:
-                  name: ${{ env.FILE_PREFIX }}-windows_x64
+                  name: PakePlus-windows_x64
                   path: target/*.exe
                   retention-days: ${{ env.retain_days}}
                   compression-level: 0
@@ -201,7 +201,7 @@ jobs:
               if: startsWith(matrix.os, 'macos')
               uses: actions/upload-artifact@v4
               with:
-                  name: ${{ env.FILE_PREFIX }}-macos_x64_aarch64
+                  name: PakePlus-macos_x64_aarch64
                   path: target/*.dmg
                   retention-days: ${{ env.retain_days}}
                   compression-level: 0
@@ -210,7 +210,7 @@ jobs:
               if: startsWith(matrix.os, 'ubuntu')
               uses: actions/upload-artifact@v4
               with:
-                  name: ${{ env.FILE_PREFIX }}-linux_amd64
+                  name: PakePlus-linux_amd64
                   path: |
                       target/*.deb
                       target/*.rpm
