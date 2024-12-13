@@ -9,9 +9,6 @@ jobs:
     publish-tauri:
         permissions:
             contents: write
-        concurrency:
-            group: ${{ matrix.platform }}-build-tauri
-            cancel-in-progress: true
         strategy:
             fail-fast: false
             matrix:
