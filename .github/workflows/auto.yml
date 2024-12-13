@@ -3,7 +3,7 @@ name: 'publish'
 on:
     push:
         branches:
-            - main
+            - dev_v*
 
 jobs:
     publish-tauri:
