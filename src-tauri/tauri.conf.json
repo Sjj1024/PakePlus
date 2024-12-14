@@ -1,126 +1,43 @@
 {
+    "$schema": "https://schema.tauri.app/config/2",
+    "productName": "pakeplus",
+    "version": "0.1.0",
+    "identifier": "com.pakeplus.app",
     "build": {
         "beforeDevCommand": "pnpm dev",
+        "devUrl": "http://localhost:1420",
         "beforeBuildCommand": "pnpm build",
-        "devPath": "http://localhost:1420",
-        "distDir": "../dist",
-        "withGlobalTauri": true
+        "frontendDist": "../dist"
     },
-    "package": {
-        "productName": "PakePlus",
-        "version": "../package.json"
-    },
-    "tauri": {
-        "allowlist": {
-            "all": false,
-            "path": {
-                "all": true
-            },
-            "os": {
-                "all": true
-            },
-            "fs": {
-                "all": true,
-                "readFile": true,
-                "writeFile": true,
-                "readDir": true,
-                "copyFile": true,
-                "createDir": true,
-                "removeDir": true,
-                "removeFile": true,
-                "renameFile": true,
-                "exists": true,
-                "scope": [
-                    "$APPDATA/**/*",
-                    "$APPDATA/*",
-                    "$APPDATA/assets/*",
-                    "$DOWNLOAD/*"
-                ]
-            },
-            "http": {
-                "all": true,
-                "scope": [
-                    "https://api.github.com/*",
-                    "https://sjj1024.github.io/*",
-                    "http://*/*",
-                    "https://*/*"
-                ]
-            },
-            "dialog": {
-                "all": true,
-                "ask": true,
-                "confirm": true,
-                "message": true,
-                "open": true,
-                "save": true
-            },
-            "protocol": {
-                "all": true,
-                "asset": true,
-                "assetScope": [
-                    "$APPDATA/**/*",
-                    "$APPDATA/*",
-                    "$APPDATA/assets/*",
-                    "$DOWNLOAD/*"
-                ]
-            },
-            "shell": {
-                "all": false,
-                "open": true
-            },
-            "clipboard": {
-                "all": true,
-                "writeText": true,
-                "readText": true
-            },
-            "window": {
-                "all": true,
-                "create": true,
-                "center": true,
-                "setResizable": true
-            }
-        },
+    "app": {
         "windows": [
             {
-                "title": "PakePlus",
+                "title": "pakeplus",
                 "width": 800,
-                "height": 600,
-                "center": true
+                "height": 600
             }
         ],
         "security": {
-            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' asset://localhost blob: data: https://asset.localhost; font-src 'self' asset://localhost data:;",
-            "dangerousRemoteDomainIpcAccess": [
-                {
-                    "domain": "weread.qq.com",
-                    "windows": ["PakePlus"],
-                    "enableTauriAPI": true
-                },
-                {
-                    "domain": "http://localhost:5174",
-                    "windows": ["previewWeb"],
-                    "enableTauriAPI": true
-                }
-            ]
+            "csp": null
         },
-        "bundle": {
-            "active": true,
-            "targets": "all",
-            "identifier": "com.pakeplus.desktop",
-            "resources": [
-                "./data/build.yml",
-                "./data/config.json",
-                "./data/main.rs",
-                "./data/Cargo.toml",
-                "./data/custom.js"
-            ],
-            "icon": [
-                "icons/32x32.png",
-                "icons/128x128.png",
-                "icons/128x128@2x.png",
-                "icons/icon.icns",
-                "icons/icon.ico"
-            ]
-        }
+        "permissions": [
+            "core:default",
+            "dialog:open",
+            {
+                "identifier": "fs:allow-write-text-file",
+                "allow": [{ "path": "$HOME/test.txt" }]
+            }
+        ]
+    },
+    "bundle": {
+        "active": true,
+        "targets": "all",
+        "icon": [
+            "icons/32x32.png",
+            "icons/128x128.png",
+            "icons/128x128@2x.png",
+            "icons/icon.icns",
+            "icons/icon.ico"
+        ]
     }
 }

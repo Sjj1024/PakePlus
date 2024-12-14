@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { createDir, BaseDirectory } from '@tauri-apps/api/fs'
-import { os } from '@tauri-apps/api'
+
+import { locale as osLocale } from '@tauri-apps/plugin-os'
 import { useI18n } from 'vue-i18n'
 
 const { locale } = useI18n()
@@ -55,7 +55,7 @@ const chageTheme = (theme: string) => {
 }
 
 const initEnv = async () => {
-    const language = await os.locale()
+    const language = await osLocale()
     let lang = 'en' // Default to English
     if (language?.includes('zh-Hans')) {
         lang = 'zh' // Simplified Chinese
