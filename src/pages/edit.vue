@@ -332,14 +332,7 @@ import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePakeStore } from '@/store'
-import {
-    writeBinaryFile,
-    readBinaryFile,
-    createDir,
-    readTextFile,
-    writeTextFile,
-    exists,
-} from '@tauri-apps/api/fs'
+import { readTextFile, writeTextFile, exists } from '@tauri-apps/plugin-fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
 import { open } from '@tauri-apps/api/dialog'
 import { basename } from '@tauri-apps/api/path'
