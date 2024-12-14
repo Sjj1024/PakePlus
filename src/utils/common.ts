@@ -1,4 +1,4 @@
-import { open } from '@tauri-apps/api/shell'
+import { open } from '@tauri-apps/plugin-shell'
 
 export const pakeUrlMap = {
     github: 'https://github.com/Sjj1024/PakePlus',

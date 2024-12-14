@@ -26,6 +26,9 @@ dependencies:
   '@tauri-apps/plugin-os':
     specifier: ^2.2.0
     version: 2.2.0
+  '@tauri-apps/plugin-shell':
+    specifier: ^2.2.0
+    version: 2.2.0
   codemirror:
     specifier: ^6.0.1
     version: 6.0.1(@lezer/common@1.2.3)
@@ -1115,6 +1118,12 @@ packages:
 
   /@tauri-apps/plugin-os@2.2.0:
     resolution: {integrity: sha512-HszbCdbisMlu5QhCNAN8YIWyz2v33abAWha6+uvV2CKX8P5VSct/y+kEe22JeyqrxCnWlQ3DRx7s49Byg7/0EA==}
+    dependencies:
+      '@tauri-apps/api': 2.1.1
+    dev: false
+
+  /@tauri-apps/plugin-shell@2.2.0:
+    resolution: {integrity: sha512-iC3Ic1hLmasoboG7BO+7p+AriSoqAwKrIk+Hpk+S/bjTQdXqbl2GbdclghI4gM32X0bls7xHzIFqhRdrlvJeaA==}
     dependencies:
       '@tauri-apps/api': 2.1.1
     dev: false
