@@ -169,16 +169,16 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { appWindow } from '@tauri-apps/api/window'
+// import { windows } from '@tauri-apps/api/window'
 import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
 import { pakeUrlMap, openUrl, initProject } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
-import { convertFileSrc } from '@tauri-apps/api/tauri'
-import { getVersion } from '@tauri-apps/api/app'
-import { invoke } from '@tauri-apps/api/tauri'
+// import { convertFileSrc } from '@tauri-apps/plugin-fs'
+// import { getVersion } from '@tauri-apps/plugin-app'
+// import { invoke } from '@tauri-apps/plugin-tauri'
 
 const router = useRouter()
 const store = usePakeStore()
