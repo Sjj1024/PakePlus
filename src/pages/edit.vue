@@ -325,23 +325,22 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref, watch } from 'vue'
-import { appWindow } from '@tauri-apps/api/window'
+import { open } from '@tauri-apps/plugin-dialog'
 import { useRouter } from 'vue-router'
-import { invoke } from '@tauri-apps/api/tauri'
+import { invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePakeStore } from '@/store'
 import {
-    writeBinaryFile,
-    readBinaryFile,
-    createDir,
+    mkdir,
+    writeFile,
+    readFile,
     readTextFile,
     writeTextFile,
     exists,
-} from '@tauri-apps/api/fs'
+} from '@tauri-apps/plugin-fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
-import { open } from '@tauri-apps/api/dialog'
 import { basename } from '@tauri-apps/api/path'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
@@ -695,8 +694,8 @@ const uploadIcon = async () => {
     console.log('Selected file path:', selectedFilePath, fileName)
     console.log(`File Name: ${fileName}`)
     // get file name
-    const binaryData = await readBinaryFile(selectedFilePath)
-    const base64Data = arrayBufferToBase64(binaryData)
+    const binaryData = await readFile(selectedFilePath)
+    const base64Data: any = arrayBufferToBase64(binaryData)
     console.log('Base64 encoded image:', base64Data)
     const base64String = 'data:image/jpg;base64,' + base64Data
     iconBase64.value = base64String
@@ -752,10 +751,10 @@ const saveImage = async (fileName: string, base64: string) => {
     const targetDir = await join(appDataPath, 'assets')
     const savePath = await join(targetDir, fileName)
     // confirm target dir
-    await createDir(targetDir, { recursive: true })
+    await mkdir(targetDir, { recursive: true })
     // const savePath = await join(appDataPath, 'assets', fileName)
     // save file to app data dir
-    await writeBinaryFile(savePath, imageData)
+    await writeFile(savePath, imageData)
     console.log(`Image saved to: ${savePath}`)
     appForm.icon = savePath
     // save image asseturl to project
@@ -1367,7 +1366,7 @@ onMounted(async () => {
     if (store.currentProject.icon) {
         iconFileName.value = await basename(store.currentProject.icon)
     }
-    appWindow.setTitle(`${store.currentProject.name}`)
+    // appWindow.setTitle(`${store.currentProject.name}`)
 })
 </script>
 

@@ -176,9 +176,8 @@ import { usePakeStore } from '@/store'
 import { pakeUrlMap, openUrl, initProject } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
-// import { convertFileSrc } from '@tauri-apps/plugin-fs'
-// import { getVersion } from '@tauri-apps/plugin-app'
-// import { invoke } from '@tauri-apps/plugin-tauri'
+import { invoke, convertFileSrc } from '@tauri-apps/api/core'
+import { getVersion } from '@tauri-apps/api/app'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -465,7 +464,7 @@ const mergeUpdateRep = async () => {
 }
 
 onMounted(() => {
-    appWindow.setTitle('PakePlus')
+    // appWindow.setTitle('PakePlus')
     getPakePlusInfo()
     resetReleaseInfo()
     mergeUpdateRep()

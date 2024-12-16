@@ -1,5 +1,4 @@
 import http from '@/utils/http'
-import { ResponseType } from '@tauri-apps/api/http'
 
 export default {
     // get github api rate limit
@@ -10,7 +9,6 @@ export default {
                 Authorization: `Bearer ${token}`,
                 'User-Agent': 'PostmanRuntime/7.41.2',
             },
-            responseType: ResponseType.JSON,
         })
     },
     // get github user info
@@ -21,7 +19,6 @@ export default {
                 Authorization: `Bearer ${token}`,
                 'User-Agent': 'PostmanRuntime/7.41.2',
             },
-            responseType: ResponseType.JSON,
         })
     },
     // start repository

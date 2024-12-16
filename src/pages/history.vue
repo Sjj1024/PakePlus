@@ -40,7 +40,10 @@
                                     : scope.row.name
                             }}
                         </span>
-                        <span class="copyLink" @click="openDownlink(scope.row)">
+                        <span
+                            class="copyLink"
+                            @click="openUrl(scope.row.browser_download_url)"
+                        >
                             {{ t('download') }}
                         </span>
                     </div>
@@ -78,9 +81,8 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePakeStore } from '@/store'
 import githubApi from '@/apis/github'
+import { openUrl } from '@/utils/common'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { open } from '@tauri-apps/api/shell'
-import { writeText } from '@tauri-apps/api/clipboard'
 import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
@@ -172,13 +174,13 @@ const deleteRelease = async () => {
 }
 
 // open downlink by chrome
-const openDownlink = async (asset: any) => {
-    await open(asset.browser_download_url)
-}
+// const openDownlink = async (asset: any) => {
+//     await openUrl(asset.browser_download_url)
+// }
 
 // copy downlink
 const copyDownlink = async (asset: any) => {
-    await writeText(asset.browser_download_url)
+    // await writeText(asset.browser_download_url)
     ElMessage.success(t('copySuccess'))
 }
 

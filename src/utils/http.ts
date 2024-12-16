@@ -1,6 +1,6 @@
-import { HttpVerb, fetch } from '@tauri-apps/api/http'
-import { Body } from '@tauri-apps/api/http'
+import { fetch } from '@tauri-apps/plugin-http'
 
+// base url
 const baseURL = `https://api.github.com`
 
 const BODY_TYPE = {
@@ -31,25 +31,6 @@ const buildFullPath = (baseURL: string, requestedURL: string) => {
     return requestedURL
 }
 
-// 重新获取API接口速率
-export const getApiLimit = () => {
-    let payload = {
-        method: 'GET' as HttpVerb,
-        headers: {
-            Authorization: localStorage.getItem('token'),
-        },
-    }
-    fetch('https://api.github.com/rate_limit', payload)
-        .then(({ status, data }) => {
-            if (status >= 200 && status < 500) {
-                console.log('apilimit---', data)
-            }
-        })
-        .catch((err) => {
-            console.error('apilimiterr-------', err)
-        })
-}
-
 const http = async (url: string, options: any = {}) => {
     if (!options.headers)
         options.headers = {
@@ -57,7 +38,7 @@ const http = async (url: string, options: any = {}) => {
             'User-Agent': 'PostmanRuntime/7.41.2',
         }
     if (options?.body) {
-        options.body = Body.json(options.body)
+        options.body = options.body
         if (options.body.type === BODY_TYPE.Form) {
             options.headers['Content-Type'] = 'multipart/form-data'
         }
@@ -69,7 +50,7 @@ const http = async (url: string, options: any = {}) => {
     options = { ...commonOptions, ...options }
     console.log('request-------', buildFullPath(baseURL, url), options)
     return fetch(buildFullPath(baseURL, url), options)
-        .then(({ status, data }) => {
+        .then(({ status, data }: any) => {
             if (status >= 200 && status < 500) {
                 return { status, data }
             }
@@ -80,8 +61,7 @@ const http = async (url: string, options: any = {}) => {
             return Promise.reject(err)
         })
         .finally(() => {
-            // 发送接口速率
-            // getApiLimit()
+            console.log('finally')
         })
 }
 
