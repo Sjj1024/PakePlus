@@ -134,9 +134,9 @@ pnpm run dev
 pnpm run build
 
 # github action
-releaseDraft: false：表示这个版本不会是草稿版本，它会被视为正式发布的版本。
-prerelease: false：表示这个版本不是预发布版本，也就是说这是一个稳定版本。
-publish: false：表示这个版本不会立即发布，虽然它会被创建，但不会公开显示。
+releaseDraft: false：means this version is not a draft version, it will be considered as a stable release.
+prerelease: false：means this version is not a pre-release version, which means it is a stable version.
+publish: false：means this version will not be published immediately, although it will be created, it will not be publicly displayed.
 ```
 
 <!-- ## Support
