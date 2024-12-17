@@ -1,4 +1,5 @@
-import http from '@/utils/axios'
+// import http from '@/utils/axios'
+import http from '@/utils/http'
 
 export default {
     // get github api rate limit

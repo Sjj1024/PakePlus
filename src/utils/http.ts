@@ -3,13 +3,6 @@ import { fetch } from '@tauri-apps/plugin-http'
 // base url
 const baseURL = `https://api.github.com`
 
-const BODY_TYPE = {
-    Form: 'Form',
-    Json: 'Json',
-    Text: 'Text',
-    Bytes: 'Bytes',
-}
-
 const commonOptions = {
     timeout: 60,
 }
@@ -37,8 +30,8 @@ const http = async (url: string, options: any = {}) => {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
             'User-Agent': 'PostmanRuntime/7.41.2',
         }
-    if (options?.body) {
-        options.body = options.body
+    if (options?.data) {
+        options.data = options.data
         // if (options.body.type === BODY_TYPE.Form) {
         //     options.headers['Content-Type'] = 'multipart/form-data'
         // }
