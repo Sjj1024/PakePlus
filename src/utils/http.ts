@@ -50,11 +50,15 @@ const http = async (url: string, options: any = {}) => {
     options = { ...commonOptions, ...options }
     console.log('request-------', buildFullPath(baseURL, url), options)
     return fetch(buildFullPath(baseURL, url), options)
-        .then(({ status, data }: any) => {
-            if (status >= 200 && status < 500) {
-                return { status, data }
+        .then(async (response: any) => {
+            const data = await response.json()
+            if (response.status >= 200 && response.status < 500) {
+                return { status: response.status, data: data }
             }
-            return Promise.reject({ status, data })
+            return Promise.reject({
+                status: response.status,
+                data: data,
+            })
         })
         .catch((err) => {
             console.error(err)

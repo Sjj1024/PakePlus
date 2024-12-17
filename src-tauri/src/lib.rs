@@ -14,7 +14,7 @@ pub fn run() {
                     &Submenu::with_items(
                         handle,
                         "Edit",
-                        false,
+                        true,
                         &[
                             &PredefinedMenuItem::undo(handle, None)?,
                             &PredefinedMenuItem::redo(handle, None)?,

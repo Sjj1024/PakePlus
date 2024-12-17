@@ -169,7 +169,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-// import { windows } from '@tauri-apps/api/window'
 import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
@@ -387,7 +386,7 @@ const creatBranch = async () => {
 }
 
 // creat build yml
-const uploadBuildYml = async (branchName: string = 'main') => {
+const uploadBuildYml = async (_: string = 'main') => {
     // get build.yml file content
     const content = await invoke('update_build_file', {
         name: 'PakePlus',
@@ -434,8 +433,8 @@ const deleteBuildYml = async (branchName: string = 'main') => {
 
 // check update
 const checkUpdate = async () => {
-    const updateJson = await githubApi.getUpdateFile()
-    console.log('updateJson', updateJson)
+    const response = await githubApi.getUpdateFile()
+    console.log('updateJson', response)
 }
 
 const getPakePlusInfo = async () => {

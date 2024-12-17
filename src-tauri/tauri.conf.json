@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.tauri.app/config/2",
-    "productName": "pakeplus",
+    "productName": "PakePlus",
     "version": "0.1.0",
     "identifier": "com.pakeplus.app",
     "build": {
@@ -12,13 +12,13 @@
     "app": {
         "windows": [
             {
-                "title": "pakeplus",
+                "title": "PakePlus",
                 "width": 800,
                 "height": 600
             }
         ],
         "security": {
-            "csp": null
+            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' asset://localhost blob: data: https://asset.localhost; font-src 'self' asset://localhost data:;"
         }
     },
     "bundle": {
