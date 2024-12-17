@@ -1,4 +1,4 @@
-import http from '@/utils/http'
+import http from '@/utils/axios'
 
 export default {
     // get github api rate limit
@@ -31,7 +31,7 @@ export default {
     forkProgect(body: any) {
         return http(`/repos/Sjj1024/PakePlus/forks`, {
             method: 'post',
-            body,
+            data: body,
         })
     },
     // get commit sha
@@ -44,7 +44,7 @@ export default {
     createBranch(user: string, repo: string, body: any) {
         return http(`/repos/${user}/${repo}/git/refs`, {
             method: 'post',
-            body,
+            data: body,
         })
     },
     // delete branch
@@ -64,7 +64,7 @@ export default {
     updateFileContent(user: string, repo: string, path: string, body: any) {
         return http(`/repos/${user}/${repo}/contents/${path}`, {
             method: 'put',
-            body,
+            data: body,
         })
     },
     // update build yml contents
@@ -73,7 +73,7 @@ export default {
             `/repos/${user}/${repo}/contents/.github/workflows/build.yml`,
             {
                 method: 'put',
-                body,
+                data: body,
             }
         )
     },
@@ -81,7 +81,7 @@ export default {
     updateIconFile(user: string, repo: string, body: any) {
         return http(`/repos/${user}/${repo}/contents/app-icon.png`, {
             method: 'put',
-            body,
+            data: body,
         })
     },
     // creat file contents
@@ -90,7 +90,7 @@ export default {
             `/repos/${user}/${repo}/contents/src-tauri/tauri.conf.json`,
             {
                 method: 'put',
-                body,
+                data: body,
             }
         )
     },
@@ -98,14 +98,14 @@ export default {
     updateCargoFile(user: string, repo: string, body: any) {
         return http(`/repos/${user}/${repo}/contents/src-tauri/Cargo.toml`, {
             method: 'put',
-            body,
+            data: body,
         })
     },
     // creat file contents
     updateMainRsFile(user: string, repo: string, body: any) {
         return http(`/repos/${user}/${repo}/contents/src-tauri/src/main.rs`, {
             method: 'put',
-            body,
+            data: body,
         })
     },
     // update custom js file
@@ -114,7 +114,7 @@ export default {
             `/repos/${user}/${repo}/contents/src-tauri/src/extension/custom.js`,
             {
                 method: 'put',
-                body,
+                data: body,
             }
         )
     },
@@ -124,7 +124,7 @@ export default {
             `/repos/${user}/${repo}/actions/workflows/build.yml/dispatches`,
             {
                 method: 'post',
-                body,
+                data: body,
             }
         )
     },
@@ -132,7 +132,7 @@ export default {
     enableWorkflow(user: string, repo: string) {
         return http(`/repos/${user}/${repo}/actions/permissions`, {
             method: 'put',
-            body: {
+            data: {
                 enabled: true,
                 allowed_actions: 'all',
             },
@@ -144,7 +144,7 @@ export default {
             `/repos/${user}/${repo}/contents/.github/workflows/build.yml`,
             {
                 method: 'delete',
-                body,
+                data: body,
             }
         )
     },
@@ -154,7 +154,7 @@ export default {
             `/repos/${user}/${repo}/contents/.github/workflows/build.yml`,
             {
                 method: 'put',
-                body,
+                data: body,
             }
         )
     },
@@ -187,14 +187,14 @@ export default {
     mergeUpdateRep(user: string, repo: string) {
         return http(`/repos/${user}/${repo}/merge-upstream`, {
             method: 'post',
-            body: { branch: 'main' },
+            data: { branch: 'main' },
         })
     },
     // creat issue
     createIssue(body: any) {
         return http(`/repos/Sjj1024/PakePlus/issues`, {
             method: 'post',
-            body,
+            data: body,
         })
     },
 }
