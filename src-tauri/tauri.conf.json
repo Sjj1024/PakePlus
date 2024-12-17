@@ -35,11 +35,11 @@
         "active": true,
         "targets": "all",
         "resources": [
-            "./src/data/build.yml",
-            "./src/data/config.json",
-            "./src/data/main.rs",
-            "./src/data/Cargo.toml",
-            "./src/data/custom.js"
+            "./data/*",
+            "./data/config.json",
+            "./data/main.rs",
+            "./data/Cargo.toml",
+            "./data/custom.js"
         ],
         "icon": [
             "icons/32x32.png",

@@ -1,7 +1,7 @@
 use base64::prelude::*;
 use std::io::Read;
 use std::time::Instant;
-use tauri::{utils::config::WindowConfig, AppHandle, LogicalSize, Manager};
+use tauri::{path::BaseDirectory, utils::config::WindowConfig, AppHandle, LogicalSize, Manager};
 
 #[tauri::command]
 pub async fn open_window(
@@ -37,16 +37,15 @@ pub async fn open_window(
         }
     }
     println!("Opening docs in external window: {}, {}", app_url, platform);
-    // println!("js_content: {}", js_content);
-    // let resource_path = handle
-    //     .path()
-    //     .resolve_resource("data/custom.js")
-    //     .expect("failed to resolve resource");
-    // let mut custom_js = std::fs::File::open(&resource_path).unwrap();
-    // let mut contents = String::new();
-    // custom_js.read_to_string(&mut contents).unwrap();
-    // contents += js_content.as_str();
-    // println!("js file contents: {}", contents);
+    let resource_path = handle
+        .path()
+        .resolve("data/custom.js", BaseDirectory::Resource)
+        .expect("failed to resolve resource");
+    let mut custom_js = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    custom_js.read_to_string(&mut contents).unwrap();
+    contents += js_content.as_str();
+    println!("js file contents: {}", contents);
     if !resize {
         let _window = tauri::WebviewWindowBuilder::new(
             &handle,
@@ -92,15 +91,15 @@ pub async fn preview_from_config(
         }
     }
     // println!("tauri config: {:?}", config);
-    // let resource_path = handle
-    //     .path_resolver()
-    //     .resolve_resource("data/custom.js")
-    //     .expect("failed to resolve resource");
-    // let mut custom_js = std::fs::File::open(&resource_path).unwrap();
-    // let mut contents = String::new();
-    // custom_js.read_to_string(&mut contents).unwrap();
-    // contents += js_content.as_str();
-    // println!("js file contents: {}", contents);
+    let resource_path = handle
+        .path()
+        .resolve("data/custom.js", BaseDirectory::Resource)
+        .expect("failed to resolve resource");
+    let mut custom_js = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    custom_js.read_to_string(&mut contents).unwrap();
+    contents += js_content.as_str();
+    println!("js file contents: {}", contents);
     if !resize {
         let _window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
             .unwrap()
@@ -112,7 +111,8 @@ pub async fn preview_from_config(
 #[tauri::command]
 pub async fn update_build_file(handle: tauri::AppHandle, name: String, body: String) -> String {
     let resource_path = handle
-        .resolve_resource("data/build.yml")
+        .path()
+        .resolve("data/build.yml", BaseDirectory::Resource)
         .expect("failed to resolve resource");
     let mut build_file = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
@@ -139,8 +139,8 @@ pub async fn update_config_file(
     ascii: bool,
 ) -> String {
     let resource_path = handle
-        .path_resolver()
-        .resolve_resource("data/config.json")
+        .path()
+        .resolve("data/config.json", BaseDirectory::Resource)
         .expect("failed to resolve resource");
     let mut config_file = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
@@ -180,8 +180,8 @@ pub async fn update_config_json(
     ascii: bool,
 ) -> String {
     let resource_path = handle
-        .path_resolver()
-        .resolve_resource("data/config.json")
+        .path()
+        .resolve("data/config.json", BaseDirectory::Resource)
         .expect("failed to resolve resource");
     let mut config_file = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
@@ -217,8 +217,8 @@ pub async fn update_cargo_file(
     debug: bool,
 ) -> String {
     let resource_path = handle
-        .path_resolver()
-        .resolve_resource("data/Cargo.toml")
+        .path()
+        .resolve("data/Cargo.toml", BaseDirectory::Resource)
         .expect("failed to resolve resource");
     let mut config_file = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
@@ -249,8 +249,8 @@ pub async fn update_main_rust(
     height: f64,
 ) -> String {
     let resource_path = handle
-        .path_resolver()
-        .resolve_resource("data/main.rs")
+        .path()
+        .resolve("data/main.rs", BaseDirectory::Resource)
         .expect("failed to resolve resource");
     let mut main_rust = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
@@ -270,8 +270,8 @@ pub async fn update_main_rust(
 #[tauri::command]
 pub async fn rust_main_window(handle: tauri::AppHandle, config: String) -> String {
     let resource_path = handle
-        .path_resolver()
-        .resolve_resource("data/main.rs")
+        .path()
+        .resolve("data/main.rs", BaseDirectory::Resource)
         .expect("failed to resolve resource");
     let mut main_rust = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
@@ -286,8 +286,8 @@ pub async fn rust_main_window(handle: tauri::AppHandle, config: String) -> Strin
 #[tauri::command]
 pub async fn update_custom_js(handle: tauri::AppHandle, js_content: String) -> String {
     let resource_path = handle
-        .path_resolver()
-        .resolve_resource("data/custom.js")
+        .path()
+        .resolve("data/custom.js", BaseDirectory::Resource)
         .expect("failed to resolve resource");
     let mut custom_js = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
