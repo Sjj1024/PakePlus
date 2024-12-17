@@ -9,6 +9,7 @@
         "http:allow-fetch",
         "dialog:allow-open",
         "os:allow-locale",
+        "shell:allow-open",
         "fs:allow-app-write",
         "fs:allow-app-read",
         "fs:allow-app-read-recursive",

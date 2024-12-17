@@ -34,6 +34,13 @@
     "bundle": {
         "active": true,
         "targets": "all",
+        "resources": [
+            "./src/data/build.yml",
+            "./src/data/config.json",
+            "./src/data/main.rs",
+            "./src/data/Cargo.toml",
+            "./src/data/custom.js"
+        ],
         "icon": [
             "icons/32x32.png",
             "icons/128x128.png",
