@@ -507,7 +507,7 @@ const tauriConfig = reactive({
         useHttpsScheme: false,
         zoomHotkeysEnabled: false,
         backgroundColor: '#ffffff',
-        shadow: true,
+        // shadow: true,
         acceptFirstMouse: false,
         additionalBrowserArgs: '',
     },
@@ -1242,9 +1242,11 @@ const dispatchAction = async () => {
         document.querySelector('.el-loading-text')!.innerHTML = loadingText
     }, 1000)
     // check build status
-    checkDispatchTimer = setInterval(async () => {
-        checkBuildStatus()
-    }, 10000)
+    setTimeout(async () => {
+        checkDispatchTimer = setInterval(async () => {
+            checkBuildStatus()
+        }, 10000)
+    }, 1000 * 60 * 7)
 }
 
 // create issue

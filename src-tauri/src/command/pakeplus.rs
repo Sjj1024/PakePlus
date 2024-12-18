@@ -91,18 +91,19 @@ pub async fn preview_from_config(
     //     }
     // }
     println!("tauri config: {:?}", config);
-    // let resource_path = handle
-    //     .path()
-    //     .resolve("data/custom.js", BaseDirectory::Resource)
-    //     .expect("failed to resolve resource");
-    // let mut custom_js = std::fs::File::open(&resource_path).unwrap();
-    // let mut contents = String::new();
-    // custom_js.read_to_string(&mut contents).unwrap();
-    // contents += js_content.as_str();
-    // println!("js file contents: {}", contents);
+    let resource_path = handle
+        .path()
+        .resolve("data/custom.js", BaseDirectory::Resource)
+        .expect("failed to resolve resource");
+    let mut custom_js = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    custom_js.read_to_string(&mut contents).unwrap();
+    contents += js_content.as_str();
+    println!("js file contents: {}", contents);
     if !resize {
         let _window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
             .unwrap()
+            .initialization_script(contents.as_str())
             .build()
             .unwrap();
     }
