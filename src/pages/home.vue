@@ -225,8 +225,7 @@ const getImgUrl = (filePath: string) => {
 
 // new barnch config
 const showBranchDialog = () => {
-    // dev need config
-    // router.push('/edit')
+    // TODO if token exist, then creat branch, else next page
     getCommitSha()
     // checkout has github token
     if (localStorage.getItem('token')) {
