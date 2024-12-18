@@ -506,7 +506,7 @@ const tauriConfig = reactive({
         proxyUrl: null,
         useHttpsScheme: false,
         zoomHotkeysEnabled: false,
-        backgroundColor: '#ffffff',
+        // backgroundColor: '#ffffff',
         // shadow: true,
         acceptFirstMouse: false,
         additionalBrowserArgs: '',
