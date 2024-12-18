@@ -31,7 +31,7 @@ const http = async (url: string, options: any = {}) => {
             'User-Agent': 'PostmanRuntime/7.41.2',
         }
     if (options?.data) {
-        options.data = options.data
+        options.body = JSON.stringify(options.data)
         // if (options.body.type === BODY_TYPE.Form) {
         //     options.headers['Content-Type'] = 'multipart/form-data'
         // }
@@ -44,21 +44,22 @@ const http = async (url: string, options: any = {}) => {
     console.log('request-------', buildFullPath(baseURL, url), options)
     return fetch(buildFullPath(baseURL, url), options)
         .then(async (response: any) => {
-            const data = await response.json()
+            console.log('fetch success response', response)
+            const data = response.body ? await response.json() : {}
             if (response.status >= 200 && response.status < 500) {
-                return { status: response.status, data: data }
+                return Promise.resolve({ status: response.status, data: data })
             }
             return Promise.reject({
                 status: response.status,
                 data: data,
             })
         })
-        .catch((err) => {
-            console.error(err)
-            return Promise.reject(err)
+        .catch((error) => {
+            console.error('fetch error', error)
+            return Promise.resolve({ status: 400, msg: 'fetch error' })
         })
         .finally(() => {
-            console.log('finally')
+            console.log('fetch finally')
         })
 }
 

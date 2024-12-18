@@ -112,9 +112,9 @@
                     placeholder="github token"
                     class="tokenInput"
                 />
-                <el-button @click="testToken(true)" :loading="testLoading">{{
-                    t('testToken')
-                }}</el-button>
+                <el-button @click="testToken(true)" :loading="testLoading">
+                    {{ t('testToken') }}
+                </el-button>
             </div>
             <template #footer>
                 <div class="dialog-footer">
@@ -287,24 +287,24 @@ const forkProgect = async (tips: boolean = true) => {
     console.log('startRes', startRes)
     if (startRes.status === 204) {
         console.log('start success')
+    } else {
+        console.log('start error')
     }
     // wait fork done, enable github action
-    const timer = setInterval(async () => {
+    while (true) {
         const status = await getCommitSha()
         console.log('wait fork done', status)
         if (status) {
-            deleteBuildYml()
-            timer && clearInterval(timer)
-            testLoading.value = false
-            if (!tips) {
-                tokenDialog.value = false
-            } else {
-                ElMessage.success(t('tokenOk'))
-            }
-        } else {
-            console.log('wait fork done')
+            break
         }
-    }, 1000)
+    }
+    deleteBuildYml()
+    testLoading.value = false
+    if (!tips) {
+        tokenDialog.value = false
+    } else {
+        ElMessage.success(t('tokenOk'))
+    }
 }
 
 // get commit sha
