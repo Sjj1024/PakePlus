@@ -45,6 +45,7 @@ const http = async (url: string, options: any = {}) => {
     return fetch(buildFullPath(baseURL, url), options)
         .then(async (response: any) => {
             console.log('fetch success response', response)
+            // maybe response.body is null
             const data = response.body ? await response.json() : {}
             if (response.status >= 200 && response.status < 500) {
                 return Promise.resolve({ status: response.status, data: data })

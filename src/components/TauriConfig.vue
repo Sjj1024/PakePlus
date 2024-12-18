@@ -58,10 +58,10 @@
                             </el-form-item>
                         </div>
                         <div class="lineBool">
-                            <el-form-item label="fileDropEnabled" prop="size">
+                            <el-form-item label="dragDropEnabled" prop="size">
                                 <el-checkbox
                                     v-model="
-                                        tauriConfig.windows.fileDropEnabled
+                                        tauriConfig.windows.dragDropEnabled
                                     "
                                     name="type"
                                 >
