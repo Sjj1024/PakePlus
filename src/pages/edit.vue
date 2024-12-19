@@ -436,7 +436,7 @@ const appRules = reactive<FormRules>({
         },
         {
             validator: (rule, value, callback) => {
-                const versionPattern = /^\d+\.\d+\.\d+$/ // 匹配如 1.8.8 或 1.9.23
+                const versionPattern = /^\d\.\d\.\d$/ // 1.8.8 or 1.9.2
                 if (!versionPattern.test(value)) {
                     callback(new Error(t('versionSemVer')))
                 } else {
@@ -1252,9 +1252,9 @@ const dispatchAction = async () => {
 // create issue
 const createIssue = async (url: string) => {
     const issueRes: any = await githubApi.createIssue({
-        body: `编译出错：${url}`,
+        body: `build error：${url}`,
         labels: ['failure'],
-        title: `${store.currentProject.name}编译出错`,
+        title: `${store.currentProject.name} build error`,
     })
     console.log('issueRes---', issueRes)
 }
