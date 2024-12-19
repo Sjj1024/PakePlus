@@ -207,6 +207,11 @@ const chageTheme = async (theme: string) => {
 
 // go project detail
 const goProject = (pro: Project) => {
+    // if token exist, creat branch, else next page
+    branchName.value = pro.name
+    if (token.value) {
+        creatBranch(true)
+    }
     store.setCurrentProject(pro)
     router.push('/edit')
 }
@@ -337,7 +342,7 @@ const getFileSha = async (filePath: string, branch: string) => {
 const creatLoading = ref(false)
 
 // creat project branch
-const creatBranch = async () => {
+const creatBranch = async (first: boolean = false) => {
     creatLoading.value = true
     token.value && (await uploadBuildYml())
     // checkout branch name is english
@@ -354,6 +359,12 @@ const creatBranch = async () => {
                 }
             )
             console.log('createBranch', res)
+            if (first) {
+                console.log('first creat branch')
+                return
+            } else {
+                console.log('not first')
+            }
             // 201 is ok
             if (res.status === 201) {
                 const branchInfo: Project = {
