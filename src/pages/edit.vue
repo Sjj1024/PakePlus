@@ -130,6 +130,7 @@
                     >
                         <el-input
                             :value="iconFileName"
+                            :disabled="token === null"
                             readonly
                             @click="uploadIcon"
                             class="iconInput"
@@ -222,7 +223,9 @@
         <div class="footerBox">
             <el-button @click="saveProject(true)">{{ t('save') }}</el-button>
             <el-button @click="preview(false)">{{ t('preview') }}</el-button>
-            <el-button @click="createRepo">{{ t('publish') }}</el-button>
+            <el-button :disabled="token === null" @click="createRepo">
+                {{ t('publish') }}
+            </el-button>
             <!-- <el-button @click="mouseover">test</el-button> -->
         </div>
         <!-- build -->
@@ -360,7 +363,7 @@ const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
 const appForm: any = reactive(store.currentProject)
 const platformName = platform()
-
+const token = localStorage.getItem('token')
 const iconFileName = ref('')
 const selJs = ref<any>(null)
 const jsFileContents = ref('')
@@ -1382,7 +1385,13 @@ const initJsFileContents = async () => {
     })
 }
 
+// init project
+const initProject = async () => {
+    console.log('initProject')
+}
+
 onMounted(async () => {
+    console.log('token', token)
     getLatestRelease()
     initJsFileContents()
     buildTime = 0

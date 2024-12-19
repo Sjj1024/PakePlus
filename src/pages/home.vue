@@ -175,6 +175,7 @@ import { usePakeStore } from '@/store'
 import { pakeUrlMap, openUrl, initProject } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
+import { setTheme } from '@tauri-apps/api/app'
 import { invoke, convertFileSrc } from '@tauri-apps/api/core'
 import { getVersion } from '@tauri-apps/api/app'
 
@@ -189,15 +190,17 @@ const branchDialog = ref(false)
 const branchName = ref('')
 const testLoading = ref(false)
 
-const chageTheme = (theme: string) => {
+const chageTheme = async (theme: string) => {
     if (theme === 'light') {
         document.documentElement.setAttribute('theme', 'light')
         document.querySelector('html')?.classList.remove('dark')
         document.querySelector('html')?.classList.add('light')
+        // await setTheme('light')
     } else {
         document.documentElement.setAttribute('theme', 'dark')
         document.querySelector('html')?.classList.remove('light')
         document.querySelector('html')?.classList.add('dark')
+        // await setTheme('dark')
     }
     localStorage.setItem('theme', theme)
 }
@@ -225,17 +228,14 @@ const getImgUrl = (filePath: string) => {
 
 // new barnch config
 const showBranchDialog = () => {
-    // TODO if token exist, then creat branch, else next page
+    // if token exist, then creat branch, else next page
     getCommitSha()
     // checkout has github token
-    if (localStorage.getItem('token')) {
-        // need creat new branch, first input project name
-        branchDialog.value = true
-    } else {
-        tokenDialog.value = true
+    if (token.value === '') {
         ElMessage.error(t('configToken'))
-        return
     }
+    // need creat new branch, first input project name
+    branchDialog.value = true
 }
 
 const changeLang = (lang: string) => {
@@ -339,44 +339,55 @@ const creatLoading = ref(false)
 // creat project branch
 const creatBranch = async () => {
     creatLoading.value = true
-    await uploadBuildYml()
+    token.value && (await uploadBuildYml())
     // checkout branch name is english
     if (branchName.value && /^[A-Za-z0-9]+$/.test(branchName.value)) {
         console.log('branchName.value', branchName.value)
-        const res: any = await githubApi.createBranch(
-            store.userInfo.login,
-            'PakePlus',
-            {
-                ref: `refs/heads/${branchName.value}`,
-                sha: store.commit.sha,
+        // if token exist, then creat branch, else next page
+        if (token.value) {
+            const res: any = await githubApi.createBranch(
+                store.userInfo.login,
+                'PakePlus',
+                {
+                    ref: `refs/heads/${branchName.value}`,
+                    sha: store.commit.sha,
+                }
+            )
+            console.log('createBranch', res)
+            // 201 is ok
+            if (res.status === 201) {
+                const branchInfo: Project = {
+                    ...res.data,
+                    ...initProject,
+                    name: branchName.value,
+                }
+                console.log('branch Info success', branchInfo)
+                store.setCurrentProject(branchInfo)
+                creatLoading.value = false
+                router.push('/edit')
+                // update new branch build.yml file
+                // updateBuildYml(branchName.value)
+            } else if (res.status === 422) {
+                console.log('project existed')
+                creatLoading.value = false
+                ElMessage.success(t('projectExist'))
+                // router.push('/publish')
+            } else if (res.status === 401) {
+                ElMessage.error(t('tokenError'))
+                creatLoading.value = false
+            } else {
+                creatLoading.value = false
+                console.log('branchInfo error', res)
+                ElMessage.error(
+                    `${t('creatProjectError')}: ${res.data.message}`
+                )
             }
-        )
-        console.log('createBranch', res)
-        // 201 is ok
-        if (res.status === 201) {
-            const branchInfo: Project = {
-                ...res.data,
+        } else {
+            store.setCurrentProject({
                 ...initProject,
                 name: branchName.value,
-            }
-            console.log('branch Info success', branchInfo)
-            store.setCurrentProject(branchInfo)
-            creatLoading.value = false
+            })
             router.push('/edit')
-            // update new branch build.yml file
-            // updateBuildYml(branchName.value)
-        } else if (res.status === 422) {
-            console.log('project existed')
-            creatLoading.value = false
-            ElMessage.success(t('projectExist'))
-            // router.push('/publish')
-        } else if (res.status === 401) {
-            ElMessage.error(t('tokenError'))
-            creatLoading.value = false
-        } else {
-            creatLoading.value = false
-            console.log('branchInfo error', res)
-            ElMessage.error(`${t('creatProjectError')}: ${res.data.message}`)
         }
     } else {
         ElMessage.error(t('englishName'))

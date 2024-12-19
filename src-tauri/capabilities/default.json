@@ -5,6 +5,8 @@
     "windows": ["main"],
     "permissions": [
         "core:default",
+        "core:app:allow-set-app-theme",
+        "core:app:allow-name",
         "opener:default",
         "http:allow-fetch",
         "http:allow-fetch-cancel",
