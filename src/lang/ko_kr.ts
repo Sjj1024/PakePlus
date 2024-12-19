@@ -47,6 +47,7 @@ export default {
     desTips: '프로젝트 설명을 입력하세요',
     save: '저장',
     preview: '미리보기',
+    previewNotSupport: '미리보기는 이 플랫폼에서 지원되지 않습니다 아직',
     publish: '게시',
     build: '빌드 및 게시',
     pubPlatform: '게시 플랫폼',

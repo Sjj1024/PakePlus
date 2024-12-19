@@ -45,6 +45,7 @@ export default {
     desTips: '请输入项目描述',
     save: '保存',
     preview: '预览',
+    previewNotSupport: '预览暂不支持此平台',
     publish: '发布',
     build: '打包发布',
     pubPlatform: '发布平台',

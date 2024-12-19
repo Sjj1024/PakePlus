@@ -48,6 +48,8 @@ export default {
     desTips: 'プロジェクトの説明を入力してください',
     save: '保存',
     preview: 'プレビュー',
+    previewNotSupport:
+        'プレビューはこのプラットフォームではサポートされていません まだ',
     publish: '公開',
     build: 'ビルド＆公開',
     pubPlatform: '公開プラットフォーム',

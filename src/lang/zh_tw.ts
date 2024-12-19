@@ -45,6 +45,7 @@ export default {
     desTips: '請輸入項目描述',
     save: '保存',
     preview: '預覽',
+    previewNotSupport: '預覽暫不支持此平台',
     publish: '發佈',
     build: '打包發佈',
     pubPlatform: '發佈平台',

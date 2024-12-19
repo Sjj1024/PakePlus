@@ -46,6 +46,7 @@ export default {
     desTips: 'Please enter the project description.',
     save: 'Save',
     preview: 'Preview',
+    previewNotSupport: 'Preview is not supported on this platform yet',
     publish: 'Release',
     build: 'Build',
     pubPlatform: 'Platform',

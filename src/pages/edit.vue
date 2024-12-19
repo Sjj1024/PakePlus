@@ -347,6 +347,7 @@ import CutterImg from '@/components/CutterImg.vue'
 import { useI18n } from 'vue-i18n'
 import { CSSFILTER, isAlphanumeric, openUrl } from '@/utils/common'
 import { platforms } from '@/utils/config'
+import { platform } from '@tauri-apps/plugin-os'
 import TauriConfig from '@/components/TauriConfig.vue'
 
 const router = useRouter()
@@ -358,6 +359,7 @@ const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
 const appForm: any = reactive(store.currentProject)
+const platformName = platform()
 
 const iconFileName = ref('')
 const selJs = ref<any>(null)
@@ -896,22 +898,30 @@ const getInitializationScript = () => {
 }
 
 const preview = async (resize: boolean) => {
-    appFormRef.value?.validate((valid, fields) => {
-        if (valid) {
-            console.log('submit!', appForm)
-            saveProject(false)
-            // initialization_script
-            const initJsScript = getInitializationScript()
-            // console.log('initCssScript', initCssScript)
-            invoke('preview_from_config', {
-                resize,
-                config: tauriConfig.windows,
-                jsContent: initJsScript,
-            })
-        } else {
-            console.log('error submit!', fields)
-        }
-    })
+    // get platform
+    console.log('platform', platformName)
+    // if platform is macos, then use tauri preview
+    if (platformName === 'macos') {
+        appFormRef.value?.validate((valid, fields) => {
+            if (valid) {
+                console.log('submit!', appForm)
+                saveProject(false)
+                // initialization_script
+                const initJsScript = getInitializationScript()
+                // console.log('initCssScript', initCssScript)
+                invoke('preview_from_config', {
+                    resize,
+                    config: tauriConfig.windows,
+                    jsContent: initJsScript,
+                })
+            } else {
+                console.log('error submit!', fields)
+            }
+        })
+    } else {
+        console.log('platform is not macos')
+        ElMessage.error(t('previewNotSupport'))
+    }
 }
 
 const createRepo = async () => {
