@@ -13,8 +13,8 @@
         "windows": [
             {
                 "title": "PakePlus",
-                "width": 800,
-                "height": 600
+                "width": 900,
+                "height": 680
             }
         ],
         "security": {

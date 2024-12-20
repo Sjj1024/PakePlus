@@ -1,8 +1,8 @@
 {
     "$schema": "https://schema.tauri.app/config/2",
-    "productName": "PakePlus",
-    "version": "0.0.1",
-    "identifier": "com.pakeplus.app",
+    "productName": "PROJECTNAME",
+    "version": "PROJECTVERSION",
+    "identifier": "PROJECTID",
     "app": {
         "security": {
             "assetProtocol": {
