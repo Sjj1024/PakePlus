@@ -64,7 +64,7 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
-                  releaseName: 'NiKa AI v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
+                  releaseName: 'NikaAI v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
                   releaseBody: ''
                   releaseDraft: false
                   prerelease: false
