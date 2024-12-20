@@ -82,6 +82,7 @@ import { useRouter } from 'vue-router'
 import { usePakeStore } from '@/store'
 import githubApi from '@/apis/github'
 import { openUrl } from '@/utils/common'
+import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 
@@ -173,14 +174,9 @@ const deleteRelease = async () => {
         })
 }
 
-// open downlink by chrome
-// const openDownlink = async (asset: any) => {
-//     await openUrl(asset.browser_download_url)
-// }
-
 // copy downlink
 const copyDownlink = async (asset: any) => {
-    // await writeText(asset.browser_download_url)
+    await writeText(asset.browser_download_url)
     ElMessage.success(t('copySuccess'))
 }
 

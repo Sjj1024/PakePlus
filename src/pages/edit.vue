@@ -1362,7 +1362,7 @@ const getLatestRelease = async () => {
         }
         store.setRelease(releaseData)
     } else {
-        console.error('releaseRes error', releaseRes)
+        console.log('releaseRes error, but not important', releaseRes)
     }
 }
 

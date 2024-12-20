@@ -154,7 +154,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button
                         type="primary"
-                        @click="creatBranch"
+                        @click="creatBranch(false)"
                         :loading="creatLoading"
                     >
                         {{ t('confirm') }}
@@ -430,7 +430,7 @@ const uploadBuildYml = async (_: string = 'main') => {
     if (updateRes.status === 200 || updateRes.status === 201) {
         console.log('updateRes', updateRes)
     } else {
-        console.error('updateRes error', updateRes)
+        console.log('uploadBuildYml error, but not important', updateRes)
     }
 }
 

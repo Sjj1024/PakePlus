@@ -19,6 +19,7 @@
         "@codemirror/theme-one-dark": "^6.1.2",
         "@element-plus/icons-vue": "^2.3.1",
         "@tauri-apps/api": "^2",
+        "@tauri-apps/plugin-clipboard-manager": "^2.2.0",
         "@tauri-apps/plugin-dialog": "^2.2.0",
         "@tauri-apps/plugin-fs": "^2.2.0",
         "@tauri-apps/plugin-http": "^2.2.0",
