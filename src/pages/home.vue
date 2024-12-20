@@ -176,6 +176,7 @@ import { pakeUrlMap, openUrl, initProject } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
 // import { setTheme } from '@tauri-apps/api/app'
+import { getCurrentWindow } from '@tauri-apps/api/window'
 import { invoke, convertFileSrc } from '@tauri-apps/api/core'
 import { getVersion } from '@tauri-apps/api/app'
 
