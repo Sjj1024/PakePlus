@@ -1,5 +1,5 @@
 [package]
-name = "NiKa AI"
+name = "NikaAI"
 version = "0.0.1"
 description = "NiKa AI 利用尖端人工智慧模型，包括 OpenAI o1、GPT-4o、Claude 3.5 和 Gemini 1.5，來提升您的聊天、搜尋、寫作和程式設計體驗。可作為 Chrome 和 Edge 瀏覽器擴充功能使用，同時提供行動和桌面應用程式。"
 authors = ["1024xiaoshen"]
