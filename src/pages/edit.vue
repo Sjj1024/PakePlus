@@ -996,7 +996,7 @@ const updateBuildYml = async () => {
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get build.yml file content
         const content = await invoke('update_build_file', {
-            name: appForm.showName,
+            name: store.currentProject.name,
             body: pubForm.desc,
         })
         console.log('content', content)
