@@ -1,38 +1,55 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+
+mod command;
 use serde_json::Error;
-use tauri::{utils::config::WindowConfig, Menu, MenuItem, Submenu, WindowBuilder};
+use tauri::{menu::*, utils::config::WindowConfig};
 
 fn json_to_window_config(window_json: &str) -> Result<WindowConfig, Error> {
     serde_json::from_str(window_json)
 }
 
-fn main() {
-    #[cfg(any(target_os = "linux", target_os = "windows"))]
-    let menu = Menu::new();
-    #[cfg(target_os = "macos")]
-    let menu = Menu::new().add_submenu(Submenu::new(
-        "Edit",
-        Menu::new()
-            .add_native_item(MenuItem::Undo)
-            .add_native_item(MenuItem::Redo)
-            .add_native_item(MenuItem::Copy)
-            .add_native_item(MenuItem::Cut)
-            .add_native_item(MenuItem::Paste)
-            .add_native_item(MenuItem::SelectAll)
-            .add_native_item(MenuItem::CloseWindow)
-            .add_native_item(MenuItem::Quit),
-    ));
+#[cfg_attr(mobile, tauri::mobile_entry_point)]
+pub fn run() {
     tauri::Builder::default()
+        .menu(|handle| {
+            let menu = Menu::with_items(
+                handle,
+                &[
+                    #[cfg(target_os = "macos")]
+                    &Submenu::with_items(
+                        handle,
+                        "Edit",
+                        true,
+                        &[
+                            &PredefinedMenuItem::undo(handle, None)?,
+                            &PredefinedMenuItem::redo(handle, None)?,
+                            &PredefinedMenuItem::cut(handle, None)?,
+                            &PredefinedMenuItem::copy(handle, None)?,
+                            &PredefinedMenuItem::paste(handle, None)?,
+                            &PredefinedMenuItem::select_all(handle, None)?,
+                        ],
+                    )?,
+                ],
+            );
+            menu
+        })
         .setup(|app| {
             let app_handle = app.handle();
-            let window_json = r#"WINDOWCONFIG"#;
+            let window_json = r#"{
+  "title": "PakePlus",
+  "label": "PakePlus",
+  "width": 800,
+  "height": 600,
+  "url": "https://juejin.cn/"
+}"#;
             match json_to_window_config(window_json) {
                 Ok(config) => {
                     println!("Parsed WindowConfig: {:?}", config);
-                    let _main_window = WindowBuilder::from_config(&app_handle, config)
-                        .build()
-                        .unwrap();
+                    let _main_window =
+                        tauri::WebviewWindowBuilder::from_config(app_handle, &config)
+                            .unwrap()
+                            .build()
+                            .unwrap();
                 }
                 Err(err) => {
                     eprintln!("Failed to parse JSON: {}", err);
@@ -40,7 +57,24 @@ fn main() {
             }
             Ok(())
         })
-        .menu(menu)
+        .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_os::init())
+        .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_http::init())
+        .invoke_handler(tauri::generate_handler![
+            command::pakeplus::open_window,
+            command::pakeplus::preview_from_config,
+            command::pakeplus::update_build_file,
+            command::pakeplus::update_config_file,
+            command::pakeplus::update_cargo_file,
+            command::pakeplus::update_main_rust,
+            command::pakeplus::update_custom_js,
+            command::pakeplus::content_to_base64,
+            command::pakeplus::update_config_json,
+            command::pakeplus::rust_main_window,
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
