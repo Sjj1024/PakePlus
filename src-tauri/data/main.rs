@@ -35,13 +35,7 @@ pub fn run() {
         })
         .setup(|app| {
             let app_handle = app.handle();
-            let window_json = r#"{
-  "title": "PakePlus",
-  "label": "PakePlus",
-  "width": 800,
-  "height": 600,
-  "url": "https://juejin.cn/"
-}"#;
+            let window_json = r#"WINDOWCONFIG"#;
             match json_to_window_config(window_json) {
                 Ok(config) => {
                     println!("Parsed WindowConfig: {:?}", config);
