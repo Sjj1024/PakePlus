@@ -750,7 +750,7 @@ const updateIcon = async (content: string) => {
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
         } else {
-            console.log('updateRes error', updateRes)
+            console.error('updateRes error', updateRes)
         }
     }
 }
@@ -868,7 +868,7 @@ const saveProject = async (tips: boolean = true) => {
             }
             tips && ElMessage.success(t('saveSuccess'))
         } else {
-            console.log('error submit!', fields)
+            console.error('error submit!', fields)
         }
     })
 }
@@ -918,7 +918,7 @@ const preview = async (resize: boolean) => {
                     jsContent: initJsScript,
                 })
             } else {
-                console.log('error submit!', fields)
+                console.error('error submit!', fields)
             }
         })
     } else {
@@ -934,7 +934,7 @@ const createRepo = async () => {
             console.log('submit!', appForm)
             centerDialogVisible.value = true
         } else {
-            console.log('error submit!', fields)
+            console.error('error submit!', fields)
         }
     })
 }
@@ -1014,10 +1014,10 @@ const updateBuildYml = async () => {
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
         } else {
-            console.log('updateRes error', updateRes)
+            console.error('updateRes error', updateRes)
         }
     } else {
-        console.log('getFileSha error', shaRes)
+        console.error('getFileSha error', shaRes)
     }
 }
 
@@ -1051,10 +1051,10 @@ const updateCargoToml = async () => {
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
         } else {
-            console.log('updateRes error', updateRes)
+            console.error('updateRes error', updateRes)
         }
     } else {
-        console.log('getFileSha error', shaRes)
+        console.error('getFileSha error', shaRes)
     }
 }
 
@@ -1088,10 +1088,10 @@ const updateMainRs = async () => {
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
         } else {
-            console.log('updateRes error', updateRes)
+            console.error('updateRes error', updateRes)
         }
     } else {
-        console.log('getFileSha error', shaRes)
+        console.error('getFileSha error', shaRes)
     }
 }
 
@@ -1121,10 +1121,10 @@ const mainRsConfig = async () => {
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
         } else {
-            console.log('updateRes error', updateRes)
+            console.error('updateRes error', updateRes)
         }
     } else {
-        console.log('getFileSha error', shaRes)
+        console.error('getFileSha error', shaRes)
     }
 }
 
@@ -1155,10 +1155,10 @@ const updateCustomJs = async () => {
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
         } else {
-            console.log('updateRes error', updateRes)
+            console.error('updateRes error', updateRes)
         }
     } else {
-        console.log('getFileSha error', shaRes)
+        console.error('getFileSha error', shaRes)
     }
 }
 
@@ -1211,7 +1211,7 @@ const onPublish = async () => {
                 t('preCompile') + '...'
             dispatchAction()
         } else {
-            console.log('updateRes error', updateRes)
+            console.error('updateRes error', updateRes)
         }
     } catch (error) {
         console.error('Error reading JSON file:', error)
@@ -1283,7 +1283,7 @@ const checkBuildStatus = async () => {
         }
     )
     console.log('checkRes---', checkRes)
-    // check build status
+    // check build status, runs may be null
     const build_runs = checkRes.data.workflow_runs[0]
     const { status, conclusion, html_url } = build_runs
     buildStatus = t(status) || t('inProgress')
@@ -1361,7 +1361,7 @@ const getLatestRelease = async () => {
         }
         store.setRelease(releaseData)
     } else {
-        console.log('releaseRes error', releaseRes)
+        console.error('releaseRes error', releaseRes)
     }
 }
 

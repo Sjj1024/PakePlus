@@ -41,6 +41,12 @@ export default {
             method: 'get',
         })
     },
+    // get a commit sha
+    getaCommitSha(user: string, repo: string, ref: string) {
+        return http(`/repos/${user}/${repo}/commits/${ref}`, {
+            method: 'get',
+        })
+    },
     // creat branch
     createBranch(user: string, repo: string, body: any) {
         return http(`/repos/${user}/${repo}/git/refs`, {

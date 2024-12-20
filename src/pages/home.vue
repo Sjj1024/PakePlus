@@ -175,7 +175,7 @@ import { usePakeStore } from '@/store'
 import { pakeUrlMap, openUrl, initProject } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
-import { setTheme } from '@tauri-apps/api/app'
+// import { setTheme } from '@tauri-apps/api/app'
 import { invoke, convertFileSrc } from '@tauri-apps/api/core'
 import { getVersion } from '@tauri-apps/api/app'
 
@@ -206,14 +206,15 @@ const chageTheme = async (theme: string) => {
 }
 
 // go project detail
-const goProject = (pro: Project) => {
+const goProject = async (pro: Project) => {
+    router.push('/edit')
     // if token exist, creat branch, else next page
     branchName.value = pro.name
     if (token.value) {
-        creatBranch(true)
+        await getCommitSha()
+        await creatBranch(true)
     }
     store.setCurrentProject(pro)
-    router.push('/edit')
 }
 
 // go about
@@ -282,7 +283,7 @@ const forkProgect = async (tips: boolean = true) => {
         testLoading.value = false
         ElMessage.error(forkRes.data.message)
     } else {
-        console.log('fork error', forkRes)
+        console.error('fork error', forkRes)
         testLoading.value = false
         ElMessage.error(forkRes.data.message)
     }
@@ -292,7 +293,7 @@ const forkProgect = async (tips: boolean = true) => {
     if (startRes.status === 204) {
         console.log('start success')
     } else {
-        console.log('start error')
+        console.error('start error')
     }
     // wait fork done, enable github action
     while (true) {
@@ -313,13 +314,15 @@ const forkProgect = async (tips: boolean = true) => {
 
 // get commit sha
 const getCommitSha = async () => {
-    const res: any = await githubApi.getCommitSha(
+    // dev
+    const res: any = await githubApi.getaCommitSha(
         store.userInfo.login,
-        'PakePlus'
+        'PakePlus',
+        import.meta.env.DEV ? 'update_2' : 'main'
     )
-    console.log('getCommitSha', res.data[0])
+    console.log('getCommitSha', res.data)
     if (res.status === 200) {
-        store.setCommitSha(res.data[0])
+        store.setCommitSha(res.data)
         return true
     } else {
         return false
@@ -388,7 +391,7 @@ const creatBranch = async (first: boolean = false) => {
                 creatLoading.value = false
             } else {
                 creatLoading.value = false
-                console.log('branchInfo error', res)
+                console.error('branchInfo error', res)
                 ElMessage.error(
                     `${t('creatProjectError')}: ${res.data.message}`
                 )
@@ -408,6 +411,7 @@ const creatBranch = async (first: boolean = false) => {
 
 // creat build yml
 const uploadBuildYml = async (_: string = 'main') => {
+    console.log('uploadBuildYml', import.meta.env.DEV)
     // get build.yml file content
     const content = await invoke('update_build_file', {
         name: 'PakePlus',
@@ -426,7 +430,7 @@ const uploadBuildYml = async (_: string = 'main') => {
     if (updateRes.status === 200 || updateRes.status === 201) {
         console.log('updateRes', updateRes)
     } else {
-        console.log('updateRes error', updateRes)
+        console.error('updateRes error', updateRes)
     }
 }
 
@@ -447,7 +451,7 @@ const deleteBuildYml = async (branchName: string = 'main') => {
         if (deleteRes.status === 200) {
             console.log('deleteRes', deleteRes)
         } else {
-            console.log('deleteRes error', deleteRes)
+            console.error('deleteRes error', deleteRes)
         }
     }
 }

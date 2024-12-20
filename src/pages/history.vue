@@ -136,7 +136,7 @@ const getLatestRelease = async () => {
         getLoading.value = false
     } else {
         getLoading.value = false
-        console.log('releaseRes error', releaseRes)
+        console.error('releaseRes error', releaseRes)
         // sometime get one assets, will deep call
         // setTimeout(getLatestRelease, 1000)
     }
