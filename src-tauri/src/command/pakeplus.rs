@@ -251,7 +251,7 @@ pub async fn update_main_rust(
 ) -> String {
     let resource_path = handle
         .path()
-        .resolve("data/main.rs", BaseDirectory::Resource)
+        .resolve("data/lib.rs", BaseDirectory::Resource)
         .expect("failed to resolve resource");
     let mut main_rust = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
@@ -273,6 +273,22 @@ pub async fn rust_main_window(handle: tauri::AppHandle, config: String) -> Strin
     let resource_path = handle
         .path()
         .resolve("data/main.rs", BaseDirectory::Resource)
+        .expect("failed to resolve resource");
+    let mut main_rust = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    main_rust.read_to_string(&mut contents).unwrap();
+    contents = contents.replace("WINDOWCONFIG", config.as_str());
+    // println!("Updated config file: {}", contents);
+    // The new file content, using Base64 encoding
+    let encoded_contents = BASE64_STANDARD.encode(contents);
+    return encoded_contents;
+}
+
+#[tauri::command]
+pub async fn rust_lib_window(handle: tauri::AppHandle, config: String) -> String {
+    let resource_path = handle
+        .path()
+        .resolve("data/lib.rs", BaseDirectory::Resource)
         .expect("failed to resolve resource");
     let mut main_rust = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();

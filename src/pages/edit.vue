@@ -1096,16 +1096,16 @@ const updateMainRs = async () => {
 }
 
 // update build.yml file content
-const mainRsConfig = async () => {
+const libRsConfig = async () => {
     // get CargoToml file sha
     const shaRes = await getFileSha(
-        'src-tauri/src/main.rs',
+        'src-tauri/src/lib.rs',
         store.currentProject.name
     )
     console.log('get CargoToml file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
-        const configContent: any = await invoke('rust_main_window', {
+        const configContent: any = await invoke('rust_lib_window', {
             config: JSON.stringify(tauriConfig.windows),
         })
         const updateRes: any = await githubApi.updateMainRsFile(
@@ -1174,7 +1174,7 @@ const onPublish = async () => {
     await updateCargoToml()
     // update main rust
     // await updateMainRs()
-    await mainRsConfig()
+    await libRsConfig()
     // update custom js
     await updateCustomJs()
     // update tauri config json

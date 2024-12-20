@@ -41,6 +41,7 @@ pub fn run() {
             command::pakeplus::update_config_file,
             command::pakeplus::update_cargo_file,
             command::pakeplus::update_main_rust,
+            command::pakeplus::rust_lib_window,
             command::pakeplus::update_custom_js,
             command::pakeplus::content_to_base64,
             command::pakeplus::update_config_json,
