@@ -83,7 +83,7 @@ jobs:
               with:
                   tagName: PROJECTNAME-v__VERSION__
                   releaseName: 'PROJECTNAME v__VERSION__'
-                  body_path: 'RELEASEBODY'
+                  releaseBody: 'RELEASEBODY'
                   releaseDraft: false
                   prerelease: false
                   publish: true
