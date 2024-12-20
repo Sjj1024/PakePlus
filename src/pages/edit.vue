@@ -1108,11 +1108,12 @@ const libRsConfig = async () => {
         const configContent: any = await invoke('rust_lib_window', {
             config: JSON.stringify(tauriConfig.windows),
         })
-        const updateRes: any = await githubApi.updateMainRsFile(
+        const updateRes: any = await githubApi.updateFileContent(
             store.userInfo.login,
             'PakePlus',
+            'src-tauri/src/lib.rs',
             {
-                message: 'update main rust from pakeplus',
+                message: 'update lib rust from pakeplus',
                 content: configContent,
                 sha: shaRes.data.sha,
                 branch: store.currentProject.name,
