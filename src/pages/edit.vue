@@ -351,10 +351,12 @@ import { useI18n } from 'vue-i18n'
 import { CSSFILTER, isAlphanumeric, openUrl } from '@/utils/common'
 import { platforms } from '@/utils/config'
 import { platform } from '@tauri-apps/plugin-os'
+import { getCurrentWindow } from '@tauri-apps/api/window'
 import TauriConfig from '@/components/TauriConfig.vue'
 
 const router = useRouter()
 const store = usePakeStore()
+const window = getCurrentWindow()
 const { t } = useI18n()
 const iconBase64 = ref('')
 const cutVisible = ref(false)
@@ -1399,6 +1401,7 @@ onMounted(async () => {
     if (store.currentProject.icon) {
         iconFileName.value = await basename(store.currentProject.icon)
     }
+    window.setTitle(`${store.currentProject.name}`)
     // appWindow.setTitle(`${store.currentProject.name}`)
 })
 </script>

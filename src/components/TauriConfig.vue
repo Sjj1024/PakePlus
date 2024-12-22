@@ -116,6 +116,13 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
+                            <el-form-item label="visible" prop="size">
+                                <el-checkbox
+                                    v-model="tauriConfig.windows.visible"
+                                    name="type"
+                                >
+                                </el-checkbox>
+                            </el-form-item>
                         </div>
                         <div class="lineBool">
                             <el-form-item label="decorations" prop="size">
@@ -162,8 +169,6 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                        </div>
-                        <div class="inLine">
                             <el-form-item label="acceptFirstMouse" prop="size">
                                 <el-checkbox
                                     v-model="
@@ -173,13 +178,8 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="visible" prop="size">
-                                <el-checkbox
-                                    v-model="tauriConfig.windows.visible"
-                                    name="type"
-                                >
-                                </el-checkbox>
-                            </el-form-item>
+                        </div>
+                        <div class="inLine flexLeft">
                             <el-form-item label="hiddenTitle" prop="size">
                                 <el-checkbox
                                     v-model="tauriConfig.windows.hiddenTitle"
@@ -363,6 +363,10 @@ defineExpose({
                 .themeSel {
                     width: 100px;
                 }
+            }
+
+            .flexLeft {
+                justify-content: flex-start;
             }
 
             .formItem {

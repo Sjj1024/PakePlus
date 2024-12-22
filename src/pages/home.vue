@@ -183,7 +183,7 @@ import { getVersion } from '@tauri-apps/api/app'
 const router = useRouter()
 const store = usePakeStore()
 const { t, locale } = useI18n()
-
+const window = getCurrentWindow()
 const token = ref(localStorage.getItem('token') || '')
 const version = ref('')
 const tokenDialog = ref(false)
@@ -489,7 +489,7 @@ const mergeUpdateRep = async () => {
 }
 
 onMounted(() => {
-    // appWindow.setTitle('PakePlus')
+    window.setTitle('PakePlus')
     getPakePlusInfo()
     resetReleaseInfo()
     mergeUpdateRep()

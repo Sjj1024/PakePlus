@@ -7,6 +7,7 @@
         "core:default",
         "core:app:allow-set-app-theme",
         "core:app:allow-name",
+        "core:window:allow-set-title",
         "opener:default",
         "http:allow-fetch",
         "http:allow-fetch-cancel",
