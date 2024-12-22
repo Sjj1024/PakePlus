@@ -1251,6 +1251,7 @@ const dispatchAction = async () => {
         }
     )
     console.log('dispatchRes---', dispatchRes)
+    //TODO maybe error---
     buildSecondTimer = setInterval(() => {
         buildTime += 1
         const minute = Math.floor(buildTime / 60)
@@ -1292,7 +1293,7 @@ const checkBuildStatus = async () => {
         }
     )
     console.log('checkRes---', checkRes)
-    // check build status, runs may be null
+    //TODO check build status, runs may be null
     const build_runs = checkRes.data.workflow_runs[0]
     const { status, conclusion, html_url } = build_runs
     buildStatus = t(status) || t('inProgress')
