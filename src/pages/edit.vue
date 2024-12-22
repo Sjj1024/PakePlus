@@ -245,6 +245,7 @@
                 label-width="auto"
                 style="max-width: 600px"
             >
+                <!-- platform select -->
                 <el-form-item :label="t('pubPlatform')">
                     <el-checkbox-group v-model="pubForm.platform">
                         <el-checkbox :label="t('desktop')" value="desktop" />
@@ -260,6 +261,14 @@
                         />
                     </el-checkbox-group>
                 </el-form-item>
+                <!-- build package selcted -->
+                <!-- <el-form-item label="目标架构">
+                    <el-radio-group v-model="pubForm.chip">
+                        <el-radio value="macos">m</el-radio>
+                        <el-radio value="debug">macos-Intel</el-radio>
+                    </el-radio-group>
+                </el-form-item> -->
+                <!-- debug -->
                 <el-form-item :label="t('pubMode')">
                     <el-radio-group v-model="pubForm.model">
                         <el-radio value="close">{{ t('closeDebug') }}</el-radio>
@@ -921,27 +930,6 @@ const preview = async (resize: boolean) => {
             console.error('error submit!', fields)
         }
     })
-    if (platformName === 'macos') {
-        appFormRef.value?.validate((valid, fields) => {
-            if (valid) {
-                console.log('submit!', appForm)
-                saveProject(false)
-                // initialization_script
-                const initJsScript = getInitializationScript()
-                // console.log('initCssScript', initCssScript)
-                invoke('preview_from_config', {
-                    resize,
-                    config: tauriConfig.windows,
-                    jsContent: initJsScript,
-                })
-            } else {
-                console.error('error submit!', fields)
-            }
-        })
-    } else {
-        console.log('platform is not macos')
-        ElMessage.error(t('previewNotSupport'))
-    }
 }
 
 const createRepo = async () => {
@@ -959,6 +947,7 @@ const createRepo = async () => {
 // do not use same name with ref
 const pubForm = reactive({
     platform: ['desktop'],
+    chip: 'macos',
     model: 'close',
     desc: '',
 })
