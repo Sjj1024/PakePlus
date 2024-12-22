@@ -514,7 +514,8 @@ const tauriConfig = reactive({
         // backgroundColor: '#ffffff',
         // shadow: true,
         acceptFirstMouse: false,
-        additionalBrowserArgs: '',
+        // windows preview will be white page
+        // additionalBrowserArgs: '',
     },
 })
 
@@ -904,6 +905,22 @@ const preview = async (resize: boolean) => {
     // get platform
     console.log('platform', platformName)
     // if platform is macos, then use tauri preview
+    appFormRef.value?.validate((valid, fields) => {
+        if (valid) {
+            console.log('submit!', appForm)
+            saveProject(false)
+            // initialization_script
+            const initJsScript = getInitializationScript()
+            // console.log('initCssScript', initCssScript)
+            invoke('preview_from_config', {
+                resize,
+                config: tauriConfig.windows,
+                jsContent: initJsScript,
+            })
+        } else {
+            console.error('error submit!', fields)
+        }
+    })
     if (platformName === 'macos') {
         appFormRef.value?.validate((valid, fields) => {
             if (valid) {
