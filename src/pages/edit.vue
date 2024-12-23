@@ -526,7 +526,8 @@ const tauriConfig = reactive({
         // shadow: true,
         acceptFirstMouse: false,
         // windows preview will be white page
-        // additionalBrowserArgs: '',
+        additionalBrowserArgs:
+            '--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection',
     },
 })
 
