@@ -522,12 +522,9 @@ const tauriConfig = reactive({
         proxyUrl: null,
         useHttpsScheme: false,
         zoomHotkeysEnabled: false,
-        // backgroundColor: '#ffffff',
-        // shadow: true,
         acceptFirstMouse: false,
-        // windows preview will be white page
         additionalBrowserArgs:
-            '--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection',
+            '--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection --autoplay-policy=no-user-gesture-required --auto-accept-camera-and-microphone-capture',
     },
 })
 

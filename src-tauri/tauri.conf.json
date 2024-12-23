@@ -14,7 +14,8 @@
             {
                 "title": "PakePlus",
                 "width": 920,
-                "height": 680
+                "height": 680,
+                "additionalBrowserArgs": "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection"
             }
         ],
         "security": {
