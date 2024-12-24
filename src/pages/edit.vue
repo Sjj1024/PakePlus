@@ -425,7 +425,7 @@ const appRules = reactive<FormRules>({
         },
         {
             validator: (rule, value, callback) => {
-                const versionPattern = /^\d+\.\d+\.\d+$/ // 匹配如 1.8.8 或 1.9.23
+                const versionPattern = /^\d\.\d\.\d$/ // 匹配如 1.8.8 或 1.9.23
                 if (!versionPattern.test(value)) {
                     callback(new Error(t('versionSemVer')))
                 } else {
