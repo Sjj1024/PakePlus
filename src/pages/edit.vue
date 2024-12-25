@@ -1290,16 +1290,11 @@ const createIssue = async (url: string) => {
 }
 
 // rerun fails jobs
-const reRunFailsJobs = async (html_url: string) => {
-    const rerunRes: any = await githubApi.rerunFailedJobs(
-        store.userInfo.login,
-        'PakePlus',
-        323
-    )
-    console.log('rerun fails jobs', rerunRes)
-    if (rerunRes.status === 201) {
-        console.log('rerun success')
-    } else {
+let rerunCount = 0
+const reRunFailsJobs = async (id: number, html_url: string) => {
+    rerunCount += 1
+    if (rerunCount >= 2) {
+        console.log('rerun cancel', rerunCount)
         buildLoading.value = false
         buildTime = 0
         createIssue(html_url)
@@ -1307,6 +1302,17 @@ const reRunFailsJobs = async (html_url: string) => {
         document.querySelector('.el-loading-text')!.innerHTML = t('failure')
         buildSecondTimer && clearInterval(buildSecondTimer)
         checkDispatchTimer && clearInterval(checkDispatchTimer)
+    } else {
+        const rerunRes: any = await githubApi.rerunFailedJobs(
+            store.userInfo.login,
+            'PakePlus',
+            id
+        )
+        if (rerunRes.status === 201) {
+            console.log('rerun success')
+        } else {
+            reRunFailsJobs(id, html_url)
+        }
     }
 }
 
@@ -1322,7 +1328,7 @@ const checkBuildStatus = async () => {
     )
     console.log('checkRes---', checkRes)
     const build_runs = checkRes.data.workflow_runs[0]
-    const { status, conclusion, html_url } = build_runs
+    const { id, status, conclusion, html_url } = build_runs
     buildStatus = t(status) || t('inProgress')
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
         if (status === 'completed' && conclusion === 'success') {
@@ -1343,11 +1349,11 @@ const checkBuildStatus = async () => {
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)
         } else if (status === 'failure') {
-            reRunFailsJobs(html_url)
+            reRunFailsJobs(id, html_url)
         } else if (conclusion === 'failure') {
-            reRunFailsJobs(html_url)
+            reRunFailsJobs(id, html_url)
         } else if (status === 'completed') {
-            reRunFailsJobs(html_url)
+            reRunFailsJobs(id, html_url)
         }
     } else {
         buildTime = 0

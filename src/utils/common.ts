@@ -50,7 +50,7 @@ export const initProject = {
     showName: '',
     appid: '',
     icon: '',
-    version: '',
+    version: '0.0.1',
     platform: 'desktop',
     width: 800,
     height: 600,
