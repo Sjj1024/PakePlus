@@ -1253,25 +1253,30 @@ const dispatchAction = async () => {
         }
     )
     console.log('dispatchRes---', dispatchRes)
-    //TODO maybe error---
-    buildSecondTimer = setInterval(() => {
-        buildTime += 1
-        const minute = Math.floor(buildTime / 60)
-        const second = buildTime % 60
-        const buildRate = Math.floor((buildTime / 720) * 100)
-        // loadingText.value = `${buildStatus}...${minute}分${second}秒`
-        const loadingText = `<div>${minute}${t('minute')}${second}${t(
-            'second'
-        )}</div><div>${buildStatus}${buildRate}%...</div>`
-        // console.log('loadingText---', loadingText)
-        document.querySelector('.el-loading-text')!.innerHTML = loadingText
-    }, 1000)
-    // check build status
-    setTimeout(async () => {
-        checkDispatchTimer = setInterval(async () => {
-            checkBuildStatus()
-        }, 10000)
-    }, 1000 * 60 * 7)
+    if (dispatchRes.status !== 204) {
+        console.error('dispatch res error', dispatchRes)
+        ElMessage.error('dispatch res error')
+        return
+    } else {
+        buildSecondTimer = setInterval(() => {
+            buildTime += 1
+            const minute = Math.floor(buildTime / 60)
+            const second = buildTime % 60
+            const buildRate = Math.floor((buildTime / 720) * 100)
+            // loadingText.value = `${buildStatus}...${minute}分${second}秒`
+            const loadingText = `<div>${minute}${t('minute')}${second}${t(
+                'second'
+            )}</div><div>${buildStatus}${buildRate}%...</div>`
+            // console.log('loadingText---', loadingText)
+            document.querySelector('.el-loading-text')!.innerHTML = loadingText
+        }, 1000)
+        // check build status
+        setTimeout(async () => {
+            checkDispatchTimer = setInterval(async () => {
+                checkBuildStatus()
+            }, 10000)
+        }, 1000 * 60 * 7)
+    }
 }
 
 // create issue
@@ -1282,6 +1287,27 @@ const createIssue = async (url: string) => {
         title: `${store.currentProject.name} build error`,
     })
     console.log('issueRes---', issueRes)
+}
+
+// rerun fails jobs
+const reRunFailsJobs = async (html_url: string) => {
+    const rerunRes: any = await githubApi.rerunFailedJobs(
+        store.userInfo.login,
+        'PakePlus',
+        323
+    )
+    console.log('rerun fails jobs', rerunRes)
+    if (rerunRes.status === 201) {
+        console.log('rerun success')
+    } else {
+        buildLoading.value = false
+        buildTime = 0
+        createIssue(html_url)
+        openUrl(html_url)
+        document.querySelector('.el-loading-text')!.innerHTML = t('failure')
+        buildSecondTimer && clearInterval(buildSecondTimer)
+        checkDispatchTimer && clearInterval(checkDispatchTimer)
+    }
 }
 
 // check build workflow status
@@ -1295,7 +1321,6 @@ const checkBuildStatus = async () => {
         }
     )
     console.log('checkRes---', checkRes)
-    //TODO check build status, runs may be null
     const build_runs = checkRes.data.workflow_runs[0]
     const { status, conclusion, html_url } = build_runs
     buildStatus = t(status) || t('inProgress')
@@ -1318,28 +1343,11 @@ const checkBuildStatus = async () => {
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)
         } else if (status === 'failure') {
-            buildLoading.value = false
-            buildTime = 0
-            createIssue(html_url)
-            openUrl(html_url)
-            document.querySelector('.el-loading-text')!.innerHTML = t('failure')
-            buildSecondTimer && clearInterval(buildSecondTimer)
-            checkDispatchTimer && clearInterval(checkDispatchTimer)
+            reRunFailsJobs(html_url)
         } else if (conclusion === 'failure') {
-            buildLoading.value = false
-            buildTime = 0
-            createIssue(html_url)
-            openUrl(html_url)
-            document.querySelector('.el-loading-text')!.innerHTML = t('failure')
-            buildSecondTimer && clearInterval(buildSecondTimer)
-            checkDispatchTimer && clearInterval(checkDispatchTimer)
+            reRunFailsJobs(html_url)
         } else if (status === 'completed') {
-            buildLoading.value = false
-            buildTime = 0
-            createIssue(html_url)
-            openUrl(html_url)
-            buildSecondTimer && clearInterval(buildSecondTimer)
-            checkDispatchTimer && clearInterval(checkDispatchTimer)
+            reRunFailsJobs(html_url)
         }
     } else {
         buildTime = 0

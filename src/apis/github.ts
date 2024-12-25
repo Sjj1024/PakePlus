@@ -204,4 +204,13 @@ export default {
             data: body,
         })
     },
+    // rerun failed jobs
+    rerunFailedJobs(user: string, repo: string, run_id: number) {
+        return http(
+            `/repos/${user}/${repo}/actions/runs/${run_id}/rerun-failed-jobs`,
+            {
+                method: 'post',
+            }
+        )
+    },
 }
