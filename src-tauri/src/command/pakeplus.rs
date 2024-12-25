@@ -90,7 +90,7 @@ pub async fn preview_from_config(
     //         }
     //     }
     // }
-    println!("tauri config: {:?}", config);
+    // println!("tauri config: {:?}", config);
     let resource_path = handle
         .path()
         .resolve("data/custom.js", BaseDirectory::Resource)
