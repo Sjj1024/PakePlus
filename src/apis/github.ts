@@ -194,7 +194,7 @@ export default {
     mergeUpdateRep(user: string, repo: string) {
         return http(`/repos/${user}/${repo}/merge-upstream`, {
             method: 'post',
-            data: { branch: 'main' },
+            data: { branch: 'muster' },
         })
     },
     // creat issue

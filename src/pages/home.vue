@@ -274,7 +274,7 @@ const forkProgect = async (tips: boolean = true) => {
     // fork action is async
     const forkRes: any = await githubApi.forkProgect({
         name: 'PakePlus',
-        default_branch_only: true,
+        default_branch_only: false,
     })
     console.log('forkRes', forkRes)
     if (forkRes.status === 202) {
@@ -492,7 +492,7 @@ onMounted(() => {
     window.setTitle('PakePlus')
     getPakePlusInfo()
     resetReleaseInfo()
-    mergeUpdateRep()
+    // mergeUpdateRep()
 })
 </script>
 
