@@ -1194,11 +1194,7 @@ const onPublish = async () => {
         const configContent: any = await invoke('update_config_file', {
             name: appForm.showName,
             version: appForm.version,
-            url: appForm.url,
             id: appForm.appid,
-            width: appForm.width.toString(),
-            height: appForm.height.toString(),
-            userAgent: platforms[appForm.platform].userAgent,
             ascii: isAlphanumeric(appForm.showName),
         })
         // update config file

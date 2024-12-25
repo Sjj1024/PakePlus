@@ -132,11 +132,7 @@ pub async fn update_config_file(
     handle: tauri::AppHandle,
     name: String,
     version: String,
-    url: String,
     id: String,
-    width: String,
-    height: String,
-    user_agent: String,
     ascii: bool,
 ) -> String {
     let resource_path = handle
@@ -149,11 +145,7 @@ pub async fn update_config_file(
     contents = contents
         .replace("PROJECTNAME", name.as_str())
         .replace("PROJECTVERSION", version.as_str())
-        .replace("PROJECTURL", url.as_str())
-        .replace("PROJECTID", id.as_str())
-        .replace("PROJECTUSERAGENT", user_agent.as_str())
-        .replace("-1", width.as_str())
-        .replace("-2", height.as_str());
+        .replace("PROJECTID", id.as_str());
     if ascii {
         contents = contents.replace("-3", r#""all""#);
     } else {
@@ -173,11 +165,7 @@ pub async fn update_config_json(
     handle: tauri::AppHandle,
     name: String,
     version: String,
-    url: String,
     id: String,
-    width: String,
-    height: String,
-    user_agent: String,
     ascii: bool,
 ) -> String {
     let resource_path = handle
@@ -190,11 +178,7 @@ pub async fn update_config_json(
     contents = contents
         .replace("PROJECTNAME", name.as_str())
         .replace("PROJECTVERSION", version.as_str())
-        .replace("PROJECTURL", url.as_str())
-        .replace("PROJECTID", id.as_str())
-        .replace("PROJECTUSERAGENT", user_agent.as_str())
-        .replace("-1", width.as_str())
-        .replace("-2", height.as_str());
+        .replace("PROJECTID", id.as_str());
     if ascii {
         contents = contents.replace("-3", r#""all""#);
     } else {
@@ -230,9 +214,9 @@ pub async fn update_cargo_file(
         .replace("PROJECTDESC", desc.as_str());
     if debug {
         // "shell-open", "devtools"
-        contents = contents.replace("-3", r#""shell-open", "devtools""#);
+        contents = contents.replace("-3", r#""protocol-asset", "devtools""#);
     } else {
-        contents = contents.replace("-3", r#""shell-open""#);
+        contents = contents.replace("-3", r#""protocol-asset""#);
     }
     // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding

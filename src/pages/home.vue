@@ -319,7 +319,7 @@ const getCommitSha = async () => {
     const res: any = await githubApi.getaCommitSha(
         store.userInfo.login,
         'PakePlus',
-        import.meta.env.DEV ? 'update_2' : 'main'
+        'master'
     )
     console.log('getCommitSha', res.data)
     if (res.status === 200) {
