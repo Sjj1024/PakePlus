@@ -483,7 +483,7 @@ const isJson = ref(false)
 const tauriConfigRef = ref<any>(null)
 
 // tauri config
-const tauriConfig = reactive({
+const tauriConfig: any = reactive({
     windows: {
         label: store.currentProject.name,
         title: appForm.showName,
@@ -524,8 +524,8 @@ const tauriConfig = reactive({
         zoomHotkeysEnabled: false,
         acceptFirstMouse: false,
         // if add additionalBrowserArgs, windows cant preview, but can build
-        additionalBrowserArgs:
-            '--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection --autoplay-policy=no-user-gesture-required --auto-accept-camera-and-microphone-capture',
+        // additionalBrowserArgs:
+        //     '--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection --autoplay-policy=no-user-gesture-required --auto-accept-camera-and-microphone-capture',
     },
 })
 
@@ -914,6 +914,13 @@ const getInitializationScript = () => {
 const preview = async (resize: boolean) => {
     // get platform
     console.log('platform', platformName)
+    if (
+        platformName === 'windows' &&
+        tauriConfig.windows.additionalBrowserArgs
+    ) {
+        ElMessage.error('additionalBrowserArgs cant preview on windows')
+        return
+    }
     // if platform is macos, then use tauri preview
     appFormRef.value?.validate((valid, fields) => {
         if (valid) {
