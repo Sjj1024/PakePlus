@@ -77,6 +77,12 @@ jobs:
             - name: install frontend dependencies
               run: pnpm install # change this to npm, pnpm or bun depending on which one you use.
 
+            - name: Regenerate Icons
+              run: pnpm tauri icon
+
+            - name: Create apple icon
+              run: node ./cli/creatIcon.cjs
+
             - uses: tauri-apps/tauri-action@v0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
