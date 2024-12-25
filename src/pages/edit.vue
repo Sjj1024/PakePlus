@@ -487,8 +487,6 @@ const tauriConfig = reactive({
         hiddenTitle: false,
         acceptFirstMouse: false,
         tabbingIdentifier: '',
-        additionalBrowserArgs:
-            '--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection',
     },
 })
 
