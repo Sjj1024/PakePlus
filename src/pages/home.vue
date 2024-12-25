@@ -10,7 +10,7 @@
                         {{ t('projectTips') }}
                     </span>
                     <span
-                        @click="openUrl(pakeUrlMap.github)"
+                        @click="openUrl(urlMap.github)"
                         class="iconfont githubIcon"
                     >
                         &#xe709;
@@ -172,7 +172,7 @@ import { useRouter } from 'vue-router'
 import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
-import { pakeUrlMap, openUrl, initProject } from '@/utils/common'
+import { urlMap, openUrl, initProject } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
 // import { setTheme } from '@tauri-apps/api/app'

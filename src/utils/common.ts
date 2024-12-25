@@ -1,6 +1,6 @@
 import { open } from '@tauri-apps/plugin-shell'
 
-export const pakeUrlMap = {
+export const urlMap = {
     github: 'https://github.com/Sjj1024/PakePlus',
     weixin: 'https://github.com/Sjj1024/PakePlus',
     qq: '',
@@ -10,6 +10,7 @@ export const pakeUrlMap = {
     google: '',
     csdn: 'https://xiaoshen.blog.csdn.net/',
     juejin: 'https://juejin.cn/user/70007368988926',
+    windowsConfig: 'https://v2.tauri.app/reference/config/#windowconfig',
 }
 
 export const openUrl = async (url: string) => {

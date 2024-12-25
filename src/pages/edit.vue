@@ -523,6 +523,7 @@ const tauriConfig = reactive({
         useHttpsScheme: false,
         zoomHotkeysEnabled: false,
         acceptFirstMouse: false,
+        // if add additionalBrowserArgs, windows cant preview, but can build
         additionalBrowserArgs:
             '--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection --autoplay-policy=no-user-gesture-required --auto-accept-camera-and-microphone-capture',
     },

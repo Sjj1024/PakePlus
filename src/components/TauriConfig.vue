@@ -12,7 +12,16 @@
         </div>
         <!-- ui config -->
         <el-collapse v-else v-model="activeName" accordion>
-            <el-collapse-item title="windows" name="1">
+            <el-collapse-item name="1">
+                <template #title>
+                    Windows
+                    <el-icon
+                        class="infoLink"
+                        @click.stop="openUrl(urlMap.windowsConfig)"
+                    >
+                        <info-filled />
+                    </el-icon>
+                </template>
                 <div class="windowsConfig">
                     <el-form
                         :model="tauriConfig.windows"
@@ -282,6 +291,7 @@
 import { Codemirror } from 'vue-codemirror'
 import { json } from '@codemirror/lang-json'
 import { oneDark } from '@codemirror/theme-one-dark'
+import { openUrl, urlMap } from '@/utils/common'
 import { ref } from 'vue'
 
 const activeName = ref('1')
@@ -338,6 +348,10 @@ defineExpose({
     .jsonInput {
         width: 100%;
         height: 400px;
+    }
+
+    .infoLink {
+        margin-left: 6px;
     }
 
     .windowsConfig {

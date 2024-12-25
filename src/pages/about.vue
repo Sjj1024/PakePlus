@@ -19,31 +19,31 @@
             <div class="description">
                 <p>
                     {{ t('aboutGuide') }}:
-                    {{ pakeUrlMap.email }}
+                    {{ urlMap.email }}
                 </p>
             </div>
             <div class="tools">
                 <p>
                     <span>{{ t('githubRepo') }}：</span>
-                    <span class="link" @click="openUrl(pakeUrlMap.github)">
-                        {{ pakeUrlMap.github }}
+                    <span class="link" @click="openUrl(urlMap.github)">
+                        {{ urlMap.github }}
                     </span>
                 </p>
                 <p>
                     <span>{{ t('navigation') }}：</span>
-                    <span class="link" @click="openUrl(pakeUrlMap.github)">
-                        {{ pakeUrlMap.github }}
+                    <span class="link" @click="openUrl(urlMap.github)">
+                        {{ urlMap.github }}
                     </span>
                 </p>
                 <p>
                     <span>{{ t('followme') }}：</span>
-                    <span class="link" @click="openUrl(pakeUrlMap.csdn)">
+                    <span class="link" @click="openUrl(urlMap.csdn)">
                         CSDN
                     </span>
-                    <span class="link" @click="openUrl(pakeUrlMap.juejin)">
+                    <span class="link" @click="openUrl(urlMap.juejin)">
                         掘金
                     </span>
-                    <span class="link" @click="openUrl(pakeUrlMap.github)">
+                    <span class="link" @click="openUrl(urlMap.github)">
                         Github
                     </span>
                 </p>
@@ -80,7 +80,7 @@ import weixin from '@/assets/images/weixin.png'
 import zhifubao from '@/assets/images/zhifubao.png'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import { pakeUrlMap, openUrl } from '@/utils/common'
+import { urlMap, openUrl } from '@/utils/common'
 import { ref } from 'vue'
 
 const { t } = useI18n()
