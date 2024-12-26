@@ -401,6 +401,8 @@ const creatBranch = async (first: boolean = false) => {
             store.setCurrentProject({
                 ...initProject,
                 name: branchName.value,
+                showName: branchName.value,
+                appid: `com.${branchName.value}.app`,
             })
             router.push('/edit')
         }
