@@ -374,6 +374,10 @@ defineExpose({
                     margin-left: 0px !important;
                 }
 
+                :deep(.el-form-item__label) {
+                    padding: 0px 2px 0px 0px !important;
+                }
+
                 .themeSel {
                     width: 100px;
                 }
@@ -381,6 +385,10 @@ defineExpose({
 
             .flexLeft {
                 justify-content: flex-start;
+
+                :deep(.el-form-item--label-right) {
+                    margin-right: 10px;
+                }
             }
 
             .formItem {
