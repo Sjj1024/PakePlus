@@ -1280,11 +1280,13 @@ const dispatchAction = async () => {
 }
 
 // create issue
-const createIssue = async (url: string) => {
+const createIssue = async (url: string, label: string, title: string) => {
     const issueRes: any = await githubApi.createIssue({
-        body: `build error：${url}`,
-        labels: ['failure'],
-        title: `${store.currentProject.name} build error`,
+        body: `name: ${store.currentProject.name}\n 
+        weburl: ${store.currentProject.url}\n 
+        build error: ${url}`,
+        labels: [label],
+        title: title,
     })
     console.log('issueRes---', issueRes)
 }
@@ -1297,7 +1299,7 @@ const reRunFailsJobs = async (id: number, html_url: string) => {
         console.log('rerun cancel', rerunCount)
         buildLoading.value = false
         buildTime = 0
-        createIssue(html_url)
+        createIssue(html_url, 'failure', 'build error')
         openUrl(html_url)
         document.querySelector('.el-loading-text')!.innerHTML = t('failure')
         buildSecondTimer && clearInterval(buildSecondTimer)
@@ -1332,6 +1334,7 @@ const checkBuildStatus = async () => {
     buildStatus = t(status) || t('inProgress')
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
         if (status === 'completed' && conclusion === 'success') {
+            createIssue(html_url, 'success', 'build success')
             document.querySelector('.el-loading-text')!.innerHTML =
                 t('buildSuccess')
             // clear timer
@@ -1341,6 +1344,7 @@ const checkBuildStatus = async () => {
             buildTime = 0
             router.push('/history')
         } else if (status === 'completed' && conclusion === 'cancelled') {
+            createIssue(html_url, 'cancelled', 'build cancelled')
             document.querySelector('.el-loading-text')!.innerHTML =
                 t('cancelled')
             buildLoading.value = false

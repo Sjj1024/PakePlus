@@ -149,10 +149,7 @@ pub async fn update_config_file(
     if ascii {
         contents = contents.replace("-3", r#""all""#);
     } else {
-        contents = contents.replace(
-            "-3",
-            r#"["deb", "appimage", "nsis", "app", "dmg", "updater"]"#,
-        );
+        contents = contents.replace("-3", r#"["deb", "appimage", "nsis", "app", "dmg"]"#);
     }
     // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
@@ -182,10 +179,7 @@ pub async fn update_config_json(
     if ascii {
         contents = contents.replace("-3", r#""all""#);
     } else {
-        contents = contents.replace(
-            "-3",
-            r#"["deb", "appimage", "nsis", "app", "dmg", "updater"]"#,
-        );
+        contents = contents.replace("-3", r#"["deb", "appimage", "nsis", "app", "dmg"]"#);
     }
     // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
