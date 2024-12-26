@@ -69,27 +69,27 @@ pub async fn preview_from_config(
     config: WindowConfig,
     js_content: String,
 ) {
-    // let window_label = config.label.clone();
-    // if let Some(existing_window) = handle.get_webview_window(window_label.as_str()) {
-    //     if resize {
-    //         let new_size = LogicalSize::new(config.width, config.height);
-    //         match existing_window.set_size(new_size) {
-    //             Ok(_) => println!("Window resized to {}x{}", config.width, config.height),
-    //             Err(e) => eprintln!("Failed to resize window: {}", e),
-    //         }
-    //     } else {
-    //         existing_window.close().unwrap();
-    //         println!("Existing window closed.");
-    //         let start = Instant::now();
-    //         while handle.get_webview_window(window_label.as_str()).is_some() {
-    //             if start.elapsed().as_secs() > 2 {
-    //                 println!("Window close took too long. Aborting.");
-    //                 return;
-    //             }
-    //             std::thread::yield_now();
-    //         }
-    //     }
-    // }
+    let window_label = config.label.clone();
+    if let Some(existing_window) = handle.get_webview_window(window_label.as_str()) {
+        if resize {
+            let new_size = LogicalSize::new(config.width, config.height);
+            match existing_window.set_size(new_size) {
+                Ok(_) => println!("Window resized to {}x{}", config.width, config.height),
+                Err(e) => eprintln!("Failed to resize window: {}", e),
+            }
+        } else {
+            existing_window.close().unwrap();
+            println!("Existing window closed.");
+            let start = Instant::now();
+            while handle.get_webview_window(window_label.as_str()).is_some() {
+                if start.elapsed().as_secs() > 2 {
+                    println!("Window close took too long. Aborting.");
+                    return;
+                }
+                std::thread::yield_now();
+            }
+        }
+    }
     // println!("tauri config: {:?}", config);
     let resource_path = handle
         .path()
@@ -99,7 +99,7 @@ pub async fn preview_from_config(
     let mut contents = String::new();
     custom_js.read_to_string(&mut contents).unwrap();
     contents += js_content.as_str();
-    println!("js file contents: {}", contents);
+    // println!("js file contents: {}", contents);
     if !resize {
         let _window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
             .unwrap()
