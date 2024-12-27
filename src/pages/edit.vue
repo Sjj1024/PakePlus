@@ -866,7 +866,7 @@ const saveJsFile = async () => {
 
 // save project
 const saveProject = async (tips: boolean = true) => {
-    await emit('handlepay', { loggedIn: true, token: 'authToken' })
+    // await emit('handlepay', { loggedIn: true, token: 'authToken' })
     appFormRef.value?.validate(async (valid, fields) => {
         if (valid) {
             store.addUpdatePro({

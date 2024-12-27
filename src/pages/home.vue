@@ -208,6 +208,7 @@ const chageTheme = async (theme: string) => {
 
 // go project detail
 const goProject = async (pro: Project) => {
+    store.setCurrentProject(pro)
     router.push('/edit')
     // if token exist, creat branch, else next page
     branchName.value = pro.name
@@ -215,7 +216,6 @@ const goProject = async (pro: Project) => {
         await getCommitSha()
         await creatBranch(true)
     }
-    store.setCurrentProject(pro)
 }
 
 // go about
