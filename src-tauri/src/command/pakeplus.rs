@@ -69,8 +69,8 @@ pub async fn preview_from_config(
     config: WindowConfig,
     js_content: String,
 ) {
-    let window_label = config.label.clone();
-    if let Some(existing_window) = handle.get_webview_window(window_label.as_str()) {
+    let window_label = "PreView";
+    if let Some(existing_window) = handle.get_webview_window(window_label) {
         if resize {
             let new_size = LogicalSize::new(config.width, config.height);
             match existing_window.set_size(new_size) {
@@ -81,7 +81,7 @@ pub async fn preview_from_config(
             existing_window.close().unwrap();
             println!("Existing window closed.");
             let start = Instant::now();
-            while handle.get_webview_window(window_label.as_str()).is_some() {
+            while handle.get_webview_window(window_label).is_some() {
                 if start.elapsed().as_secs() > 2 {
                     println!("Window close took too long. Aborting.");
                     return;
@@ -104,6 +104,7 @@ pub async fn preview_from_config(
         let _window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
             .unwrap()
             .initialization_script(contents.as_str())
+            .initialization_script(include_str!("../extension/event.js"))
             .build()
             .unwrap();
     }

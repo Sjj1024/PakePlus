@@ -2,14 +2,18 @@
     "$schema": "../gen/schemas/desktop-schema.json",
     "identifier": "default",
     "description": "Capability for the main window",
-    "windows": ["main"],
+    "windows": ["main", "PreView"],
+    "remote": { "urls": ["https://**"] },
     "permissions": [
         "core:default",
         "core:app:allow-set-app-theme",
         "core:app:allow-name",
         "core:window:allow-set-title",
+        "core:event:allow-emit",
+        "core:event:allow-listen",
         "opener:default",
         "http:allow-fetch",
+        "http:default",
         "http:allow-fetch-cancel",
         "http:allow-fetch-read-body",
         "http:allow-fetch-send",
@@ -26,10 +30,6 @@
         "fs:allow-appconfig-write-recursive",
         "fs:allow-appdata-write",
         "fs:allow-appdata-write-recursive",
-        "clipboard-manager:allow-write-text",
-        {
-            "identifier": "http:default",
-            "allow": [{ "url": "https://**" }]
-        }
+        "clipboard-manager:allow-write-text"
     ]
 }

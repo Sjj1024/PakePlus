@@ -358,6 +358,7 @@ import { ArrowLeft } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import { useI18n } from 'vue-i18n'
 import { CSSFILTER, isAlphanumeric, openUrl } from '@/utils/common'
+import { emit } from '@tauri-apps/api/event'
 import { platforms } from '@/utils/config'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -408,7 +409,7 @@ const appRules = reactive<FormRules>({
         },
         {
             validator: (rule, value, callback) => {
-                console.log('appshow name value', value)
+                // console.log('appshow name value', value)
                 // the name cannot start with a digit
                 if (/^[0-9]/.test(value)) {
                     callback(new Error(t('appNameInvalid')))
@@ -865,6 +866,7 @@ const saveJsFile = async () => {
 
 // save project
 const saveProject = async (tips: boolean = true) => {
+    await emit('handlepay', { loggedIn: true, token: 'authToken' })
     appFormRef.value?.validate(async (valid, fields) => {
         if (valid) {
             store.addUpdatePro({
@@ -931,7 +933,10 @@ const preview = async (resize: boolean) => {
             // console.log('initCssScript', initCssScript)
             invoke('preview_from_config', {
                 resize,
-                config: tauriConfig.windows,
+                config: {
+                    ...tauriConfig.windows,
+                    label: 'PreView',
+                },
                 jsContent: initJsScript,
             })
         } else {
@@ -1283,8 +1288,7 @@ const dispatchAction = async () => {
 const createIssue = async (url: string, label: string, title: string) => {
     const issueRes: any = await githubApi.createIssue({
         body: `name: ${store.currentProject.name}\n 
-        weburl: ${store.currentProject.url}\n 
-        build error: ${url}`,
+        build info: ${url}`,
         labels: [label],
         title: title,
     })
