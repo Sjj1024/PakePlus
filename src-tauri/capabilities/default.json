@@ -30,6 +30,10 @@
         "fs:allow-appconfig-write-recursive",
         "fs:allow-appdata-write",
         "fs:allow-appdata-write-recursive",
-        "clipboard-manager:allow-write-text"
+        "clipboard-manager:allow-write-text",
+        {
+            "identifier": "http:default",
+            "allow": [{ "url": "https://**" }]
+        }
     ]
 }

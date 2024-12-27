@@ -216,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             anchorEle.addEventListener(
                 'click',
                 (e) => {
+                    console.log('anchorEle.addEventListener')
                     const url = anchorEle.href
                     const filename =
                         anchorEle.download || getFilenameFromUrl(url)

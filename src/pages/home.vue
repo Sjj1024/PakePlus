@@ -646,6 +646,10 @@ onMounted(() => {
             &:hover {
                 box-shadow: var(--box-shadow) 0px 0px 10px;
                 transform: scale(1.01);
+
+                .appIcon {
+                    transform: scale(1.02);
+                }
             }
 
             .appIcon {

@@ -3,6 +3,12 @@ use std::io::Read;
 use std::time::Instant;
 use tauri::{path::BaseDirectory, utils::config::WindowConfig, AppHandle, LogicalSize, Manager};
 
+#[derive(serde::Deserialize)]
+pub struct BinaryDownloadParams {
+    filename: String,
+    binary: Vec<u8>,
+}
+
 #[tauri::command]
 pub async fn open_window(
     handle: AppHandle,
@@ -302,3 +308,25 @@ pub async fn content_to_base64(_: tauri::AppHandle, content: String) -> String {
     let encoded_contents = BASE64_STANDARD.encode(content);
     return encoded_contents;
 }
+
+// #[tauri::command]
+// pub async fn download_file_by_binary(
+//     app: AppHandle,
+//     params: BinaryDownloadParams,
+// ) -> Result<(), String> {
+//     let window: Window = app.get_window("pake").unwrap();
+//     show_toast(&window, &get_download_message(MessageType::Start));
+//     let output_path = api::path::download_dir().unwrap().join(params.filename);
+//     let file_path = check_file_or_append(output_path.to_str().unwrap());
+//     let download_file_result = fs::write(file_path, &params.binary);
+//     match download_file_result {
+//         Ok(_) => {
+//             show_toast(&window, &get_download_message(MessageType::Success));
+//             Ok(())
+//         }
+//         Err(e) => {
+//             show_toast(&window, &get_download_message(MessageType::Failure));
+//             Err(e.to_string())
+//         }
+//     }
+// }
