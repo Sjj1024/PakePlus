@@ -30,6 +30,7 @@ function zoomOut() {
 }
 
 function handleShortcut(event) {
+    console.log('event.key')
     if (shortcuts[event.key]) {
         event.preventDefault()
         shortcuts[event.key]()
@@ -38,6 +39,7 @@ function handleShortcut(event) {
 
 // Judgment of file download.
 function isDownloadLink(url) {
+    console.log('is download link', url)
     const fileExtensions = [
         '3gp',
         '7z',
@@ -113,7 +115,18 @@ function externalTargetLink() {
     return ['zbook.lol'].indexOf(location.hostname) > -1
 }
 
+document.addEventListener('keyup', (event) => {
+    console.log('add event listener keyup', event)
+    if (/windows|linux/i.test(navigator.userAgent) && event.ctrlKey) {
+        handleShortcut(event)
+    }
+    if (/macintosh|mac os x/i.test(navigator.userAgent) && event.metaKey) {
+        handleShortcut(event)
+    }
+})
+
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('eventjs DOMContentLoaded------')
     const tauri = window.__TAURI__
     const appWindow = tauri.window.appWindow
     const invoke = tauri.tauri.invoke
@@ -138,15 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
         appWindow.isFullscreen().then((fullscreen) => {
             appWindow.setFullscreen(!fullscreen).then()
         })
-    })
-
-    document.addEventListener('keyup', (event) => {
-        if (/windows|linux/i.test(navigator.userAgent) && event.ctrlKey) {
-            handleShortcut(event)
-        }
-        if (/macintosh|mac os x/i.test(navigator.userAgent) && event.metaKey) {
-            handleShortcut(event)
-        }
     })
 
     // Collect blob urls to blob by overriding window.URL.createObjectURL
@@ -207,15 +211,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // detect blob download by createElement("a")
     function detectDownloadByCreateAnchor() {
+        console.log('detectDownloadByCreateAnchor')
         const createEle = document.createElement
+
         document.createElement = (el) => {
             if (el !== 'a') return createEle.call(document, el)
             const anchorEle = createEle.call(document, el)
-
             // use addEventListener to avoid overriding the original click event.
             anchorEle.addEventListener(
                 'click',
                 (e) => {
+                    console.log('anchorEle.addEventListener')
                     const url = anchorEle.href
                     const filename =
                         anchorEle.download || getFilenameFromUrl(url)
@@ -247,25 +253,27 @@ document.addEventListener('DOMContentLoaded', () => {
         anchorElement.download || e.metaKey || e.ctrlKey || isDownloadLink(url)
 
     const handleExternalLink = (e, url) => {
-        console.log('handleExternalLink')
+        console.log('handleExternalLink----')
         e.preventDefault()
         tauri.shell.open(url)
     }
 
     const handleDownloadLink = (e, url, filename) => {
+        console.log('handleDownloadLink----')
         e.preventDefault()
         invoke('download_file', { params: { url, filename } })
     }
 
     const detectAnchorElementClick = (e) => {
+        console.log('detectAnchorElementClick----')
         const anchorElement = e.target.closest('a')
+        console.log('anchorElement--', anchorElement.href)
         if (anchorElement && anchorElement.href) {
             anchorElement.target = '_self'
             const hrefUrl = new URL(anchorElement.href)
             const absoluteUrl = hrefUrl.href
             let filename =
                 anchorElement.download || getFilenameFromUrl(absoluteUrl)
-
             // Handling external link redirection.
             if (
                 isExternalLink(absoluteUrl) &&
