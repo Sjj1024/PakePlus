@@ -1,8 +1,8 @@
 [package]
-name = "pakeplus"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+name = "Outlook"
+version = "0.0.1"
+description = "Release first"
+authors = ["1024xiaoshen"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
