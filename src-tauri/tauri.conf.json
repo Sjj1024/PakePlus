@@ -1,22 +1,12 @@
 {
-    "build": {
-        "beforeDevCommand": "pnpm dev",
-        "beforeBuildCommand": "pnpm build",
-        "devPath": "http://localhost:1420",
-        "distDir": "../dist",
-        "withGlobalTauri": true
-    },
     "package": {
-        "productName": "PakePlus",
-        "version": "../package.json"
+        "productName": "Outlook",
+        "version": "0.0.1"
     },
     "tauri": {
         "allowlist": {
             "all": false,
             "path": {
-                "all": true
-            },
-            "os": {
                 "all": true
             },
             "fs": {
@@ -31,20 +21,14 @@
                 "renameFile": true,
                 "exists": true,
                 "scope": [
-                    "$APPDATA/**/*",
                     "$APPDATA/*",
+                    "$APPDATA/**/*",
                     "$APPDATA/assets/*",
                     "$DOWNLOAD/*"
                 ]
             },
             "http": {
-                "all": true,
-                "scope": [
-                    "https://api.github.com/*",
-                    "https://sjj1024.github.io/*",
-                    "http://*/*",
-                    "https://*/*"
-                ]
+                "all": true
             },
             "dialog": {
                 "all": true,
@@ -58,8 +42,8 @@
                 "all": true,
                 "asset": true,
                 "assetScope": [
-                    "$APPDATA/**/*",
                     "$APPDATA/*",
+                    "$APPDATA/**/*",
                     "$APPDATA/assets/*",
                     "$DOWNLOAD/*"
                 ]
@@ -80,41 +64,13 @@
                 "setResizable": true
             }
         },
-        "windows": [
-            {
-                "title": "PakePlus",
-                "width": 800,
-                "height": 600,
-                "center": true,
-                "additionalBrowserArgs": "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection"
-            }
-        ],
         "security": {
-            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' asset://localhost blob: data: https://asset.localhost; font-src 'self' asset://localhost data:;",
-            "dangerousRemoteDomainIpcAccess": [
-                {
-                    "domain": "weread.qq.com",
-                    "windows": ["PakePlus"],
-                    "enableTauriAPI": true
-                },
-                {
-                    "domain": "http://localhost:5174",
-                    "windows": ["previewWeb"],
-                    "enableTauriAPI": true
-                }
-            ]
+            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' asset://localhost data:; font-src 'self' asset://localhost data:; asset: https://asset.localhost"
         },
         "bundle": {
             "active": true,
             "targets": "all",
-            "identifier": "com.pakeplus.desktop",
-            "resources": [
-                "./data/build.yml",
-                "./data/config.json",
-                "./data/main.rs",
-                "./data/Cargo.toml",
-                "./data/custom.js"
-            ],
+            "identifier": "com.outlook.id",
             "icon": [
                 "icons/32x32.png",
                 "icons/128x128.png",
