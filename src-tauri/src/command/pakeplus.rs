@@ -3,11 +3,11 @@ use std::io::Read;
 use std::time::Instant;
 use tauri::{path::BaseDirectory, utils::config::WindowConfig, AppHandle, LogicalSize, Manager};
 
-#[derive(serde::Deserialize)]
-pub struct BinaryDownloadParams {
-    filename: String,
-    binary: Vec<u8>,
-}
+// #[derive(serde::Deserialize)]
+// pub struct BinaryDownloadParams {
+//     filename: String,
+//     binary: Vec<u8>,
+// }
 
 #[tauri::command]
 pub async fn open_window(
