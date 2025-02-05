@@ -2,8 +2,8 @@ name: 'publish'
 
 on:
     push:
-        tags:
-            - 'v*'
+        branches:
+            - test_dist
 
 jobs:
     publish-tauri:
@@ -13,7 +13,7 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                    - platform: 'macos-latest'
+                    - platform: 'macos-latest' # for Arm based macs (M1 and above).
                       target: 'aarch64-apple-darwin'
                       args: '--target aarch64-apple-darwin'
                     - platform: 'macos-latest' # for Intel based macs.
@@ -29,10 +29,8 @@ jobs:
 
                     - platform: 'windows-latest'
                       target: 'x86_64-pc-windows-msvc'
-                      args: ''
                     - platform: 'windows-latest'
                       target: 'i686-pc-windows-msvc'
-                      args: ''
                     - platform: 'windows-latest'
                       target: 'aarch64-pc-windows-msvc'
                       args: '--target aarch64-pc-windows-msvc'
@@ -44,6 +42,11 @@ jobs:
 
             - name: Install rust target
               run: rustup target add ${{ matrix.target }}
+
+            - name: Setup node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
 
             - uses: pnpm/action-setup@v3
               with:
@@ -58,7 +61,7 @@ jobs:
             - name: install Rust stable
               uses: dtolnay/rust-toolchain@stable
               with:
-                  targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin x86_64-apple-darwin' || matrix.target }}
+                  targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
             - name: install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-22.04'
@@ -79,16 +82,3 @@ jobs:
                   releaseDraft: true
                   prerelease: false
                   args: ${{ matrix.args }}
-
-            - name: Package Windows Build as ZIP
-              if: matrix.platform == 'windows-latest'
-              run: |
-                  mkdir -p release
-                  Compress-Archive -Path "src-tauri/target/release/*" -DestinationPath "release/PakePlus-Windows-${{ matrix.target }}.zip"
-
-            - name: Upload Windows ZIP to Release
-              if: matrix.platform == 'windows-latest'
-              uses: softprops/action-gh-release@v1
-              with:
-                  files: release/PakePlus-Windows-${{ matrix.target }}.zip
-                  token: ${{ secrets.GITHUB_TOKEN }}
