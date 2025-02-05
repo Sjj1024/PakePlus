@@ -411,7 +411,8 @@ const appRules = reactive<FormRules>({
             validator: (rule, value, callback) => {
                 // console.log('appshow name value', value)
                 // the name cannot start with a digit
-                if (/^[0-9]/.test(value)) {
+                // the name cannot contain special characters
+                if (/^[0-9]/.test(value) || value.includes(' ')) {
                     callback(new Error(t('appNameInvalid')))
                 } else {
                     callback()
