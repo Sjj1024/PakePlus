@@ -45,11 +45,6 @@ jobs:
             - name: Install rust target
               run: rustup target add ${{ matrix.target }}
 
-            - name: Setup node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-
             - uses: pnpm/action-setup@v3
               with:
                   version: latest
