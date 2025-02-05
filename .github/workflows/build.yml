@@ -13,7 +13,7 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                    - platform: 'macos-latest' # for Arm based macs (M1 and above).
+                    - platform: 'macos-latest'
                       target: 'aarch64-apple-darwin'
                       args: '--target aarch64-apple-darwin'
                     - platform: 'macos-latest' # for Intel based macs.
@@ -64,7 +64,7 @@ jobs:
               if: matrix.platform == 'ubuntu-22.04'
               run: |
                   sudo apt-get update
-                  sudo apt-get install -y libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev patchelf
+                  sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
             - name: install frontend dependencies
               run: pnpm install # change this to npm, pnpm or bun depending on which one you use.
