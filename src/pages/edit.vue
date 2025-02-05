@@ -1268,11 +1268,13 @@ const dispatchAction = async () => {
             buildTime += 1
             const minute = Math.floor(buildTime / 60)
             const second = buildTime % 60
-            const buildRate = Math.floor((buildTime / 720) * 100)
+            const buildRate = Math.floor((buildTime / (60 * 15)) * 100)
             // loadingText.value = `${buildStatus}...${minute}分${second}秒`
             const loadingText = `<div>${minute}${t('minute')}${second}${t(
                 'second'
-            )}</div><div>${buildStatus}${buildRate}%...</div>`
+            )}</div><div>${buildStatus}${
+                buildRate > 99 ? 99 : buildRate
+            }%...</div>`
             // console.log('loadingText---', loadingText)
             document.querySelector('.el-loading-text')!.innerHTML = loadingText
         }, 1000)
