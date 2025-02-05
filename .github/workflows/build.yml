@@ -2,8 +2,8 @@ name: 'publish'
 
 on:
     push:
-        branches:
-            - test_dist
+        tags:
+            - 'v*'
 
 jobs:
     publish-tauri:
