@@ -34,8 +34,10 @@ jobs:
 
                     - platform: 'windows-latest'
                       target: 'x86_64-pc-windows-msvc'
+                      args: ''
                     - platform: 'windows-latest'
                       target: 'i686-pc-windows-msvc'
+                      args: ''
                     - platform: 'windows-latest'
                       target: 'aarch64-pc-windows-msvc'
                       args: '--target aarch64-pc-windows-msvc'
@@ -47,11 +49,6 @@ jobs:
 
             - name: Install rust target
               run: rustup target add ${{ matrix.target }}
-
-            - name: Setup node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
 
             - uses: pnpm/action-setup@v3
               with:
@@ -66,7 +63,7 @@ jobs:
             - name: install Rust stable
               uses: dtolnay/rust-toolchain@stable
               with:
-                  targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+                  targets: ${{ matrix.target }}
 
             - name: install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-22.04'
@@ -77,10 +74,8 @@ jobs:
             - name: install frontend dependencies
               run: pnpm install # change this to npm, pnpm or bun depending on which one you use.
 
-            - name: Regenerate Icons
-              run: pnpm tauri icon
-
-            - name: Create apple icon
+            - name: Create Apple icon
+              if: matrix.platform == 'macos-latest'
               run: node ./cli/creatIcon.cjs
 
             - uses: tauri-apps/tauri-action@v0
