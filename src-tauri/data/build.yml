@@ -5,6 +5,10 @@ on:
             - 'v*'
     workflow_dispatch:
         inputs:
+            tag:
+                description: '手动触发时输入的版本标签(如v1.0.0)'
+                required: true
+                default: 'v0.0.1'
             branch:
                 description: 'Branch to run the workflow on'
                 required: true
@@ -82,7 +86,7 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  tagName: PROJECTNAME
+                  tagName: 'PROJECTNAME'
                   releaseName: 'PROJECTNAME v__VERSION__'
                   releaseBody: 'RELEASEBODY'
                   releaseDraft: false
