@@ -304,6 +304,7 @@ const forkProgect = async (tips: boolean = true) => {
             break
         }
     }
+    // delete build.yml
     deleteBuildYml()
     testLoading.value = false
     if (!tips) {
@@ -348,6 +349,7 @@ const creatLoading = ref(false)
 // creat project branch
 const creatBranch = async (first: boolean = false) => {
     creatLoading.value = true
+    // update build.yml file content
     token.value && (await uploadBuildYml())
     // checkout branch name is english
     if (branchName.value && /^[A-Za-z0-9]+$/.test(branchName.value)) {
@@ -431,14 +433,14 @@ const uploadBuildYml = async (_: string = 'main') => {
         }
     )
     if (updateRes.status === 200 || updateRes.status === 201) {
-        console.log('updateRes', updateRes)
+        console.log('uploadBuildYml Res', updateRes)
     } else {
         console.log('uploadBuildYml error, but not important', updateRes)
     }
 }
 
 // delete build yml file, must do, because main branch need action promise
-const deleteBuildYml = async (branchName: string = 'main') => {
+const deleteBuildYml = async (branchName: string = 'master') => {
     const shaRes = await getFileSha('.github/workflows/build.yml', branchName)
     console.log('get build.yml file sha', shaRes)
     if (shaRes.status === 200) {
