@@ -117,6 +117,12 @@ sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
 sudo xattr -r -d com.apple.quarantine /Applications/YourAppName.app
 ```
 
+3. If you encounter any issues while using the program, please download the latest version, as versions developed before 2025 were based on Tauri v1.0. In 2025, Tauri was upgraded to v2.0. If the latest version still has issues, please submit an issue with detailed information so that we can update and resolve it more quickly.
+
+```sh
+sudo xattr -r -d com.apple.quarantine /Applications/YourAppName.app
+```
+
 ## Developing PakePlus
 
 If you want to develop PakePlus locally, ensure your environment is prepared beforehand. Make sure Rust `>=1.63` and Node `>=16` (e.g., `16.18.1`) are installed on your computer. For installation guidance, please refer to the [Tauri Documentation](https://tauri.app/v1/guides/getting-started/prerequisites).
