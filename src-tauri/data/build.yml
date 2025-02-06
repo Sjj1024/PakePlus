@@ -5,10 +5,6 @@ on:
             - 'v*'
     workflow_dispatch:
         inputs:
-            tag:
-                description: '手动触发时输入的版本标签(如v1.0.0)'
-                required: true
-                default: 'v0.0.1'
             branch:
                 description: 'Branch to run the workflow on'
                 required: true
@@ -64,23 +60,26 @@ jobs:
                   node-version: 20
                   cache: pnpm
 
+            - name: Install frontend dependencies
+              run: pnpm install # change this to npm, pnpm or bun depending on which one you use.
+
             - name: install Rust stable
               uses: dtolnay/rust-toolchain@stable
               with:
                   targets: ${{ matrix.target }}
+
+            - name: Regenerate Icons
+              run: pnpm tauri icon
+
+            - name: Create Apple icon
+              if: matrix.platform == 'macos-latest'
+              run: node ./cli/creatIcon.cjs
 
             - name: install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-22.04'
               run: |
                   sudo apt-get update
                   sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
-
-            - name: install frontend dependencies
-              run: pnpm install # change this to npm, pnpm or bun depending on which one you use.
-
-            - name: Create Apple icon
-              if: matrix.platform == 'macos-latest'
-              run: node ./cli/creatIcon.cjs
 
             - uses: tauri-apps/tauri-action@v0
               env:

@@ -119,6 +119,8 @@ sudo xattr -r -d com.apple.quarantine /Applications/YourAppName.app
 
 3. **如果您在使用该程序时遇到任何问题，请下载最新版本。** 2025 年之前开发的版本基于 Tauri v1.0，而在 2025 年，Tauri 已升级至 v2.0。如果最新版本仍然存在问题，请提交 Issue 并附上详细信息，以便我们能够更快地更新和解决问题。
 
+4. 当你添加 Github Token 之后，PakePLus 会 Fork 一个 PakePlus 仓库到你的仓库中，以后你的所有项目都会依赖这个仓库创建和编译，请勿删除你的 PakePlus 仓库。
+
 ## 开发 PakePlus
 
 如果你想在本地开发 PakePlus，在开始之前，准备好你的环境。确保你已在计算机上安装了 Rust `>=1.63` 和 Node `>=16`（例如 `16.18.1`）。有关安装指南，请参阅 [Tauri 文档](https://tauri.app/v1/guides/getting-started/prerequisites)。
