@@ -1,0 +1,1 @@
+.user-box .user-search{display:flex;flex-direction:row;justify-content:flex-end}input:-webkit-autofill{background:transparent;transition:background-color 50000s ease-in-out 0s;-webkit-text-fill-color:unset}input:-internal-autofill-previewed,input:-internal-autofill-selected{-webkit-text-fill-color:#2a2d33;transition:background-color 5000s ease-out .5s}
