@@ -14,38 +14,10 @@
         "tauri debug": "tauri build --debug",
         "tauri preview": "tauri preview"
     },
-    "dependencies": {
-        "@codemirror/lang-json": "^6.0.1",
-        "@codemirror/theme-one-dark": "^6.1.2",
-        "@element-plus/icons-vue": "^2.3.1",
-        "@tauri-apps/api": "^2",
-        "@tauri-apps/plugin-clipboard-manager": "^2.2.0",
-        "@tauri-apps/plugin-dialog": "^2.2.0",
-        "@tauri-apps/plugin-fs": "^2.2.0",
-        "@tauri-apps/plugin-http": "^2.2.0",
-        "@tauri-apps/plugin-opener": "^2",
-        "@tauri-apps/plugin-os": "^2.2.0",
-        "@tauri-apps/plugin-shell": "^2.2.0",
-        "axios": "^1.7.9",
-        "codemirror": "^6.0.1",
-        "element-plus": "^2.8.2",
-        "pinia": "^2.2.2",
-        "sass": "^1.78.0",
-        "sass-loader": "^16.0.1",
-        "vue": "^3.3.4",
-        "vue-codemirror": "^6.1.1",
-        "vue-cropper": "^1.1.4",
-        "vue-i18n": "^10.0.0",
-        "vue-router": "4"
-    },
     "devDependencies": {
         "@tauri-apps/cli": "^2",
         "@types/node": "^22.5.4",
-        "@vitejs/plugin-vue": "^5.2.1",
         "png2icons": "^2.0.1",
-        "sharp": "^0.33.5",
-        "typescript": "~5.6.2",
-        "vite": "^6.0.3",
-        "vue-tsc": "^2.1.10"
+        "sharp": "^0.33.5"
     }
 }
