@@ -316,7 +316,7 @@ const forkProgect = async (tips: boolean = true) => {
 
 // get commit sha
 const getCommitSha = async () => {
-    // dev
+    // get commit sha by branch name
     const res: any = await githubApi.getaCommitSha(
         store.userInfo.login,
         'PakePlus',
