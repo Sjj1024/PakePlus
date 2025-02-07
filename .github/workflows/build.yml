@@ -3,7 +3,7 @@ name: 'publish'
 on:
     push:
         branches:
-            - test_dist
+            - dist
 
 jobs:
     publish-tauri:
@@ -43,11 +43,6 @@ jobs:
             - name: Install rust target
               run: rustup target add ${{ matrix.target }}
 
-            - name: Setup node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-
             - uses: pnpm/action-setup@v3
               with:
                   version: latest
@@ -76,8 +71,8 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  tagName: PakePlus-v__VERSION__
-                  releaseName: 'PakePlus v__VERSION__'
+                  tagName: PakeDist-v__VERSION__
+                  releaseName: 'PakeDist v__VERSION__'
                   body_path: ./Note.md
                   releaseDraft: true
                   prerelease: false
