@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.tauri.app/config/2",
-    "productName": "PakePlus",
+    "productName": "PakeDist",
     "version": "../package.json",
     "identifier": "com.pakeplus.app",
     "build": {
