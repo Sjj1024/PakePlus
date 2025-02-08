@@ -44,7 +44,7 @@ PakePLus支持arm和inter架构的安装包，流行的程序安装包仅仅包�
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/apple.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/deepseek.png width=600/></td>
         <td><img src=https://sjj1024.github.io/PakePlus/xtwitter.png width=600/></td>
     </tr>
     <tr>

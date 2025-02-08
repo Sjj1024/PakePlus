@@ -46,7 +46,7 @@ PakePlus supports installation packages for both ARM and Intel architectures. Mo
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/apple.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/deepseek.png width=600/></td>
         <td><img src=https://sjj1024.github.io/PakePlus/xtwitter.png width=600/></td>
     </tr>
     <tr>
