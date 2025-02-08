@@ -85,7 +85,7 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  tagName: 'PROJECTNAME-v__VERSION__'
+                  tagName: 'PROJECTNAME'
                   releaseName: 'PROJECTNAME v__VERSION__'
                   releaseBody: 'RELEASEBODY'
                   releaseDraft: false
