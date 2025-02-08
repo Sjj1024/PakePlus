@@ -28,13 +28,14 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 ## 人気パッケージ
 
 <img src=https://sjj1024.github.io/PakePlus/preview.webp  width=1920/>
+PakePlusは、ARMとIntelの両アーキテクチャに対応したインストールパッケージをサポートしています。一般的なプログラムのインストールパッケージには、通常、Mac用のARMとWindows用のIntelのみが含まれています。より多くのアーキテクチャに対応したインストールパッケージが必要な場合は、PakePlusを使用して必要なパッケージを個別にコンパイルしてください。
 
 <table>
     <tr>
-        <td>Apple
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Apple/Apple_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Apple/Apple_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Apple/apple_0.0.1_amd64.deb">Linux</a>
+        <td>DeepSeek
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/DeepSeek_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/DeepSeek_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/DeepSeek_0.0.1_amd64.deb">Linux</a>
         </td>
         <td>X (Twitter)
             <a href="https://github.com/codegirle/PakePlus/releases/download/X/X_0.0.1_aarch64.dmg">Mac</a>
@@ -52,10 +53,10 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
             <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/YouTube_0.0.1_x64_en-US.msi">Windows</a>
             <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/you-tube_0.0.1_amd64.deb">Linux</a>
         </td>
-        <td>小红书(Little Red Book)
-            <a href="https://github.com/codegirle/PakePlus/releases/download/XiaoHongShu/_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/XiaoHongShu/_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/XiaoHongShu/_0.0.1_amd64.deb">Linux</a>
+        <td>小红书
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_amd64.deb">Linux</a>
         </td>
     </tr>
     <tr>

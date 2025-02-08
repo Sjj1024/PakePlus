@@ -34,10 +34,10 @@ PakePlus supports installation packages for both ARM and Intel architectures. Mo
 
 <table>
     <tr>
-        <td>Apple
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Apple/Apple_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Apple/Apple_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Apple/apple_0.0.1_amd64.deb">Linux</a>
+        <td>DeepSeek
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/DeepSeek_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/DeepSeek_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/DeepSeek_0.0.1_amd64.deb">Linux</a>
         </td>
         <td>X (Twitter)
             <a href="https://github.com/codegirle/PakePlus/releases/download/Twitter/Twitter_0.0.1_aarch64.dmg">Mac</a>
@@ -51,13 +51,13 @@ PakePlus supports installation packages for both ARM and Intel architectures. Mo
     </tr>
     <tr>
         <td>YouTube
-            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/YouTube_0.0.2_aarch64.dmg">Mac(arm)</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/YouTube_0.0.2_x64-setup.exe">Windows(x86)</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/YouTube_0.0.2_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/YouTube_0.0.2_x64-setup.exe">Windows</a>
             <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/you-tube_0.0.2_amd64.deb">Linux</a>
         </td>
         <td>小红书(Red Book)
-            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_aarch64.dmg">Mac(arm)</a>
-            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_x64-setup.exe">Windows(x86)</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_x64-setup.exe">Windows</a>
             <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_amd64.deb">Linux</a>
         </td>
     </tr>
