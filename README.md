@@ -30,6 +30,8 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
 <img src=https://sjj1024.github.io/PakePlus/preview.webp  width=1920/>
 
+PakePlus supports installation packages for both ARM and Intel architectures. Most popular program installation packages only include the ARM architecture for macOS and the Intel architecture for Windows. If you need installation packages for additional architectures, please use PakePlus to compile the required package separately.
+
 <table>
     <tr>
         <td>Apple
@@ -49,14 +51,14 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
     </tr>
     <tr>
         <td>YouTube
-            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/YouTube_0.0.2_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/YouTube_0.0.2_x64-setup.exe">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/YouTube_0.0.2_aarch64.dmg">Mac(arm)</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/YouTube_0.0.2_x64-setup.exe">Windows(x86)</a>
             <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/you-tube_0.0.2_amd64.deb">Linux</a>
         </td>
-        <td>小红书(Little Red Book)
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Hongshu/_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Hongshu/_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Hongshu/_0.0.1_amd64.deb">Linux</a>
+        <td>小红书(Red Book)
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_aarch64.dmg">Mac(arm)</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_x64-setup.exe">Windows(x86)</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_amd64.deb">Linux</a>
         </td>
     </tr>
     <tr>
