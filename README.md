@@ -149,8 +149,8 @@ publish: false：means this version will not be published immediately, although 
 
 1. wechat and group
  <p align="center" style="display:flex" >
-    <img src="./docs/mywx.png" width=300/>
-    <img src="./docs/wxcode.png" width=300/>
+    <img src="./docs/mywx.png" />
+    <img src="./docs/wxcode.png" />
  </p>
 
 2. If PakePlus has brought joy to your life, feel free to support it.
