@@ -32,7 +32,7 @@ export default {
     urlInvalid: 'url은 http로 시작해야 합니다',
     example: '예',
     appName: '앱 이름',
-    appNameInvalid: '앱 이름은 숫자로 시작할 수 없습니다',
+    appNameInvalid: '앱 이름은 영어 숫자와 _로만 구성되어야 합니다',
     appId: '앱 ID',
     appIdInvalid: '앱 ID는 영어 숫자와 .로 구성되어야 합니다',
     appIcon: '앱 아이콘',

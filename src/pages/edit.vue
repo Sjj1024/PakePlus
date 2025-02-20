@@ -412,7 +412,12 @@ const appRules = reactive<FormRules>({
                 // console.log('appshow name value', value)
                 // the name cannot start with a digit
                 // the name cannot contain special characters
-                if (/^[0-9]/.test(value) || value.includes(' ')) {
+                // the name cannot include chinese characters
+                if (
+                    /^[0-9]/.test(value) ||
+                    value.includes(' ') ||
+                    /[\u4e00-\u9fa5]/.test(value)
+                ) {
                     callback(new Error(t('appNameInvalid')))
                 } else {
                     callback()
