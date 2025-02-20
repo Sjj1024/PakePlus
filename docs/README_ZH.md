@@ -139,9 +139,15 @@ pnpm run dev
 pnpm run build
 ```
 
-<!-- ## 支持
+## 支持
 
-1. 如果你觉得 PakePlus 给你的生活带来了乐趣，你可以为它充点能量。
- <p align="center">
-         <img src="./pay.png" />
- </p> -->
+1. 微信和群聊
+ <p align="center" style="display:flex" >
+    <img src="./mywx.png" width=300/>
+    <img src="./wxcode.png" width=300/>
+ </p>
+
+2. 如果对你有帮，可以请我喝咖啡.
+ <p align="center" >
+    <img src="./pay.png" />
+ </p>

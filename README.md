@@ -147,14 +147,15 @@ publish: false：means this version will not be published immediately, although 
 
 ## Support
 
-1. If PakePlus has brought joy to your life, feel free to support it.
- <p align="center" >
-    <img src="./docs/pay.png" />
+1. wechat and group
+ <p align="center" style="display:flex" >
+    <img src="./docs/mywx.png" width=300/>
+    <img src="./docs/wxcode.png" width=300/>
  </p>
 
-2. wechat group
+2. If PakePlus has brought joy to your life, feel free to support it.
  <p align="center" >
-    <img src="./docs/wxcode.png" width=300/>
+    <img src="./docs/pay.png" />
  </p>
 
 ## TODO
