@@ -1,7 +1,9 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
 mod command;
-use tauri::menu::*;
+use serde_json::json;
+use tauri::{menu::*, Manager, WindowEvent};
+use tauri_plugin_store::StoreExt;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -30,6 +32,7 @@ pub fn run() {
         })
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_os::init())
+        .plugin(tauri_plugin_store::Builder::default().build())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_dialog::init())
@@ -48,6 +51,34 @@ pub fn run() {
             command::pakeplus::update_config_json,
             command::pakeplus::rust_main_window,
         ])
+        .setup(|app| {
+            let window = app.get_webview_window("main").unwrap();
+            // This loads the store from disk
+            let store = app.store("app_data.json")?;
+            let window_size: Option<serde_json::Value> = store.get("window_size");
+            if let Some(window_size) = window_size {
+                let size = window_size.as_object().unwrap();
+                let width = size["width"].as_f64().unwrap();
+                let height = size["height"].as_f64().unwrap();
+                window
+                    .set_size(tauri::PhysicalSize::new(width, height))
+                    .unwrap();
+            }
+
+            window.on_window_event(move |event| {
+                if let WindowEvent::Resized(size) = event {
+                    let _ = store.set(
+                        "window_size",
+                        json!({
+                            "width": size.width,
+                            "height": size.height
+                        }),
+                    );
+                }
+            });
+
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

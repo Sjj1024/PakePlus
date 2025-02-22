@@ -101,4 +101,5 @@ export default {
     inputXpathSelectors: '請輸入selector選擇器，以英文分號分割',
     mobileEnd: '移動端',
     sourceCode: '源代碼',
+    editImg: '編輯圖片',
 }

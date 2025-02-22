@@ -106,4 +106,5 @@ export default {
     inputXpathSelectors: 'selector選択器を入力してください',
     mobileEnd: 'モバイル端末',
     sourceCode: 'ソースコード',
+    editImg: '画像を編集',
 }

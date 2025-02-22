@@ -104,4 +104,5 @@ export default {
     inputXpathSelectors: '请输入selector，以英文分号分割',
     mobileEnd: '移动端',
     sourceCode: '源代码',
+    editImg: '编辑图片',
 }

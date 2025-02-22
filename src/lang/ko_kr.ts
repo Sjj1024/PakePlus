@@ -107,4 +107,5 @@ export default {
     inputXpathSelectors: 'selector를 입력하세요, 영어 세미콜론으로 구분',
     mobileEnd: '모바일 끝',
     sourceCode: '소스 코드',
+    editImg: '이미지 편집',
 }

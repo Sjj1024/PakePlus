@@ -107,4 +107,5 @@ export default {
         'Please enter the selector selectors, separated by semicolons',
     mobileEnd: 'Mobile End',
     sourceCode: 'Source Code',
+    editImg: 'Edit Image',
 }

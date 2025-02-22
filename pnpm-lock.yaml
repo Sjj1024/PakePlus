@@ -38,6 +38,9 @@ dependencies:
   '@tauri-apps/plugin-shell':
     specifier: ^2.2.0
     version: 2.2.0
+  '@tauri-apps/plugin-store':
+    specifier: ^2.2.0
+    version: 2.2.0
   axios:
     specifier: ^1.7.9
     version: 1.7.9
@@ -1149,6 +1152,12 @@ packages:
 
   /@tauri-apps/plugin-shell@2.2.0:
     resolution: {integrity: sha512-iC3Ic1hLmasoboG7BO+7p+AriSoqAwKrIk+Hpk+S/bjTQdXqbl2GbdclghI4gM32X0bls7xHzIFqhRdrlvJeaA==}
+    dependencies:
+      '@tauri-apps/api': 2.1.1
+    dev: false
+
+  /@tauri-apps/plugin-store@2.2.0:
+    resolution: {integrity: sha512-hJTRtuJis4w5fW1dkcgftsYxKXK0+DbAqurZ3CURHG5WkAyyZgbxpeYctw12bbzF9ZbZREXZklPq8mocCC3Sgg==}
     dependencies:
       '@tauri-apps/api': 2.1.1
     dev: false
