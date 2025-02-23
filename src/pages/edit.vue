@@ -1227,7 +1227,7 @@ const onPublish = async () => {
             version: appForm.version,
             id: appForm.appid,
             ascii: isAlphanumeric(appForm.showName),
-            window_config: JSON.stringify(newWindows),
+            windowConfig: JSON.stringify(newWindows),
         })
         // update config file
         const updateRes: any = await githubApi.updateConfigFile(
