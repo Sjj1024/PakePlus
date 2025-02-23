@@ -53,6 +53,8 @@ pub fn run() {
                     let _main_window =
                         tauri::WebviewWindowBuilder::from_config(app_handle, &config)
                             .unwrap()
+                            .initialization_script(include_str!("./extension/event.js"))
+                            .initialization_script(include_str!("./extension/custom.js"))
                             .build()
                             .unwrap();
                 }
