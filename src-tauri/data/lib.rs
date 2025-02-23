@@ -52,6 +52,9 @@ pub fn run() {
         ])
         .setup(|app| {
             let window = app.get_webview_window("main").unwrap();
+            // init custom js
+            window.eval(include_str!("./extension/event.js")).unwrap();
+            window.eval(include_str!("./extension/custom.js")).unwrap();
             // This loads the store from disk
             let store = app.store("app_data.json")?;
             let window_size: Option<serde_json::Value> = store.get("window_size");
