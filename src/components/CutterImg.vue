@@ -1,7 +1,7 @@
 <template>
     <div class="avatar-container">
         <el-dialog
-            :title="title"
+            :title="t('editImg')"
             :model-value="visible"
             width="400px"
             append-to-body
@@ -55,10 +55,6 @@ const props = defineProps({
     imgUrl: {
         type: String,
         default: '',
-    },
-    title: {
-        type: String,
-        default: t('editImg'),
     },
     confirm: {
         type: Function,

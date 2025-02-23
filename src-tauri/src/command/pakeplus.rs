@@ -1,4 +1,5 @@
 use base64::prelude::*;
+// use regex::Regex;
 use std::io::Read;
 use std::time::Instant;
 use tauri::{path::BaseDirectory, utils::config::WindowConfig, AppHandle, LogicalSize, Manager};
@@ -262,8 +263,9 @@ pub async fn rust_main_window(handle: tauri::AppHandle, config: String) -> Strin
     let mut main_rust = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
     main_rust.read_to_string(&mut contents).unwrap();
+    // test replace
     contents = contents.replace("WINDOWCONFIG", config.as_str());
-    // println!("Updated config file: {}", contents);
+    println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);
     return encoded_contents;
@@ -279,6 +281,10 @@ pub async fn rust_lib_window(handle: tauri::AppHandle, config: String) -> String
     let mut contents = String::new();
     main_rust.read_to_string(&mut contents).unwrap();
     contents = contents.replace("WINDOWCONFIG", config.as_str());
+    // let regex = Regex::new(r#""width":\d+,"height":\d+"#).unwrap();
+    // contents = regex
+    //     .replace_all(&contents, &format!(r#""width":{},"height":{}"#, 100, 100))
+    //     .to_string();
     // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);

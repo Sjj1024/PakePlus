@@ -102,4 +102,5 @@ export default {
     mobileEnd: '移動端',
     sourceCode: '源代碼',
     editImg: '編輯圖片',
+    networkError: '網絡錯誤，請關閉代理再試!',
 }

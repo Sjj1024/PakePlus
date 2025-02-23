@@ -1,4 +1,6 @@
 import { fetch } from '@tauri-apps/plugin-http'
+import i18n from '@/lang'
+import { ElMessage } from 'element-plus'
 
 // base url
 const baseURL = `https://api.github.com`
@@ -57,6 +59,7 @@ const http = async (url: string, options: any = {}) => {
         })
         .catch((error) => {
             console.error('fetch error', error)
+            ElMessage.error(i18n.global.t('networkError'))
             return Promise.resolve({ status: 400, msg: 'fetch error' })
         })
         .finally(() => {

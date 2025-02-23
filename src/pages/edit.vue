@@ -226,7 +226,7 @@
             <el-button :disabled="token === null" @click="createRepo">
                 {{ t('publish') }}
             </el-button>
-            <!-- <el-button @click="mouseover">test</el-button> -->
+            <el-button v-if="isDev" @click="libRsConfig">Test</el-button>
         </div>
         <!-- build -->
         <el-dialog
@@ -357,7 +357,7 @@ import { basename } from '@tauri-apps/api/path'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import { useI18n } from 'vue-i18n'
-import { CSSFILTER, isAlphanumeric, openUrl } from '@/utils/common'
+import { CSSFILTER, isAlphanumeric, openUrl, isDev } from '@/utils/common'
 import { emit } from '@tauri-apps/api/event'
 import { platforms } from '@/utils/config'
 import { platform } from '@tauri-apps/plugin-os'
@@ -548,6 +548,7 @@ const changeUrl = (value: string) => {
     tauriConfig.windows.url = value
 }
 
+// watch tauri config
 watch(tauriConfig, () => {
     console.log('tauriConfig change', tauriConfig)
     if (isJson.value) {
@@ -556,6 +557,7 @@ watch(tauriConfig, () => {
     } else {
         tauriConfigRef.value?.updateCode()
     }
+    saveFormInput()
 })
 
 // close tauri config dialog
@@ -870,21 +872,27 @@ const saveJsFile = async () => {
     console.log(`js file saved to: ${savePath}`)
 }
 
+// save form input
+const saveFormInput = async () => {
+    console.log('saveFormInput', appForm)
+    store.addUpdatePro({
+        ...appForm,
+        name: store.currentProject.name,
+        debug: pubForm.model,
+        more: tauriConfig,
+    })
+    // save js file content to appDataDir
+    if (jsFileContents.value) {
+        saveJsFile()
+    }
+}
+
 // save project
 const saveProject = async (tips: boolean = true) => {
     // await emit('handlepay', { loggedIn: true, token: 'authToken' })
     appFormRef.value?.validate(async (valid, fields) => {
         if (valid) {
-            store.addUpdatePro({
-                ...appForm,
-                name: store.currentProject.name,
-                debug: pubForm.model,
-                more: tauriConfig,
-            })
-            // save js file content to appDataDir
-            if (jsFileContents.value) {
-                saveJsFile()
-            }
+            saveFormInput()
             tips && ElMessage.success(t('saveSuccess'))
         } else {
             console.error('error submit!', fields)
@@ -1133,6 +1141,7 @@ const libRsConfig = async () => {
         const configContent: any = await invoke('rust_lib_window', {
             config: JSON.stringify(tauriConfig.windows),
         })
+        console.log('configContent', configContent)
         const updateRes: any = await githubApi.updateFileContent(
             store.userInfo.login,
             'PakePlus',
@@ -1425,11 +1434,6 @@ const initJsFileContents = async () => {
             value: item,
         }
     })
-}
-
-// init project
-const initProject = async () => {
-    console.log('initProject')
 }
 
 onMounted(async () => {

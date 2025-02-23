@@ -107,4 +107,5 @@ export default {
     mobileEnd: 'モバイル端末',
     sourceCode: 'ソースコード',
     editImg: '画像を編集',
+    networkError: 'ネットワークエラー、プロキシを閉じて再試行してください!',
 }

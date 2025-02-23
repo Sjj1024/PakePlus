@@ -108,4 +108,5 @@ export default {
     mobileEnd: 'Mobile End',
     sourceCode: 'Source Code',
     editImg: 'Edit Image',
+    networkError: 'Network error, please close the proxy and try again!',
 }

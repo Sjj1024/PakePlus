@@ -60,6 +60,7 @@ pub fn run() {
                 let size = window_size.as_object().unwrap();
                 let width = size["width"].as_f64().unwrap();
                 let height = size["height"].as_f64().unwrap();
+                println!("window size init: {:?}", size);
                 window
                     .set_size(tauri::PhysicalSize::new(width, height))
                     .unwrap();
@@ -67,6 +68,7 @@ pub fn run() {
 
             window.on_window_event(move |event| {
                 if let WindowEvent::Resized(size) = event {
+                    println!("window resized: {:?}", size);
                     let _ = store.set(
                         "window_size",
                         json!({

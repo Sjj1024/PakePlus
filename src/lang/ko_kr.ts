@@ -108,4 +108,5 @@ export default {
     mobileEnd: '모바일 끝',
     sourceCode: '소스 코드',
     editImg: '이미지 편집',
+    networkError: '네트워크 오류, 프록시를 닫고 다시 시도하세요!',
 }

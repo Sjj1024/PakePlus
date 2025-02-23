@@ -323,7 +323,7 @@ const getCommitSha = async () => {
         'master'
     )
     console.log('getCommitSha', res.data)
-    if (res.status === 200) {
+    if (res.status === 200 && res.data) {
         store.setCommitSha(res.data)
         return true
     } else {
@@ -377,6 +377,7 @@ const creatBranch = async (first: boolean = false) => {
                     ...res.data,
                     ...initProject,
                     name: branchName.value,
+                    appid: `com.${branchName.value}.app`,
                 }
                 console.log('branch Info success', branchInfo)
                 store.setCurrentProject(branchInfo)
