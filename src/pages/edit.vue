@@ -739,7 +739,8 @@ const uploadIcon = async () => {
     const imageSize: any = await getImageSize(base64String)
     // console.log('imageSize', imageSize)
     if (imageSize.width === imageSize.height && fileName.endsWith('.png')) {
-        confirmIcon(base64String)
+        // confirmIcon(base64String)
+        cutVisible.value = true
     } else {
         cutVisible.value = true
     }
@@ -1209,7 +1210,7 @@ const onPublish = async () => {
     await updateCargoToml()
     // update main rust
     // await updateMainRs()
-    await libRsConfig()
+    // await libRsConfig()
     // update custom js
     await updateCustomJs()
     // update tauri config json
@@ -1219,11 +1220,14 @@ const onPublish = async () => {
     )
     try {
         // if name is ASCII
+        // remove label from windows
+        let { label, ...newWindows } = tauriConfig.windows
         const configContent: any = await invoke('update_config_file', {
             name: appForm.showName,
             version: appForm.version,
             id: appForm.appid,
             ascii: isAlphanumeric(appForm.showName),
+            window_config: JSON.stringify(newWindows),
         })
         // update config file
         const updateRes: any = await githubApi.updateConfigFile(
@@ -1276,6 +1280,7 @@ const dispatchAction = async () => {
     if (dispatchRes.status !== 204) {
         console.error('dispatch res error', dispatchRes)
         ElMessage.error('dispatch res error')
+        buildLoading.value = false
         return
     } else {
         buildSecondTimer = setInterval(() => {
@@ -1296,8 +1301,8 @@ const dispatchAction = async () => {
         setTimeout(async () => {
             checkDispatchTimer = setInterval(async () => {
                 checkBuildStatus()
-            }, 10000)
-        }, 1000 * 60 * 7)
+            }, 1000 * 3)
+        }, 1000 * 60 * 3)
     }
 }
 

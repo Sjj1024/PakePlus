@@ -1,13 +1,9 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
 mod command;
-use serde_json::{json, Error};
-use tauri::{menu::*, utils::config::WindowConfig, WindowEvent};
+use serde_json::json;
+use tauri::{menu::*, Manager, WindowEvent};
 use tauri_plugin_store::StoreExt;
-
-fn json_to_window_config(window_json: &str) -> Result<WindowConfig, Error> {
-    serde_json::from_str(window_json)
-}
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -39,6 +35,7 @@ pub fn run() {
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_store::Builder::default().build())
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .invoke_handler(tauri::generate_handler![
@@ -54,46 +51,33 @@ pub fn run() {
             command::pakeplus::rust_main_window,
         ])
         .setup(|app| {
-            let app_handle = app.handle();
-            // get window size store
+            let window = app.get_webview_window("main").unwrap();
+            // This loads the store from disk
             let store = app.store("app_data.json")?;
             let window_size: Option<serde_json::Value> = store.get("window_size");
-            let mut window_json = r#"WINDOWCONFIG"#;
             if let Some(window_size) = window_size {
                 let size = window_size.as_object().unwrap();
                 let width = size["width"].as_f64().unwrap();
                 let height = size["height"].as_f64().unwrap();
-                // use regex replace window_json
-                let regex = Regex::new(r#""width":\d+,"height":\d+"#).unwrap();
-                window_json = regex.replace_all(
-                    window_json,
-                    &format!(r#""width":{},"height":{}"#, width, height),
-                );
+                println!("window size init: {:?}", size);
+                window
+                    .set_size(tauri::PhysicalSize::new(width, height))
+                    .unwrap();
             }
-            match json_to_window_config(window_json) {
-                Ok(config) => {
-                    // println!("Parsed WindowConfig: {:?}", config);
-                    let main_window = tauri::WebviewWindowBuilder::from_config(app_handle, &config)
-                        .unwrap()
-                        .build()
-                        .unwrap();
-                    // listen window sizi change event
-                    main_window.on_window_event(move |event| {
-                        if let WindowEvent::Resized(size) = event {
-                            let _ = store.set(
-                                "window_size",
-                                json!({
-                                    "width": size.width,
-                                    "height": size.height
-                                }),
-                            );
-                        }
-                    });
+            // listen window sizi change event
+            window.on_window_event(move |event| {
+                if let WindowEvent::Resized(size) = event {
+                    println!("window resized: {:?}", size);
+                    let _ = store.set(
+                        "window_size",
+                        json!({
+                            "width": size.width,
+                            "height": size.height
+                        }),
+                    );
                 }
-                Err(err) => {
-                    eprintln!("Failed to parse JSON: {}", err);
-                }
-            }
+            });
+
             Ok(())
         })
         .run(tauri::generate_context!())

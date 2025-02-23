@@ -1,5 +1,3 @@
-// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-
 mod command;
 use serde_json::json;
 use tauri::{menu::*, Manager, WindowEvent};
@@ -65,7 +63,7 @@ pub fn run() {
                     .set_size(tauri::PhysicalSize::new(width, height))
                     .unwrap();
             }
-
+            // listen window sizi change event
             window.on_window_event(move |event| {
                 if let WindowEvent::Resized(size) = event {
                     println!("window resized: {:?}", size);

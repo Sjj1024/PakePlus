@@ -142,6 +142,7 @@ pub async fn update_config_file(
     version: String,
     id: String,
     ascii: bool,
+    window_config: String,
 ) -> String {
     let resource_path = handle
         .path()
@@ -159,6 +160,7 @@ pub async fn update_config_file(
     } else {
         contents = contents.replace("-3", r#"["deb", "appimage", "nsis", "app", "dmg"]"#);
     }
+    contents = contents.replace("-1", window_config.as_str());
     // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);
