@@ -1,7 +1,7 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 
 mod command;
-use serde_json::{json, Error};
+use serde_json::Error;
 use tauri::{menu::*, utils::config::WindowConfig};
 
 fn json_to_window_config(window_json: &str) -> Result<WindowConfig, Error> {
@@ -36,8 +36,8 @@ pub fn run() {
         .setup(|app| {
             let app_handle = app.handle();
             // get window size store
-            let store = app.store("app_data.json")?;
-            let window_size: Option<serde_json::Value> = store.get("window_size");
+            // let store = app.store("app_data.json")?;
+            // let window_size: Option<serde_json::Value> = store.get("window_size");
             let window_json = r#"WINDOWCONFIG"#;
             match json_to_window_config(window_json) {
                 Ok(config) => {
