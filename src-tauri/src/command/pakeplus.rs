@@ -283,11 +283,6 @@ pub async fn rust_lib_window(handle: tauri::AppHandle, config: String) -> String
     let mut contents = String::new();
     main_rust.read_to_string(&mut contents).unwrap();
     contents = contents.replace("WINDOWCONFIG", config.as_str());
-    // let regex = Regex::new(r#""width":\d+,"height":\d+"#).unwrap();
-    // contents = regex
-    //     .replace_all(&contents, &format!(r#""width":{},"height":{}"#, 100, 100))
-    //     .to_string();
-    // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);
     return encoded_contents;
