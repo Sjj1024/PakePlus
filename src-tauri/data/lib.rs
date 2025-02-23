@@ -1,5 +1,3 @@
-// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-
 mod command;
 use serde_json::json;
 use tauri::{menu::*, Manager, WindowEvent};
