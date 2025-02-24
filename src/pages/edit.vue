@@ -357,7 +357,13 @@ import { basename } from '@tauri-apps/api/path'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import { useI18n } from 'vue-i18n'
-import { CSSFILTER, isAlphanumeric, openUrl, isDev } from '@/utils/common'
+import {
+    CSSFILTER,
+    isAlphanumeric,
+    openUrl,
+    isDev,
+    convertToLocalTime,
+} from '@/utils/common'
 import { emit } from '@tauri-apps/api/event'
 import { platforms } from '@/utils/config'
 import { platform } from '@tauri-apps/plugin-os'
@@ -1414,8 +1420,14 @@ const getLatestRelease = async () => {
         })
         const releaseData = {
             ...releaseRes.data,
-            assets,
+            assets: assets.map((asset: any) => {
+                return {
+                    ...asset,
+                    updated_at: convertToLocalTime(asset.updated_at),
+                }
+            }),
         }
+        console.log('releaseData-----', releaseData)
         store.setRelease(releaseData)
     } else {
         console.log('releaseRes error, but not important', releaseRes)

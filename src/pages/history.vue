@@ -81,7 +81,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePakeStore } from '@/store'
 import githubApi from '@/apis/github'
-import { openUrl } from '@/utils/common'
+import { convertToLocalTime, openUrl } from '@/utils/common'
 import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useI18n } from 'vue-i18n'
@@ -132,8 +132,14 @@ const getLatestRelease = async () => {
         })
         releaseData.value = {
             ...releaseRes.data,
-            assets,
+            assets: assets.map((asset: any) => {
+                return {
+                    ...asset,
+                    updated_at: convertToLocalTime(asset.updated_at),
+                }
+            }),
         }
+        console.log('releaseData-----', releaseData.value)
         getLoading.value = false
     } else {
         getLoading.value = false

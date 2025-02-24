@@ -94,3 +94,12 @@ export const initProject = {
 }
 
 export const isDev = import.meta.env.DEV
+
+export const convertToLocalTime = (utcDateTime: string) => {
+    // Create a new Date object from the UTC date-time string
+    let date = new Date(utcDateTime)
+    // Get the local time as a string
+    let localTime = date.toLocaleString()
+    // Return the local time string
+    return localTime
+}

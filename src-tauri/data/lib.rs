@@ -46,6 +46,7 @@ pub fn run() {
             command::pakeplus::update_custom_js,
             command::pakeplus::content_to_base64,
             command::pakeplus::update_config_json,
+            command::pakeplus::rust_lib_window,
             command::pakeplus::rust_main_window,
         ])
         .setup(|app| {
