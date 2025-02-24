@@ -1211,7 +1211,7 @@ const onPublish = async () => {
     await updateCargoToml()
     // update main rust
     // await updateMainRs()
-    // await libRsConfig()
+    await libRsConfig()
     // update custom js
     await updateCustomJs()
     // update tauri config json
