@@ -4,6 +4,7 @@
     "version": "PROJECTVERSION",
     "identifier": "PROJECTID",
     "app": {
+        "windows": [-1],
         "security": {
             "assetProtocol": {
                 "enable": true,

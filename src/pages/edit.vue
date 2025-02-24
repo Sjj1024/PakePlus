@@ -530,6 +530,7 @@ const tauriConfig: any = reactive({
         useHttpsScheme: false,
         zoomHotkeysEnabled: false,
         acceptFirstMouse: false,
+        create: false,
         // if add additionalBrowserArgs, windows cant preview, but can build
         // additionalBrowserArgs:
         //     '--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection --autoplay-policy=no-user-gesture-required --auto-accept-camera-and-microphone-capture',
@@ -1210,7 +1211,7 @@ const onPublish = async () => {
     await updateCargoToml()
     // update main rust
     // await updateMainRs()
-    await libRsConfig()
+    // await libRsConfig()
     // update custom js
     await updateCustomJs()
     // update tauri config json
