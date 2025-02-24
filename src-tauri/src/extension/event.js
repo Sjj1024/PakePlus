@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const handleExternalLink = (e, url) => {
         console.log('handleExternalLink----')
         e.preventDefault()
-        tauri.shell.open(url)
+        // tauri.shell.open(url)
     }
 
     const handleDownloadLink = (e, url, filename) => {
@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             const baseUrl = window.location.origin + window.location.pathname
             const hrefUrl = new URL(url, baseUrl)
-            tauri.shell.open(hrefUrl.href)
+            // tauri.shell.open(hrefUrl.href)
         }
         // Call the original window.open function to maintain its normal functionality.
         return originalWindowOpen.call(window, url, name, specs)
