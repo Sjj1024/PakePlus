@@ -4,7 +4,7 @@
 <span >日本语</span>
 </h4>   
 <p align="center">
-    <img src="./pakeplus.png" width=138/>
+    <img src="./docs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>9分で任意のウェブページをデスクトップアプリやモバイルアプリに変換。シンプルで使いやすい。</strong></p>
@@ -142,5 +142,5 @@ pnpm run build
 
 1. PakePlus があなたの生活に楽しみをもたらしたなら、サポートしていただけると嬉しいです。
  <p align="center">
-         <img src="./pay.png" />
+         <img src="./docs/pay.png" />
  </p>
