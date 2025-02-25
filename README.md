@@ -1,8 +1,8 @@
 <h4 align="right"> 
-<a href="./docs/README.md">English</a> 
-<a href="./docs/README_ZH.md" 
+<span href=".README.md">English</span> 
+<a href="./README_ZH.md" 
 style="margin: 0 10px;" >简体中文</a> 
-<a href="./docs/README_JP.md">日本语</a>
+<a href="./README_JP.md">日本语</a>
 </h4>  
 <p align="center">
     <img src="./docs/pakeplus.png" width=138/>
