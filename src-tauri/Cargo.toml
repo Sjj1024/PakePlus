@@ -29,5 +29,4 @@ tauri-plugin-shell = "2.0.0"
 tauri-plugin-dialog = "2.0.0"
 tauri-plugin-http = { version = "2", features = ["unsafe-headers"] }
 tauri-plugin-clipboard-manager = "2.0.0"
-tauri-plugin-store = "2.0.0"
-regex = "1.11.1"
+tauri-plugin-window-state = "2.0.0"

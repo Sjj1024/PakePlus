@@ -179,6 +179,8 @@ import { useI18n } from 'vue-i18n'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import { invoke, convertFileSrc } from '@tauri-apps/api/core'
 import { getVersion } from '@tauri-apps/api/app'
+import { tauriConfig } from '@/utils/common'
+import { platforms } from '@/utils/config'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -378,7 +380,19 @@ const creatBranch = async (first: boolean = false) => {
                     ...res.data,
                     ...initProject,
                     name: branchName.value,
+                    showName: branchName.value,
                     appid: `com.${branchName.value}.app`,
+                    more: {
+                        ...tauriConfig,
+                        windows: {
+                            ...tauriConfig.windows,
+                            label: branchName.value,
+                            title: branchName.value,
+                            userAgent: platforms['desktop'].userAgent,
+                            width: platforms['desktop'].width,
+                            height: platforms['desktop'].height,
+                        },
+                    },
                 }
                 console.log('branch Info success', branchInfo)
                 store.setCurrentProject(branchInfo)

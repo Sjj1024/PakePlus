@@ -7,7 +7,6 @@ name = "PakePlus"
 version = "0.1.0"
 dependencies = [
  "base64 0.22.1",
- "regex",
  "serde",
  "serde_json",
  "tauri",
@@ -19,7 +18,7 @@ dependencies = [
  "tauri-plugin-opener",
  "tauri-plugin-os",
  "tauri-plugin-shell",
- "tauri-plugin-store",
+ "tauri-plugin-window-state",
 ]
 
 [[package]]
@@ -4333,19 +4332,18 @@ dependencies = [
 ]
 
 [[package]]
-name = "tauri-plugin-store"
-version = "2.2.0"
+name = "tauri-plugin-window-state"
+version = "2.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1c0c08fae6995909f5e9a0da6038273b750221319f2c0f3b526d6de1cde21505"
+checksum = "35e344b512b0d99d9d06225f235d87d6c66d89496a3bf323d9b578d940596e6c"
 dependencies = [
- "dunce",
+ "bitflags 2.6.0",
+ "log",
  "serde",
  "serde_json",
  "tauri",
  "tauri-plugin",
  "thiserror 2.0.7",
- "tokio",
- "tracing",
 ]
 
 [[package]]

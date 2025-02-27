@@ -41,6 +41,9 @@ dependencies:
   '@tauri-apps/plugin-store':
     specifier: ^2.2.0
     version: 2.2.0
+  '@tauri-apps/plugin-window-state':
+    specifier: ^2.2.1
+    version: 2.2.1
   axios:
     specifier: ^1.7.9
     version: 1.7.9
@@ -1158,6 +1161,12 @@ packages:
 
   /@tauri-apps/plugin-store@2.2.0:
     resolution: {integrity: sha512-hJTRtuJis4w5fW1dkcgftsYxKXK0+DbAqurZ3CURHG5WkAyyZgbxpeYctw12bbzF9ZbZREXZklPq8mocCC3Sgg==}
+    dependencies:
+      '@tauri-apps/api': 2.1.1
+    dev: false
+
+  /@tauri-apps/plugin-window-state@2.2.1:
+    resolution: {integrity: sha512-L7FhG/ocQNt8t+TMBkvl8eLhCU6I19t848unKMUgNHuvwHPaurzZr4knulNyKzqz7zVYSz9AdvgWy4915eq+AA==}
     dependencies:
       '@tauri-apps/api': 2.1.1
     dev: false

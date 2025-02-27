@@ -309,7 +309,10 @@ const tauriConfig = defineModel('tauriConfig', {
     type: Object,
 })
 
+// init ui code
 const uiCode = ref(JSON.stringify(tauriConfig.value, null, 2))
+
+// extensions
 const extensions: any = [json(), oneDark]
 
 const cmOptions = ref({

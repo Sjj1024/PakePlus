@@ -496,52 +496,7 @@ const isJson = ref(false)
 const tauriConfigRef = ref<any>(null)
 
 // tauri config
-const tauriConfig: any = reactive({
-    windows: {
-        label: store.currentProject.name,
-        title: appForm.showName,
-        url: appForm.url,
-        userAgent: platforms[appForm.platform].userAgent,
-        width: appForm.width,
-        height: appForm.height,
-        theme: null,
-        resizable: true,
-        fullscreen: false,
-        maximized: false,
-        minWidth: 400,
-        minHeight: 300,
-        maxWidth: 1920,
-        maxHeight: 1080,
-        decorations: true,
-        transparent: false,
-        titleBarStyle: 'Visible',
-        visible: true,
-        focus: true,
-        closable: true,
-        minimizable: true,
-        maximizable: true,
-        alwaysOnTop: false,
-        alwaysOnBottom: false,
-        center: false,
-        skipTaskbar: false,
-        tabbingIdentifier: null,
-        parent: null,
-        dragDropEnabled: true,
-        browserExtensionsEnabled: false,
-        devtools: true,
-        contentProtected: false,
-        hiddenTitle: false,
-        incognito: false,
-        proxyUrl: null,
-        useHttpsScheme: false,
-        zoomHotkeysEnabled: false,
-        acceptFirstMouse: false,
-        create: false,
-        // if add additionalBrowserArgs, windows cant preview, but can build
-        // additionalBrowserArgs:
-        //     '--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection --autoplay-policy=no-user-gesture-required --auto-accept-camera-and-microphone-capture',
-    },
-})
+const tauriConfig: any = reactive(store.currentProject.more)
 
 // change app name
 const changeAppName = (value: string) => {
@@ -883,12 +838,14 @@ const saveJsFile = async () => {
 // save form input
 const saveFormInput = async () => {
     console.log('saveFormInput', appForm)
+    console.log('tauriConfig', tauriConfig)
     store.addUpdatePro({
         ...appForm,
         name: store.currentProject.name,
         debug: pubForm.model,
         more: tauriConfig,
     })
+    tauriConfigRef.value?.updateCode()
     // save js file content to appDataDir
     if (jsFileContents.value) {
         saveJsFile()
