@@ -238,7 +238,7 @@ const getImgUrl = (filePath: string) => {
 // new barnch config
 const showBranchDialog = () => {
     // if token exist, then creat branch, else next page
-    getCommitSha()
+    token.value && getCommitSha()
     // checkout has github token
     if (token.value === '') {
         ElMessage.error(t('configToken'))
