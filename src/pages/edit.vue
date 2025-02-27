@@ -364,7 +364,6 @@ import {
     isDev,
     convertToLocalTime,
 } from '@/utils/common'
-import { emit } from '@tauri-apps/api/event'
 import { platforms } from '@/utils/config'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
