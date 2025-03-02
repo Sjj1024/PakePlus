@@ -60,12 +60,6 @@ jobs:
               with:
                   targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
-            - name: Rust Cache
-              uses: Swatinem/rust-cache@v2
-              with:
-                  workspaces: src-tauri
-                  cache-all-crates: true
-
             - name: install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-22.04'
               run: |
@@ -80,7 +74,4 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   args: ${{ matrix.args }}
-                  artifactPaths: './dist'
-
-            - name: rename dist files
-              run: node cli/rename.cjs
+                  artifactPaths: './target'

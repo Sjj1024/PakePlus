@@ -1,8 +1,11 @@
 const fs = require('fs')
 const path = require('path')
 
+// build  target dir
+//
+
 // get dist dir
-const distDir = path.join(__dirname, '../dist')
+const distDir = path.join(__dirname, '../target')
 
 // get all files in dist dir
 const files = fs.readdirSync(distDir)
