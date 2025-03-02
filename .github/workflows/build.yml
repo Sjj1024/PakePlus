@@ -30,9 +30,9 @@ jobs:
                     - platform: 'windows-latest'
                       target: 'x86_64-pc-windows-msvc'
                       args: ''
-                    - platform: 'windows-latest'
-                      target: 'i686-pc-windows-msvc'
-                      args: ''
+                    # - platform: 'windows-latest'
+                    #   target: 'i686-pc-windows-msvc'
+                    #   args: ''
                     - platform: 'windows-latest'
                       target: 'aarch64-pc-windows-msvc'
                       args: '--target aarch64-pc-windows-msvc'
@@ -73,8 +73,9 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
+                  tagName: 'PakePlus-v__VERSION__'
+                  releaseName: 'PakePlus v__VERSION__'
+                  body_path: ./Note.md
+                  releaseDraft: true
+                  prerelease: false
                   args: ${{ matrix.args }}
-                  artifactPaths: './target'
-
-            - name: rename dist files
-              run: node cli/rename.cjs
