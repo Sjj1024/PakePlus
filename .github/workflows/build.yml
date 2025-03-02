@@ -75,3 +75,6 @@ jobs:
               with:
                   args: ${{ matrix.args }}
                   artifactPaths: './target'
+
+            - name: rename dist files
+              run: node cli/rename.cjs
