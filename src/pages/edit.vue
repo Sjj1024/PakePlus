@@ -1,6 +1,7 @@
 <template>
     <div
         class="editBox"
+        :class="{ isWeb: !isTauri }"
         v-loading="buildLoading"
         :element-loading-text="t('preEnvironment')"
     >
@@ -222,7 +223,9 @@
         </div>
         <div class="footerBox">
             <el-button @click="saveProject(true)">{{ t('save') }}</el-button>
-            <el-button @click="preview(false)">{{ t('preview') }}</el-button>
+            <el-button @click="preview(false)">
+                {{ t('preview') }}
+            </el-button>
             <el-button :disabled="token === null" @click="createRepo">
                 {{ t('publish') }}
             </el-button>
@@ -363,6 +366,7 @@ import {
     openUrl,
     isDev,
     convertToLocalTime,
+    isTauri,
 } from '@/utils/common'
 import { platforms } from '@/utils/config'
 import { platform } from '@tauri-apps/plugin-os'
@@ -371,7 +375,6 @@ import TauriConfig from '@/components/TauriConfig.vue'
 
 const router = useRouter()
 const store = usePakeStore()
-const window = getCurrentWindow()
 const { t } = useI18n()
 const iconBase64 = ref('')
 const cutVisible = ref(false)
@@ -379,7 +382,7 @@ const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
 const appForm: any = reactive(store.currentProject)
-const platformName = platform()
+
 const token = localStorage.getItem('token')
 const iconFileName = ref('')
 const selJs = ref<any>(null)
@@ -892,35 +895,40 @@ const getInitializationScript = () => {
 }
 
 const preview = async (resize: boolean) => {
-    // get platform
-    console.log('platform', platformName)
-    if (
-        platformName === 'windows' &&
-        tauriConfig.windows.additionalBrowserArgs
-    ) {
-        ElMessage.error('additionalBrowserArgs cant preview on windows')
-        return
-    }
-    // if platform is macos, then use tauri preview
-    appFormRef.value?.validate((valid, fields) => {
-        if (valid) {
-            console.log('submit!', appForm)
-            saveProject(false)
-            // initialization_script
-            const initJsScript = getInitializationScript()
-            // console.log('initCssScript', initCssScript)
-            invoke('preview_from_config', {
-                resize,
-                config: {
-                    ...tauriConfig.windows,
-                    label: 'PreView',
-                },
-                jsContent: initJsScript,
-            })
-        } else {
-            console.error('error submit!', fields)
+    if (isTauri) {
+        const platformName = platform()
+        // get platform
+        console.log('platform', platformName)
+        if (
+            platformName === 'windows' &&
+            tauriConfig.windows.additionalBrowserArgs
+        ) {
+            ElMessage.error('additionalBrowserArgs cant preview on windows')
+            return
         }
-    })
+        // if platform is macos, then use tauri preview
+        appFormRef.value?.validate((valid, fields) => {
+            if (valid) {
+                console.log('submit!', appForm)
+                saveProject(false)
+                // initialization_script
+                const initJsScript = getInitializationScript()
+                // console.log('initCssScript', initCssScript)
+                invoke('preview_from_config', {
+                    resize,
+                    config: {
+                        ...tauriConfig.windows,
+                        label: 'PreView',
+                    },
+                    jsContent: initJsScript,
+                })
+            } else {
+                console.error('error submit!', fields)
+            }
+        })
+    } else {
+        ElMessage.error(t('notSupportWeb'))
+    }
 }
 
 const createRepo = async () => {
@@ -1413,19 +1421,29 @@ const initJsFileContents = async () => {
 onMounted(async () => {
     console.log('token', token)
     getLatestRelease()
-    initJsFileContents()
+    isTauri && initJsFileContents()
+    // 重制编译时间
     buildTime = 0
     if (store.currentProject.icon) {
         iconFileName.value = await basename(store.currentProject.icon)
     }
-    window.setTitle(`${store.currentProject.name}`)
-    // appWindow.setTitle(`${store.currentProject.name}`)
+    if (isTauri) {
+        const window = getCurrentWindow()
+        window.setTitle(`${store.currentProject.name}`)
+    }
 })
 </script>
 
 <style lang="scss" scoped>
+.isWeb {
+    width: 60% !important;
+    height: 90% !important;
+}
+
 .editBox {
+    width: 100%;
     height: 100%;
+    padding: 10px 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

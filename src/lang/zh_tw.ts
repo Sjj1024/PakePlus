@@ -103,4 +103,6 @@ export default {
     sourceCode: '源代碼',
     editImg: '編輯圖片',
     networkError: '網絡錯誤，請關閉代理再試!',
+    readFileError: '文件讀取錯誤',
+    notSupportWeb: 'Web端不支持預覽',
 }

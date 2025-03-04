@@ -1,5 +1,5 @@
 <template>
-    <div class="homeBox">
+    <div class="homeBox" :class="{ isWeb: !isTauri }">
         <div class="homeHeader">
             <div>
                 <div class="headerTitle">
@@ -64,7 +64,13 @@
                 </div>
                 <div class="setting" @click="tokenDialog = true">
                     <!-- <span class="userName">{{ store.userInfo.login }}</span> -->
-                    <span class="iconfont setIcon">&#xe667;</span>
+                    <img
+                        v-if="store.userInfo.avatar_url"
+                        :src="store.userInfo.avatar_url"
+                        class="userAvatar"
+                        alt="userAvatar"
+                    />
+                    <span v-else class="iconfont setIcon">&#xe667;</span>
                 </div>
             </div>
         </div>
@@ -172,7 +178,15 @@ import { useRouter } from 'vue-router'
 import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
-import { urlMap, openUrl, initProject, isDev, isTauri } from '@/utils/common'
+import {
+    urlMap,
+    openUrl,
+    initProject,
+    isDev,
+    isTauri,
+    readFile,
+    updateBuildFile,
+} from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
 // import { setTheme } from '@tauri-apps/api/app'
@@ -254,6 +268,7 @@ const changeLang = (lang: string) => {
 
 // check token and confirm token is ok
 const testToken = async (tips: boolean = true) => {
+    console.log('testToken', token.value)
     if (localStorage.getItem('token') !== token.value || tips) {
         testLoading.value = true
         const res: any = await githubApi.gitUserInfo(token.value)
@@ -432,13 +447,17 @@ const creatBranch = async (first: boolean = false) => {
 
 // creat build yml
 const uploadBuildYml = async (_: string = 'main') => {
-    console.log('uploadBuildYml', import.meta.env.DEV)
     // get build.yml file content
-    const content = await invoke('update_build_file', {
+    // const content = await readFile('build.yml')
+    const content = await updateBuildFile({
         name: 'PakePlus',
         body: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.',
     })
     console.log('content', content)
+    if (content === 'error') {
+        ElMessage.error(t('readFileError'))
+        return
+    }
     // update build.yml file content
     const updateRes: any = await githubApi.createBuildYml(
         store.userInfo.login,
@@ -522,9 +541,14 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.isWeb {
+    width: 60% !important;
+    height: 90% !important;
+}
+
 .homeBox {
-    width: 60%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
     padding: 10px 20px;
     position: relative;
     background-color: var(--bg-color);
@@ -613,6 +637,7 @@ onMounted(() => {
                     font-size: 20px;
                     color: gray;
                     user-select: none;
+                    cursor: pointer;
                     &:hover {
                         color: var(--text-color);
                     }
@@ -624,9 +649,16 @@ onMounted(() => {
                 flex-direction: row;
                 justify-content: flex-start;
                 align-items: center;
+                cursor: pointer;
 
                 .userName {
                     margin-right: 6px;
+                }
+
+                .userAvatar {
+                    width: 22px;
+                    height: 22px;
+                    border-radius: 50%;
                 }
 
                 .setIcon {

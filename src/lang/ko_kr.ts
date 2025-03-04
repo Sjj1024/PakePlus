@@ -109,4 +109,6 @@ export default {
     sourceCode: '소스 코드',
     editImg: '이미지 편집',
     networkError: '네트워크 오류, 프록시를 닫고 다시 시도하세요!',
+    readFileError: '파일 읽기 오류',
+    notSupportWeb: '웹에서 미리보기를 지원하지 않습니다',
 }

@@ -8,7 +8,6 @@ export default {
             method: 'get',
             headers: {
                 Authorization: `Bearer ${token}`,
-                'User-Agent': 'PostmanRuntime/7.41.2',
             },
         })
     },
@@ -18,7 +17,6 @@ export default {
             method: 'get',
             headers: {
                 Authorization: `Bearer ${token}`,
-                'User-Agent': 'PostmanRuntime/7.41.2',
             },
         })
     },

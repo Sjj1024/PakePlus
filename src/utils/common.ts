@@ -1,5 +1,7 @@
 import { open } from '@tauri-apps/plugin-shell'
+import { invoke } from '@tauri-apps/api/core'
 
+// urlMap
 export const urlMap = {
     github: 'https://github.com/Sjj1024/PakePlus',
     weixin: 'https://github.com/Sjj1024/PakePlus',
@@ -13,15 +15,18 @@ export const urlMap = {
     windowsConfig: 'https://v2.tauri.app/reference/config/#windowconfig',
 }
 
+// 打开url
 export const openUrl = async (url: string) => {
     await open(url)
 }
 
+// 是否为字母数字
 export const isAlphanumeric = (str: string) => {
     const regex = /^[a-zA-Z0-9]+$/
     return regex.test(str)
 }
 
+// css filter
 export const CSSFILTER = `
 // css filter
 document.addEventListener('DOMContentLoaded', () => {
@@ -91,6 +96,7 @@ export const tauriConfig = {
     },
 }
 
+// 初始化项目
 export const initProject = {
     name: '',
     node_id: '',
@@ -108,10 +114,13 @@ export const initProject = {
     more: tauriConfig,
 }
 
+// 是否为开发环境
 export const isDev = import.meta.env.DEV
 
+// 是否为tauri环境
 export const isTauri = (window as any).__TAURI__ ? true : false
 
+// 转换为本地时间
 export const convertToLocalTime = (utcDateTime: string) => {
     // Create a new Date object from the UTC date-time string
     let date = new Date(utcDateTime)
@@ -119,4 +128,38 @@ export const convertToLocalTime = (utcDateTime: string) => {
     let localTime = date.toLocaleString()
     // Return the local time string
     return localTime
+}
+
+// 读取文件内容
+export const readFile = async (fileName: string) => {
+    try {
+        const response = await fetch(`/${fileName}`)
+        if (!response.ok) {
+            throw new Error('文件读取失败')
+        }
+        return response.text()
+    } catch (error) {
+        console.error('读取文件时出错:', error)
+        return 'error'
+    }
+}
+
+// update_build_file
+export const updateBuildFile = async (data: any) => {
+    if (isTauri) {
+        const content = await invoke('update_build_file', data)
+        return content
+    } else {
+        let content = await readFile('build.yml')
+        if (content === 'error') {
+            return 'error'
+        }
+        // 替换PROJECTNAME
+        content = content.replace('PROJECTNAME', data.name)
+        // 替换RELEASEBODY
+        content = content.replace('RELEASEBODY', data.body)
+        // 使用Base64编码
+        const encodedContent = btoa(content)
+        return encodedContent
+    }
 }

@@ -106,4 +106,6 @@ export default {
     sourceCode: '源代码',
     editImg: '编辑图片',
     networkError: '网络请求失败，请关闭代理再试!',
+    readFileError: '文件读取失败',
+    notSupportWeb: 'Web端不支持预览',
 }

@@ -13,7 +13,11 @@ const http = axios.create({
 //请求拦截器，在请求发出之前做些事情
 http.interceptors.request.use((config) => {
     //config:配置对象，对象里面有个属性很重要，header请求头
-    config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+    if (!config.headers['Authorization']) {
+        config.headers['Authorization'] = `Bearer ${localStorage.getItem(
+            'token'
+        )}`
+    }
     return config
 })
 
@@ -26,6 +30,9 @@ http.interceptors.response.use(
     (error) => {
         //响应失败回调函数，如终结Promise链
         console.log('请求失败:', error)
+        if (200 <= error.status && error.status < 500) {
+            return Promise.resolve({ status: error.status, data: error.data })
+        }
         return Promise.reject(error)
     }
 )

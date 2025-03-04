@@ -108,4 +108,6 @@ export default {
     sourceCode: 'ソースコード',
     editImg: '画像を編集',
     networkError: 'ネットワークエラー、プロキシを閉じて再試行してください!',
+    readFileError: 'ファイルの読み込みに失敗しました',
+    notSupportWeb: 'Web端末ではプレビューがサポートされていません',
 }
