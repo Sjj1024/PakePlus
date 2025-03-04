@@ -172,7 +172,7 @@ import { useRouter } from 'vue-router'
 import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
-import { urlMap, openUrl, initProject, isDev } from '@/utils/common'
+import { urlMap, openUrl, initProject, isDev, isTauri } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
 // import { setTheme } from '@tauri-apps/api/app'
@@ -181,13 +181,13 @@ import { invoke, convertFileSrc } from '@tauri-apps/api/core'
 import { getVersion } from '@tauri-apps/api/app'
 import { tauriConfig } from '@/utils/common'
 import { platforms } from '@/utils/config'
+import packageJson from '../../package.json'
 
 const router = useRouter()
 const store = usePakeStore()
 const { t, locale } = useI18n()
-const window = getCurrentWindow()
 const token = ref(localStorage.getItem('token') || '')
-const version = ref('')
+const version = ref(packageJson.version)
 const tokenDialog = ref(false)
 const branchDialog = ref(false)
 const branchName = ref('')
@@ -484,10 +484,12 @@ const checkUpdate = async () => {
 }
 
 const getPakePlusInfo = async () => {
-    const pakeVersion = await getVersion()
+    const pakeVersion = packageJson.version
     console.log('pakeVersion', pakeVersion)
     version.value = pakeVersion
-    await checkUpdate()
+    if (isTauri) {
+        await checkUpdate()
+    }
 }
 
 // reset release info
@@ -509,7 +511,10 @@ const mergeUpdateRep = async () => {
 }
 
 onMounted(() => {
-    window.setTitle('PakePlus')
+    if (isTauri) {
+        const window = getCurrentWindow()
+        window.setTitle('PakePlus')
+    }
     getPakePlusInfo()
     resetReleaseInfo()
     // mergeUpdateRep()
@@ -518,6 +523,8 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .homeBox {
+    width: 60%;
+    height: 90%;
     padding: 10px 20px;
     position: relative;
     background-color: var(--bg-color);

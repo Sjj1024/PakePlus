@@ -110,6 +110,8 @@ export const initProject = {
 
 export const isDev = import.meta.env.DEV
 
+export const isTauri = (window as any).__TAURI__ ? true : false
+
 export const convertToLocalTime = (utcDateTime: string) => {
     // Create a new Date object from the UTC date-time string
     let date = new Date(utcDateTime)

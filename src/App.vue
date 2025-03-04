@@ -3,6 +3,7 @@ import { onMounted } from 'vue'
 import { locale as osLocale } from '@tauri-apps/plugin-os'
 import { useI18n } from 'vue-i18n'
 import { mkdir, BaseDirectory } from '@tauri-apps/plugin-fs'
+import { isTauri } from './utils/common'
 
 const { locale } = useI18n()
 
@@ -55,7 +56,7 @@ const chageTheme = (theme: string) => {
 }
 
 const initEnv = async () => {
-    const language = await osLocale()
+    const language = isTauri ? await osLocale() : 'zh-CN'
     let lang = 'en' // Default to English
     if (language?.includes('zh-Hans')) {
         lang = 'zh' // Simplified Chinese
@@ -73,7 +74,11 @@ const initEnv = async () => {
     console.log(`当前系统主题: ${currentTheme}`)
     const localTheme = localStorage.getItem('theme')
     chageTheme(localTheme || currentTheme)
-    await mkdir('assets', { baseDir: BaseDirectory.AppData, recursive: true })
+    isTauri &&
+        (await mkdir('assets', {
+            baseDir: BaseDirectory.AppData,
+            recursive: true,
+        }))
     console.log('App data dir exists:', import.meta.env.DEV)
     // if env is dev
     // if (!import.meta.env.DEV) {
@@ -96,9 +101,12 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="container">
+    <div class="container" :class="{ isWeb: !isTauri }">
         <router-view></router-view>
     </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.isWeb {
+}
+</style>
