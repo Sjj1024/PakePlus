@@ -159,7 +159,7 @@ const deleteRelAssets = async () => {
         )
         console.log('deleteRelease', releaseRes)
         ElMessage.success(t('delSuccess'))
-        store.setRelease({ id: 0 })
+        store.setRelease('pakeplus', { id: 0 })
         router.go(-1)
     }
 }
@@ -188,11 +188,11 @@ const copyDownlink = async (asset: any) => {
 
 onMounted(() => {
     // must do, edit page submit will creat new release
-    if (store.release.id === 0) {
+    if (store.releases.pakeplus.id === 0) {
         getLoading.value = true
         getLatestRelease()
     } else {
-        releaseData.value = store.release
+        releaseData.value = store.releases.pakeplus
     }
 })
 </script>

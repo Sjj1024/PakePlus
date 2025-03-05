@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 export const usePakeStore = defineStore('pakeplus', {
     state: () => {
         return {
+            // 用户信息
             userInfo: localStorage.getItem('userInfo')
                 ? JSON.parse(localStorage.getItem('userInfo') as string)
                 : {
@@ -41,6 +42,7 @@ export const usePakeStore = defineStore('pakeplus', {
                       created_at: '2019-03-10T04:28:19Z',
                       updated_at: '2024-08-22T04:54:05Z',
                   },
+            // PakePlus仓库信息
             repository: localStorage.getItem('repository')
                 ? JSON.parse(localStorage.getItem('repository') as string)
                 : {
@@ -456,6 +458,7 @@ export const usePakeStore = defineStore('pakeplus', {
                       network_count: 0,
                       subscribers_count: 0,
                   },
+            // main branch提交信息
             commit: localStorage.getItem('commit')
                 ? JSON.parse(localStorage.getItem('commit') as string)
                 : {
@@ -558,32 +561,245 @@ export const usePakeStore = defineStore('pakeplus', {
                           },
                       ],
                   },
+            // dist branch提交信息
+            distCommit: localStorage.getItem('distCommit')
+                ? JSON.parse(localStorage.getItem('distCommit') as string)
+                : {
+                      sha: 'f42ea4b062330e78b5af81b4187f5fd59dd3372e',
+                      node_id: '',
+                      commit: {
+                          author: {
+                              name: '1024小神',
+                              email: '15670339118@163.com',
+                              date: '2024-09-18T08:46:29Z',
+                          },
+                          committer: {
+                              name: '1024小神',
+                              email: '15670339118@163.com',
+                              date: '2024-09-18T08:46:29Z',
+                          },
+                          message: 'add pinia',
+                          tree: {
+                              sha: '3b85b6da74530256a9c30724f39022fdaadfc970',
+                              url: 'https://api.github.com/repos/codegirle/PakePlus/git/trees/3b85b6da74530256a9c30724f39022fdaadfc970',
+                          },
+                          url: 'https://api.github.com/repos/codegirle/PakePlus/git/commits/f42ea4b062330e78b5af81b4187f5fd59dd3372e',
+                          comment_count: 0,
+                          verification: {
+                              verified: false,
+                              reason: 'unsigned',
+                              signature: null,
+                              payload: null,
+                          },
+                      },
+                      url: '',
+                      html_url: '',
+                      comments_url: '',
+                      author: {
+                          login: 'Sjj1024',
+                          id: 48399687,
+                          node_id: 'MDQ6VXNlcjQ4Mzk5Njg3',
+                          avatar_url:
+                              'https://avatars.githubusercontent.com/u/48399687?v=4',
+                          gravatar_id: '',
+                          url: 'https://api.github.com/users/Sjj1024',
+                          html_url: 'https://github.com/Sjj1024',
+                          followers_url:
+                              'https://api.github.com/users/Sjj1024/followers',
+                          following_url:
+                              'https://api.github.com/users/Sjj1024/following{/other_user}',
+                          gists_url:
+                              'https://api.github.com/users/Sjj1024/gists{/gist_id}',
+                          starred_url:
+                              'https://api.github.com/users/Sjj1024/starred{/owner}{/repo}',
+                          subscriptions_url:
+                              'https://api.github.com/users/Sjj1024/subscriptions',
+                          organizations_url:
+                              'https://api.github.com/users/Sjj1024/orgs',
+                          repos_url:
+                              'https://api.github.com/users/Sjj1024/repos',
+                          events_url:
+                              'https://api.github.com/users/Sjj1024/events{/privacy}',
+                          received_events_url:
+                              'https://api.github.com/users/Sjj1024/received_events',
+                          type: 'User',
+                          site_admin: false,
+                      },
+                      committer: {
+                          login: 'Sjj1024',
+                          id: 48399687,
+                          node_id: 'MDQ6VXNlcjQ4Mzk5Njg3',
+                          avatar_url:
+                              'https://avatars.githubusercontent.com/u/48399687?v=4',
+                          gravatar_id: '',
+                          url: 'https://api.github.com/users/Sjj1024',
+                          html_url: 'https://github.com/Sjj1024',
+                          followers_url:
+                              'https://api.github.com/users/Sjj1024/followers',
+                          following_url:
+                              'https://api.github.com/users/Sjj1024/following{/other_user}',
+                          gists_url:
+                              'https://api.github.com/users/Sjj1024/gists{/gist_id}',
+                          starred_url:
+                              'https://api.github.com/users/Sjj1024/starred{/owner}{/repo}',
+                          subscriptions_url:
+                              'https://api.github.com/users/Sjj1024/subscriptions',
+                          organizations_url:
+                              'https://api.github.com/users/Sjj1024/orgs',
+                          repos_url:
+                              'https://api.github.com/users/Sjj1024/repos',
+                          events_url:
+                              'https://api.github.com/users/Sjj1024/events{/privacy}',
+                          received_events_url:
+                              'https://api.github.com/users/Sjj1024/received_events',
+                          type: 'User',
+                          site_admin: false,
+                      },
+                      parents: [
+                          {
+                              sha: 'e8fb5a3a259e411a391e8fe2ed756f060747b2e2',
+                              url: 'https://api.github.com/repos/codegirle/PakePlus/commits/e8fb5a3a259e411a391e8fe2ed756f060747b2e2',
+                              html_url:
+                                  'https://github.com/codegirle/PakePlus/commit/e8fb5a3a259e411a391e8fe2ed756f060747b2e2',
+                          },
+                      ],
+                  },
+            // webCommit
+            webCommit: localStorage.getItem('webCommit')
+                ? JSON.parse(localStorage.getItem('webCommit') as string)
+                : {
+                      sha: 'f42ea4b062330e78b5af81b4187f5fd59dd3372e',
+                      node_id: '',
+                      commit: {
+                          author: {
+                              name: '1024小神',
+                              email: '15670339118@163.com',
+                              date: '2024-09-18T08:46:29Z',
+                          },
+                          committer: {
+                              name: '1024小神',
+                              email: '15670339118@163.com',
+                              date: '2024-09-18T08:46:29Z',
+                          },
+                          message: 'add pinia',
+                          tree: {
+                              sha: '3b85b6da74530256a9c30724f39022fdaadfc970',
+                              url: 'https://api.github.com/repos/codegirle/PakePlus/git/trees/3b85b6da74530256a9c30724f39022fdaadfc970',
+                          },
+                          url: 'https://api.github.com/repos/codegirle/PakePlus/git/commits/f42ea4b062330e78b5af81b4187f5fd59dd3372e',
+                          comment_count: 0,
+                          verification: {
+                              verified: false,
+                              reason: 'unsigned',
+                              signature: null,
+                              payload: null,
+                          },
+                      },
+                      url: '',
+                      html_url: '',
+                      comments_url: '',
+                      author: {
+                          login: 'Sjj1024',
+                          id: 48399687,
+                          node_id: 'MDQ6VXNlcjQ4Mzk5Njg3',
+                          avatar_url:
+                              'https://avatars.githubusercontent.com/u/48399687?v=4',
+                          gravatar_id: '',
+                          url: 'https://api.github.com/users/Sjj1024',
+                          html_url: 'https://github.com/Sjj1024',
+                          followers_url:
+                              'https://api.github.com/users/Sjj1024/followers',
+                          following_url:
+                              'https://api.github.com/users/Sjj1024/following{/other_user}',
+                          gists_url:
+                              'https://api.github.com/users/Sjj1024/gists{/gist_id}',
+                          starred_url:
+                              'https://api.github.com/users/Sjj1024/starred{/owner}{/repo}',
+                          subscriptions_url:
+                              'https://api.github.com/users/Sjj1024/subscriptions',
+                          organizations_url:
+                              'https://api.github.com/users/Sjj1024/orgs',
+                          repos_url:
+                              'https://api.github.com/users/Sjj1024/repos',
+                          events_url:
+                              'https://api.github.com/users/Sjj1024/events{/privacy}',
+                          received_events_url:
+                              'https://api.github.com/users/Sjj1024/received_events',
+                          type: 'User',
+                          site_admin: false,
+                      },
+                      committer: {
+                          login: 'Sjj1024',
+                          id: 48399687,
+                          node_id: 'MDQ6VXNlcjQ4Mzk5Njg3',
+                          avatar_url:
+                              'https://avatars.githubusercontent.com/u/48399687?v=4',
+                          gravatar_id: '',
+                          url: 'https://api.github.com/users/Sjj1024',
+                          html_url: 'https://github.com/Sjj1024',
+                          followers_url:
+                              'https://api.github.com/users/Sjj1024/followers',
+                          following_url:
+                              'https://api.github.com/users/Sjj1024/following{/other_user}',
+                          gists_url:
+                              'https://api.github.com/users/Sjj1024/gists{/gist_id}',
+                          starred_url:
+                              'https://api.github.com/users/Sjj1024/starred{/owner}{/repo}',
+                          subscriptions_url:
+                              'https://api.github.com/users/Sjj1024/subscriptions',
+                          organizations_url:
+                              'https://api.github.com/users/Sjj1024/orgs',
+                          repos_url:
+                              'https://api.github.com/users/Sjj1024/repos',
+                          events_url:
+                              'https://api.github.com/users/Sjj1024/events{/privacy}',
+                          received_events_url:
+                              'https://api.github.com/users/Sjj1024/received_events',
+                          type: 'User',
+                          site_admin: false,
+                      },
+                      parents: [
+                          {
+                              sha: 'e8fb5a3a259e411a391e8fe2ed756f060747b2e2',
+                              url: 'https://api.github.com/repos/codegirle/PakePlus/commits/e8fb5a3a259e411a391e8fe2ed756f060747b2e2',
+                              html_url:
+                                  'https://github.com/codegirle/PakePlus/commit/e8fb5a3a259e411a391e8fe2ed756f060747b2e2',
+                          },
+                      ],
+                  },
+            // 当前项目
             currentProject: localStorage.getItem('currentProject')
                 ? JSON.parse(localStorage.getItem('currentProject') as string)
                 : initProject,
+            // 项目列表
             projectList: localStorage.getItem('projectList')
                 ? JSON.parse(localStorage.getItem('projectList') as string)
                 : ([] as Project[]),
-            release: {
-                url: '',
-                assets_url: '',
-                upload_url: '',
-                html_url: '',
-                id: 0,
-                node_id: '',
-                tag_name: '',
-                target_commitish: '',
-                name: '',
-                draft: false,
-                prerelease: false,
-                created_at: '2024-09-23T10:46:29Z',
-                published_at: '2024-09-23T10:48:30Z',
-                assets: [],
-                tarball_url: '',
-                zipball_url: '',
-                body: '',
-            },
-            age: 25,
+            // 发布信息
+            releases: localStorage.getItem('releases')
+                ? JSON.parse(localStorage.getItem('releases') as string)
+                : ({
+                      pakeplus: {
+                          url: '',
+                          assets_url: '',
+                          upload_url: '',
+                          html_url: '',
+                          id: 0,
+                          node_id: '',
+                          tag_name: '',
+                          target_commitish: '',
+                          name: '',
+                          draft: false,
+                          prerelease: false,
+                          created_at: '2024-09-23T10:46:29Z',
+                          published_at: '2024-09-23T10:48:30Z',
+                          assets: [],
+                          tarball_url: '',
+                          zipball_url: '',
+                          body: '',
+                      },
+                  } as { [key: string]: any }),
+            age: 18,
             sex: '男',
         }
     },
@@ -604,6 +820,14 @@ export const usePakeStore = defineStore('pakeplus', {
         setCommitSha(info: any) {
             this.commit = info
             localStorage.setItem('commit', JSON.stringify(info))
+        },
+        setDistCommit(info: any) {
+            this.distCommit = info
+            localStorage.setItem('distCommit', JSON.stringify(info))
+        },
+        setWebCommit(info: any) {
+            this.webCommit = info
+            localStorage.setItem('webCommit', JSON.stringify(info))
         },
         setCurrentProject(info: any) {
             this.currentProject = info
@@ -639,8 +863,9 @@ export const usePakeStore = defineStore('pakeplus', {
                 )
             }
         },
-        setRelease(info: any) {
-            this.release = info
+        setRelease(proName: string, info: any) {
+            this.releases[proName] = info
+            localStorage.setItem('release', JSON.stringify(this.releases))
         },
     },
 })

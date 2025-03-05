@@ -2,7 +2,6 @@
 import { onMounted } from 'vue'
 import { locale as osLocale } from '@tauri-apps/plugin-os'
 import { useI18n } from 'vue-i18n'
-import { mkdir, BaseDirectory } from '@tauri-apps/plugin-fs'
 import { isTauri } from './utils/common'
 
 const { locale } = useI18n()
@@ -74,11 +73,6 @@ const initEnv = async () => {
     console.log(`当前系统主题: ${currentTheme}`)
     const localTheme = localStorage.getItem('theme')
     chageTheme(localTheme || currentTheme)
-    isTauri &&
-        (await mkdir('assets', {
-            baseDir: BaseDirectory.AppData,
-            recursive: true,
-        }))
     console.log('App data dir exists:', import.meta.env.DEV)
     // if env is dev
     // if (!import.meta.env.DEV) {
@@ -101,12 +95,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="container" :class="{ isWeb: !isTauri }">
+    <div class="container">
         <router-view></router-view>
     </div>
 </template>
 
-<style scoped lang="scss">
-.isWeb {
-}
-</style>
+<style scoped lang="scss"></style>

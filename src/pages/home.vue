@@ -82,7 +82,11 @@
                 :key="pro.id"
                 @click="goProject(pro)"
             >
-                <img :src="getImgUrl(pro.icon)" class="appIcon" alt="appIcon" />
+                <img
+                    :src="pro.icon || pakePlusIcon"
+                    class="appIcon"
+                    alt="appIcon"
+                />
                 <div class="infoBox">
                     <div class="appBox">
                         <div class="appName">{{ pro.name }}</div>
@@ -184,15 +188,13 @@ import {
     initProject,
     isDev,
     isTauri,
-    readFile,
     updateBuildFile,
 } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
 // import { setTheme } from '@tauri-apps/api/app'
 import { getCurrentWindow } from '@tauri-apps/api/window'
-import { invoke, convertFileSrc } from '@tauri-apps/api/core'
-import { getVersion } from '@tauri-apps/api/app'
+// import { convertFileSrc } from '@tauri-apps/api/core'
 import { tauriConfig } from '@/utils/common'
 import { platforms } from '@/utils/config'
 import packageJson from '../../package.json'
@@ -240,14 +242,14 @@ const goAbout = () => {
 }
 
 // get img url
-const getImgUrl = (filePath: string) => {
-    if (filePath) {
-        const timestamp = new Date().getTime()
-        return `${convertFileSrc(filePath)}?t=${timestamp}`
-    } else {
-        return pakePlusIcon
-    }
-}
+// const getImgUrl = (filePath: string) => {
+//     if (filePath) {
+//         const timestamp = new Date().getTime()
+//         return `${convertFileSrc(filePath)}?t=${timestamp}`
+//     } else {
+//         return pakePlusIcon
+//     }
+// }
 
 // new barnch config
 const showBranchDialog = () => {
@@ -315,19 +317,24 @@ const forkProgect = async (tips: boolean = true) => {
     }
     // wait fork done, enable github action
     while (true) {
-        const status = await getCommitSha()
-        console.log('wait fork done', status)
-        if (status) {
-            break
-        }
-    }
-    // delete build.yml
-    deleteBuildYml()
-    testLoading.value = false
-    if (!tips) {
-        tokenDialog.value = false
-    } else {
-        ElMessage.success(t('tokenOk'))
+        await new Promise((resolve) => setTimeout(resolve, 1000))
+        Promise.all([getCommitSha(), getDistCommitSha(), getWebCommitSha()])
+            .then((res) => {
+                console.log('wait fork done', res)
+                if (res[0] && res[1] && res[2]) {
+                    // delete build.yml
+                    deleteBuildYml()
+                    testLoading.value = false
+                    if (!tips) {
+                        tokenDialog.value = false
+                    } else {
+                        ElMessage.success(t('tokenOk'))
+                    }
+                }
+            })
+            .catch((err) => {
+                console.error('wait fork done error', err)
+            })
     }
 }
 
@@ -343,6 +350,42 @@ const getCommitSha = async () => {
     console.log('getCommitSha', res.data)
     if (res.status === 200 && res.data) {
         store.setCommitSha(res.data)
+        return true
+    } else {
+        return false
+    }
+}
+
+// get commit sha
+const getDistCommitSha = async () => {
+    // get commit sha by branch name
+    // if dev get dev branch, else get master branch
+    const res: any = await githubApi.getaCommitSha(
+        store.userInfo.login,
+        'PakePlus',
+        'dist'
+    )
+    console.log('getCommitSha', res.data)
+    if (res.status === 200 && res.data) {
+        store.setDistCommit(res.data)
+        return true
+    } else {
+        return false
+    }
+}
+
+// get commit sha
+const getWebCommitSha = async () => {
+    // get commit sha by branch name
+    // if dev get dev branch, else get master branch
+    const res: any = await githubApi.getaCommitSha(
+        store.userInfo.login,
+        'PakePlus',
+        'web'
+    )
+    console.log('getCommitSha', res.data)
+    if (res.status === 200 && res.data) {
+        store.setWebCommit(res.data)
         return true
     } else {
         return false
@@ -368,9 +411,8 @@ const creatLoading = ref(false)
 const creatBranch = async (first: boolean = false) => {
     creatLoading.value = true
     // update build.yml file content
-    token.value && (await uploadBuildYml())
-    // checkout branch name is english
-    if (branchName.value && /^[A-Za-z0-9]+$/.test(branchName.value)) {
+    // token.value && (await uploadBuildYml())
+    if (branchName.value) {
         console.log('branchName.value', branchName.value)
         // if token exist, then creat branch, else next page
         if (token.value) {
@@ -497,36 +539,15 @@ const deleteBuildYml = async (branchName: string = 'master') => {
 }
 
 // check update
-const checkUpdate = async () => {
-    const response = await githubApi.getUpdateFile()
-    console.log('updateJson', response)
-}
+// const checkUpdate = async () => {
+//     const response = await githubApi.getUpdateFile()
+//     console.log('updateJson', response)
+// }
 
 const getPakePlusInfo = async () => {
     const pakeVersion = packageJson.version
     console.log('pakeVersion', pakeVersion)
     version.value = pakeVersion
-    if (isTauri) {
-        await checkUpdate()
-    }
-}
-
-// reset release info
-const resetReleaseInfo = () => {
-    store.setRelease({
-        id: 0,
-    })
-}
-
-// merge and update pakeplus
-const mergeUpdateRep = async () => {
-    if (token.value) {
-        const res = await githubApi.mergeUpdateRep(
-            store.userInfo.login,
-            'PakePlus'
-        )
-        console.log('merge update PakePlus', res)
-    }
 }
 
 onMounted(() => {
@@ -535,7 +556,7 @@ onMounted(() => {
         window.setTitle('PakePlus')
     }
     getPakePlusInfo()
-    resetReleaseInfo()
+    // resetReleaseInfo()
     // mergeUpdateRep()
 })
 </script>

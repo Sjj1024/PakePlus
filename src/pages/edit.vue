@@ -37,7 +37,7 @@
                                     {{ t('moreConfig') }}
                                 </el-dropdown-item>
                                 <el-dropdown-item
-                                    :disabled="store.release.id === 0"
+                                    :disabled="store.releases.pakeplus.id === 0"
                                     @click="toHistory"
                                 >
                                     {{ t('relHistore') }}
@@ -960,16 +960,16 @@ let checkDispatchTimer: any = null
 
 // delete lasted release
 const deleteRelease = async () => {
-    if (store.release.id !== 0) {
+    if (store.releases.pakeplus.id !== 0) {
         const releaseRes: any = await githubApi.deleteRelease(
             store.userInfo.login,
             'PakePlus',
-            store.release.id
+            store.releases.pakeplus.id
         )
         console.log('deleteRelease', releaseRes)
     }
     // reset release
-    store.setRelease({
+    store.setRelease('pakeplus', {
         url: '',
         assets_url: '',
         upload_url: '',
@@ -1392,7 +1392,7 @@ const getLatestRelease = async () => {
             }),
         }
         console.log('releaseData-----', releaseData)
-        store.setRelease(releaseData)
+        store.setRelease('pakeplus', releaseData)
     } else {
         console.log('releaseRes error, but not important', releaseRes)
     }
