@@ -13,7 +13,7 @@ const http = axios.create({
 //请求拦截器，在请求发出之前做些事情
 http.interceptors.request.use((config) => {
     //config:配置对象，对象里面有个属性很重要，header请求头
-    if (!config.headers['Authorization']) {
+    if (!config.headers['Authorization'] && localStorage.getItem('token')) {
         config.headers['Authorization'] = `Bearer ${localStorage.getItem(
             'token'
         )}`

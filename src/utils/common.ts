@@ -130,6 +130,16 @@ export const convertToLocalTime = (utcDateTime: string) => {
     return localTime
 }
 
+// base64 encode
+export const base64Encode = (str: string) => {
+    return btoa(str)
+}
+
+// base64 decode
+export const base64Decode = (str: string) => {
+    return atob(str)
+}
+
 // 读取文件内容
 export const readFile = async (fileName: string) => {
     try {

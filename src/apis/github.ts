@@ -188,6 +188,12 @@ export default {
             method: 'get',
         })
     },
+    // get pakeplus info
+    getPakePlusInfo() {
+        return http(`/repos/Sjj1024/PakePlus/contents/package.json`, {
+            method: 'get',
+        })
+    },
     // update and merge
     mergeUpdateRep(user: string, repo: string) {
         return http(`/repos/${user}/${repo}/merge-upstream`, {

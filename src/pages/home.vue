@@ -62,15 +62,21 @@
                         </template>
                     </el-dropdown>
                 </div>
-                <div class="setting" @click="tokenDialog = true">
+                <div class="setting">
                     <!-- <span class="userName">{{ store.userInfo.login }}</span> -->
                     <img
                         v-if="store.userInfo.avatar_url"
                         :src="store.userInfo.avatar_url"
+                        @click="userInfoDialog = true"
                         class="userAvatar"
                         alt="userAvatar"
                     />
-                    <span v-else class="iconfont setIcon">&#xe667;</span>
+                    <span
+                        v-else
+                        @click="tokenDialog = true"
+                        class="iconfont setIcon"
+                        >&#xe667;</span
+                    >
                 </div>
             </div>
         </div>
@@ -138,6 +144,37 @@
                 </div>
             </template>
         </el-dialog>
+        <!-- github user info -->
+        <el-dialog v-model="userInfoDialog" width="500" center>
+            <template #header>
+                <div class="diaHeader">
+                    <!-- <span>User Info</span> -->
+                    <!-- <el-icon class="diaTipsIcon"><Warning /></el-icon> -->
+                </div>
+            </template>
+            <div class="userContent">
+                <div class="userAvatarBox">
+                    <img
+                        class="userAvatar"
+                        :src="store.userInfo.avatar_url"
+                        alt="avatar"
+                    />
+                </div>
+                <div>用户名: {{ store.userInfo.login }}</div>
+                <div>主页: {{ store.userInfo.html_url }}</div>
+                <div>简介: {{ store.userInfo.bio }}</div>
+                <div>token: {{ token }}</div>
+            </div>
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button @click="logout">{{ t('退出') }}</el-button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <el-button type="primary" @click="userInfoDialog = false">
+                        {{ t('确定') }}
+                    </el-button>
+                </div>
+            </template>
+        </el-dialog>
         <!-- config new project name -->
         <el-dialog v-model="branchDialog" width="400" center>
             <template #header>
@@ -189,6 +226,7 @@ import {
     isDev,
     isTauri,
     updateBuildFile,
+    base64Decode,
 } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
@@ -205,6 +243,7 @@ const { t, locale } = useI18n()
 const token = ref(localStorage.getItem('token') || '')
 const version = ref(packageJson.version)
 const tokenDialog = ref(false)
+const userInfoDialog = ref(false)
 const branchDialog = ref(false)
 const branchName = ref('')
 const testLoading = ref(false)
@@ -222,6 +261,16 @@ const chageTheme = async (theme: string) => {
         // await setTheme('dark')
     }
     localStorage.setItem('theme', theme)
+}
+
+// logout
+const logout = () => {
+    token.value = ''
+    localStorage.removeItem('token')
+    localStorage.removeItem('userInfo')
+    localStorage.clear()
+    store.$reset()
+    userInfoDialog.value = false
 }
 
 // go project detail
@@ -302,10 +351,12 @@ const forkProgect = async (tips: boolean = true) => {
         // maybe account has locked
         testLoading.value = false
         ElMessage.error(forkRes.data.message)
+        return
     } else {
         console.error('fork error', forkRes)
         testLoading.value = false
         ElMessage.error(forkRes.data.message)
+        return
     }
     // start
     const startRes = await githubApi.startProgect()
@@ -317,10 +368,15 @@ const forkProgect = async (tips: boolean = true) => {
     }
     // wait fork done, enable github action
     while (true) {
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        Promise.all([getCommitSha(), getDistCommitSha(), getWebCommitSha()])
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+        console.log('wait fork done......', testLoading.value)
+        const res = await Promise.all([
+            getCommitSha(),
+            getDistCommitSha(),
+            getWebCommitSha(),
+        ])
             .then((res) => {
-                console.log('wait fork done', res)
+                console.log('wait fork done res', res)
                 if (res[0] && res[1] && res[2]) {
                     // delete build.yml
                     deleteBuildYml()
@@ -330,11 +386,18 @@ const forkProgect = async (tips: boolean = true) => {
                     } else {
                         ElMessage.success(t('tokenOk'))
                     }
+                    return true
                 }
+                return false
             })
             .catch((err) => {
                 console.error('wait fork done error', err)
+                return false
             })
+        if (res) {
+            console.log('wait fork done break')
+            break
+        }
     }
 }
 
@@ -365,7 +428,7 @@ const getDistCommitSha = async () => {
         'PakePlus',
         'dist'
     )
-    console.log('getCommitSha', res.data)
+    console.log('getDistCommitSha', res.data)
     if (res.status === 200 && res.data) {
         store.setDistCommit(res.data)
         return true
@@ -383,7 +446,7 @@ const getWebCommitSha = async () => {
         'PakePlus',
         'web'
     )
-    console.log('getCommitSha', res.data)
+    console.log('getWebCommitSha', res.data)
     if (res.status === 200 && res.data) {
         store.setWebCommit(res.data)
         return true
@@ -531,18 +594,27 @@ const deleteBuildYml = async (branchName: string = 'master') => {
             }
         )
         if (deleteRes.status === 200) {
-            console.log('deleteRes', deleteRes)
+            console.log('deleteBuildYml', deleteRes)
         } else {
-            console.error('deleteRes error', deleteRes)
+            console.error('deleteBuildYml error', deleteRes)
         }
     }
 }
 
 // check update
-// const checkUpdate = async () => {
-//     const response = await githubApi.getUpdateFile()
-//     console.log('updateJson', response)
-// }
+const checkUpdate = async () => {
+    const response = await githubApi.getPakePlusInfo()
+    console.log('updateJson', response)
+    const content = base64Decode(response.data.content)
+    console.log('content PakePlus Json', content)
+    const pakePlusJson = JSON.parse(content)
+    console.log('json', pakePlusJson)
+    const version = pakePlusJson.version
+    console.log('version', version)
+    if (version !== packageJson.version) {
+        console.log('update', version)
+    }
+}
 
 const getPakePlusInfo = async () => {
     const pakeVersion = packageJson.version
@@ -556,6 +628,7 @@ onMounted(() => {
         window.setTitle('PakePlus')
     }
     getPakePlusInfo()
+    checkUpdate()
     // resetReleaseInfo()
     // mergeUpdateRep()
 })
@@ -848,6 +921,21 @@ onMounted(() => {
 
     .tokenInput {
         margin-right: 10px;
+    }
+}
+
+.userContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .userAvatarBox {
+        .userAvatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
     }
 }
 </style>
