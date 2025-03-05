@@ -31,8 +31,7 @@ export default {
     urlInvalid: 'The url must start with http',
     example: 'example',
     appName: 'AppName',
-    appNameInvalid:
-        'The app name can only contain letters, numbers and underscores.',
+    appNameInvalid: 'The app name cannot contain special characters',
     appId: 'Identifier',
     appIdInvalid: 'The appid must be alphanumeric and dot',
     appIcon: 'AppIcon',

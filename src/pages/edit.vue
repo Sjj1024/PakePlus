@@ -418,17 +418,10 @@ const appRules = reactive<FormRules>({
         {
             validator: (rule, value, callback) => {
                 // console.log('appshow name value', value)
-                // the name cannot start with a digit
-                // the name cannot contain special characters
-                // the name cannot include chinese characters
-                if (
-                    /^[0-9]/.test(value) ||
-                    value.includes(' ') ||
-                    /[\u4e00-\u9fa5]/.test(value)
-                ) {
-                    callback(new Error(t('appNameInvalid')))
-                } else {
+                if (/^[^/\:*?"<>|]+$/.test(value)) {
                     callback()
+                } else {
+                    callback(new Error(t('appNameInvalid')))
                 }
             },
             trigger: 'blur',

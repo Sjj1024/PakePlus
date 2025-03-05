@@ -111,6 +111,7 @@ pub async fn preview_from_config(
         let _window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
             .unwrap()
             .initialization_script(contents.as_str())
+            .initialization_script(include_str!("../extension/custom.js"))
             .initialization_script(include_str!("../extension/event.js"))
             .build()
             .unwrap();
