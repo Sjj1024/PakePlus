@@ -160,10 +160,13 @@
                         alt="avatar"
                     />
                 </div>
-                <div>用户名: {{ store.userInfo.login }}</div>
-                <div>主页: {{ store.userInfo.html_url }}</div>
-                <div>简介: {{ store.userInfo.bio }}</div>
-                <div>token: {{ token }}</div>
+                <div class="line">用户名: {{ store.userInfo.login }}</div>
+                <!-- <div class="line">主页: {{ store.userInfo.html_url }}</div>
+                <div class="line">简介: {{ store.userInfo.bio }}</div> -->
+                <!-- <div class="line">token: {{ token }}</div> -->
+                <!-- <div class="line">
+                    提示: token仅本地存储，不会上传到服务器，请妥善保管
+                </div> -->
             </div>
             <template #footer>
                 <div class="dialog-footer">
@@ -303,7 +306,7 @@ const goAbout = () => {
 // new barnch config
 const showBranchDialog = () => {
     // if token exist, then creat branch, else next page
-    token.value && getCommitSha()
+    // token.value && getCommitSha()
     // checkout has github token
     if (token.value === '') {
         ElMessage.error(t('configToken'))
@@ -929,6 +932,11 @@ onMounted(() => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .line {
+        // width: 100%;
+        margin-bottom: 6px;
+    }
 
     .userAvatarBox {
         .userAvatar {
