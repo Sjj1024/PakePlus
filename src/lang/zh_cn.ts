@@ -30,7 +30,7 @@ export default {
     urlInvalid: 'url必须以http开头',
     example: '例如',
     appName: 'APP名称',
-    appNameInvalid: 'APP名称只能包含字母、数字和下划线',
+    appNameInvalid: 'APP名称不能包含特殊字符',
     appId: 'APP标识',
     appIdInvalid: 'appid必须为字母、数字和.组成',
     appIcon: 'APP图标',
