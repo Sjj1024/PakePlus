@@ -12,7 +12,8 @@
         "tauri dev": "tauri dev",
         "tauri build": "tauri build",
         "tauri debug": "tauri build --debug",
-        "tauri preview": "tauri preview"
+        "tauri preview": "tauri preview",
+        "update tauri": "cd src-tauri && cargo update"
     },
     "dependencies": {
         "@codemirror/lang-json": "^6.0.1",

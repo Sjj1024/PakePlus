@@ -4,12 +4,6 @@ use std::io::Read;
 use std::time::Instant;
 use tauri::{path::BaseDirectory, utils::config::WindowConfig, AppHandle, LogicalSize, Manager};
 
-// #[derive(serde::Deserialize)]
-// pub struct BinaryDownloadParams {
-//     filename: String,
-//     binary: Vec<u8>,
-// }
-
 #[tauri::command]
 pub async fn open_window(
     handle: AppHandle,
@@ -97,7 +91,7 @@ pub async fn preview_from_config(
             }
         }
     }
-    // println!("tauri config: {:?}", config);
+    println!("tauri config: {:?}", config);
     let resource_path = handle
         .path()
         .resolve("data/custom.js", BaseDirectory::Resource)
@@ -111,8 +105,6 @@ pub async fn preview_from_config(
         let _window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
             .unwrap()
             .initialization_script(contents.as_str())
-            .initialization_script(include_str!("../extension/custom.js"))
-            .initialization_script(include_str!("../extension/event.js"))
             .build()
             .unwrap();
     }
