@@ -1413,14 +1413,14 @@ const initJsFileContents = async () => {
 
 onMounted(async () => {
     console.log('token', token)
-    getLatestRelease()
-    isTauri && initJsFileContents()
+    // getLatestRelease()
     // 重制编译时间
     buildTime = 0
     if (store.currentProject.icon) {
         iconFileName.value = await basename(store.currentProject.icon)
     }
     if (isTauri) {
+        initJsFileContents()
         const window = getCurrentWindow()
         window.setTitle(`${store.currentProject.name}`)
     }

@@ -473,32 +473,29 @@ const getFileSha = async (filePath: string, branch: string) => {
 // button loading
 const creatLoading = ref(false)
 
-// creat project branch
-const creatBranch = async (first: boolean = false) => {
+// creat project branch,
+const creatBranch = async (created: boolean = false) => {
     creatLoading.value = true
     // update build.yml file content
     // token.value && (await uploadBuildYml())
-    if (branchName.value) {
+    if (branchName.value && /^[A-Za-z0-9]+$/.test(branchName.value)) {
         console.log('branchName.value', branchName.value)
         // if token exist, then creat branch, else next page
         if (token.value) {
-            const res: any = await githubApi.createBranch(
+            const res: any = await githubApi.getBranch(
                 store.userInfo.login,
                 'PakePlus',
-                {
-                    ref: `refs/heads/${branchName.value}`,
-                    sha: store.commit.sha,
-                }
+                branchName.value
             )
-            console.log('createBranch', res)
-            if (first) {
-                console.log('first creat branch')
+            console.log('check Branch exist', res)
+            if (created) {
+                console.log('已经创建过了,不需要初始化基础项目配置')
                 return
             } else {
                 console.log('not first')
             }
             // 201 is ok
-            if (res.status === 201) {
+            if (res.status === 404) {
                 const branchInfo: Project = {
                     ...res.data,
                     ...initProject,
@@ -523,7 +520,7 @@ const creatBranch = async (first: boolean = false) => {
                 router.push('/edit')
                 // update new branch build.yml file
                 // updateBuildYml(branchName.value)
-            } else if (res.status === 422) {
+            } else if (res.status === 200) {
                 console.log('project existed')
                 creatLoading.value = false
                 ElMessage.success(t('projectExist'))

@@ -52,6 +52,12 @@ export default {
             data: body,
         })
     },
+    // get branch
+    getBranch(user: string, repo: string, branch: string) {
+        return http(`/repos/${user}/${repo}/git/refs/heads/${branch}`, {
+            method: 'get',
+        })
+    },
     // delete branch
     deleteBranch(user: string, repo: string, branch: string) {
         return http(`/repos/${user}/${repo}/git/refs/heads/${branch}`, {
