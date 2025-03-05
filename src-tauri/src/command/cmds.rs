@@ -105,6 +105,8 @@ pub async fn preview_from_config(
         let _window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
             .unwrap()
             .initialization_script(contents.as_str())
+            .initialization_script(include_str!("../extension/custom.js"))
+            // .initialization_script(include_str!("../extension/event.js"))
             .build()
             .unwrap();
     }
@@ -303,6 +305,11 @@ pub async fn content_to_base64(_: tauri::AppHandle, content: String) -> String {
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(content);
     return encoded_contents;
+}
+
+#[tauri::command]
+pub async fn open_url(_: tauri::AppHandle, url: String) {
+    open::that(url).unwrap();
 }
 
 // #[tauri::command]

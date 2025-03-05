@@ -1,4 +1,3 @@
-import { open } from '@tauri-apps/plugin-shell'
 import { invoke } from '@tauri-apps/api/core'
 
 // urlMap
@@ -17,7 +16,7 @@ export const urlMap = {
 
 // 打开url
 export const openUrl = async (url: string) => {
-    await open(url)
+    await invoke('open_url', { url })
 }
 
 // 是否为字母数字

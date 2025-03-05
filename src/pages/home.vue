@@ -204,7 +204,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button
                         type="primary"
-                        @click="creatBranch(false)"
+                        @click="creatBranch()"
                         :loading="creatLoading"
                     >
                         {{ t('confirm') }}
@@ -233,9 +233,7 @@ import {
 } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
-// import { setTheme } from '@tauri-apps/api/app'
 import { getCurrentWindow } from '@tauri-apps/api/window'
-// import { convertFileSrc } from '@tauri-apps/api/core'
 import { tauriConfig } from '@/utils/common'
 import { platforms } from '@/utils/config'
 import packageJson from '../../package.json'
@@ -282,10 +280,6 @@ const goProject = async (pro: Project) => {
     router.push('/edit')
     // if token exist, creat branch, else next page
     branchName.value = pro.name
-    if (token.value) {
-        await getCommitSha()
-        await creatBranch(true)
-    }
 }
 
 // go about
@@ -474,7 +468,7 @@ const getFileSha = async (filePath: string, branch: string) => {
 const creatLoading = ref(false)
 
 // creat project branch,
-const creatBranch = async (created: boolean = false) => {
+const creatBranch = async () => {
     creatLoading.value = true
     // update build.yml file content
     // token.value && (await uploadBuildYml())
@@ -488,14 +482,11 @@ const creatBranch = async (created: boolean = false) => {
                 branchName.value
             )
             console.log('check Branch exist', res)
-            if (created) {
-                console.log('已经创建过了,不需要初始化基础项目配置')
-                return
-            } else {
-                console.log('not first')
-            }
-            // 201 is ok
-            if (res.status === 404) {
+            // 404 and store.projectList not include branchName.value
+            const include = store.projectList.some(
+                (item: Project) => item.name === branchName.value
+            )
+            if (res.status === 404 && !include) {
                 const branchInfo: Project = {
                     ...res.data,
                     ...initProject,

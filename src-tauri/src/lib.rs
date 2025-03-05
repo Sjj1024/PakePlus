@@ -29,23 +29,23 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_fs::init())
-        .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_window_state::Builder::default().build())
         .invoke_handler(tauri::generate_handler![
-            command::pakeplus::open_window,
-            command::pakeplus::preview_from_config,
-            command::pakeplus::update_build_file,
-            command::pakeplus::update_config_file,
-            command::pakeplus::update_cargo_file,
-            command::pakeplus::update_main_rust,
-            command::pakeplus::rust_lib_window,
-            command::pakeplus::update_custom_js,
-            command::pakeplus::content_to_base64,
-            command::pakeplus::update_config_json,
-            command::pakeplus::rust_main_window,
+            command::cmds::open_window,
+            command::cmds::preview_from_config,
+            command::cmds::update_build_file,
+            command::cmds::update_config_file,
+            command::cmds::update_cargo_file,
+            command::cmds::update_main_rust,
+            command::cmds::rust_lib_window,
+            command::cmds::update_custom_js,
+            command::cmds::content_to_base64,
+            command::cmds::update_config_json,
+            command::cmds::rust_main_window,
+            command::cmds::open_url,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
