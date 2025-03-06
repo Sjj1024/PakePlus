@@ -1,0 +1,33 @@
+{
+    "$schema": "../gen/schemas/desktop-schema.json",
+    "identifier": "default",
+    "description": "Capability for the main window",
+    "windows": ["main"],
+    "permissions": [
+        "core:default",
+        "core:app:allow-set-app-theme",
+        "core:app:allow-name",
+        "opener:default",
+        "http:allow-fetch",
+        "http:allow-fetch-cancel",
+        "http:allow-fetch-read-body",
+        "http:allow-fetch-send",
+        "dialog:allow-open",
+        "os:allow-locale",
+        "shell:allow-open",
+        "fs:allow-app-write",
+        "fs:allow-app-read",
+        "fs:allow-app-read-recursive",
+        "fs:allow-app-write-recursive",
+        "fs:allow-appcache-write",
+        "fs:allow-appcache-write-recursive",
+        "fs:allow-appconfig-write",
+        "fs:allow-appconfig-write-recursive",
+        "fs:allow-appdata-write",
+        "fs:allow-appdata-write-recursive",
+        {
+            "identifier": "http:default",
+            "allow": [{ "url": "https://**" }]
+        }
+    ]
+}

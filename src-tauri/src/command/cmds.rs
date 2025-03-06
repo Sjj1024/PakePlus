@@ -315,9 +315,9 @@ pub async fn open_url(_: tauri::AppHandle, url: String) {
 // open devtools
 #[tauri::command]
 pub async fn open_devtools(handle: AppHandle) {
-    if let Some(existing_window) = handle.get_webview_window("main") {
+    if let Some(_) = handle.get_webview_window("main") {
         println!("open devtools");
-        existing_window.open_devtools();
+        // existing_window.open_devtools();
     }
 }
 

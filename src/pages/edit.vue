@@ -217,14 +217,16 @@
                 <el-form-item :label="t('winSize')" prop="size">
                     <el-input
                         type="number"
-                        v-model.number="store.currentProject.width"
+                        v-model.number="store.currentProject.more.windows.width"
                         style="width: 100px"
                         :placeholder="t('width')"
                     />
                     <span class="iconfont divider"> &#xe62f; </span>
                     <el-input
                         type="number"
-                        v-model.number="store.currentProject.height"
+                        v-model.number="
+                            store.currentProject.more.windows.height
+                        "
                         style="width: 100px"
                         :placeholder="t('height')"
                     />
@@ -1057,7 +1059,7 @@ const preview = async (resize: boolean) => {
         // if platform is macos, then use tauri preview
         appFormRef.value?.validate((valid, fields) => {
             if (valid) {
-                console.log('submit!', store.currentProject)
+                console.log('submit!', store.currentProject.more.windows)
                 saveProject(false)
                 // initialization_script
                 const initJsScript = getInitializationScript()
