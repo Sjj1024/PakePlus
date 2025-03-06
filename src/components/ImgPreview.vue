@@ -1,5 +1,6 @@
 <template>
-    <el-dialog v-model="visible" title="预览" width="500" center>
+    <el-dialog v-model="visible" width="300" center>
+        <template #header="{ close, titleId, titleClass }"> </template>
         <div>
             <img :src="base64Data" alt="icon" class="preImg" />
         </div>
