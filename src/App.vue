@@ -95,9 +95,13 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="container">
+    <div class="container" :class="{ isTauri: isTauri }">
         <router-view></router-view>
     </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.isTauri {
+    padding-top: 10px;
+}
+</style>

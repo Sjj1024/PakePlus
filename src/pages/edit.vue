@@ -5,51 +5,51 @@
         v-loading="buildLoading"
         :element-loading-text="t('preEnvironment')"
     >
-        <div class="mainEdit">
-            <div class="homeHeader">
-                <div>
-                    <div class="headerTitle">
-                        <div class="backBox" @click="backHome">
-                            <el-icon><ArrowLeft /></el-icon>
-                            <span>{{ t('back') }}</span>
-                        </div>
-                        <el-divider direction="vertical" />
-                        <span>{{ t('configProject') }}</span>
+        <div class="homeHeader">
+            <div>
+                <div class="headerTitle">
+                    <div class="backBox" @click="backHome">
+                        <el-icon><ArrowLeft /></el-icon>
+                        <span>{{ t('back') }}</span>
                     </div>
-                    <div class="toolTips">
-                        <span>
-                            {{ t('configProjectTips') }}
-                        </span>
-                    </div>
+                    <el-divider direction="vertical" />
+                    <span>{{ t('configProject') }}</span>
                 </div>
-                <!-- tools -->
-                <div class="setting">
-                    <!-- <el-icon :size="26"><Menu /></el-icon> -->
-                    <el-dropdown>
-                        <span class="dropdownLink">
-                            <el-icon :size="26"><Operation /></el-icon>
-                        </span>
-                        <template #dropdown>
-                            <el-dropdown-menu>
-                                <el-dropdown-item
-                                    @click="configDialogVisible = true"
-                                >
-                                    {{ t('moreConfig') }}
-                                </el-dropdown-item>
-                                <el-dropdown-item
-                                    :disabled="store.releases.pakeplus.id === 0"
-                                    @click="toHistory"
-                                >
-                                    {{ t('relHistore') }}
-                                </el-dropdown-item>
-                                <el-dropdown-item @click="deleteProject">
-                                    {{ t('delProject') }}
-                                </el-dropdown-item>
-                            </el-dropdown-menu>
-                        </template>
-                    </el-dropdown>
+                <div class="toolTips">
+                    <span>
+                        {{ t('configProjectTips') }}
+                    </span>
                 </div>
             </div>
+            <!-- tools -->
+            <div class="setting">
+                <!-- <el-icon :size="26"><Menu /></el-icon> -->
+                <el-dropdown>
+                    <span class="dropdownLink">
+                        <el-icon :size="26"><Operation /></el-icon>
+                    </span>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item
+                                @click="configDialogVisible = true"
+                            >
+                                {{ t('moreConfig') }}
+                            </el-dropdown-item>
+                            <el-dropdown-item
+                                :disabled="store.releases.pakeplus.id === 0"
+                                @click="toHistory"
+                            >
+                                {{ t('relHistore') }}
+                            </el-dropdown-item>
+                            <el-dropdown-item @click="deleteProject">
+                                {{ t('delProject') }}
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+            </div>
+        </div>
+        <div class="mainEdit">
             <el-form
                 ref="appFormRef"
                 :model="store.currentProject"
@@ -1609,97 +1609,97 @@ onMounted(async () => {
         }
     }
 
-    .mainEdit {
-        padding: 10px 20px;
+    .homeHeader {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        position: relative;
 
-        .homeHeader {
+        .headerTitle {
+            font-size: 20px;
+            font-weight: bold;
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
-            margin-bottom: 16px;
-            position: relative;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard syntax */
+            cursor: default;
 
-            .headerTitle {
-                font-size: 20px;
-                font-weight: bold;
+            .backBox {
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
                 align-items: center;
-                -webkit-user-select: none; /* Safari */
-                -moz-user-select: none; /* Firefox */
-                -ms-user-select: none; /* IE10+/Edge */
-                user-select: none; /* Standard syntax */
-                cursor: default;
+                cursor: pointer;
 
-                .backBox {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: flex-start;
-                    align-items: center;
-                    cursor: pointer;
-
-                    &:hover {
-                        font-weight: bold;
-                    }
-                }
-            }
-
-            .toolTips {
-                color: gray;
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                align-items: center;
-                margin-left: 2px;
-                -webkit-user-select: none; /* Safari */
-                -moz-user-select: none; /* Firefox */
-                -ms-user-select: none; /* IE10+/Edge */
-                user-select: none; /* Standard syntax */
-                cursor: default;
-
-                .tipsIcon {
-                    margin-left: 6px;
-                    cursor: pointer;
-                }
-            }
-
-            .setting {
-                position: absolute;
-                top: 20px;
-                right: -20px;
-                -webkit-user-select: none; /* Safari */
-                -moz-user-select: none; /* Firefox */
-                -ms-user-select: none; /* IE10+/Edge */
-                user-select: none; /* Standard syntax */
-                z-index: 1000;
-
-                .dropdownLink {
-                    color: gray;
-
-                    &:hover {
-                        color: var(--text-color);
-                    }
-                }
-            }
-
-            .headerTool {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                -webkit-user-select: none; /* Safari */
-                -moz-user-select: none; /* Firefox */
-                -ms-user-select: none; /* IE10+/Edge */
-                user-select: none; /* Standard syntax */
-                cursor: default;
-
-                .control {
-                    color: #2a598a;
-                    cursor: pointer;
+                &:hover {
+                    font-weight: bold;
                 }
             }
         }
+
+        .toolTips {
+            color: gray;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            margin-left: 2px;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard syntax */
+            cursor: default;
+
+            .tipsIcon {
+                margin-left: 6px;
+                cursor: pointer;
+            }
+        }
+
+        .setting {
+            // position: absolute;
+            // top: 20px;
+            // right: -20px;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard syntax */
+            z-index: 1000;
+
+            .dropdownLink {
+                color: gray;
+
+                &:hover {
+                    color: var(--text-color);
+                }
+            }
+        }
+
+        .headerTool {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard syntax */
+            cursor: default;
+
+            .control {
+                color: #2a598a;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .mainEdit {
+        padding: 10px 20px;
 
         .configForm {
             margin-top: 10px;
