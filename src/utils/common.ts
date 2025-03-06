@@ -1,4 +1,5 @@
 import { invoke } from '@tauri-apps/api/core'
+import { getCurrentWindow } from '@tauri-apps/api/window'
 
 // urlMap
 export const urlMap = {
@@ -14,9 +15,19 @@ export const urlMap = {
     windowsConfig: 'https://v2.tauri.app/reference/config/#windowconfig',
 }
 
+// 是否为开发环境
+export const isDev = import.meta.env.DEV
+
+// 是否为tauri环境
+export const isTauri = (window as any).__TAURI__ ? true : false
+
 // 打开url
 export const openUrl = async (url: string) => {
-    await invoke('open_url', { url })
+    if (isTauri) {
+        await invoke('open_url', { url })
+    } else {
+        window.open(url, '_blank')
+    }
 }
 
 // 是否为字母数字
@@ -103,6 +114,9 @@ export const initProject = {
     showName: '',
     appid: '',
     icon: '',
+    iconRound: true,
+    cors: false,
+    injectJq: false,
     version: '0.0.1',
     platform: 'desktop',
     width: 800,
@@ -113,12 +127,6 @@ export const initProject = {
     jsCode: 'const dialogVisible = ref(false)',
     more: tauriConfig,
 }
-
-// 是否为开发环境
-export const isDev = import.meta.env.DEV
-
-// 是否为tauri环境
-export const isTauri = (window as any).__TAURI__ ? true : false
 
 // 转换为本地时间
 export const convertToLocalTime = (utcDateTime: string) => {
@@ -171,5 +179,13 @@ export const updateBuildFile = async (data: any) => {
         // 使用Base64编码
         const encodedContent = btoa(content)
         return encodedContent
+    }
+}
+
+// open devtools
+export const openDevtools = async () => {
+    if (isTauri) {
+        console.log('open devtools')
+        invoke('open_devtools')
     }
 }

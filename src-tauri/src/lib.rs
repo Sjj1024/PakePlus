@@ -46,6 +46,7 @@ pub fn run() {
             command::cmds::update_config_json,
             command::cmds::rust_main_window,
             command::cmds::open_url,
+            command::cmds::open_devtools,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

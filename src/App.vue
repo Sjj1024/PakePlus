@@ -102,6 +102,6 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .isTauri {
-    padding-top: 10px;
+    padding-top: 5px;
 }
 </style>

@@ -169,7 +169,7 @@
                         :label="t('scriptFile')"
                         prop="jsFile"
                         class="formItem"
-                        style="margin-right: 8px"
+                        style="margin-right: 10px"
                     >
                         <el-icon
                             class="editIcon"
@@ -1582,9 +1582,6 @@ onMounted(async () => {
     width: 100%;
     height: 100%;
     padding: 10px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 
     .configHeader {
         -webkit-user-select: none; /* Safari */
@@ -1614,7 +1611,7 @@ onMounted(async () => {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 16px;
+        margin-bottom: 10px;
         position: relative;
 
         .headerTitle {
@@ -1699,7 +1696,7 @@ onMounted(async () => {
     }
 
     .mainEdit {
-        padding: 10px 20px;
+        padding: 10px 10px;
 
         .configForm {
             margin-top: 10px;
@@ -1722,6 +1719,11 @@ onMounted(async () => {
                     .editIcon {
                         cursor: pointer;
                         font-size: 20px;
+                        color: gray;
+
+                        &:hover {
+                            color: var(--text-color);
+                        }
                     }
 
                     .iconChange {
@@ -1799,7 +1801,7 @@ onMounted(async () => {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        margin-bottom: 10px;
+        margin: 10px 0;
     }
 }
 

@@ -312,6 +312,15 @@ pub async fn open_url(_: tauri::AppHandle, url: String) {
     open::that(url).unwrap();
 }
 
+// open devtools
+#[tauri::command]
+pub async fn open_devtools(handle: AppHandle) {
+    if let Some(existing_window) = handle.get_webview_window("main") {
+        println!("open devtools");
+        existing_window.open_devtools();
+    }
+}
+
 // #[tauri::command]
 // pub async fn download_file_by_binary(
 //     app: AppHandle,
