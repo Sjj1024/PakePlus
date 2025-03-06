@@ -132,9 +132,14 @@
                     >
                         <div v-if="iconBase64" class="iconChange">
                             <img
-                                :src="iconBase64 ? iconBase64 : pakePlusIcon"
+                                :src="
+                                    store.currentProject.iconRound
+                                        ? roundIcon
+                                        : iconBase64
+                                "
                                 alt="icon"
                                 class="initIcon"
+                                @click="imgPreviewVisible = true"
                             />
                             <!-- close icon -->
                             <el-icon class="closeIcon" @click="closeIconChange">
@@ -156,18 +161,38 @@
                             />
                         </div>
                     </el-form-item>
-                    <el-form-item label="Icon圆角" prop="icon" class="formItem">
-                        <el-checkbox label="" value="Value 1" />
+                    <el-form-item
+                        prop="iconRound"
+                        label="Icon圆角"
+                        class="formItem"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.iconRound"
+                            label=""
+                            value="Value 1"
+                        />
                     </el-form-item>
-                    <el-form-item label="CORS" prop="icon" class="formItem">
-                        <el-checkbox label="" value="Value 1" />
+                    <el-form-item label="CORS" prop="cors" class="formItem">
+                        <el-checkbox
+                            v-model="store.currentProject.cors"
+                            label=""
+                            value="Value 1"
+                        />
                     </el-form-item>
-                    <el-form-item label="注入JQ" prop="icon" class="formItem">
-                        <el-checkbox label="" value="Value 1" />
+                    <el-form-item
+                        label="注入JQ"
+                        prop="injectJq"
+                        class="formItem"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.injectJq"
+                            label=""
+                            value="Value 1"
+                        />
                     </el-form-item>
                     <el-form-item
                         :label="t('scriptFile')"
-                        prop="jsFile"
+                        prop="jsCode"
                         class="formItem"
                         style="margin-right: 10px"
                     >
@@ -367,11 +392,18 @@
             </template>
             <CodeEdit ref="codeEditRef" lang="javascript" />
         </el-dialog>
+        <!-- img preview -->
+        <ImgPreview
+            v-model:visible="imgPreviewVisible"
+            :base64Data="
+                store.currentProject.iconRound ? roundIcon : iconBase64
+            "
+        ></ImgPreview>
     </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import { open } from '@tauri-apps/plugin-dialog'
 import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
@@ -405,27 +437,28 @@ import { platforms } from '@/utils/config'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import TauriConfig from '@/components/TauriConfig.vue'
+import ImgPreview from '@/components/ImgPreview.vue'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 
 const router = useRouter()
 const store = usePakeStore()
 const { t } = useI18n()
 const iconBase64 = ref('')
+const roundIcon = ref('')
 const cutVisible = ref(false)
 const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
-// const appForm: any = store.currentProject
 
 const token = localStorage.getItem('token')
 const iconFileName = ref('')
 const file = ref<any>(null)
-// const imageBase64 = ref('')
-const selJs = ref<any>(null)
+
 const jsFileContents = ref('')
 const jsSelOptions: any = ref<any>([])
 const configDialogVisible = ref(false)
 const codeDialogVisible = ref(false)
+const imgPreviewVisible = ref(false)
 
 const appRules = reactive<FormRules>({
     url: [
@@ -527,9 +560,6 @@ const appRules = reactive<FormRules>({
 const isJson = ref(false)
 const tauriConfigRef = ref<any>(null)
 
-// tauri config
-// const tauriConfig: any = reactive(store.currentProject.more)
-
 // change app name
 const changeAppName = (value: string) => {
     console.log('changeAppName', value)
@@ -541,18 +571,6 @@ const changeUrl = (value: string) => {
     console.log('changeUrl', value)
     store.currentProject.more.windows.url = value
 }
-
-// watch tauri config
-// watch(store.currentProject.more, () => {
-//     console.log('tauriConfig change', store.currentProject.more)
-//     if (isJson.value) {
-//         store.currentProject.showName = store.currentProject.more.windows.title
-//         store.currentProject.url = store.currentProject.more.windows.url
-//     } else {
-//         tauriConfigRef.value?.updateCode()
-//     }
-//     saveFormInput()
-// })
 
 // close tauri config dialog
 const closeConfigDialog = () => {
@@ -652,18 +670,13 @@ const jsHandle = async (event: any) => {
 // icon confirm
 const confirmIcon = (base64Data: string) => {
     cutVisible.value = false
-    console.log('confirmIcon base64Data', base64Data)
+    iconBase64.value = base64Data
+    store.currentProject.icon = base64Data
     const image = new Image()
     image.src = base64Data
     image.onload = () => {
-        iconBase64.value = cropImageToRound(image) // 图片加载完成后裁剪为苹果风格圆角
+        roundIcon.value = cropImageToRound(image)
     }
-    // iconBase64.value = cropImageToRound(base64Data)
-    // const base64Img = base64Data.split('base64,')[1]
-    // update icon file content
-    // updateIcon(base64Img)
-    // save image to datadir
-    // saveImage(iconFileName.value, base64Img)
 }
 
 // get base64 image size
@@ -1562,7 +1575,7 @@ onMounted(async () => {
     // 重制编译时间
     buildTime = 0
     if (store.currentProject.icon) {
-        iconFileName.value = await basename(store.currentProject.icon)
+        confirmIcon(store.currentProject.icon)
     }
     if (isTauri) {
         initJsFileContents()

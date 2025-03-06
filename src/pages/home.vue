@@ -597,7 +597,6 @@ const checkUpdate = async () => {
     const response = await githubApi.getPakePlusInfo()
     console.log('updateJson', response)
     const content = base64Decode(response.data.content)
-    console.log('content PakePlus Json', content)
     const pakePlusJson = JSON.parse(content)
     console.log('json', pakePlusJson)
     const version = pakePlusJson.version
