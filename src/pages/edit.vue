@@ -128,6 +128,7 @@
                         :label="t('appIcon')"
                         prop="icon"
                         class="formItem"
+                        style="width: 20%"
                     >
                         <div v-if="iconBase64" class="iconChange">
                             <img
@@ -168,7 +169,7 @@
                         :label="t('scriptFile')"
                         prop="jsFile"
                         class="formItem"
-                        style="margin-left: 0px"
+                        style="margin-right: 8px"
                     >
                         <el-icon
                             class="editIcon"
@@ -1725,6 +1726,8 @@ onMounted(async () => {
                     }
 
                     .iconChange {
+                        width: 22px;
+                        height: 22px;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -1732,18 +1735,18 @@ onMounted(async () => {
 
                         .closeIcon {
                             position: absolute;
-                            top: -5px;
-                            right: 2px;
+                            top: -6px;
+                            right: -2px;
                             cursor: pointer;
                         }
                     }
 
                     .iconPreview {
+                        width: 21px;
+                        height: 21px;
                         color: gray;
                         border: 1px dashed gray;
                         border-radius: 4px;
-                        width: 20px;
-                        height: 20px;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -1760,10 +1763,11 @@ onMounted(async () => {
             .checkBox {
                 display: flex;
                 flex-direction: row;
-                justify-content: space-evenly;
+                justify-content: space-between;
                 align-items: center;
 
                 .formItem {
+                    flex: unset;
                     margin-right: 5px;
                 }
             }
