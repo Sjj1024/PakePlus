@@ -169,14 +169,12 @@
                         <el-checkbox
                             v-model="store.currentProject.iconRound"
                             label=""
-                            value="Value 1"
                         />
                     </el-form-item>
                     <el-form-item label="CORS" prop="cors" class="formItem">
                         <el-checkbox
                             v-model="store.currentProject.cors"
                             label=""
-                            value="Value 1"
                         />
                     </el-form-item>
                     <el-form-item
@@ -187,7 +185,6 @@
                         <el-checkbox
                             v-model="store.currentProject.injectJq"
                             label=""
-                            value="Value 1"
                         />
                     </el-form-item>
                     <el-form-item
