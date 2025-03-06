@@ -328,7 +328,7 @@
         <!-- more config -->
         <el-dialog
             v-model="configDialogVisible"
-            width="90%"
+            :width="isTauri ? '90%' : '60%'"
             center
             align-center
             @closed="closeConfigDialog"
@@ -352,7 +352,7 @@
         <!-- code edit -->
         <el-dialog
             v-model="codeDialogVisible"
-            width="90%"
+            :width="isTauri ? '90%' : '60%'"
             center
             align-center
             @closed="closeConfigDialog"
@@ -370,7 +370,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { open } from '@tauri-apps/plugin-dialog'
 import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
@@ -1617,6 +1617,7 @@ onMounted(async () => {
             justify-content: space-between;
             align-items: center;
             margin-bottom: 16px;
+            position: relative;
 
             .headerTitle {
                 font-size: 20px;
@@ -1664,9 +1665,9 @@ onMounted(async () => {
             }
 
             .setting {
-                position: fixed;
+                position: absolute;
                 top: 20px;
-                right: 20px;
+                right: -20px;
                 -webkit-user-select: none; /* Safari */
                 -moz-user-select: none; /* Firefox */
                 -ms-user-select: none; /* IE10+/Edge */
@@ -1720,6 +1721,7 @@ onMounted(async () => {
 
                     .editIcon {
                         cursor: pointer;
+                        font-size: 20px;
                     }
 
                     .iconChange {

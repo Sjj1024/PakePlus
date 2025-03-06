@@ -31,11 +31,11 @@ const store = usePakeStore()
 const localTheme = localStorage.getItem('theme')
 
 // extensions
-const extensions: any = [javascript(), oneDark]
+const extensions: any = [props.lang === 'json' ? json() : javascript(), oneDark]
 
 const cmOptions = ref({
     tabSize: 4,
-    mode: 'text/javascript',
+    mode: props.lang === 'json' ? 'text/json' : 'text/javascript',
     lineNumbers: true,
     line: true,
 })
