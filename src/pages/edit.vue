@@ -1717,7 +1717,6 @@ onMounted(async () => {
                     .initIcon {
                         width: 22px;
                         height: 22px;
-                        margin-right: 10px;
                     }
 
                     .editIcon {
@@ -1736,7 +1735,7 @@ onMounted(async () => {
                         .closeIcon {
                             position: absolute;
                             top: -6px;
-                            right: -2px;
+                            right: -6px;
                             cursor: pointer;
                         }
                     }
