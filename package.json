@@ -16,6 +16,7 @@
         "update tauri": "cd src-tauri && cargo update"
     },
     "dependencies": {
+        "@codemirror/lang-javascript": "^6.2.3",
         "@codemirror/lang-json": "^6.0.1",
         "@codemirror/theme-one-dark": "^6.1.2",
         "@element-plus/icons-vue": "^2.3.1",

@@ -1,30 +1,65 @@
 <template>
-    <div>
+    <div class="codeEdit">
         <Codemirror
-            v-model="uiCode"
+            v-model="store.currentProject.jsCode"
             :options="cmOptions"
             :extensions="localTheme === 'dark' ? extensions : []"
             :style="{ height: '100%' }"
             @change="codeChange"
-        ></Codemirror>
+        >
+        </Codemirror>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { Codemirror } from 'vue-codemirror'
+import { json } from '@codemirror/lang-json'
+import { javascript } from '@codemirror/lang-javascript'
+import { oneDark } from '@codemirror/theme-one-dark'
+import { usePakeStore } from '@/store'
 
 const props = defineProps({
-    modelValue: {
+    lang: {
         type: String,
-        required: true,
-    },
-    options: {
-        type: Object,
         required: true,
     },
 })
 
-const emit = defineEmits(['update:modelValue'])
+const store = usePakeStore()
+
+const localTheme = localStorage.getItem('theme')
+
+// extensions
+const extensions: any = [javascript(), oneDark]
+
+const cmOptions = ref({
+    tabSize: 4,
+    mode: 'text/javascript',
+    lineNumbers: true,
+    line: true,
+})
+
+const codeChange = (code: string) => {
+    console.log('codeChange!', code)
+}
+
+const updateCode = () => {
+    console.log('updateCode!')
+    store.currentProject.jsCode = JSON.stringify(
+        store.currentProject.jsCode,
+        null,
+        2
+    )
+}
+
+defineExpose({
+    updateCode,
+})
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.codeEdit {
+    height: 400px;
+}
+</style>

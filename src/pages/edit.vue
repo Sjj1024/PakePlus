@@ -52,7 +52,7 @@
             </div>
             <el-form
                 ref="appFormRef"
-                :model="appForm"
+                :model="store.currentProject"
                 :rules="appRules"
                 label-width="auto"
                 class="configForm"
@@ -66,7 +66,7 @@
                         class="formItem"
                     >
                         <el-input
-                            v-model="appForm.showName"
+                            v-model="store.currentProject.showName"
                             autocomplete="off"
                             autoCapitalize="off"
                             autoCorrect="off"
@@ -81,7 +81,7 @@
                         class="formItem"
                     >
                         <el-input
-                            v-model="appForm.url"
+                            v-model="store.currentProject.url"
                             autocomplete="off"
                             autoCapitalize="off"
                             autoCorrect="off"
@@ -100,7 +100,7 @@
                         class="formItem"
                     >
                         <el-input
-                            v-model="appForm.appid"
+                            v-model="store.currentProject.appid"
                             autocomplete="off"
                             autoCapitalize="off"
                             autoCorrect="off"
@@ -114,7 +114,7 @@
                         class="formItem"
                     >
                         <el-input
-                            v-model="appForm.version"
+                            v-model="store.currentProject.version"
                             autocomplete="off"
                             autoCapitalize="off"
                             autoCorrect="off"
@@ -123,50 +123,64 @@
                         />
                     </el-form-item>
                 </div>
-                <div class="inLine">
+                <div class="inLine checkBox">
                     <el-form-item
                         :label="t('appIcon')"
                         prop="icon"
                         class="formItem"
                     >
-                        <el-input
-                            :value="iconFileName"
-                            :disabled="token === null"
-                            readonly
-                            @click="uploadIcon"
-                            class="iconInput"
-                            :placeholder="`${t('onlyPng')}`"
-                        />
+                        <div v-if="iconBase64" class="iconChange">
+                            <img
+                                :src="iconBase64 ? iconBase64 : pakePlusIcon"
+                                alt="icon"
+                                class="initIcon"
+                            />
+                            <!-- close icon -->
+                            <el-icon class="closeIcon" @click="closeIconChange">
+                                <CircleCloseFilled />
+                            </el-icon>
+                        </div>
+                        <div
+                            v-else
+                            class="iconPreview"
+                            @click="isTauri ? uploadIcon() : webUploadIcon()"
+                        >
+                            <el-icon><Picture /></el-icon>
+                            <input
+                                type="file"
+                                ref="file"
+                                accept="image/*"
+                                @change="handleIconChange"
+                                style="display: none"
+                            />
+                        </div>
+                    </el-form-item>
+                    <el-form-item label="Icon圆角" prop="icon" class="formItem">
+                        <el-checkbox label="" value="Value 1" />
+                    </el-form-item>
+                    <el-form-item label="CORS" prop="icon" class="formItem">
+                        <el-checkbox label="" value="Value 1" />
+                    </el-form-item>
+                    <el-form-item label="注入JQ" prop="icon" class="formItem">
+                        <el-checkbox label="" value="Value 1" />
                     </el-form-item>
                     <el-form-item
                         :label="t('scriptFile')"
                         prop="jsFile"
                         class="formItem"
+                        style="margin-left: 0px"
                     >
-                        <el-select
-                            v-model="appForm.jsFile"
-                            multiple
-                            collapse-tags
-                            filterable
-                            ref="selJs"
-                            :placeholder="t('selectJsScriptFile')"
-                            class="jsSelect"
-                            @change="jsChange"
-                            @click="jsHandle"
-                            @visible-change="optionVisible"
+                        <el-icon
+                            class="editIcon"
+                            @click="codeDialogVisible = true"
                         >
-                            <el-option
-                                v-for="item in jsSelOptions"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value"
-                            />
-                        </el-select>
+                            <Edit />
+                        </el-icon>
                     </el-form-item>
                 </div>
                 <el-form-item :label="t('platform')" prop="platform">
                     <el-radio-group
-                        v-model="appForm.platform"
+                        v-model="store.currentProject.platform"
                         @change="platformChange"
                     >
                         <el-radio value="desktop">{{ t('desktop') }}</el-radio>
@@ -180,14 +194,14 @@
                 <el-form-item :label="t('winSize')" prop="size">
                     <el-input
                         type="number"
-                        v-model.number="appForm.width"
+                        v-model.number="store.currentProject.width"
                         style="width: 100px"
                         :placeholder="t('width')"
                     />
                     <span class="iconfont divider"> &#xe62f; </span>
                     <el-input
                         type="number"
-                        v-model.number="appForm.height"
+                        v-model.number="store.currentProject.height"
                         style="width: 100px"
                         :placeholder="t('height')"
                     />
@@ -197,7 +211,7 @@
                 </el-form-item>
                 <el-form-item :label="t('filterElements')" prop="desc">
                     <el-input
-                        v-model="appForm.filterCss"
+                        v-model="store.currentProject.filterCss"
                         type="textarea"
                         autocomplete="off"
                         autoCapitalize="off"
@@ -209,7 +223,7 @@
                 </el-form-item>
                 <el-form-item :label="t('appDes')" prop="desc">
                     <el-input
-                        v-model="appForm.desc"
+                        v-model="store.currentProject.desc"
                         type="textarea"
                         autocomplete="off"
                         autoCapitalize="off"
@@ -331,9 +345,26 @@
             </template>
             <TauriConfig
                 ref="tauriConfigRef"
-                :tauriConfig="tauriConfig"
+                :tauriConfig="store.currentProject.more"
                 :isJson="isJson"
             />
+        </el-dialog>
+        <!-- code edit -->
+        <el-dialog
+            v-model="codeDialogVisible"
+            width="90%"
+            center
+            align-center
+            @closed="closeConfigDialog"
+        >
+            <template #header="{ titleId, titleClass }">
+                <div class="configHeader">
+                    <h4 :id="titleId" :class="titleClass" class="titleLine">
+                        <span class="titleText">脚本编辑</span>
+                    </h4>
+                </div>
+            </template>
+            <CodeEdit ref="codeEditRef" lang="javascript" />
         </el-dialog>
     </div>
 </template>
@@ -359,6 +390,7 @@ import { appDataDir, join } from '@tauri-apps/api/path'
 import { basename } from '@tauri-apps/api/path'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
+import CodeEdit from '@/components/codeEdit.vue'
 import { useI18n } from 'vue-i18n'
 import {
     CSSFILTER,
@@ -372,6 +404,7 @@ import { platforms } from '@/utils/config'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import TauriConfig from '@/components/TauriConfig.vue'
+import pakePlusIcon from '@/assets/images/pakeplus.png'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -381,14 +414,17 @@ const cutVisible = ref(false)
 const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
-const appForm: any = reactive(store.currentProject)
+// const appForm: any = store.currentProject
 
 const token = localStorage.getItem('token')
 const iconFileName = ref('')
+const file = ref<any>(null)
+// const imageBase64 = ref('')
 const selJs = ref<any>(null)
 const jsFileContents = ref('')
 const jsSelOptions: any = ref<any>([])
 const configDialogVisible = ref(false)
+const codeDialogVisible = ref(false)
 
 const appRules = reactive<FormRules>({
     url: [
@@ -491,42 +527,43 @@ const isJson = ref(false)
 const tauriConfigRef = ref<any>(null)
 
 // tauri config
-const tauriConfig: any = reactive(store.currentProject.more)
+// const tauriConfig: any = reactive(store.currentProject.more)
 
 // change app name
 const changeAppName = (value: string) => {
     console.log('changeAppName', value)
-    tauriConfig.windows.title = value
+    store.currentProject.more.windows.title = value
 }
 
 // change url
 const changeUrl = (value: string) => {
     console.log('changeUrl', value)
-    tauriConfig.windows.url = value
+    store.currentProject.more.windows.url = value
 }
 
 // watch tauri config
-watch(tauriConfig, () => {
-    console.log('tauriConfig change', tauriConfig)
-    if (isJson.value) {
-        appForm.showName = tauriConfig.windows.title
-        appForm.url = tauriConfig.windows.url
-    } else {
-        tauriConfigRef.value?.updateCode()
-    }
-    saveFormInput()
-})
+// watch(store.currentProject.more, () => {
+//     console.log('tauriConfig change', store.currentProject.more)
+//     if (isJson.value) {
+//         store.currentProject.showName = store.currentProject.more.windows.title
+//         store.currentProject.url = store.currentProject.more.windows.url
+//     } else {
+//         tauriConfigRef.value?.updateCode()
+//     }
+//     saveFormInput()
+// })
 
 // close tauri config dialog
 const closeConfigDialog = () => {
     configDialogVisible.value = false
-    console.log('closeConfigDialog', tauriConfig)
+    codeDialogVisible.value = false
+    // console.log('closeConfigDialog', tauriConfig)
 }
 
 const jsChange = () => {
-    console.log('js file change', appForm.jsFile)
+    console.log('js file change', store.currentProject.jsFile)
     let jsContent = ''
-    for (let jsFile of appForm.jsFile) {
+    for (let jsFile of store.currentProject.jsFile) {
         const reContent = jsFileContents.value.match(
             new RegExp(`// ${jsFile}\n(.*)// end ${jsFile}\n`, 's')
         )
@@ -536,7 +573,7 @@ const jsChange = () => {
     }
     console.log('jsContent', jsContent)
     jsFileContents.value = jsContent
-    jsSelOptions.value = appForm.jsFile?.map((item: any) => {
+    jsSelOptions.value = store.currentProject.jsFile?.map((item: any) => {
         return {
             label: item,
             value: item,
@@ -548,7 +585,7 @@ const optionVisible = (value: boolean) => {
     console.log('optionVisible', value)
     if (!value) {
         // close show js option
-        jsSelOptions.value = appForm.jsFile?.map((item: any) => {
+        jsSelOptions.value = store.currentProject.jsFile?.map((item: any) => {
             return {
                 label: item,
                 value: item,
@@ -596,7 +633,7 @@ const jsHandle = async (event: any) => {
                 })
                 jsFiles.push(fileName)
             }
-            appForm.jsFile = jsFiles
+            store.currentProject.jsFile = jsFiles
             jsSelOptions.value = jsOptions
             jsFileContents.value = jsContents
             console.log('jsFileContents', jsFileContents.value)
@@ -615,11 +652,17 @@ const jsHandle = async (event: any) => {
 const confirmIcon = (base64Data: string) => {
     cutVisible.value = false
     console.log('confirmIcon base64Data', base64Data)
-    const base64Img = base64Data.split('base64,')[1]
+    const image = new Image()
+    image.src = base64Data
+    image.onload = () => {
+        iconBase64.value = cropImageToRound(image) // 图片加载完成后裁剪为苹果风格圆角
+    }
+    // iconBase64.value = cropImageToRound(base64Data)
+    // const base64Img = base64Data.split('base64,')[1]
     // update icon file content
-    updateIcon(base64Img)
+    // updateIcon(base64Img)
     // save image to datadir
-    saveImage(iconFileName.value, base64Img)
+    // saveImage(iconFileName.value, base64Img)
 }
 
 // get base64 image size
@@ -645,22 +688,123 @@ const platformChange = (value: any) => {
     console.log('platformChange', value)
     const platformInfo = platforms[value]
     console.log('platformInfo', platformInfo)
-    appForm.width = platformInfo.width
-    appForm.height = platformInfo.height
-    tauriConfig.windows.width = platformInfo.width
-    tauriConfig.windows.height = platformInfo.height
-    tauriConfig.windows.userAgent = platformInfo.userAgent
+    store.currentProject.more.windows.width = platformInfo.width
+    store.currentProject.more.windows.height = platformInfo.height
+    store.currentProject.more.windows.userAgent = platformInfo.userAgent
     tauriConfigRef.value?.updateCode()
 }
 
 // rotate width and height
 const rotateWH = () => {
-    const temp = appForm.width
-    appForm.width = appForm.height
-    appForm.height = temp
-    tauriConfig.windows.width = appForm.width
-    tauriConfig.windows.height = appForm.height
+    const temp = store.currentProject.more.windows.width
+    store.currentProject.more.windows.width =
+        store.currentProject.more.windows.height
+    store.currentProject.more.windows.height = temp
+    tauriConfigRef.value?.updateCode()
     preview(true)
+}
+
+// 绘制苹果风格圆角路径
+const drawAppleStylePath = (ctx: any, width: number, height: number) => {
+    const radius = Math.min(width, height) * 0.15 // 圆角半径比例
+    const controlOffset = radius * 0.55 // 控制点偏移量
+
+    ctx.beginPath()
+
+    // 左上角
+    ctx.moveTo(radius, 0)
+    ctx.bezierCurveTo(controlOffset, 0, 0, controlOffset, 0, radius)
+
+    // 左下角
+    ctx.lineTo(0, height - radius)
+    ctx.bezierCurveTo(
+        0,
+        height - controlOffset,
+        controlOffset,
+        height,
+        radius,
+        height
+    )
+
+    // 右下角
+    ctx.lineTo(width - radius, height)
+    ctx.bezierCurveTo(
+        width - controlOffset,
+        height,
+        width,
+        height - controlOffset,
+        width,
+        height - radius
+    )
+
+    // 右上角
+    ctx.lineTo(width, radius)
+    ctx.bezierCurveTo(
+        width,
+        controlOffset,
+        width - controlOffset,
+        0,
+        width - radius,
+        0
+    )
+
+    ctx.closePath()
+}
+
+//
+// 使用 Canvas 裁剪图片为圆角
+const cropImageToRound = (image: any) => {
+    const canvas = document.createElement('canvas')
+    const ctx: any = canvas.getContext('2d')
+
+    // 设置画布大小与图片一致
+    canvas.width = image.width
+    canvas.height = image.height
+
+    // 绘制苹果风格圆角路径
+    drawAppleStylePath(ctx, canvas.width, canvas.height)
+
+    // 裁剪图片
+    ctx.clip()
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
+
+    // 将裁剪后的图片转换为 Base64
+    return canvas.toDataURL('image/png')
+}
+
+// web upload icon
+const webUploadIcon = async () => {
+    console.log('webUploadIcon uploadIcon')
+    file.value.click()
+}
+
+const fileToBase64 = (file: any) => {
+    const reader = new FileReader()
+    reader.onload = async () => {
+        iconBase64.value = reader.result as string
+        const imageSize: any = await getImageSize(iconBase64.value)
+        // console.log('imageSize', imageSize)
+        if (imageSize.width === imageSize.height && file.type === 'image/png') {
+            // confirmIcon(base64String)
+            cutVisible.value = true
+        } else {
+            cutVisible.value = true
+        }
+    }
+    reader.readAsDataURL(file)
+}
+
+const handleIconChange = (event: any) => {
+    const file = event.target.files[0]
+    console.log('handleIconChange', file)
+    if (file) {
+        fileToBase64(file)
+    }
+}
+
+// close icon change
+const closeIconChange = () => {
+    iconBase64.value = ''
 }
 
 // upload icon
@@ -750,15 +894,15 @@ const saveImage = async (fileName: string, base64: string) => {
     // save file to app data dir
     await writeFile(savePath, imageData)
     console.log(`Image saved to: ${savePath}`)
-    appForm.icon = savePath
+    store.currentProject.icon = savePath
     // save image asseturl to project
     store.addUpdatePro({
-        ...appForm,
+        ...store.currentProject,
         name: store.currentProject.name,
-        appid: appForm.appid,
+        appid: store.currentProject.appid,
         debug: pubForm.model,
         icon: savePath,
-        more: tauriConfig,
+        more: store.currentProject.more,
     })
 }
 
@@ -832,13 +976,13 @@ const saveJsFile = async () => {
 
 // save form input
 const saveFormInput = async () => {
-    console.log('saveFormInput', appForm)
-    console.log('tauriConfig', tauriConfig)
+    console.log('saveFormInput', store.currentProject)
+    // console.log('tauriConfig', store.currentProject.more)
     store.addUpdatePro({
-        ...appForm,
+        ...store.currentProject,
         name: store.currentProject.name,
         debug: pubForm.model,
-        more: tauriConfig,
+        more: store.currentProject.more,
     })
     tauriConfigRef.value?.updateCode()
     // save js file content to appDataDir
@@ -864,8 +1008,8 @@ const saveProject = async (tips: boolean = true) => {
 const getInitializationScript = () => {
     // creat css filter content
     let initJsScript = ''
-    if (appForm.filterCss !== '') {
-        const cssFilterContent = appForm.filterCss
+    if (store.currentProject.filterCss !== '') {
+        const cssFilterContent = store.currentProject.filterCss
             .split(';')
             .map((item: string, index: number) => {
                 return `const element${index} = document.querySelector('${item}');
@@ -894,7 +1038,7 @@ const preview = async (resize: boolean) => {
         console.log('platform', platformName)
         if (
             platformName === 'windows' &&
-            tauriConfig.windows.additionalBrowserArgs
+            store.currentProject.more.windows.additionalBrowserArgs
         ) {
             ElMessage.error('additionalBrowserArgs cant preview on windows')
             return
@@ -902,7 +1046,7 @@ const preview = async (resize: boolean) => {
         // if platform is macos, then use tauri preview
         appFormRef.value?.validate((valid, fields) => {
             if (valid) {
-                console.log('submit!', appForm)
+                console.log('submit!', store.currentProject)
                 saveProject(false)
                 // initialization_script
                 const initJsScript = getInitializationScript()
@@ -910,7 +1054,7 @@ const preview = async (resize: boolean) => {
                 invoke('preview_from_config', {
                     resize,
                     config: {
-                        ...tauriConfig.windows,
+                        ...store.currentProject.more.windows,
                         label: 'PreView',
                     },
                     jsContent: initJsScript,
@@ -928,7 +1072,7 @@ const createRepo = async () => {
     appFormRef.value?.validate(async (valid, fields) => {
         if (valid) {
             saveProject(false)
-            console.log('submit!', appForm)
+            console.log('submit!', store.currentProject)
             centerDialogVisible.value = true
         } else {
             console.error('error submit!', fields)
@@ -1030,9 +1174,9 @@ const updateCargoToml = async () => {
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
         const configContent: any = await invoke('update_cargo_file', {
-            name: appForm.showName,
-            version: appForm.version,
-            desc: appForm.desc,
+            name: store.currentProject.showName,
+            version: store.currentProject.version,
+            desc: store.currentProject.desc,
             debug: pubForm.model === 'debug',
         })
         // update config file
@@ -1067,11 +1211,11 @@ const updateMainRs = async () => {
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
         const configContent: any = await invoke('update_main_rust', {
-            appUrl: appForm.url,
-            appName: appForm.showName,
-            userAgent: platforms[appForm.platform].userAgent,
-            width: appForm.width,
-            height: appForm.height,
+            appUrl: store.currentProject.url,
+            appName: store.currentProject.showName,
+            userAgent: platforms[store.currentProject.platform].userAgent,
+            width: store.currentProject.width,
+            height: store.currentProject.height,
         })
         const updateRes: any = await githubApi.updateMainRsFile(
             store.userInfo.login,
@@ -1104,7 +1248,7 @@ const libRsConfig = async () => {
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
         const configContent: any = await invoke('rust_lib_window', {
-            config: JSON.stringify(tauriConfig.windows),
+            config: JSON.stringify(store.currentProject.more.windows),
         })
         console.log('configContent', configContent)
         const updateRes: any = await githubApi.updateFileContent(
@@ -1185,12 +1329,12 @@ const onPublish = async () => {
     try {
         // if name is ASCII
         // remove label from windows
-        let { label, ...newWindows } = tauriConfig.windows
+        let { label, ...newWindows } = store.currentProject.more.windows
         const configContent: any = await invoke('update_config_file', {
-            name: appForm.showName,
-            version: appForm.version,
-            id: appForm.appid,
-            ascii: isAlphanumeric(appForm.showName),
+            name: store.currentProject.showName,
+            version: store.currentProject.version,
+            id: store.currentProject.appid,
+            ascii: isAlphanumeric(store.currentProject.showName),
             windowConfig: JSON.stringify(newWindows),
         })
         // update config file
@@ -1273,7 +1417,7 @@ const dispatchAction = async () => {
 // create issue
 const createIssue = async (url: string, label: string, title: string) => {
     const issueRes: any = await githubApi.createIssue({
-        body: `name: ${store.currentProject.name}\n 
+        body: `name: ${store.currentProject.name}\n
         build info: ${url}`,
         labels: [label],
         title: title,
@@ -1403,7 +1547,7 @@ const initJsFileContents = async () => {
         jsFileContents.value = jsFileContent
         console.log('initJsFileContents', jsFileContent)
     }
-    jsSelOptions.value = appForm.jsFile?.map((item: any) => {
+    jsSelOptions.value = store.currentProject.jsFile?.map((item: any) => {
         return {
             label: item,
             value: item,
@@ -1561,10 +1705,64 @@ onMounted(async () => {
             .inLine {
                 display: flex;
                 flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
 
                 .formItem {
                     flex: 1;
                     margin-right: 10px;
+
+                    .initIcon {
+                        width: 22px;
+                        height: 22px;
+                        margin-right: 10px;
+                    }
+
+                    .editIcon {
+                        cursor: pointer;
+                    }
+
+                    .iconChange {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: relative;
+
+                        .closeIcon {
+                            position: absolute;
+                            top: -5px;
+                            right: 2px;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .iconPreview {
+                        color: gray;
+                        border: 1px dashed gray;
+                        border-radius: 4px;
+                        width: 20px;
+                        height: 20px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: var(--text-color);
+                            border-color: var(--text-color);
+                        }
+                    }
+                }
+            }
+
+            .checkBox {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                align-items: center;
+
+                .formItem {
+                    margin-right: 5px;
                 }
             }
 

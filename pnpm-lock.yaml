@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@codemirror/lang-javascript':
+    specifier: ^6.2.3
+    version: 6.2.3
   '@codemirror/lang-json':
     specifier: ^6.0.1
     version: 6.0.1
@@ -144,6 +147,18 @@ packages:
       '@codemirror/state': 6.5.0
       '@codemirror/view': 6.36.1
       '@lezer/common': 1.2.3
+    dev: false
+
+  /@codemirror/lang-javascript@6.2.3:
+    resolution: {integrity: sha512-8PR3vIWg7pSu7ur8A07pGiYHgy3hHj+mRYRCSG8q+mPIrl0F02rgpGv+DsQTHRTc30rydOsf5PZ7yjKFg2Ackw==}
+    dependencies:
+      '@codemirror/autocomplete': 6.18.4
+      '@codemirror/language': 6.10.8
+      '@codemirror/lint': 6.8.4
+      '@codemirror/state': 6.5.0
+      '@codemirror/view': 6.36.1
+      '@lezer/common': 1.2.3
+      '@lezer/javascript': 1.4.21
     dev: false
 
   /@codemirror/lang-json@6.0.1:
@@ -681,6 +696,14 @@ packages:
     resolution: {integrity: sha512-Z5duk4RN/3zuVO7Jq0pGLJ3qynpxUVsh7IbUbGj88+uV2ApSAn6kWg2au3iJb+0Zi7kKtqffIESgNcRXWZWmSA==}
     dependencies:
       '@lezer/common': 1.2.3
+    dev: false
+
+  /@lezer/javascript@1.4.21:
+    resolution: {integrity: sha512-lL+1fcuxWYPURMM/oFZLEDm0XuLN128QPV+VuGtKpeaOGdcl9F2LYC3nh1S9LkPqx9M0mndZFdXCipNAZpzIkQ==}
+    dependencies:
+      '@lezer/common': 1.2.3
+      '@lezer/highlight': 1.2.1
+      '@lezer/lr': 1.4.2
     dev: false
 
   /@lezer/json@1.0.2:

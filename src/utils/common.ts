@@ -110,6 +110,7 @@ export const initProject = {
     desc: '',
     jsFile: [],
     filterCss: '',
+    jsCode: 'const dialogVisible = ref(false)',
     more: tauriConfig,
 }
 
