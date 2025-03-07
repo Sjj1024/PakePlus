@@ -10,14 +10,6 @@
         "frontendDist": "../dist"
     },
     "app": {
-        "windows": [
-            {
-                "title": "PakePlus",
-                "width": 920,
-                "height": 680,
-                "fullscreen": false
-            }
-        ],
         "security": {
             "assetProtocol": {
                 "enable": true,

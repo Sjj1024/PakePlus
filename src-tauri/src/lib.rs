@@ -1,4 +1,5 @@
 mod command;
+mod utils;
 use tauri::menu::*;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -32,6 +33,7 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_clipboard_manager::init())
+        .plugin(tauri_plugin_store::Builder::default().build())
         .invoke_handler(tauri::generate_handler![
             command::cmds::open_window,
             command::cmds::preview_from_config,
@@ -47,6 +49,12 @@ pub fn run() {
             command::cmds::open_url,
             command::cmds::open_devtools,
         ])
+        .setup(|app| {
+            tauri::async_runtime::block_on(async move {
+                let _ = utils::init::resolve_setup(app).await;
+            });
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
