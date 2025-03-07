@@ -185,7 +185,6 @@
                     >
                         <el-checkbox
                             v-model="store.currentProject.injectJq"
-                            disabled
                             label=""
                         />
                     </el-form-item>
@@ -1085,6 +1084,7 @@ const preview = async (resize: boolean) => {
                         label: 'PreView',
                     },
                     jsContent: initJsScript,
+                    injectjq: store.currentProject.injectJq,
                 })
             } else {
                 console.error('error submit!', fields)

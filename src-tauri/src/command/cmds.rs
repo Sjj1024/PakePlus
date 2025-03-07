@@ -69,6 +69,7 @@ pub async fn preview_from_config(
     resize: bool,
     config: WindowConfig,
     js_content: String,
+    injectjq: bool,
 ) {
     let window_label = "PreView";
     if let Some(existing_window) = handle.get_webview_window(window_label) {
@@ -92,10 +93,22 @@ pub async fn preview_from_config(
         }
     }
     println!("tauri config: {:?}", config);
+    let resource_path = handle
+        .path()
+        .resolve("data/jquery.min.js", BaseDirectory::Resource)
+        .expect("failed to resolve resource");
+    let mut jq = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    jq.read_to_string(&mut contents).unwrap();
+    if injectjq {
+        contents += js_content.as_str();
+    } else {
+        contents = js_content;
+    }
     if !resize {
         let _window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
             .unwrap()
-            .initialization_script(js_content.as_str())
+            .initialization_script(contents.as_str())
             .build()
             .unwrap();
     }
