@@ -711,6 +711,8 @@ const platformChange = (value: any) => {
     console.log('platformChange', value)
     const platformInfo = platforms[value]
     console.log('platformInfo', platformInfo)
+    store.currentProject.width = platformInfo.width
+    store.currentProject.height = platformInfo.height
     store.currentProject.more.windows.width = platformInfo.width
     store.currentProject.more.windows.height = platformInfo.height
     store.currentProject.more.windows.userAgent = platformInfo.userAgent
@@ -723,6 +725,8 @@ const rotateWH = () => {
     store.currentProject.more.windows.width =
         store.currentProject.more.windows.height
     store.currentProject.more.windows.height = temp
+    store.currentProject.width = store.currentProject.more.windows.width
+    store.currentProject.height = store.currentProject.more.windows.height
     tauriConfigRef.value?.updateCode()
     preview(true)
 }
