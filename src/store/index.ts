@@ -867,5 +867,14 @@ export const usePakeStore = defineStore('pakeplus', {
             this.releases[proName] = info
             localStorage.setItem('release', JSON.stringify(this.releases))
         },
+        // update tauri config
+        updateTauriConfig(info: any) {
+            this.currentProject.url = info.windows.url
+            this.currentProject.more = info
+            localStorage.setItem(
+                'currentProject',
+                JSON.stringify(this.currentProject)
+            )
+        },
     },
 })

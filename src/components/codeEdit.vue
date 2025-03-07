@@ -43,19 +43,6 @@ const cmOptions = ref({
 const codeChange = (code: string) => {
     console.log('codeChange!', code)
 }
-
-const updateCode = () => {
-    console.log('updateCode!')
-    store.currentProject.jsCode = JSON.stringify(
-        store.currentProject.jsCode,
-        null,
-        2
-    )
-}
-
-defineExpose({
-    updateCode,
-})
 </script>
 
 <style scoped lang="scss">

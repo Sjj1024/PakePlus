@@ -89,7 +89,7 @@
                             @change="changeUrl"
                             :placeholder="`${t(
                                 'example'
-                            )}：https://www.pakeplus.com'`"
+                            )}：https://www.github.com'`"
                         />
                     </el-form-item>
                 </div>
@@ -174,6 +174,7 @@
                     <el-form-item label="CORS" prop="cors" class="formItem">
                         <el-checkbox
                             v-model="store.currentProject.cors"
+                            disabled
                             label=""
                         />
                     </el-form-item>
@@ -184,6 +185,7 @@
                     >
                         <el-checkbox
                             v-model="store.currentProject.injectJq"
+                            disabled
                             label=""
                         />
                     </el-form-item>
@@ -362,17 +364,13 @@
                 <div class="configHeader">
                     <h4 :id="titleId" :class="titleClass" class="titleLine">
                         <span class="titleText">{{ t('moreConfig') }}</span>
-                        <el-icon class="switchIcon" @click="isJson = !isJson">
+                        <el-icon class="switchIcon" @click="switchTauriConfig">
                             <Switch />
                         </el-icon>
                     </h4>
                 </div>
             </template>
-            <TauriConfig
-                ref="tauriConfigRef"
-                :tauriConfig="store.currentProject.more"
-                :isJson="isJson"
-            />
+            <TauriConfig ref="tauriConfigRef" :isJson="isJson" />
         </el-dialog>
         <!-- code edit -->
         <el-dialog
@@ -431,13 +429,12 @@ import {
     isDev,
     convertToLocalTime,
     isTauri,
+    platforms,
 } from '@/utils/common'
-import { platforms } from '@/utils/config'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import TauriConfig from '@/components/TauriConfig.vue'
 import ImgPreview from '@/components/ImgPreview.vue'
-import pakePlusIcon from '@/assets/images/pakeplus.png'
 
 const router = useRouter()
 const store = usePakeStore()
@@ -460,24 +457,6 @@ const codeDialogVisible = ref(false)
 const imgPreviewVisible = ref(false)
 
 const appRules = reactive<FormRules>({
-    url: [
-        {
-            required: true,
-            message: t('inputWebPlaceholder'),
-            trigger: 'change',
-        },
-        {
-            validator: (rule, value, callback) => {
-                // check url start with http or https
-                if (value.startsWith('http')) {
-                    callback()
-                } else {
-                    callback(new Error(t('urlInvalid')))
-                }
-            },
-            trigger: 'blur',
-        },
-    ],
     showName: [
         {
             required: true,
@@ -486,11 +465,36 @@ const appRules = reactive<FormRules>({
         },
         {
             validator: (rule, value, callback) => {
-                // console.log('appshow name value', value)
-                if (/^[^/\:*?"<>|]+$/.test(value)) {
+                console.log('appshow name value', value)
+                if (
+                    /^[^/\:*?"<>|\.\$\%\&\*\@\#\!\^\(\)\{\}\[\]\+\=\`\~\'\"]+$/.test(
+                        value
+                    )
+                ) {
+                    console.log('appshow name value valid')
                     callback()
                 } else {
+                    console.log('appshow name value invalid')
                     callback(new Error(t('appNameInvalid')))
+                }
+            },
+            trigger: 'blur',
+        },
+    ],
+    url: [
+        {
+            required: true,
+            message: t('inputWebPlaceholder'),
+            trigger: 'blur',
+        },
+        {
+            validator: (rule, value, callback) => {
+                console.log('url value', value)
+                // check url start with http or https
+                if (value.startsWith('http')) {
+                    callback()
+                } else {
+                    callback(new Error(t('urlInvalid')))
                 }
             },
             trigger: 'blur',
@@ -576,6 +580,12 @@ const closeConfigDialog = () => {
     configDialogVisible.value = false
     codeDialogVisible.value = false
     // console.log('closeConfigDialog', tauriConfig)
+}
+
+// switch tauri config json or code
+const switchTauriConfig = () => {
+    isJson.value = !isJson.value
+    tauriConfigRef.value?.updateCode()
 }
 
 const jsChange = () => {
@@ -1726,6 +1736,7 @@ onMounted(async () => {
                     .initIcon {
                         width: 22px;
                         height: 22px;
+                        cursor: pointer;
                     }
 
                     .editIcon {

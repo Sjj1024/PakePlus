@@ -230,12 +230,12 @@ import {
     isTauri,
     updateBuildFile,
     base64Decode,
+    platforms,
 } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import { tauriConfig } from '@/utils/common'
-import { platforms } from '@/utils/config'
 import packageJson from '../../package.json'
 
 const router = useRouter()

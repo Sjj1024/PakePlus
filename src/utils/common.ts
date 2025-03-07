@@ -1,5 +1,4 @@
 import { invoke } from '@tauri-apps/api/core'
-import { getCurrentWindow } from '@tauri-apps/api/window'
 
 // urlMap
 export const urlMap = {
@@ -13,6 +12,54 @@ export const urlMap = {
     csdn: 'https://xiaoshen.blog.csdn.net/',
     juejin: 'https://juejin.cn/user/70007368988926',
     windowsConfig: 'https://v2.tauri.app/reference/config/#windowconfig',
+}
+
+export const platforms: { [key: string]: PlatformInfo } = {
+    desktop: {
+        name: 'desktop',
+        userAgent:
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
+        platform: 'desktop',
+        width: 800,
+        height: 600,
+        direction: 'horizontal',
+    },
+    iPhone: {
+        name: 'iPhone',
+        userAgent:
+            'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+        platform: 'ios',
+        width: 430,
+        height: 932,
+        direction: 'vertical',
+    },
+    Android: {
+        name: 'Android',
+        userAgent:
+            'Mozilla/5.0 (Linux; Android 14; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36',
+        platform: 'android',
+        width: 412,
+        height: 915,
+        direction: 'vertical',
+    },
+    iPad: {
+        name: 'iPad',
+        userAgent:
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15',
+        platform: 'desktop',
+        width: 1024,
+        height: 768,
+        direction: 'horizontal',
+    },
+    custom: {
+        name: 'custom',
+        userAgent:
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
+        platform: 'desktop',
+        width: 1920,
+        height: 1080,
+        direction: 'horizontal',
+    },
 }
 
 // 是否为开发环境
@@ -64,9 +111,10 @@ export const tauriConfig = {
         label: '',
         title: '',
         url: '',
-        userAgent: '',
-        width: '',
-        height: '',
+        userAgent:
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
+        width: 800,
+        height: 600,
         theme: null,
         resizable: true,
         fullscreen: false,
@@ -124,7 +172,7 @@ export const initProject = {
     desc: '',
     jsFile: [],
     filterCss: '',
-    jsCode: 'const dialogVisible = ref(false)',
+    jsCode: 'console.log("PakePlus")',
     more: tauriConfig,
 }
 

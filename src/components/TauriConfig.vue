@@ -24,7 +24,7 @@
                 </template>
                 <div class="windowsConfig">
                     <el-form
-                        :model="tauriConfig.windows"
+                        :model="store.currentProject.more"
                         label-width="auto"
                         class="configForm"
                     >
@@ -33,7 +33,8 @@
                                 <el-input
                                     type="number"
                                     v-model.number="
-                                        tauriConfig.windows.minWidth
+                                        store.currentProject.more.windows
+                                            .minWidth
                                     "
                                     style="width: 80px"
                                 />
@@ -42,7 +43,8 @@
                                 <el-input
                                     type="number"
                                     v-model.number="
-                                        tauriConfig.windows.minHeight
+                                        store.currentProject.more.windows
+                                            .minHeight
                                     "
                                     style="width: 80px"
                                 />
@@ -51,7 +53,8 @@
                                 <el-input
                                     type="number"
                                     v-model.number="
-                                        tauriConfig.windows.maxWidth
+                                        store.currentProject.more.windows
+                                            .maxWidth
                                     "
                                     style="width: 80px"
                                 />
@@ -60,7 +63,8 @@
                                 <el-input
                                     type="number"
                                     v-model.number="
-                                        tauriConfig.windows.maxHeight
+                                        store.currentProject.more.windows
+                                            .maxHeight
                                     "
                                     style="width: 80px"
                                 />
@@ -70,7 +74,8 @@
                             <el-form-item label="dragDropEnabled" prop="size">
                                 <el-checkbox
                                     v-model="
-                                        tauriConfig.windows.dragDropEnabled
+                                        store.currentProject.more.windows
+                                            .dragDropEnabled
                                     "
                                     name="type"
                                 >
@@ -78,56 +83,78 @@
                             </el-form-item>
                             <el-form-item label="center" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.center"
+                                    v-model="
+                                        store.currentProject.more.windows.center
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
                             </el-form-item>
                             <el-form-item label="closable" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.closable"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .closable
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
                             </el-form-item>
                             <el-form-item label="resizable" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.resizable"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .resizable
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
                             </el-form-item>
                             <el-form-item label="fullscreen" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.fullscreen"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .fullscreen
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
                             </el-form-item>
                             <el-form-item label="focus" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.focus"
+                                    v-model="
+                                        store.currentProject.more.windows.focus
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
                             </el-form-item>
                             <el-form-item label="transparent" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.transparent"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .transparent
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
                             </el-form-item>
                             <el-form-item label="maximized" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.maximized"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .maximized
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
                             </el-form-item>
                             <el-form-item label="visible" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.visible"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .visible
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
@@ -136,14 +163,20 @@
                         <div class="lineBool">
                             <el-form-item label="decorations" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.decorations"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .decorations
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
                             </el-form-item>
                             <el-form-item label="alwaysOnTop" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.alwaysOnTop"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .alwaysOnTop
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
@@ -151,7 +184,8 @@
                             <el-form-item label="contentProtected" prop="size">
                                 <el-checkbox
                                     v-model="
-                                        tauriConfig.windows.contentProtected
+                                        store.currentProject.more.windows
+                                            .contentProtected
                                     "
                                     name="type"
                                 >
@@ -159,21 +193,30 @@
                             </el-form-item>
                             <el-form-item label="skipTaskbar" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.skipTaskbar"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .skipTaskbar
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
                             </el-form-item>
                             <el-form-item label="maximizable" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.maximizable"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .maximizable
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
                             </el-form-item>
                             <el-form-item label="minimizable" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.minimizable"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .minimizable
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
@@ -181,7 +224,8 @@
                             <el-form-item label="acceptFirstMouse" prop="size">
                                 <el-checkbox
                                     v-model="
-                                        tauriConfig.windows.acceptFirstMouse
+                                        store.currentProject.more.windows
+                                            .acceptFirstMouse
                                     "
                                     name="type"
                                 >
@@ -191,14 +235,19 @@
                         <div class="inLine flexLeft">
                             <el-form-item label="hiddenTitle" prop="size">
                                 <el-checkbox
-                                    v-model="tauriConfig.windows.hiddenTitle"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .hiddenTitle
+                                    "
                                     name="type"
                                 >
                                 </el-checkbox>
                             </el-form-item>
                             <el-form-item label="theme:">
                                 <el-select
-                                    v-model="tauriConfig.windows.theme"
+                                    v-model="
+                                        store.currentProject.more.windows.theme
+                                    "
                                     placeholder="theme"
                                     class="themeSel"
                                 >
@@ -208,7 +257,10 @@
                             </el-form-item>
                             <el-form-item label="titleBarStyle:">
                                 <el-select
-                                    v-model="tauriConfig.windows.titleBarStyle"
+                                    v-model="
+                                        store.currentProject.more.windows
+                                            .titleBarStyle
+                                    "
                                     placeholder="titleBarStyle"
                                     class="themeSel"
                                 >
@@ -233,7 +285,10 @@
                             class="formItem"
                         >
                             <el-input
-                                v-model="tauriConfig.windows.tabbingIdentifier"
+                                v-model="
+                                    store.currentProject.more.windows
+                                        .tabbingIdentifier
+                                "
                                 autocomplete="off"
                                 autoCapitalize="off"
                                 autoCorrect="off"
@@ -248,7 +303,10 @@
                         class="formItem"
                     >
                         <el-input
-                            v-model="tauriConfig.windows.additionalBrowserArgs"
+                            v-model="
+                                store.currentProject.more.windows
+                                    .additionalBrowserArgs
+                            "
                             autocomplete="off"
                             autoCapitalize="off"
                             autoCorrect="off"
@@ -293,7 +351,9 @@ import { json } from '@codemirror/lang-json'
 import { oneDark } from '@codemirror/theme-one-dark'
 import { openUrl, urlMap } from '@/utils/common'
 import { ref } from 'vue'
+import { usePakeStore } from '@/store'
 
+const store = usePakeStore()
 const activeName = ref('1')
 const localTheme = localStorage.getItem('theme')
 
@@ -304,13 +364,8 @@ const props = defineProps({
     },
 })
 
-const tauriConfig = defineModel('tauriConfig', {
-    required: true,
-    type: Object,
-})
-
 // init ui code
-const uiCode = ref(JSON.stringify(tauriConfig.value, null, 2))
+const uiCode = ref(JSON.stringify(store.currentProject.more, null, 2))
 
 // extensions
 const extensions: any = [json(), oneDark]
@@ -327,7 +382,7 @@ const codeChange = (code: string) => {
     try {
         const codeObj = JSON.parse(code)
         console.log('codeObj', codeObj)
-        Object.assign(tauriConfig.value, codeObj)
+        store.updateTauriConfig(codeObj)
     } catch (error) {
         console.error('codeChange error!', error)
     }
@@ -335,7 +390,7 @@ const codeChange = (code: string) => {
 
 const updateCode = () => {
     console.log('updateCode!')
-    uiCode.value = JSON.stringify(tauriConfig.value, null, 2)
+    uiCode.value = JSON.stringify(store.currentProject.more, null, 2)
 }
 
 defineExpose({
