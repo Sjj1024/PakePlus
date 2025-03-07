@@ -10,23 +10,21 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     let window_size: Option<serde_json::Value> = store.get("window_size");
     println!("windows_size: {:?}", window_size);
     // 示例 JSON 字符串
-    let mut window_json = r#"
+    let window_json = r#"
         {
-            "width": 890,
-            "height": 700,
             "title": "PakePlus",
             "center": true
         }
     "#
     .to_string();
+    let mut width = 800.0;
+    let mut height = 600.0;
     if let Some(window_size) = window_size {
         let size = window_size.as_object().unwrap();
-        let width = size["width"].to_string();
-        let height = size["height"].to_string();
+        width = size["width"].as_f64().unwrap();
+        height = size["height"].as_f64().unwrap();
         println!("width: {:?}", width);
         println!("height: {:?}", height);
-        window_json = window_json.replace("890", &width);
-        window_json = window_json.replace("700", &height);
     }
     // 解析 JSON 字符串为 WindowConfig 类型
     let config: WindowConfig = serde_json::from_str(&window_json).unwrap();
@@ -36,11 +34,14 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         .unwrap()
         .build()
         .unwrap();
-
+    // 设置窗口大小
+    window
+        .set_size(tauri::PhysicalSize::new(width, height))
+        .unwrap();
     // 监听窗口大小变化
     window.on_window_event(move |event| {
         if let WindowEvent::Resized(size) = event {
-            println!("window_size: {:?}", size);
+            // println!("window_size: {:?}", size);
             let _ = store.set(
                 "window_size",
                 json!({
