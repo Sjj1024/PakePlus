@@ -400,7 +400,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { open } from '@tauri-apps/plugin-dialog'
 import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
@@ -1027,10 +1027,10 @@ const saveProject = async (tips: boolean = true) => {
     })
 }
 
-// get initialization_script
+// get initialization_script(jscode+cssfilter+jsfile)
 const getInitializationScript = () => {
     // creat css filter content
-    let initJsScript = ''
+    let initJsScript = store.currentProject.jsCode
     if (store.currentProject.filterCss !== '') {
         const cssFilterContent = store.currentProject.filterCss
             .split(';')
@@ -1044,11 +1044,11 @@ const getInitializationScript = () => {
         console.log('cssFilterContent', cssFilterContent)
         const initCssScript = CSSFILTER.replace('CSSFILTER', cssFilterContent)
         // read js file content
-        initJsScript = initCssScript
+        initJsScript += initCssScript
     }
     // if jsFileContents is not empty, then add initJsScript
     if (jsFileContents.value) {
-        initJsScript = initJsScript + jsFileContents.value
+        initJsScript += jsFileContents.value
     }
     console.log('initJsScript', initJsScript)
     return initJsScript
@@ -1073,7 +1073,7 @@ const preview = async (resize: boolean) => {
                 saveProject(false)
                 // initialization_script
                 const initJsScript = getInitializationScript()
-                // console.log('initCssScript', initCssScript)
+                console.log('initCssScript', initJsScript)
                 invoke('preview_from_config', {
                     resize,
                     config: {
