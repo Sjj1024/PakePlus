@@ -810,6 +810,9 @@ export const usePakeStore = defineStore('pakeplus', {
         noMain: (state) => {
             return state.userInfo.login !== 'Sjj1024'
         },
+        isRelease: (state) => {
+            return state.releases[state.currentProject.name] !== undefined
+        },
     },
     actions: {
         setUser(info: any) {
@@ -867,7 +870,11 @@ export const usePakeStore = defineStore('pakeplus', {
             }
         },
         setRelease(proName: string, info: any) {
-            this.releases[proName] = info
+            if (info) {
+                this.releases[proName] = info
+            } else {
+                delete this.releases[proName]
+            }
             localStorage.setItem('release', JSON.stringify(this.releases))
         },
         // update tauri config

@@ -1131,34 +1131,16 @@ let checkDispatchTimer: any = null
 
 // delete lasted release
 const deleteRelease = async () => {
-    if (store.releases.pakeplus.id !== 0) {
+    if (store.isRelease) {
         const releaseRes: any = await githubApi.deleteRelease(
             store.userInfo.login,
             'PakePlus',
-            store.releases.pakeplus.id
+            store.releases[store.currentProject.name].id
         )
         console.log('deleteRelease', releaseRes)
     }
     // reset release
-    store.setRelease('pakeplus', {
-        url: '',
-        assets_url: '',
-        upload_url: '',
-        html_url: '',
-        id: 0,
-        node_id: '',
-        tag_name: '',
-        target_commitish: '',
-        name: '',
-        draft: false,
-        prerelease: false,
-        created_at: '',
-        published_at: '',
-        assets: [],
-        tarball_url: '',
-        zipball_url: '',
-        body: '',
-    })
+    store.setRelease(store.currentProject.name, undefined)
 }
 
 // update build.yml file content
@@ -1340,12 +1322,53 @@ const updateCustomJs = async () => {
     }
 }
 
+// check project type and creat branch
+const createBranch = async () => {
+    // create web branch
+    console.log('creat branch')
+    const res: any = await githubApi.createBranch(
+        store.userInfo.login,
+        'PakePlus',
+        {
+            ref: 'refs/heads/main',
+            sha: 'main',
+        }
+    )
+    console.log('check Branch exist', res)
+}
+
+// web publish
+const publishWeb = async () => {
+    // create web branch
+    console.log('publish web')
+}
+
+// dist publish
+const publishDist = async () => {
+    // create dist branch
+    console.log('publish dist')
+}
+
+// new publish version
+const publish2 = async () => {
+    // delete release
+    store.isRelease && deleteRelease()
+    // check project type and creat branch
+    createBranch()
+    // publish web or dist
+    if (store.currentProject.url.includes('http')) {
+        publishWeb()
+    } else {
+        publishDist()
+    }
+}
+
 // del pre publish version
 const onPublish = async () => {
     centerDialogVisible.value = false
     buildLoading.value = true
     // delete release
-    deleteRelease()
+    store.isRelease && deleteRelease()
     // update build yml
     await updateBuildYml()
     // update Cargo.toml
