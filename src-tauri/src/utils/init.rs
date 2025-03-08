@@ -58,7 +58,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     if let Some(window_fullscreen) = window_fullscreen {
         let fullscreen = window_fullscreen.as_object().unwrap();
         println!("fullscreen: {:?}", fullscreen);
-        if fullscreen["fullscreen"].as_bool().unwrap() {
+        if config.fullscreen || fullscreen["fullscreen"].as_bool().unwrap() {
             window.set_fullscreen(true).unwrap();
             println!("window fullscreen");
         } else {
@@ -68,7 +68,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                 .unwrap();
             // 设置窗口位置
             // 如果xy为0，则窗口为中心位置
-            if x == 0.0 && y == 0.0 {
+            if config.center || (x == 0.0 && y == 0.0) {
                 window.center().unwrap();
             } else {
                 window

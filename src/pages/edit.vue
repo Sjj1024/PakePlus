@@ -348,7 +348,7 @@
         <!-- cutter img -->
         <CutterImg
             v-model="cutVisible"
-            :imgUrl="iconBase64"
+            :imgUrl="tempIconBase64"
             :confirm="confirmIcon"
         ></CutterImg>
         <!-- more config -->
@@ -438,6 +438,7 @@ import ImgPreview from '@/components/ImgPreview.vue'
 const router = useRouter()
 const store = usePakeStore()
 const { t } = useI18n()
+const tempIconBase64 = ref('')
 const iconBase64 = ref('')
 const roundIcon = ref('')
 const cutVisible = ref(false)
@@ -807,15 +808,8 @@ const webUploadIcon = async () => {
 const fileToBase64 = (file: any) => {
     const reader = new FileReader()
     reader.onload = async () => {
-        iconBase64.value = reader.result as string
-        const imageSize: any = await getImageSize(iconBase64.value)
-        // console.log('imageSize', imageSize)
-        if (imageSize.width === imageSize.height && file.type === 'image/png') {
-            // confirmIcon(base64String)
-            cutVisible.value = true
-        } else {
-            cutVisible.value = true
-        }
+        tempIconBase64.value = reader.result as string
+        cutVisible.value = true
     }
     reader.readAsDataURL(file)
 }
@@ -825,6 +819,8 @@ const handleIconChange = (event: any) => {
     console.log('handleIconChange', file)
     if (file) {
         fileToBase64(file)
+    } else {
+        console.log('No file selected')
     }
 }
 
@@ -861,16 +857,9 @@ const uploadIcon = async () => {
     const base64Data: any = arrayBufferToBase64(binaryData)
     console.log('Base64 encoded image:', base64Data)
     const base64String = 'data:image/jpg;base64,' + base64Data
-    iconBase64.value = base64String
+    tempIconBase64.value = base64String
     // if file is not png, and size is not 512x512, then cut it
-    const imageSize: any = await getImageSize(base64String)
-    // console.log('imageSize', imageSize)
-    if (imageSize.width === imageSize.height && fileName.endsWith('.png')) {
-        // confirmIcon(base64String)
-        cutVisible.value = true
-    } else {
-        cutVisible.value = true
-    }
+    cutVisible.value = true
 }
 
 // update icon file content
