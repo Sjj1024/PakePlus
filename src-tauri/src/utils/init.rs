@@ -24,11 +24,11 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
 
     // 获取记录窗口全屏
     let window_fullscreen: Option<serde_json::Value> = store.get("window_fullscreen");
-    println!("windows_fullscreen: {:?}", window_fullscreen);
+    // println!("windows_fullscreen: {:?}", window_fullscreen);
 
     // 获取记录窗口大小
     let window_size: Option<serde_json::Value> = store.get("window_size");
-    println!("windows_size: {:?}", window_size);
+    // println!("windows_size: {:?}", window_size);
     let mut width = 800.0;
     let mut height = 600.0;
     // 如果window_size存在，则设置窗口大小
@@ -36,31 +36,31 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         let size = window_size.as_object().unwrap();
         width = size["width"].as_f64().unwrap();
         height = size["height"].as_f64().unwrap();
-        println!("width: {:?}", width);
-        println!("height: {:?}", height);
+        // println!("width: {:?}", width);
+        // println!("height: {:?}", height);
     }
 
     // 获取记录窗口位置
     let window_position: Option<serde_json::Value> = store.get("window_position");
     let mut x = 0.0;
     let mut y = 0.0;
-    println!("windows_position: {:?}", window_position);
+    // println!("windows_position: {:?}", window_position);
     // 如果window_position存在，则设置窗口位置
     if let Some(window_position) = window_position {
         let position = window_position.as_object().unwrap();
         x = position["x"].as_f64().unwrap();
         y = position["y"].as_f64().unwrap();
-        println!("x: {:?}", x);
-        println!("y: {:?}", y);
+        // println!("x: {:?}", x);
+        // println!("y: {:?}", y);
     }
 
     // 如果window_fullscreen存在，则设置全屏
     if let Some(window_fullscreen) = window_fullscreen {
         let fullscreen = window_fullscreen.as_object().unwrap();
-        println!("fullscreen: {:?}", fullscreen);
+        // println!("fullscreen: {:?}", fullscreen);
         if config.fullscreen || fullscreen["fullscreen"].as_bool().unwrap() {
             window.set_fullscreen(true).unwrap();
-            println!("window fullscreen");
+            // println!("window fullscreen");
         } else {
             // 设置窗口大小
             window
@@ -95,7 +95,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                 );
             }
             if window_clone.is_fullscreen().unwrap_or(false) {
-                println!("Window entered fullscreen mode.");
+                // println!("Window entered fullscreen mode.");
                 let _ = store.set(
                     "window_fullscreen",
                     json!({
@@ -103,7 +103,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                     }),
                 );
             } else {
-                println!("Window exited fullscreen mode.");
                 let _ = store.set(
                     "window_fullscreen",
                     json!({
@@ -114,7 +113,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         }
         // 监听窗口位置变化
         if let WindowEvent::Moved(position) = event {
-            println!("window_position: {:?}", position);
+            // println!("window_position: {:?}", position);
             if position.x > 0 && position.y > 0 {
                 let _ = store.set(
                     "window_position",
