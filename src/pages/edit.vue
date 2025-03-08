@@ -128,7 +128,7 @@
                         :label="t('appIcon')"
                         prop="icon"
                         class="formItem"
-                        style="width: 12%"
+                        :style="isTauri ? 'width: 12%' : 'width: 18%'"
                     >
                         <div v-if="iconBase64" class="iconChange">
                             <img
@@ -509,7 +509,7 @@ const appRules = reactive<FormRules>({
                     callback(new Error(t('urlInvalid')))
                 }
             },
-            trigger: 'blur',
+            trigger: 'change',
         },
     ],
     appid: [

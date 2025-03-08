@@ -324,7 +324,12 @@ const testToken = async (tips: boolean = true) => {
         if (res.status === 200) {
             localStorage.setItem('token', token.value)
             store.setUser(res.data)
-            forkProgect(tips)
+            console.log('gitUserInfo res.data', res.data)
+            if (res.data.login !== 'Sjj1024') {
+                forkStartShas(tips)
+            } else {
+                commitShas(tips)
+            }
         } else {
             ElMessage.error(t('tokenError'))
             testLoading.value = false
@@ -334,8 +339,40 @@ const testToken = async (tips: boolean = true) => {
     }
 }
 
+const commitShas = async (tips: boolean = true) => {
+    // wait fork done, enable github action
+    while (true) {
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+        console.log('wait fork done......', testLoading.value)
+        const res = await Promise.all([getCommitSha(), getWebCommitSha()])
+            .then((res) => {
+                console.log('wait fork done res', res)
+                if (res[0] && res[1]) {
+                    // delete build.yml
+                    store.noMain && deleteBuildYml()
+                    testLoading.value = false
+                    if (!tips) {
+                        tokenDialog.value = false
+                    } else {
+                        ElMessage.success(t('tokenOk'))
+                    }
+                    return true
+                }
+                return false
+            })
+            .catch((err) => {
+                console.error('wait fork done error', err)
+                return false
+            })
+        if (res) {
+            console.log('wait fork done break')
+            break
+        }
+    }
+}
+
 // fork and start
-const forkProgect = async (tips: boolean = true) => {
+const forkStartShas = async (tips: boolean = true) => {
     // fork action is async
     const forkRes: any = await githubApi.forkProgect({
         name: 'PakePlus',
@@ -363,39 +400,8 @@ const forkProgect = async (tips: boolean = true) => {
     } else {
         console.error('start error')
     }
-    // wait fork done, enable github action
-    while (true) {
-        await new Promise((resolve) => setTimeout(resolve, 2000))
-        console.log('wait fork done......', testLoading.value)
-        const res = await Promise.all([
-            getCommitSha(),
-            getDistCommitSha(),
-            getWebCommitSha(),
-        ])
-            .then((res) => {
-                console.log('wait fork done res', res)
-                if (res[0] && res[1] && res[2]) {
-                    // delete build.yml
-                    deleteBuildYml()
-                    testLoading.value = false
-                    if (!tips) {
-                        tokenDialog.value = false
-                    } else {
-                        ElMessage.success(t('tokenOk'))
-                    }
-                    return true
-                }
-                return false
-            })
-            .catch((err) => {
-                console.error('wait fork done error', err)
-                return false
-            })
-        if (res) {
-            console.log('wait fork done break')
-            break
-        }
-    }
+    // commit shas
+    commitShas(tips)
 }
 
 // get commit sha
@@ -474,7 +480,7 @@ const creatBranch = async () => {
     // token.value && (await uploadBuildYml())
     if (branchName.value && /^[A-Za-z0-9]+$/.test(branchName.value)) {
         console.log('branchName.value', branchName.value)
-        // if token exist, then creat branch, else next page
+        // check branch exist
         if (token.value) {
             const res: any = await githubApi.getBranch(
                 store.userInfo.login,
