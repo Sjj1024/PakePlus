@@ -8,8 +8,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     // 示例 JSON 字符串
     let window_json = r#"
         {
-            "title": "PakePlus",
-            "center": true
+            "title": "PakePlus"
         }
     "#;
     // 解析 JSON 字符串为 WindowConfig 类型
@@ -25,15 +24,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     // 获取记录窗口全屏
     let window_fullscreen: Option<serde_json::Value> = store.get("window_fullscreen");
     println!("windows_fullscreen: {:?}", window_fullscreen);
-    // 如果window_fullscreen存在，则设置全屏
-    if let Some(window_fullscreen) = window_fullscreen {
-        let fullscreen = window_fullscreen.as_bool().unwrap();
-        println!("fullscreen: {:?}", fullscreen);
-        if fullscreen {
-            window.set_fullscreen(true).unwrap();
-            println!("window fullscreen");
-        }
-    }
 
     // 获取记录窗口大小
     let window_size: Option<serde_json::Value> = store.get("window_size");
@@ -48,6 +38,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         println!("width: {:?}", width);
         println!("height: {:?}", height);
     }
+
     // 获取记录窗口位置
     let window_position: Option<serde_json::Value> = store.get("window_position");
     let mut x = 0.0;
@@ -62,21 +53,33 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         println!("y: {:?}", y);
     }
 
-    let window_clone = window.clone();
-    // 设置窗口位置
-    // 如果xy为0，则窗口为中心位置
-    if x == 0.0 && y == 0.0 {
-        window.center().unwrap();
-    } else {
-        window
-            .set_position(tauri::PhysicalPosition::new(x, y))
-            .unwrap();
+    // 如果window_fullscreen存在，则设置全屏
+    if let Some(window_fullscreen) = window_fullscreen {
+        let fullscreen = window_fullscreen.as_object().unwrap();
+        println!("fullscreen: {:?}", fullscreen);
+        if fullscreen["fullscreen"].as_bool().unwrap() {
+            window.set_fullscreen(true).unwrap();
+            println!("window fullscreen");
+        } else {
+            // 设置窗口大小
+            window
+                .set_size(tauri::PhysicalSize::new(width, height))
+                .unwrap();
+            // 设置窗口位置
+            // 如果xy为0，则窗口为中心位置
+            if x == 0.0 && y == 0.0 {
+                window.center().unwrap();
+            } else {
+                window
+                    .set_position(tauri::PhysicalPosition::new(x, y))
+                    .unwrap();
+            }
+        }
     }
 
-    // 设置窗口大小
-    window
-        .set_size(tauri::PhysicalSize::new(width, height))
-        .unwrap();
+    // 用于监听窗口是否全屏
+    let window_clone = window.clone();
+
     // 监听窗口大小变化
     window.on_window_event(move |event| {
         if let WindowEvent::Resized(size) = event {
