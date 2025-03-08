@@ -1,1 +1,0 @@
-import{r as n}from"./index-aeca932e.js";const t=function(t){void 0===t&&(t={});var o=n.useState(t),e=o[0],i=o[1];return[e,n.useCallback((function(n){i((function(t){return Object.assign({},t,n instanceof Function?n(t):n)}))}),[])]};export{t as u};

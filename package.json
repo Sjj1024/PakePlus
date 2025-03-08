@@ -4,15 +4,12 @@
     "version": "1.0.2",
     "type": "module",
     "scripts": {
-        "dev": "vite",
-        "build": "vue-tsc --noEmit && vite build",
-        "preview": "vite preview",
         "tauri": "tauri",
         "icon": "tauri icon",
+        "icns": "node ./cli/creatIcon.cjs",
         "tauri dev": "tauri dev",
         "tauri build": "tauri build",
-        "tauri debug": "tauri build --debug",
-        "tauri preview": "tauri preview"
+        "tauri debug": "tauri build --debug"
     },
     "devDependencies": {
         "@tauri-apps/cli": "^2",
