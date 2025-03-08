@@ -27,6 +27,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         r#"
         {{
             "title": "PakePlus",
+            "visible": false,
             "width":   {},
             "height": {}
         }}
