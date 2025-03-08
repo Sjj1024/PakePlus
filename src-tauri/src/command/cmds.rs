@@ -1,5 +1,4 @@
 use base64::prelude::*;
-// use regex::Regex;
 use std::io::Read;
 use std::time::Instant;
 use tauri::{path::BaseDirectory, utils::config::WindowConfig, AppHandle, LogicalSize, Manager};
