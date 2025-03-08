@@ -29,7 +29,7 @@
                         class="configForm"
                     >
                         <div class="inLine">
-                            <el-form-item label="minWidth" prop="size">
+                            <el-form-item label="minWidth" prop="minWidth">
                                 <el-input
                                     type="number"
                                     v-model.number="
@@ -39,7 +39,7 @@
                                     style="width: 80px"
                                 />
                             </el-form-item>
-                            <el-form-item label="minHeight" prop="size">
+                            <el-form-item label="minHeight" prop="minHeight">
                                 <el-input
                                     type="number"
                                     v-model.number="
@@ -49,7 +49,7 @@
                                     style="width: 80px"
                                 />
                             </el-form-item>
-                            <el-form-item label="maxWidth" prop="size">
+                            <el-form-item label="maxWidth" prop="maxWidth">
                                 <el-input
                                     type="number"
                                     v-model.number="
@@ -59,7 +59,7 @@
                                     style="width: 80px"
                                 />
                             </el-form-item>
-                            <el-form-item label="maxHeight" prop="size">
+                            <el-form-item label="maxHeight" prop="maxHeight">
                                 <el-input
                                     type="number"
                                     v-model.number="
@@ -71,7 +71,10 @@
                             </el-form-item>
                         </div>
                         <div class="lineBool">
-                            <el-form-item label="dragDropEnabled" prop="size">
+                            <el-form-item
+                                label="dragDropEnabled"
+                                prop="dragDropEnabled"
+                            >
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -81,7 +84,7 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="center" prop="size">
+                            <el-form-item label="center" prop="center">
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows.center
@@ -90,7 +93,7 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="closable" prop="size">
+                            <el-form-item label="closable" prop="closable">
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -100,7 +103,7 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="resizable" prop="size">
+                            <el-form-item label="resizable" prop="resizable">
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -110,7 +113,7 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="fullscreen" prop="size">
+                            <el-form-item label="fullscreen" prop="fullscreen">
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -120,7 +123,7 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="focus" prop="size">
+                            <el-form-item label="focus" prop="focus">
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows.focus
@@ -129,7 +132,10 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="transparent" prop="size">
+                            <el-form-item
+                                label="transparent"
+                                prop="transparent"
+                            >
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -139,7 +145,7 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="maximized" prop="size">
+                            <el-form-item label="maximized" prop="maximized">
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -149,7 +155,7 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="visible" prop="size">
+                            <el-form-item label="visible" prop="visible">
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -161,7 +167,10 @@
                             </el-form-item>
                         </div>
                         <div class="lineBool">
-                            <el-form-item label="decorations" prop="size">
+                            <el-form-item
+                                label="decorations"
+                                prop="decorations"
+                            >
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -171,7 +180,10 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="alwaysOnTop" prop="size">
+                            <el-form-item
+                                label="alwaysOnTop"
+                                prop="alwaysOnTop"
+                            >
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -181,7 +193,10 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="contentProtected" prop="size">
+                            <el-form-item
+                                label="contentProtected"
+                                prop="contentProtected"
+                            >
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -191,7 +206,10 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="skipTaskbar" prop="size">
+                            <el-form-item
+                                label="skipTaskbar"
+                                prop="skipTaskbar"
+                            >
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -201,7 +219,10 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="maximizable" prop="size">
+                            <el-form-item
+                                label="maximizable"
+                                prop="maximizable"
+                            >
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -211,7 +232,10 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="minimizable" prop="size">
+                            <el-form-item
+                                label="minimizable"
+                                prop="minimizable"
+                            >
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -221,7 +245,10 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                            <el-form-item label="acceptFirstMouse" prop="size">
+                            <el-form-item
+                                label="acceptFirstMouse"
+                                prop="acceptFirstMouse"
+                            >
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
@@ -233,7 +260,10 @@
                             </el-form-item>
                         </div>
                         <div class="inLine flexLeft">
-                            <el-form-item label="hiddenTitle" prop="size">
+                            <el-form-item
+                                label="hiddenTitle"
+                                prop="hiddenTitle"
+                            >
                                 <el-checkbox
                                     v-model="
                                         store.currentProject.more.windows
