@@ -163,7 +163,7 @@ export const initProject = {
     appid: '',
     icon: '',
     iconRound: true,
-    cors: false,
+    state: true,
     injectJq: false,
     version: '0.0.1',
     platform: 'desktop',

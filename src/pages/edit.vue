@@ -171,9 +171,13 @@
                             label=""
                         />
                     </el-form-item>
-                    <el-form-item label="CORS" prop="cors" class="formItem">
+                    <el-form-item
+                        label="窗口保持"
+                        prop="state"
+                        class="formItem"
+                    >
                         <el-checkbox
-                            v-model="store.currentProject.cors"
+                            v-model="store.currentProject.state"
                             disabled
                             label=""
                         />
@@ -943,6 +947,12 @@ const arrayBufferToBase64 = (buffer: ArrayBuffer) => {
         binary += String.fromCharCode(bytes[i])
     }
     return btoa(binary)
+}
+
+// state remember
+const stateChange = () => {
+    console.log('stateChange', store.currentProject.state)
+    tauriConfigRef.value?.updateCode()
 }
 
 const backHome = () => {
