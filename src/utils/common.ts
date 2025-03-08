@@ -165,6 +165,7 @@ export const initProject = {
     iconRound: true,
     state: true,
     injectJq: false,
+    tauriApi: false,
     version: '0.0.1',
     platform: 'desktop',
     width: 800,

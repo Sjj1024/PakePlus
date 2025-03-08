@@ -128,7 +128,7 @@
                         :label="t('appIcon')"
                         prop="icon"
                         class="formItem"
-                        style="width: 20%"
+                        style="width: 12%"
                     >
                         <div v-if="iconBase64" class="iconChange">
                             <img
@@ -188,6 +188,16 @@
                     >
                         <el-checkbox
                             v-model="store.currentProject.injectJq"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="TauriApi"
+                        prop="tauriApi"
+                        class="formItem"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.tauriApi"
                             label=""
                         />
                     </el-form-item>
@@ -272,7 +282,6 @@
             <el-button :disabled="token === null" @click="createRepo">
                 {{ t('publish') }}
             </el-button>
-            <el-button v-if="isDev" @click="libRsConfig">Test</el-button>
         </div>
         <!-- build -->
         <el-dialog
