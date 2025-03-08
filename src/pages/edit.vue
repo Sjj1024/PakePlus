@@ -93,11 +93,20 @@
                         >
                             <template #append>
                                 <el-button
-                                    class="distUpload"
+                                    :class="isTauri ? 'distUpload' : ''"
                                     :icon="UploadFilled"
+                                    :disabled="!isTauri"
+                                    @click="activeDistInput"
                                 />
                             </template>
                         </el-input>
+                        <input
+                            type="file"
+                            ref="distInput"
+                            webkitdirectory
+                            @change="handleFileChange"
+                            style="display: none"
+                        />
                     </el-form-item>
                 </div>
                 <div class="inLine">
@@ -135,7 +144,7 @@
                         :label="t('appIcon')"
                         prop="icon"
                         class="formItem"
-                        :style="isTauri ? 'width: 12%' : 'width: 18%'"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
                     >
                         <div v-if="iconBase64" class="iconChange">
                             <img
@@ -470,6 +479,7 @@ const token = localStorage.getItem('token')
 const iconFileName = ref('')
 const file = ref<any>(null)
 
+const distInput = ref<any>(null)
 const jsFileContents = ref('')
 const jsSelOptions: any = ref<any>([])
 const configDialogVisible = ref(false)
@@ -832,6 +842,16 @@ const fileToBase64 = (file: any) => {
         cutVisible.value = true
     }
     reader.readAsDataURL(file)
+}
+
+// active dist input
+const activeDistInput = () => {
+    distInput.value.click()
+}
+
+// handle file change
+const handleFileChange = (event: any) => {
+    console.log('handleFileChange', event)
 }
 
 const handleIconChange = (event: any) => {
