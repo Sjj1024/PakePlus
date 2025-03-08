@@ -9,7 +9,9 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     let window_json = r#"
         {
             "title": "PakePlus",
-            "visible": false
+            "visible": false,
+            "url": "index.html",
+            "label": "main"
         }
     "#;
     // 解析 JSON 字符串为 WindowConfig 类型
