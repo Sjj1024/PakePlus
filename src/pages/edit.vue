@@ -90,7 +90,14 @@
                             :placeholder="`${t(
                                 'example'
                             )}：https://www.github.com'`"
-                        />
+                        >
+                            <template #append>
+                                <el-button
+                                    class="distUpload"
+                                    :icon="UploadFilled"
+                                />
+                            </template>
+                        </el-input>
                     </el-form-item>
                 </div>
                 <div class="inLine">
@@ -413,6 +420,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import { open } from '@tauri-apps/plugin-dialog'
+import { UploadFilled } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
@@ -1330,11 +1338,17 @@ const createBranch = async () => {
         store.userInfo.login,
         'PakePlus',
         {
-            ref: 'refs/heads/main',
-            sha: 'main',
+            ref: `refs/heads/${store.currentProject.name}`,
+            sha: store.webCommit.sha,
         }
     )
-    console.log('check Branch exist', res)
+    console.log('createBranch', res)
+    if (res.status === 201) {
+        console.log('first creat branch')
+        return
+    } else {
+        console.log('not first')
+    }
 }
 
 // web publish
@@ -1771,6 +1785,14 @@ onMounted(async () => {
                         width: 22px;
                         height: 22px;
                         cursor: pointer;
+                    }
+
+                    .distUpload {
+                        cursor: pointer;
+
+                        &:hover {
+                            color: var(--text-color);
+                        }
                     }
 
                     .editIcon {
