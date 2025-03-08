@@ -178,7 +178,6 @@
                     >
                         <el-checkbox
                             v-model="store.currentProject.state"
-                            disabled
                             label=""
                         />
                     </el-form-item>
