@@ -1,5 +1,6 @@
-import { initProject } from '@/utils/common'
+import { convertToLocalTime, initProject } from '@/utils/common'
 import { defineStore } from 'pinia'
+import githubApi from '@/apis/github'
 
 export const usePakeStore = defineStore('pakeplus', {
     state: () => {
@@ -875,7 +876,7 @@ export const usePakeStore = defineStore('pakeplus', {
             } else {
                 delete this.releases[proName]
             }
-            localStorage.setItem('release', JSON.stringify(this.releases))
+            localStorage.setItem('releases', JSON.stringify(this.releases))
         },
         // update tauri config
         updateTauriConfig(info: any) {
@@ -885,6 +886,40 @@ export const usePakeStore = defineStore('pakeplus', {
                 'currentProject',
                 JSON.stringify(this.currentProject)
             )
+        },
+        async getRelease() {
+            const releaseRes: any = await githubApi.getReleasesAssets(
+                this.userInfo.login,
+                'PakePlus',
+                this.currentProject.name
+            )
+            console.log('releaseRes', releaseRes)
+            if (
+                releaseRes.status === 200 &&
+                releaseRes.data.assets.length >= 3
+            ) {
+                // filter current project version
+                const assets = releaseRes.data.assets.filter((item: any) => {
+                    return (
+                        item.name.includes(this.currentProject.version) ||
+                        item.name.includes('tar')
+                    )
+                })
+                const releaseData = {
+                    ...releaseRes.data,
+                    assets: assets.map((asset: any) => {
+                        return {
+                            ...asset,
+                            updated_at: convertToLocalTime(asset.updated_at),
+                        }
+                    }),
+                }
+                this.setRelease(this.currentProject.name, releaseData)
+                return releaseData
+            } else {
+                console.error('releaseRes error', releaseRes)
+                return null
+            }
         },
     },
 })

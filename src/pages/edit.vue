@@ -36,7 +36,7 @@
                                 {{ t('moreConfig') }}
                             </el-dropdown-item>
                             <el-dropdown-item
-                                :disabled="store.releases.pakeplus.id === 0"
+                                :disabled="!store.isRelease"
                                 @click="toHistory"
                             >
                                 {{ t('relHistore') }}
@@ -452,7 +452,6 @@ import {
     CSSFILTER,
     isAlphanumeric,
     openUrl,
-    convertToLocalTime,
     isTauri,
     platforms,
     arrayBufferToBase64,
@@ -972,6 +971,8 @@ const updateBuildYml = async () => {
         )
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
+            document.querySelector('.el-loading-text')!.innerHTML =
+                t('preCompile') + '...'
         } else {
             console.error('updateRes error', updateRes)
         }
@@ -1009,6 +1010,8 @@ const updateCargoToml = async () => {
         )
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
+            document.querySelector('.el-loading-text')!.innerHTML =
+                t('preCompile') + '...'
         } else {
             console.error('updateRes error', updateRes)
         }
@@ -1176,7 +1179,7 @@ const publishWeb = async () => {
     // update init.rs
     await updateInitRs()
     // dispatch action
-    // dispatchAction()
+    dispatchAction()
 }
 
 // dist publish
@@ -1358,38 +1361,6 @@ const checkBuildStatus = async () => {
     }
 }
 
-// check preview release assets
-const getLatestRelease = async () => {
-    const releaseRes: any = await githubApi.getReleasesAssets(
-        store.userInfo.login,
-        'PakePlus',
-        store.currentProject.name
-    )
-    console.log('releaseRes', releaseRes)
-    if (releaseRes.status === 200 && releaseRes.data.assets.length >= 3) {
-        // filter current project version
-        const assets = releaseRes.data.assets.filter((item: any) => {
-            return (
-                item.name.includes(store.currentProject.version) ||
-                item.name.includes('tar')
-            )
-        })
-        const releaseData = {
-            ...releaseRes.data,
-            assets: assets.map((asset: any) => {
-                return {
-                    ...asset,
-                    updated_at: convertToLocalTime(asset.updated_at),
-                }
-            }),
-        }
-        console.log('releaseData-----', releaseData)
-        store.setRelease('pakeplus', releaseData)
-    } else {
-        console.log('releaseRes error, but not important', releaseRes)
-    }
-}
-
 // init jsFileContents from jsFile
 const initJsFileContents = async () => {
     // read js file content from appDataDir assets dir
@@ -1411,9 +1382,8 @@ const initJsFileContents = async () => {
 }
 
 onMounted(async () => {
-    console.log('token', token)
-    // getLatestRelease()
     // 重制编译时间
+    // store.getRelease()
     buildTime = 0
     if (store.currentProject.icon) {
         confirmIcon(store.currentProject.icon)
@@ -1427,11 +1397,6 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-.isWeb {
-    width: 60% !important;
-    height: 90% !important;
-}
-
 .editBox {
     width: 100%;
     height: 100%;
@@ -1514,9 +1479,6 @@ onMounted(async () => {
         }
 
         .setting {
-            // position: absolute;
-            // top: 20px;
-            // right: -20px;
             -webkit-user-select: none; /* Safari */
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE10+/Edge */

@@ -2,6 +2,7 @@
     <div
         class="historyBox"
         v-loading="getLoading"
+        :class="{ isWeb: !isTauri }"
         :element-loading-text="t('requesting')"
     >
         <div class="homeHeader">
@@ -81,7 +82,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePakeStore } from '@/store'
 import githubApi from '@/apis/github'
-import { convertToLocalTime, openUrl } from '@/utils/common'
+import { openUrl, isTauri } from '@/utils/common'
 import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useI18n } from 'vue-i18n'
@@ -94,60 +95,11 @@ const { t } = useI18n()
 const backHome = () => {
     router.go(-1)
 }
-
-const releaseData = ref({
-    url: '',
-    assets_url: '',
-    upload_url: '',
-    html_url: '',
-    id: 0,
-    node_id: '',
-    tag_name: '',
-    target_commitish: '',
-    name: '',
-    draft: false,
-    prerelease: false,
-    assets: [],
-    body: '',
-})
+// releaseData
+const releaseData = ref(store.releases[store.currentProject.name])
 
 // getLoading
 const getLoading = ref(false)
-
-// get latest release assets by tag name
-const getLatestRelease = async () => {
-    const releaseRes: any = await githubApi.getReleasesAssets(
-        store.userInfo.login,
-        'PakePlus',
-        store.currentProject.name
-    )
-    console.log('releaseRes', releaseRes)
-    if (releaseRes.status === 200 && releaseRes.data.assets.length >= 3) {
-        // filter current project version
-        const assets = releaseRes.data.assets.filter((item: any) => {
-            return (
-                item.name.includes(store.currentProject.version) ||
-                item.name.includes('tar')
-            )
-        })
-        releaseData.value = {
-            ...releaseRes.data,
-            assets: assets.map((asset: any) => {
-                return {
-                    ...asset,
-                    updated_at: convertToLocalTime(asset.updated_at),
-                }
-            }),
-        }
-        console.log('releaseData-----', releaseData.value)
-        getLoading.value = false
-    } else {
-        getLoading.value = false
-        console.error('releaseRes error', releaseRes)
-        // sometime get one assets, will deep call
-        // setTimeout(getLatestRelease, 1000)
-    }
-}
 
 // delete lasted release
 const deleteRelAssets = async () => {
@@ -186,13 +138,14 @@ const copyDownlink = async (asset: any) => {
     ElMessage.success(t('copySuccess'))
 }
 
-onMounted(() => {
+onMounted(async () => {
     // must do, edit page submit will creat new release
-    if (store.releases.pakeplus.id === 0) {
+    if (!store.isRelease) {
         getLoading.value = true
-        getLatestRelease()
+        releaseData.value = await store.getRelease()
+        getLoading.value = false
     } else {
-        releaseData.value = store.releases.pakeplus
+        releaseData.value = await store.getRelease()
     }
 })
 </script>
@@ -209,6 +162,7 @@ onMounted(() => {
         justify-content: space-between;
         align-items: center;
         margin-bottom: 10px;
+        position: relative;
 
         .headerTitle {
             width: 100%;
@@ -255,9 +209,6 @@ onMounted(() => {
         }
 
         .setting {
-            position: fixed;
-            top: 20px;
-            right: 20px;
             -webkit-user-select: none; /* Safari */
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE10+/Edge */

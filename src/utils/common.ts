@@ -706,3 +706,33 @@ export const createBranch = async (user: string, project: string, sha: any) => {
 //         }
 //     }
 // }
+
+// get latest release assets by tag name
+export const getRelease = async (
+    user: string,
+    repo: string,
+    tag: string,
+    version: string
+) => {
+    const releaseRes: any = await githubApi.getReleasesAssets(user, repo, tag)
+    console.log('releaseRes', releaseRes)
+    if (releaseRes.status === 200 && releaseRes.data.assets.length >= 3) {
+        // filter current project version
+        const assets = releaseRes.data.assets.filter((item: any) => {
+            return item.name.includes(version) || item.name.includes('tar')
+        })
+        const releaseData = {
+            ...releaseRes.data,
+            assets: assets.map((asset: any) => {
+                return {
+                    ...asset,
+                    updated_at: convertToLocalTime(asset.updated_at),
+                }
+            }),
+        }
+        return releaseData
+    } else {
+        console.error('releaseRes error', releaseRes)
+        return null
+    }
+}

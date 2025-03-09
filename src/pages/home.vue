@@ -597,11 +597,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.isWeb {
-    width: 60% !important;
-    height: 90% !important;
-}
-
 .homeBox {
     width: 100%;
     height: 100%;
