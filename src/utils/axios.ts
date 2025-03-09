@@ -18,6 +18,7 @@ http.interceptors.request.use((config) => {
             'token'
         )}`
     }
+    config.headers['Content-Length'] = undefined
     return config
 })
 

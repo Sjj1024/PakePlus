@@ -339,6 +339,7 @@ export const getInitRust = async (params: any) => {
     params.config = JSON.parse(params.config)
     params.config.visible = false
     params.config = JSON.stringify(params.config)
+    console.log('getInitRust params', params)
     if (isTauri) {
         const content = await invoke('update_init_rs', params)
         return content
