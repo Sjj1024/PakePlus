@@ -122,7 +122,7 @@ export default {
     // update custom js file
     updateCustomJsFile(user: string, repo: string, body: any) {
         return http(
-            `/repos/${user}/${repo}/contents/src-tauri/src/extension/custom.js`,
+            `/repos/${user}/${repo}/contents/src-tauri/data/custom.js`,
             {
                 method: 'put',
                 data: body,

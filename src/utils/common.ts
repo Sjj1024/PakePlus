@@ -252,3 +252,178 @@ export const getCustomJs = async () => {
         return content
     }
 }
+
+// turn base64 to ArrayBuffer
+export const base64ToArrayBuffer = (base64: string) => {
+    // creat new ArrayBuffer
+    const binaryString = atob(base64)
+    const len = binaryString.length
+    const arrayBuffer = new ArrayBuffer(len)
+    const uint8Array = new Uint8Array(arrayBuffer)
+    for (let i = 0; i < len; i++) {
+        uint8Array[i] = binaryString.charCodeAt(i)
+    }
+    return arrayBuffer
+}
+
+// arrayBufferToBase64
+export const arrayBufferToBase64 = (buffer: ArrayBuffer) => {
+    let binary = ''
+    const bytes = new Uint8Array(buffer)
+    const len = bytes.byteLength
+    for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i])
+    }
+    return btoa(binary)
+}
+
+// 绘制苹果风格圆角路径
+const drawAppleStylePath = (ctx: any, width: number, height: number) => {
+    const radius = Math.min(width, height) * 0.15 // 圆角半径比例
+    const controlOffset = radius * 0.55 // 控制点偏移量
+
+    ctx.beginPath()
+
+    // 左上角
+    ctx.moveTo(radius, 0)
+    ctx.bezierCurveTo(controlOffset, 0, 0, controlOffset, 0, radius)
+
+    // 左下角
+    ctx.lineTo(0, height - radius)
+    ctx.bezierCurveTo(
+        0,
+        height - controlOffset,
+        controlOffset,
+        height,
+        radius,
+        height
+    )
+
+    // 右下角
+    ctx.lineTo(width - radius, height)
+    ctx.bezierCurveTo(
+        width - controlOffset,
+        height,
+        width,
+        height - controlOffset,
+        width,
+        height - radius
+    )
+
+    // 右上角
+    ctx.lineTo(width, radius)
+    ctx.bezierCurveTo(
+        width,
+        controlOffset,
+        width - controlOffset,
+        0,
+        width - radius,
+        0
+    )
+
+    ctx.closePath()
+}
+
+// 使用 Canvas 裁剪图片为圆角
+export const cropImageToRound = (image: any) => {
+    const canvas = document.createElement('canvas')
+    const ctx: any = canvas.getContext('2d')
+
+    // 设置画布大小与图片一致
+    canvas.width = image.width
+    canvas.height = image.height
+
+    // 绘制苹果风格圆角路径
+    drawAppleStylePath(ctx, canvas.width, canvas.height)
+
+    // 裁剪图片
+    ctx.clip()
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
+
+    // 将裁剪后的图片转换为 Base64
+    return canvas.toDataURL('image/png')
+}
+
+// get base64 image size
+export const getImageSize = (base64String: any) => {
+    return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.onload = () => {
+            const dimensions = {
+                width: img.width,
+                height: img.height,
+            }
+            resolve(dimensions)
+        }
+        img.onerror = (error) => {
+            reject(error)
+        }
+        img.src = base64String
+    })
+}
+
+// save image file to datadir
+// const saveImage = async (fileName: string, base64: string) => {
+//     // base64 to arraybuffer
+//     const imageArrayBuffer = base64ToArrayBuffer(base64)
+//     // save file
+//     const imageData = new Uint8Array(imageArrayBuffer)
+//     // get app data dir
+//     const appDataPath = await appDataDir()
+//     console.log('appDataPath------', appDataPath)
+//     const targetDir = await join(appDataPath, 'assets')
+//     const savePath = await join(targetDir, fileName)
+//     // confirm target dir
+//     await mkdir(targetDir, { recursive: true })
+//     // const savePath = await join(appDataPath, 'assets', fileName)
+//     // save file to app data dir
+//     await writeFile(savePath, imageData)
+//     console.log(`Image saved to: ${savePath}`)
+//     store.currentProject.icon = savePath
+//     // save image asseturl to project
+//     store.addUpdatePro({
+//         ...store.currentProject,
+//         name: store.currentProject.name,
+//         appid: store.currentProject.appid,
+//         debug: pubForm.model,
+//         icon: savePath,
+//         more: store.currentProject.more,
+//     })
+// }
+
+// update build.yml file content
+// const updateMainRs = async () => {
+//     // get CargoToml file sha
+//     const shaRes = await getFileSha(
+//         'src-tauri/src/main.rs',
+//         store.currentProject.name
+//     )
+//     console.log('get CargoToml file sha', shaRes)
+//     if (shaRes.status === 200 || shaRes.status === 404) {
+//         // get CargoToml file content
+//         const configContent: any = await invoke('update_main_rust', {
+//             appUrl: store.currentProject.url,
+//             appName: store.currentProject.showName,
+//             userAgent: platforms[store.currentProject.platform].userAgent,
+//             width: store.currentProject.width,
+//             height: store.currentProject.height,
+//         })
+//         const updateRes: any = await githubApi.updateMainRsFile(
+//             store.userInfo.login,
+//             'PakePlus',
+//             {
+//                 message: 'update main rust from pakeplus',
+//                 content: configContent,
+//                 sha: shaRes.data.sha,
+//                 branch: store.currentProject.name,
+//             }
+//         )
+//         if (updateRes.status === 200) {
+//             console.log('updateRes', updateRes)
+//         } else {
+//             console.error('updateRes error', updateRes)
+//         }
+//     } else {
+//         console.error('getFileSha error', shaRes)
+//     }
+// }

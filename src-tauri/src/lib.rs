@@ -49,6 +49,7 @@ pub fn run() {
             command::cmds::rust_main_window,
             command::cmds::open_url,
             command::cmds::open_devtools,
+            command::cmds::update_init_rs,
         ])
         .setup(|app| {
             tauri::async_runtime::block_on(async move {

@@ -333,6 +333,21 @@ pub async fn open_devtools(handle: AppHandle) {
     }
 }
 
+#[tauri::command]
+pub async fn update_init_rs(handle: tauri::AppHandle, config: String) -> String {
+    let resource_path = handle
+        .path()
+        .resolve("data/lib.rs", BaseDirectory::Resource)
+        .expect("failed to resolve resource");
+    let mut main_rust = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    main_rust.read_to_string(&mut contents).unwrap();
+    contents = contents.replace("WINDOWCONFIG", config.as_str());
+    // The new file content, using Base64 encoding
+    let encoded_contents = BASE64_STANDARD.encode(contents);
+    return encoded_contents;
+}
+
 // #[tauri::command]
 // pub async fn download_file_by_binary(
 //     app: AppHandle,
