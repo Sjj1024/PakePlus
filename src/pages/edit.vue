@@ -179,7 +179,7 @@
                     </el-form-item>
                     <el-form-item
                         prop="iconRound"
-                        label="Icon圆角"
+                        :label="t('iconRounded')"
                         class="formItem"
                     >
                         <el-checkbox
@@ -188,7 +188,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="窗口保持"
+                        :label="t('windowKeep')"
                         prop="state"
                         class="formItem"
                     >
@@ -198,7 +198,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="注入JQ"
+                        :label="t('injectJq')"
                         prop="injectJq"
                         class="formItem"
                     >
@@ -410,7 +410,7 @@
             <template #header="{ titleId, titleClass }">
                 <div class="configHeader">
                     <h4 :id="titleId" :class="titleClass" class="titleLine">
-                        <span class="titleText">脚本编辑</span>
+                        <span class="titleText">{{ t('scriptEdit') }}</span>
                     </h4>
                 </div>
             </template>

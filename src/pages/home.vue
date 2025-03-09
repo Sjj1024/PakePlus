@@ -160,7 +160,9 @@
                         alt="avatar"
                     />
                 </div>
-                <div class="line">用户名: {{ store.userInfo.login }}</div>
+                <div class="line">
+                    {{ t('userName') }}: {{ store.userInfo.login }}
+                </div>
                 <!-- <div class="line">主页: {{ store.userInfo.html_url }}</div>
                 <div class="line">简介: {{ store.userInfo.bio }}</div> -->
                 <div class="line">token: {{ token }}</div>
@@ -170,10 +172,10 @@
             </div>
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button @click="logout">{{ t('退出') }}</el-button>
+                    <el-button @click="logout">{{ t('quit') }}</el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button type="primary" @click="userInfoDialog = false">
-                        {{ t('确定') }}
+                        {{ t('confirm') }}
                     </el-button>
                 </div>
             </template>
