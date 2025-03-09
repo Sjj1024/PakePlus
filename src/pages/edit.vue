@@ -437,8 +437,6 @@ import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePakeStore } from '@/store'
 import {
-    mkdir,
-    writeFile,
     readFile,
     readTextFile,
     writeTextFile,
@@ -454,7 +452,6 @@ import {
     CSSFILTER,
     isAlphanumeric,
     openUrl,
-    base64ToArrayBuffer,
     convertToLocalTime,
     isTauri,
     platforms,
@@ -465,7 +462,6 @@ import {
     getTauriConf,
     base64Encode,
     getInitRust,
-    verifyBranch,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -624,94 +620,6 @@ const closeConfigDialog = () => {
 const switchTauriConfig = () => {
     isJson.value = !isJson.value
     tauriConfigRef.value?.updateCode()
-}
-
-const jsChange = () => {
-    console.log('js file change', store.currentProject.jsFile)
-    let jsContent = ''
-    for (let jsFile of store.currentProject.jsFile) {
-        const reContent = jsFileContents.value.match(
-            new RegExp(`// ${jsFile}\n(.*)// end ${jsFile}\n`, 's')
-        )
-        if (reContent) {
-            jsContent += reContent[1]
-        }
-    }
-    console.log('jsContent', jsContent)
-    jsFileContents.value = jsContent
-    jsSelOptions.value = store.currentProject.jsFile?.map((item: any) => {
-        return {
-            label: item,
-            value: item,
-        }
-    })
-}
-
-const optionVisible = (value: boolean) => {
-    console.log('optionVisible', value)
-    if (!value) {
-        // close show js option
-        jsSelOptions.value = store.currentProject.jsFile?.map((item: any) => {
-            return {
-                label: item,
-                value: item,
-            }
-        })
-        //
-    }
-}
-
-const jsHandle = async (event: any) => {
-    console.log('js hangle', event.offsetX, event.offsetY)
-    if (
-        (event.offsetX > 230 && event.offsetY > 0) ||
-        event.target instanceof SVGElement ||
-        (event.target instanceof HTMLDivElement &&
-            event.target.classList.contains('el-select__suffix'))
-    ) {
-        console.log('Clicked on an SVG')
-    } else {
-        console.log('Clicked on an element other than SVG')
-        const selected: any = await open({
-            multiple: true,
-            filters: [
-                {
-                    name: 'File',
-                    extensions: ['js'],
-                },
-            ],
-        })
-        if (Array.isArray(selected)) {
-            // user selected multiple directories
-            console.log('selected list', selected)
-            const jsFiles: any = []
-            const jsOptions: any = []
-            let jsContents: any = ''
-            for (let file of selected) {
-                // read js file content
-                const jsContent = await readTextFile(file)
-                const fileName = await basename(file)
-                jsContents += `// ${fileName}\n${jsContent}\n// end ${fileName}\n`
-                console.log('filename', fileName)
-                jsOptions.push({
-                    label: fileName,
-                    value: fileName,
-                })
-                jsFiles.push(fileName)
-            }
-            store.currentProject.jsFile = jsFiles
-            jsSelOptions.value = jsOptions
-            jsFileContents.value = jsContents
-            console.log('jsFileContents', jsFileContents.value)
-        } else if (selected === null) {
-            // user cancelled the selection
-            console.log('No file selected')
-            return null
-        } else {
-            // user selected a single directory
-            console.log('user selected a single directory')
-        }
-    }
 }
 
 // icon confirm
@@ -955,7 +863,6 @@ const getInitializationScript = () => {
     if (jsFileContents.value) {
         initJsScript += jsFileContents.value
     }
-    console.log('initJsScript', initJsScript)
     return initJsScript
 }
 
@@ -1052,7 +959,6 @@ const updateBuildYml = async () => {
             name: store.currentProject.name,
             body: pubForm.desc,
         })
-        console.log('content', content)
         // update build.yml file content
         const updateRes: any = await githubApi.updateBuildYmlFile(
             store.userInfo.login,
@@ -1126,7 +1032,6 @@ const updateInitRs = async () => {
             state: store.currentProject.state,
             injectjq: store.currentProject.injectJq,
         })
-        console.log('configContent', configContent)
         const updateRes: any = await githubApi.updateFileContent(
             store.userInfo.login,
             'PakePlus',
@@ -1161,7 +1066,6 @@ const libRsConfig = async () => {
         const configContent: any = await invoke('rust_lib_window', {
             config: JSON.stringify(store.currentProject.more.windows),
         })
-        console.log('configContent', configContent)
         const updateRes: any = await githubApi.updateFileContent(
             store.userInfo.login,
             'PakePlus',
@@ -1213,30 +1117,6 @@ const updateCustomJs = async () => {
     } else {
         console.error('getFileSha error', shaRes)
     }
-}
-
-// check project type and creat branch
-const createBranch = async () => {
-    // create web branch
-    console.log('creat branch')
-    const res: any = await githubApi.createBranch(
-        store.userInfo.login,
-        'PakePlus',
-        {
-            ref: `refs/heads/${store.currentProject.name}`,
-            sha: store.webCommit.sha,
-        }
-    )
-    console.log('createBranch', res)
-    if (res.status === 201) {
-        console.log('first creat branch')
-    } else {
-        console.log('not first')
-    }
-    // verify branch success
-    await verifyBranch(store.userInfo.login, 'PakePlus', 'app-icon.png', {
-        ref: store.currentProject.name,
-    })
 }
 
 // update tauri.conf.json
@@ -1307,10 +1187,10 @@ const publishDist = async () => {
 
 // new publish version
 const publish2 = async () => {
+    centerDialogVisible.value = false
+    buildLoading.value = true
     // delete release
     store.isRelease && deleteRelease()
-    // check project type and creat branch
-    await createBranch()
     // publish web or dist
     if (store.currentProject.url.includes('http')) {
         await publishWeb()

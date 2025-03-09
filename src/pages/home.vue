@@ -204,7 +204,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button
                         type="primary"
-                        @click="creatBranch()"
+                        @click="creatProject()"
                         :loading="creatLoading"
                     >
                         {{ t('confirm') }}
@@ -232,6 +232,7 @@ import {
     base64Decode,
     platforms,
     getCustomJs,
+    createBranch,
 } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
@@ -279,24 +280,28 @@ const logout = () => {
 const goProject = async (pro: Project) => {
     store.setCurrentProject(pro)
     router.push('/edit')
-    // if token exist, creat branch, else next page
     branchName.value = pro.name
+    // check branch exist
+    if (token.value) {
+        const res: any = await githubApi.getBranch(
+            store.userInfo.login,
+            'PakePlus',
+            branchName.value
+        )
+        console.log('getBranch', res)
+        if (res.status === 200) {
+            console.log('branch exist')
+        } else {
+            console.log('branch not exist')
+            createBranch(store.userInfo.login, pro.name, store.webCommit.sha)
+        }
+    }
 }
 
 // go about
 const goAbout = () => {
     router.push('/about')
 }
-
-// get img url
-// const getImgUrl = (filePath: string) => {
-//     if (filePath) {
-//         const timestamp = new Date().getTime()
-//         return `${convertFileSrc(filePath)}?t=${timestamp}`
-//     } else {
-//         return pakePlusIcon
-//     }
-// }
 
 // new barnch config
 const showBranchDialog = () => {
@@ -424,24 +429,6 @@ const getCommitSha = async () => {
 }
 
 // get commit sha
-const getDistCommitSha = async () => {
-    // get commit sha by branch name
-    // if dev get dev branch, else get master branch
-    const res: any = await githubApi.getaCommitSha(
-        store.userInfo.login,
-        'PakePlus',
-        'dist'
-    )
-    console.log('getDistCommitSha', res.data)
-    if (res.status === 200 && res.data) {
-        store.setDistCommit(res.data)
-        return true
-    } else {
-        return false
-    }
-}
-
-// get commit sha
 const getWebCommitSha = async () => {
     // get commit sha by branch name
     // if dev get dev branch, else get master branch
@@ -475,7 +462,7 @@ const getFileSha = async (filePath: string, branch: string) => {
 const creatLoading = ref(false)
 
 // creat project branch,
-const creatBranch = async () => {
+const creatProject = async () => {
     creatLoading.value = true
     // update build.yml file content
     // token.value && (await uploadBuildYml())
@@ -517,9 +504,13 @@ const creatBranch = async () => {
                 console.log('branch Info success', branchInfo)
                 store.setCurrentProject(branchInfo)
                 creatLoading.value = false
-                router.push('/edit')
                 // update new branch build.yml file
-                // updateBuildYml(branchName.value)
+                createBranch(
+                    store.userInfo.login,
+                    branchName.value,
+                    store.webCommit.sha
+                )
+                router.push('/edit')
             } else if (res.status === 200) {
                 console.log('project existed')
                 creatLoading.value = false
@@ -548,35 +539,6 @@ const creatBranch = async () => {
     } else {
         ElMessage.error(t('englishName'))
         creatLoading.value = false
-    }
-}
-
-// creat build yml
-const uploadBuildYml = async (_: string = 'main') => {
-    // get build.yml file content
-    // const content = await readFile('build.yml')
-    const content = await updateBuildFile({
-        name: 'PakePlus',
-        body: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.',
-    })
-    console.log('content', content)
-    if (content === 'error') {
-        ElMessage.error(t('readFileError'))
-        return
-    }
-    // update build.yml file content
-    const updateRes: any = await githubApi.createBuildYml(
-        store.userInfo.login,
-        'PakePlus',
-        {
-            message: 'update build.yml from pakeplus',
-            content: content,
-        }
-    )
-    if (updateRes.status === 200 || updateRes.status === 201) {
-        console.log('uploadBuildYml Res', updateRes)
-    } else {
-        console.log('uploadBuildYml error, but not important', updateRes)
     }
 }
 

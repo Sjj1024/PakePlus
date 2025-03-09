@@ -408,7 +408,6 @@ const cmOptions = ref({
 })
 
 const codeChange = (code: string) => {
-    console.log('codeChange!', code)
     try {
         const codeObj = JSON.parse(code)
         console.log('codeObj', codeObj)

@@ -172,11 +172,11 @@ const deleteRelease = async () => {
         type: 'warning',
     })
         .then(() => {
-            console.log('delete project')
+            console.log('delete deleteRelease')
             deleteRelAssets()
         })
         .catch(() => {
-            console.log('catch project')
+            console.log('catch deleteRelease')
         })
 }
 

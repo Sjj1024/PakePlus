@@ -1,4 +1,5 @@
 import { invoke } from '@tauri-apps/api/core'
+import { Base64 } from 'js-base64'
 import githubApi from '@/apis/github'
 
 // 分支
@@ -194,12 +195,12 @@ export const convertToLocalTime = (utcDateTime: string) => {
 
 // base64 encode
 export const base64Encode = (str: string) => {
-    return btoa(str)
+    return Base64.encode(str)
 }
 
 // base64 decode
 export const base64Decode = (str: string) => {
-    return atob(str)
+    return Base64.decode(str)
 }
 
 // 读取文件内容
@@ -333,7 +334,9 @@ export const getTauriConf = async (params: any) => {
 // get init.rs file content
 export const getInitRust = async (params: any) => {
     // 将visible: true 替换为 visible: false
-    params.config = params.config.replaceAll('visible: true', 'visible: false')
+    params.config = JSON.parse(params.config)
+    params.config.visible = false
+    params.config = JSON.stringify(params.config)
     if (isTauri) {
         const content = await invoke('update_init_rs', params)
         return content
@@ -352,8 +355,7 @@ export const getInitRust = async (params: any) => {
             // 替换INJECTJQ
             content = content.replaceAll(
                 '.initialization_script(include_str!("../../data/custom.js"))',
-                `.initialization_script(include_str!("../../data/jquery.min.js"))
-            .initialization_script(include_str!("../../data/custom.js"))`
+                `.initialization_script(include_str!("../../data/jquery.min.js"))\r.initialization_script(include_str!("../../data/custom.js"))`
             )
         }
         return base64Encode(content)
@@ -559,3 +561,148 @@ export const verifyBranch = async (
         }
     }
 }
+
+// get img url
+// const getImgUrl = (filePath: string) => {
+//     if (filePath) {
+//         const timestamp = new Date().getTime()
+//         return `${convertFileSrc(filePath)}?t=${timestamp}`
+//     } else {
+//         return pakePlusIcon
+//     }
+// }
+
+// check project type and creat branch
+export const createBranch = async (user: string, project: string, sha: any) => {
+    // create web branch
+    console.log('creat branch')
+    const res: any = await githubApi.createBranch(user, 'PakePlus', {
+        ref: `refs/heads/${project}`,
+        sha,
+    })
+    console.log('createBranch', res)
+    if (res.status === 201) {
+        console.log('first creat branch')
+        return true
+    } else {
+        console.log('not first')
+        return false
+    }
+}
+
+// const jsChange = () => {
+//     console.log('js file change', store.currentProject.jsFile)
+//     let jsContent = ''
+//     for (let jsFile of store.currentProject.jsFile) {
+//         const reContent = jsFileContents.value.match(
+//             new RegExp(`// ${jsFile}\n(.*)// end ${jsFile}\n`, 's')
+//         )
+//         if (reContent) {
+//             jsContent += reContent[1]
+//         }
+//     }
+//     console.log('jsContent', jsContent)
+//     jsFileContents.value = jsContent
+//     jsSelOptions.value = store.currentProject.jsFile?.map((item: any) => {
+//         return {
+//             label: item,
+//             value: item,
+//         }
+//     })
+// }
+
+// creat build yml
+// const uploadBuildYml = async (_: string = 'main') => {
+//     // get build.yml file content
+//     // const content = await readFile('build.yml')
+//     const content = await updateBuildFile({
+//         name: 'PakePlus',
+//         body: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.',
+//     })
+//     console.log('content', content)
+//     if (content === 'error') {
+//         ElMessage.error(t('readFileError'))
+//         return
+//     }
+//     // update build.yml file content
+//     const updateRes: any = await githubApi.createBuildYml(
+//         store.userInfo.login,
+//         'PakePlus',
+//         {
+//             message: 'update build.yml from pakeplus',
+//             content: content,
+//         }
+//     )
+//     if (updateRes.status === 200 || updateRes.status === 201) {
+//         console.log('uploadBuildYml Res', updateRes)
+//     } else {
+//         console.log('uploadBuildYml error, but not important', updateRes)
+//     }
+// }
+
+// const optionVisible = (value: boolean) => {
+//     console.log('optionVisible', value)
+//     if (!value) {
+//         // close show js option
+//         jsSelOptions.value = store.currentProject.jsFile?.map((item: any) => {
+//             return {
+//                 label: item,
+//                 value: item,
+//             }
+//         })
+//         //
+//     }
+// }
+
+// const jsHandle = async (event: any) => {
+//     console.log('js hangle', event.offsetX, event.offsetY)
+//     if (
+//         (event.offsetX > 230 && event.offsetY > 0) ||
+//         event.target instanceof SVGElement ||
+//         (event.target instanceof HTMLDivElement &&
+//             event.target.classList.contains('el-select__suffix'))
+//     ) {
+//         console.log('Clicked on an SVG')
+//     } else {
+//         console.log('Clicked on an element other than SVG')
+//         const selected: any = await open({
+//             multiple: true,
+//             filters: [
+//                 {
+//                     name: 'File',
+//                     extensions: ['js'],
+//                 },
+//             ],
+//         })
+//         if (Array.isArray(selected)) {
+//             // user selected multiple directories
+//             console.log('selected list', selected)
+//             const jsFiles: any = []
+//             const jsOptions: any = []
+//             let jsContents: any = ''
+//             for (let file of selected) {
+//                 // read js file content
+//                 const jsContent = await readTextFile(file)
+//                 const fileName = await basename(file)
+//                 jsContents += `// ${fileName}\n${jsContent}\n// end ${fileName}\n`
+//                 console.log('filename', fileName)
+//                 jsOptions.push({
+//                     label: fileName,
+//                     value: fileName,
+//                 })
+//                 jsFiles.push(fileName)
+//             }
+//             store.currentProject.jsFile = jsFiles
+//             jsSelOptions.value = jsOptions
+//             jsFileContents.value = jsContents
+//             console.log('jsFileContents', jsFileContents.value)
+//         } else if (selected === null) {
+//             // user cancelled the selection
+//             console.log('No file selected')
+//             return null
+//         } else {
+//             // user selected a single directory
+//             console.log('user selected a single directory')
+//         }
+//     }
+// }

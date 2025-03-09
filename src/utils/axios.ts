@@ -7,7 +7,7 @@ const http = axios.create({
     //基础路径，requests发出的请求在端口号后面会跟改baseURl
     baseURL: 'https://api.github.com',
     //代表请求超时的时间5s
-    timeout: 5000,
+    timeout: 10000,
 })
 
 //请求拦截器，在请求发出之前做些事情
