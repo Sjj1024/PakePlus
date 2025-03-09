@@ -21,7 +21,7 @@
                     ]
                 }
             },
-            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval' ipc: http://ipc.localhost; img-src 'self' asset: http://asset.localhost blob: data: http://asset.localhost; font-src 'self' asset: http//localhost data:;"
+            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval' ipc: http://ipc.localhost; connect-src 'self' ipc://localhost https://api.github.com; img-src 'self' https://avatars.githubusercontent.com asset: http://asset.localhost blob: data: http://asset.localhost; font-src 'self' asset: http://localhost data:;"
         },
         "withGlobalTauri": true
     },
