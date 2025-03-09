@@ -534,3 +534,28 @@ export const getImageSize = (base64String: any) => {
 //         console.error('getFileSha error', shaRes)
 //     }
 // }
+
+// 验证三次分支是否已经创建成功
+export const verifyBranch = async (
+    user: string,
+    repo: string,
+    path: string,
+    params: any
+) => {
+    let count = 0
+    // wait fork done, enable github action
+    while (true) {
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+        console.log('wait verifyBranch......')
+        const res = await githubApi.getFileSha(user, repo, path, params)
+        if (res.status === 200) {
+            console.log('verifyBranch done break')
+            break
+        }
+        count++
+        if (count > 3) {
+            console.log('verifyBranch done break')
+            break
+        }
+    }
+}

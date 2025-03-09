@@ -465,6 +465,7 @@ import {
     getTauriConf,
     base64Encode,
     getInitRust,
+    verifyBranch,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -1228,10 +1229,13 @@ const createBranch = async () => {
     console.log('createBranch', res)
     if (res.status === 201) {
         console.log('first creat branch')
-        return
     } else {
         console.log('not first')
     }
+    // verify branch success
+    await verifyBranch(store.userInfo.login, 'PakePlus', 'index.html', {
+        ref: store.currentProject.name,
+    })
 }
 
 // update tauri.conf.json
@@ -1291,7 +1295,7 @@ const publishWeb = async () => {
     // update init.rs
     await updateInitRs()
     // dispatch action
-    dispatchAction()
+    // dispatchAction()
 }
 
 // dist publish
