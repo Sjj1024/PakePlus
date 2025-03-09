@@ -366,8 +366,7 @@ pub async fn update_init_rs(
         println!("injectjq: true");
         contents = contents.replace(
             r#".initialization_script(include_str!("../../data/custom.js"))"#,
-            r#".initialization_script(include_str!("../../data/jquery.min.js"))
-            .initialization_script(include_str!("../../data/custom.js"))"#,
+            r#".initialization_script(include_str!("../../data/jquery.min.js")).initialization_script(include_str!("../../data/custom.js"))"#,
         );
     } else {
         println!("injectjq: false");
