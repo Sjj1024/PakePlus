@@ -20,6 +20,7 @@
                 </div>
                 <div class="toolTips">
                     <div class="tipsBody">
+                        {{ t('releaseNotes') }}
                         {{ releaseData.body || t('releaseBody') }}
                     </div>
                 </div>

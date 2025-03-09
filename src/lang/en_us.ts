@@ -53,7 +53,7 @@ export default {
     pubMode: 'Mode',
     closeDebug: 'close debug',
     openDebug: 'open debug',
-    releaseNotes: 'Notes',
+    releaseNotes: 'Notes:',
     inputRelNotes: 'Please enter the release notes',
     pubNotesTips:
         'Note: The build and publish process usually takes about 15 minutes......',

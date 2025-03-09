@@ -54,7 +54,7 @@ export default {
     pubMode: '게시 모드',
     closeDebug: '디버그 닫기',
     openDebug: '디버그 열기',
-    releaseNotes: '릴리스 노트',
+    releaseNotes: '릴리스 노트:',
     inputRelNotes: '릴리스 노트를 입력하세요',
     pubNotesTips:
         '참고: 빌드 및 게시에는 약 15분 정도 소요되며, 잠시만 기다려 주세요......',

@@ -52,7 +52,7 @@ export default {
     pubMode: '发布模式',
     closeDebug: '关闭调试',
     openDebug: '开启调试',
-    releaseNotes: '发布说明',
+    releaseNotes: '发布说明:',
     inputRelNotes: '请输入发布说明',
     pubNotesTips: '注： 打包发布大概需要15分钟左右的时间，请耐心等待......',
     inputWebPlaceholder: '请输入网站地址',

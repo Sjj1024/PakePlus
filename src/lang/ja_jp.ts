@@ -56,7 +56,7 @@ export default {
     pubMode: '公開モード',
     closeDebug: 'デバッグをオフにする',
     openDebug: 'デバッグをオンにする',
-    releaseNotes: 'リリースノート',
+    releaseNotes: 'リリースノート:',
     inputRelNotes: 'リリースノートを入力してください',
     pubNotesTips:
         '注：ビルドと公開には約15分かかりますので、しばらくお待ちください……',
