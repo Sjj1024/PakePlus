@@ -1383,7 +1383,7 @@ const initJsFileContents = async () => {
 
 onMounted(async () => {
     // 重制编译时间
-    // store.getRelease()
+    store.getRelease()
     buildTime = 0
     if (store.currentProject.icon) {
         confirmIcon(store.currentProject.icon)

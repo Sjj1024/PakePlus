@@ -1,6 +1,7 @@
 import { invoke } from '@tauri-apps/api/core'
 import { Base64 } from 'js-base64'
 import githubApi from '@/apis/github'
+import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 
 // 分支
 export const mainBranch = 'main'
@@ -740,7 +741,7 @@ export const getRelease = async (
 // copy text
 export const copyText = async (text: string) => {
     if (isTauri) {
-        await invoke('copy_text', { text })
+        await writeText(text)
     } else {
         navigator.clipboard.writeText(text)
     }
