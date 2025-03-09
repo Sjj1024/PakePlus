@@ -826,7 +826,7 @@ const uploadIcon = async () => {
 
 // update icon file content
 const updateIcon = async () => {
-    const base64Img = store.currentProject.iconRound
+    const iconContent = store.currentProject.iconRound
         ? roundIcon.value.split('base64,')[1]
         : iconBase64.value.split('base64,')[1]
     // get app-icon.png sha
@@ -837,6 +837,7 @@ const updateIcon = async () => {
         { ref: store.currentProject.name }
     )
     console.log('iconSha---', iconSha)
+    console.log('iconContent---', iconContent)
     // update icon file content
     if (iconSha.status === 200) {
         const updateRes: any = await githubApi.updateIconFile(
@@ -844,7 +845,7 @@ const updateIcon = async () => {
             'PakePlus',
             {
                 message: 'update icon from pakeplus',
-                content: base64Img,
+                content: iconContent,
                 sha: iconSha.data.sha,
                 branch: store.currentProject.name,
             }
@@ -1283,7 +1284,7 @@ const publishWeb = async () => {
     // create web branch
     console.log('publish web')
     // update app icon
-    await updateIcon()
+    iconBase64.value && (await updateIcon())
     // update build.yml
     await updateBuildYml()
     // update Cargo.toml
