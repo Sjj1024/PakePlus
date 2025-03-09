@@ -120,7 +120,7 @@
             </template>
             <div class="diaContent">
                 <el-input
-                    v-model="token"
+                    v-model.trim="token"
                     autocomplete="off"
                     autoCapitalize="off"
                     autoCorrect="off"
@@ -189,7 +189,7 @@
             </template>
             <div class="diaContent">
                 <el-input
-                    v-model="branchName"
+                    v-model.trim="branchName"
                     autocomplete="off"
                     autoCapitalize="off"
                     autoCorrect="off"
