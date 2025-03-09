@@ -460,6 +460,11 @@ import {
     platforms,
     arrayBufferToBase64,
     cropImageToRound,
+    getBuildYml,
+    getCargoToml,
+    getTauriConf,
+    base64Encode,
+    getInitRust,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -1041,7 +1046,7 @@ const updateBuildYml = async () => {
     console.log('get build.yml file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get build.yml file content
-        const content = await invoke('update_build_file', {
+        const content = await getBuildYml({
             name: store.currentProject.name,
             body: pubForm.desc,
         })
@@ -1077,7 +1082,7 @@ const updateCargoToml = async () => {
     console.log('get CargoToml file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
-        const configContent: any = await invoke('update_cargo_file', {
+        const configContent: any = await getCargoToml({
             name: store.currentProject.showName,
             version: store.currentProject.version,
             desc: store.currentProject.desc,
@@ -1114,16 +1119,18 @@ const updateInitRs = async () => {
     console.log('get init.rs file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
-        const configContent: any = await invoke('update_init_rs', {
+        const configContent: any = await getInitRust({
             config: JSON.stringify(store.currentProject.more.windows),
+            state: store.currentProject.state,
+            injectjq: store.currentProject.injectJq,
         })
         console.log('configContent', configContent)
         const updateRes: any = await githubApi.updateFileContent(
             store.userInfo.login,
             'PakePlus',
-            'src-tauri/src/lib.rs',
+            'src-tauri/src/utils/init.rs',
             {
-                message: 'update lib rust from pakeplus',
+                message: 'update init rust from pakeplus',
                 content: configContent,
                 sha: shaRes.data.sha,
                 branch: store.currentProject.name,
@@ -1181,13 +1188,11 @@ const updateCustomJs = async () => {
         'src-tauri/data/custom.js',
         store.currentProject.name
     )
-    console.log('get CargoToml file sha', shaRes)
+    console.log('get custom file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
         const initJsScript = getInitializationScript()
-        const jsFileContent: any = await invoke('update_custom_js', {
-            jsContent: initJsScript,
-        })
+        const jsFileContent: any = await base64Encode(initJsScript)
         const updateRes: any = await githubApi.updateCustomJsFile(
             store.userInfo.login,
             'PakePlus',
@@ -1239,12 +1244,13 @@ const updateTauriConfig = async () => {
     try {
         // remove label from windows
         let { label, ...newWindows } = store.currentProject.more.windows
-        const configContent: any = await invoke('update_config_file', {
+        const configContent: any = await getTauriConf({
             name: store.currentProject.showName,
             version: store.currentProject.version,
             id: store.currentProject.appid,
             ascii: isAlphanumeric(store.currentProject.showName),
             windowConfig: JSON.stringify(newWindows),
+            tauriApi: store.currentProject.tauriApi,
         })
         // update config file
         const updateRes: any = await githubApi.updateConfigFile(
@@ -1299,12 +1305,12 @@ const publish2 = async () => {
     // delete release
     store.isRelease && deleteRelease()
     // check project type and creat branch
-    createBranch()
+    await createBranch()
     // publish web or dist
     if (store.currentProject.url.includes('http')) {
-        publishWeb()
+        await publishWeb()
     } else {
-        publishDist()
+        await publishDist()
     }
 }
 

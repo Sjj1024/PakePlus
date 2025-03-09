@@ -138,6 +138,7 @@ pub async fn update_config_file(
     id: String,
     ascii: bool,
     window_config: String,
+    tauri_api: bool,
 ) -> String {
     let resource_path = handle
         .path()
@@ -150,6 +151,11 @@ pub async fn update_config_file(
         .replace("PROJECTNAME", name.as_str())
         .replace("PROJECTVERSION", version.as_str())
         .replace("PROJECTID", id.as_str());
+    if tauri_api {
+        contents = contents.replace("-2", r#"true"#);
+    } else {
+        contents = contents.replace("-2", r#"false"#);
+    }
     if ascii {
         contents = contents.replace("-3", r#""all""#);
     } else {
@@ -296,18 +302,18 @@ pub async fn get_custom_js(handle: tauri::AppHandle) -> String {
 }
 
 #[tauri::command]
-pub async fn update_custom_js(handle: tauri::AppHandle, js_content: String) -> String {
-    let resource_path = handle
-        .path()
-        .resolve("data/custom.js", BaseDirectory::Resource)
-        .expect("failed to resolve resource");
-    let mut custom_js = std::fs::File::open(&resource_path).unwrap();
-    let mut contents = String::new();
-    custom_js.read_to_string(&mut contents).unwrap();
-    contents += js_content.as_str();
+pub async fn update_custom_js(_: tauri::AppHandle, js_content: String) -> String {
+    // let resource_path = handle
+    //     .path()
+    //     .resolve("data/custom.js", BaseDirectory::Resource)
+    //     .expect("failed to resolve resource");
+    // let mut custom_js = std::fs::File::open(&resource_path).unwrap();
+    // let mut contents = String::new();
+    // custom_js.read_to_string(&mut contents).unwrap();
+    // contents += js_content.as_str();
     // println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
-    let encoded_contents = BASE64_STANDARD.encode(contents);
+    let encoded_contents = BASE64_STANDARD.encode(js_content);
     return encoded_contents;
 }
 
@@ -334,15 +340,38 @@ pub async fn open_devtools(handle: AppHandle) {
 }
 
 #[tauri::command]
-pub async fn update_init_rs(handle: tauri::AppHandle, config: String) -> String {
+pub async fn update_init_rs(
+    handle: tauri::AppHandle,
+    config: String,
+    state: bool,
+    injectjq: bool,
+) -> String {
     let resource_path = handle
         .path()
-        .resolve("data/lib.rs", BaseDirectory::Resource)
+        .resolve("data/init.rs", BaseDirectory::Resource)
         .expect("failed to resolve resource");
     let mut main_rust = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
     main_rust.read_to_string(&mut contents).unwrap();
     contents = contents.replace("WINDOWCONFIG", config.as_str());
+    // 替换state
+    if state {
+        println!("state: true");
+    } else {
+        println!("state: false");
+        contents = contents.replace("if true {", "if false {");
+    }
+    // 替换injectjq
+    if injectjq {
+        println!("injectjq: true");
+        contents = contents.replace(
+            r#".initialization_script(include_str!("../../data/custom.js"))"#,
+            r#".initialization_script(include_str!("../../data/jquery.min.js"))
+            .initialization_script(include_str!("../../data/custom.js"))"#,
+        );
+    } else {
+        println!("injectjq: false");
+    }
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);
     return encoded_contents;

@@ -163,7 +163,7 @@
                 <div class="line">用户名: {{ store.userInfo.login }}</div>
                 <!-- <div class="line">主页: {{ store.userInfo.html_url }}</div>
                 <div class="line">简介: {{ store.userInfo.bio }}</div> -->
-                <!-- <div class="line">token: {{ token }}</div> -->
+                <div class="line">token: {{ token }}</div>
                 <!-- <div class="line">
                     提示: token仅本地存储，不会上传到服务器，请妥善保管
                 </div> -->

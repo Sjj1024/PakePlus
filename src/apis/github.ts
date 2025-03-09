@@ -202,12 +202,15 @@ export default {
     },
     // get web config
     getWebConfig(fileName: string, branch: string) {
-        return http(`/repos/Sjj1024/PakePlus/contents/${fileName}`, {
-            method: 'get',
-            params: {
-                ref: branch,
-            },
-        })
+        return http(
+            `/repos/Sjj1024/PakePlus/contents/src-tauri/data/${fileName}`,
+            {
+                method: 'get',
+                params: {
+                    ref: branch,
+                },
+            }
+        )
     },
     // update and merge
     mergeUpdateRep(user: string, repo: string) {

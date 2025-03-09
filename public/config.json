@@ -12,8 +12,7 @@
                 }
             },
             "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval' ipc: http://ipc.localhost; img-src 'self' asset: http://asset.localhost blob: data: http://asset.localhost; font-src 'self' asset: http//localhost data:;"
-        },
-        "withGlobalTauri": -2
+        }
     },
     "bundle": {
         "active": true,
