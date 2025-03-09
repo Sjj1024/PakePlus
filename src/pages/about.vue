@@ -1,5 +1,5 @@
 <template>
-    <div class="aboutBox">
+    <div class="aboutBox" :class="{ isWeb: !isTauri }">
         <div class="aboutHeader">
             <div class="toolBox">
                 <div class="setting">
@@ -80,7 +80,7 @@ import weixin from '@/assets/images/weixin.png'
 import zhifubao from '@/assets/images/zhifubao.png'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import { urlMap, openUrl } from '@/utils/common'
+import { urlMap, openUrl, isTauri } from '@/utils/common'
 import { ref } from 'vue'
 
 const { t } = useI18n()
@@ -111,13 +111,10 @@ const goBack = () => {
     .aboutHeader {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
 
         .toolBox {
-            position: fixed;
-            top: 20px;
-            right: 20px;
             -webkit-user-select: none; /* Safari */
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE10+/Edge */
@@ -138,8 +135,9 @@ const goBack = () => {
                     font-size: 20px;
                     color: gray;
                     cursor: pointer;
+
                     &:hover {
-                        color: black;
+                        color: var(--text-color);
                     }
                 }
             }
