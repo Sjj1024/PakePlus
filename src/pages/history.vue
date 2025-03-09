@@ -82,7 +82,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePakeStore } from '@/store'
 import githubApi from '@/apis/github'
-import { openUrl, isTauri } from '@/utils/common'
+import { openUrl, isTauri, copyText } from '@/utils/common'
 import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useI18n } from 'vue-i18n'
@@ -134,7 +134,7 @@ const deleteRelease = async () => {
 
 // copy downlink
 const copyDownlink = async (asset: any) => {
-    await writeText(asset.browser_download_url)
+    await copyText(asset.browser_download_url)
     ElMessage.success(t('copySuccess'))
 }
 

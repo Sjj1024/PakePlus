@@ -208,7 +208,7 @@ pub async fn update_cargo_file(
 ) -> String {
     let resource_path = handle
         .path()
-        .resolve("data/Cargo.toml", BaseDirectory::Resource)
+        .resolve("data/cargo.txt", BaseDirectory::Resource)
         .expect("failed to resolve resource");
     let mut config_file = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
