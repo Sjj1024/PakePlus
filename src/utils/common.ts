@@ -1,4 +1,9 @@
 import { invoke } from '@tauri-apps/api/core'
+import githubApi from '@/apis/github'
+
+// 分支
+export const mainBranch = 'main'
+export const webBranch = 'web'
 
 // urlMap
 export const urlMap = {
@@ -199,12 +204,13 @@ export const base64Decode = (str: string) => {
 
 // 读取文件内容
 export const readFile = async (fileName: string) => {
+    const branch = isDev ? webBranch : mainBranch
     try {
-        const response = await fetch(`/${fileName}`)
-        if (!response.ok) {
+        const response = await githubApi.getWebConfig(fileName, branch)
+        if (response.status !== 200) {
             throw new Error('文件读取失败')
         }
-        return response.text()
+        return base64Decode(response.data.content)
     } catch (error) {
         console.error('读取文件时出错:', error)
         return 'error'

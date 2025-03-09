@@ -200,6 +200,15 @@ export default {
             method: 'get',
         })
     },
+    // get web config
+    getWebConfig(fileName: string, branch: string) {
+        return http(`/repos/Sjj1024/PakePlus/contents/${fileName}`, {
+            method: 'get',
+            params: {
+                ref: branch,
+            },
+        })
+    },
     // update and merge
     mergeUpdateRep(user: string, repo: string) {
         return http(`/repos/${user}/${repo}/merge-upstream`, {
