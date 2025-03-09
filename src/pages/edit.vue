@@ -219,7 +219,7 @@
                     </el-form-item>
                     <el-form-item
                         :label="t('scriptFile')"
-                        prop="jsCode"
+                        prop="customJs"
                         class="formItem"
                         style="margin-right: 10px"
                     >
@@ -367,7 +367,7 @@
                         {{ t('cancel') }}
                     </el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <el-button type="primary" @click="onPublish">
+                    <el-button type="primary" @click="publish2">
                         {{ t('confirm') }}
                     </el-button>
                 </div>
@@ -1065,10 +1065,10 @@ const saveProject = async (tips: boolean = true) => {
     })
 }
 
-// get initialization_script(jscode+cssfilter+jsfile)
+// get initialization_script(customJs+cssfilter+jsfile)
 const getInitializationScript = () => {
     // creat css filter content
-    let initJsScript = store.currentProject.jsCode
+    let initJsScript = store.currentProject.customJs
     if (store.currentProject.filterCss !== '') {
         const cssFilterContent = store.currentProject.filterCss
             .split(';')

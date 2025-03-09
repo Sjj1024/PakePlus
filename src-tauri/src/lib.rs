@@ -43,6 +43,7 @@ pub fn run() {
             command::cmds::update_main_rust,
             command::cmds::rust_lib_window,
             command::cmds::update_custom_js,
+            command::cmds::get_custom_js,
             command::cmds::content_to_base64,
             command::cmds::update_config_json,
             command::cmds::rust_main_window,

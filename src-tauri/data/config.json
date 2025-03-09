@@ -4,16 +4,11 @@
     "version": "PROJECTVERSION",
     "identifier": "PROJECTID",
     "app": {
-        "windows": [-1],
         "security": {
             "assetProtocol": {
                 "enable": true,
                 "scope": {
-                    "allow": [
-                        "$APPDATA/assets/**",
-                        "$APPDATA/**",
-                        "$DOWNLOAD/*"
-                    ]
+                    "allow": ["$APPDATA/**", "$DOWNLOAD/*"]
                 }
             },
             "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval' ipc: http://ipc.localhost; img-src 'self' asset: http://asset.localhost blob: data: http://asset.localhost; font-src 'self' asset: http//localhost data:;"

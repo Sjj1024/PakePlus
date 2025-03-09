@@ -1,3 +1,8 @@
+console.log(
+    '%cbuild from PakePlus： https://github.com/Sjj1024/PakePlus',
+    'color:orangered;font-weight:bolder'
+)
+
 const hookClick = (e) => {
     e.preventDefault()
     const origin = e.target.closest('a')
@@ -7,18 +12,3 @@ const hookClick = (e) => {
 }
 
 document.addEventListener('click', hookClick, { capture: true })
-
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOM fully loaded and parsed')
-    // 在这里执行你的代码
-})
-
-window.onload = function () {
-    console.log('onload Page fully loaded')
-    // 在这里执行你的代码
-}
-
-window.addEventListener('load', function () {
-    console.log('addEventListener Page fully loaded')
-    // 在这里执行你的代码
-})

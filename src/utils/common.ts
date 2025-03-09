@@ -173,7 +173,7 @@ export const initProject = {
     desc: '',
     jsFile: [],
     filterCss: '',
-    jsCode: 'console.log("PakePlus")',
+    customJs: '',
     more: tauriConfig,
 }
 
@@ -236,5 +236,19 @@ export const openDevtools = async () => {
     if (isTauri) {
         console.log('open devtools')
         invoke('open_devtools')
+    }
+}
+
+// get custom js
+export const getCustomJs = async () => {
+    if (isTauri) {
+        const content = await invoke('get_custom_js')
+        return content
+    } else {
+        let content = await readFile('custom.js')
+        if (content === 'error') {
+            return 'error'
+        }
+        return content
     }
 }

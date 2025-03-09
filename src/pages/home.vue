@@ -231,6 +231,7 @@ import {
     updateBuildFile,
     base64Decode,
     platforms,
+    getCustomJs,
 } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
@@ -480,6 +481,7 @@ const creatBranch = async () => {
     // token.value && (await uploadBuildYml())
     if (branchName.value && /^[A-Za-z0-9]+$/.test(branchName.value)) {
         console.log('branchName.value', branchName.value)
+        const customJs = await getCustomJs()
         // check branch exist
         if (token.value) {
             const res: any = await githubApi.getBranch(
@@ -499,6 +501,7 @@ const creatBranch = async () => {
                     name: branchName.value,
                     showName: branchName.value,
                     appid: `com.${branchName.value}.app`,
+                    customJs: customJs,
                     more: {
                         ...tauriConfig,
                         windows: {
@@ -538,6 +541,7 @@ const creatBranch = async () => {
                 name: branchName.value,
                 showName: branchName.value,
                 appid: `com.${branchName.value}.app`,
+                customJs: customJs,
             })
             router.push('/edit')
         }

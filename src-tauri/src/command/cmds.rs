@@ -284,6 +284,18 @@ pub async fn rust_lib_window(handle: tauri::AppHandle, config: String) -> String
 }
 
 #[tauri::command]
+pub async fn get_custom_js(handle: tauri::AppHandle) -> String {
+    let resource_path = handle
+        .path()
+        .resolve("data/custom.js", BaseDirectory::Resource)
+        .expect("failed to resolve resource");
+    let mut custom_js = std::fs::File::open(&resource_path).unwrap();
+    let mut contents = String::new();
+    custom_js.read_to_string(&mut contents).unwrap();
+    return contents;
+}
+
+#[tauri::command]
 pub async fn update_custom_js(handle: tauri::AppHandle, js_content: String) -> String {
     let resource_path = handle
         .path()

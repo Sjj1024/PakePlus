@@ -1,7 +1,7 @@
 <template>
     <div class="codeEdit">
         <Codemirror
-            v-model="store.currentProject.jsCode"
+            v-model="store.currentProject.customJs"
             :options="cmOptions"
             :extensions="localTheme === 'dark' ? extensions : []"
             :style="{ height: '100%' }"
