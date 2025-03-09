@@ -1233,7 +1233,7 @@ const createBranch = async () => {
         console.log('not first')
     }
     // verify branch success
-    await verifyBranch(store.userInfo.login, 'PakePlus', 'index.html', {
+    await verifyBranch(store.userInfo.login, 'PakePlus', 'app-icon.png', {
         ref: store.currentProject.name,
     })
 }
