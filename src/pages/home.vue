@@ -235,6 +235,9 @@ import {
     platforms,
     getCustomJs,
     createBranch,
+    devBranch,
+    webBranch,
+    mainBranch,
 } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
@@ -415,11 +418,10 @@ const forkStartShas = async (tips: boolean = true) => {
 // get commit sha
 const getCommitSha = async () => {
     // get commit sha by branch name
-    // if dev get dev branch, else get master branch
     const res: any = await githubApi.getaCommitSha(
         store.userInfo.login,
         'PakePlus',
-        isDev ? 'dev' : 'master'
+        mainBranch
     )
     console.log('getCommitSha', res.data)
     if (res.status === 200 && res.data) {
@@ -433,11 +435,10 @@ const getCommitSha = async () => {
 // get commit sha
 const getWebCommitSha = async () => {
     // get commit sha by branch name
-    // if dev get dev branch, else get master branch
     const res: any = await githubApi.getaCommitSha(
         store.userInfo.login,
         'PakePlus',
-        'web'
+        webBranch
     )
     console.log('getWebCommitSha', res.data)
     if (res.status === 200 && res.data) {
@@ -545,7 +546,7 @@ const creatProject = async () => {
 }
 
 // delete build yml file, must do, because main branch need action promise
-const deleteBuildYml = async (branchName: string = 'master') => {
+const deleteBuildYml = async (branchName: string = mainBranch) => {
     const shaRes = await getFileSha('.github/workflows/build.yml', branchName)
     console.log('get build.yml file sha', shaRes)
     if (shaRes.status === 200) {

@@ -6,6 +6,7 @@ import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 // 分支
 export const mainBranch = 'main'
 export const webBranch = 'web'
+export const devBranch = 'dev'
 
 // urlMap
 export const urlMap = {
