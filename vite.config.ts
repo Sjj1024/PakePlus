@@ -34,4 +34,21 @@ export default defineConfig(async () => ({
             '@': path.resolve(__dirname, 'src'),
         },
     },
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    // 将 lodash 打包到单独的 chunk
+                    codemirror: ['codemirror'],
+                    pinia: ['pinia'],
+                    router: ['vue-router'],
+                    // 将 vue 相关的模块打包到单独的 chunk
+                    vue: ['vue'],
+                    element: ['element-plus'],
+                    // 将大型库或组件单独打包
+                    largeLibrary: ['axios'],
+                },
+            },
+        },
+    },
 }))
