@@ -235,6 +235,7 @@ import {
     createBranch,
     webBranch,
     mainBranch,
+    getBuildYml,
 } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
@@ -542,6 +543,31 @@ const creatProject = async () => {
     }
 }
 
+// creat build yml
+const uploadBuildYml = async (_: string = 'main') => {
+    console.log('uploadBuildYml', import.meta.env.DEV)
+    // get build.yml file content
+    const content = await getBuildYml({
+        name: 'PakePlus',
+        body: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.',
+    })
+    console.log('content', content)
+    // update build.yml file content
+    const updateRes: any = await githubApi.createBuildYml(
+        store.userInfo.login,
+        'PakePlus',
+        {
+            message: 'update build.yml from pakeplus',
+            content: content,
+        }
+    )
+    if (updateRes.status === 200 || updateRes.status === 201) {
+        console.log('uploadBuildYml Res', updateRes)
+    } else {
+        console.log('uploadBuildYml error, but not important', updateRes)
+    }
+}
+
 // delete build yml file, must do, because main branch need action promise
 const deleteBuildYml = async (branchName: string = mainBranch) => {
     const shaRes = await getFileSha('.github/workflows/build.yml', branchName)
@@ -558,6 +584,7 @@ const deleteBuildYml = async (branchName: string = mainBranch) => {
         )
         if (deleteRes.status === 200) {
             console.log('deleteBuildYml', deleteRes)
+            uploadBuildYml()
         } else {
             console.error('deleteBuildYml error', deleteRes)
         }

@@ -970,11 +970,11 @@ const updateBuildYml = async () => {
             }
         )
         if (updateRes.status === 200) {
-            console.log('updateRes', updateRes)
+            console.log('updateBuildYml', updateRes)
             document.querySelector('.el-loading-text')!.innerHTML =
                 t('preCompile') + '...'
         } else {
-            console.error('updateRes error', updateRes)
+            console.error('updateBuildYml error', updateRes)
         }
     } else {
         console.error('getFileSha error', shaRes)
@@ -992,7 +992,7 @@ const updateCargoToml = async () => {
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
         const configContent: any = await getCargoToml({
-            name: store.currentProject.showName,
+            name: store.currentProject.name,
             version: store.currentProject.version,
             desc: store.currentProject.desc,
             debug: pubForm.model === 'debug',
@@ -1009,11 +1009,11 @@ const updateCargoToml = async () => {
             }
         )
         if (updateRes.status === 200) {
-            console.log('updateRes', updateRes)
+            console.log('updateCargoToml', updateRes)
             document.querySelector('.el-loading-text')!.innerHTML =
                 t('preCompile') + '...'
         } else {
-            console.error('updateRes error', updateRes)
+            console.error('updateCargoToml error', updateRes)
         }
     } else {
         console.error('getFileSha error', shaRes)
@@ -1047,9 +1047,9 @@ const updateInitRs = async () => {
             }
         )
         if (updateRes.status === 200) {
-            console.log('updateRes', updateRes)
+            console.log('updateInitRs', updateRes)
         } else {
-            console.error('updateRes error', updateRes)
+            console.error('updateInitRs error', updateRes)
         }
     } else {
         console.error('getFileSha error', shaRes)
@@ -1113,9 +1113,9 @@ const updateCustomJs = async () => {
             }
         )
         if (updateRes.status === 200) {
-            console.log('updateRes', updateRes)
+            console.log('updateCustomJs', updateRes)
         } else {
-            console.error('updateRes error', updateRes)
+            console.error('updateCustomJs error', updateRes)
         }
     } else {
         console.error('getFileSha error', shaRes)
@@ -1152,11 +1152,11 @@ const updateTauriConfig = async () => {
             }
         )
         if (updateRes.status === 200) {
-            console.log('updateRes', updateRes)
+            console.log('updateTauriConfig', updateRes)
             document.querySelector('.el-loading-text')!.innerHTML =
                 t('preCompile') + '...'
         } else {
-            console.error('updateRes error', updateRes)
+            console.error('updateTauriConfig error', updateRes)
         }
     } catch (error) {
         console.error('Error reading JSON file:', error)
