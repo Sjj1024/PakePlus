@@ -122,4 +122,6 @@ export default {
     windowKeep: 'ウィンドウ保持',
     injectJq: 'JQを注入',
     scriptEdit: 'スクリプト編集',
+    dispatchError: 'dispatchエラー',
+    dispatchSuccess: 'dispatch成功',
 }

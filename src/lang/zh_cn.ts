@@ -120,4 +120,6 @@ export default {
     windowKeep: '窗口保持',
     injectJq: '注入JQ',
     scriptEdit: '脚本编辑',
+    dispatchError: 'dispatch错误',
+    dispatchSuccess: 'dispatch成功',
 }

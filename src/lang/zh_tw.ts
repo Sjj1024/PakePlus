@@ -117,4 +117,6 @@ export default {
     windowKeep: '窗口保持',
     injectJq: '注入JQ',
     scriptEdit: '腳本編輯',
+    dispatchError: 'dispatch錯誤',
+    dispatchSuccess: 'dispatch成功',
 }

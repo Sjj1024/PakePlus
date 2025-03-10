@@ -830,7 +830,7 @@ export const usePakeStore = defineStore('pakeplus', {
         getAddAge: (state) => {
             return (num: number) => state.age + num
         },
-        noMain: (state) => {
+        noSjj1024: (state) => {
             return state.userInfo.login !== 'Sjj1024'
         },
         isRelease: (state) => {

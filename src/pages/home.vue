@@ -358,7 +358,7 @@ const commitShas = async (tips: boolean = true) => {
                 console.log('wait fork done res', res)
                 if (res[0] && res[1]) {
                     // delete build.yml
-                    store.noMain && deleteBuildYml()
+                    store.noSjj1024 && deleteBuildYml()
                     testLoading.value = false
                     if (!tips) {
                         tokenDialog.value = false

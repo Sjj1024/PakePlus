@@ -1248,7 +1248,7 @@ const dispatchAction = async () => {
     console.log('dispatchRes---', dispatchRes)
     if (dispatchRes.status !== 204) {
         console.error('dispatch res error', dispatchRes)
-        ElMessage.error('dispatch res error')
+        ElMessage.error(t('dispatchError') + ':' + dispatchRes.data.message)
         buildLoading.value = false
         return
     } else {
