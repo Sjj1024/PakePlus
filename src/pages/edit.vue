@@ -733,6 +733,9 @@ const uploadIcon = async () => {
 
 // update icon file content
 const updateIcon = async () => {
+    if (iconBase64.value === '') {
+        return
+    }
     const iconContent = store.currentProject.iconRound
         ? roundIcon.value.split('base64,')[1]
         : iconBase64.value.split('base64,')[1]
@@ -1167,7 +1170,7 @@ const publishWeb = async () => {
     // create web branch
     console.log('publish web')
     // update app icon
-    iconBase64.value && (await updateIcon())
+    await updateIcon()
     // update build.yml
     await updateBuildYml()
     // update Cargo.toml
