@@ -772,6 +772,28 @@ export const usePakeStore = defineStore('pakeplus', {
             currentProject: localStorage.getItem('currentProject')
                 ? JSON.parse(localStorage.getItem('currentProject') as string)
                 : initProject,
+            // 当前项目发布
+            currentRelease: localStorage.getItem('currentRelease')
+                ? JSON.parse(localStorage.getItem('currentRelease') as string)
+                : {
+                      url: '',
+                      assets_url: '',
+                      upload_url: '',
+                      html_url: '',
+                      id: 0,
+                      node_id: '',
+                      tag_name: '',
+                      target_commitish: '',
+                      name: '',
+                      draft: false,
+                      prerelease: false,
+                      created_at: '2024-09-23T10:46:29Z',
+                      published_at: '2024-09-23T10:48:30Z',
+                      assets: [],
+                      tarball_url: '',
+                      zipball_url: '',
+                      body: '',
+                  },
             // 项目列表
             projectList: localStorage.getItem('projectList')
                 ? JSON.parse(localStorage.getItem('projectList') as string)
@@ -859,6 +881,8 @@ export const usePakeStore = defineStore('pakeplus', {
             )
         },
         delProject(project: Project) {
+            // delete release
+            this.setRelease(project.name, null)
             const exist = this.projectList.findIndex((item: Project) => {
                 return item.name === project.name
             })
@@ -877,6 +901,17 @@ export const usePakeStore = defineStore('pakeplus', {
                 delete this.releases[proName]
             }
             localStorage.setItem('releases', JSON.stringify(this.releases))
+        },
+        async setCurrentRelease() {
+            if (
+                this.releases[this.currentProject.name] &&
+                this.releases[this.currentProject.name].id !== 0
+            ) {
+                this.currentRelease = this.releases[this.currentProject.name]
+                this.getRelease()
+            } else {
+                await this.getRelease()
+            }
         },
         // update tauri config
         updateTauriConfig(info: any) {
@@ -915,6 +950,7 @@ export const usePakeStore = defineStore('pakeplus', {
                     }),
                 }
                 this.setRelease(this.currentProject.name, releaseData)
+                this.currentRelease = releaseData
                 return releaseData
             } else {
                 console.error('releaseRes error', releaseRes)

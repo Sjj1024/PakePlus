@@ -8,20 +8,20 @@
         <div class="homeHeader">
             <div>
                 <div class="headerTitle">
-                    <div class="backBox" @click="backHome">
+                    <div class="backBox" @click="router.go(-1)">
                         <el-icon><ArrowLeft /></el-icon>
                         <span>{{ t('back') }}</span>
                     </div>
                     <el-divider direction="vertical" />
                     <span>
-                        {{ releaseData.tag_name }}
+                        {{ store.currentRelease.tag_name }}
                         v{{ store.currentProject.version }}
                     </span>
                 </div>
                 <div class="toolTips">
                     <div class="tipsBody">
                         {{ t('releaseNotes') }}
-                        {{ releaseData.body || t('releaseBody') }}
+                        {{ store.currentRelease.body || t('releaseBody') }}
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <!-- only get latest version by tag name -->
-        <el-table :data="releaseData.assets" style="width: 100%">
+        <el-table :data="store.currentRelease.assets" style="width: 100%">
             <el-table-column :label="t('assetName')" width="460">
                 <template #default="scope">
                     <div style="display: flex; align-items: center">
@@ -84,7 +84,6 @@ import { useRouter } from 'vue-router'
 import { usePakeStore } from '@/store'
 import githubApi from '@/apis/github'
 import { openUrl, isTauri, copyText } from '@/utils/common'
-import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 
@@ -92,45 +91,20 @@ const router = useRouter()
 const store = usePakeStore()
 const { t } = useI18n()
 
-// back
-const backHome = () => {
-    router.go(-1)
-}
-// releaseData
-const releaseData = ref({
-    url: '',
-    assets_url: '',
-    upload_url: '',
-    html_url: '',
-    id: 0,
-    node_id: '',
-    tag_name: '',
-    target_commitish: '',
-    name: '',
-    draft: false,
-    prerelease: false,
-    created_at: '2024-09-23T10:46:29Z',
-    published_at: '2024-09-23T10:48:30Z',
-    assets: [],
-    tarball_url: '',
-    zipball_url: '',
-    body: '',
-})
-
 // getLoading
 const getLoading = ref(false)
 
 // delete lasted release
 const deleteRelAssets = async () => {
-    if (releaseData.value.id !== 0) {
+    if (store.currentRelease.id !== 0) {
         const releaseRes: any = await githubApi.deleteRelease(
             store.userInfo.login,
             'PakePlus',
-            releaseData.value.id
+            store.currentRelease.id
         )
         console.log('deleteRelease', releaseRes)
         ElMessage.success(t('delSuccess'))
-        store.setRelease('pakeplus', { id: 0 })
+        store.setRelease(store.currentProject.name, { id: 0 })
         router.go(-1)
     }
 }
@@ -159,12 +133,10 @@ const copyDownlink = async (asset: any) => {
 
 onMounted(async () => {
     // must do, edit page submit will creat new release
-    if (!store.isRelease) {
+    if (store.currentRelease.id === 0) {
         getLoading.value = true
-        releaseData.value = await store.getRelease()
+        await store.setCurrentRelease()
         getLoading.value = false
-    } else {
-        releaseData.value = await store.getRelease()
     }
 })
 </script>

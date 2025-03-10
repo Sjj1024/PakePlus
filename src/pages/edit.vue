@@ -1383,7 +1383,6 @@ const initJsFileContents = async () => {
 
 onMounted(async () => {
     // 重制编译时间
-    store.getRelease()
     buildTime = 0
     if (store.currentProject.icon) {
         confirmIcon(store.currentProject.icon)
@@ -1393,6 +1392,7 @@ onMounted(async () => {
         const window = getCurrentWindow()
         window.setTitle(`${store.currentProject.name}`)
     }
+    store.setCurrentRelease()
 })
 </script>
 
