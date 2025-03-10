@@ -97,7 +97,25 @@ const backHome = () => {
     router.go(-1)
 }
 // releaseData
-const releaseData = ref(store.releases[store.currentProject.name])
+const releaseData = ref({
+    url: '',
+    assets_url: '',
+    upload_url: '',
+    html_url: '',
+    id: 0,
+    node_id: '',
+    tag_name: '',
+    target_commitish: '',
+    name: '',
+    draft: false,
+    prerelease: false,
+    created_at: '2024-09-23T10:46:29Z',
+    published_at: '2024-09-23T10:48:30Z',
+    assets: [],
+    tarball_url: '',
+    zipball_url: '',
+    body: '',
+})
 
 // getLoading
 const getLoading = ref(false)
