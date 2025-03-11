@@ -38,7 +38,6 @@ export default defineConfig(async () => ({
         rollupOptions: {
             output: {
                 manualChunks: {
-                    // 将 lodash 打包到单独的 chunk
                     codemirror: ['codemirror'],
                     pinia: ['pinia'],
                     router: ['vue-router'],

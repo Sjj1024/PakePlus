@@ -429,7 +429,6 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import { open } from '@tauri-apps/plugin-dialog'
-import { UploadFilled } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
@@ -444,7 +443,15 @@ import {
 } from '@tauri-apps/plugin-fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
 import { basename } from '@tauri-apps/api/path'
-import { ArrowLeft } from '@element-plus/icons-vue'
+import {
+    ArrowLeft,
+    Switch,
+    Edit,
+    Picture,
+    CircleCloseFilled,
+    Operation,
+    UploadFilled,
+} from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import CodeEdit from '@/components/codeEdit.vue'
 import { useI18n } from 'vue-i18n'

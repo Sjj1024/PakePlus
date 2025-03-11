@@ -82,6 +82,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePakeStore } from '@/store'
+import { ArrowLeft, Delete } from '@element-plus/icons-vue'
 import githubApi from '@/apis/github'
 import { openUrl, isTauri, copyText } from '@/utils/common'
 import { ElMessage, ElMessageBox } from 'element-plus'

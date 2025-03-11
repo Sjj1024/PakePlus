@@ -224,6 +224,7 @@ import { useRouter } from 'vue-router'
 import githubApi from '@/apis/github'
 import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
+import { Plus } from '@element-plus/icons-vue'
 import {
     urlMap,
     openUrl,
