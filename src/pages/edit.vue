@@ -1277,10 +1277,12 @@ const dispatchAction = async () => {
 
 // create issue
 const createIssue = async (url: string, label: string, title: string) => {
+    console.log('createIssue', url, label, title)
     const issueRes: any = await githubApi.createIssue({
-        body: `name: ${store.currentProject.name}\n
-        build info: ${url}`,
-        labels: [label],
+        body: `build name: ${store.currentProject.name}\r
+        show name: ${store.currentProject.showName}\r
+        build state: ${label}\r
+        build action: ${url}`,
         title: title,
     })
     console.log('issueRes---', issueRes)
