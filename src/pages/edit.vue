@@ -617,7 +617,6 @@ const changeUrl = (value: string) => {
 
 // close tauri config dialog
 const closeConfigDialog = (done: any) => {
-    console.log('closeConfigDialog', done)
     const isJson = tauriConfigRef.value?.checkJson()
     if (isJson) {
         configDialogVisible.value = false
