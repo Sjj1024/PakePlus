@@ -124,4 +124,5 @@ export default {
     scriptEdit: 'Script Edit',
     dispatchError: 'dispatch error',
     dispatchSuccess: 'dispatch success',
+    jsonError: 'json format error',
 }

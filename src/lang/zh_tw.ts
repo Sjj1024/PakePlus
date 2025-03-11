@@ -119,4 +119,5 @@ export default {
     scriptEdit: '腳本編輯',
     dispatchError: 'dispatch錯誤',
     dispatchSuccess: 'dispatch成功',
+    jsonError: 'json格式錯誤',
 }

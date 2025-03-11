@@ -124,4 +124,5 @@ export default {
     scriptEdit: 'スクリプト編集',
     dispatchError: 'dispatchエラー',
     dispatchSuccess: 'dispatch成功',
+    jsonError: 'json形式エラー',
 }

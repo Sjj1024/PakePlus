@@ -385,7 +385,7 @@
             :width="isTauri ? '90%' : '60%'"
             center
             align-center
-            @closed="closeConfigDialog"
+            :before-close="closeConfigDialog"
         >
             <template #header="{ titleId, titleClass }">
                 <div class="configHeader">
@@ -399,13 +399,13 @@
             </template>
             <TauriConfig ref="tauriConfigRef" :isJson="isJson" />
         </el-dialog>
-        <!-- code edit -->
+        <!-- js code edit -->
         <el-dialog
             v-model="codeDialogVisible"
             :width="isTauri ? '90%' : '60%'"
             center
             align-center
-            @closed="closeConfigDialog"
+            @closed="closeJsCodeEditDialog"
         >
             <template #header="{ titleId, titleClass }">
                 <div class="configHeader">
@@ -609,10 +609,20 @@ const changeUrl = (value: string) => {
 }
 
 // close tauri config dialog
-const closeConfigDialog = () => {
-    configDialogVisible.value = false
+const closeConfigDialog = (done: any) => {
+    console.log('closeConfigDialog', done)
+    const isJson = tauriConfigRef.value?.checkJson()
+    if (isJson) {
+        configDialogVisible.value = false
+        done()
+    } else {
+        ElMessage.error(t('jsonError'))
+    }
+}
+
+// close js code edit dialog
+const closeJsCodeEditDialog = () => {
     codeDialogVisible.value = false
-    // console.log('closeConfigDialog', tauriConfig)
 }
 
 // switch tauri config json or code
