@@ -748,3 +748,10 @@ export const copyText = async (text: string) => {
         navigator.clipboard.writeText(text)
     }
 }
+
+// loading text
+export const loadingText = (text: string) => {
+    if (document.querySelector('.el-loading-text')) {
+        document.querySelector('.el-loading-text')!.innerHTML = text
+    }
+}

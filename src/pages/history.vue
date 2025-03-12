@@ -1,7 +1,7 @@
 <template>
     <div
         class="historyBox"
-        v-loading="getLoading"
+        v-loading.fullscreen.lock="getLoading"
         :class="{ isWeb: !isTauri }"
         :element-loading-text="t('requesting')"
     >

@@ -2,8 +2,8 @@
     <div
         class="editBox"
         :class="{ isWeb: !isTauri }"
-        v-loading="buildLoading"
-        :element-loading-text="t('preEnvironment')"
+        v-loading.fullscreen.lock="buildLoading"
+        :element-loading-text="t('preCheck') + '...'"
     >
         <div class="homeHeader">
             <div>
@@ -468,6 +468,7 @@ import {
     getTauriConf,
     base64Encode,
     getInitRust,
+    loadingText,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -990,8 +991,7 @@ const updateBuildYml = async () => {
         )
         if (updateRes.status === 200) {
             console.log('updateBuildYml', updateRes)
-            document.querySelector('.el-loading-text')!.innerHTML =
-                t('preCompile') + '...'
+            loadingText(t('syncConfig') + '...')
         } else {
             console.error('updateBuildYml error', updateRes)
         }
@@ -1029,8 +1029,7 @@ const updateCargoToml = async () => {
         )
         if (updateRes.status === 200) {
             console.log('updateCargoToml', updateRes)
-            document.querySelector('.el-loading-text')!.innerHTML =
-                t('preCompile') + '...'
+            loadingText(t('syncConfig') + '...')
         } else {
             console.error('updateCargoToml error', updateRes)
         }
@@ -1067,6 +1066,7 @@ const updateInitRs = async () => {
         )
         if (updateRes.status === 200) {
             console.log('updateInitRs', updateRes)
+            loadingText(t('syncConfig') + '...')
         } else {
             console.error('updateInitRs error', updateRes)
         }
@@ -1133,6 +1133,7 @@ const updateCustomJs = async () => {
         )
         if (updateRes.status === 200) {
             console.log('updateCustomJs', updateRes)
+            loadingText(t('syncConfig') + '...')
         } else {
             console.error('updateCustomJs error', updateRes)
         }
@@ -1172,8 +1173,7 @@ const updateTauriConfig = async () => {
         )
         if (updateRes.status === 200) {
             console.log('updateTauriConfig', updateRes)
-            document.querySelector('.el-loading-text')!.innerHTML =
-                t('preCompile') + '...'
+            loadingText(t('syncConfig') + '...')
         } else {
             console.error('updateTauriConfig error', updateRes)
         }
@@ -1185,6 +1185,7 @@ const updateTauriConfig = async () => {
 const publishWeb = async () => {
     // create web branch
     console.log('publish web')
+    loadingText(t('syncConfig') + '...')
     // update app icon
     await updateIcon()
     // update build.yml
@@ -1209,10 +1210,12 @@ const publishDist = async () => {
 
 // new publish version
 const publish2 = async () => {
+    // TODO 检查是否存在已经编译的action
     centerDialogVisible.value = false
     buildLoading.value = true
+    loadingText(t('preCheck') + '...')
     // delete release
-    store.isRelease && deleteRelease()
+    store.isRelease && (await deleteRelease())
     // publish web or dist
     if (store.currentProject.url.includes('http')) {
         await publishWeb()
@@ -1251,6 +1254,7 @@ const getFileSha = async (filePath: string, branch: string) => {
 
 // dispatch workflow action
 const dispatchAction = async () => {
+    loadingText(t('preCompile') + '...')
     const dispatchRes: any = await githubApi.dispatchWorkflow(
         store.userInfo.login,
         'PakePlus',
@@ -1274,13 +1278,13 @@ const dispatchAction = async () => {
             const second = buildTime % 60
             const buildRate = Math.floor((buildTime / (60 * 15)) * 100)
             // loadingText.value = `${buildStatus}...${minute}分${second}秒`
-            const loadingText = `<div>${minute}${t('minute')}${second}${t(
+            const loadingState = `<div>${minute}${t('minute')}${second}${t(
                 'second'
             )}</div><div>${buildStatus}${
                 buildRate > 99 ? 99 : buildRate
             }%...</div>`
             // console.log('loadingText---', loadingText)
-            document.querySelector('.el-loading-text')!.innerHTML = loadingText
+            loadingText(loadingState)
         }, 1000)
         // check build status
         setTimeout(async () => {
