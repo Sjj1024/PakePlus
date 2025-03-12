@@ -4,7 +4,7 @@
 <a href="./README_JP.md">日本语</a>
 </h4>   
 <p align="center">
-    <img src="./pakeplus.png" width=138/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/master/docs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>9分で任意のウェブページをデスクトップアプリやモバイルアプリに変換。シンプルで使いやすい。</strong></p>
@@ -85,7 +85,7 @@ PakePlusは、ARMとIntelの両アーキテクチャに対応したインスト�
 
 ## 始める前に
 
-1. リリースページからアプリをダウンロードし、ダブルクリックしてインストールし、実行します：https://github.com/Sjj1024/PakePlus/releases。 あるいは、ウェブ版を使ってもいいです：https://pakeplus.netlify.app。
+1. リリースページからアプリをダウンロードし、ダブルクリックしてインストールし、実行します：https://github.com/Sjj1024/PakePlus/releases。 あるいは、ウェブ版を使ってもいいです：<a href="https://pakeplus.netlify.app" target="_blank">PakePlus Web</a>
 
 2. Github トークンを設定し、新しいプロジェクトを作成して設定を行います。Token 获取方法: <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 20px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>
 
@@ -145,5 +145,5 @@ pnpm run build
 
 1. PakePlus があなたの生活に楽しみをもたらしたなら、サポートしていただけると嬉しいです。
  <p align="center">
-         <img src="./pay.png" />
+         <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/pay.png" />
  </p>

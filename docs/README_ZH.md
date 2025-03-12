@@ -4,7 +4,7 @@
 <a href="./README_JP.md">日本语</a>
 </h4>  
 <p align="center">
-    <img src="./pakeplus.png" width=138/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/master/docs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>9分钟就可以将任何网页变成桌面应用和移动应用，简单易用。</strong></p>
@@ -85,7 +85,7 @@ PakePLus支持arm和inter架构的安装包，流行的程序安装包仅仅包�
 ## 开始之前
 
 1.从发布页面下载应用程序：https://github.com/Sjj1024/PakePlus/releases，双击安装并运行应用程序。
-或者使用网页版：https://pakeplus.netlify.app。
+或者使用网页版：<a href="https://pakeplus.netlify.app" target="_blank">PakePlus Web</a>
 
 2.配置 Github Token，并创建一个新项目并进行配置。
 Token 获取方法: <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 20px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>
@@ -146,11 +146,11 @@ pnpm run build
 
 1. 微信和群聊
  <p align="center" style="display:flex" >
-    <img src="./mywx.png" width=300/>
-    <img src="./wxcode.png" width=300/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/mywx.png" width=300/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/wxcode.png" width=300/>
  </p>
 
-2. 如果对你有帮，可以请我喝咖啡.
+1. 如果对你有帮，可以请我喝咖啡.
  <p align="center" >
-    <img src="./pay.png" />
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/pay.png" />
  </p>

@@ -86,7 +86,7 @@ PakePlus supports installation packages for both ARM and Intel architectures. Mo
 
 ## Getting Started
 
-1. Download the app from the release page：https://github.com/Sjj1024/PakePlus/releases, double-click to install, and run the app. or visit web: https://pakeplus.netlify.app
+1. Download the app from the release page：https://github.com/Sjj1024/PakePlus/releases, double-click to install, and run the app. or visit web: <a href="https://pakeplus.netlify.app" target="_blank">PakePlus Web</a>
 
 2. Configure a Github Token, create a new project, and set up the configurations. get token guide: <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 20px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>
 
