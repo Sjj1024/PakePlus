@@ -287,18 +287,23 @@ const goProject = async (pro: Project) => {
     branchName.value = pro.name
     // check branch exist
     if (token.value) {
-        const res: any = await githubApi.getBranch(
-            store.userInfo.login,
-            'PakePlus',
-            branchName.value
-        )
-        console.log('getBranch', res)
-        if (res.status === 200) {
-            console.log('branch exist')
-        } else {
-            console.log('branch not exist')
-            createBranch(store.userInfo.login, pro.name, store.webCommit.sha)
-        }
+        githubApi
+            .getBranch(store.userInfo.login, 'PakePlus', branchName.value)
+            .then((res: any) => {
+                if (res.status === 200) {
+                    console.log('branch exist')
+                } else {
+                    console.log('branch not exist')
+                    createBranch(
+                        store.userInfo.login,
+                        pro.name,
+                        store.webCommit.sha
+                    )
+                }
+            })
+            .catch((err: any) => {
+                console.error('getBranch error', err)
+            })
     }
 }
 
@@ -619,8 +624,6 @@ onMounted(() => {
     }
     getPakePlusInfo()
     checkUpdate()
-    // resetReleaseInfo()
-    // mergeUpdateRep()
 })
 </script>
 

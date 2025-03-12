@@ -903,6 +903,7 @@ export const usePakeStore = defineStore('pakeplus', {
             localStorage.setItem('releases', JSON.stringify(this.releases))
         },
         async setCurrentRelease() {
+            console.log('setCurrentRelease', this.currentRelease)
             if (
                 this.releases[this.currentProject.name] &&
                 this.releases[this.currentProject.name].id !== 0
@@ -910,6 +911,7 @@ export const usePakeStore = defineStore('pakeplus', {
                 this.currentRelease = this.releases[this.currentProject.name]
                 this.getRelease()
             } else {
+                this.currentRelease = { id: 0 }
                 await this.getRelease()
             }
         },
