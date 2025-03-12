@@ -109,7 +109,8 @@ workflow: Compile and release your software
 
 ## FAQ
 
-1. Mac users may see an “App is damaged” warning on installation. click cancel and Run the following command, then reopen the app:
+1. Mac users may see an “App is damaged” warning on installation. click cancel and Run the following command, then reopen the app:（This is because the application requires an official signature to avoid the prompt of "The application is damaged" popping up after installation. However, the cost of the official signature is $99 per year... Therefore, it is necessary to manually bypass the signature to use it normally.
+   ）
 
 ```sh
 sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app

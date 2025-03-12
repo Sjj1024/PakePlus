@@ -9,21 +9,22 @@
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>9分钟就可以将任何网页变成桌面应用和移动应用，简单易用。</strong></p>
 
-<div align="left">PakePlus 支持 Mac、Windows 和 Linux，很快也将支持 Android 和 iOS。无需在本地安装复杂的依赖环境，只需要一个Github Token就可以了，而且PakePlus本身也才仅仅5M左右小大，最新版本下载请看：<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">发布地址</a>。查看 README 以获取<a href="#popular-packages">热门包</a>和<a href="#development">自定义开发</a>信息。欢迎在<a href=https://github.com/Sjj1024/PakePlus/discussions>讨论区</a>分享你的建议。</div> 加我微信进微信交流群：lanxingme 。
+<div align="left">PakePlus 支持 Mac、Windows 和 Linux，很快也将支持 Android 和 iOS。无需在本地安装复杂的依赖环境，只需要一个Github Token就可以了，而且PakePlus本身也才仅仅5M左右小大，最新版本下载请看：<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">发布地址</a>。或者访问网页版: <a href="https://pakeplus.netlify.app" target="_blank">PakePlus Web</a>。 查看 README 以获取<a href="#popular-packages">热门包</a>和<a href="#development">自定义开发</a>信息。欢迎在<a href=https://github.com/Sjj1024/PakePlus/discussions>讨论区</a>分享你的建议。</div> 加我微信进微信交流群：lanxingme 。
 
 https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
 ## 特性
 
--   🎐 体积比 Electron 包小约 20 倍（约 5M！）
--   🚀 使用 Rust Tauri，PakePlus 比基于 JS 的框架更轻量、更快。
+-   🎐 体积比 Electron 包小约 20 倍（约 5M！），性能快 10 倍。
+-   🚀 基于 Rust Tauri，PakePlus 比基于 JS 的框架更轻量、更快。
 -   📦 内置丰富功能包——支持快捷方式、沉浸式窗口、极简自定义。
--   👻 PakePlus 只是一个简单的工具——用 Tauri 替代旧的打包方式（虽然 PWA 也够用了）。
+-   👻 PakePlus 只是一个极简的软件，用 Tauri 替代旧的打包方式，支持跨平台桌面，将很快支持手机端。
 -   🤗 PakePlus 易于操作使用，只需一个 GitHub Token，即可获得桌面应用。
 -   🌹 不需要在本地安装任何复杂的依赖环境，使用 Github Action 云端自动打包。
 -   🧑‍🤝‍🧑 支持国际化，对全球用户都非常友好，并且会自动跟随你的电脑系统语言。
 -   💡 支持自定义 js 注入。你可以编写自己的 js 代码注入到页面中。
--   🎨 ui 更美观，使用更舒适。
+-   🎨 ui 界面更美观更友好对新手更实用，使用更舒适。
+-   📡 支持网页端直接使用，但是客户端功能更强大，更推荐客户端。
 
 ## 热门包
 
@@ -83,9 +84,11 @@ PakePLus支持arm和inter架构的安装包，流行的程序安装包仅仅包�
 
 ## 开始之前
 
-1.从发布页面下载应用程序：https://github.com/Sjj1024/PakePlus/releases，双击安装并运行应用程序  
+1.从发布页面下载应用程序：https://github.com/Sjj1024/PakePlus/releases，双击安装并运行应用程序。
+或者使用网页版：https://pakeplus.netlify.app。
+
 2.配置 Github Token，并创建一个新项目并进行配置。
-Token 获取方法: <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 10px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>
+Token 获取方法: <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 20px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>
 
 ```
 Github token权限说明：
@@ -101,12 +104,12 @@ repo：fork和管理模板代码
 workflow：编译和发布你的软件
 ```
 
-3.你可以在新窗口中预览应用程序，点击发布按钮打包应用程序  
-4.你可以从发布页面下载应用程序
+3.你可以在客户端中预览应用程序，点击发布按钮打包应用程序。  
+4.你可以从发布页面下载编译后的应用程序，并实现安装使用。
 
 ## 常见问题
 
-1. **Mac 用户可能在安装时看到“应用已损坏”的警告。** 请点击“取消”，然后运行以下命令，再重新打开应用：
+1. **Mac 用户可能在安装时看到“应用已损坏”的警告。** 请点击“取消”，然后运行以下命令，再重新打开应用：(这是由于应用需要官方签名，才能避免安装后弹出“应用已损坏”的提示，但官方签名的费用每年 99 美元...因此，需要手动绕过签名以正常使用)
 
 ```sh
 sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
