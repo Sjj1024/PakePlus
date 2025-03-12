@@ -57,9 +57,9 @@ const chageTheme = (theme: string) => {
 const initEnv = async () => {
     const language = isTauri ? await osLocale() : 'zh-CN'
     let lang = 'en' // Default to English
-    if (language?.includes('zh-Hans')) {
+    if (language?.includes('zh-CN')) {
         lang = 'zh' // Simplified Chinese
-    } else if (language?.includes('zh-Hant')) {
+    } else if (language?.includes('zh-TW')) {
         lang = 'zhTw' // Traditional Chinese
     } else if (language?.includes('ja')) {
         lang = 'ja' // Japanese
