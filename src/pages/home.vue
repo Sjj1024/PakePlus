@@ -687,7 +687,7 @@ onMounted(() => {
                 margin-left: 10px;
                 cursor: pointer;
                 &:hover {
-                    color: black;
+                    color: var(--text-color);
                 }
             }
         }
