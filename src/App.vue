@@ -59,9 +59,9 @@ const initEnv = async () => {
         navigator.language || (navigator as any).userLanguage || 'en'
     const language = isTauri ? await osLocale() : localLang
     let lang = 'en' // Default to English
-    if (language?.includes('zh-CN')) {
+    if (language?.includes('CN')) {
         lang = 'zh' // Simplified Chinese
-    } else if (language?.includes('zh-TW')) {
+    } else if (language?.includes('TW')) {
         lang = 'zhTw' // Traditional Chinese
     } else if (language?.includes('ja')) {
         lang = 'ja' // Japanese
