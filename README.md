@@ -5,7 +5,7 @@ style="margin: 0 10px;" >简体中文</a>
 <a href="https://github.com/Sjj1024/PakePlus/discussions/108">日本语</a>
 </h4>  
 <p align="center">
-    <img src="./docs/pakeplus.png" width=138/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>Turn any webpage into a desktop or mobile app in just 9 minutes. Simple and easy to use.</strong></p>
@@ -152,13 +152,13 @@ publish: false：means this version will not be published immediately, although 
 
 1. wechat and group
  <p align="center" style="display:flex; justify-content: flex-start;" >
-    <img src="./docs/mywx.png" width=300/>
-    <img src="./docs/wxcode.png" width=300/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/mywx.png" width=300/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/wxcode.png" width=300/>
  </p>
 
 1. If PakePlus has brought joy to your life, feel free to support it.
  <p align="center" style="display:flex; justify-content: flex-start;">
-    <img src="./docs/pay.png" width=620/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/pay.png" width=620/>
  </p>
 
 ## TODO
