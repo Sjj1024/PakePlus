@@ -16,10 +16,10 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
 ## Features
 
--   🎐 About 20 times smaller than Electron packages (approximately 5MB!)
+-   🎐 About 20 times smaller than Electron packages (approximately 5MB!)，It is 10 times faster in performance.
 -   🚀 Powered by Rust and Tauri, PakePlus is lighter and faster than JS-based frameworks.
 -   📦 Rich built-in feature packs—supporting shortcuts, immersive windows, and minimal customization.
--   👻 PakePlus is just a simple tool—using Tauri to replace older packaging methods (even though PWA is often sufficient).
+-   👻 PakePlus is just a simple tool—using Tauri to replace older packaging methods，It supports cross - platform desktops and will support mobile devices soon..
 -   🤗 PakePlus is easy to use; all you need is a GitHub Token to get a desktop app.
 -   🌹 No need to install complex dependencies locally; use Github Action for cloud-based auto-packaging.
 -   🧑‍🤝‍🧑 Supports internationalization, user-friendly for a global audience, and it follows your system language automatically.
