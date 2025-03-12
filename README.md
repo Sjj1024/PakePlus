@@ -109,14 +109,13 @@ workflow: Compile and release your software
 
 ## FAQ
 
-1. Mac users may see an “App is damaged” warning on installation. click cancel and Run the following command, then reopen the app:（This is because the application requires an official signature to avoid the prompt of "The application is damaged" popping up after installation. However, the cost of the official signature is $99 per year... Therefore, it is necessary to manually bypass the signature to use it normally.
-   ）
+1. Mac users may see an “App is damaged” warning on installation. click cancel and Run the following command, then reopen the app:（This is because the application requires an official signature to avoid the prompt of "The application is damaged" popping up after installation. However, the cost of the official signature is $99 per year... Therefore, it is necessary to manually bypass the signature to use it normally）
 
 ```sh
 sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
 ```
 
-2. When you package the app, Mac users may see an “App is damaged” warning on installation. click cancel and Run the following command, then reopen the app:
+1. When you package the app, Mac users may see an “App is damaged” warning on installation. click cancel and Run the following command, then reopen the app:
 
 ```sh
 sudo xattr -r -d com.apple.quarantine /Applications/YourAppName.app
@@ -142,10 +141,6 @@ pnpm run dev
 # Package the app
 pnpm run build
 
-# github action
-releaseDraft: false：means this version is not a draft version, it will be considered as a stable release.
-prerelease: false：means this version is not a pre-release version, which means it is a stable version.
-publish: false：means this version will not be published immediately, although it will be created, it will not be publicly displayed.
 ```
 
 ## Support
