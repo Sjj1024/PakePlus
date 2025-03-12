@@ -1,7 +1,7 @@
 <h4 align="right"> 
-<a href="./README.md">English</a> 
-<a href="./README_ZH.md" style="margin: 0 10px;" >中文</a> 
-<a href="./README_JP.md">日本语</a>
+<a href="https://github.com/Sjj1024/PakePlus">English</a> 
+<span style="margin: 0 10px;" >中文</span> 
+<a href="https://github.com/Sjj1024/PakePlus/discussions/108">日本语</a>
 </h4>  
 <p align="center">
     <img src="https://github.com/Sjj1024/PakePlus/raw/master/docs/pakeplus.png" width=138/>
