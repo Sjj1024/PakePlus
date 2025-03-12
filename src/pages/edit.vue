@@ -385,7 +385,7 @@
             :width="isTauri ? '90%' : '60%'"
             center
             align-center
-            @closed="closeConfigDialog"
+            :before-close="closeConfigDialog"
         >
             <template #header="{ titleId, titleClass }">
                 <div class="configHeader">
@@ -399,13 +399,13 @@
             </template>
             <TauriConfig ref="tauriConfigRef" :isJson="isJson" />
         </el-dialog>
-        <!-- code edit -->
+        <!-- js code edit -->
         <el-dialog
             v-model="codeDialogVisible"
             :width="isTauri ? '90%' : '60%'"
             center
             align-center
-            @closed="closeConfigDialog"
+            @closed="closeJsCodeEditDialog"
         >
             <template #header="{ titleId, titleClass }">
                 <div class="configHeader">
@@ -610,10 +610,20 @@ const changeUrl = (value: string) => {
 }
 
 // close tauri config dialog
-const closeConfigDialog = () => {
-    configDialogVisible.value = false
+const closeConfigDialog = (done: any) => {
+    console.log('closeConfigDialog', done)
+    const isJson = tauriConfigRef.value?.checkJson()
+    if (isJson) {
+        configDialogVisible.value = false
+        done()
+    } else {
+        ElMessage.error(t('jsonError'))
+    }
+}
+
+// close js code edit dialog
+const closeJsCodeEditDialog = () => {
     codeDialogVisible.value = false
-    // console.log('closeConfigDialog', tauriConfig)
 }
 
 // switch tauri config json or code
@@ -734,6 +744,9 @@ const uploadIcon = async () => {
 
 // update icon file content
 const updateIcon = async () => {
+    if (iconBase64.value === '') {
+        return
+    }
     const iconContent = store.currentProject.iconRound
         ? roundIcon.value.split('base64,')[1]
         : iconBase64.value.split('base64,')[1]
@@ -1168,7 +1181,7 @@ const publishWeb = async () => {
     console.log('publish web')
     loadingText(t('syncConfig') + '...')
     // update app icon
-    iconBase64.value && (await updateIcon())
+    await updateIcon()
     // update build.yml
     await updateBuildYml()
     // update Cargo.toml
@@ -1249,7 +1262,7 @@ const dispatchAction = async () => {
     console.log('dispatchRes---', dispatchRes)
     if (dispatchRes.status !== 204) {
         console.error('dispatch res error', dispatchRes)
-        ElMessage.error('dispatch res error')
+        ElMessage.error(t('dispatchError') + ':' + dispatchRes.data.message)
         buildLoading.value = false
         return
     } else {
@@ -1278,10 +1291,12 @@ const dispatchAction = async () => {
 
 // create issue
 const createIssue = async (url: string, label: string, title: string) => {
+    console.log('createIssue', url, label, title)
     const issueRes: any = await githubApi.createIssue({
-        body: `name: ${store.currentProject.name}\n
-        build info: ${url}`,
-        labels: [label],
+        body: `build name: ${store.currentProject.name}\r
+        show name: ${store.currentProject.showName}\r
+        build state: ${label}\r
+        build action: ${url}`,
         title: title,
     })
     console.log('issueRes---', issueRes)

@@ -36,7 +36,7 @@ export default {
     appIcon: 'APP图标',
     appVersion: 'APP版本',
     versionSemVer: '版本号必须是例如：1.2.1格式',
-    platform: '预览平台',
+    platform: '窗口模式',
     desktop: '桌面端',
     winSize: '窗口大小',
     width: '宽度',
@@ -123,4 +123,7 @@ export default {
     windowKeep: '窗口保持',
     injectJq: '注入JQ',
     scriptEdit: '脚本编辑',
+    dispatchError: 'dispatch错误',
+    dispatchSuccess: 'dispatch成功',
+    jsonError: 'json格式错误',
 }

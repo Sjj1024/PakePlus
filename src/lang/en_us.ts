@@ -125,4 +125,7 @@ export default {
     windowKeep: 'Window Keep',
     injectJq: 'Inject JQ',
     scriptEdit: 'Script Edit',
+    dispatchError: 'dispatch error',
+    dispatchSuccess: 'dispatch success',
+    jsonError: 'json format error',
 }

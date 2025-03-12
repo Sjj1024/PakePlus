@@ -126,4 +126,7 @@ export default {
     windowKeep: '창 유지',
     injectJq: 'JQ 주입',
     scriptEdit: '스크립트 편집',
+    dispatchError: 'dispatch 오류',
+    dispatchSuccess: 'dispatch 성공',
+    jsonError: 'json 형식 오류',
 }

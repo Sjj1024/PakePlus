@@ -382,8 +382,11 @@ import { oneDark } from '@codemirror/theme-one-dark'
 import { openUrl, urlMap } from '@/utils/common'
 import { ref } from 'vue'
 import { usePakeStore } from '@/store'
+import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 
 const store = usePakeStore()
+const { t } = useI18n()
 const activeName = ref('1')
 const localTheme = localStorage.getItem('theme')
 
@@ -422,8 +425,20 @@ const updateCode = () => {
     uiCode.value = JSON.stringify(store.currentProject.more, null, 2)
 }
 
+const checkJson = () => {
+    try {
+        const codeObj = JSON.parse(uiCode.value)
+        console.log('codeObj', codeObj)
+        store.updateTauriConfig(codeObj)
+        return true
+    } catch (error) {
+        return false
+    }
+}
+
 defineExpose({
     updateCode,
+    checkJson,
 })
 </script>
 
