@@ -26,6 +26,7 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 -   💡 Supports custom js injection. you can write your own js code to inject into the page.
 -   🎨 ui is more beautiful, more comfortable to use.
 -   📡 It can be directly used on the web side, but the client-side has more powerful functions.
+-   🔐 Data security. Your token is only saved locally on your device and will not be uploaded to the server. Your projects are also safely stored in your own Git repository.
 
 ## Popular Packages
 
