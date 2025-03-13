@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { locale as osLocale } from '@tauri-apps/plugin-os'
 import { useI18n } from 'vue-i18n'
-import { isTauri } from './utils/common'
+import { isTauri, isMobile } from './utils/common'
 
 const { locale } = useI18n()
 
@@ -55,6 +55,11 @@ const chageTheme = (theme: string) => {
 }
 
 const initEnv = async () => {
+    if (isMobile()) {
+        // to https://sjj1024.github.io/PakePlus/
+        window.location.href = 'https://sjj1024.github.io/PakePlus/'
+        return
+    }
     const localLang =
         navigator.language || (navigator as any).userLanguage || 'en'
     const language = isTauri ? await osLocale() : localLang

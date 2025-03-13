@@ -755,3 +755,10 @@ export const loadingText = (text: string) => {
         document.querySelector('.el-loading-text')!.innerHTML = text
     }
 }
+
+// is mobile
+export const isMobile = () => {
+    return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+        navigator.userAgent.toLowerCase()
+    )
+}
