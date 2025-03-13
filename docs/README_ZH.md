@@ -9,7 +9,7 @@
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>9分钟就可以将任何网页变成桌面应用和移动应用，简单易用。</strong></p>
 
-<div align="left">PakePlus 支持 Mac、Windows 和 Linux，很快也将支持 Android 和 iOS。无需在本地安装复杂的依赖环境，只需要一个Github Token就可以了，而且PakePlus本身也才仅仅5M左右小大，最新版本下载请看：<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">发布地址</a>。或者访问网页版: <a href="https://pakeplus.netlify.app" target="_blank">PakePlus Web</a>。 查看 README 以获取<a href="#popular-packages">热门包</a>和<a href="#development">自定义开发</a>信息。欢迎在<a href=https://github.com/Sjj1024/PakePlus/discussions>讨论区</a>分享你的建议。</div> 加我微信进微信交流群：lanxingme 。
+<div align="left">PakePlus 支持 Mac、Windows 和 Linux，很快也将支持 Android 和 iOS。无需在本地安装复杂的依赖环境，只需要一个Github Token就可以了，而且PakePlus本身也才仅仅5M左右小大，最新版本下载请看：<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">发布地址</a>。或者访问网页版: <a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>。 查看 README 以获取<a href="#popular-packages">热门包</a>和<a href="#development">自定义开发</a>信息。欢迎在<a href=https://github.com/Sjj1024/PakePlus/discussions>讨论区</a>分享你的建议。</div> 加我微信进微信交流群：lanxingme 。
 
 https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
@@ -86,7 +86,7 @@ PakePLus支持arm和inter架构的安装包，流行的程序安装包仅仅包�
 ## 开始之前
 
 1.从发布页面下载应用程序：https://github.com/Sjj1024/PakePlus/releases，双击安装并运行应用程序。
-或者使用网页版：<a href="https://pakeplus.netlify.app" target="_blank">PakePlus Web</a>
+或者使用网页版：<a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>
 
 2.配置 Github Token，并创建一个新项目并进行配置。
 Token 获取方法: <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 20px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>

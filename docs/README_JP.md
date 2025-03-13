@@ -9,7 +9,7 @@
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>9分で任意のウェブページをデスクトップアプリやモバイルアプリに変換。シンプルで使いやすい。</strong></p>
 
-<div align="left">PakePlus は Mac、Windows、および Linux に対応しており、Android と iOS も間もなくサポート予定です。ローカルに複雑な依存環境をインストールする必要はなく、Github トークンだけで利用できます。また、PakePlus 自体のサイズはわずか約5MBです。最新バージョンについては<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">リリースページ</a>をご確認ください。また、PakePlus Web 版も利用できます。<a href="URL_ADDRESS また、PakePlus Web 版も利用できます。<a href="https://pakeplus.netlify.app" target="_blank">PakePlus Web</a>。
+<div align="left">PakePlus は Mac、Windows、および Linux に対応しており、Android と iOS も間もなくサポート予定です。ローカルに複雑な依存環境をインストールする必要はなく、Github トークンだけで利用できます。また、PakePlus 自体のサイズはわずか約5MBです。最新バージョンについては<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">リリースページ</a>をご確認ください。また、PakePlus Web 版も利用できます。<a href="URL_ADDRESS また、PakePlus Web 版も利用できます。<a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>。
 <a href="#popular-packages">人気パッケージ</a>や<a href="#development">カスタム開発</a>については README をご覧ください。<a href="https://github.com/Sjj1024/PakePlus/discussions">ディスカッションエリア</a>でご意見をお待ちしています。</div>
 
 https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
@@ -86,7 +86,7 @@ PakePlusは、ARMとIntelの両アーキテクチャに対応したインスト�
 
 ## 始める前に
 
-1. リリースページからアプリをダウンロードし、ダブルクリックしてインストールし、実行します：https://github.com/Sjj1024/PakePlus/releases。 あるいは、ウェブ版を使ってもいいです：<a href="https://pakeplus.netlify.app" target="_blank">PakePlus Web</a>
+1. リリースページからアプリをダウンロードし、ダブルクリックしてインストールし、実行します：https://github.com/Sjj1024/PakePlus/releases。 あるいは、ウェブ版を使ってもいいです：<a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>
 
 2. Github トークンを設定し、新しいプロジェクトを作成して設定を行います。Token 获取方法: <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 20px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>
 
