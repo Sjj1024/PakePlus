@@ -1377,12 +1377,16 @@ const checkBuildStatus = async () => {
             reRunFailsJobs(id, html_url)
         }
     } else {
-        buildTime = 0
-        buildLoading.value = false
-        openUrl(html_url)
-        buildSecondTimer && clearInterval(buildSecondTimer)
-        checkDispatchTimer && clearInterval(checkDispatchTimer)
-        document.querySelector('.el-loading-text')!.innerHTML = t('failure')
+        if (rerunCount >= 2) {
+            buildTime = 0
+            buildLoading.value = false
+            openUrl(html_url)
+            buildSecondTimer && clearInterval(buildSecondTimer)
+            checkDispatchTimer && clearInterval(checkDispatchTimer)
+            document.querySelector('.el-loading-text')!.innerHTML = t('failure')
+        } else {
+            reRunFailsJobs(id, html_url)
+        }
     }
 }
 
