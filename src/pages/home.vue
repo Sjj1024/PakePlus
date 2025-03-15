@@ -232,11 +232,11 @@ import {
     isTauri,
     base64Decode,
     platforms,
-    getCustomJs,
     createBranch,
     webBranch,
     mainBranch,
     getBuildYml,
+    getCustomJsFetch,
 } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
@@ -475,7 +475,7 @@ const creatProject = async () => {
     // token.value && (await uploadBuildYml())
     if (branchName.value && /^[A-Za-z0-9]+$/.test(branchName.value)) {
         console.log('branchName.value', branchName.value)
-        const customJs = await getCustomJs()
+        const customJs = await getCustomJsFetch()
         // check branch exist
         if (token.value) {
             const res: any = await githubApi.getBranch(

@@ -463,11 +463,11 @@ import {
     platforms,
     arrayBufferToBase64,
     cropImageToRound,
-    getBuildYml,
-    getCargoToml,
-    getTauriConf,
+    getBuildYmlFetch,
+    getCargoTomlFetch,
+    getTauriConfFetch,
+    getInitRustFetch,
     base64Encode,
-    getInitRust,
     loadingText,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
@@ -772,9 +772,9 @@ const updateIcon = async () => {
             'PakePlus',
             {
                 message: 'update icon from pakeplus',
-                content: iconContent,
                 sha: iconSha.data.sha,
                 branch: store.currentProject.name,
+                content: iconContent,
             }
         )
         if (updateRes.status === 200) {
@@ -974,7 +974,7 @@ const updateBuildYml = async () => {
     console.log('get build.yml file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get build.yml file content
-        const content = await getBuildYml({
+        const content = await getBuildYmlFetch({
             name: store.currentProject.name,
             body: pubForm.desc,
         })
@@ -1010,7 +1010,7 @@ const updateCargoToml = async () => {
     console.log('get CargoToml file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
-        const configContent: any = await getCargoToml({
+        const configContent: any = await getCargoTomlFetch({
             name: store.currentProject.name,
             version: store.currentProject.version,
             desc: store.currentProject.desc,
@@ -1048,7 +1048,7 @@ const updateInitRs = async () => {
     console.log('get init.rs file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
-        const configContent: any = await getInitRust({
+        const configContent: any = await getInitRustFetch({
             config: JSON.stringify(store.currentProject.more.windows),
             state: store.currentProject.state,
             injectjq: store.currentProject.injectJq,
@@ -1152,7 +1152,7 @@ const updateTauriConfig = async () => {
     try {
         // remove label from windows
         let { label, ...newWindows } = store.currentProject.more.windows
-        const configContent: any = await getTauriConf({
+        const configContent: any = await getTauriConfFetch({
             name: store.currentProject.showName,
             version: store.currentProject.version,
             id: store.currentProject.appid,
@@ -1210,7 +1210,6 @@ const publishDist = async () => {
 
 // new publish version
 const publish2 = async () => {
-    // TODO 检查是否存在已经编译的action
     centerDialogVisible.value = false
     buildLoading.value = true
     loadingText(t('preCheck') + '...')
@@ -1375,6 +1374,8 @@ const checkBuildStatus = async () => {
             reRunFailsJobs(id, html_url)
         } else if (status === 'completed') {
             reRunFailsJobs(id, html_url)
+        } else if (status === 'in_progress') {
+            console.log('build in progress...')
         }
     } else {
         if (rerunCount >= 2) {

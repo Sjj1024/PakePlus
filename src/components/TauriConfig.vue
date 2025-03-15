@@ -411,7 +411,7 @@ const cmOptions = ref({
 const codeChange = (code: string) => {
     try {
         const codeObj = JSON.parse(code)
-        console.log('codeObj', codeObj)
+        console.log('codeChange codeObj', codeObj)
         store.updateTauriConfig(codeObj)
     } catch (error) {
         console.error('codeChange error!', error)
@@ -425,11 +425,12 @@ const updateCode = () => {
 
 const checkJson = () => {
     try {
-        const codeObj = JSON.parse(uiCode.value)
-        console.log('codeObj', codeObj)
-        store.updateTauriConfig(codeObj)
+        const codeObj = JSON.stringify(store.currentProject.more, null, 2)
+        console.log('checkJson codeObj', codeObj)
+        store.updateTauriConfig(JSON.parse(codeObj))
         return true
     } catch (error) {
+        console.error('checkJson error!', error)
         return false
     }
 }

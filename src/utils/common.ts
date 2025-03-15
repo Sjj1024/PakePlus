@@ -261,6 +261,15 @@ export const getCustomJs = async () => {
     }
 }
 
+// get custom js
+export const getCustomJsFetch = async () => {
+    let content = await readFile('custom.js')
+    if (content === 'error') {
+        return 'error'
+    }
+    return content
+}
+
 // get build.yml file content
 export const getBuildYml = async (params: any) => {
     if (isTauri) {
@@ -277,6 +286,20 @@ export const getBuildYml = async (params: any) => {
         content = content.replaceAll('RELEASEBODY', params.body)
         return base64Encode(content)
     }
+}
+
+// get build.yml file content
+export const getBuildYmlFetch = async (params: any) => {
+    let content = await readFile('build.yml')
+    if (content === 'error') {
+        return 'error'
+    }
+    // 替换PROJECTNAME
+    content = content.replaceAll('PROJECTNAME', params.name)
+    // 替换RELEASEBODY
+    content = content.replaceAll('RELEASEBODY', params.body)
+    console.log('getBuildYmlJs content', content)
+    return base64Encode(content)
 }
 
 // get Cargo.toml file content
@@ -302,6 +325,26 @@ export const getCargoToml = async (params: any) => {
         )
         return base64Encode(content)
     }
+}
+
+// get Cargo.toml file content
+export const getCargoTomlFetch = async (params: any) => {
+    let content = await readFile('cargo.txt')
+    if (content === 'error') {
+        return 'error'
+    }
+    // 替换NAME
+    content = content.replaceAll('PROJECTNAME', params.name)
+    // 替换VERSION
+    content = content.replaceAll('PROJECTVERSION', params.version)
+    // 替换DESC
+    content = content.replaceAll('PROJECTDESC', params.desc)
+    // 替换DEBUG
+    content = content.replaceAll(
+        '-3',
+        params.debug ? '"protocol-asset", "devtools"' : '"protocol-asset"'
+    )
+    return base64Encode(content)
 }
 
 // get tauri.conf.json file content
@@ -331,6 +374,30 @@ export const getTauriConf = async (params: any) => {
         content = content.replaceAll('-1', params.windowConfig)
         return base64Encode(content)
     }
+}
+
+// get tauri.conf.json file content
+export const getTauriConfFetch = async (params: any) => {
+    let content = await readFile('config.json')
+    if (content === 'error') {
+        return 'error'
+    }
+    // 替换PROJECTNAME
+    content = content.replaceAll('PROJECTNAME', params.name)
+    // 替换PROJECTVERSION
+    content = content.replaceAll('PROJECTVERSION', params.version)
+    // 替换PROJECTID
+    content = content.replaceAll('PROJECTID', params.id)
+    // 替换TAURIAPI
+    content = content.replaceAll('-2', params.tauriApi ? 'true' : 'false')
+    // ascii
+    content = content.replaceAll(
+        '-3',
+        params.ascii ? '"all"' : '["deb", "appimage", "nsis", "app", "dmg"]'
+    )
+    // windowConfig
+    content = content.replaceAll('-1', params.windowConfig)
+    return base64Encode(content)
 }
 
 // get init.rs file content
@@ -363,6 +430,28 @@ export const getInitRust = async (params: any) => {
         }
         return base64Encode(content)
     }
+}
+
+// get init.rs file content
+export const getInitRustFetch = async (params: any) => {
+    let content = await readFile('init.rs')
+    if (content === 'error') {
+        return 'error'
+    }
+    // 替换WINDOWCONFIG
+    content = content.replaceAll('WINDOWCONFIG', params.config)
+    // 替换STATE
+    if (!params.state) {
+        content = content.replaceAll('if true {', 'if false {')
+    }
+    if (params.injectjq) {
+        // 替换INJECTJQ
+        content = content.replaceAll(
+            '.initialization_script(include_str!("../../data/custom.js"))',
+            `.initialization_script(include_str!("../../data/jquery.min.js"))\r.initialization_script(include_str!("../../data/custom.js"))`
+        )
+    }
+    return base64Encode(content)
 }
 
 // turn base64 to ArrayBuffer
