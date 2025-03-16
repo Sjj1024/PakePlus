@@ -728,7 +728,9 @@ const handleFileChange = async (event: any) => {
     console.log('handleFileChange', event)
     const input = event.target as HTMLInputElement
     if (input.files) {
-        const files = Array.from(input.files)
+        const files = Array.from(input.files).filter(
+            (file) => !file.name.startsWith('.')
+        )
         console.log('files', files)
         const filePaths = getFilesName(files)
         console.log('filePaths', filePaths)
@@ -796,9 +798,6 @@ const uploadFiles = async (files: any) => {
     store.currentProject.url = `index.html (${t('moreAssets')}+${total})`
     for (const file of files) {
         count++
-        if (file.name.startsWith('.')) {
-            continue
-        }
         const loadingState = `<div>${count}/${total}</div>
         <div>${t('syncFilePro')}${file.name}</div>
         <div>${t('syncTileTips')}</div>`
@@ -932,7 +931,6 @@ const saveJsFile = async () => {
     console.log('saveJsFile', jsFileContents.value)
     // get app data dir
     const appDataPath = await appDataDir()
-    console.log('appDataPath------', appDataPath)
     const targetDir = await join(appDataPath, 'assets')
     const savePath = await join(targetDir, `${store.currentProject.name}.js`)
     // save file
@@ -1178,6 +1176,7 @@ const updateInitRs = async () => {
             config: JSON.stringify(store.currentProject.more.windows),
             state: store.currentProject.state,
             injectjq: store.currentProject.injectJq,
+            isHtml: store.currentProject.isHtml,
         })
         const updateRes: any = await githubApi.updateFileContent(
             store.userInfo.login,
@@ -1343,11 +1342,22 @@ const publish2 = async () => {
         // delete release
         store.isRelease && (await deleteRelease())
         // publish web or dist
-        if (store.currentProject.url.includes('http')) {
-            await publishWeb()
-        } else {
-            await publishDist()
-        }
+        console.log('publish web')
+        loadingText(t('syncConfig') + '...')
+        // update app icon
+        await updateIcon()
+        // update build.yml
+        await updateBuildYml()
+        // update Cargo.toml
+        await updateCargoToml()
+        // update tauri.conf.json
+        await updateTauriConfig()
+        // update custom.js
+        await updateCustomJs()
+        // update init.rs
+        await updateInitRs()
+        // dispatch action
+        dispatchAction()
     } catch (error: any) {
         console.error('publish2 error', error)
         warning.value = error

@@ -439,6 +439,9 @@ export const getInitRustFetch = async (params: any) => {
     // 将visible: true 替换为 visible: false
     params.config = JSON.parse(params.config)
     params.config.visible = false
+    if (params.isHtml) {
+        params.config.url = 'index.html'
+    }
     params.config = JSON.stringify(params.config)
     console.log('getInitRust params', params)
     let content = await readFile('init.rs')
