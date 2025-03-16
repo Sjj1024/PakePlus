@@ -30,9 +30,7 @@
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item
-                                @click="configDialogVisible = true"
-                            >
+                            <el-dropdown-item @click="showConfigDialog">
                                 {{ t('moreConfig') }}
                             </el-dropdown-item>
                             <el-dropdown-item
@@ -71,7 +69,7 @@
                             autoCapitalize="off"
                             autoCorrect="off"
                             spellCheck="false"
-                            @change="changeAppName"
+                            @input="changeAppName"
                             :placeholder="`${t('example')}：PakePlus`"
                         />
                     </el-form-item>
@@ -86,7 +84,7 @@
                             autoCapitalize="off"
                             autoCorrect="off"
                             spellCheck="false"
-                            @change="changeUrl"
+                            @input="changeUrl"
                             :placeholder="`${t(
                                 'example'
                             )}：https://www.github.com'`"
@@ -625,8 +623,13 @@ const changeUrl = (value: string) => {
     store.currentProject.more.windows.url = value
 }
 
+const showConfigDialog = () => {
+    configDialogVisible.value = true
+    tauriConfigRef.value?.updateCode()
+}
+
 // close tauri config dialog
-const closeConfigDialog = (done: any) => {
+const closeConfigDialog = (done: any = () => {}) => {
     const isJson = tauriConfigRef.value?.checkJson()
     if (isJson) {
         configDialogVisible.value = false
@@ -876,7 +879,7 @@ const saveFormInput = async () => {
         debug: pubForm.model,
         more: store.currentProject.more,
     })
-    tauriConfigRef.value?.updateCode()
+    !configDialogVisible.value && tauriConfigRef.value?.updateCode()
     // save js file content to appDataDir
     if (jsFileContents.value) {
         saveJsFile()
@@ -889,7 +892,16 @@ const saveProject = async (tips: boolean = true) => {
     appFormRef.value?.validate(async (valid, fields) => {
         if (valid) {
             saveFormInput()
-            tips && ElMessage.success(t('saveSuccess'))
+            if (configDialogVisible.value) {
+                const isJson = tauriConfigRef.value?.checkJson()
+                if (isJson) {
+                    ElMessage.success(t('saveSuccess'))
+                } else {
+                    ElMessage.error(t('jsonError'))
+                }
+            } else {
+                tips && ElMessage.success(t('saveSuccess'))
+            }
         } else {
             console.error('error submit!', fields)
             for (const key in fields) {
@@ -1455,11 +1467,9 @@ const initJsFileContents = async () => {
 }
 
 const handleKeydown = (event: KeyboardEvent) => {
-    console.log('handleKeydown', event)
     // Check if Command (Meta) + S is pressed
     if ((event.metaKey || event.ctrlKey) && event.key === 's') {
         event.preventDefault()
-        console.log('Command + S pressed')
         saveProject()
     }
 }
