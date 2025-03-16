@@ -688,9 +688,7 @@ const confirmIcon = (base64Data: string) => {
 
 // platform change
 const platformChange = (value: any) => {
-    console.log('platformChange', value)
     const platformInfo = platforms[value]
-    console.log('platformInfo', platformInfo)
     store.currentProject.width = platformInfo.width
     store.currentProject.height = platformInfo.height
     store.currentProject.more.windows.width = platformInfo.width
@@ -713,7 +711,6 @@ const rotateWH = () => {
 
 // web upload icon
 const webUploadIcon = async () => {
-    console.log('webUploadIcon uploadIcon')
     file.value.click()
 }
 
@@ -825,11 +822,8 @@ const uploadFiles = async (files: any) => {
 
 const handleIconChange = (event: any) => {
     const file = event.target.files[0]
-    console.log('handleIconChange', file)
     if (file) {
         fileToBase64(file)
-    } else {
-        console.log('No file selected')
     }
 }
 
@@ -853,18 +847,13 @@ const uploadIcon = async () => {
     })
 
     if (!selectedFilePath) {
-        console.log('No file selected')
         return null
     }
     const fileName = await basename(selectedFilePath)
-    // const fileName = selectedFilePath.split('/').pop()
     iconFileName.value = fileName
-    console.log('Selected file path:', selectedFilePath, fileName)
-    console.log(`File Name: ${fileName}`)
     // get file name
     const binaryData = await readFile(selectedFilePath)
     const base64Data: any = arrayBufferToBase64(binaryData)
-    console.log('Base64 encoded image:', base64Data)
     const base64String = 'data:image/jpg;base64,' + base64Data
     tempIconBase64.value = base64String
     // if file is not png, and size is not 512x512, then cut it
@@ -886,8 +875,6 @@ const updateIcon = async () => {
         'app-icon.png',
         { ref: store.currentProject.name }
     )
-    console.log('iconSha---', iconSha)
-    console.log('iconContent---', iconContent)
     // update icon file content
     if (iconSha.status === 200) {
         const updateRes: any = await githubApi.updateIconFile(
