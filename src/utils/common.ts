@@ -300,7 +300,6 @@ export const getBuildYmlFetch = async (params: any) => {
     content = content.replaceAll('PROJECTNAME', params.name)
     // 替换RELEASEBODY
     content = content.replaceAll('RELEASEBODY', params.body)
-    console.log('getBuildYmlJs content', content)
     return base64Encode(content)
 }
 
