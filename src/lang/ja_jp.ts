@@ -128,4 +128,6 @@ export default {
     dispatchError: 'dispatchエラー',
     dispatchSuccess: 'dispatch成功',
     jsonError: 'json形式エラー',
+    tokenTips:
+        'トークンはローカルに保存され、サーバーにアップロードされません。',
 }

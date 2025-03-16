@@ -822,6 +822,8 @@ export const usePakeStore = defineStore('pakeplus', {
                           body: '',
                       },
                   } as { [key: string]: any }),
+            //   token
+            token: localStorage.getItem('token') || '',
             age: 18,
             sex: '男',
         }
@@ -838,6 +840,10 @@ export const usePakeStore = defineStore('pakeplus', {
         },
     },
     actions: {
+        setToken(token: any) {
+            this.token = token
+            localStorage.setItem('token', token)
+        },
         setUser(info: any) {
             this.userInfo = info
             localStorage.setItem('userInfo', JSON.stringify(info))

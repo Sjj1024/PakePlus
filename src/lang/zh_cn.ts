@@ -126,4 +126,5 @@ export default {
     dispatchError: 'dispatch错误',
     dispatchSuccess: 'dispatch成功',
     jsonError: 'json格式错误',
+    tokenTips: '提示: token仅本地存储，不会上传到服务器，请妥善保管',
 }

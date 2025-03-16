@@ -120,7 +120,7 @@
             </template>
             <div class="diaContent">
                 <el-input
-                    v-model.trim="token"
+                    v-model.trim="store.token"
                     autocomplete="off"
                     autoCapitalize="off"
                     autoCorrect="off"
@@ -163,12 +163,10 @@
                 <div class="line">
                     {{ t('userName') }}: {{ store.userInfo.login }}
                 </div>
-                <!-- <div class="line">主页: {{ store.userInfo.html_url }}</div>
-                <div class="line">简介: {{ store.userInfo.bio }}</div> -->
-                <div class="line">token: {{ token }}</div>
-                <!-- <div class="line">
-                    提示: token仅本地存储，不会上传到服务器，请妥善保管
-                </div> -->
+                <div class="line">token: {{ store.token }}</div>
+                <div class="tokenTips">
+                    {{ t('tokenTips') }}
+                </div>
             </div>
             <template #footer>
                 <div class="dialog-footer">
@@ -247,7 +245,7 @@ import packageJson from '../../package.json'
 const router = useRouter()
 const store = usePakeStore()
 const { t, locale } = useI18n()
-const token = ref(localStorage.getItem('token') || '')
+// const token = ref(localStorage.getItem('token') || '')
 const version = ref(packageJson.version)
 const tokenDialog = ref(false)
 const userInfoDialog = ref(false)
@@ -272,11 +270,8 @@ const chageTheme = async (theme: string) => {
 
 // logout
 const logout = () => {
-    token.value = ''
-    localStorage.removeItem('token')
-    localStorage.removeItem('userInfo')
-    localStorage.clear()
     store.$reset()
+    localStorage.clear()
     userInfoDialog.value = false
 }
 
@@ -286,7 +281,7 @@ const goProject = async (pro: Project) => {
     router.push('/edit')
     branchName.value = pro.name
     // check branch exist
-    if (token.value) {
+    if (store.token) {
         githubApi
             .getBranch(store.userInfo.login, 'PakePlus', branchName.value)
             .then((res: any) => {
@@ -317,7 +312,7 @@ const showBranchDialog = () => {
     // if token exist, then creat branch, else next page
     // token.value && getCommitSha()
     // checkout has github token
-    if (token.value === '') {
+    if (store.token === '') {
         ElMessage.error(t('configToken'))
     }
     // need creat new branch, first input project name
@@ -331,13 +326,13 @@ const changeLang = (lang: string) => {
 
 // check token and confirm token is ok
 const testToken = async (tips: boolean = true) => {
-    console.log('testToken', token.value)
-    if (localStorage.getItem('token') !== token.value || tips) {
+    console.log('testToken', store.token)
+    if (localStorage.getItem('token') !== store.token || tips) {
         testLoading.value = true
-        const res: any = await githubApi.gitUserInfo(token.value)
+        const res: any = await githubApi.gitUserInfo(store.token)
         console.log('testToken', res)
         if (res.status === 200) {
-            localStorage.setItem('token', token.value)
+            localStorage.setItem('token', store.token)
             store.setUser(res.data)
             console.log('gitUserInfo res.data', res.data)
             if (res.data.login !== 'Sjj1024') {
@@ -477,7 +472,7 @@ const creatProject = async () => {
         console.log('branchName.value', branchName.value)
         const customJs = await getCustomJsFetch()
         // check branch exist
-        if (token.value) {
+        if (store.token) {
             const res: any = await githubApi.getBranch(
                 store.userInfo.login,
                 'PakePlus',
@@ -557,7 +552,7 @@ const uploadBuildYml = async (_: string = 'main') => {
         name: 'PakePlus',
         body: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.',
     })
-    console.log('content', content)
+    // console.log('content', content)
     // update build.yml file content
     const updateRes: any = await githubApi.createBuildYml(
         store.userInfo.login,
@@ -921,6 +916,10 @@ onMounted(() => {
     .line {
         // width: 100%;
         margin-bottom: 6px;
+    }
+
+    .tokenTips {
+        color: gray;
     }
 
     .userAvatarBox {

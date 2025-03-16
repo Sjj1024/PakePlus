@@ -95,6 +95,7 @@
                                 <el-button
                                     :class="isTauri ? 'distUpload' : ''"
                                     :icon="UploadFilled"
+                                    :disabled="!store.token"
                                     @click="activeDistInput"
                                 />
                             </template>

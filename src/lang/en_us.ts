@@ -128,4 +128,5 @@ export default {
     dispatchError: 'dispatch error',
     dispatchSuccess: 'dispatch success',
     jsonError: 'json format error',
+    tokenTips: 'Token is stored locally and will not be uploaded to the server',
 }

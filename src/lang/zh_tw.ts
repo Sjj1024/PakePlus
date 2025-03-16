@@ -123,4 +123,5 @@ export default {
     dispatchError: 'dispatch錯誤',
     dispatchSuccess: 'dispatch成功',
     jsonError: 'json格式錯誤',
+    tokenTips: '提示: token僅本地存儲，不會上傳到服務器，請妥善保管',
 }

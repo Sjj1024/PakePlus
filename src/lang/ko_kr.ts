@@ -129,4 +129,6 @@ export default {
     dispatchError: 'dispatch 오류',
     dispatchSuccess: 'dispatch 성공',
     jsonError: 'json 형식 오류',
+    tokenTips:
+        '토큰은 로컬에 저장되며, 서버에 업로드되지 않습니다. 확인하세요.',
 }
