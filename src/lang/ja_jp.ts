@@ -132,4 +132,11 @@ export default {
         'トークンはローカルに保存され、サーバーにアップロードされません。',
     staticFile: '静的ファイルまたはフォルダー',
     indexHtmError: 'index.htmlファイルが必要です',
+    syncFileStart: 'ファイルを同期開始',
+    syncFilePro: 'ファイルを同期',
+    syncFileCount: '同期進捗',
+    syncFileError: '同期失敗',
+    syncFileSuccess: '同期成功',
+    syncFileCancel: '同期キャンセル',
+    syncTileTips: '同期中は何も操作しないでください',
 }

@@ -131,4 +131,11 @@ export default {
     tokenTips: 'Token is stored locally and will not be uploaded to the server',
     staticFile: 'Static file or folder',
     indexHtmError: 'index.html file is required',
+    syncFileStart: 'Start sync file',
+    syncFilePro: 'Sync file',
+    syncFileCount: 'Sync progress',
+    syncFileError: 'Sync failed',
+    syncFileSuccess: 'Sync success',
+    syncFileCancel: 'Sync cancel',
+    syncTileTips: 'Please do not do any operations during the sync process',
 }

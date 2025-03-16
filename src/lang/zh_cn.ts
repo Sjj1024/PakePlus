@@ -135,5 +135,5 @@ export default {
     syncFileError: '同步失败',
     syncFileSuccess: '同步成功',
     syncFileCancel: '同步取消',
-    syncTileTips: '同步文件时，请不要关闭当前页面，否则会导致同步失败',
+    syncTileTips: '同步文件时，请不要做任何操作，否则会同步失败',
 }

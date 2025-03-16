@@ -730,7 +730,7 @@ const handleFileChange = async (event: any) => {
                 await uploadFiles(files)
                 buildLoading.value = false
                 loadingText(t('syncFileSuccess'))
-                ElMessage.success(t('syncSuccess'))
+                ElMessage.success(t('syncFileSuccess'))
             } catch (error) {
                 console.error('uploadFiles error', error)
                 buildLoading.value = false
@@ -784,7 +784,8 @@ const uploadFiles = async (files: any) => {
     for (const file of files) {
         count++
         const loadingState = `<div>${count}/${total}</div>
-        <div>${t('syncFilePro')}${file.name}</div>`
+        <div>${t('syncFilePro')}${file.name}</div>
+        <div>${t('syncTileTips')}</div>`
         loadingText(loadingState)
         // 替换根路径为 "src"
         const newFilePath = rootPath(file)

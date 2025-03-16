@@ -133,4 +133,11 @@ export default {
         '토큰은 로컬에 저장되며, 서버에 업로드되지 않습니다. 확인하세요.',
     staticFile: '정적 파일 또는 폴더',
     indexHtmError: 'index.html 파일이 포함되어야 합니다',
+    syncFileStart: '파일 동기화 시작',
+    syncFilePro: '파일 동기화',
+    syncFileCount: '동기화 진행',
+    syncFileError: '동기화 실패',
+    syncFileSuccess: '동기화 성공',
+    syncFileCancel: '동기화 취소',
+    syncTileTips: '동기화 중에는 아무 작업도 하지 마세요',
 }

@@ -126,4 +126,11 @@ export default {
     tokenTips: '提示: token僅本地存儲，不會上傳到服務器，請妥善保管',
     staticFile: '靜態文件或文件夾',
     indexHtmError: '必須包含index.html文件',
+    syncFileStart: '開始同步文件',
+    syncFilePro: '同步文件',
+    syncFileCount: '同步進度',
+    syncFileError: '同步失敗',
+    syncFileSuccess: '同步成功',
+    syncFileCancel: '同步取消',
+    syncTileTips: '同步文件時，請不要做任何操作，否則會同步失敗',
 }
