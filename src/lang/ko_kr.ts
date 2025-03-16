@@ -142,4 +142,5 @@ export default {
     syncTileTips: '동기화 중에는 아무 작업도 하지 마세요',
     webNotStable: '웹 페이지가 안정적이지 않습니다. 데스크탑을 사용하세요.',
     moreAssets: '등 자산',
+    staticPreview: '정적 자산은 미리보기를 지원하지 않습니다',
 }

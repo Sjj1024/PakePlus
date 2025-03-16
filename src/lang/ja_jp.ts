@@ -142,4 +142,5 @@ export default {
     webNotStable:
         'Webは安定していません。デスクトップを使用することをお勧めします。',
     moreAssets: '等資源',
+    staticPreview: '静的資源は預覧できません',
 }

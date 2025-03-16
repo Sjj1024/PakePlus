@@ -140,4 +140,5 @@ export default {
     syncTileTips: 'Please do not do any operations during the sync process',
     webNotStable: 'Web is not stable, recommend using desktop',
     moreAssets: 'more assets',
+    staticPreview: 'Static assets cant preview',
 }

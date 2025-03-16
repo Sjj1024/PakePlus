@@ -1024,6 +1024,11 @@ const getInitializationScript = () => {
 
 const preview = async (resize: boolean) => {
     if (isTauri) {
+        // 判断是不是静态资源，是的话，暂不支持预览
+        if (store.currentProject.isHtml) {
+            ElMessage.error(t('staticPreview'))
+            return
+        }
         const platformName = platform()
         // get platform
         console.log('platform', platformName)
