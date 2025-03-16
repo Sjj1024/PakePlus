@@ -386,7 +386,7 @@ import { usePakeStore } from '@/store'
 
 const store = usePakeStore()
 const activeName = ref('1')
-const localTheme = localStorage.getItem('theme')
+const localTheme = localStorage.getItem('theme') || 'dark'
 
 const props = defineProps({
     isJson: {

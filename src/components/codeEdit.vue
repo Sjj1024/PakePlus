@@ -28,7 +28,7 @@ const props = defineProps({
 
 const store = usePakeStore()
 
-const localTheme = localStorage.getItem('theme')
+const localTheme = localStorage.getItem('theme') || 'dark'
 
 // extensions
 const extensions: any = [props.lang === 'json' ? json() : javascript(), oneDark]
