@@ -127,4 +127,6 @@ export default {
     dispatchSuccess: 'dispatch成功',
     jsonError: 'json格式错误',
     tokenTips: '提示: token仅本地存储，不会上传到服务器，请妥善保管',
+    staticFile: '静态文件或文件夹',
+    indexHtmError: '必须包含index.html文件',
 }

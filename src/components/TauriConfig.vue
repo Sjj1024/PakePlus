@@ -425,9 +425,14 @@ const updateCode = () => {
 
 const checkJson = () => {
     try {
-        const codeObj = JSON.stringify(store.currentProject.more, null, 2)
+        let codeObj = {}
+        if (props.isJson) {
+            codeObj = JSON.parse(uiCode.value)
+        } else {
+            codeObj = store.currentProject.more
+        }
         console.log('checkJson codeObj', codeObj)
-        store.updateTauriConfig(JSON.parse(codeObj))
+        store.updateTauriConfig(codeObj)
         return true
     } catch (error) {
         console.error('checkJson error!', error)

@@ -182,6 +182,8 @@ export const initProject = {
     jsFile: [],
     filterCss: '',
     customJs: '',
+    isHtml: false,
+    htmlFiles: [],
     more: tauriConfig,
 }
 
@@ -873,4 +875,28 @@ export const buildFileTree = (files: File[]): any => {
         })
     })
     return fileTree
+}
+
+// get file path
+export const getFilesName = (files: File[]) => {
+    return files.map((file) => {
+        return file.name
+    })
+}
+
+// check includes index.htm
+export const includeHtm = (files: string[]) => {
+    return files.some((file) => {
+        return file.includes('index.htm')
+    })
+}
+
+// read file as base64
+export const readFileAsBase64 = async (file: File) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => resolve(reader.result as string)
+        reader.onerror = (error) => reject(error)
+        reader.readAsDataURL(file)
+    })
 }

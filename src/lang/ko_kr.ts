@@ -131,4 +131,6 @@ export default {
     jsonError: 'json 형식 오류',
     tokenTips:
         '토큰은 로컬에 저장되며, 서버에 업로드되지 않습니다. 확인하세요.',
+    staticFile: '정적 파일 또는 폴더',
+    indexHtmError: 'index.html 파일이 포함되어야 합니다',
 }

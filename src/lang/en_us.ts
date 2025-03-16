@@ -129,4 +129,6 @@ export default {
     dispatchSuccess: 'dispatch success',
     jsonError: 'json format error',
     tokenTips: 'Token is stored locally and will not be uploaded to the server',
+    staticFile: 'Static file or folder',
+    indexHtmError: 'index.html file is required',
 }

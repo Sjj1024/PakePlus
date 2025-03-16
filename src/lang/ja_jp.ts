@@ -130,4 +130,6 @@ export default {
     jsonError: 'json形式エラー',
     tokenTips:
         'トークンはローカルに保存され、サーバーにアップロードされません。',
+    staticFile: '静的ファイルまたはフォルダー',
+    indexHtmError: 'index.htmlファイルが必要です',
 }

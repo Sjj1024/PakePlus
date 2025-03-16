@@ -92,12 +92,18 @@
                             )}：https://www.github.com'`"
                         >
                             <template #append>
-                                <el-button
-                                    :class="isTauri ? 'distUpload' : ''"
-                                    :icon="UploadFilled"
-                                    :disabled="!store.token"
-                                    @click="activeDistInput"
-                                />
+                                <el-tooltip
+                                    class="box-item"
+                                    :content="t('staticFile')"
+                                    placement="bottom"
+                                >
+                                    <el-button
+                                        class="distUpload"
+                                        :icon="UploadFilled"
+                                        :disabled="!store.token"
+                                        @click="activeDistInput"
+                                    />
+                                </el-tooltip>
                             </template>
                         </el-input>
                         <input
@@ -469,7 +475,9 @@ import {
     getInitRustFetch,
     base64Encode,
     loadingText,
-    buildFileTree,
+    includeHtm,
+    readFileAsBase64,
+    getFilesName,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -533,7 +541,7 @@ const appRules = reactive<FormRules>({
             validator: (rule, value, callback) => {
                 console.log('url value', value)
                 // check url start with http or https
-                if (value.startsWith('http')) {
+                if (value.startsWith('http') || value.includes('index.htm')) {
                     callback()
                 } else {
                     callback(new Error(t('urlInvalid')))
@@ -702,8 +710,30 @@ const handleFileChange = (event: any) => {
     const input = event.target as HTMLInputElement
     if (input.files) {
         const files = Array.from(input.files)
-        const fileTree = buildFileTree(files)
-        console.log('fileTree', fileTree)
+        console.log('files', files)
+        const filePaths = getFilesName(files)
+        console.log('filePaths', filePaths)
+        // check if index.htm is included
+        const isIncludeHtm = includeHtm(filePaths)
+        console.log('isIncludeHtm', isIncludeHtm)
+        if (isIncludeHtm) {
+            console.log('ok')
+            store.currentProject.url = 'index.html'
+            uploadFiles(files)
+        } else {
+            ElMessage.error(t('indexHtmError'))
+        }
+    }
+}
+
+// uploadFiles
+const uploadFiles = async (files: any) => {
+    console.log('uploadFiles', files)
+    for (const file of files) {
+        const filePath = file.webkitRelativePath
+        console.log('filePath', filePath)
+        const base64 = await readFileAsBase64(file)
+        console.log('readFileAsBase64', base64)
     }
 }
 
@@ -862,6 +892,12 @@ const saveProject = async (tips: boolean = true) => {
             tips && ElMessage.success(t('saveSuccess'))
         } else {
             console.error('error submit!', fields)
+            for (const key in fields) {
+                if (fields[key].length > 0) {
+                    ElMessage.error(fields[key][0].message)
+                    return
+                }
+            }
         }
     })
 }
@@ -1418,7 +1454,22 @@ const initJsFileContents = async () => {
     })
 }
 
+const handleKeydown = (event: KeyboardEvent) => {
+    console.log('handleKeydown', event)
+    // Check if Command (Meta) + S is pressed
+    if ((event.metaKey || event.ctrlKey) && event.key === 's') {
+        event.preventDefault()
+        console.log('Command + S pressed')
+        saveProject()
+    }
+}
+
+onMounted(() => {
+    window.addEventListener('keydown', handleKeydown)
+})
+
 onMounted(async () => {
+    window.addEventListener('keydown', handleKeydown)
     // 重制编译时间
     buildTime = 0
     if (store.currentProject.icon) {
