@@ -73,14 +73,11 @@ const initEnv = async () => {
     } else if (language?.includes('ko')) {
         lang = 'ko' // Korean
     }
-    console.log('语言: ', language, lang)
     locale.value = localStorage.getItem('lang') || lang
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const currentTheme = mediaQuery.matches ? 'dark' : 'light'
-    console.log(`当前系统主题: ${currentTheme}`)
     const localTheme = localStorage.getItem('theme')
     chageTheme(localTheme || currentTheme)
-    console.log('App data dir exists:', import.meta.env.DEV)
     // if env is dev
     // if (!import.meta.env.DEV) {
     //     disableRightClick()
@@ -97,6 +94,7 @@ window
     })
 
 onMounted(() => {
+    console.log('Build time:', import.meta.env.BUILD_TIME)
     initEnv()
 })
 </script>
