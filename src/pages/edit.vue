@@ -23,7 +23,12 @@
             </div>
             <!-- tools -->
             <div class="setting">
-                <el-icon v-if="warning" :size="22" class="warning">
+                <el-icon
+                    v-if="warning"
+                    @click="showWarning"
+                    :size="22"
+                    class="warning"
+                >
                     <Warning />
                 </el-icon>
                 <el-dropdown>
@@ -428,7 +433,8 @@
             :base64Data="
                 store.currentProject.iconRound ? roundIcon : iconBase64
             "
-        ></ImgPreview>
+        >
+        </ImgPreview>
     </div>
 </template>
 
@@ -612,6 +618,11 @@ const appRules = reactive<FormRules>({
     ],
 })
 
+// tip warning
+const showWarning = () => {
+    ElMessage.error(warning.value)
+}
+
 // is json config
 const isJson = ref(false)
 const tauriConfigRef = ref<any>(null)
@@ -747,7 +758,7 @@ const handleFileChange = async (event: any) => {
                 ElMessage.success(t('syncFileSuccess'))
             } catch (error: any) {
                 console.error('uploadFiles error', error)
-                warning.value = error
+                warning.value = error.message
                 buildLoading.value = false
                 loadingText(t('syncFileError'))
                 ElMessage.error(t('syncFileError'))
@@ -1335,7 +1346,7 @@ const publishWeb = async () => {
         dispatchAction()
     } catch (error: any) {
         console.error('publish2 error', error)
-        warning.value = error
+        warning.value = error.message
         buildTime = 0
         loadingText(t('failure'))
         buildLoading.value = false
@@ -1652,10 +1663,12 @@ onMounted(async () => {
             .warning {
                 color: red;
                 margin-right: 20px;
+                cursor: pointer;
             }
 
             .dropdownLink {
                 color: gray;
+                cursor: pointer;
 
                 &:hover {
                     color: var(--text-color);
