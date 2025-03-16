@@ -23,10 +23,12 @@
             </div>
             <!-- tools -->
             <div class="setting">
-                <!-- <el-icon :size="26"><Menu /></el-icon> -->
+                <el-icon v-if="warning" :size="22" class="warning">
+                    <Warning />
+                </el-icon>
                 <el-dropdown>
                     <span class="dropdownLink">
-                        <el-icon :size="26"><Operation /></el-icon>
+                        <el-icon :size="22"><Operation /></el-icon>
                     </span>
                     <template #dropdown>
                         <el-dropdown-menu>
@@ -455,6 +457,7 @@ import {
     CircleCloseFilled,
     Operation,
     UploadFilled,
+    Warning,
 } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import CodeEdit from '@/components/codeEdit.vue'
@@ -504,6 +507,7 @@ const jsSelOptions: any = ref<any>([])
 const configDialogVisible = ref(false)
 const codeDialogVisible = ref(false)
 const imgPreviewVisible = ref(false)
+const warning = ref('')
 
 const appRules = reactive<FormRules>({
     showName: [
@@ -731,8 +735,9 @@ const handleFileChange = async (event: any) => {
                 buildLoading.value = false
                 loadingText(t('syncFileSuccess'))
                 ElMessage.success(t('syncFileSuccess'))
-            } catch (error) {
+            } catch (error: any) {
                 console.error('uploadFiles error', error)
+                warning.value = error
                 buildLoading.value = false
                 loadingText(t('syncFileError'))
                 ElMessage.error(t('syncFileError'))
@@ -746,7 +751,6 @@ const handleFileChange = async (event: any) => {
 
 // 仓库是否已经存在该文件并获取sha, 不存在则创建
 const upSrcFile = async (filePath: string, base64Content: string) => {
-    console.log('filepath', filePath, base64Content)
     const resSha = await githubApi.getFileSha(
         store.userInfo.login,
         'PakePlus',
@@ -1332,8 +1336,9 @@ const publish2 = async () => {
         } else {
             await publishDist()
         }
-    } catch (error) {
+    } catch (error: any) {
         console.error('publish2 error', error)
+        warning.value = error
         buildTime = 0
         loadingText(t('failure'))
         buildLoading.value = false
@@ -1642,6 +1647,15 @@ onMounted(async () => {
             -ms-user-select: none; /* IE10+/Edge */
             user-select: none; /* Standard syntax */
             z-index: 1000;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+
+            .warning {
+                color: red;
+                margin-right: 20px;
+            }
 
             .dropdownLink {
                 color: gray;

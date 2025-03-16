@@ -140,4 +140,5 @@ export default {
     syncFileSuccess: '동기화 성공',
     syncFileCancel: '동기화 취소',
     syncTileTips: '동기화 중에는 아무 작업도 하지 마세요',
+    webNotStable: '웹 페이지가 안정적이지 않습니다. 데스크탑을 사용하세요.',
 }

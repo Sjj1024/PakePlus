@@ -75,8 +75,8 @@
                         v-else
                         @click="tokenDialog = true"
                         class="iconfont setIcon"
-                        >&#xe667;</span
-                    >
+                        >&#xe667;
+                    </span>
                 </div>
             </div>
         </div>
@@ -622,6 +622,8 @@ onMounted(() => {
     if (isTauri) {
         const window = getCurrentWindow()
         window.setTitle('PakePlus')
+    } else {
+        ElMessage.error(t('webNotStable'))
     }
     getPakePlusInfo()
     checkUpdate()
@@ -717,7 +719,7 @@ onMounted(() => {
                 .themeIcon,
                 .langIcon,
                 .setIcon {
-                    font-size: 20px;
+                    font-size: 22px;
                     color: gray;
                     user-select: none;
                     cursor: pointer;
@@ -745,7 +747,7 @@ onMounted(() => {
                 }
 
                 .setIcon {
-                    font-size: 20px;
+                    font-size: 22px;
                     color: gray;
                     cursor: pointer;
                     &:hover {

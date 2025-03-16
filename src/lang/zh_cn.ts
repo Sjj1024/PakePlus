@@ -136,4 +136,5 @@ export default {
     syncFileSuccess: '同步成功',
     syncFileCancel: '同步取消',
     syncTileTips: '同步文件时，请不要做任何操作，否则会同步失败',
+    webNotStable: '网页端现在并不是稳定版本，推荐使用桌面端',
 }

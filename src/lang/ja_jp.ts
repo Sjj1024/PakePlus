@@ -139,4 +139,6 @@ export default {
     syncFileSuccess: '同期成功',
     syncFileCancel: '同期キャンセル',
     syncTileTips: '同期中は何も操作しないでください',
+    webNotStable:
+        'Webは安定していません。デスクトップを使用することをお勧めします。',
 }

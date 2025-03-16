@@ -132,7 +132,7 @@ const goBack = () => {
                 }
 
                 .setIcon {
-                    font-size: 20px;
+                    font-size: 22px;
                     color: gray;
                     cursor: pointer;
 

@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="setting">
-                <el-icon :size="26" @click="deleteRelease"><Delete /></el-icon>
+                <el-icon :size="22" @click="deleteRelease"><Delete /></el-icon>
             </div>
         </div>
         <!-- only get latest version by tag name -->
