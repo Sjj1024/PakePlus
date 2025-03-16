@@ -641,7 +641,7 @@ const changeUrl = (value: string) => {
         store.currentProject.more.windows.url = ''
         store.currentProject.isHtml = false
         store.currentProject.htmlFiles = []
-        store.storeCurrent()
+        store.addUpdatePro(store.currentProject)
     } else {
         store.currentProject.more.windows.url = value
     }
@@ -763,7 +763,7 @@ const handleFileChange = async (event: any) => {
                 loadingText(t('syncFileError'))
                 ElMessage.error(t('syncFileError'))
             }
-            store.storeCurrent()
+            store.addUpdatePro(store.currentProject)
         } else {
             ElMessage.error(t('indexHtmError'))
             buildLoading.value = false
@@ -806,7 +806,9 @@ const uploadFiles = async (files: any) => {
     loadingText(t('syncFileStart') + '...')
     let total = files.length
     let count = 0
-    store.currentProject.url = `index.html (${t('moreAssets')}+${total})`
+    const configUrl = `index.html (${t('moreAssets')}+${total})`
+    store.currentProject.url = configUrl
+    store.currentProject.more.windows.url = configUrl
     for (const file of files) {
         count++
         const loadingState = `<div>${count}/${total}</div>

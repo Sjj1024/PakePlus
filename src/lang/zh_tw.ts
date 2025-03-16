@@ -134,4 +134,5 @@ export default {
     syncFileCancel: '同步取消',
     syncTileTips: '同步文件時，請不要做任何操作，否則會同步失敗',
     webNotStable: '網頁端現在並不是穩定版本，推薦使用桌面端',
+    moreAssets: '等資源',
 }
