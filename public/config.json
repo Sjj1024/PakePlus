@@ -5,13 +5,15 @@
     "identifier": "PROJECTID",
     "app": {
         "security": {
+            "csp": null,
+            "dangerousDisableAssetCspModification": true,
             "assetProtocol": {
                 "enable": true,
                 "scope": {
-                    "allow": ["$APPDATA/**", "$DOWNLOAD/*"]
+                    "allow": ["**/*"],
+                    "requireLiteralLeadingDot": false
                 }
-            },
-            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval' ipc: http://ipc.localhost; img-src 'self' asset: http://asset.localhost blob: data: http://asset.localhost; font-src 'self' asset: http//localhost data:;"
+            }
         },
         "withGlobalTauri": -2
     },
