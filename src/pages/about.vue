@@ -59,6 +59,9 @@
                     </span>
                 </p>
             </div>
+            <div class="buildTime">
+                <span>Build Time: {{ buildTime }}</span>
+            </div>
         </div>
         <!-- pay -->
         <el-dialog
@@ -80,7 +83,7 @@ import weixin from '@/assets/images/weixin.png'
 import zhifubao from '@/assets/images/zhifubao.png'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import { urlMap, openUrl, isTauri } from '@/utils/common'
+import { urlMap, openUrl, isTauri, buildTime } from '@/utils/common'
 import { ref } from 'vue'
 
 const { t } = useI18n()
@@ -187,6 +190,12 @@ const goBack = () => {
                 margin-right: 20px;
                 cursor: pointer;
             }
+        }
+
+        .buildTime {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #999;
         }
     }
 }

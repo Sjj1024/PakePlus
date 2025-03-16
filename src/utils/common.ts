@@ -73,6 +73,8 @@ export const platforms: { [key: string]: PlatformInfo } = {
 // 是否为开发环境
 export const isDev = import.meta.env.DEV
 
+export const buildTime = import.meta.env.BUILD_TIME
+
 // 是否为tauri环境
 export const isTauri = (window as any).__TAURI__ ? true : false
 

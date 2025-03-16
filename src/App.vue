@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { locale as osLocale } from '@tauri-apps/plugin-os'
 import { useI18n } from 'vue-i18n'
-import { isTauri, isMobile } from './utils/common'
+import { isTauri, isMobile, buildTime } from './utils/common'
 
 const { locale } = useI18n()
 
@@ -55,6 +55,7 @@ const chageTheme = (theme: string) => {
 }
 
 const initEnv = async () => {
+    console.log('Build time:', buildTime)
     if (isMobile()) {
         // to https://sjj1024.github.io/PakePlus/
         window.location.href = 'https://sjj1024.github.io/PakePlus/'
@@ -94,7 +95,6 @@ window
     })
 
 onMounted(() => {
-    console.log('Build time:', import.meta.env.BUILD_TIME)
     initEnv()
 })
 </script>
