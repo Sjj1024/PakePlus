@@ -886,6 +886,12 @@ export const usePakeStore = defineStore('pakeplus', {
                 JSON.stringify(this.projectList)
             )
         },
+        storeCurrent() {
+            localStorage.setItem(
+                'currentProject',
+                JSON.stringify(this.currentProject)
+            )
+        },
         delProject(project: Project) {
             // delete release
             this.setRelease(project.name, null)

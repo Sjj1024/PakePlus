@@ -625,7 +625,15 @@ const changeAppName = (value: string) => {
 // change url
 const changeUrl = (value: string) => {
     console.log('changeUrl', value)
-    store.currentProject.more.windows.url = value
+    if (store.currentProject.isHtml) {
+        store.currentProject.url = ''
+        store.currentProject.more.windows.url = ''
+        store.currentProject.isHtml = false
+        store.currentProject.htmlFiles = []
+        store.storeCurrent()
+    } else {
+        store.currentProject.more.windows.url = value
+    }
 }
 
 const showConfigDialog = () => {
@@ -715,6 +723,7 @@ const activeDistInput = () => {
 // handle file change
 const handleFileChange = async (event: any) => {
     buildLoading.value = true
+    store.currentProject.isHtml = true
     loadingText(t('syncFileStart') + '...')
     console.log('handleFileChange', event)
     const input = event.target as HTMLInputElement
@@ -729,7 +738,6 @@ const handleFileChange = async (event: any) => {
         loadingText(t('syncFileStart') + '...')
         if (isIncludeHtm) {
             console.log('ok')
-            store.currentProject.url = 'index.html'
             try {
                 await uploadFiles(files)
                 buildLoading.value = false
@@ -742,6 +750,7 @@ const handleFileChange = async (event: any) => {
                 loadingText(t('syncFileError'))
                 ElMessage.error(t('syncFileError'))
             }
+            store.storeCurrent()
         } else {
             ElMessage.error(t('indexHtmError'))
             buildLoading.value = false
@@ -781,12 +790,15 @@ const upSrcFile = async (filePath: string, base64Content: string) => {
 
 // uploadFiles
 const uploadFiles = async (files: any) => {
-    // console.log('uploadFiles', files)
     loadingText(t('syncFileStart') + '...')
     let total = files.length
     let count = 0
+    store.currentProject.url = `index.html (${t('moreAssets')}+${total})`
     for (const file of files) {
         count++
+        if (file.name.startsWith('.')) {
+            continue
+        }
         const loadingState = `<div>${count}/${total}</div>
         <div>${t('syncFilePro')}${file.name}</div>
         <div>${t('syncTileTips')}</div>`
@@ -794,7 +806,7 @@ const uploadFiles = async (files: any) => {
         // 替换根路径为 "src"
         const newFilePath = rootPath(file)
         const base64Content: string = await readFileAsBase64(file)
-        // console.log('readFileAsBase64', base64)
+        store.currentProject.htmlFiles.push(newFilePath)
         await upSrcFile(newFilePath, base64Content.split('base64,')[1])
     }
 }
