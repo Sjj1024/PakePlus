@@ -329,19 +329,25 @@ const testToken = async (tips: boolean = true) => {
     console.log('testToken', store.token)
     if (localStorage.getItem('token') !== store.token || tips) {
         testLoading.value = true
-        const res: any = await githubApi.gitUserInfo(store.token)
-        console.log('testToken', res)
-        if (res.status === 200) {
-            localStorage.setItem('token', store.token)
-            store.setUser(res.data)
-            console.log('gitUserInfo res.data', res.data)
-            if (res.data.login !== 'Sjj1024') {
-                forkStartShas(tips)
+        try {
+            const res: any = await githubApi.gitUserInfo(store.token)
+            console.log('testToken', res)
+            if (res.status === 200) {
+                localStorage.setItem('token', store.token)
+                store.setUser(res.data)
+                console.log('gitUserInfo res.data', res.data)
+                if (res.data.login !== 'Sjj1024') {
+                    forkStartShas(tips)
+                } else {
+                    commitShas(tips)
+                }
             } else {
-                commitShas(tips)
+                ElMessage.error(t('tokenError'))
+                testLoading.value = false
             }
-        } else {
-            ElMessage.error(t('tokenError'))
+        } catch (error) {
+            console.error('testToken error', error)
+            ElMessage.error(t('networkError'))
             testLoading.value = false
         }
     } else {

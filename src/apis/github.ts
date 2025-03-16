@@ -71,7 +71,7 @@ export default {
             params,
         })
     },
-    // update file contents
+    // update or create file contents
     updateFileContent(user: string, repo: string, path: string, body: any) {
         return http(`/repos/${user}/${repo}/contents/${path}`, {
             method: 'put',

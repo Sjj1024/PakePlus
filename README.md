@@ -57,7 +57,7 @@ PakePlus supports installation packages for both ARM and Intel architectures. Mo
             <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/YouTube_0.0.2_x64-setup.exe">Windows(x64)</a>
             <a href="https://github.com/codegirle/PakePlus/releases/download/YouTube/you-tube_0.0.2_amd64.deb">Linux(x64)</a>
         </td>
-        <td>小红书(Red Book)
+        <td>小红书
             <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_aarch64.dmg">Mac(Arm)</a>
             <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_x64-setup.exe">Windows(x64)</a>
             <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_amd64.deb">Linux(x64)</a>

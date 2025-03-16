@@ -476,6 +476,7 @@ import {
     includeHtm,
     readFileAsBase64,
     getFilesName,
+    rootPath,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -708,7 +709,9 @@ const activeDistInput = () => {
 }
 
 // handle file change
-const handleFileChange = (event: any) => {
+const handleFileChange = async (event: any) => {
+    buildLoading.value = true
+    loadingText(t('syncFileStart') + '...')
     console.log('handleFileChange', event)
     const input = event.target as HTMLInputElement
     if (input.files) {
@@ -719,24 +722,75 @@ const handleFileChange = (event: any) => {
         // check if index.htm is included
         const isIncludeHtm = includeHtm(filePaths)
         console.log('isIncludeHtm', isIncludeHtm)
+        loadingText(t('syncFileStart') + '...')
         if (isIncludeHtm) {
             console.log('ok')
             store.currentProject.url = 'index.html'
-            uploadFiles(files)
+            try {
+                await uploadFiles(files)
+                buildLoading.value = false
+                loadingText(t('syncFileSuccess'))
+                ElMessage.success(t('syncSuccess'))
+            } catch (error) {
+                console.error('uploadFiles error', error)
+                buildLoading.value = false
+                loadingText(t('syncFileError'))
+                ElMessage.error(t('syncFileError'))
+            }
         } else {
             ElMessage.error(t('indexHtmError'))
+            buildLoading.value = false
         }
     }
 }
 
+// 仓库是否已经存在该文件并获取sha, 不存在则创建
+const upSrcFile = async (filePath: string, base64Content: string) => {
+    console.log('filepath', filePath, base64Content)
+    const resSha = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
+        filePath,
+        { ref: store.currentProject.name }
+    )
+    console.log('resSha', resSha)
+    let params: any = {
+        message: 'update src file from pakeplus',
+        content: base64Content,
+        sha: '',
+        branch: store.currentProject.name,
+    }
+    if (resSha.status === 200) {
+        params.sha = resSha.data.sha
+    } else {
+        delete params.sha
+    }
+    // 更新文件
+    const updateRes: any = await githubApi.updateFileContent(
+        store.userInfo.login,
+        'PakePlus',
+        filePath,
+        params
+    )
+    console.log(`${filePath} updateRes`, updateRes)
+}
+
 // uploadFiles
 const uploadFiles = async (files: any) => {
-    console.log('uploadFiles', files)
+    // console.log('uploadFiles', files)
+    loadingText(t('syncFileStart') + '...')
+    let total = files.length
+    let count = 0
     for (const file of files) {
-        const filePath = file.webkitRelativePath
-        console.log('filePath', filePath)
-        const base64 = await readFileAsBase64(file)
-        console.log('readFileAsBase64', base64)
+        count++
+        const loadingState = `<div>${count}/${total}</div>
+        <div>${t('syncFilePro')}${file.name}</div>`
+        loadingText(loadingState)
+        // 替换根路径为 "src"
+        const newFilePath = rootPath(file)
+        const base64Content: string = await readFileAsBase64(file)
+        // console.log('readFileAsBase64', base64)
+        await upSrcFile(newFilePath, base64Content.split('base64,')[1])
     }
 }
 
@@ -1268,13 +1322,20 @@ const publish2 = async () => {
     centerDialogVisible.value = false
     buildLoading.value = true
     loadingText(t('preCheck') + '...')
-    // delete release
-    store.isRelease && (await deleteRelease())
-    // publish web or dist
-    if (store.currentProject.url.includes('http')) {
-        await publishWeb()
-    } else {
-        await publishDist()
+    try {
+        // delete release
+        store.isRelease && (await deleteRelease())
+        // publish web or dist
+        if (store.currentProject.url.includes('http')) {
+            await publishWeb()
+        } else {
+            await publishDist()
+        }
+    } catch (error) {
+        console.error('publish2 error', error)
+        buildTime = 0
+        loadingText(t('failure'))
+        buildLoading.value = false
     }
 }
 
@@ -1372,7 +1433,7 @@ const reRunFailsJobs = async (id: number, html_url: string) => {
         buildTime = 0
         createIssue(html_url, 'failure', 'build error')
         openUrl(html_url)
-        document.querySelector('.el-loading-text')!.innerHTML = t('failure')
+        loadingText(t('failure'))
         buildSecondTimer && clearInterval(buildSecondTimer)
         checkDispatchTimer && clearInterval(checkDispatchTimer)
     } else {
@@ -1406,8 +1467,7 @@ const checkBuildStatus = async () => {
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
         if (status === 'completed' && conclusion === 'success') {
             createIssue(html_url, 'success', 'build success')
-            document.querySelector('.el-loading-text')!.innerHTML =
-                t('buildSuccess')
+            loadingText(t('buildSuccess'))
             // clear timer
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)
@@ -1416,8 +1476,7 @@ const checkBuildStatus = async () => {
             router.push('/history')
         } else if (status === 'completed' && conclusion === 'cancelled') {
             createIssue(html_url, 'cancelled', 'build cancelled')
-            document.querySelector('.el-loading-text')!.innerHTML =
-                t('cancelled')
+            loadingText(t('cancelled'))
             buildLoading.value = false
             buildTime = 0
             // clear interval
@@ -1439,7 +1498,7 @@ const checkBuildStatus = async () => {
             openUrl(html_url)
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)
-            document.querySelector('.el-loading-text')!.innerHTML = t('failure')
+            loadingText(t('failure'))
         } else {
             reRunFailsJobs(id, html_url)
         }

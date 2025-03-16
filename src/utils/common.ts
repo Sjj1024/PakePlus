@@ -892,11 +892,23 @@ export const includeHtm = (files: string[]) => {
 }
 
 // read file as base64
-export const readFileAsBase64 = async (file: File) => {
+export const readFileAsBase64 = async (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader()
         reader.onload = () => resolve(reader.result as string)
         reader.onerror = (error) => reject(error)
         reader.readAsDataURL(file)
     })
+}
+
+// 批量替换根路径为 "src"
+export const rootPath = (file: File) => {
+    // 找到第一个斜杠的位置
+    let firstSlashIndex = file.webkitRelativePath.indexOf('/')
+    if (firstSlashIndex === -1) {
+        // 如果没有斜杠，直接返回原路径
+        return 'src/' + file.name
+    }
+    // 替换根路径为 "src"
+    return 'src' + file.webkitRelativePath.slice(firstSlashIndex)
 }
