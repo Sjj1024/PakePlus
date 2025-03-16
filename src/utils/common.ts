@@ -384,6 +384,14 @@ export const getTauriConfFetch = async (params: any) => {
     if (content === 'error') {
         return 'error'
     }
+    //
+    if (params.isHtml) {
+        content = content.replaceAll(
+            '"app": {',
+            `"build": {"frontendDist": "../src"},
+    "app": {`
+        )
+    }
     // 替换PROJECTNAME
     content = content.replaceAll('PROJECTNAME', params.name)
     // 替换PROJECTVERSION
@@ -438,12 +446,13 @@ export const getInitRust = async (params: any) => {
 export const getInitRustFetch = async (params: any) => {
     // 将visible: true 替换为 visible: false
     params.config = JSON.parse(params.config)
+    params.config.label = 'main'
     params.config.visible = false
     if (params.isHtml) {
         params.config.url = 'index.html'
     }
+    console.log('getInitRust params', params.config)
     params.config = JSON.stringify(params.config)
-    console.log('getInitRust params', params)
     let content = await readFile('init.rs')
     if (content === 'error') {
         return 'error'

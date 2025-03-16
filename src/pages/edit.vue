@@ -373,7 +373,7 @@
                         {{ t('cancel') }}
                     </el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <el-button type="primary" @click="publish2">
+                    <el-button type="primary" @click="publishWeb">
                         {{ t('confirm') }}
                     </el-button>
                 </div>
@@ -1284,6 +1284,7 @@ const updateTauriConfig = async () => {
             ascii: isAlphanumeric(store.currentProject.showName),
             windowConfig: JSON.stringify(newWindows),
             tauriApi: store.currentProject.tauriApi,
+            isHtml: store.currentProject.isHtml,
         })
         // update config file
         const updateRes: any = await githubApi.updateConfigFile(
@@ -1306,35 +1307,9 @@ const updateTauriConfig = async () => {
         console.error('Error reading JSON file:', error)
     }
 }
-// web publish
-const publishWeb = async () => {
-    // create web branch
-    console.log('publish web')
-    loadingText(t('syncConfig') + '...')
-    // update app icon
-    await updateIcon()
-    // update build.yml
-    await updateBuildYml()
-    // update Cargo.toml
-    await updateCargoToml()
-    // update tauri.conf.json
-    await updateTauriConfig()
-    // update custom.js
-    await updateCustomJs()
-    // update init.rs
-    await updateInitRs()
-    // dispatch action
-    dispatchAction()
-}
-
-// dist publish
-const publishDist = async () => {
-    // create dist branch
-    console.log('publish dist')
-}
 
 // new publish version
-const publish2 = async () => {
+const publishWeb = async () => {
     centerDialogVisible.value = false
     buildLoading.value = true
     loadingText(t('preCheck') + '...')
