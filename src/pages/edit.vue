@@ -469,6 +469,7 @@ import {
     getInitRustFetch,
     base64Encode,
     loadingText,
+    buildFileTree,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -698,6 +699,12 @@ const activeDistInput = () => {
 // handle file change
 const handleFileChange = (event: any) => {
     console.log('handleFileChange', event)
+    const input = event.target as HTMLInputElement
+    if (input.files) {
+        const files = Array.from(input.files)
+        const fileTree = buildFileTree(files)
+        console.log('fileTree', fileTree)
+    }
 }
 
 const handleIconChange = (event: any) => {
@@ -1418,7 +1425,7 @@ onMounted(async () => {
         confirmIcon(store.currentProject.icon)
     }
     if (isTauri) {
-        initJsFileContents()
+        // initJsFileContents()
         const window = getCurrentWindow()
         window.setTitle(`${store.currentProject.name}`)
     }

@@ -856,3 +856,21 @@ export const isMobile = () => {
         navigator.userAgent.toLowerCase()
     )
 }
+
+// build file tree
+export const buildFileTree = (files: File[]): any => {
+    const fileTree: any = {}
+    files.forEach((file) => {
+        const pathParts = file.webkitRelativePath.split('/')
+        let current = fileTree
+        pathParts.forEach((part, index) => {
+            if (index === pathParts.length - 1) {
+                current[part] = file
+            } else {
+                current[part] = current[part] || {}
+                current = current[part]
+            }
+        })
+    })
+    return fileTree
+}

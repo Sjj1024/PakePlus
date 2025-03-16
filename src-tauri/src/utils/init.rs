@@ -29,8 +29,8 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     // 获取记录窗口大小
     let window_size: Option<serde_json::Value> = store.get("window_size");
     // println!("windows_size: {:?}", window_size);
-    let mut width = 800.0;
-    let mut height = 600.0;
+    let mut width = 920.0;
+    let mut height = 680.0;
     // 如果window_size存在，则设置窗口大小
     if let Some(window_size) = window_size {
         let size = window_size.as_object().unwrap();

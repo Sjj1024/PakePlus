@@ -925,38 +925,46 @@ export const usePakeStore = defineStore('pakeplus', {
             )
         },
         async getRelease() {
-            const releaseRes: any = await githubApi.getReleasesAssets(
-                this.userInfo.login,
-                'PakePlus',
-                this.currentProject.name
-            )
-            console.log('releaseRes', releaseRes)
-            if (
-                releaseRes.status === 200 &&
-                releaseRes.data.assets.length >= 3
-            ) {
-                // filter current project version
-                const assets = releaseRes.data.assets.filter((item: any) => {
-                    return (
-                        item.name.includes(this.currentProject.version) ||
-                        item.name.includes('tar')
-                    )
-                })
-                const releaseData = {
-                    ...releaseRes.data,
-                    assets: assets.map((asset: any) => {
-                        return {
-                            ...asset,
-                            updated_at: convertToLocalTime(asset.updated_at),
+            // if token is null, return
+            if (localStorage.getItem('token')) {
+                const releaseRes: any = await githubApi.getReleasesAssets(
+                    this.userInfo.login,
+                    'PakePlus',
+                    this.currentProject.name
+                )
+                console.log('releaseRes', releaseRes)
+                if (
+                    releaseRes.status === 200 &&
+                    releaseRes.data.assets.length >= 3
+                ) {
+                    // filter current project version
+                    const assets = releaseRes.data.assets.filter(
+                        (item: any) => {
+                            return (
+                                item.name.includes(
+                                    this.currentProject.version
+                                ) || item.name.includes('tar')
+                            )
                         }
-                    }),
+                    )
+                    const releaseData = {
+                        ...releaseRes.data,
+                        assets: assets.map((asset: any) => {
+                            return {
+                                ...asset,
+                                updated_at: convertToLocalTime(
+                                    asset.updated_at
+                                ),
+                            }
+                        }),
+                    }
+                    this.setRelease(this.currentProject.name, releaseData)
+                    this.currentRelease = releaseData
+                    return releaseData
+                } else {
+                    console.error('releaseRes error', releaseRes)
+                    return null
                 }
-                this.setRelease(this.currentProject.name, releaseData)
-                this.currentRelease = releaseData
-                return releaseData
-            } else {
-                console.error('releaseRes error', releaseRes)
-                return null
             }
         },
     },
