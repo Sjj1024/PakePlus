@@ -17,11 +17,24 @@
                     "allow": [
                         "$APPDATA/assets/**",
                         "$APPDATA/**",
-                        "$DOWNLOAD/*"
-                    ]
+                        "$DOWNLOAD/**",
+                        "$HOME/**",
+                        "$LOCALAPPDATA/**",
+                        "$RESOURCE/../**",
+                        "$TEMP/**",
+                        "asset://localhost/**"
+                    ],
+                    "scope": [
+                        "$APPDATA/**",
+                        "$RESOURCE/../**",
+                        "**",
+                        "asset://localhost/**"
+                    ],
+                    "enable": true
                 }
             },
-            "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval' ipc: http://ipc.localhost; connect-src 'self' ipc://localhost https://api.github.com; img-src 'self' https://avatars.githubusercontent.com asset: http://asset.localhost blob: data: http://asset.localhost; font-src 'self' asset: http://localhost data:;"
+            "csp": "default-src 'self' asset: 'unsafe-inline' 'unsafe-eval' ipc: http://ipc.localhost; connect-src 'self' ipc://localhost https://api.github.com; img-src 'self' https://avatars.githubusercontent.com asset: http://asset.localhost blob: data: http://asset.localhost; font-src 'self' asset: http://localhost data:;",
+            "dangerousDisableAssetCspModification": true
         },
         "withGlobalTauri": true
     },

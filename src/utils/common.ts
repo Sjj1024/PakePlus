@@ -1,7 +1,10 @@
 import { invoke } from '@tauri-apps/api/core'
 import { Base64 } from 'js-base64'
 import githubApi from '@/apis/github'
+import { open } from '@tauri-apps/plugin-dialog'
+import { readDir } from '@tauri-apps/plugin-fs'
 import { writeText } from '@tauri-apps/plugin-clipboard-manager'
+import { join } from '@tauri-apps/api/path'
 
 // 分支
 export const mainBranch = 'main'
@@ -70,6 +73,31 @@ export const platforms: { [key: string]: PlatformInfo } = {
     },
 }
 
+// Open a selection dialog for image files
+export const openSelect = async (filters: any) => {
+    const selected = await open({
+        directory: true,
+        multiple: false,
+        filters: filters,
+    })
+    return selected
+}
+
+// read dir recursively
+export const readDirRecursively = async (path: string): Promise<string[]> => {
+    const entries = await readDir(path)
+    const fileList: string[] = []
+    for (const entry of entries) {
+        const fullPath = await join(path, entry.name)
+        if (entry.isDirectory) {
+            const subDirFiles = await readDirRecursively(fullPath)
+            fileList.push(...subDirFiles)
+        } else {
+            fileList.push(fullPath)
+        }
+    }
+    return fileList
+}
 // 是否为开发环境
 export const isDev = import.meta.env.DEV
 

@@ -442,7 +442,7 @@
 import { onMounted, reactive, ref } from 'vue'
 import { open } from '@tauri-apps/plugin-dialog'
 import { useRouter } from 'vue-router'
-import { invoke } from '@tauri-apps/api/core'
+import { convertFileSrc, invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
@@ -486,6 +486,8 @@ import {
     readFileAsBase64,
     getFilesName,
     rootPath,
+    openSelect,
+    readDirRecursively,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -524,16 +526,13 @@ const appRules = reactive<FormRules>({
         },
         {
             validator: (rule, value, callback) => {
-                console.log('appshow name value', value)
                 if (
                     /^[^/\:*?"<>|\.\$\%\&\*\@\#\!\^\(\)\{\}\[\]\+\=\`\~\'\"]+$/.test(
                         value
                     )
                 ) {
-                    console.log('appshow name value valid')
                     callback()
                 } else {
-                    console.log('appshow name value invalid')
                     callback(new Error(t('appNameInvalid')))
                 }
             },
@@ -548,7 +547,6 @@ const appRules = reactive<FormRules>({
         },
         {
             validator: (rule, value, callback) => {
-                console.log('url value', value)
                 // check url start with http or https
                 if (value.startsWith('http') || value.includes('index.htm')) {
                     callback()
@@ -723,9 +721,87 @@ const fileToBase64 = (file: any) => {
     reader.readAsDataURL(file)
 }
 
+// loadHtml
+const loadHtml = async () => {
+    console.log('loadHtml')
+    const selected = await openSelect([])
+    console.log('selected', selected)
+    if (selected) {
+        const files = await readDirRecursively(selected)
+        console.log('files', files)
+        let indexUrl = ''
+        for (const file of files) {
+            const fileUrl = await convertFileSrc(file)
+            console.log('fileUrl', fileUrl)
+            if (fileUrl.includes('index.html')) {
+                indexUrl = fileUrl
+            }
+        }
+        if (indexUrl) {
+            invoke('preview_from_config', {
+                resize: false,
+                config: {
+                    url: indexUrl,
+                    label: 'PreView',
+                    width: 800,
+                    height: 500,
+                },
+                jsContent: store.currentProject.customJs,
+                injectjq: false,
+            })
+        }
+    }
+    // if (selected) {
+    //     console.log(`Selected folder: ${selected}`)
+    //     // 调用Rust函数来递归加载文件夹中的所有文件
+    //     const indexUrl = await join(selected, 'index.html')
+    //     const imgUrl = await join(selected, 'Wechat.jpg')
+    //     console.log('indexUrl', indexUrl)
+    //     console.log('imgUrl', imgUrl)
+    //     const fileUrl = await convertFileSrc(indexUrl)
+    //     const imgFileUrl = await convertFileSrc(imgUrl)
+    //     console.log('fileUrl', fileUrl)
+    //     console.log('imgFileUrl', imgFileUrl)
+    //     // 读每个文件
+    //     invoke('preview_from_config', {
+    //         resize: false,
+    //         config: {
+    //             url: fileUrl,
+    //             label: 'PreView',
+    //             width: 800,
+    //             height: 500,
+    //             additionalBrowserArgs: '--disable-web-security',
+    //         },
+    //         jsContent: '',
+    //         injectjq: false,
+    //     })
+    // } else {
+    //     console.log('No folder selected')
+    // }
+    // if (selected) {
+    //     const fileUrl = await convertFileSrc(selected)
+    //     console.log('fileUrl', fileUrl)
+    //     // invoke('preview_from_config', {
+    //     //     resize: false,
+    //     //     config: {
+    //     //         url: fileUrl,
+    //     //         label: 'PreView',
+    //     //         width: 500,
+    //     //         height: 500,
+    //     //     },
+    //     //     jsContent: '',
+    //     //     injectjq: false,
+    //     // })
+    // }
+}
+
 // active dist input
 const activeDistInput = () => {
-    distInput.value.click()
+    if (isTauri) {
+        loadHtml()
+    } else {
+        distInput.value.click()
+    }
 }
 
 // handle file change

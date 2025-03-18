@@ -3,7 +3,9 @@
     "identifier": "default",
     "description": "Capability for the main window",
     "windows": ["main", "PreView"],
-    "remote": { "urls": ["https://**"] },
+    "remote": {
+        "urls": ["https://**", "file://**", "http://**", "asset://localhost/**"]
+    },
     "permissions": [
         "core:default",
         "core:app:allow-set-app-theme",
@@ -19,6 +21,32 @@
         "http:allow-fetch-send",
         "dialog:allow-open",
         "os:allow-locale",
+        "clipboard-manager:allow-write-text",
+        {
+            "identifier": "http:default",
+            "allow": [
+                { "url": "https://**" },
+                { "url": "file://**" },
+                { "url": "http://**" },
+                { "url": "asset://localhost/**" }
+            ]
+        },
+        {
+            "identifier": "fs:scope",
+            "allow": [
+                "**",
+                "$APPDATA/**",
+                "$RESOURCE/../**",
+                "$HOME/**",
+                "$DOWNLOAD/**",
+                "$ASSETS/**",
+                "$TEMP/**",
+                "asset://localhost/**"
+            ]
+        },
+        "fs:allow-read-file",
+        "fs:allow-exists",
+        "fs:allow-write-file",
         "fs:allow-app-write",
         "fs:allow-app-read",
         "fs:allow-app-read-recursive",
@@ -28,11 +56,6 @@
         "fs:allow-appconfig-write",
         "fs:allow-appconfig-write-recursive",
         "fs:allow-appdata-write",
-        "fs:allow-appdata-write-recursive",
-        "clipboard-manager:allow-write-text",
-        {
-            "identifier": "http:default",
-            "allow": [{ "url": "https://**" }]
-        }
+        "fs:allow-appdata-write-recursive"
     ]
 }
