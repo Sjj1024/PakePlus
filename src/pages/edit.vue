@@ -438,7 +438,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import { open } from '@tauri-apps/plugin-dialog'
 import { useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
@@ -817,20 +817,10 @@ const activeDistInput = async () => {
 
 // stop server
 const stopServer = async () => {
-    const res = await invoke('stop_server')
-    console.log('stopServer', res)
-    invoke('preview_from_config', {
-        resize: false,
-        config: {
-            ...store.currentProject.more.windows,
-            label: 'PreView',
-            url: store.currentProject.isHtml
-                ? 'https://ocrm.hadoglobal-meleap.com/'
-                : store.currentProject.url,
-        },
-        jsContent: '',
-        injectjq: false,
-    })
+    if (isTauri) {
+        const res = await invoke('stop_server')
+        console.log('stopServer', res)
+    }
 }
 
 // handle file change
@@ -1001,11 +991,13 @@ const updateIcon = async () => {
 }
 
 const backHome = () => {
+    stopServer()
     router.go(-1)
 }
 
 // click menu item
 const toHistory = () => {
+    stopServer()
     router.push('/history')
 }
 
@@ -1140,8 +1132,7 @@ const preview = async (resize: boolean) => {
                         ...store.currentProject.more.windows,
                         label: 'PreView',
                         url: store.currentProject.isHtml
-                            ? 'http://127.0.0.1:3030/index.html?time=' +
-                              new Date().getTime()
+                            ? 'http://127.0.0.1:3030/index.html'
                             : store.currentProject.url,
                     },
                     jsContent: initJsScript,
@@ -1645,8 +1636,12 @@ const handleKeydown = (event: KeyboardEvent) => {
     }
 }
 
-onMounted(() => {
-    window.addEventListener('keydown', handleKeydown)
+onUnmounted(() => {
+    stopServer()
+    window.removeEventListener('keydown', handleKeydown)
+    // clear interval
+    buildSecondTimer && clearInterval(buildSecondTimer)
+    checkDispatchTimer && clearInterval(checkDispatchTimer)
 })
 
 onMounted(async () => {

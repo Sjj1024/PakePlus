@@ -17,13 +17,18 @@ pub async fn start_server(
     }
     let path_clone = path.clone();
     let server_handle = tokio::spawn(async move {
-        let route = warp::fs::dir(path_clone).map(|reply| {
-            warp::reply::with_header(
-                reply,
-                "Cache-Control",
-                "no-store, no-cache, must-revalidate, max-age=0",
-            )
-        });
+        let route = warp::fs::dir(path_clone)
+            .map(|reply| {
+                warp::reply::with_header(
+                    reply,
+                    "Cache-Control",
+                    "no-store, no-cache, must-revalidate, max-age=0",
+                )
+            })
+            .map(|reply| warp::reply::with_header(reply, "Vary", "*"))
+            .map(|reply| warp::reply::with_header(reply, "Surrogate-Control", "no-store"))
+            .map(|reply| warp::reply::with_header(reply, "Pragma", "no-cache"))
+            .map(|reply| warp::reply::with_header(reply, "Expires", "0"));
         warp::serve(route).run(([127, 0, 0, 1], 3030)).await;
     });
     state.server_handle = Some(server_handle);
