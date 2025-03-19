@@ -13,7 +13,9 @@
                         <span>{{ t('back') }}</span>
                     </div>
                     <el-divider direction="vertical" />
-                    <span @click="stopServer">{{ t('configProject') }}</span>
+                    <span @click="tauriHtmlUpload">{{
+                        t('configProject')
+                    }}</span>
                 </div>
                 <div class="toolTips">
                     <span>
@@ -731,62 +733,32 @@ const loadHtml = async () => {
         store.currentProject.url = configUrl
         store.currentProject.htmlPath = selected
         store.currentProject.more.windows.url = configUrl
-        // if (indexUrl) {
-        //     invoke('preview_from_config', {
-        //         resize: false,
-        //         config: {
-        //             url: 'https://juejin.cn/',
-        //             label: 'PreView',
-        //             width: 800,
-        //             height: 500,
-        //         },
-        //         jsContent: store.currentProject.customJs,
-        //         injectjq: false,
-        //     })
-        // }
     }
-    // if (selected) {
-    //     console.log(`Selected folder: ${selected}`)
-    //     // 调用Rust函数来递归加载文件夹中的所有文件
-    //     const indexUrl = await join(selected, 'index.html')
-    //     const imgUrl = await join(selected, 'Wechat.jpg')
-    //     console.log('indexUrl', indexUrl)
-    //     console.log('imgUrl', imgUrl)
-    //     const fileUrl = await convertFileSrc(indexUrl)
-    //     const imgFileUrl = await convertFileSrc(imgUrl)
-    //     console.log('fileUrl', fileUrl)
-    //     console.log('imgFileUrl', imgFileUrl)
-    //     // 读每个文件
-    //     invoke('preview_from_config', {
-    //         resize: false,
-    //         config: {
-    //             url: fileUrl,
-    //             label: 'PreView',
-    //             width: 800,
-    //             height: 500,
-    //             additionalBrowserArgs: '--disable-web-security',
-    //         },
-    //         jsContent: '',
-    //         injectjq: false,
-    //     })
-    // } else {
-    //     console.log('No folder selected')
-    // }
-    // if (selected) {
-    //     const fileUrl = await convertFileSrc(selected)
-    //     console.log('fileUrl', fileUrl)
-    //     // invoke('preview_from_config', {
-    //     //     resize: false,
-    //     //     config: {
-    //     //         url: fileUrl,
-    //     //         label: 'PreView',
-    //     //         width: 500,
-    //     //         height: 500,
-    //     //     },
-    //     //     jsContent: '',
-    //     //     injectjq: false,
-    //     // })
-    // }
+}
+
+// tauri html file upload
+const tauriHtmlUpload = async () => {
+    console.log('tauriHtmlUpload')
+    // 读取文件夹里面的内容
+    if (store.currentProject.htmlPath) {
+        console.log(`Selected folder: ${store.currentProject.htmlPath}`)
+        // 调用Rust函数来递归加载文件夹中的所有文件
+        const files = await readDirRecursively(store.currentProject.htmlPath)
+        console.log('files', files)
+        // 查询是否存在，并获取sha
+        // const shaRes = await getFileSha(
+        //     '.github/workflows/build.yml',
+        //     store.currentProject.name
+        // )
+        // console.log('get build.yml file sha', shaRes)
+    } else {
+        console.log('No folder selected')
+    }
+    // 查询是否存在，并获取sha
+
+    // 更新文件
+
+    // 上传文件
 }
 
 // active dist input
@@ -799,7 +771,6 @@ const activeDistInput = async () => {
         } catch (error) {
             console.error('Failed to stop server:', error)
         }
-        store.actionSecond()
         loadHtml()
     } else {
         if (!store.token) {
@@ -1140,8 +1111,8 @@ const preview = async (resize: boolean) => {
             return
         } else {
             console.log('unknown preview error')
-            warning.value = `path: ${store.previewPath} 
-            second: ${store.previewSecond} 
+            warning.value = `path: ${store.previewPath}
+            second: ${store.previewSecond}
             htmlPath: ${store.currentProject.htmlPath}`
         }
         store.setPreviewPath(store.currentProject.htmlPath)
