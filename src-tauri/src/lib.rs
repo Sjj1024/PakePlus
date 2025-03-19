@@ -1,10 +1,14 @@
 mod command;
+use std::sync::{Arc, Mutex};
 mod utils;
+use command::model::ServerState;
 use tauri::menu::*;
 
-#[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .manage(Arc::new(Mutex::new(ServerState {
+            server_handle: None,
+        })))
         .menu(|handle| {
             let menu = Menu::with_items(
                 handle,
@@ -50,6 +54,8 @@ pub fn run() {
             command::cmds::open_url,
             command::cmds::open_devtools,
             command::cmds::update_init_rs,
+            command::cmds::start_server,
+            command::cmds::stop_server,
         ])
         .setup(|app| {
             tauri::async_runtime::block_on(async move {

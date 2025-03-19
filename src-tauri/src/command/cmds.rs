@@ -1,7 +1,41 @@
+use crate::command::model::ServerState;
 use base64::prelude::*;
 use std::io::Read;
+use std::sync::{Arc, Mutex};
 use std::time::Instant;
 use tauri::{path::BaseDirectory, utils::config::WindowConfig, AppHandle, LogicalSize, Manager};
+
+#[tauri::command]
+pub async fn start_server(
+    state: tauri::State<'_, Arc<Mutex<ServerState>>>,
+    path: String,
+) -> Result<(), String> {
+    println!("start_server: {}", path);
+    let mut state = state.lock().unwrap();
+    if state.server_handle.is_some() {
+        return Err("Server is already running".into());
+    }
+    let path_clone = path.clone();
+    let server_handle = tokio::spawn(async move {
+        let route = warp::fs::dir(path_clone);
+        warp::serve(route).run(([127, 0, 0, 1], 3030)).await;
+    });
+    state.server_handle = Some(server_handle);
+    println!("Server started at http://127.0.0.1:3030");
+    Ok(())
+}
+
+#[tauri::command]
+pub async fn stop_server(state: tauri::State<'_, Arc<Mutex<ServerState>>>) -> Result<(), String> {
+    let mut state = state.lock().unwrap();
+    println!("stop_server");
+    if let Some(handle) = state.server_handle.take() {
+        handle.abort();
+        Ok(())
+    } else {
+        Err("Server is not running".into())
+    }
+}
 
 #[tauri::command]
 pub async fn open_window(
@@ -56,7 +90,6 @@ pub async fn open_window(
         .inner_size(width, height)
         .user_agent(user_agent.as_str())
         .center()
-        // .initialization_script(contents.as_str())
         .build()
         .unwrap();
     }

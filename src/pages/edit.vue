@@ -13,7 +13,7 @@
                         <span>{{ t('back') }}</span>
                     </div>
                     <el-divider direction="vertical" />
-                    <span>{{ t('configProject') }}</span>
+                    <span @click="stopServer">{{ t('configProject') }}</span>
                 </div>
                 <div class="toolTips">
                     <span>
@@ -727,29 +727,25 @@ const loadHtml = async () => {
     const selected = await openSelect([])
     console.log('selected', selected)
     if (selected) {
-        const files = await readDirRecursively(selected)
-        console.log('files', files)
-        let indexUrl = ''
-        for (const file of files) {
-            const fileUrl = await convertFileSrc(file)
-            console.log('fileUrl', fileUrl)
-            if (fileUrl.includes('index.html')) {
-                indexUrl = fileUrl
-            }
+        try {
+            await invoke('start_server', { path: selected })
+            console.log('Server started successfully')
+        } catch (error) {
+            console.error('Failed to start server:', error)
         }
-        if (indexUrl) {
-            invoke('preview_from_config', {
-                resize: false,
-                config: {
-                    url: indexUrl,
-                    label: 'PreView',
-                    width: 800,
-                    height: 500,
-                },
-                jsContent: store.currentProject.customJs,
-                injectjq: false,
-            })
-        }
+        // if (indexUrl) {
+        //     invoke('preview_from_config', {
+        //         resize: false,
+        //         config: {
+        //             url: 'https://juejin.cn/',
+        //             label: 'PreView',
+        //             width: 800,
+        //             height: 500,
+        //         },
+        //         jsContent: store.currentProject.customJs,
+        //         injectjq: false,
+        //     })
+        // }
     }
     // if (selected) {
     //     console.log(`Selected folder: ${selected}`)
@@ -802,6 +798,11 @@ const activeDistInput = () => {
     } else {
         distInput.value.click()
     }
+}
+
+// stop server
+const stopServer = () => {
+    invoke('stop_server')
 }
 
 // handle file change
