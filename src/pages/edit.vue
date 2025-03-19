@@ -105,7 +105,6 @@
                                     <el-button
                                         class="distUpload"
                                         :icon="UploadFilled"
-                                        :disabled="!store.token"
                                         @click="activeDistInput"
                                     />
                                 </el-tooltip>
@@ -442,7 +441,7 @@
 import { onMounted, reactive, ref } from 'vue'
 import { open } from '@tauri-apps/plugin-dialog'
 import { useRouter } from 'vue-router'
-import { convertFileSrc, invoke } from '@tauri-apps/api/core'
+import { invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
@@ -724,12 +723,16 @@ const fileToBase64 = (file: any) => {
 // loadHtml
 const loadHtml = async () => {
     console.log('loadHtml')
+    store.currentProject.isHtml = true
     const selected = await openSelect([])
     console.log('selected', selected)
     if (selected) {
+        const configUrl = `index.html (${t('moreAssets')}+${8})`
+        store.currentProject.url = configUrl
+        store.currentProject.more.windows.url = configUrl
         try {
-            await invoke('start_server', { path: selected })
-            console.log('Server started successfully')
+            const res = await invoke('start_server', { path: selected })
+            console.log('Server started successfully', res)
         } catch (error) {
             console.error('Failed to start server:', error)
         }
@@ -792,17 +795,42 @@ const loadHtml = async () => {
 }
 
 // active dist input
-const activeDistInput = () => {
+const activeDistInput = async () => {
+    console.log('activeDistInput', isTauri)
     if (isTauri) {
+        try {
+            const res = await invoke('stop_server')
+            console.log('stopServer', res)
+        } catch (error) {
+            console.error('Failed to stop server:', error)
+        }
         loadHtml()
     } else {
-        distInput.value.click()
+        if (!store.token) {
+            ElMessage.error(t('configToken'))
+            return
+        } else {
+            distInput.value.click()
+        }
     }
 }
 
 // stop server
-const stopServer = () => {
-    invoke('stop_server')
+const stopServer = async () => {
+    const res = await invoke('stop_server')
+    console.log('stopServer', res)
+    invoke('preview_from_config', {
+        resize: false,
+        config: {
+            ...store.currentProject.more.windows,
+            label: 'PreView',
+            url: store.currentProject.isHtml
+                ? 'https://ocrm.hadoglobal-meleap.com/'
+                : store.currentProject.url,
+        },
+        jsContent: '',
+        injectjq: false,
+    })
 }
 
 // handle file change
@@ -1088,11 +1116,6 @@ const getInitializationScript = () => {
 
 const preview = async (resize: boolean) => {
     if (isTauri) {
-        // 判断是不是静态资源，是的话，暂不支持预览
-        if (store.currentProject.isHtml) {
-            ElMessage.error(t('staticPreview'))
-            return
-        }
         const platformName = platform()
         // get platform
         console.log('platform', platformName)
@@ -1116,6 +1139,10 @@ const preview = async (resize: boolean) => {
                     config: {
                         ...store.currentProject.more.windows,
                         label: 'PreView',
+                        url: store.currentProject.isHtml
+                            ? 'http://127.0.0.1:3030/index.html?time=' +
+                              new Date().getTime()
+                            : store.currentProject.url,
                     },
                     jsContent: initJsScript,
                     injectjq: store.currentProject.injectJq,
