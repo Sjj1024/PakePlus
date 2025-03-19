@@ -139,4 +139,5 @@ export default {
     webNotStable: '网页端现在并不是稳定版本，推荐使用桌面端',
     moreAssets: '等资源',
     staticPreview: '静态资源暂不支持预览',
+    htmlError: '切换静态资源后需要等待1分钟才可以预览',
 }

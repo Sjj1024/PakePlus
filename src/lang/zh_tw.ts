@@ -136,4 +136,5 @@ export default {
     webNotStable: '網頁端現在並不是穩定版本，推薦使用桌面端',
     moreAssets: '等資源',
     staticPreview: '靜態資源暫不支持預覽',
+    htmlError: '切換靜態資源後需要等待1分鐘才可以預覽',
 }

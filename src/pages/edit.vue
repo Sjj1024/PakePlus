@@ -729,13 +729,8 @@ const loadHtml = async () => {
     if (selected) {
         const configUrl = `index.html (${t('moreAssets')}+${8})`
         store.currentProject.url = configUrl
+        store.currentProject.htmlPath = selected
         store.currentProject.more.windows.url = configUrl
-        try {
-            const res = await invoke('start_server', { path: selected })
-            console.log('Server started successfully', res)
-        } catch (error) {
-            console.error('Failed to start server:', error)
-        }
         // if (indexUrl) {
         //     invoke('preview_from_config', {
         //         resize: false,
@@ -804,6 +799,7 @@ const activeDistInput = async () => {
         } catch (error) {
             console.error('Failed to stop server:', error)
         }
+        store.actionSecond()
         loadHtml()
     } else {
         if (!store.token) {
@@ -818,8 +814,13 @@ const activeDistInput = async () => {
 // stop server
 const stopServer = async () => {
     if (isTauri) {
-        const res = await invoke('stop_server')
-        console.log('stopServer', res)
+        try {
+            const res = await invoke('stop_server')
+            console.log('stopServer', res)
+        } catch (error) {
+            console.error('Failed to stop server:', error)
+        }
+        store.actionSecond()
     }
 }
 
@@ -991,7 +992,6 @@ const updateIcon = async () => {
 }
 
 const backHome = () => {
-    stopServer()
     router.go(-1)
 }
 
@@ -1108,9 +1108,16 @@ const getInitializationScript = () => {
 
 const preview = async (resize: boolean) => {
     if (isTauri) {
+        try {
+            const res = await invoke('start_server', {
+                path: store.currentProject.htmlPath,
+            })
+            console.log('Server started successfully', res)
+        } catch (error) {
+            console.error('Failed to start server:', error)
+        }
         const platformName = platform()
         // get platform
-        console.log('platform', platformName)
         if (
             platformName === 'windows' &&
             store.currentProject.more.windows.additionalBrowserArgs
@@ -1118,6 +1125,26 @@ const preview = async (resize: boolean) => {
             ElMessage.error('additionalBrowserArgs cant preview on windows')
             return
         }
+        if (
+            store.previewPath === '' ||
+            store.previewSecond === 60 ||
+            store.previewPath === store.currentProject.htmlPath
+        ) {
+            console.log('html preview ok')
+        } else if (
+            store.previewPath !== store.currentProject.htmlPath &&
+            store.previewSecond !== 60
+        ) {
+            console.log('html preview error')
+            ElMessage.error(t('htmlError'))
+            return
+        } else {
+            console.log('unknown preview error')
+            warning.value = `path: ${store.previewPath} 
+            second: ${store.previewSecond} 
+            htmlPath: ${store.currentProject.htmlPath}`
+        }
+        store.setPreviewPath(store.currentProject.htmlPath)
         // if platform is macos, then use tauri preview
         appFormRef.value?.validate((valid, fields) => {
             if (valid) {

@@ -213,6 +213,7 @@ export const initProject = {
     filterCss: '',
     customJs: '',
     isHtml: false,
+    htmlPath: '',
     htmlFiles: [],
     more: tauriConfig,
 }

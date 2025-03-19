@@ -143,4 +143,5 @@ export default {
     webNotStable: '웹 페이지가 안정적이지 않습니다. 데스크탑을 사용하세요.',
     moreAssets: '등 자산',
     staticPreview: '정적 자산은 미리보기를 지원하지 않습니다',
+    htmlError: '정적 자산을 변경한 후 1분 기다리세요',
 }

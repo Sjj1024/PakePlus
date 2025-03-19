@@ -141,4 +141,5 @@ export default {
     webNotStable: 'Web is not stable, recommend using desktop',
     moreAssets: 'more assets',
     staticPreview: 'Static assets cant preview',
+    htmlError: 'Switch static resources need to wait 1 minute to preview',
 }

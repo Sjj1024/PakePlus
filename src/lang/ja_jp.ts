@@ -143,4 +143,5 @@ export default {
         'Webは安定していません。デスクトップを使用することをお勧めします。',
     moreAssets: '等資源',
     staticPreview: '静的資源は預覧できません',
+    htmlError: '静的資源を切り替えた後、1分待ってから預覧してください',
 }

@@ -822,8 +822,14 @@ export const usePakeStore = defineStore('pakeplus', {
                           body: '',
                       },
                   } as { [key: string]: any }),
-            //   token
+            //  token
             token: localStorage.getItem('token') || '',
+            //  重新预览倒计时
+            previewSecond: 60,
+            // 预览静态文件夹路径
+            previewPath: '',
+            // timer
+            timer: 0 as any,
             age: 18,
             sex: '男',
         }
@@ -840,6 +846,31 @@ export const usePakeStore = defineStore('pakeplus', {
         },
     },
     actions: {
+        actionSecond() {
+            console.log(
+                'actionSecond',
+                this.previewSecond,
+                this.previewPath,
+                this.currentProject.htmlPath
+            )
+            if (
+                this.previewPath !== '' &&
+                this.currentProject.htmlPath === this.previewPath
+            ) {
+                this.previewSecond = 60
+                this.timer && clearInterval(this.timer)
+                this.timer = setInterval(() => {
+                    this.previewSecond--
+                    if (this.previewSecond <= -1) {
+                        this.timer && clearInterval(this.timer)
+                        this.previewSecond = 60
+                    }
+                }, 1000)
+            }
+        },
+        setPreviewPath(path: string) {
+            this.previewPath = path
+        },
         setToken(token: any) {
             this.token = token
             localStorage.setItem('token', token)
