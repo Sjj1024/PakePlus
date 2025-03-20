@@ -122,7 +122,6 @@ pub async fn preview_from_config(
             }
         } else {
             existing_window.close().unwrap();
-            println!("Existing window closed.");
             let start = Instant::now();
             while handle.get_webview_window(window_label).is_some() {
                 if start.elapsed().as_secs() > 2 {
@@ -310,7 +309,6 @@ pub async fn rust_main_window(handle: tauri::AppHandle, config: String) -> Strin
     main_rust.read_to_string(&mut contents).unwrap();
     // test replace
     contents = contents.replace("WINDOWCONFIG", config.as_str());
-    println!("Updated config file: {}", contents);
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);
     return encoded_contents;
@@ -400,18 +398,14 @@ pub async fn update_init_rs(
     if state {
         println!("state: true");
     } else {
-        println!("state: false");
         contents = contents.replace("if true {", "if false {");
     }
     // 替换injectjq
     if injectjq {
-        println!("injectjq: true");
         contents = contents.replace(
             r#".initialization_script(include_str!("../../data/custom.js"))"#,
             r#".initialization_script(include_str!("../../data/jquery.min.js")).initialization_script(include_str!("../../data/custom.js"))"#,
         );
-    } else {
-        println!("injectjq: false");
     }
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);

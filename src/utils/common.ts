@@ -4,7 +4,7 @@ import githubApi from '@/apis/github'
 import { open } from '@tauri-apps/plugin-dialog'
 import { readDir } from '@tauri-apps/plugin-fs'
 import { writeText } from '@tauri-apps/plugin-clipboard-manager'
-import { join, sep } from '@tauri-apps/api/path'
+import { join } from '@tauri-apps/api/path'
 
 // 分支
 export const mainBranch = 'main'
@@ -73,12 +73,35 @@ export const platforms: { [key: string]: PlatformInfo } = {
     },
 }
 
+// 查询系统
+export const getOS = () => {
+    const userAgent = window.navigator.userAgent
+    if (userAgent.includes('Win')) {
+        return 'Windows'
+    } else if (userAgent.includes('Linux')) {
+        return 'Linux'
+    } else if (userAgent.includes('Mac')) {
+        return 'macOS'
+    } else {
+        return 'Unknown'
+    }
+}
+
+// get sep
+export const getSep = () => {
+    const os = getOS()
+    if (os === 'Windows') {
+        return '\\'
+    }
+    return '/'
+}
+
 // 替换rootPath
 export const replaceRootPath = async (files: string[], rootPath: string) => {
     // 按照路径拆分
     const newFiles: string[] = []
     for (const file of files) {
-        const filePath = await join(rootPath, sep())
+        const filePath = await join(rootPath, getSep())
         newFiles.push(file.replace(filePath, 'src').replace('\\', '/'))
     }
     return newFiles
@@ -86,7 +109,7 @@ export const replaceRootPath = async (files: string[], rootPath: string) => {
 
 // 替换单个文件的rootPath
 export const replaceFileRoot = async (file: string, rootPath: string) => {
-    const filePath = await join(rootPath, sep())
+    const filePath = await join(rootPath, getSep())
     return file.replace(filePath, 'src').replace('\\', '/')
 }
 
@@ -926,7 +949,7 @@ export const isMobile = () => {
 export const buildFileTree = (files: File[]): any => {
     const fileTree: any = {}
     files.forEach((file) => {
-        const pathParts = file.webkitRelativePath.split(sep())
+        const pathParts = file.webkitRelativePath.split(getSep())
         let current = fileTree
         pathParts.forEach((part, index) => {
             if (index === pathParts.length - 1) {
@@ -967,7 +990,7 @@ export const readFileAsBase64 = async (file: File): Promise<string> => {
 // 批量替换根路径为 "src"
 export const rootPath = (file: File) => {
     // 找到第一个斜杠的位置
-    let firstSlashIndex = file.webkitRelativePath.indexOf(sep())
+    let firstSlashIndex = file.webkitRelativePath.indexOf(getSep())
     if (firstSlashIndex === -1) {
         // 如果没有斜杠，直接返回原路径
         return 'src/' + file.name

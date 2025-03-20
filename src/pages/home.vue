@@ -134,9 +134,9 @@
             </div>
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button @click="tokenDialog = false">{{
-                        t('cancel')
-                    }}</el-button>
+                    <el-button @click="cancelToken">
+                        {{ t('cancel') }}
+                    </el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button type="primary" @click="testToken(false)">
                         {{ t('confirm') }}
@@ -324,9 +324,14 @@ const changeLang = (lang: string) => {
     localStorage.setItem('lang', lang)
 }
 
+const cancelToken = () => {
+    tokenDialog.value = false
+    store.token = ''
+    localStorage.setItem('token', '')
+}
+
 // check token and confirm token is ok
 const testToken = async (tips: boolean = true) => {
-    console.log('testToken', store.token)
     if (localStorage.getItem('token') !== store.token || tips) {
         testLoading.value = true
         try {
@@ -335,7 +340,6 @@ const testToken = async (tips: boolean = true) => {
             if (res.status === 200) {
                 localStorage.setItem('token', store.token)
                 store.setUser(res.data)
-                console.log('gitUserInfo res.data', res.data)
                 if (res.data.login !== 'Sjj1024') {
                     forkStartShas(tips)
                 } else {
@@ -394,7 +398,6 @@ const forkStartShas = async (tips: boolean = true) => {
         name: 'PakePlus',
         default_branch_only: false,
     })
-    console.log('forkRes', forkRes)
     if (forkRes.status === 202) {
         store.setRepository(forkRes.data)
     } else if (forkRes.status === 403) {
@@ -409,13 +412,7 @@ const forkStartShas = async (tips: boolean = true) => {
         return
     }
     // start
-    const startRes = await githubApi.startProgect()
-    console.log('startRes', startRes)
-    if (startRes.status === 204) {
-        console.log('start success')
-    } else {
-        console.error('start error')
-    }
+    await githubApi.startProgect()
     // commit shas
     commitShas(tips)
 }
@@ -428,7 +425,6 @@ const getCommitSha = async () => {
         'PakePlus',
         mainBranch
     )
-    console.log('getCommitSha', res.data)
     if (res.status === 200 && res.data) {
         store.setCommitSha(res.data)
         return true
@@ -445,7 +441,6 @@ const getWebCommitSha = async () => {
         'PakePlus',
         webBranch
     )
-    console.log('getWebCommitSha', res.data)
     if (res.status === 200 && res.data) {
         store.setWebCommit(res.data)
         return true
@@ -462,7 +457,6 @@ const getFileSha = async (filePath: string, branch: string) => {
         filePath,
         { ref: branch }
     )
-    console.log('getBranch', res)
     return res
 }
 
@@ -475,7 +469,6 @@ const creatProject = async () => {
     // update build.yml file content
     // token.value && (await uploadBuildYml())
     if (branchName.value && /^[A-Za-z0-9]+$/.test(branchName.value)) {
-        console.log('branchName.value', branchName.value)
         const customJs = await getCustomJsFetch()
         // check branch exist
         if (store.token) {
@@ -484,7 +477,6 @@ const creatProject = async () => {
                 'PakePlus',
                 branchName.value
             )
-            console.log('check Branch exist', res)
             // 404 and store.projectList not include branchName.value
             const include = store.projectList.some(
                 (item: Project) => item.name === branchName.value
@@ -509,7 +501,6 @@ const creatProject = async () => {
                         },
                     },
                 }
-                console.log('branch Info success', branchInfo)
                 store.setCurrentProject(branchInfo)
                 creatLoading.value = false
                 // update new branch build.yml file
@@ -520,7 +511,6 @@ const creatProject = async () => {
                 )
                 router.push('/edit')
             } else if (res.status === 200) {
-                console.log('project existed')
                 creatLoading.value = false
                 ElMessage.success(t('projectExist'))
                 // router.push('/publish')

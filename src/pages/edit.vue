@@ -955,6 +955,7 @@ const uploadIcon = async () => {
 
 // update icon file content
 const updateIcon = async () => {
+    loadingText(t('syncConfig') + 'icon...')
     if (iconBase64.value === '') {
         return
     }
@@ -1214,6 +1215,7 @@ const deleteRelease = async () => {
 
 // update build.yml file content
 const updateBuildYml = async () => {
+    loadingText(t('syncConfig') + 'action...')
     // get build.yml file sha
     const shaRes = await getFileSha(
         '.github/workflows/build.yml',
@@ -1250,6 +1252,7 @@ const updateBuildYml = async () => {
 
 // update build.yml file content
 const updateCargoToml = async () => {
+    loadingText(t('syncConfig') + 'Cargo...')
     // get CargoToml file sha
     const shaRes = await getFileSha(
         'src-tauri/Cargo.toml',
@@ -1288,6 +1291,7 @@ const updateCargoToml = async () => {
 
 // update build.yml file content
 const updateInitRs = async () => {
+    loadingText(t('syncConfig') + 'rust...')
     // get CargoToml file sha
     const shaRes = await getFileSha(
         'src-tauri/src/utils/init.rs',
@@ -1360,6 +1364,7 @@ const libRsConfig = async () => {
 
 // update build.yml file content
 const updateCustomJs = async () => {
+    loadingText(t('syncConfig') + 'custom...')
     // get CargoToml file sha
     const shaRes = await getFileSha(
         'src-tauri/data/custom.js',
@@ -1393,6 +1398,7 @@ const updateCustomJs = async () => {
 
 // update tauri.conf.json
 const updateTauriConfig = async () => {
+    loadingText(t('syncConfig') + 'tauri...')
     // update tauri config json
     const configSha: any = await getFileSha(
         'src-tauri/tauri.conf.json',
@@ -1459,11 +1465,11 @@ const publishWeb = async () => {
         // dispatch action
         dispatchAction()
     } catch (error: any) {
-        console.error('publish2 error', error)
         warning.value = error.message
         buildTime = 0
         loadingText(t('failure'))
         buildLoading.value = false
+        createIssue('publish action error', 'failure', 'build error')
     }
 }
 
@@ -1491,13 +1497,12 @@ const getFileSha = async (filePath: string, branch: string) => {
         filePath,
         { ref: branch }
     )
-    console.log('getBranch', res)
     return res
 }
 
 // dispatch workflow action
 const dispatchAction = async () => {
-    loadingText(t('preCompile') + '...')
+    loadingText(t('preCompile') + 'workflow...')
     const dispatchRes: any = await githubApi.dispatchWorkflow(
         store.userInfo.login,
         'PakePlus',
@@ -1508,7 +1513,6 @@ const dispatchAction = async () => {
             },
         }
     )
-    console.log('dispatchRes---', dispatchRes)
     if (dispatchRes.status !== 204) {
         console.error('dispatch res error', dispatchRes)
         ElMessage.error(t('dispatchError') + ':' + dispatchRes.data.message)
@@ -1548,7 +1552,6 @@ const createIssue = async (url: string, label: string, title: string) => {
         build action: ${url}`,
         title: title,
     })
-    console.log('issueRes---', issueRes)
 }
 
 // rerun fails jobs
@@ -1588,7 +1591,6 @@ const checkBuildStatus = async () => {
             event: 'workflow_dispatch',
         }
     )
-    console.log('checkRes---', checkRes)
     const build_runs = checkRes.data.workflow_runs[0]
     const { id, status, conclusion, html_url } = build_runs
     buildStatus = t(status) || t('inProgress')
