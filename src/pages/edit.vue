@@ -78,6 +78,7 @@
                             autoCapitalize="off"
                             autoCorrect="off"
                             spellCheck="false"
+                            clearable
                             @input="changeAppName"
                             :placeholder="`${t('example')}：PakePlus`"
                         />
@@ -93,6 +94,7 @@
                             autoCapitalize="off"
                             autoCorrect="off"
                             spellCheck="false"
+                            clearable
                             @input="changeUrl"
                             :placeholder="`${t(
                                 'example'
@@ -489,6 +491,7 @@ import {
     rootPath,
     openSelect,
     readDirRecursively,
+    replaceFileRoot,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -729,36 +732,59 @@ const loadHtml = async () => {
     const selected = await openSelect([])
     console.log('selected', selected)
     if (selected) {
-        const configUrl = `index.html (${t('moreAssets')}+${8})`
-        store.currentProject.url = configUrl
-        store.currentProject.htmlPath = selected
-        store.currentProject.more.windows.url = configUrl
+        const indexHtml = await join(selected, 'index.html')
+        const isExists = await exists(indexHtml)
+        if (isExists) {
+            const files = await readDirRecursively(selected)
+            const configUrl = `index.html (${t('moreAssets')}+${files.length})`
+            store.currentProject.url = configUrl
+            store.currentProject.htmlPath = selected
+            store.currentProject.more.windows.url = configUrl
+        } else {
+            ElMessage.error(t('indexHtmError'))
+        }
     }
 }
 
 // tauri html file upload
 const tauriHtmlUpload = async () => {
     console.log('tauriHtmlUpload')
+    loadingText(t('syncFileStart') + '...')
     // 读取文件夹里面的内容
-    if (store.currentProject.htmlPath) {
+    if (store.currentProject.isHtml && store.currentProject.htmlPath) {
         console.log(`Selected folder: ${store.currentProject.htmlPath}`)
         // 调用Rust函数来递归加载文件夹中的所有文件
         const files = await readDirRecursively(store.currentProject.htmlPath)
         console.log('files', files)
-        // 查询是否存在，并获取sha
-        // const shaRes = await getFileSha(
-        //     '.github/workflows/build.yml',
-        //     store.currentProject.name
-        // )
-        // console.log('get build.yml file sha', shaRes)
+        loadingText(t('syncFileStart') + '...')
+        let total = files.length
+        let count = 0
+        // 读取文件内容，并替换rootPath
+        for (const file of files) {
+            count++
+            const isExists = await exists(file)
+            if (isExists) {
+                const fileContent = await readFile(file)
+                console.log('fileContent', fileContent)
+                const base64Content = arrayBufferToBase64(fileContent)
+                console.log('base64Content', base64Content)
+                const gitPath = await replaceFileRoot(
+                    file,
+                    store.currentProject.htmlPath
+                )
+                const loadingState = `<div>${count}/${total}</div>
+                <div>${t('syncFilePro')}${gitPath.replace('src/', '')}</div>
+                <div>${t('syncTileTips')}</div>`
+                loadingText(loadingState)
+                console.log('gitPath', gitPath)
+                await upSrcFile(gitPath, base64Content)
+            } else {
+                console.log('file not exists', file)
+            }
+        }
     } else {
         console.log('No folder selected')
     }
-    // 查询是否存在，并获取sha
-
-    // 更新文件
-
-    // 上传文件
 }
 
 // active dist input
@@ -1417,6 +1443,7 @@ const publishWeb = async () => {
         // publish web or dist
         console.log('publish web')
         loadingText(t('syncConfig') + '...')
+        isTauri && (await tauriHtmlUpload())
         // update app icon
         await updateIcon()
         // update build.yml

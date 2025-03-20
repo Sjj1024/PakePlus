@@ -4,7 +4,7 @@ import githubApi from '@/apis/github'
 import { open } from '@tauri-apps/plugin-dialog'
 import { readDir } from '@tauri-apps/plugin-fs'
 import { writeText } from '@tauri-apps/plugin-clipboard-manager'
-import { join } from '@tauri-apps/api/path'
+import { join, sep } from '@tauri-apps/api/path'
 
 // 分支
 export const mainBranch = 'main'
@@ -71,6 +71,23 @@ export const platforms: { [key: string]: PlatformInfo } = {
         height: 1080,
         direction: 'horizontal',
     },
+}
+
+// 替换rootPath
+export const replaceRootPath = async (files: string[], rootPath: string) => {
+    // 按照路径拆分
+    const newFiles: string[] = []
+    for (const file of files) {
+        const filePath = await join(rootPath, sep())
+        newFiles.push(file.replace(filePath, 'src').replace('\\', '/'))
+    }
+    return newFiles
+}
+
+// 替换单个文件的rootPath
+export const replaceFileRoot = async (file: string, rootPath: string) => {
+    const filePath = await join(rootPath, sep())
+    return file.replace(filePath, 'src').replace('\\', '/')
 }
 
 // Open a selection dialog for image files
@@ -909,7 +926,7 @@ export const isMobile = () => {
 export const buildFileTree = (files: File[]): any => {
     const fileTree: any = {}
     files.forEach((file) => {
-        const pathParts = file.webkitRelativePath.split('/')
+        const pathParts = file.webkitRelativePath.split(sep())
         let current = fileTree
         pathParts.forEach((part, index) => {
             if (index === pathParts.length - 1) {
@@ -950,7 +967,7 @@ export const readFileAsBase64 = async (file: File): Promise<string> => {
 // 批量替换根路径为 "src"
 export const rootPath = (file: File) => {
     // 找到第一个斜杠的位置
-    let firstSlashIndex = file.webkitRelativePath.indexOf('/')
+    let firstSlashIndex = file.webkitRelativePath.indexOf(sep())
     if (firstSlashIndex === -1) {
         // 如果没有斜杠，直接返回原路径
         return 'src/' + file.name
