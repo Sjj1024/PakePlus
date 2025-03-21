@@ -4,7 +4,7 @@
 <a href="./README_JP.md">日本语</a>
 </h4>  
 <p align="center">
-    <img src="./static/imgs/pakeplus.png" width=138/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
 <p align="center">
