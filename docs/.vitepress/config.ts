@@ -4,6 +4,11 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
     title: 'PakePlus Official',
     description: 'PakePlus Docs',
+    vite: {
+        server: {
+            host: '0.0.0.0',
+        },
+    },
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         nav: [
