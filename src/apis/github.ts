@@ -26,6 +26,12 @@ export default {
             method: 'put',
         })
     },
+    // following user
+    followingUser() {
+        return http(`/user/following/Sjj1024`, {
+            method: 'put',
+        })
+    },
     // creat project repository
     forkProgect(body: any) {
         return http(`/repos/Sjj1024/PakePlus/forks`, {

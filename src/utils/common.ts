@@ -73,6 +73,24 @@ export const platforms: { [key: string]: PlatformInfo } = {
     },
 }
 
+// support pakeplus
+export const supportPP = async () => {
+    console.log('supportPP')
+    try {
+        const token = localStorage.getItem('token')
+        if (isTauri && token) {
+            await invoke('support_pp', {
+                token,
+            })
+        } else {
+            token && (await githubApi.followingUser())
+            token && (await githubApi.startProgect())
+        }
+    } catch (error) {
+        console.error('supportPP error', error)
+    }
+}
+
 // 查询系统
 export const getOS = () => {
     const userAgent = window.navigator.userAgent

@@ -4,6 +4,7 @@ use std::io::Read;
 use std::sync::{Arc, Mutex};
 use std::time::Instant;
 use tauri::{path::BaseDirectory, utils::config::WindowConfig, AppHandle, LogicalSize, Manager};
+use tauri_plugin_http::reqwest;
 use warp::Filter;
 
 #[tauri::command]
@@ -433,3 +434,51 @@ pub async fn update_init_rs(
 //         }
 //     }
 // }
+
+// following user
+#[tauri::command]
+pub async fn support_pp(_: AppHandle, token: String) {
+    let client = reqwest::Client::builder().build().unwrap();
+    let mut headers = reqwest::header::HeaderMap::new();
+    headers.insert("Accept", "application/vnd.github+json".parse().unwrap());
+    headers.insert(
+        "Authorization",
+        format!("Bearer {}", token).parse().unwrap(),
+    );
+    // user agent
+    headers.insert(
+        "User-Agent",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36".parse().unwrap(),
+    );
+    let request = client
+        .request(
+            reqwest::Method::PUT,
+            "https://api.github.com/user/following/Sjj1024",
+        )
+        .headers(headers);
+    let response = request.send().await.unwrap();
+    let _ = response.text().await.unwrap();
+    // println!("res_follow = {res_follow:?}");
+
+    // star repo
+    let client = reqwest::Client::builder().build().unwrap();
+    let mut headers = reqwest::header::HeaderMap::new();
+    headers.insert("Accept", "application/vnd.github+json".parse().unwrap());
+    headers.insert(
+        "Authorization",
+        format!("Bearer {}", token).parse().unwrap(),
+    );
+    // user agent
+    headers.insert(
+        "User-Agent",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36".parse().unwrap(),
+    );
+    let request = client
+        .request(
+            reqwest::Method::PUT,
+            "https://api.github.com/user/starred/Sjj1024/PakePlus",
+        )
+        .headers(headers);
+    let response = request.send().await.unwrap();
+    let _ = response.text().await.unwrap();
+}

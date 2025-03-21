@@ -4,7 +4,13 @@
     "description": "Capability for the main window",
     "windows": ["main", "PreView"],
     "remote": {
-        "urls": ["https://**", "file://**", "http://**", "asset://localhost/**"]
+        "urls": [
+            "https://**",
+            "file://**",
+            "http://**",
+            "asset://localhost/**",
+            "https://api.github.com/**"
+        ]
     },
     "permissions": [
         "core:default",
@@ -28,7 +34,8 @@
                 { "url": "https://**" },
                 { "url": "file://**" },
                 { "url": "http://**" },
-                { "url": "asset://localhost/**" }
+                { "url": "asset://localhost/**" },
+                { "url": "https://api.github.com/**" }
             ]
         },
         {

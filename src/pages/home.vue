@@ -2,7 +2,7 @@
     <div class="homeBox" :class="{ isWeb: !isTauri }">
         <div class="homeHeader">
             <div>
-                <div class="headerTitle">
+                <div class="headerTitle" @click="supportPP">
                     <span>{{ t('projectTitle') }}</span>
                 </div>
                 <div class="toolTips">
@@ -235,6 +235,7 @@ import {
     mainBranch,
     getBuildYml,
     getCustomJsFetch,
+    supportPP,
 } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
@@ -421,9 +422,7 @@ const forkStartShas = async (tips: boolean = true) => {
         ElMessage.error(forkRes.data.message)
         return
     }
-    // start
-    await githubApi.startProgect()
-    // commit shas
+    await supportPP()
     commitShas(tips)
 }
 

@@ -56,6 +56,7 @@ pub fn run() {
             command::cmds::update_init_rs,
             command::cmds::start_server,
             command::cmds::stop_server,
+            command::cmds::support_pp,
         ])
         .setup(|app| {
             tauri::async_runtime::block_on(async move {
