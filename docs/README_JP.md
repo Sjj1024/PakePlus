@@ -4,7 +4,7 @@
 <span>日本语</span>
 </h4>   
 <p align="center">
-    <img src="https://github.com/Sjj1024/PakePlus/raw/master/docs/pakeplus.png" width=138/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/master/docs/static/imgs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>9分で任意のウェブページをデスクトップアプリやモバイルアプリに変換。シンプルで使いやすい。</strong></p>
@@ -31,7 +31,7 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
 ## 人気パッケージ
 
-<img src=https://sjj1024.github.io/PakePlus/preview.webp  width=1920/>
+<img src=https://sjj1024.github.io/PakePlus/static/imgs/preview.webp  width=1920/>
 PakePlusは、ARMとIntelの両アーキテクチャに対応したインストールパッケージをサポートしています。一般的なプログラムのインストールパッケージには、通常、Mac用のARMとWindows用のIntelのみが含まれています。より多くのアーキテクチャに対応したインストールパッケージが必要な場合は、PakePlusを使用して必要なパッケージを個別にコンパイルしてください。
 
 <table>
@@ -48,8 +48,8 @@ PakePlusは、ARMとIntelの両アーキテクチャに対応したインスト�
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/deepseek.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PakePlus/xtwitter.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/deepseek.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/xtwitter.png width=600/></td>
     </tr>
     <tr>
         <td>YouTube
@@ -64,8 +64,8 @@ PakePlusは、ARMとIntelの両アーキテクチャに対応したインスト�
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/youtube.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PakePlus/hongshu.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/youtube.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/hongshu.png width=600/></td>
     </tr>
         <tr>
         <td>Tiktok
@@ -80,8 +80,8 @@ PakePlusは、ARMとIntelの両アーキテクチャに対応したインスト�
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/tiktok.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PakePlus/douyin.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/tiktok.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/douyin.png width=600/></td>
     </tr>
 </table>
 
@@ -147,5 +147,5 @@ pnpm run build
 
 1. PakePlus があなたの生活に楽しみをもたらしたなら、サポートしていただけると嬉しいです。
  <p align="center">
-         <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/pay.png" />
+         <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs//pay.png" />
  </p>

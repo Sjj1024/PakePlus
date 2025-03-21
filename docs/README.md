@@ -4,7 +4,7 @@
 <a href="./README_JP.md">日本语</a>
 </h4>  
 <p align="center">
-    <img src="./pakeplus.png" width=138/>
+    <img src="./static/imgs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
 <p align="center">
@@ -28,7 +28,7 @@
 
 ## Popular Packages
 
-<img src=https://sjj1024.github.io/PakePlus/preview.webp  width=1920/>
+<img src=https://sjj1024.github.io/PakePlus/static/imgs/preview.webp  width=1920/>
 
 <table>
     <tr>
@@ -44,8 +44,8 @@
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/apple.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PakePlus/xtwitter.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/apple.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/xtwitter.png width=600/></td>
     </tr>
     <tr>
         <td>YouTube
@@ -60,8 +60,8 @@
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/youtube.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PakePlus/hongshu.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/youtube.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/hongshu.png width=600/></td>
     </tr>
         <tr>
         <td>Tiktok
@@ -76,8 +76,8 @@
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/tiktok.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PakePlus/douyin.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/tiktok.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/douyin.png width=600/></td>
     </tr>
 </table>
 
@@ -132,5 +132,5 @@ pnpm run build
 
 1. If PakePlus has brought joy to your life, feel free to support it.
  <p align="center">
-         <img src="./docs/pay.png" />
+         <img src="./docs/static/imgs//pay.png" />
  </p>

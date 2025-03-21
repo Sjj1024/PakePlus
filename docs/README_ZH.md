@@ -4,7 +4,7 @@
 <a href="https://github.com/Sjj1024/PakePlus/discussions/108">日本语</a>
 </h4>  
 <p align="center">
-    <img src="https://github.com/Sjj1024/PakePlus/raw/master/docs/pakeplus.png" width=138/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/master/docs/static/imgs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>9分钟就可以将任何网页变成桌面应用和移动应用，简单易用。</strong></p>
@@ -30,7 +30,7 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
 ## 热门包
 
-<img src=https://sjj1024.github.io/PakePlus/preview.webp  width=1920/>
+<img src=https://sjj1024.github.io/PakePlus/static/imgs/preview.webp  width=1920/>
 PakePLus支持arm和inter架构的安装包，流行的程序安装包仅仅包含了mac的arm和windows的inter架构，如果需要更多架构的安装包，请使用PakePlus单独编译自己需要的安装包。
 
 <table>
@@ -47,8 +47,8 @@ PakePLus支持arm和inter架构的安装包，流行的程序安装包仅仅包�
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/deepseek.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PakePlus/xtwitter.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/deepseek.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/xtwitter.png width=600/></td>
     </tr>
     <tr>
         <td>YouTube
@@ -63,8 +63,8 @@ PakePLus支持arm和inter架构的安装包，流行的程序安装包仅仅包�
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/youtube.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PakePlus/hongshu.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/youtube.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/hongshu.png width=600/></td>
     </tr>
         <tr>
         <td>Tiktok
@@ -79,8 +79,8 @@ PakePLus支持arm和inter架构的安装包，流行的程序安装包仅仅包�
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/tiktok.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PakePlus/douyin.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/tiktok.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/douyin.png width=600/></td>
     </tr>
 </table>
 
@@ -148,11 +148,11 @@ pnpm run build
 
 1. 微信和群聊
  <p align="center" style="display:flex" >
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/mywx.png" width=300/>
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/wxcode.png" width=300/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/mywx.png" width=300/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/wxcode.png" width=300/>
  </p>
 
 1. 如果对你有帮，可以请我喝咖啡.
  <p align="center" >
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/pay.png" />
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/pay.png" />
  </p>
