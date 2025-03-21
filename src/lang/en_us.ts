@@ -142,4 +142,6 @@ export default {
     moreAssets: 'more assets',
     staticPreview: 'Static assets cant preview',
     htmlError: 'Switch static resources need to wait 1 minute to preview',
+    initError:
+        'Initialization failed, please manually delete your PakePlus repository and try again',
 }

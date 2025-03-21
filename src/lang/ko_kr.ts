@@ -144,4 +144,6 @@ export default {
     moreAssets: '등 자산',
     staticPreview: '정적 자산은 미리보기를 지원하지 않습니다',
     htmlError: '정적 자산을 변경한 후 1분 기다리세요',
+    initError:
+        '초기화 실패, PakePlus 저장소를 수동으로 삭제하고 다시 시도하세요',
 }

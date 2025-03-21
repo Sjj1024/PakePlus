@@ -144,4 +144,6 @@ export default {
     moreAssets: '等資源',
     staticPreview: '静的資源は預覧できません',
     htmlError: '静的資源を切り替えた後、1分待ってから預覧してください',
+    initError:
+        '初期化に失敗しました。PakePlusリポジトリを手動で削除して再試行してください',
 }

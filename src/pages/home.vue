@@ -270,9 +270,9 @@ const chageTheme = async (theme: string) => {
 
 // logout
 const logout = () => {
-    store.$reset()
     localStorage.clear()
     userInfoDialog.value = false
+    store.$reset()
 }
 
 // go project detail
@@ -343,13 +343,15 @@ const testToken = async (tips: boolean = true) => {
                 if (res.data.login !== 'Sjj1024') {
                     forkStartShas(tips)
                 } else {
-                    commitShas(tips)
+                    await commitShas(tips)
                 }
             } else {
+                store.setUser({})
                 ElMessage.error(t('tokenError'))
                 testLoading.value = false
             }
         } catch (error) {
+            store.setUser({})
             console.error('testToken error', error)
             ElMessage.error(t('networkError'))
             testLoading.value = false
@@ -361,12 +363,14 @@ const testToken = async (tips: boolean = true) => {
 
 const commitShas = async (tips: boolean = true) => {
     // wait fork done, enable github action
-    while (true) {
+    let getCount = 0
+    while (true && getCount < 6) {
         await new Promise((resolve) => setTimeout(resolve, 2000))
         console.log('wait fork done......', testLoading.value)
         const res = await Promise.all([getCommitSha(), getWebCommitSha()])
             .then((res) => {
                 console.log('wait fork done res', res)
+                getCount++
                 if (res[0] && res[1]) {
                     // delete build.yml
                     store.noSjj1024 && deleteBuildYml()
@@ -389,6 +393,12 @@ const commitShas = async (tips: boolean = true) => {
             break
         }
     }
+    if (getCount >= 6) {
+        store.setUser({})
+        ElMessage.error(t('initError'))
+    }
+    testLoading.value = false
+    return false
 }
 
 // fork and start

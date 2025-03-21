@@ -137,4 +137,5 @@ export default {
     moreAssets: '等資源',
     staticPreview: '靜態資源暫不支持預覽',
     htmlError: '切換靜態資源後需要等待1分鐘才可以預覽',
+    initError: '初始化失敗，請手動刪除你的PakePlus倉庫重試',
 }

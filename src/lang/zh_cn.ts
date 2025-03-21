@@ -140,4 +140,7 @@ export default {
     moreAssets: '等资源',
     staticPreview: '静态资源暂不支持预览',
     htmlError: '切换静态资源后需要等待1分钟才可以预览',
+    initError: '初始化失败，请手动删除你的PakePlus仓库重试',
+    initErrorTips:
+        '初始化失败，请手动删除你的PakePlus仓库重试，如果还是不行，请加我微信：lanxingme，备注：PakePlus',
 }
