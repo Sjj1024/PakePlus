@@ -1469,7 +1469,11 @@ const publishWeb = async () => {
         buildTime = 0
         loadingText(t('failure'))
         buildLoading.value = false
-        createIssue('publish action error', 'failure', 'build error')
+        createIssue(
+            `publish action error: ${error.message}`,
+            'failure',
+            'build error'
+        )
     }
 }
 

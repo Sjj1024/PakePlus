@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-    title: 'PakePlus Official',
+    title: 'PakePlus',
     description: 'PakePlus Docs',
     vite: {
         server: {
@@ -27,7 +27,7 @@ export default defineConfig({
         ],
 
         socialLinks: [
-            { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+            { icon: 'github', link: 'https://github.com/Sjj1024/PakePlus' },
         ],
     },
 })
