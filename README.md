@@ -5,7 +5,7 @@ style="margin: 0 10px;" >简体中文</a>
 <a href="https://github.com/Sjj1024/PakePlus/discussions/108">日本语</a>
 </h4>  
 <p align="center">
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/pakeplus.png" width=138/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>Turn any webpage into a desktop or mobile app in just 9 minutes. Simple and easy to use.</strong></p>
@@ -31,7 +31,7 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
 ## Popular Packages
 
-<img src=https://sjj1024.github.io/PakePlus/preview.webp  width=1920/>
+<img src=https://sjj1024.github.io/PakePlus/static/imgs/preview.webp  width=1920/>
 
 PakePlus supports installation packages for both ARM and Intel architectures. Most popular program installation packages only include the ARM architecture for macOS and the Intel architecture for Windows. If you need installation packages for additional architectures, please use PakePlus to compile the required package separately.
 
@@ -49,8 +49,8 @@ PakePlus supports installation packages for both ARM and Intel architectures. Mo
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/deepseek.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PakePlus/xtwitter.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/deepseek.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/xtwitter.png width=600/></td>
     </tr>
     <tr>
         <td>YouTube
@@ -65,8 +65,8 @@ PakePlus supports installation packages for both ARM and Intel architectures. Mo
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/youtube.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PakePlus/hongshu.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/youtube.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/hongshu.png width=600/></td>
     </tr>
         <tr>
         <td>Tiktok
@@ -81,8 +81,8 @@ PakePlus supports installation packages for both ARM and Intel architectures. Mo
         </td>
     </tr>
     <tr>
-        <td><img src=https://sjj1024.github.io/PakePlus/tiktok.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PakePlus/douyin.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/tiktok.png width=600/></td>
+        <td><img src=https://sjj1024.github.io/PakePlus/static/imgs/douyin.png width=600/></td>
     </tr>
 </table>
 
@@ -149,13 +149,13 @@ pnpm run build
 
 1. wechat and group
  <p align="center" style="display:flex; justify-content: flex-start;" >
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/mywx.png" width=300/>
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/wxcode.png" width=300/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/mywx.png" width=300/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/wxcode.png" width=300/>
  </p>
 
 1. If PakePlus has brought joy to your life, feel free to support it.
  <p align="center" style="display:flex; justify-content: flex-start;">
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/pay.png" width=620/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/pay.png" width=620/>
  </p>
 
 ## TODO

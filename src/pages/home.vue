@@ -478,7 +478,7 @@ const creatProject = async () => {
     creatLoading.value = true
     // update build.yml file content
     // token.value && (await uploadBuildYml())
-    if (branchName.value && /^[A-Za-z0-9]+$/.test(branchName.value)) {
+    if (branchName.value && /^[A-Za-z][A-Za-z0-9]*$/.test(branchName.value)) {
         const customJs = await getCustomJsFetch()
         // check branch exist
         if (store.token) {
