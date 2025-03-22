@@ -308,6 +308,16 @@
                                     />
                                 </el-select>
                             </el-form-item>
+                            <el-form-item
+                                :label="t('injectJq')"
+                                prop="injectJq"
+                                class="formItem"
+                            >
+                                <el-checkbox
+                                    v-model="store.currentProject.injectJq"
+                                    label=""
+                                />
+                            </el-form-item>
                         </div>
                         <el-form-item
                             label="tabbingIdentifier"
@@ -383,8 +393,10 @@ import { openUrl, urlMap } from '@/utils/common'
 import { ref } from 'vue'
 import { InfoFilled } from '@element-plus/icons-vue'
 import { usePakeStore } from '@/store'
+import { useI18n } from 'vue-i18n'
 
 const store = usePakeStore()
+const { t } = useI18n()
 const activeName = ref('1')
 const localTheme = localStorage.getItem('theme') || 'dark'
 
