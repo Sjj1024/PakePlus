@@ -1,0 +1,9 @@
+/* .vitepress/theme/custom.css */
+:root {
+    --vp-c-brand-1: #646cff;
+    --vp-c-brand-2: #747bff;
+}
+
+.VPImage:hover {
+    filter: drop-shadow(0 0 2em var(--vp-c-brand-1));
+}
