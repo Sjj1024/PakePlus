@@ -1564,7 +1564,7 @@ const dispatchAction = async () => {
         setTimeout(async () => {
             checkDispatchTimer = setInterval(async () => {
                 checkBuildStatus()
-            }, 1000 * 3)
+            }, 1000 * 10)
         }, 1000 * 60 * 3)
     }
 }
@@ -1585,7 +1585,7 @@ const createIssue = async (url: string, label: string, title: string) => {
 let rerunCount = 0
 const reRunFailsJobs = async (id: number, html_url: string) => {
     rerunCount += 1
-    if (rerunCount >= 2) {
+    if (rerunCount >= 3) {
         console.log('rerun cancel', rerunCount)
         buildLoading.value = false
         buildTime = 0
