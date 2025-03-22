@@ -937,6 +937,9 @@ export const usePakeStore = defineStore('pakeplus', {
             } else {
                 delete this.releases[proName]
             }
+            if (proName === this.currentProject.name) {
+                this.currentRelease = info
+            }
             localStorage.setItem('releases', JSON.stringify(this.releases))
         },
         async setCurrentRelease() {
