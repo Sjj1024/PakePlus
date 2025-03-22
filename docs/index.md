@@ -7,7 +7,7 @@ hero:
     text: '何必是网页，秒变桌面应用和手机应用'
     tagline: 打包网页/Vue/React项目为桌面/手机应用只需几分钟
     image:
-        src: ./static/imgs/pplogo.png
+        src: ./pplogo.png
         alt: PakePlus
     actions:
         - theme: brand

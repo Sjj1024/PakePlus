@@ -4,16 +4,16 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
     title: 'PakePlus',
     description: 'PakePlus Docs',
-    outDir: './dist',
+    outDir: './',
     vite: {
         server: {
             host: '0.0.0.0',
         },
     },
-    head: [['link', { rel: 'icon', href: '/app.svg' }]],
+    head: [['link', { rel: 'icon', href: './app.svg' }]],
     themeConfig: {
         logo: {
-            src: './static/imgs/pakeplus.png',
+            src: './app.svg',
             alt: 'PakePlus',
         },
         // https://vitepress.dev/reference/default-theme-config
