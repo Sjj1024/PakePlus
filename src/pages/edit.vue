@@ -749,7 +749,6 @@ const loadHtml = async () => {
 
 // tauri html file upload
 const tauriHtmlUpload = async () => {
-    console.log('tauriHtmlUpload')
     loadingText(t('syncFileStart') + '...')
     // 读取文件夹里面的内容
     if (store.currentProject.isHtml && store.currentProject.htmlPath) {
@@ -783,8 +782,6 @@ const tauriHtmlUpload = async () => {
                 console.log('file not exists', file)
             }
         }
-    } else {
-        console.log('No folder selected')
     }
 }
 
@@ -1541,7 +1538,11 @@ const dispatchAction = async () => {
     )
     if (dispatchRes.status !== 204) {
         console.error('dispatch res error', dispatchRes)
-        ElMessage.error(t('dispatchError') + ':' + dispatchRes.data.message)
+        const message = dispatchRes.data
+            ? dispatchRes.data.message
+            : dispatchRes.status
+        warning.value = t('dispatchError') + ':' + message
+        ElMessage.error(warning.value)
         buildLoading.value = false
         return
     } else {
@@ -1588,6 +1589,7 @@ const reRunFailsJobs = async (id: number, html_url: string) => {
         console.log('rerun cancel', rerunCount)
         buildLoading.value = false
         buildTime = 0
+        warning.value = 'rerun cancel and rerun count > 2'
         createIssue(html_url, 'failure', 'build error')
         openUrl(html_url)
         loadingText(t('failure'))
@@ -1639,11 +1641,9 @@ const checkBuildStatus = async () => {
             // clear interval
             buildSecondTimer && clearInterval(buildSecondTimer)
             checkDispatchTimer && clearInterval(checkDispatchTimer)
-        } else if (status === 'failure') {
+        } else if (status === 'failure' || conclusion === 'failure') {
             reRunFailsJobs(id, html_url)
-        } else if (conclusion === 'failure') {
-            reRunFailsJobs(id, html_url)
-        } else if (status === 'completed') {
+        } else if (status === 'completed' && conclusion === 'failure') {
             reRunFailsJobs(id, html_url)
         } else if (status === 'in_progress') {
             console.log('build in progress...')
