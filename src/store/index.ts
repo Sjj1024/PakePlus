@@ -919,7 +919,7 @@ export const usePakeStore = defineStore('pakeplus', {
         },
         delProject(project: Project) {
             // delete release
-            this.setRelease(project.name, null)
+            this.setRelease(project.name, { id: 0 })
             const exist = this.projectList.findIndex((item: Project) => {
                 return item.name === project.name
             })

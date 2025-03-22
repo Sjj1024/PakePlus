@@ -1208,7 +1208,7 @@ const deleteRelease = async () => {
         console.log('deleteRelease', releaseRes)
     }
     // reset release
-    store.setRelease(store.currentProject.name, undefined)
+    store.setRelease(store.currentProject.name, { id: 0 })
 }
 
 // update build.yml file content
