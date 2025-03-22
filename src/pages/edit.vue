@@ -1266,6 +1266,7 @@ const updateCargoToml = async () => {
             version: store.currentProject.version,
             desc: store.currentProject.desc,
             debug: pubForm.model === 'debug',
+            single: store.currentProject.single,
         })
         // update config file
         const updateRes: any = await githubApi.updateCargoFile(
@@ -1295,6 +1296,46 @@ const updateInitRs = async () => {
     // get CargoToml file sha
     const shaRes = await getFileSha(
         'src-tauri/src/utils/init.rs',
+        store.currentProject.name
+    )
+    console.log('get init.rs file sha', shaRes)
+    if (shaRes.status === 200 || shaRes.status === 404) {
+        // get CargoToml file content
+        const configContent: any = await getInitRustFetch({
+            config: JSON.stringify(store.currentProject.more.windows),
+            state: store.currentProject.state,
+            injectjq: store.currentProject.injectJq,
+            isHtml: store.currentProject.isHtml,
+        })
+        const updateRes: any = await githubApi.updateFileContent(
+            store.userInfo.login,
+            'PakePlus',
+            'src-tauri/src/utils/init.rs',
+            {
+                message: 'update init rust from pakeplus',
+                content: configContent,
+                sha: shaRes.data.sha,
+                branch: store.currentProject.name,
+            }
+        )
+        if (updateRes.status === 200) {
+            console.log('updateInitRs', updateRes)
+            loadingText(t('syncConfig') + '...')
+        } else {
+            console.error('updateInitRs error', updateRes)
+        }
+    } else {
+        console.error('getFileSha error', shaRes)
+    }
+}
+
+// update lib.rs file content
+// update build.yml file content
+const updateLibRs = async () => {
+    loadingText(t('syncConfig') + 'rust...')
+    // get CargoToml file sha
+    const shaRes = await getFileSha(
+        'src-tauri/src/lib.rs',
         store.currentProject.name
     )
     console.log('get init.rs file sha', shaRes)
@@ -1447,7 +1488,6 @@ const publishWeb = async () => {
         // delete release
         store.isRelease && (await deleteRelease())
         // publish web or dist
-        console.log('publish web')
         loadingText(t('syncConfig') + '...')
         isTauri && (await tauriHtmlUpload())
         // update app icon
@@ -1475,23 +1515,6 @@ const publishWeb = async () => {
             'build error'
         )
     }
-}
-
-// del pre publish version
-const onPublish = async () => {
-    centerDialogVisible.value = false
-    buildLoading.value = true
-    // delete release
-    store.isRelease && deleteRelease()
-    // update build yml
-    await updateBuildYml()
-    // update Cargo.toml
-    await updateCargoToml()
-    // update main rust
-    // await updateMainRs()
-    await libRsConfig()
-    // update custom js
-    await updateCustomJs()
 }
 
 const getFileSha = async (filePath: string, branch: string) => {

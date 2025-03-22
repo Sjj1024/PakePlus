@@ -428,6 +428,14 @@ export const getCargoTomlFetch = async (params: any) => {
     if (content === 'error') {
         return 'error'
     }
+    if (params.single) {
+        content = content.replaceAll(
+            '[single]',
+            'tauri-plugin-single-instance = "2"'
+        )
+    } else {
+        content = content.replaceAll('[single]', '')
+    }
     // 替换NAME
     content = content.replaceAll('PROJECTNAME', params.name)
     // 替换VERSION
@@ -533,6 +541,24 @@ export const getInitRust = async (params: any) => {
         }
         return base64Encode(content)
     }
+}
+
+// get init.rs file content
+export const getLibRsFetch = async (params: any) => {
+    let content = await readFile('lib.txt')
+    if (content === 'error') {
+        return 'error'
+    }
+    // 替换Single
+    if (params.single) {
+        content = content.replaceAll(
+            '[single]',
+            'tauri-plugin-single-instance = "2"'
+        )
+    } else {
+        content = content.replaceAll('[single]', '')
+    }
+    return base64Encode(content)
 }
 
 // get init.rs file content
