@@ -7,7 +7,7 @@ hero:
     text: 'PakePlus Docs'
     tagline: My great project tagline
     image:
-        src: ./static/imgs/pakeplus.png
+        src: ./static/imgs/pplogo.png
         alt: PakePlus
     actions:
         - theme: brand

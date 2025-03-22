@@ -1589,7 +1589,7 @@ const reRunFailsJobs = async (id: number, html_url: string) => {
         console.log('rerun cancel', rerunCount)
         buildLoading.value = false
         buildTime = 0
-        warning.value = 'rerun cancel and rerun count > 2'
+        warning.value = 'rerun cancel and rerun count > 3'
         createIssue(html_url, 'failure', 'build error')
         openUrl(html_url)
         loadingText(t('failure'))
@@ -1601,8 +1601,12 @@ const reRunFailsJobs = async (id: number, html_url: string) => {
             'PakePlus',
             id
         )
-        if (rerunRes.status === 201) {
+        // 201 is success 403 is running
+        if (rerunRes.status === 201 || rerunRes.status === 403) {
             console.log('rerun success')
+            if (rerunRes.status === 403) {
+                rerunCount -= 1
+            }
         } else {
             reRunFailsJobs(id, html_url)
         }
