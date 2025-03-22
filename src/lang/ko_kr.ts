@@ -146,4 +146,6 @@ export default {
     htmlError: '정적 자산을 변경한 후 1분 기다리세요',
     initError:
         '초기화 실패, PakePlus 저장소를 수동으로 삭제하고 다시 시도하세요',
+    single: '싱글',
+    singleTips: '싱글 모드에서는 하나의 프로그램만 열 수 있습니다',
 }

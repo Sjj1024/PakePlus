@@ -212,12 +212,12 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        :label="t('injectJq')"
-                        prop="injectJq"
+                        :label="t('single')"
+                        prop="single"
                         class="formItem"
                     >
                         <el-checkbox
-                            v-model="store.currentProject.injectJq"
+                            v-model="store.currentProject.single"
                             label=""
                         />
                     </el-form-item>

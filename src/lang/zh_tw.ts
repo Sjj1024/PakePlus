@@ -138,4 +138,6 @@ export default {
     staticPreview: '靜態資源暫不支持預覽',
     htmlError: '切換靜態資源後需要等待1分鐘才可以預覽',
     initError: '初始化失敗，請手動刪除你的PakePlus倉庫重試',
+    single: '單例模式',
+    singleTips: '單例模式下，只允許打開一個程序',
 }

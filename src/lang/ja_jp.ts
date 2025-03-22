@@ -146,4 +146,6 @@ export default {
     htmlError: '静的資源を切り替えた後、1分待ってから預覧してください',
     initError:
         '初期化に失敗しました。PakePlusリポジトリを手動で削除して再試行してください',
+    single: 'シングル',
+    singleTips: 'シングルモードでは、1つのプログラムしか開けません',
 }

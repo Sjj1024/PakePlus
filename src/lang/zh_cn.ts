@@ -143,4 +143,6 @@ export default {
     initError: '初始化失败，请手动删除你的PakePlus仓库重试',
     initErrorTips:
         '初始化失败，请手动删除你的PakePlus仓库重试，如果还是不行，请加我微信：lanxingme，备注：PakePlus',
+    single: '单例模式',
+    singleTips: '单例模式下，只允许打开一个程序',
 }

@@ -144,4 +144,6 @@ export default {
     htmlError: 'Switch static resources need to wait 1 minute to preview',
     initError:
         'Initialization failed, please manually delete your PakePlus repository and try again',
+    single: 'Single',
+    singleTips: 'Single mode, only one program can be opened',
 }

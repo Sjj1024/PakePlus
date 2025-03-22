@@ -264,6 +264,7 @@ export const initProject = {
     icon: '',
     iconRound: true,
     state: true,
+    single: true,
     injectJq: false,
     tauriApi: false,
     version: '0.0.1',
