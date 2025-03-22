@@ -511,18 +511,17 @@ export const getTauriConfFetch = async (params: any) => {
     return base64Encode(content)
 }
 
-// get init.rs file content
+// get init.txt file content
 export const getInitRust = async (params: any) => {
     // 将visible: true 替换为 visible: false
     params.config = JSON.parse(params.config)
     params.config.visible = false
     params.config = JSON.stringify(params.config)
-    console.log('getInitRust params', params)
     if (isTauri) {
         const content = await invoke('update_init_rs', params)
         return content
     } else {
-        let content = await readFile('init.rs')
+        let content = await readFile('init.txt')
         if (content === 'error') {
             return 'error'
         }
@@ -552,11 +551,13 @@ export const getLibRsFetch = async (params: any) => {
     // 替换Single
     if (params.single) {
         content = content.replaceAll(
-            '[single]',
-            'tauri-plugin-single-instance = "2"'
+            '.plugin(tauri_plugin_opener::init())',
+            `.plugin(tauri_plugin_opener::init())
+            .plugin(tauri_plugin_single_instance::init(|app, _, _| {
+                utils::init::show_window(app);
+            }))
+            `
         )
-    } else {
-        content = content.replaceAll('[single]', '')
     }
     return base64Encode(content)
 }
@@ -572,7 +573,7 @@ export const getInitRustFetch = async (params: any) => {
     }
     console.log('getInitRust params', params.config)
     params.config = JSON.stringify(params.config)
-    let content = await readFile('init.rs')
+    let content = await readFile('init.txt')
     if (content === 'error') {
         return 'error'
     }

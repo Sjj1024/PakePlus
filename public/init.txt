@@ -1,5 +1,5 @@
 use serde_json::{json, Error};
-use tauri::{utils::config::WindowConfig, App, AppHandle, WindowEvent};
+use tauri::{utils::config::WindowConfig, App, AppHandle, Manager, WindowEvent};
 use tauri_plugin_store::StoreExt;
 
 // handle something when start app
@@ -133,7 +133,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
 
     Ok(())
 }
-
 
 // 单例模式，当二次启动时聚焦
 pub fn show_window(app: &AppHandle) {

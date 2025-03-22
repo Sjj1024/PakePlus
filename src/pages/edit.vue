@@ -492,6 +492,7 @@ import {
     openSelect,
     readDirRecursively,
     replaceFileRoot,
+    getLibRsFetch,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -1319,8 +1320,7 @@ const updateInitRs = async () => {
             }
         )
         if (updateRes.status === 200) {
-            console.log('updateInitRs', updateRes)
-            loadingText(t('syncConfig') + '...')
+            loadingText(t('syncConfig') + 'rust...')
         } else {
             console.error('updateInitRs error', updateRes)
         }
@@ -1338,31 +1338,28 @@ const updateLibRs = async () => {
         'src-tauri/src/lib.rs',
         store.currentProject.name
     )
-    console.log('get init.rs file sha', shaRes)
+    console.log('get lib.rs file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
-        const configContent: any = await getInitRustFetch({
-            config: JSON.stringify(store.currentProject.more.windows),
-            state: store.currentProject.state,
-            injectjq: store.currentProject.injectJq,
-            isHtml: store.currentProject.isHtml,
+        const configContent: any = await getLibRsFetch({
+            single: store.currentProject.single,
         })
         const updateRes: any = await githubApi.updateFileContent(
             store.userInfo.login,
             'PakePlus',
-            'src-tauri/src/utils/init.rs',
+            'src-tauri/src/lib.rs',
             {
-                message: 'update init rust from pakeplus',
+                message: 'update lib rust from pakeplus',
                 content: configContent,
                 sha: shaRes.data.sha,
                 branch: store.currentProject.name,
             }
         )
         if (updateRes.status === 200) {
-            console.log('updateInitRs', updateRes)
-            loadingText(t('syncConfig') + '...')
+            console.log('updateLibRs', updateRes)
+            loadingText(t('syncConfig') + 'rust...')
         } else {
-            console.error('updateInitRs error', updateRes)
+            console.error('updateLibRs error', updateRes)
         }
     } else {
         console.error('getFileSha error', shaRes)
@@ -1502,6 +1499,8 @@ const publishWeb = async () => {
         await updateCustomJs()
         // update init.rs
         await updateInitRs()
+        // update lib.rs
+        await updateLibRs()
         // dispatch action
         dispatchAction()
     } catch (error: any) {
@@ -1621,6 +1620,7 @@ const checkBuildStatus = async () => {
     const build_runs = checkRes.data.workflow_runs[0]
     const { id, status, conclusion, html_url } = build_runs
     buildStatus = t(status) || t('inProgress')
+    console.log('checkBuildStatus', build_runs)
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
         if (status === 'completed' && conclusion === 'success') {
             createIssue(html_url, 'success', 'build success')
