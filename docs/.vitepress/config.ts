@@ -11,7 +11,7 @@ export default defineConfig({
     },
     themeConfig: {
         logo: {
-            src: './static/imgs/app-icon.png',
+            src: './static/imgs/pakeplus.png',
             alt: 'PakePlus',
         },
         // https://vitepress.dev/reference/default-theme-config
