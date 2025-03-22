@@ -134,10 +134,16 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
 
 // 单例模式，当二次启动时聚焦
 pub fn show_window(app: &AppHandle) {
-    app.webview_windows()
-        .values()
-        .next()
-        .expect("Sorry, no window found")
-        .set_focus()
-        .expect("Can't Bring Window to Focus");
+    let main = app.get_webview_window("main");
+    if let Some(main) = main {
+        main.show().expect("Sorry, can't show window");
+        main.set_focus().expect("Sorry, can't focus window");
+    } else {
+        app.webview_windows()
+            .values()
+            .next()
+            .expect("Sorry, no window found")
+            .set_focus()
+            .expect("Can't Bring Window to Focus");
+    }
 }

@@ -3,9 +3,12 @@
 layout: home
 
 hero:
-    name: 'PakePlus Official'
+    name: 'PakePlus'
     text: 'PakePlus Docs'
     tagline: My great project tagline
+    image:
+        src: ./static/imgs/app-icon.png
+        alt: PakePlus
     actions:
         - theme: brand
           text: Markdown Examples

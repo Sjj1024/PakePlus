@@ -10,6 +10,10 @@ export default defineConfig({
         },
     },
     themeConfig: {
+        logo: {
+            src: './static/imgs/app-icon.png',
+            alt: 'PakePlus',
+        },
         // https://vitepress.dev/reference/default-theme-config
         nav: [
             { text: 'Home', link: '/' },
