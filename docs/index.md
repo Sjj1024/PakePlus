@@ -37,7 +37,7 @@ features:
       details: 支持国际化，对全球用户都友好，并且会自动跟随你的电脑系统语言
       icon: 🌍
     - title: 支持自定义
-      details: 你可以自定义应用图标、应用名称等，并支持注入 JavaScript 代码
+      details: 你可以自定义应用图标、应用名称(支持中文)，支持注入JavaScript代码
       icon: 🎨
     - title: 支持静态文件
       details: 你可以将静态html文件或Vue/React等项目编译后的dist打包为应用
@@ -48,7 +48,7 @@ features:
 ---
 
 <div :class="$style.buildInfo">
-    <span class="buildTime">构建时间：{{ data.buildTime }}</span>
+    <span :class="$style.buildTime">构建时间：{{ data.buildTime }}</span>
 </div>
 
 <script setup>
@@ -57,15 +57,14 @@ import { data } from './static/js/common.data.ts'
 
 <style module>
 
-.name{
-    color: pink;
-}
-
-
 .buildInfo{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    margin-top: 10px;
+    margin-top: 20px;
+}
+
+.buildTime{
+    color: gray;
 }
 </style>

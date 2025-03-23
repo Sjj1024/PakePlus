@@ -9,6 +9,13 @@ export default defineConfig({
         server: {
             host: '0.0.0.0',
         },
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    api: 'modern-compiler',
+                },
+            },
+        },
     },
     locales: {
         root: {
@@ -53,6 +60,7 @@ export default defineConfig({
         // 导航栏
         nav: [
             { text: '首页', link: '/' },
+            { text: '下载', link: '/download' },
             { text: '使用指南', link: '/guide/' },
             { text: '常见问题', link: '/question/' },
             { text: '社区交流', link: '/exchange/' },
@@ -61,24 +69,32 @@ export default defineConfig({
         // 侧边栏
         sidebar: {
             '/guide/': [
-                {
-                    text: '简介',
-                    items: [
-                        { text: '简介', link: '/guide/' },
-                        { text: '快速开始', link: '/guide/one' },
-                        { text: '常见问题', link: '/guide/two' },
-                    ],
-                },
+                { text: '简介', link: '/guide/' },
+                { text: '下载软件', link: '/guide/one' },
+                { text: '获取Token', link: '/guide/two' },
+                { text: '创建项目', link: '/guide/two' },
+                { text: '配置项目', link: '/guide/two' },
+                { text: '编译发布', link: '/guide/two' },
+                { text: '进阶配置', link: '/guide/two' },
             ],
             '/question/': [
-                {
-                    text: '常见问题',
-                    items: [
-                        { text: 'Index', link: '/guide/' },
-                        { text: 'One', link: '/guide/one' },
-                        { text: 'Two', link: '/guide/two' },
-                    ],
-                },
+                { text: '应用已损坏', link: '/guide/' },
+                { text: 'Token无效', link: '/guide/one' },
+                { text: '项目已存在', link: '/guide/two' },
+                { text: '编译失败', link: '/guide/two' },
+                { text: '打包html项目', link: '/guide/two' },
+                { text: '打包Vue等项目', link: '/guide/two' },
+                { text: '窗口跳转', link: '/guide/two' },
+                { text: '其他问题', link: '/guide/two' },
+                { text: 'Issue', link: '/guide/two' },
+            ],
+            '/exchange/': [
+                { text: '加入群聊', link: '/guide/' },
+                { text: 'Github讨论', link: '/guide/one' },
+            ],
+            '/sponsor/': [
+                { text: '赞助我们', link: '/guide/' },
+                { text: '赞助名单', link: '/guide/one' },
             ],
         },
         // 社交链接
