@@ -2,6 +2,12 @@
 :root {
     --vp-c-brand-1: #646cff;
     --vp-c-brand-2: #747bff;
+    --vp-home-hero-name-color: transparent;
+    --vp-home-hero-name-background: -webkit-linear-gradient(
+        120deg,
+        #bd34fe 30%,
+        #41d1ff
+    );
 }
 
 .VPImage:hover {

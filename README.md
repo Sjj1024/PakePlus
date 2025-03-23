@@ -22,12 +22,12 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 -   👻 PakePlus is just a simple tool—using Tauri to replace older packaging methods，It supports cross - platform desktops and will support mobile devices soon..
 -   🤗 PakePlus is easy to use; all you need is a GitHub Token to get a desktop app.
 -   🌹 No need to install complex dependencies locally; use Github Action for cloud-based auto-packaging.
--   🧑‍🤝‍🧑 Supports internationalization, user-friendly for a global audience, and it follows your system language automatically.
+-   🌎 Supports internationalization, user-friendly for a global audience, and it follows your system language automatically.
 -   💡 Supports custom js injection. you can write your own js code to inject into the page.
 -   🎨 ui is more beautiful, more comfortable to use.
 -   📡 It can be directly used on the web side, but the client-side has more powerful functions.
 -   🔐 Data security. Your token is only saved locally on your device and will not be uploaded to the server. Your projects are also safely stored in your own Git repository.
--   😈 Support static file packaging. Just drop your dist directory or index.html in, and it becomes a client. Why limit it to a website?
+-   🍀 Support static file / vue / React packaging. Just drop your dist directory or index.html in, and it becomes a client. Why limit it to a website?
 
 ## Popular Packages
 
@@ -162,4 +162,3 @@ pnpm run build
 
 1. add auto update feature
 2. support build android apk and build ios ipa
-3. add upload front build dist to build

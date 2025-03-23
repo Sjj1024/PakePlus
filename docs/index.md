@@ -56,6 +56,12 @@ import { data } from './static/js/common.data.ts'
 </script>
 
 <style module>
+
+.name{
+    color: pink;
+}
+
+
 .buildInfo{
     display: flex;
     flex-direction: row;
