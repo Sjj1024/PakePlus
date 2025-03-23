@@ -1,6 +1,6 @@
 <template>
     <div class="downBox">
-        <div class="title">我应该下载哪个版本？</div>
+        <div class="title">我应该使用哪个版本？</div>
         <div class="platform">
             <div class="leftIcon">
                 <svg
@@ -120,11 +120,47 @@
                 </div>
             </div>
         </div>
+        <div class="platform">
+            <div class="leftIcon">
+                <svg
+                    t="1742721374498"
+                    class="icon"
+                    viewBox="0 0 1565 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="1694"
+                    width="200"
+                    height="200"
+                >
+                    <path
+                        d="M1206.510527 299.331595c-27.357038 0-53.867311 3.354494-79.465683 9.119013C1078.551237 130.792698 916.428217 0 723.398257 0c-231.329814 0-418.82323 187.493416-418.82323 418.790662 0 16.023408 1.107309 31.786273 2.865975 47.353731-9.151581-0.879333-18.400865-1.40042-27.812989-1.40042C125.223586 464.743973 0 589.934991 0 744.371987s125.223586 279.628013 279.628013 279.628013c134.928821 0 782.150754 0 926.849946 0 197.947713 0 358.40977-168.34349 358.40977-366.291203C1564.920298 459.761084 1404.458241 299.331595 1206.510527 299.331595z"
+                        fill="#090909"
+                        p-id="1695"
+                    ></path>
+                </svg>
+            </div>
+            <div class="rightContent">
+                <h1 class="title">网页版</h1>
+                <div class="item">
+                    <a href="https://pakeplus.pages.dev/">
+                        https://pakeplus.pages.dev/
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="https://pakeplus.netlify.app/">
+                        https://pakeplus.netlify.app/
+                    </a>
+                </div>
+                <div class="item">
+                    <span> 不推荐，因为是bate版本，没有客户端稳定 </span>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+// import { ref, reactive } from 'vue'
 </script>
 
 <style scoped lang="scss">
@@ -135,7 +171,7 @@ import { ref, reactive } from 'vue'
     justify-content: center;
     gap: 30px;
     margin: 20px 0;
-    width: 100vw;
+    // width: 100vw;
 
     .title {
         font-size: 30px;
@@ -159,7 +195,7 @@ import { ref, reactive } from 'vue'
 
         .leftIcon {
             width: 10%;
-            margin-right: 20px;
+            margin-right: 10px;
 
             .icon {
                 width: 100%;
@@ -198,7 +234,8 @@ import { ref, reactive } from 'vue'
                     color: var(--vp-c-brand-1);
 
                     &:hover {
-                        color: rgb(58, 58, 254);
+                        // color: rgb(58, 58, 254);
+                        font-weight: bold;
                     }
                 }
             }

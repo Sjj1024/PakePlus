@@ -1,26 +1,85 @@
-# 使用指南
+# PakePLus 简介
 
-[
-{ text: '简介', link: '/sum' },
-{
-text: '快速开始',
-items: [
-{ text: '下载软件', link: '/down' },
-{ text: '获取 Token', link: '/token' },
-{ text: '创建项目', link: '/create' },
-{ text: '配置项目', link: '/config' },
-{ text: '编译发布', link: '/build' },
-],
-},
-{
-text: '常见问题',
-items: [
-{ text: '应用已损坏', link: '/mac' },
-{ text: 'Token 无效', link: '/token' },
-{ text: '项目已存在', link: '/create' },
-{ text: '编译失败', link: '/build' },
-{ text: '打包 Vue/React 项目', link: '/config' },
-{ text: '窗口跳转', link: '/build' },
-],
-},
-]
+PakePlus 是一个基于 Tauri2 和 Github 的打包工具，无需在本地安装复杂的 rust 和 node 依赖环境，只需要一个 Github Token 就可以将任意网站/Vue/React 等项目的 dist 静态文件打包为跨平台桌面软件，体积小巧(小于 5M)并且性能还高，而且 PakePlus 本身也才仅仅 8M 左右小大。
+
+## 特性
+
+-   🎐 体积比 Electron 包小约 20 倍（小于 5M！），性能快 10 倍。
+-   🚀 基于 Rust Tauri，PakePlus 比基于 JS 的框架更轻量、更快。
+-   📦 内置丰富功能包——支持快捷方式、沉浸式窗口、极简自定义。
+-   👻 PakePlus 只是一个极简的软件，用 Tauri 替代旧的打包方式，支持跨平台桌面，将很快支持手机端。
+-   🤗 PakePlus 易于操作使用，只需一个 GitHub Token，即可获得桌面应用。
+-   🌹 不需要在本地安装任何复杂的依赖环境，使用 Github Action 云端自动打包。
+-   🧑‍🤝‍🧑 支持国际化，对全球用户都非常友好，并且会自动跟随你的电脑系统语言。
+-   💡 支持自定义 js 注入。你可以编写自己的 js 代码注入到页面中。
+-   🎨 ui 界面更美观更友好对新手更实用，使用更舒适，支持中文名称打包。
+-   📡 支持网页端直接使用，但是客户端功能更强大，更推荐客户端。
+-   🔐 数据安全，你的 token 仅保存在你本地，不会上传服务器，你的项目也都在你自己的 git 中安全存储。
+-   🍀 支持静态文件打包，将 Vue/React 等项目编译后的 dist 目录或者 index.html 丢进来即可成为客户端，何必是网站。
+
+## 使用场景
+
+-   你有一个网站，想把它立刻变成桌面应用，立刻高大尚。
+-   你有一个 Vue/React 等项目，不想购买服务器，想把它打包成桌面应用。
+-   隐藏你的网站地址，不被随意传播和使用，防止爬虫程序获取你的网站内容。
+-   公司内网平台，不想让别人知道你的网站地址，只允许通过你的客户端访问。
+-   想把某个网站变成自己的客户端，实现自定义功能，比如注入 js 实现自动化操作。
+-   网站广告太多？想把它隐藏起来，用无所不能的 js 来屏蔽它们吧。
+-   需要使用 tauri2 打包，但是依赖环境太复杂，本地电脑硬盘不够用，就用 PakePlus
+
+## 热门包
+
+<img src="../static/imgs/preview.webp"  width=1920/>
+
+PakePLus 支持 arm 和 inter 架构的安装包，流行的程序安装包仅仅包含了 mac 的 arm 和 windows 的 inter 架构，如果需要更多架构的安装包，请使用 PakePlus 单独编译自己需要的安装包。
+
+<table>
+    <tr>
+        <td>DeepSeek
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/DeepSeek_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/DeepSeek_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/DeepSeek_0.0.1_amd64.deb">Linux</a>
+        </td>
+        <td>X (Twitter)
+            <a href="https://github.com/codegirle/PakePlus/releases/download/X/X_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/X/X_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/X/x_0.0.1_amd64.deb">Linux</a>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../static/imgs/deepseek.png" width=600/></td>
+        <td><img src="../static/imgs/xtwitter.png" width=600/></td>
+    </tr>
+    <tr>
+        <td>YouTube
+            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/YouTube_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/YouTube_0.0.1_x64_en-US.msi">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/you-tube_0.0.1_amd64.deb">Linux</a>
+        </td>
+        <td>小红书
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_amd64.deb">Linux</a>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../static/imgs/youtube.png" width=600/></td>
+        <td><img src="../static/imgs/hongshu.png"width=600/></td>
+    </tr>
+        <tr>
+        <td>Tiktok
+            <a href="https://github.com/codegirle/PakePlus/releases/download/TikTok/TikTok_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/TikTok/TikTok_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/TikTok/tik-tok_0.0.1_amd64.deb">Linux</a>
+        </td>
+        <td>抖音
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/_0.0.1_aarch64.dmg">Mac</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/_0.0.1_x64-setup.exe">Windows</a>
+            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/_0.0.1_amd64.deb">Linux</a>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="../static/imgs/tiktok.png" width=600/></td>
+        <td><img src="../static/imgs/douyin.png" width=600/></td>
+    </tr>
+</table>
