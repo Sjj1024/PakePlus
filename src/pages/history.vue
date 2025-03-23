@@ -26,7 +26,9 @@
                 </div>
             </div>
             <div class="setting">
-                <el-icon :size="22" @click="deleteRelease"><Delete /></el-icon>
+                <el-icon :size="22" @click="delDialog = true">
+                    <Delete />
+                </el-icon>
             </div>
         </div>
         <!-- only get latest version by tag name -->
@@ -75,6 +77,33 @@
                 {{ t('assetDesc') }}
             </div>
         </div>
+        <!-- delete release -->
+        <el-dialog v-model="delDialog" width="400" center>
+            <template #header>
+                <div class="diaHeader">
+                    {{ store.currentRelease.tag_name }}
+                    v{{ store.currentProject.version }}
+                </div>
+            </template>
+            <div class="diaContent">
+                {{ t('deleteRelease') }}
+            </div>
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button @click="delDialog = false">{{
+                        t('cancel')
+                    }}</el-button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <el-button
+                        type="primary"
+                        @click="deleteRelAssets()"
+                        :loading="delLoading"
+                    >
+                        {{ t('confirm') }}
+                    </el-button>
+                </div>
+            </template>
+        </el-dialog>
     </div>
 </template>
 
@@ -94,9 +123,12 @@ const { t } = useI18n()
 
 // getLoading
 const getLoading = ref(false)
+const delDialog = ref(false)
+const delLoading = ref(false)
 
 // delete lasted release
 const deleteRelAssets = async () => {
+    delLoading.value = true
     if (store.currentRelease.id !== 0) {
         const releaseRes: any = await githubApi.deleteRelease(
             store.userInfo.login,
@@ -104,26 +136,14 @@ const deleteRelAssets = async () => {
             store.currentRelease.id
         )
         console.log('deleteRelease', releaseRes)
+        delLoading.value = false
+        delDialog.value = false
         ElMessage.success(t('delSuccess'))
-        store.setRelease(store.currentProject.name, { id: 0 })
         router.go(-1)
+        store.setRelease(store.currentProject.name, { id: 0 })
     }
-}
-
-// delete release
-const deleteRelease = async () => {
-    ElMessageBox.confirm(t('confirmDelProject'), t('tips'), {
-        confirmButtonText: t('confirm'),
-        cancelButtonText: t('cancel'),
-        type: 'warning',
-    })
-        .then(() => {
-            console.log('delete deleteRelease')
-            deleteRelAssets()
-        })
-        .catch(() => {
-            console.log('catch deleteRelease')
-        })
+    delLoading.value = false
+    delDialog.value = false
 }
 
 // copy downlink
@@ -143,6 +163,14 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
+.diaContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
 .historyBox {
     // width: 100%;
     padding: 10px 20px;

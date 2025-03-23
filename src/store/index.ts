@@ -842,7 +842,11 @@ export const usePakeStore = defineStore('pakeplus', {
             return state.userInfo.login !== 'Sjj1024'
         },
         isRelease: (state) => {
-            return state.releases[state.currentProject.name] !== undefined
+            console.log('isReleaseisRelease', state.currentRelease)
+            return (
+                state.currentRelease !== undefined &&
+                state.currentRelease.id !== 0
+            )
         },
     },
     actions: {
@@ -932,7 +936,7 @@ export const usePakeStore = defineStore('pakeplus', {
             }
         },
         setRelease(proName: string, info: any) {
-            if (info) {
+            if (info && info.id !== 0) {
                 this.releases[proName] = info
             } else {
                 delete this.releases[proName]

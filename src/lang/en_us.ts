@@ -146,4 +146,7 @@ export default {
         'Initialization failed, please manually delete your PakePlus repository and try again',
     single: 'Single',
     singleTips: 'Single mode, only one program can be opened',
+    deleteRelease: 'Are you sure you want to delete the current release?',
+    deleteReleaseTips:
+        'After deletion, it cannot be recovered, please be careful',
 }

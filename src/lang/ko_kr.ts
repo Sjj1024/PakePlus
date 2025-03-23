@@ -148,4 +148,6 @@ export default {
         '초기화 실패, PakePlus 저장소를 수동으로 삭제하고 다시 시도하세요',
     single: '싱글',
     singleTips: '싱글 모드에서는 하나의 프로그램만 열 수 있습니다',
+    deleteRelease: '현재 릴리스를 삭제하시겠습니까?',
+    deleteReleaseTips: '삭제 후 복구할 수 없습니다. 주의하세요',
 }

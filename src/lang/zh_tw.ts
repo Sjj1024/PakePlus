@@ -140,4 +140,6 @@ export default {
     initError: '初始化失敗，請手動刪除你的PakePlus倉庫重試',
     single: '單例模式',
     singleTips: '單例模式下，只允許打開一個程序',
+    deleteRelease: '確定要刪除當前發佈嗎？',
+    deleteReleaseTips: '刪除後無法恢復，請謹慎操作',
 }

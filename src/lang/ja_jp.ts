@@ -148,4 +148,7 @@ export default {
         '初期化に失敗しました。PakePlusリポジトリを手動で削除して再試行してください',
     single: 'シングル',
     singleTips: 'シングルモードでは、1つのプログラムしか開けません',
+    deleteRelease: '現在のリリースを削除しますか？',
+    deleteReleaseTips:
+        '削除後は元に戻すことはできません。慎重に操作してください',
 }
