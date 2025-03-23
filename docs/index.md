@@ -46,3 +46,20 @@ features:
       details: PakePlus 不会上传你的任何数据，所有数据都保存在你的电脑上
       icon: 🔒
 ---
+
+<div :class="$style.buildInfo">
+    <span class="buildTime">构建时间：{{ data.buildTime }}</span>
+</div>
+
+<script setup>
+import { data } from './static/js/common.data.ts'
+</script>
+
+<style module>
+.buildInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+</style>
