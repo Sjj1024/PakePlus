@@ -14,6 +14,8 @@ export const devBranch = 'dev'
 // urlMap
 export const urlMap = {
     github: 'https://github.com/Sjj1024/PakePlus',
+    ppofficial: 'https://ppofficial.pages.dev/',
+    pakeplusdev: 'https://pakeplus.pages.dev/',
     weixin: 'https://github.com/Sjj1024/PakePlus',
     qq: '',
     email: '1024xiaoshen@gmail.com',

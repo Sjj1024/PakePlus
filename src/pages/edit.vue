@@ -13,9 +13,9 @@
                         <span>{{ t('back') }}</span>
                     </div>
                     <el-divider direction="vertical" />
-                    <span @click="tauriHtmlUpload">{{
-                        t('configProject')
-                    }}</span>
+                    <span @click="tauriHtmlUpload">
+                        {{ t('configProject') }}
+                    </span>
                 </div>
                 <div class="toolTips">
                     <span>
@@ -25,6 +25,7 @@
             </div>
             <!-- tools -->
             <div class="setting">
+                <!-- warning -->
                 <el-icon
                     v-if="warning"
                     @click="showWarning"
@@ -32,6 +33,15 @@
                     class="warning"
                 >
                     <Warning />
+                </el-icon>
+                <!-- publish -->
+                <el-icon
+                    v-if="store.isRelease"
+                    @click="toHistory"
+                    :size="22"
+                    class="publish"
+                >
+                    <Paperclip />
                 </el-icon>
                 <el-dropdown>
                     <span class="dropdownLink">
@@ -467,6 +477,7 @@ import {
     Operation,
     UploadFilled,
     Warning,
+    Paperclip,
 } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import CodeEdit from '@/components/codeEdit.vue'
@@ -1813,6 +1824,12 @@ onMounted(async () => {
 
             .warning {
                 color: red;
+                margin-right: 20px;
+                cursor: pointer;
+            }
+
+            .publish {
+                color: var(--el-color-primary);
                 margin-right: 20px;
                 cursor: pointer;
             }

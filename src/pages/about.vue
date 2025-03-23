@@ -31,8 +31,8 @@
                 </p>
                 <p>
                     <span>{{ t('navigation') }}：</span>
-                    <span class="link" @click="openUrl(urlMap.github)">
-                        {{ urlMap.github }}
+                    <span class="link" @click="openUrl(urlMap.ppofficial)">
+                        {{ urlMap.ppofficial }}
                     </span>
                 </p>
                 <p>
@@ -162,6 +162,7 @@ const goBack = () => {
                 font-size: 26px;
                 font-weight: 600;
                 color: var(--text-color);
+                margin: 20px 0;
             }
         }
 
@@ -173,6 +174,10 @@ const goBack = () => {
 
         .tools {
             margin-top: 10px;
+
+            p {
+                margin-bottom: 10px;
+            }
         }
 
         .payMe {
