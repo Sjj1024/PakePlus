@@ -14,8 +14,8 @@ hero:
           text: 下载地址
           link: https://github.com/Sjj1024/PakePlus/releases
         - theme: alt
-          text: 使用说明
-          link: /api-examples
+          text: 使用指南
+          link: /guide/
 
 features:
     - title: 开源免费
