@@ -163,7 +163,9 @@
                 <div class="line">
                     {{ t('userName') }}: {{ store.userInfo.login }}
                 </div>
-                <div class="line">token: {{ store.token }}</div>
+                <div class="line tokenLine" @click="copyToken">
+                    token: {{ store.token }}
+                </div>
                 <div class="tokenTips">
                     {{ t('tokenTips') }}
                 </div>
@@ -267,6 +269,12 @@ const chageTheme = async (theme: string) => {
         // await setTheme('dark')
     }
     localStorage.setItem('theme', theme)
+}
+
+// copy token
+const copyToken = () => {
+    navigator.clipboard.writeText(store.token)
+    ElMessage.success(t('copySuccess'))
 }
 
 // logout
@@ -923,6 +931,14 @@ onMounted(() => {
     .line {
         // width: 100%;
         margin-bottom: 6px;
+    }
+
+    .tokenLine {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
     }
 
     .tokenTips {
