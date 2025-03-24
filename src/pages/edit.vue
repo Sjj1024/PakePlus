@@ -454,7 +454,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import { open } from '@tauri-apps/plugin-dialog'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
@@ -510,6 +510,7 @@ import { getCurrentWindow } from '@tauri-apps/api/window'
 import TauriConfig from '@/components/TauriConfig.vue'
 import ImgPreview from '@/components/ImgPreview.vue'
 
+const route = useRoute()
 const router = useRouter()
 const store = usePakeStore()
 const { t } = useI18n()
@@ -1725,7 +1726,13 @@ onMounted(async () => {
         const window = getCurrentWindow()
         window.setTitle(`${store.currentProject.name}`)
     }
-    store.setCurrentRelease()
+    console.log('route.query', route.query)
+    const delrelease = route.query.delrelease
+    if (delrelease) {
+        store.setRelease(store.currentProject.name, { id: 0 })
+    } else {
+        store.setCurrentRelease()
+    }
 })
 </script>
 

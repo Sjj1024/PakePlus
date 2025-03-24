@@ -939,6 +939,7 @@ onMounted(() => {
         text-overflow: ellipsis;
         white-space: nowrap;
         cursor: pointer;
+        text-align: center;
     }
 
     .tokenTips {

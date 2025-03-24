@@ -114,7 +114,7 @@ import { usePakeStore } from '@/store'
 import { ArrowLeft, Delete } from '@element-plus/icons-vue'
 import githubApi from '@/apis/github'
 import { openUrl, isTauri, copyText } from '@/utils/common'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
@@ -139,8 +139,7 @@ const deleteRelAssets = async () => {
         delLoading.value = false
         delDialog.value = false
         ElMessage.success(t('delSuccess'))
-        router.go(-1)
-        store.setRelease(store.currentProject.name, { id: 0 })
+        router.push('/edit?delrelease=true')
     }
     delLoading.value = false
     delDialog.value = false
