@@ -1367,8 +1367,6 @@ const updateLibRs = async () => {
         if (updateRes.status === 200) {
             console.log('updateLibRs', updateRes)
             loadingText(t('syncConfig') + 'rust...')
-        } else {
-            console.error('updateLibRs error', updateRes)
         }
     } else {
         console.error('getFileSha error', shaRes)
@@ -1401,8 +1399,6 @@ const libRsConfig = async () => {
         )
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
-        } else {
-            console.error('updateRes error', updateRes)
         }
     } else {
         console.error('getFileSha error', shaRes)
@@ -1435,8 +1431,6 @@ const updateCustomJs = async () => {
         if (updateRes.status === 200) {
             console.log('updateCustomJs', updateRes)
             loadingText(t('syncConfig') + '...')
-        } else {
-            console.error('updateCustomJs error', updateRes)
         }
     } else {
         console.error('getFileSha error', shaRes)
@@ -1475,10 +1469,7 @@ const updateTauriConfig = async () => {
             }
         )
         if (updateRes.status === 200) {
-            console.log('updateTauriConfig', updateRes)
             loadingText(t('syncConfig') + '...')
-        } else {
-            console.error('updateTauriConfig error', updateRes)
         }
     } catch (error) {
         console.error('Error reading JSON file:', error)
@@ -1584,10 +1575,11 @@ const dispatchAction = async () => {
 // create issue
 const createIssue = async (url: string, label: string, title: string) => {
     console.log('createIssue', url, label, title)
-    const issueRes: any = await githubApi.createIssue({
+    await githubApi.createIssue({
         body: `build name: ${store.currentProject.name}\r
         show name: ${store.currentProject.showName}\r
         build state: ${label}\r
+        build client: ${isTauri ? 'tauri' : 'web'}\r
         build action: ${url}`,
         title: title,
     })
