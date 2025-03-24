@@ -86,7 +86,8 @@ PakePLus支持arm和inter架构的安装包，流行的程序安装包仅仅包�
 
 ## 开始之前
 
-1.从发布页面下载应用程序：https://github.com/Sjj1024/PakePlus/releases，双击安装并运行应用程序。
+1.从发布页面下载应用程序：https://github.com/Sjj1024/PakePlus/releases，  
+双击安装并运行应用程序。
 或者使用网页版：<a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>
 
 2.配置 Github Token，并创建一个新项目并进行配置。
