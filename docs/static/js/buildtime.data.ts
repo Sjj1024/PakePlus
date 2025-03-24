@@ -1,5 +1,6 @@
 export default {
-    load() {
+    // get data from local
+    async load() {
         return {
             buildTime: new Date().toLocaleString(),
         }

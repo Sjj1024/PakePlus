@@ -23,16 +23,12 @@
             <div class="rightContent">
                 <h1 class="title">MacOS 版本</h1>
                 <div class="item">
-                    <a
-                        href="https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_aarch64.dmg"
-                    >
+                    <a :href="macArm.browser_download_url">
                         点击下载ARM(M芯片)版本
                     </a>
                 </div>
                 <div class="item">
-                    <a
-                        href="https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64.dmg"
-                    >
+                    <a :href="macX64.browser_download_url">
                         点击下载 Intel芯片 版本
                     </a>
                 </div>
@@ -61,16 +57,12 @@
             <div class="rightContent">
                 <h1 class="title">Windows 版本</h1>
                 <div class="item">
-                    <a
-                        href="https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64-setup.exe"
-                    >
+                    <a :href="windowsX64.browser_download_url">
                         点击下载 X64 版本
                     </a>
                 </div>
                 <div class="item">
-                    <a
-                        href="https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_arm64-setup.exe"
-                    >
+                    <a :href="windowsArm64.browser_download_url">
                         点击下载 ARM64 版本
                     </a>
                 </div>
@@ -98,23 +90,17 @@
             <div class="rightContent">
                 <h1 class="title">Linux 版本</h1>
                 <div class="item">
-                    <a
-                        href="https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_amd64.deb"
-                    >
+                    <a :href="linuxDeb.browser_download_url">
                         点击下载 dep 版本
                     </a>
                 </div>
                 <div class="item">
-                    <a
-                        href="https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus-0.5.17-1.x86_64.rpm"
-                    >
+                    <a :href="linuxRpm.browser_download_url">
                         点击下载 rpm 版本
                     </a>
                 </div>
                 <div class="item">
-                    <a
-                        href="https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_amd64.AppImage"
-                    >
+                    <a :href="linuxImage.browser_download_url">
                         点击下载 AppImage 版本
                     </a>
                 </div>
@@ -159,8 +145,229 @@
     </div>
 </template>
 
-<script setup lang="ts">
-// import { ref, reactive } from 'vue'
+<script setup>
+import { data } from '../static/js/releases.data.ts'
+
+console.log('releases data', data)
+
+const lastRelease = data[0] || {
+    url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/207589840',
+    assets_url:
+        'https://api.github.com/repos/Sjj1024/PakePlus/releases/207589840/assets',
+    upload_url:
+        'https://uploads.github.com/repos/Sjj1024/PakePlus/releases/207589840/assets{?name,label}',
+    html_url:
+        'https://github.com/Sjj1024/PakePlus/releases/tag/PakePlus-v0.5.17',
+    id: 207589840,
+    node_id: 'RE_kwDOMvkdy84MX5HQ',
+    tag_name: 'PakePlus-v0.5.17',
+    target_commitish: '4fb9a11b57dccf84387ba9bfe83685f6c571cd41',
+    name: 'PakePlus v0.5.17',
+    draft: false,
+    prerelease: false,
+    created_at: '2025-03-22T05:21:55Z',
+    published_at: '2025-03-22T05:48:09Z',
+    assets: [
+        {
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239940761',
+            id: 239940761,
+            node_id: 'RA_kwDOMvkdy84OTTSZ',
+            name: 'PakePlus-0.5.17-1.x86_64.rpm',
+            label: '',
+            content_type: 'application/zip',
+            state: 'uploaded',
+            size: 11039896,
+            download_count: 12,
+            created_at: '2025-03-23T01:56:49Z',
+            updated_at: '2025-03-23T01:56:50Z',
+            browser_download_url:
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus-0.5.17-1.x86_64.rpm',
+        },
+        {
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939962',
+            id: 239939962,
+            node_id: 'RA_kwDOMvkdy84OTTF6',
+            name: 'PakePlus_0.5.17_aarch64.dmg',
+            label: '',
+            content_type: 'application/zip',
+            state: 'uploaded',
+            size: 10200795,
+            download_count: 5,
+            created_at: '2025-03-23T01:52:29Z',
+            updated_at: '2025-03-23T01:52:30Z',
+            browser_download_url:
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_aarch64.dmg',
+        },
+        {
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239940766',
+            id: 239940766,
+            node_id: 'RA_kwDOMvkdy84OTTSe',
+            name: 'PakePlus_0.5.17_amd64.AppImage',
+            label: '',
+            content_type: 'application/zip',
+            state: 'uploaded',
+            size: 92353728,
+            download_count: 1,
+            created_at: '2025-03-23T01:56:50Z',
+            updated_at: '2025-03-23T01:56:52Z',
+            browser_download_url:
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_amd64.AppImage',
+        },
+        {
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239940760',
+            id: 239940760,
+            node_id: 'RA_kwDOMvkdy84OTTSY',
+            name: 'PakePlus_0.5.17_amd64.deb',
+            label: '',
+            content_type: 'application/zip',
+            state: 'uploaded',
+            size: 11038642,
+            download_count: 0,
+            created_at: '2025-03-23T01:56:48Z',
+            updated_at: '2025-03-23T01:56:48Z',
+            browser_download_url:
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_amd64.deb',
+        },
+        {
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941740',
+            id: 239941740,
+            node_id: 'RA_kwDOMvkdy84OTThs',
+            name: 'PakePlus_0.5.17_arm64-setup.exe',
+            label: '',
+            content_type: 'application/zip',
+            state: 'uploaded',
+            size: 6201297,
+            download_count: 3,
+            created_at: '2025-03-23T02:01:43Z',
+            updated_at: '2025-03-23T02:01:43Z',
+            browser_download_url:
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_arm64-setup.exe',
+        },
+        {
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941733',
+            id: 239941733,
+            node_id: 'RA_kwDOMvkdy84OTThl',
+            name: 'PakePlus_0.5.17_arm64_en-US.msi',
+            label: '',
+            content_type: 'application/zip',
+            state: 'uploaded',
+            size: 8704000,
+            download_count: 1,
+            created_at: '2025-03-23T02:01:42Z',
+            updated_at: '2025-03-23T02:01:43Z',
+            browser_download_url:
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_arm64_en-US.msi',
+        },
+        {
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941382',
+            id: 239941382,
+            node_id: 'RA_kwDOMvkdy84OTTcG',
+            name: 'PakePlus_0.5.17_x64-setup.exe',
+            label: '',
+            content_type: 'application/zip',
+            state: 'uploaded',
+            size: 6806955,
+            download_count: 4,
+            created_at: '2025-03-23T02:00:02Z',
+            updated_at: '2025-03-23T02:00:03Z',
+            browser_download_url:
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64-setup.exe',
+        },
+        {
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939963',
+            id: 239939963,
+            node_id: 'RA_kwDOMvkdy84OTTF7',
+            name: 'PakePlus_0.5.17_x64.dmg',
+            label: '',
+            content_type: 'application/zip',
+            state: 'uploaded',
+            size: 10565520,
+            download_count: 2,
+            created_at: '2025-03-23T01:52:29Z',
+            updated_at: '2025-03-23T01:52:30Z',
+            browser_download_url:
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64.dmg',
+        },
+        {
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941381',
+            id: 239941381,
+            node_id: 'RA_kwDOMvkdy84OTTcF',
+            name: 'PakePlus_0.5.17_x64_en-US.msi',
+            label: '',
+            content_type: 'application/zip',
+            state: 'uploaded',
+            size: 9216000,
+            download_count: 0,
+            created_at: '2025-03-23T02:00:02Z',
+            updated_at: '2025-03-23T02:00:02Z',
+            browser_download_url:
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64_en-US.msi',
+        },
+        {
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939968',
+            id: 239939968,
+            node_id: 'RA_kwDOMvkdy84OTTGA',
+            name: 'PakePlus_aarch64.app.tar.gz',
+            label: '',
+            content_type: 'application/zip',
+            state: 'uploaded',
+            size: 9717915,
+            download_count: 1,
+            created_at: '2025-03-23T01:52:31Z',
+            updated_at: '2025-03-23T01:52:31Z',
+            browser_download_url:
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_aarch64.app.tar.gz',
+        },
+        {
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939969',
+            id: 239939969,
+            node_id: 'RA_kwDOMvkdy84OTTGB',
+            name: 'PakePlus_x64.app.tar.gz',
+            label: '',
+            content_type: 'application/zip',
+            state: 'uploaded',
+            size: 10089554,
+            download_count: 0,
+            created_at: '2025-03-23T01:52:31Z',
+            updated_at: '2025-03-23T01:52:32Z',
+            browser_download_url:
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_x64.app.tar.gz',
+        },
+    ],
+    tarball_url:
+        'https://api.github.com/repos/Sjj1024/PakePlus/tarball/PakePlus-v0.5.17',
+    zipball_url:
+        'https://api.github.com/repos/Sjj1024/PakePlus/zipball/PakePlus-v0.5.17',
+    body: '## 我应该下载哪个版本？\r\n\r\n### MacOS\r\n\r\n-   MacOS intel 芯片: x64.dmg\r\n-   MacOS apple M 芯片: aarch64.dmg\r\n\r\n### Linux\r\n\r\n-   Linux 64 位: amd64.deb/amd64.rpm\r\n-   Linux arm64 architecture: arm64.deb/aarch64.rpm\r\n-   Linux armv7 架构: armhf.deb/armhfp.rpm\r\n\r\n### Windows\r\n\r\n-   64 位: x64-setup.exe\r\n-   arm64 架构: arm64-setup.exe',
+}
+
+// 获取 mac 版本
+const macArm = lastRelease.assets.find((asset) =>
+    asset.name.includes('aarch64.dmg')
+)
+const macX64 = lastRelease.assets.find((asset) =>
+    asset.name.includes('x64.dmg')
+)
+
+// 获取windows版本
+const windowsX64 = lastRelease.assets.find((asset) =>
+    asset.name.includes('x64-setup.exe')
+)
+const windowsArm64 = lastRelease.assets.find((asset) =>
+    asset.name.includes('arm64-setup.exe')
+)
+
+// 获取linux版本
+const linuxDeb = lastRelease.assets.find((asset) =>
+    asset.name.includes('amd64.deb')
+)
+const linuxRpm = lastRelease.assets.find((asset) =>
+    asset.name.includes('64.rpm')
+)
+
+const linuxImage = lastRelease.assets.find((asset) =>
+    asset.name.includes('amd64.AppImage')
+)
 </script>
 
 <style scoped lang="scss">
