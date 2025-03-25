@@ -30,7 +30,7 @@ export default {
     relHistore: 'リリース履歴',
     delProject: 'プロジェクトを削除',
     webUrl: 'Webサイトアドレス',
-    urlInvalid: 'urlはhttpで始まる必要があります',
+    urlInvalid: 'urlはuri規範に従ってください',
     example: '例',
     appName: 'アプリ名',
     appNameInvalid: 'アプリ名には特殊文字を含めることはできません。',

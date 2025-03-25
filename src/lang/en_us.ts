@@ -28,7 +28,7 @@ export default {
     relHistore: 'Release History',
     delProject: 'Delete Project',
     webUrl: 'Website',
-    urlInvalid: 'The url must start with http',
+    urlInvalid: 'The url must conform to the uri specification',
     example: 'example',
     appName: 'AppName',
     appNameInvalid: 'The app name cannot contain special characters',

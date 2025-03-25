@@ -27,7 +27,7 @@ export default {
     relHistore: '發佈歷史',
     delProject: '刪除項目',
     webUrl: '網站地址',
-    urlInvalid: 'url必須以http開頭',
+    urlInvalid: 'url必須符合uri規範',
     example: '例如',
     appName: 'APP名稱',
     appNameInvalid: '應用程式名稱不能包含特殊字元。',

@@ -29,7 +29,7 @@ export default {
     relHistore: '릴리스 기록',
     delProject: '프로젝트 삭제',
     webUrl: '웹 사이트 주소',
-    urlInvalid: 'url은 http로 시작해야 합니다',
+    urlInvalid: 'url은 uri 규칙을 따라야 합니다',
     example: '예',
     appName: '앱 이름',
     appNameInvalid: '앱 이름에는 특수 문자를 포함할 수 없습니다.',

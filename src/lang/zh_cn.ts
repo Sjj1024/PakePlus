@@ -27,7 +27,7 @@ export default {
     relHistore: '发布历史',
     delProject: '删除项目',
     webUrl: '网站地址',
-    urlInvalid: 'url必须以http开头',
+    urlInvalid: 'url必须符合uri规范',
     example: '例如',
     appName: 'APP名称',
     appNameInvalid: 'APP名称不能包含特殊字符',
