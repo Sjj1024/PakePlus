@@ -89,7 +89,8 @@ PakePlusは、ARMとIntelの両アーキテクチャに対応したインスト�
 
 1. リリースページからアプリをダウンロードし、ダブルクリックしてインストールし、実行します：https://github.com/Sjj1024/PakePlus/releases。 あるいは、ウェブ版を使ってもいいです：<a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>
 
-2. Github トークンを設定し、新しいプロジェクトを作成して設定を行います。Token 获取方法: <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 20px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>
+2. Github トークンを設定し、新しいプロジェクトを作成して設定を行います。Token 获取方法:  
+   <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 20px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>
 
 ```
 Github トークン権限の説明：
@@ -100,13 +101,13 @@ Administration：リポジトリのフォークとファイル管理
 Contents：リポジトリ内容の追加/削除/修正/検索など
 Issues：PakePlus への問題の提出
 
-2. クラシック版に必要なトークン権限：
+1. クラシック版に必要なトークン権限：
 repo：テンプレートコードのフォークと管理
 workflow：ソフトウェアのコンパイルとリリース
 ```
 
-3. 新しいウィンドウでアプリをプレビューし、パッケージングボタンをクリックしてアプリをビルドします。
-4. リリースページからアプリをダウンロード可能です。
+1. 新しいウィンドウでアプリをプレビューし、パッケージングボタンをクリックしてアプリをビルドします。
+2. リリースページからアプリをダウンロード可能です。
 
 ## よくある質問
 

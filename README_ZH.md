@@ -90,8 +90,8 @@ PakePLus支持arm和inter架构的安装包，流行的程序安装包仅仅包�
 双击安装并运行应用程序。
 或者使用网页版：<a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>
 
-2.配置 Github Token，并创建一个新项目并进行配置。
-Token 获取方法: <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 20px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>
+2.配置 Github Token，并创建一个新项目并进行配置。Token 获取方法:  
+ <a href="https://sjj1024.github.io/PakePlus/">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 20px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_zh.html">日本语</a>
 
 ```
 Github token权限说明：
