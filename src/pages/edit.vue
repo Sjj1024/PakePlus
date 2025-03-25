@@ -565,7 +565,8 @@ const appRules = reactive<FormRules>({
         {
             validator: (rule, value, callback) => {
                 // check url start with http or https
-                if (value.startsWith('http') || value.includes('index.htm')) {
+                const uriRegex = /^(https?|ftp|file):\/\/[^\s/$.?#].[^\s]*$/i
+                if (uriRegex.test(value) || value.includes('index.htm')) {
                     callback()
                 } else {
                     callback(new Error(t('urlInvalid')))
