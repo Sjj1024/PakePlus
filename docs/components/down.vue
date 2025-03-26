@@ -21,7 +21,7 @@
                 </svg>
             </div>
             <div class="rightContent">
-                <h1 class="title">MacOS 版本</h1>
+                <h1 class="title">MacOS</h1>
                 <div class="item">
                     <a :href="macArm.browser_download_url">
                         点击下载ARM(M芯片)版本
@@ -55,7 +55,7 @@
                 </svg>
             </div>
             <div class="rightContent">
-                <h1 class="title">Windows 版本</h1>
+                <h1 class="title">Windows</h1>
                 <div class="item">
                     <a :href="windowsX64.browser_download_url">
                         点击下载 X64 版本
@@ -88,7 +88,7 @@
                 </svg>
             </div>
             <div class="rightContent">
-                <h1 class="title">Linux 版本</h1>
+                <h1 class="title">Linux</h1>
                 <div class="item">
                     <a :href="linuxDeb.browser_download_url">
                         点击下载 dep 版本
@@ -141,6 +141,11 @@
                     <span> 不推荐，因为是bate版本，没有客户端稳定 </span>
                 </div>
             </div>
+        </div>
+        <!-- last release -->
+        <div class="lastRelease">
+            <span>Last Release: {{ lastRelease.name }}</span>
+            <span>Last Time: {{ lastRelease.published_at }}</span>
         </div>
     </div>
 </template>
@@ -447,6 +452,17 @@ const linuxImage = lastRelease.assets.find((asset) =>
                 }
             }
         }
+    }
+
+    .lastRelease {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 20px;
+        font-size: 14px;
+        color: var(--vp-c-text-2);
+        gap: 10px;
     }
 }
 </style>
