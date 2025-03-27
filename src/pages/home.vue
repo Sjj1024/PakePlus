@@ -158,6 +158,7 @@
                         class="userAvatar"
                         :src="store.userInfo.avatar_url"
                         alt="avatar"
+                        @click="openUrl(store.userInfo.html_url)"
                     />
                 </div>
                 <div class="line">
