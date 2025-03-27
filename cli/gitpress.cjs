@@ -21,15 +21,15 @@ function copyStatic() {
     // 将docs/index_zh.html 复制到 docs/dist/
     // 将docs/index_en.html 复制到 docs/dist/
     // 将docs/index_ja.html 复制到 docs/dist/
-    fs.copyFileSync(
+    fs.cpSync(
         path.join('../docs', 'index_zh.html'),
         path.join('../docs/dist', 'index_zh.html')
     )
-    fs.copyFileSync(
+    fs.cpSync(
         path.join('../docs', 'index_en.html'),
         path.join('../docs/dist', 'index_en.html')
     )
-    fs.copyFileSync(
+    fs.cpSync(
         path.join('../docs', 'index_ja.html'),
         path.join('../docs/dist', 'index_ja.html')
     )
