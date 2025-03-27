@@ -1,7 +1,6 @@
 // 修改vitepress base
 const fs = require('fs')
 const path = require('path')
-const { exec } = require('child_process')
 
 // 修改vitepress base
 function gitBase() {
