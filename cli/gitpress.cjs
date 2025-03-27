@@ -21,18 +21,14 @@ function copyStatic() {
     // 将docs/index_zh.html 复制到 docs/dist/
     // 将docs/index_en.html 复制到 docs/dist/
     // 将docs/index_ja.html 复制到 docs/dist/
-    // fs.cpSync(
-    //     path.join('../docs', 'index_zh.html'),
-    //     path.join('../docs/dist', 'index_zh.html')
-    // )
-    // fs.cpSync(
-    //     path.join('../docs', 'index_en.html'),
-    //     path.join('../docs/dist', 'index_en.html')
-    // )
-    // fs.cpSync(
-    //     path.join('../docs', 'index_ja.html'),
-    //     path.join('../docs/dist', 'index_ja.html')
-    // )
+    const htmlFiles = ['index_zh.html', 'index_en.html', 'index_ja.html']
+    htmlFiles.forEach((file) => {
+        fs.cpSync(
+            path.join(__dirname, '../docs', file),
+            path.join(__dirname, '../docs/dist', file),
+            { recursive: true }
+        )
+    })
 }
 
 // 根据参数 修改vitepress base 或者 copy /docs/static 到 /docs/dist/static
