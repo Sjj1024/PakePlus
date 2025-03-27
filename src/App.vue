@@ -58,7 +58,7 @@ const initEnv = async () => {
     console.log('Build time:', buildTime)
     if (isMobile()) {
         // to https://sjj1024.github.io/PakePlus/
-        window.location.href = 'https://sjj1024.github.io/PakePlus/'
+        window.location.href = 'https://ppofficial.pages.dev/'
         return
     }
     const localLang =
