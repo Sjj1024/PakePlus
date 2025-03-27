@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
     title: 'PakePlus',
     description: 'PakePlus Docs',
+    base: '/',
     outDir: './dist',
     vite: {
         server: {
