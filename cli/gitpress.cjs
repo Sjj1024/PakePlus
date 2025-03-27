@@ -36,7 +36,7 @@ function copyStatic() {
 }
 
 // 根据参数 修改vitepress base 或者 copy /docs/static 到 /docs/dist/static
-const callFunc = process.argv[1]
+const callFunc = process.argv[2]
 console.log('callFunc', callFunc)
 if (callFunc === 'gitBase') {
     gitBase()
