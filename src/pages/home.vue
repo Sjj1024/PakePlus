@@ -421,13 +421,15 @@ const forkStartShas = async (tips: boolean = true) => {
         store.setRepository(forkRes.data)
     } else if (forkRes.status === 403) {
         // maybe account has locked
+        store.setUser({})
         testLoading.value = false
-        ElMessage.error(forkRes.data.message)
+        ElMessage.error(forkRes.data.message || t('tokenError'))
         return
     } else {
         console.error('fork error', forkRes)
+        store.setUser({})
         testLoading.value = false
-        ElMessage.error(forkRes.data.message)
+        ElMessage.error(forkRes.data.message || t('tokenError'))
         return
     }
     await supportPP()

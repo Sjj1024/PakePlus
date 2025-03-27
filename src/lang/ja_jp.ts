@@ -18,7 +18,7 @@ export default {
         'オープンソースで無料、Webページをパッケージしてクロスプラットフォームアプリを作成するには、Githubトークンが1つだけ必要です',
     configToken: 'まずトークンを設定してください',
     tokenOk: 'トークンが有効です',
-    tokenError: 'トークンが無効です',
+    tokenError: 'トークンが無効です、再設定してください',
     projectExist: 'プロジェクトはすでに存在します',
     creatProjectError: 'プロジェクトの作成に失敗しました',
     englishName: '純粋な英語のプロジェクト名を入力してください',

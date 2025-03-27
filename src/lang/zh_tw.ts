@@ -15,7 +15,7 @@ export default {
     aboutTips: '開源免費，Web網頁打包跨平台APP，僅僅只需要一個Github Token',
     configToken: '請先配置Token',
     tokenOk: 'Token可用',
-    tokenError: 'Token不可用',
+    tokenError: 'Token權限不足，請重新配置',
     projectExist: '項目已存在',
     creatProjectError: '創建項目失敗',
     englishName: '請輸入純英文項目名稱',

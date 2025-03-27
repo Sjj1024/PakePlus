@@ -17,7 +17,7 @@ export default {
         '오픈 소스 및 무료, 웹 페이지를 패키징하여 크로스 플랫폼 앱을 만들려면 Github 토큰 하나만 필요합니다',
     configToken: '먼저 토큰을 설정하세요',
     tokenOk: '토큰이 유효합니다',
-    tokenError: '토큰이 유효하지 않습니다',
+    tokenError: '토큰이 유효하지 않습니다, 다시 설정해주세요',
     projectExist: '프로젝트가 이미 존재합니다',
     creatProjectError: '프로젝트 생성 실패',
     englishName: '영어 프로젝트 이름을 입력하세요',
