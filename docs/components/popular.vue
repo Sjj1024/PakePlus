@@ -108,7 +108,7 @@
 // import { ref, reactive } from 'vue'
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 td {
     a {
         margin: 0 10px;
