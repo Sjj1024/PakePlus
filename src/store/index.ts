@@ -1007,6 +1007,7 @@ export const usePakeStore = defineStore('pakeplus', {
                     return releaseData
                 } else {
                     console.error('releaseRes error', releaseRes)
+                    this.setRelease(this.currentProject.name, { id: 0 })
                     return null
                 }
             }
