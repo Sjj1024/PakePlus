@@ -21,6 +21,12 @@
                     <span>
                         {{ t('configProjectTips') }}
                     </span>
+                    <el-icon
+                        class="document"
+                        @click="openUrl(urlMap.configdoc)"
+                    >
+                        <Document />
+                    </el-icon>
                 </div>
             </div>
             <!-- tools -->
@@ -232,12 +238,12 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="TauriApi"
+                        :label="t('devbug')"
                         prop="tauriApi"
                         class="formItem"
                     >
                         <el-checkbox
-                            v-model="store.currentProject.tauriApi"
+                            v-model="store.currentProject.devbug"
                             label=""
                         />
                     </el-form-item>
@@ -478,6 +484,7 @@ import {
     UploadFilled,
     Warning,
     Paperclip,
+    Document,
 } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import CodeEdit from '@/components/codeEdit.vue'
@@ -504,6 +511,7 @@ import {
     readDirRecursively,
     replaceFileRoot,
     getLibRsFetch,
+    urlMap,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -1173,6 +1181,7 @@ const preview = async (resize: boolean) => {
                     },
                     jsContent: initJsScript,
                     injectjq: store.currentProject.injectJq,
+                    devbug: store.currentProject.devbug,
                 })
             } else {
                 console.error('error submit!', fields)
@@ -1808,6 +1817,17 @@ onMounted(async () => {
             .tipsIcon {
                 margin-left: 6px;
                 cursor: pointer;
+            }
+
+            .document {
+                width: 20px;
+                height: 20px;
+                font-size: 18px;
+                margin-left: 10px;
+                cursor: pointer;
+                &:hover {
+                    color: var(--text-color);
+                }
             }
         }
 

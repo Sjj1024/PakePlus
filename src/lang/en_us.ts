@@ -24,7 +24,7 @@ export default {
     back: 'Back',
     configProject: 'Configure the project',
     configProjectTips:
-        'Configure the website, name, identifier, etc. of the current project。',
+        'Configure the website, name, identifier, etc. of the current project',
     relHistore: 'Release History',
     delProject: 'Delete Project',
     webUrl: 'Website',
@@ -149,4 +149,5 @@ export default {
     deleteRelease: 'Are you sure you want to delete the current release?',
     deleteReleaseTips:
         'After deletion, it cannot be recovered, please be careful',
+    devbug: 'Debug',
 }

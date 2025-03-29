@@ -15,6 +15,7 @@ export const devBranch = 'dev'
 export const urlMap = {
     github: 'https://github.com/Sjj1024/PakePlus',
     ppofficial: 'https://ppofficial.pages.dev/',
+    configdoc: 'https://ppofficial.pages.dev/guide/config.html',
     pakeplusdev: 'https://pakeplus.pages.dev/',
     weixin: 'https://github.com/Sjj1024/PakePlus',
     qq: '',
@@ -269,6 +270,7 @@ export const initProject = {
     single: true,
     injectJq: false,
     tauriApi: false,
+    devbug: false,
     version: '0.0.1',
     platform: 'desktop',
     width: 800,

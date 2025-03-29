@@ -25,7 +25,7 @@ export default {
     back: '뒤로',
     configProject: '프로젝트 설정',
     configProjectTips:
-        '현재 프로젝트의 웹 사이트 주소, 앱 표시 이름, 영어 이름, 앱 ID 등을 설정합니다.',
+        '현재 프로젝트의 웹 사이트 주소, 앱 표시 이름, 영어 이름, 앱 ID 등을 설정합니다',
     relHistore: '릴리스 기록',
     delProject: '프로젝트 삭제',
     webUrl: '웹 사이트 주소',
@@ -150,4 +150,5 @@ export default {
     singleTips: '싱글 모드에서는 하나의 프로그램만 열 수 있습니다',
     deleteRelease: '현재 릴리스를 삭제하시겠습니까?',
     deleteReleaseTips: '삭제 후 복구할 수 없습니다. 주의하세요',
+    devbug: '개발 디버그',
 }

@@ -26,7 +26,7 @@ export default {
     back: '戻る',
     configProject: 'プロジェクトを設定',
     configProjectTips:
-        '現在のプロジェクトのWebサイトアドレス、アプリ名、英語名、アプリIDなどを設定します。',
+        '現在のプロジェクトのWebサイトアドレス、アプリ名、英語名、アプリIDなどを設定します',
     relHistore: 'リリース履歴',
     delProject: 'プロジェクトを削除',
     webUrl: 'Webサイトアドレス',
@@ -151,4 +151,5 @@ export default {
     deleteRelease: '現在のリリースを削除しますか？',
     deleteReleaseTips:
         '削除後は元に戻すことはできません。慎重に操作してください',
+    devbug: '開発デバッグ',
 }

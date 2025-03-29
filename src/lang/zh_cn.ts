@@ -22,8 +22,7 @@ export default {
     preEnvironment: '准备环境...',
     back: '返回',
     configProject: '项目配置',
-    configProjectTips:
-        '配置当前项目网站地址、APP显示名称、英文名称、APP标识等。',
+    configProjectTips: '配置当前项目网站地址、APP显示名称、英文名称、APP标识等',
     relHistore: '发布历史',
     delProject: '删除项目',
     webUrl: '网站地址',
@@ -147,4 +146,5 @@ export default {
     singleTips: '单例模式下，只允许打开一个程序',
     deleteRelease: '确定要删除当前发布吗？',
     deleteReleaseTips: '删除后无法恢复，请谨慎操作',
+    devbug: '开发调试',
 }

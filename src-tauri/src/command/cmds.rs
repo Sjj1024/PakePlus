@@ -112,6 +112,7 @@ pub async fn preview_from_config(
     config: WindowConfig,
     js_content: String,
     injectjq: bool,
+    devbug: bool,
 ) {
     let window_label = "PreView";
     if let Some(existing_window) = handle.get_webview_window(window_label) {
@@ -133,18 +134,16 @@ pub async fn preview_from_config(
             }
         }
     }
-    let resource_path = handle
-        .path()
-        .resolve("data/jquery.min.js", BaseDirectory::Resource)
-        .expect("failed to resolve resource");
-    let mut jq = std::fs::File::open(&resource_path).unwrap();
     let mut contents = String::new();
-    jq.read_to_string(&mut contents).unwrap();
     if injectjq {
-        contents += js_content.as_str();
-    } else {
-        contents = js_content;
+        contents += include_str!("../../data/jquery.min.js");
     }
+    if devbug {
+        contents += include_str!("../../data/vconsole.min.js");
+        contents += "var vConsole = new window.VConsole();";
+    }
+    // custom js
+    contents += js_content.as_str();
     if !resize {
         let _window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
             .unwrap()

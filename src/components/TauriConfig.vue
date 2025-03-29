@@ -318,6 +318,16 @@
                                     label=""
                                 />
                             </el-form-item>
+                            <el-form-item
+                                label="TauriApi"
+                                prop="tauriApi"
+                                class="formItem"
+                            >
+                                <el-checkbox
+                                    v-model="store.currentProject.tauriApi"
+                                    label=""
+                                />
+                            </el-form-item>
                         </div>
                         <el-form-item
                             label="tabbingIdentifier"
