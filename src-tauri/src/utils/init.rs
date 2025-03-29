@@ -5,33 +5,27 @@ use tauri_plugin_store::StoreExt;
 // handle something when start app
 pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     let app_handle = app.handle();
-    // 示例 JSON 字符串
     let window_json = r#"
         {
             "title": "PakePlus",
             "visible": false
         }
     "#;
-    // 解析 JSON 字符串为 WindowConfig 类型
     let config: WindowConfig = serde_json::from_str(window_json).unwrap();
     let window = tauri::WebviewWindowBuilder::from_config(app_handle, &config)
         .unwrap()
         .build()
         .unwrap();
 
-    // 获取记录窗口大小
     let store = app.store("app_data.json").unwrap();
 
-    // 获取记录窗口全屏
     let window_fullscreen: Option<serde_json::Value> = store.get("window_fullscreen");
     // println!("windows_fullscreen: {:?}", window_fullscreen);
 
-    // 获取记录窗口大小
     let window_size: Option<serde_json::Value> = store.get("window_size");
     // println!("windows_size: {:?}", window_size);
     let mut width = 920.0;
     let mut height = 680.0;
-    // 如果window_size存在，则设置窗口大小
     if let Some(window_size) = window_size {
         let size = window_size.as_object().unwrap();
         width = size["width"].as_f64().unwrap();
@@ -40,12 +34,10 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         // println!("height: {:?}", height);
     }
 
-    // 获取记录窗口位置
     let window_position: Option<serde_json::Value> = store.get("window_position");
     let mut x = 0.0;
     let mut y = 0.0;
     // println!("windows_position: {:?}", window_position);
-    // 如果window_position存在，则设置窗口位置
     if let Some(window_position) = window_position {
         let position = window_position.as_object().unwrap();
         x = position["x"].as_f64().unwrap();
@@ -54,7 +46,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         // println!("y: {:?}", y);
     }
 
-    // 如果window_fullscreen存在，则设置全屏
     if let Some(window_fullscreen) = window_fullscreen {
         let fullscreen = window_fullscreen.as_object().unwrap();
         // println!("fullscreen: {:?}", fullscreen);
@@ -62,12 +53,9 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
             window.set_fullscreen(true).unwrap();
             // println!("window fullscreen");
         } else {
-            // 设置窗口大小
             window
                 .set_size(tauri::PhysicalSize::new(width, height))
                 .unwrap();
-            // 设置窗口位置
-            // 如果xy为0，则窗口为中心位置
             if config.center || (x == 0.0 && y == 0.0) {
                 window.center().unwrap();
             } else {
@@ -78,10 +66,8 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         }
     }
 
-    // 用于监听窗口是否全屏
     let window_clone = window.clone();
 
-    // 监听窗口大小变化
     window.on_window_event(move |event| {
         if let WindowEvent::Resized(size) = event {
             // println!("window_size: {:?}", size);
@@ -111,7 +97,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                 );
             }
         }
-        // 监听窗口位置变化
         if let WindowEvent::Moved(position) = event {
             // println!("window_position: {:?}", position);
             if position.x > 0 && position.y > 0 {
@@ -123,16 +108,13 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         }
     });
 
-    // 显示窗口
     window.show().unwrap();
 
-    // 设置窗口聚焦
     window.set_focus().unwrap();
 
     Ok(())
 }
 
-// 单例模式，当二次启动时聚焦
 pub fn show_window(app: &AppHandle) {
     let main = app.get_webview_window("main");
     if let Some(main) = main {
