@@ -38,5 +38,5 @@ PakePLus 支持 arm 和 inter 架构的安装包，流行的程序安装包仅�
 <Popular />
 
 <script setup>
-import Popular from '../components/Popular.vue'
+import Popular from '../components/popular.vue'
 </script>
