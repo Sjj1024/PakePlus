@@ -28,6 +28,7 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 -   📡 It can be directly used on the web side, but the client-side has more powerful functions.
 -   🔐 Data security. Your token is only saved locally on your device and will not be uploaded to the server. Your projects are also safely stored in your own Git repository.
 -   🍀 Support static file / vue / React packaging. Just drop your dist directory or index.html in, and it becomes a client. Why limit it to a website?
+-   🐞 Supports debug mode. Whether it is in preview or release, you can find bugs and eliminate bugs.
 
 ## Popular Packages
 
