@@ -55,9 +55,18 @@
                 </td>
                 <td>
                     小红书
-                    <a href="../bundle/redbook_0.0.1_aarch64.dmg">Mac</a>
-                    <a href="../bundle/redbook_0.0.1_x64-setup.exe">Windows</a>
-                    <a href="../bundle/redbook_0.0.1_amd64.deb">Linux</a>
+                    <a
+                        href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_aarch64.dmg"
+                        >Mac</a
+                    >
+                    <a
+                        href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_x64-setup.exe"
+                        >Windows</a
+                    >
+                    <a
+                        href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_amd64.deb"
+                        >Linux</a
+                    >
                 </td>
             </tr>
             <tr>
