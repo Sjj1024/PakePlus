@@ -138,7 +138,7 @@
                     </a>
                 </div>
                 <div class="item">
-                    <span> 不推荐，因为是bate版本，没有客户端稳定 </span>
+                    <span> 不推荐，因为是bate版本 </span>
                 </div>
             </div>
         </div>

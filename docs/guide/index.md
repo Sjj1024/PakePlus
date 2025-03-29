@@ -35,53 +35,8 @@ PakePlus 是一个基于 Tauri2 和 Github 的打包工具，无需在本地安�
 
 PakePLus 支持 arm 和 inter 架构的安装包，流行的程序安装包仅仅包含了 mac 的 arm 和 windows 的 inter 架构，如果需要更多架构的安装包，请使用 PakePlus 单独编译自己需要的安装包。
 
-<table>
-    <tr>
-        <td>DeepSeek
-            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/DeepSeek_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/DeepSeek_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/DeepSeek_0.0.1_amd64.deb">Linux</a>
-        </td>
-        <td>X (Twitter)
-            <a href="https://github.com/codegirle/PakePlus/releases/download/X/X_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/X/X_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/X/x_0.0.1_amd64.deb">Linux</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="../static/imgs/deepseek.png" width=600/></td>
-        <td><img src="../static/imgs/xtwitter.png" width=600/></td>
-    </tr>
-    <tr>
-        <td>YouTube
-            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/YouTube_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/YouTube_0.0.1_x64_en-US.msi">Windows</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/YouTuBe/you-tube_0.0.1_amd64.deb">Linux</a>
-        </td>
-        <td>小红书
-            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/Sjj1024/PakePlus/releases/download/OtherFiles/_0.0.1_amd64.deb">Linux</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="../static/imgs/youtube.png" width=600/></td>
-        <td><img src="../static/imgs/hongshu.png"width=600/></td>
-    </tr>
-        <tr>
-        <td>Tiktok
-            <a href="https://github.com/codegirle/PakePlus/releases/download/TikTok/TikTok_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/TikTok/TikTok_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/TikTok/tik-tok_0.0.1_amd64.deb">Linux</a>
-        </td>
-        <td>抖音
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PakePlus/releases/download/Douyin/_0.0.1_amd64.deb">Linux</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src="../static/imgs/tiktok.png" width=600/></td>
-        <td><img src="../static/imgs/douyin.png" width=600/></td>
-    </tr>
-</table>
+<Popular />
+
+<script setup>
+import Popular from '../components/Popular.vue'
+</script>
