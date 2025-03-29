@@ -4,19 +4,19 @@
     "version": "0.5.20",
     "type": "module",
     "scripts": {
+        "tauri dev": "tauri dev",
+        "docs:dev": "vitepress dev docs",
+        "docs:build": "vitepress build docs",
+        "docs:preview": "vitepress preview docs",
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
         "preview": "vite preview",
         "tauri": "tauri",
         "icon": "tauri icon",
-        "tauri dev": "tauri dev",
         "tauri build": "tauri build",
         "tauri debug": "tauri build --debug",
         "tauri preview": "tauri preview",
-        "update tauri": "cd src-tauri && cargo update",
-        "docs:dev": "vitepress dev docs",
-        "docs:build": "vitepress build docs",
-        "docs:preview": "vitepress preview docs"
+        "update tauri": "cd src-tauri && cargo update"
     },
     "dependencies": {
         "@codemirror/lang-javascript": "^6.2.3",
