@@ -51,3 +51,6 @@ docs/.vitepress/cache
 docs/.vitepress/temp
 docs/.vitepress/cache
 docs/.vitepress/temp
+
+# tauri
+src-tauri/target

@@ -19,7 +19,6 @@
             "@/*": ["src/*"]
         },
 
-        /* Linting */
         "strict": true,
         "noUnusedLocals": false,
         "noUnusedParameters": false,
