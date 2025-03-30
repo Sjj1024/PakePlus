@@ -63,10 +63,10 @@ export default defineConfig({
         nav: [
             { text: '首页', link: '/' },
             { text: '下载', link: '/download' },
-            { text: '使用指南', link: '/guide/' },
-            { text: '常见问题', link: '/question/' },
-            { text: '社区交流', link: '/exchange/' },
-            { text: '赞助我们', link: '/sponsor/' },
+            { text: '使用指南', link: '/guide/', activeMatch: '/guide/' },
+            { text: '常见问题', link: '/question/', activeMatch: '/question/' },
+            { text: '社区交流', link: '/exchange/', activeMatch: '/exchange/' },
+            { text: '赞助我们', link: '/sponsor/', activeMatch: '/sponsor/' },
         ],
         // 侧边栏
         sidebar: {

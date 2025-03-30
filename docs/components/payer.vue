@@ -52,6 +52,6 @@
 .payerTable {
     width: 100%;
     border-collapse: collapse;
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
 }
 </style>
