@@ -8,7 +8,7 @@
         <div class="homeHeader">
             <div>
                 <div class="headerTitle">
-                    <div class="backBox" @click="router.go(-1)">
+                    <div class="backBox" @click="router.push('/edit')">
                         <el-icon><ArrowLeft /></el-icon>
                         <span>{{ t('back') }}</span>
                     </div>

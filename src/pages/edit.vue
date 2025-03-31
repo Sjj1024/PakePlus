@@ -1034,7 +1034,7 @@ const updateIcon = async () => {
 }
 
 const backHome = () => {
-    router.go(-1)
+    router.push('/')
 }
 
 // click menu item
