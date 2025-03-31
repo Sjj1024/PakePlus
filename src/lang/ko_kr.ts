@@ -151,4 +151,5 @@ export default {
     deleteRelease: '현재 릴리스를 삭제하시겠습니까?',
     deleteReleaseTips: '삭제 후 복구할 수 없습니다. 주의하세요',
     devbug: '개발 디버그',
+    limitSize: '단일 파일 크기는 10MB 이하여야 합니다',
 }

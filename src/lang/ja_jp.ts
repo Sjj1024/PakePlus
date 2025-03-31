@@ -152,4 +152,5 @@ export default {
     deleteReleaseTips:
         '削除後は元に戻すことはできません。慎重に操作してください',
     devbug: '開発デバッグ',
+    limitSize: '1つのファイルのサイズは10MB以下にしてください',
 }

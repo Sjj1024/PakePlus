@@ -6,10 +6,11 @@ import { readDir } from '@tauri-apps/plugin-fs'
 import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 import { join } from '@tauri-apps/api/path'
 
-// 分支
 export const mainBranch = 'main'
 export const webBranch = 'web'
 export const devBranch = 'dev'
+
+export const fileSizeLimit = 1024 * 1024 * 10
 
 // urlMap
 export const urlMap = {

@@ -512,6 +512,7 @@ import {
     replaceFileRoot,
     getLibRsFetch,
     urlMap,
+    fileSizeLimit,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -771,12 +772,8 @@ const loadHtml = async () => {
 // tauri html file upload
 const tauriHtmlUpload = async () => {
     loadingText(t('syncFileStart') + '...')
-    // 读取文件夹里面的内容
     if (store.currentProject.isHtml && store.currentProject.htmlPath) {
-        console.log(`Selected folder: ${store.currentProject.htmlPath}`)
-        // 调用Rust函数来递归加载文件夹中的所有文件
         const files = await readDirRecursively(store.currentProject.htmlPath)
-        console.log('files', files)
         loadingText(t('syncFileStart') + '...')
         let total = files.length
         let count = 0
@@ -786,9 +783,13 @@ const tauriHtmlUpload = async () => {
             const isExists = await exists(file)
             if (isExists) {
                 const fileContent = await readFile(file)
-                console.log('fileContent', fileContent)
+                // limit file size
+                const fileSize = fileContent.byteLength
+                if (fileSize > fileSizeLimit) {
+                    ElMessage.error(t('limitSize'))
+                    return
+                }
                 const base64Content = arrayBufferToBase64(fileContent)
-                console.log('base64Content', base64Content)
                 const gitPath = await replaceFileRoot(
                     file,
                     store.currentProject.htmlPath
@@ -797,7 +798,6 @@ const tauriHtmlUpload = async () => {
                 <div>${t('syncFilePro')}${gitPath.replace('src/', '')}</div>
                 <div>${t('syncTileTips')}</div>`
                 loadingText(loadingState)
-                console.log('gitPath', gitPath)
                 await upSrcFile(gitPath, base64Content)
             } else {
                 console.log('file not exists', file)
@@ -852,6 +852,14 @@ const handleFileChange = async (event: any) => {
             (file) => !file.name.startsWith('.')
         )
         console.log('files', files)
+        // limit file size
+        for (const file of files) {
+            const fileSize = file.size
+            if (fileSize > fileSizeLimit) {
+                ElMessage.error(t('limitSize'))
+                return
+            }
+        }
         const filePaths = getFilesName(files)
         console.log('filePaths', filePaths)
         // check if index.htm is included
@@ -934,7 +942,13 @@ const uploadFiles = async (files: any) => {
 
 const handleIconChange = (event: any) => {
     const file = event.target.files[0]
+    // limit file size
     if (file) {
+        const fileSize = file.size
+        if (fileSize > fileSizeLimit) {
+            ElMessage.error(t('limitSize'))
+            return
+        }
         fileToBase64(file)
     }
 }
@@ -965,6 +979,14 @@ const uploadIcon = async () => {
     iconFileName.value = fileName
     // get file name
     const binaryData = await readFile(selectedFilePath)
+    // get file size
+    const fileSize = binaryData.byteLength
+    console.log('fileSize', fileSize)
+    // limit file size
+    if (fileSize > 1024 * 1024 * 10) {
+        ElMessage.error(t('limitSize'))
+        return
+    }
     const base64Data: any = arrayBufferToBase64(binaryData)
     const base64String = 'data:image/jpg;base64,' + base64Data
     tempIconBase64.value = base64String

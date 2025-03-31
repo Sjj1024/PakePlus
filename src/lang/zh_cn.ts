@@ -147,4 +147,5 @@ export default {
     deleteRelease: '确定要删除当前发布吗？',
     deleteReleaseTips: '删除后无法恢复，请谨慎操作',
     devbug: '开发调试',
+    limitSize: '单个文件大小限制为10MB',
 }
