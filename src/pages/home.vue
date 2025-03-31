@@ -129,7 +129,11 @@
                     class="tokenInput"
                     @keyup.enter="testToken(true)"
                 />
-                <el-button @click="testToken(true)" :loading="testLoading">
+                <el-button
+                    @click="testToken(true)"
+                    :loading="testLoading"
+                    :type="store.userInfo.login !== '' ? 'success' : ''"
+                >
                     {{ t('testToken') }}
                 </el-button>
             </div>

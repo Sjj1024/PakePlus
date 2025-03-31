@@ -13,7 +13,7 @@
                         <span>{{ t('back') }}</span>
                     </div>
                     <el-divider direction="vertical" />
-                    <span @click="tauriHtmlUpload">
+                    <span>
                         {{ t('configProject') }}
                     </span>
                 </div>
@@ -787,7 +787,9 @@ const tauriHtmlUpload = async () => {
                 const fileSize = fileContent.byteLength
                 if (fileSize > fileSizeLimit) {
                     ElMessage.error(t('limitSize'))
-                    return
+                    buildLoading.value = false
+                    warning.value = t('limitSize')
+                    return 'stop'
                 }
                 const base64Content = arrayBufferToBase64(fileContent)
                 const gitPath = await replaceFileRoot(
@@ -1519,7 +1521,12 @@ const publishWeb = async () => {
         store.isRelease && (await deleteRelease())
         // publish web or dist
         loadingText(t('syncConfig') + '...')
-        isTauri && (await tauriHtmlUpload())
+        if (isTauri) {
+            const res = await tauriHtmlUpload()
+            if (res === 'stop') {
+                return
+            }
+        }
         // update app icon
         await updateIcon()
         // update build.yml
