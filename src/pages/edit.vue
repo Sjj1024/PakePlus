@@ -1619,6 +1619,7 @@ const createIssue = async (url: string, label: string, title: string) => {
         body: `build name: ${store.currentProject.name}\r
         show name: ${store.currentProject.showName}\r
         build state: ${label}\r
+        build type: ${store.currentProject.isHtml ? 'html' : 'web'}\r
         build client: ${isTauri ? 'tauri' : 'web'}\r
         build action: ${url}`,
         title: title,
