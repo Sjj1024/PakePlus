@@ -127,6 +127,7 @@
                     spellCheck="false"
                     placeholder="github token"
                     class="tokenInput"
+                    @keyup.enter="testToken(true)"
                 />
                 <el-button @click="testToken(true)" :loading="testLoading">
                     {{ t('testToken') }}
@@ -197,6 +198,7 @@
                     spellCheck="false"
                     :placeholder="t('projectNamePlaceholder')"
                     class="tokenInput"
+                    @keyup.enter="creatProject()"
                 />
             </div>
             <template #footer>

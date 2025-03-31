@@ -187,8 +187,8 @@
                                 class="initIcon"
                                 @click="imgPreviewVisible = true"
                             />
-                            <!-- close icon -->
-                            <el-icon class="closeIcon" @click="closeIconChange">
+                            <!-- delete icon -->
+                            <el-icon class="closeIcon" @click="deleteIcon">
                                 <CircleCloseFilled />
                             </el-icon>
                         </div>
@@ -953,9 +953,10 @@ const handleIconChange = (event: any) => {
     }
 }
 
-// close icon change
-const closeIconChange = () => {
+// delete icon
+const deleteIcon = () => {
     iconBase64.value = ''
+    store.currentProject.icon = ''
 }
 
 // upload icon
