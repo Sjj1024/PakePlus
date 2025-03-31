@@ -18,6 +18,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     let config: WindowConfig = serde_json::from_str(window_json).unwrap();
     let window = tauri::WebviewWindowBuilder::from_config(app_handle, &config)
         .unwrap()
+        .initialization_script(include_str!("../../data/analytics.js"))
         .initialization_script(include_str!("../../data/custom.js"))
         .build()
         .unwrap();
