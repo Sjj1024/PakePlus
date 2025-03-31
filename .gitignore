@@ -38,3 +38,9 @@ dist-ssr
 .externalNativeBuild
 .cxx
 local.properties
+docs
+dist
+auto-imports.d.test
+auto-imports.d.ts
+components.d.ts
+stats.html
