@@ -74,6 +74,9 @@ dependencies:
   vue-cropper:
     specifier: ^1.1.4
     version: 1.1.4
+  vue-gtag:
+    specifier: ^3.1.1
+    version: 3.1.1(vue-router@4.5.0)(vue@3.5.13)
   vue-i18n:
     specifier: ^10.0.0
     version: 10.0.6(vue@3.5.13)
@@ -3497,6 +3500,19 @@ packages:
         optional: true
     dependencies:
       vue: 3.5.13(typescript@5.6.3)
+    dev: false
+
+  /vue-gtag@3.1.1(vue-router@4.5.0)(vue@3.5.13):
+    resolution: {integrity: sha512-8n31qQ4Qiyn8IenzDWp6A9oq9dPhHUCxFtXJHK0smq+sftiW4S4jTfZeGNCRJZrHLo8ybpso7Br6Go7GB5CmPQ==}
+    peerDependencies:
+      vue: ^3.5.13
+      vue-router: ^4.5.0
+    peerDependenciesMeta:
+      vue-router:
+        optional: true
+    dependencies:
+      vue: 3.5.13(typescript@5.6.3)
+      vue-router: 4.5.0(vue@3.5.13)
     dev: false
 
   /vue-i18n@10.0.6(vue@3.5.13):

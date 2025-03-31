@@ -42,6 +42,7 @@
         "vue": "^3.3.4",
         "vue-codemirror": "^6.1.1",
         "vue-cropper": "^1.1.4",
+        "vue-gtag": "^3.1.1",
         "vue-i18n": "^10.0.0",
         "vue-router": "4"
     },
