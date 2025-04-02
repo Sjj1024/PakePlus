@@ -6,6 +6,8 @@ layout: doc
 
 PakePlus 是一个基于 Tauri2 和 Github 的打包工具，无需在本地安装复杂的 rust 和 node 依赖环境，只需要一个 Github Token 就可以将任意网站/Vue/React 等项目的 dist 静态文件打包为跨平台桌面软件，体积小巧(小于 5M)并且性能还高，而且 PakePlus 本身也才仅仅 8M 左右小大。
 
+<video src="../static//videos/pakeplus.mp4" controls="controls" width="100%"></video>
+
 ## 特性
 
 -   🎐 体积比 Electron 包小约 20 倍（小于 5M！），性能快 10 倍。
