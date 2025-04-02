@@ -18,4 +18,14 @@
 # 如何解决
 
 1. 最快的解决办法就是删除你的 PakePlus 仓库，然后重新打开 PakePlus，并填入 Token 重新走一遍流程。（该过程会删除你之前创建的项目，请做好备份记录）
+   删除你的 PakePlus 仓库教程：
+
+-   打开你的 PakePlus 仓库
+-   点击 Settings，并滑动到最底部
+-   点击 Delete this repository
+-   点击 I want to delete this repository
+-   点击 I have read and understand these effects
+-   然后填入你的 PakePlus 全名
+-   点击 Delete this repository
+
 2. 如果还是不行，请加我的微信：lanxingme，或者进群聊问问群友。
