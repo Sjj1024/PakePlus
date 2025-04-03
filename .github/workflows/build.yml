@@ -1,136 +1,64 @@
-name: 'Publish and Deploy'
+name: Android CI
 
 on:
     push:
         branches:
             - main
-    workflow_dispatch:
-
-permissions:
-    contents: write
-    pages: write
-    id-token: write
-
-concurrency:
-    group: pages
-    cancel-in-progress: false
+    pull_request:
+        branches:
+            - main
 
 jobs:
-    publish-tauri:
-        permissions:
-            contents: write
-        strategy:
-            fail-fast: false
-            matrix:
-                include:
-                    - platform: 'macos-latest'
-                      target: 'aarch64-apple-darwin'
-                      args: '--target aarch64-apple-darwin'
-                    - platform: 'macos-latest'
-                      target: 'x86_64-apple-darwin'
-                      args: '--target x86_64-apple-darwin'
-                    - platform: 'ubuntu-22.04'
-                      target: 'x86_64-unknown-linux-gnu'
-                      args: ''
-                    - platform: 'ubuntu-22.04'
-                      target: 'aarch64-unknown-linux-gnu'
-                      args: ''
-                    - platform: 'windows-latest'
-                      target: 'x86_64-pc-windows-msvc'
-                      args: ''
-                    - platform: 'windows-latest'
-                      target: 'aarch64-pc-windows-msvc'
-                      args: '--target aarch64-pc-windows-msvc'
-
-        runs-on: ${{ matrix.platform }}
-        timeout-minutes: 60
-        steps:
-            - uses: actions/checkout@v4
-
-            - name: Install rust target
-              run: rustup target add ${{ matrix.target }}
-
-            - uses: pnpm/action-setup@v3
-              with:
-                  version: latest
-
-            - name: Sync node version and setup cache
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-                  cache: pnpm
-
-            - name: Install Rust stable
-              uses: dtolnay/rust-toolchain@stable
-              with:
-                  targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
-
-            - name: Install dependencies (ubuntu only)
-              if: matrix.platform == 'ubuntu-22.04'
-              run: |
-                  sudo apt-get update
-                  sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
-
-            - name: Install frontend dependencies
-              run: pnpm install
-
-            - uses: tauri-apps/tauri-action@v0
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  tagName: 'PakePlus-v__VERSION__'
-                  releaseName: 'PakePlus v__VERSION__'
-                  body_path: ./Note.md
-                  releaseDraft: true
-                  prerelease: false
-                  args: ${{ matrix.args }}
-
-    deploy-pages:
-        needs: publish-tauri
+    build:
         runs-on: ubuntu-latest
+
         steps:
-            - name: Checkout
+            - name: Checkout code
               uses: actions/checkout@v4
+
+            - name: Set up JDK 17
+              uses: actions/setup-java@v4
               with:
-                  fetch-depth: 0
+                  java-version: '17'
+                  distribution: 'temurin'
 
-            - uses: pnpm/action-setup@v3
+            - name: Cache Gradle packages
+              uses: actions/cache@v4
               with:
-                  version: 9
+                  path: |
+                      ~/.gradle/caches
+                      ~/.gradle/wrapper
+                  key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+                  restore-keys: |
+                      ${{ runner.os }}-gradle-
 
-            - name: Setup Node
-              uses: actions/setup-node@v4
+            - name: Generate Keystore
+              run: |
+                  keytool -genkeypair -v -keystore keystore.jks -keyalg RSA -keysize 2048 -validity 10000 \
+                      -storepass myKeystorePass -keypass myKeyPass -alias my-key-alias -dname "CN=MyApp, OU=Dev, O=MyCompany, L=City, S=State, C=US"
+
+            - name: Build unsigned APK
+              run: |
+                  ./gradlew assembleRelease
+                  ls -l app/build/outputs/apk/release
+
+            - name: Sign APK
+              run: |
+                  jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
+                      -keystore keystore.jks -storepass myKeystorePass \
+                      -keypass myKeyPass \
+                      app/build/outputs/apk/release/app-release-unsigned.apk my-key-alias
+
+                  # 验证签名
+                  jarsigner -verify -verbose -certs app/build/outputs/apk/release/app-release-unsigned.apk
+
+                  # 使用 zipalign 进行优化
+                  ${ANDROID_HOME}/build-tools/$(ls ${ANDROID_HOME}/build-tools | tail -n 1)/zipalign -v 4 \
+                      app/build/outputs/apk/release/app-release-unsigned.apk \
+                      app/build/outputs/apk/release/app-release.apk
+
+            - name: Upload Signed APK
+              uses: actions/upload-artifact@v4
               with:
-                  node-version: 20
-                  cache: pnpm
-
-            - name: Setup Pages
-              uses: actions/configure-pages@v4
-
-            - name: Install dependencies
-              run: pnpm install
-
-            - name: GitPress Config
-              run: node ./cli/gitpress.cjs gitBase
-
-            - name: Build with VitePress
-              run: pnpm run docs:build
-
-            - name: Copy Static
-              run: node ./cli/gitpress.cjs copyStatic
-
-            - name: Upload artifact
-              uses: actions/upload-pages-artifact@v3
-              with:
-                  path: docs/dist
-
-    deploy:
-        environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
-        needs: deploy-pages
-        runs-on: ubuntu-latest
-        steps:
-            - name: Deploy to GitHub Pages
-              id: deployment
-              uses: actions/deploy-pages@v4
+                  name: app-release.apk
+                  path: app/build/outputs/apk/release/app-release.apk
