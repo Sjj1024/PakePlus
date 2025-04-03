@@ -1,9 +1,19 @@
-name: 'Publish'
+name: 'Publish and Deploy'
 
 on:
     push:
         branches:
             - main
+    workflow_dispatch:
+
+permissions:
+    contents: write
+    pages: write
+    id-token: write
+
+concurrency:
+    group: pages
+    cancel-in-progress: false
 
 jobs:
     publish-tauri:
@@ -13,26 +23,21 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                    - platform: 'macos-latest' # for Arm based macs (M1 and above).
+                    - platform: 'macos-latest'
                       target: 'aarch64-apple-darwin'
                       args: '--target aarch64-apple-darwin'
-                    - platform: 'macos-latest' # for Intel based macs.
+                    - platform: 'macos-latest'
                       target: 'x86_64-apple-darwin'
                       args: '--target x86_64-apple-darwin'
-
                     - platform: 'ubuntu-22.04'
                       target: 'x86_64-unknown-linux-gnu'
                       args: ''
                     - platform: 'ubuntu-22.04'
                       target: 'aarch64-unknown-linux-gnu'
                       args: ''
-
                     - platform: 'windows-latest'
                       target: 'x86_64-pc-windows-msvc'
                       args: ''
-                    # - platform: 'windows-latest'
-                    #   target: 'i686-pc-windows-msvc'
-                    #   args: ''
                     - platform: 'windows-latest'
                       target: 'aarch64-pc-windows-msvc'
                       args: '--target aarch64-pc-windows-msvc'
@@ -55,19 +60,19 @@ jobs:
                   node-version: 20
                   cache: pnpm
 
-            - name: install Rust stable
+            - name: Install Rust stable
               uses: dtolnay/rust-toolchain@stable
               with:
                   targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
-            - name: install dependencies (ubuntu only)
+            - name: Install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-22.04'
               run: |
                   sudo apt-get update
                   sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
-            - name: install frontend dependencies
-              run: pnpm install # change this to npm, pnpm or bun depending on which one you use.
+            - name: Install frontend dependencies
+              run: pnpm install
 
             - uses: tauri-apps/tauri-action@v0
               env:
@@ -79,3 +84,53 @@ jobs:
                   releaseDraft: true
                   prerelease: false
                   args: ${{ matrix.args }}
+
+    deploy-pages:
+        needs: publish-tauri
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - uses: pnpm/action-setup@v3
+              with:
+                  version: 9
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: pnpm
+
+            - name: Setup Pages
+              uses: actions/configure-pages@v4
+
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: GitPress Config
+              run: node ./cli/gitpress.cjs gitBase
+
+            - name: Build with VitePress
+              run: pnpm run docs:build
+
+            - name: Copy Static
+              run: node ./cli/gitpress.cjs copyStatic
+
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: docs/dist
+
+    deploy:
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        needs: deploy-pages
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
