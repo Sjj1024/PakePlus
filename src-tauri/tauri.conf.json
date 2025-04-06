@@ -1,26 +1,19 @@
 {
     "$schema": "https://schema.tauri.app/config/2",
-    "productName": "PakePlus",
-    "version": "0.1.0",
-    "identifier": "com.pakeplus.app",
-    "build": {
-        "frontendDist": "../src"
-    },
+    "productName": "kaggle",
+    "version": "0.0.1",
+    "identifier": "com.kaggle.app",
     "app": {
-        "withGlobalTauri": true,
         "security": {
             "assetProtocol": {
                 "enable": true,
                 "scope": {
-                    "allow": [
-                        "$APPDATA/assets/**",
-                        "$APPDATA/**",
-                        "$DOWNLOAD/*"
-                    ]
+                    "allow": ["$APPDATA/**", "$DOWNLOAD/*"]
                 }
             },
             "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval' ipc: http://ipc.localhost; img-src 'self' asset: http://asset.localhost blob: data: http://asset.localhost; font-src 'self' asset: http//localhost data:;"
-        }
+        },
+        "withGlobalTauri": true
     },
     "bundle": {
         "active": true,
