@@ -1,17 +1,17 @@
 use serde_json::{json, Error};
-use tauri::{utils::config::WindowConfig, App, WindowEvent};
+use tauri::{utils::config::WindowConfig, App, AppHandle, Manager, WindowEvent};
 use tauri_plugin_store::StoreExt;
 
 // handle something when start app
 pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     let app_handle = app.handle();
     // 示例 JSON 字符串
-    let window_json = r#"{"label":"kaggle","title":"kaggle","url":"https://www.kaggle.com/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36","width":800,"height":600,"theme":null,"resizable":true,"fullscreen":false,"maximized":false,"minWidth":400,"minHeight":300,"maxWidth":1920,"maxHeight":1080,"decorations":true,"transparent":false,"titleBarStyle":"Visible","visible":false,"focus":true,"closable":true,"minimizable":true,"maximizable":true,"alwaysOnTop":false,"alwaysOnBottom":false,"center":false,"skipTaskbar":false,"tabbingIdentifier":null,"parent":null,"dragDropEnabled":true,"browserExtensionsEnabled":false,"devtools":true,"contentProtected":false,"hiddenTitle":false,"incognito":false,"proxyUrl":null,"useHttpsScheme":false,"zoomHotkeysEnabled":false,"acceptFirstMouse":false,"create":false}"#;
+    let window_json = r#"{"label":"main","title":"kaggle","url":"https://www.kaggle.com/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36","width":800,"height":600,"theme":null,"resizable":true,"fullscreen":false,"maximized":false,"minWidth":400,"minHeight":300,"maxWidth":1920,"maxHeight":1080,"decorations":true,"transparent":false,"titleBarStyle":"Visible","visible":false,"focus":true,"closable":true,"minimizable":true,"maximizable":true,"alwaysOnTop":false,"alwaysOnBottom":false,"center":false,"skipTaskbar":false,"tabbingIdentifier":null,"parent":null,"dragDropEnabled":true,"browserExtensionsEnabled":false,"devtools":true,"contentProtected":false,"hiddenTitle":false,"incognito":false,"proxyUrl":null,"useHttpsScheme":false,"zoomHotkeysEnabled":false,"acceptFirstMouse":false,"create":false}"#;
     // 解析 JSON 字符串为 WindowConfig 类型
     let config: WindowConfig = serde_json::from_str(window_json).unwrap();
     let window = tauri::WebviewWindowBuilder::from_config(app_handle, &config)
         .unwrap()
-        .initialization_script(include_str!("../../data/jquery.min.js")).initialization_script(include_str!("../../data/custom.js"))
+        .initialization_script(include_str!("../../data/jquery.min.js")).initialization_script(include_str!("../../data/custom.js"))
         .build()
         .unwrap();
 
@@ -132,4 +132,20 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     window.set_focus().unwrap();
 
     Ok(())
+}
+
+// 单例模式，当二次启动时聚焦
+pub fn show_window(app: &AppHandle) {
+    let main = app.get_webview_window("main");
+    if let Some(main) = main {
+        main.unminimize().expect("Sorry, can't unminimize window");
+        main.set_focus().expect("Sorry, can't focus window");
+    } else {
+        app.webview_windows()
+            .values()
+            .next()
+            .expect("Sorry, no window found")
+            .set_focus()
+            .expect("Can't Bring Window to Focus");
+    }
 }
