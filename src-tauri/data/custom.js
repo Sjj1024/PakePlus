@@ -1,5 +1,14 @@
-console.log('custom.js ----')
+console.log(
+    '%cbuild from PakePlus： https://github.com/Sjj1024/PakePlus',
+    'color:orangered;font-weight:bolder'
+)
 
-window.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded')
-})
+const hookClick = (e) => {
+    e.preventDefault()
+    const origin = e.target.closest('a')
+    if (origin && origin.href) {
+        location.href = origin.href
+    }
+}
+
+document.addEventListener('click', hookClick, { capture: true })
