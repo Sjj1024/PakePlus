@@ -1,5 +1,5 @@
 <template>
-    <div class="codeEdit">
+    <div class="codebox">
         <Codemirror
             v-model="store.currentProject.customJs"
             :options="cmOptions"
@@ -46,7 +46,7 @@ const codeChange = (code: string) => {
 </script>
 
 <style scoped lang="scss">
-.codeEdit {
+.codebox {
     height: 400px;
 }
 </style>

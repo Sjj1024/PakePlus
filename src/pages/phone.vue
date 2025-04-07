@@ -13,14 +13,10 @@
                         <span>{{ t('back') }}</span>
                     </div>
                     <el-divider direction="vertical" />
-                    <span>
-                        {{ t('configProject') }}
-                    </span>
+                    <span> APP配置 </span>
                 </div>
                 <div class="toolTips">
-                    <span>
-                        {{ t('configProjectTips') }}
-                    </span>
+                    <span> 配置手机APP的配置信息 </span>
                     <el-icon
                         class="document"
                         @click="openUrl(urlMap.configdoc)"
@@ -49,31 +45,9 @@
                 >
                     <Paperclip />
                 </el-icon>
-                <!-- phone -->
-                <el-icon @click="toPhone" :size="22" class="phone">
-                    <Cellphone />
+                <el-icon :size="22" class="desktop">
+                    <ForkSpoon />
                 </el-icon>
-                <el-dropdown>
-                    <span class="dropdownLink">
-                        <el-icon :size="22"><Operation /></el-icon>
-                    </span>
-                    <template #dropdown>
-                        <el-dropdown-menu>
-                            <el-dropdown-item @click="showConfigDialog">
-                                {{ t('moreConfig') }}
-                            </el-dropdown-item>
-                            <el-dropdown-item
-                                :disabled="!store.isRelease"
-                                @click="toHistory"
-                            >
-                                {{ t('relHistore') }}
-                            </el-dropdown-item>
-                            <el-dropdown-item @click="deleteProject">
-                                {{ t('delProject') }}
-                            </el-dropdown-item>
-                        </el-dropdown-menu>
-                    </template>
-                </el-dropdown>
             </div>
         </div>
         <div class="mainEdit">
@@ -127,9 +101,9 @@
                                     placement="bottom"
                                 >
                                     <el-button
-                                        class="distUpload"
                                         :icon="UploadFilled"
                                         @click="activeDistInput"
+                                        :disabled="true"
                                     />
                                 </el-tooltip>
                             </template>
@@ -173,6 +147,7 @@
                         />
                     </el-form-item>
                 </div>
+                <!-- app icon -->
                 <div class="inLine checkBox">
                     <el-form-item
                         :label="t('appIcon')"
@@ -222,24 +197,22 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        :label="t('windowKeep')"
-                        prop="state"
+                        label="安全区域"
+                        prop="tauriApi"
                         class="formItem"
                     >
-                        <el-checkbox
-                            v-model="store.currentProject.state"
-                            label=""
-                        />
-                    </el-form-item>
-                    <el-form-item
-                        :label="t('single')"
-                        prop="single"
-                        class="formItem"
-                    >
-                        <el-checkbox
-                            v-model="store.currentProject.single"
-                            label=""
-                        />
+                        <el-select
+                            v-model="value"
+                            placeholder="Select"
+                            style="width: 100px"
+                        >
+                            <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                            />
+                        </el-select>
                     </el-form-item>
                     <el-form-item
                         :label="t('devbug')"
@@ -265,65 +238,187 @@
                         </el-icon>
                     </el-form-item>
                 </div>
-                <el-form-item :label="t('platform')" prop="platform">
-                    <el-radio-group
-                        v-model="store.currentProject.platform"
-                        @change="platformChange"
+                <!-- app header -->
+                <div class="inLine checkBox">
+                    <el-form-item
+                        label="APP标头"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
                     >
-                        <el-radio value="desktop">{{ t('desktop') }}</el-radio>
-                        <el-radio value="iPhone">iPhone</el-radio>
-                        <el-radio value="Android">Android</el-radio>
-                        <el-radio value="iPad">iPad</el-radio>
-                        <el-radio value="custom">{{ t('customize') }}</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <!-- window size -->
-                <el-form-item :label="t('winSize')" prop="size">
-                    <el-input
-                        type="number"
-                        v-model.number="store.currentProject.more.windows.width"
-                        style="width: 100px"
-                        :placeholder="t('width')"
-                    />
-                    <span class="iconfont divider"> &#xe62f; </span>
-                    <el-input
-                        type="number"
-                        v-model.number="
-                            store.currentProject.more.windows.height
-                        "
-                        style="width: 100px"
-                        :placeholder="t('height')"
-                    />
-                    <span class="iconfont rotateIcon" @click="rotateWH">
-                        &#xe66b;
-                    </span>
-                </el-form-item>
-                <el-form-item :label="t('filterElements')" prop="desc">
-                    <el-input
-                        v-model.trim="store.currentProject.filterCss"
-                        type="textarea"
-                        autocomplete="off"
-                        autoCapitalize="off"
-                        autoCorrect="off"
-                        spellCheck="false"
-                        :rows="3"
-                        :placeholder="t('inputXpathSelectors')"
-                    />
-                </el-form-item>
-                <el-form-item :label="t('appDes')" prop="desc">
-                    <el-input
-                        v-model.trim="store.currentProject.desc"
-                        type="textarea"
-                        autocomplete="off"
-                        autoCapitalize="off"
-                        autoCorrect="off"
-                        spellCheck="false"
-                        :rows="3"
-                        :placeholder="t('desTips')"
-                    />
-                </el-form-item>
+                        <el-checkbox
+                            v-model="store.currentProject.iconRound"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="侧边菜单"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.iconRound"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="功能菜单"
+                        prop="tauriApi"
+                        class="formItem"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.devbug"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="加载进度"
+                        prop="tauriApi"
+                        class="formItem"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.devbug"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        prop="iconRound"
+                        label="APP标题"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                </div>
+                <!-- bottom menu -->
+                <div class="inLine checkBox">
+                    <el-form-item
+                        label="底部菜单"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.iconRound"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="默认颜色"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.iconRound"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="激活颜色"
+                        prop="tauriApi"
+                        class="formItem"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.devbug"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="背景颜色"
+                        prop="tauriApi"
+                        class="formItem"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.devbug"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        prop="iconRound"
+                        label="字体大小"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                </div>
+                <!-- menu config -->
+                <div class="inLine checkBox">
+                    <el-form-item
+                        label="底部菜单"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.iconRound"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="默认颜色"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.iconRound"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="激活颜色"
+                        prop="tauriApi"
+                        class="formItem"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.devbug"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="背景颜色"
+                        prop="tauriApi"
+                        class="formItem"
+                    >
+                        <el-checkbox
+                            v-model="store.currentProject.devbug"
+                            label=""
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        prop="iconRound"
+                        label="字体大小"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                </div>
             </el-form>
         </div>
+
+        <!-- save and preview and publish -->
         <div class="footerBox">
             <el-button @click="saveProject(true)">{{ t('save') }}</el-button>
             <el-button @click="preview(false)">
@@ -484,12 +579,11 @@ import {
     Edit,
     Picture,
     CircleCloseFilled,
-    Operation,
+    ForkSpoon,
     UploadFilled,
     Warning,
     Paperclip,
     Document,
-    Cellphone,
 } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import CodeEdit from '@/components/CodeEdit.vue'
@@ -677,10 +771,22 @@ const changeUrl = (value: string) => {
     }
 }
 
-const showConfigDialog = () => {
-    configDialogVisible.value = true
-    tauriConfigRef.value?.updateCode()
-}
+// 安全区域
+const value = ref('all')
+const options = [
+    {
+        value: 'all',
+        label: '全忽略',
+    },
+    {
+        value: 'top',
+        label: '仅头部',
+    },
+    {
+        value: 'bottom',
+        label: '仅底部',
+    },
+]
 
 // close tauri config dialog
 const closeConfigDialog = (done: any = () => {}) => {
@@ -1039,18 +1145,13 @@ const updateIcon = async () => {
 }
 
 const backHome = () => {
-    router.push('/')
+    router.push('/edit')
 }
 
 // click menu item
 const toHistory = () => {
     stopServer()
     router.push('/history')
-}
-
-// to phone
-const toPhone = () => {
-    router.push('/phone')
 }
 
 // delete current project
@@ -1895,9 +1996,8 @@ onMounted(async () => {
                 cursor: pointer;
             }
 
-            .phone {
+            .desktop {
                 color: gray;
-                margin-right: 20px;
                 cursor: pointer;
 
                 &:hover {
