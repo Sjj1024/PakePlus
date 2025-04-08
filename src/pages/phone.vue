@@ -359,50 +359,252 @@
                 <!-- menu config -->
                 <div class="inLine checkBox">
                     <el-form-item
-                        label="底部菜单"
+                        label="菜单一"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 18%'"
                     >
-                        <el-checkbox
-                            v-model="store.currentProject.iconRound"
-                            label=""
-                        />
                     </el-form-item>
                     <el-form-item
-                        label="默认颜色"
+                        label="菜单文字"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 18%'"
                     >
-                        <el-checkbox
-                            v-model="store.currentProject.iconRound"
-                            label=""
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
                         />
                     </el-form-item>
                     <el-form-item
-                        label="激活颜色"
+                        label="菜单图标"
                         prop="tauriApi"
                         class="formItem"
                     >
-                        <el-checkbox
-                            v-model="store.currentProject.devbug"
-                            label=""
-                        />
-                    </el-form-item>
-                    <el-form-item
-                        label="背景颜色"
-                        prop="tauriApi"
-                        class="formItem"
-                    >
-                        <el-checkbox
-                            v-model="store.currentProject.devbug"
-                            label=""
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
                         />
                     </el-form-item>
                     <el-form-item
                         prop="iconRound"
-                        label="字体大小"
+                        label="菜单链接"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                </div>
+                <div class="inLine checkBox">
+                    <el-form-item
+                        label="菜单二"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                    </el-form-item>
+                    <el-form-item
+                        label="菜单文字"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="菜单图标"
+                        prop="tauriApi"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        prop="iconRound"
+                        label="菜单链接"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                </div>
+                <div class="inLine checkBox">
+                    <el-form-item
+                        label="菜单三"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                    </el-form-item>
+                    <el-form-item
+                        label="菜单文字"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="菜单图标"
+                        prop="tauriApi"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        prop="iconRound"
+                        label="菜单链接"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                </div>
+                <div class="inLine checkBox">
+                    <el-form-item
+                        label="菜单四"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                    </el-form-item>
+                    <el-form-item
+                        label="菜单文字"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="菜单图标"
+                        prop="tauriApi"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        prop="iconRound"
+                        label="菜单链接"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                </div>
+                <div class="inLine checkBox">
+                    <el-form-item
+                        label="菜单五"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                    </el-form-item>
+                    <el-form-item
+                        label="菜单文字"
+                        prop="icon"
+                        class="formItem"
+                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        label="菜单图标"
+                        prop="tauriApi"
+                        class="formItem"
+                    >
+                        <el-input
+                            v-model.trim="store.currentProject.version"
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="`${t('example')}：0.0.1`"
+                        />
+                    </el-form-item>
+                    <el-form-item
+                        prop="iconRound"
+                        label="菜单链接"
                         class="formItem"
                     >
                         <el-input
