@@ -5,7 +5,7 @@ style="margin: 0 10px;" >简体中文</a>
 <a href="https://github.com/Sjj1024/PakePlus/discussions/108">日本语</a>
 </h4>  
 <p align="center">
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/pplogo.png" width=138/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>Turn any webpage into a desktop or mobile app in just 9 minutes. Simple and easy to use.</strong></p>
