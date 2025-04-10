@@ -139,11 +139,15 @@
             </div>
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button @click="cancelToken">
+                    <el-button @click="cancelToken" :disabled="testLoading">
                         {{ t('cancel') }}
                     </el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <el-button type="primary" @click="testToken(false)">
+                    <el-button
+                        type="primary"
+                        @click="testToken(false)"
+                        :disabled="testLoading"
+                    >
                         {{ t('confirm') }}
                     </el-button>
                 </div>
@@ -362,12 +366,12 @@ const testToken = async (tips: boolean = true) => {
                     await commitShas(tips)
                 }
             } else {
-                store.setUser({})
+                store.setUser({ login: '' })
                 ElMessage.error(t('tokenError'))
                 testLoading.value = false
             }
         } catch (error) {
-            store.setUser({})
+            store.setUser({ login: '' })
             console.error('testToken error', error)
             ElMessage.error(t('networkError'))
             testLoading.value = false
@@ -384,17 +388,27 @@ const commitShas = async (tips: boolean = true) => {
         await new Promise((resolve) => setTimeout(resolve, 2000))
         console.log('wait fork done......', testLoading.value)
         const res = await Promise.all([getCommitSha(), getWebCommitSha()])
-            .then((res) => {
+            .then(async (res) => {
                 console.log('wait fork done res', res)
                 getCount++
                 if (res[0] && res[1]) {
                     // delete build.yml
-                    store.noSjj1024 && deleteBuildYml()
-                    testLoading.value = false
-                    if (!tips) {
-                        tokenDialog.value = false
+                    let deleteRes = true
+                    if (store.noSjj1024) {
+                        deleteRes = await deleteBuildYml()
+                    }
+                    if (deleteRes) {
+                        testLoading.value = false
+                        if (!tips) {
+                            tokenDialog.value = false
+                        } else {
+                            ElMessage.success(t('tokenOk'))
+                        }
                     } else {
-                        ElMessage.success(t('tokenOk'))
+                        store.setUser({ login: '' })
+                        ElMessage.error(t('noWorkflowPermission'))
+                        testLoading.value = false
+                        return false
                     }
                     return true
                 }
@@ -407,10 +421,13 @@ const commitShas = async (tips: boolean = true) => {
         if (res) {
             console.log('wait fork done break')
             break
+        } else if (store.userInfo.login === '') {
+            console.log('token promise break')
+            break
         }
     }
     if (getCount >= 6) {
-        store.setUser({})
+        store.setUser({ login: '' })
         ElMessage.error(t('initError'))
     }
     testLoading.value = false
@@ -428,13 +445,13 @@ const forkStartShas = async (tips: boolean = true) => {
         store.setRepository(forkRes.data)
     } else if (forkRes.status === 403) {
         // maybe account has locked
-        store.setUser({})
+        store.setUser({ login: '' })
         testLoading.value = false
         ElMessage.error(forkRes.data.message || t('tokenError'))
         return
     } else {
         console.error('fork error', forkRes)
-        store.setUser({})
+        store.setUser({ login: '' })
         testLoading.value = false
         ElMessage.error(forkRes.data.message || t('tokenError'))
         return
@@ -607,10 +624,15 @@ const deleteBuildYml = async (branchName: string = mainBranch) => {
         )
         if (deleteRes.status === 200) {
             console.log('deleteBuildYml', deleteRes)
-            uploadBuildYml()
+            await uploadBuildYml()
+            return true
         } else {
             console.error('deleteBuildYml error', deleteRes)
+            return false
         }
+    } else {
+        // no workflow permission
+        return false
     }
 }
 

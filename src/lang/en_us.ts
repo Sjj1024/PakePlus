@@ -151,4 +151,5 @@ export default {
         'After deletion, it cannot be recovered, please be careful',
     devbug: 'Debug',
     limitSize: 'Single file size limit is 10MB',
+    noWorkflowPermission: 'No workflow permission, please add permission',
 }

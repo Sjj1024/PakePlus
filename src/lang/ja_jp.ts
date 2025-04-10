@@ -153,4 +153,5 @@ export default {
         '削除後は元に戻すことはできません。慎重に操作してください',
     devbug: '開発デバッグ',
     limitSize: '1つのファイルのサイズは10MB以下にしてください',
+    noWorkflowPermission: 'workflow権限がありません。権限を追加してください',
 }

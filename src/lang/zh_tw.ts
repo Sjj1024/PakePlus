@@ -143,4 +143,5 @@ export default {
     deleteReleaseTips: '刪除後無法恢復，請謹慎操作',
     devbug: '開發調試',
     limitSize: '單個文件大小限制為10MB',
+    noWorkflowPermission: '沒有workflow權限，請添加權限',
 }

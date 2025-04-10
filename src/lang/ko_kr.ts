@@ -152,4 +152,5 @@ export default {
     deleteReleaseTips: '삭제 후 복구할 수 없습니다. 주의하세요',
     devbug: '개발 디버그',
     limitSize: '단일 파일 크기는 10MB 이하여야 합니다',
+    noWorkflowPermission: 'workflow 권한이 없습니다. 권한을 추가하세요',
 }
