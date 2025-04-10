@@ -3,7 +3,6 @@
     "productName": "RDM",
     "version": "0.0.1",
     "identifier": "com.deivce.app",
-    "build": {"frontendDist": "../src"},
     "app": {
         "security": {
             "csp": null,
