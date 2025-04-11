@@ -5,6 +5,7 @@
     "type": "module",
     "scripts": {
         "tauri dev": "tauri dev",
+        "tauri debug": "tauri build --debug",
         "docs:dev": "vitepress dev docs",
         "docs:build": "vitepress build docs",
         "docs:preview": "vitepress preview docs",
@@ -14,7 +15,6 @@
         "tauri": "tauri",
         "icon": "tauri icon",
         "tauri build": "tauri build",
-        "tauri debug": "tauri build --debug",
         "tauri preview": "tauri preview",
         "update tauri": "cd src-tauri && cargo update"
     },

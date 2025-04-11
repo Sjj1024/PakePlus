@@ -62,6 +62,8 @@ pub fn run() {
             command::cmds::support_pp,
         ])
         .setup(|app| {
+            let args: Vec<String> = std::env::args().collect();
+            println!("Application started with arguments: {:?}", args);
             tauri::async_runtime::block_on(async move {
                 let _ = utils::init::resolve_setup(app).await;
             });
