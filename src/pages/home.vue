@@ -935,7 +935,7 @@ onMounted(() => {
             margin-bottom: 10px;
             background-color: var(--project-bg);
             overflow: hidden;
-            transition: background-color 0.5s, color 0.5s;
+            transition: all 0.2s ease;
 
             &:hover {
                 box-shadow: var(--box-shadow) 0px 0px 10px;
@@ -954,7 +954,7 @@ onMounted(() => {
                 object-fit: cover;
                 border-radius: 26px;
                 background-color: var(--project-bg);
-                transition: transform 0.3s ease;
+                transition: transform 0.2s ease;
                 transition: background-color 0.5s, color 0.5s;
             }
 
@@ -970,6 +970,10 @@ onMounted(() => {
                 -moz-user-select: none; /* Firefox */
                 -ms-user-select: none; /* IE10+/Edge */
                 user-select: none; /* Standard syntax */
+
+                &:hover {
+                    transform: scale(1.01);
+                }
 
                 .appBox {
                     display: flex;
@@ -1000,7 +1004,7 @@ onMounted(() => {
             &:hover {
                 color: black;
                 // border: 1px solid var(--box-shadow);
-                transition: background-color 0.5s, color 0.5s;
+                transition: transform 0.2s ease;
                 cursor: pointer;
 
                 .addIcon {
@@ -1012,7 +1016,7 @@ onMounted(() => {
 
             .addIcon {
                 color: var(--box-shadow);
-                transition: font-size 0.1s, font-weight 0.5s;
+                transition: transform 0.2s ease;
             }
         }
     }
@@ -1098,6 +1102,12 @@ onMounted(() => {
             width: 50px;
             height: 50px;
             border-radius: 50%;
+            transition: transform 0.2s ease;
+
+            &:hover {
+                transform: scale(1.05);
+                cursor: pointer;
+            }
         }
     }
 }
