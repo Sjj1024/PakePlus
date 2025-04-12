@@ -895,6 +895,11 @@ onMounted(() => {
                     width: 22px;
                     height: 22px;
                     border-radius: 50%;
+
+                    &:hover {
+                        transform: scale(1.08);
+                        cursor: pointer;
+                    }
                 }
 
                 .setIcon {
@@ -1000,11 +1005,10 @@ onMounted(() => {
             flex-direction: row;
             justify-content: center;
             align-items: center;
+            transition: all 0.2s ease;
 
             &:hover {
                 color: black;
-                // border: 1px solid var(--box-shadow);
-                transition: transform 0.2s ease;
                 cursor: pointer;
 
                 .addIcon {
@@ -1016,7 +1020,7 @@ onMounted(() => {
 
             .addIcon {
                 color: var(--box-shadow);
-                transition: transform 0.2s ease;
+                transition: all 0.2s ease;
             }
         }
     }
