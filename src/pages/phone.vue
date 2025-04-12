@@ -46,7 +46,7 @@
                     <Paperclip />
                 </el-icon>
                 <el-icon :size="22" class="desktop">
-                    <ForkSpoon />
+                    <!-- <ForkSpoon /> -->
                 </el-icon>
             </div>
         </div>
@@ -153,7 +153,7 @@
                         :label="t('appIcon')"
                         prop="icon"
                         class="formItem"
-                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                        :style="isTauri ? 'width: unset' : 'width: unset'"
                     >
                         <div v-if="iconBase64" class="iconChange">
                             <img
@@ -197,24 +197,6 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="安全区域"
-                        prop="tauriApi"
-                        class="formItem"
-                    >
-                        <el-select
-                            v-model="value"
-                            placeholder="Select"
-                            style="width: 100px"
-                        >
-                            <el-option
-                                v-for="item in options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value"
-                            />
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item
                         :label="t('devbug')"
                         prop="tauriApi"
                         class="formItem"
@@ -237,6 +219,25 @@
                             <Edit />
                         </el-icon>
                     </el-form-item>
+                    <el-form-item
+                        label="安全区域"
+                        prop="tauriApi"
+                        class="formItem"
+                    >
+                        <el-select
+                            v-model="safeVal"
+                            placeholder="Select"
+                            style="width: 100px"
+                            disabled
+                        >
+                            <el-option
+                                v-for="item in safeOptions"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                            />
+                        </el-select>
+                    </el-form-item>
                 </div>
                 <!-- app header -->
                 <div class="inLine checkBox">
@@ -244,22 +245,24 @@
                         label="APP标头"
                         prop="icon"
                         class="formItem"
-                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                        :style="isTauri ? 'width: unset' : 'width: unset'"
                     >
                         <el-checkbox
-                            v-model="store.currentProject.iconRound"
+                            v-model="store.currentProject.phone.header.show"
                             label=""
+                            disabled
                         />
                     </el-form-item>
                     <el-form-item
                         label="侧边菜单"
                         prop="icon"
                         class="formItem"
-                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                        :style="isTauri ? 'width: unset' : 'width: unset'"
                     >
                         <el-checkbox
-                            v-model="store.currentProject.iconRound"
+                            v-model="store.currentProject.phone.siderMenu.show"
                             label=""
+                            disabled
                         />
                     </el-form-item>
                     <el-form-item
@@ -268,8 +271,9 @@
                         class="formItem"
                     >
                         <el-checkbox
-                            v-model="store.currentProject.devbug"
+                            v-model="store.currentProject.phone.header.toolBar"
                             label=""
+                            disabled
                         />
                     </el-form-item>
                     <el-form-item
@@ -280,21 +284,27 @@
                         <el-checkbox
                             v-model="store.currentProject.devbug"
                             label=""
+                            disabled
                         />
                     </el-form-item>
                     <el-form-item
-                        prop="iconRound"
                         label="APP标题"
+                        prop="tauriApi"
                         class="formItem"
                     >
-                        <el-input
-                            v-model.trim="store.currentProject.version"
-                            autocomplete="off"
-                            autoCapitalize="off"
-                            autoCorrect="off"
-                            spellCheck="false"
-                            :placeholder="`${t('example')}：0.0.1`"
-                        />
+                        <el-select
+                            v-model="appHeaderVal"
+                            placeholder="Select"
+                            style="width: 100px"
+                            disabled
+                        >
+                            <el-option
+                                v-for="item in appHeaderOptions"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                            />
+                        </el-select>
                     </el-form-item>
                 </div>
                 <!-- bottom menu -->
@@ -303,22 +313,24 @@
                         label="底部菜单"
                         prop="icon"
                         class="formItem"
-                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                        :style="isTauri ? 'width: unset' : 'width: unset'"
                     >
                         <el-checkbox
-                            v-model="store.currentProject.iconRound"
+                            v-model="store.currentProject.phone.tabBar.show"
                             label=""
+                            disabled
                         />
                     </el-form-item>
                     <el-form-item
                         label="默认颜色"
                         prop="icon"
                         class="formItem"
-                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                        :style="isTauri ? 'width: unset' : 'width: unset'"
                     >
                         <el-checkbox
-                            v-model="store.currentProject.iconRound"
+                            v-model="store.currentProject.phone.tabBar.color"
                             label=""
+                            disabled
                         />
                     </el-form-item>
                     <el-form-item
@@ -327,8 +339,11 @@
                         class="formItem"
                     >
                         <el-checkbox
-                            v-model="store.currentProject.devbug"
+                            v-model="
+                                store.currentProject.phone.tabBar.activeColor
+                            "
                             label=""
+                            disabled
                         />
                     </el-form-item>
                     <el-form-item
@@ -337,23 +352,32 @@
                         class="formItem"
                     >
                         <el-checkbox
-                            v-model="store.currentProject.devbug"
+                            v-model="
+                                store.currentProject.phone.tabBar
+                                    .backgroundColor
+                            "
                             label=""
+                            disabled
                         />
                     </el-form-item>
                     <el-form-item
-                        prop="iconRound"
                         label="字体大小"
+                        prop="tauriApi"
                         class="formItem"
                     >
-                        <el-input
-                            v-model.trim="store.currentProject.version"
-                            autocomplete="off"
-                            autoCapitalize="off"
-                            autoCorrect="off"
-                            spellCheck="false"
-                            :placeholder="`${t('example')}：0.0.1`"
-                        />
+                        <el-select
+                            v-model="fontSizeVal"
+                            placeholder="Select"
+                            style="width: 100px"
+                            disabled
+                        >
+                            <el-option
+                                v-for="item in fontSizeOptions"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value"
+                            />
+                        </el-select>
                     </el-form-item>
                 </div>
                 <!-- menu config -->
@@ -974,8 +998,8 @@ const changeUrl = (value: string) => {
 }
 
 // 安全区域
-const value = ref('all')
-const options = [
+const safeVal = ref('all')
+const safeOptions = [
     {
         value: 'all',
         label: '全忽略',
@@ -995,6 +1019,35 @@ const options = [
     {
         value: 'right',
         label: '仅右侧',
+    },
+]
+// APP标头
+const appHeaderVal = ref('default')
+const appHeaderOptions = [
+    {
+        value: 'default',
+        label: '默认',
+    },
+    {
+        value: 'custom',
+        label: '自定义',
+    },
+]
+
+// 字体大小
+const fontSizeVal = ref('16')
+const fontSizeOptions = [
+    {
+        value: '16',
+        label: '16px',
+    },
+    {
+        value: '18',
+        label: '18px',
+    },
+    {
+        value: '20',
+        label: '20px',
     },
 ]
 

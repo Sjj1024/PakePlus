@@ -178,7 +178,7 @@
                         :label="t('appIcon')"
                         prop="icon"
                         class="formItem"
-                        :style="isTauri ? 'width: unset' : 'width: 18%'"
+                        :style="isTauri ? 'width: unset' : 'width: 13.5%'"
                     >
                         <div v-if="iconBase64" class="iconChange">
                             <img

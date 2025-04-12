@@ -274,23 +274,26 @@ export const phoneConfig = {
         fontSize: 16,
         fontWeight: 'bold',
         loading: false,
-        // left siderDrawer
-        siderDrawer: false,
-        siderDrawerWidth: 0,
-        siderDrawerBackgroundColor: '',
-        siderDrawerColor: '',
-        siderDrawerFontSize: 16,
-        siderDrawerFontWeight: 'bold',
-        siderDrawerTitle: '',
-        siderDrawerTitleColor: '',
-        siderDrawerTitleFontSize: 16,
-        siderDrawerTitleFontWeight: 'bold',
         // right toolBar
         toolBar: false,
         toolBarBackgroundColor: '',
         toolBarColor: '',
         toolBarFontSize: 16,
         toolBarFontWeight: 'bold',
+    },
+    // sider menu config
+    siderMenu: {
+        // left siderMenu
+        show: false,
+        width: 0,
+        backgroundColor: '',
+        color: '',
+        fontSize: 16,
+        fontWeight: 'bold',
+        title: '',
+        titleColor: '',
+        titleFontSize: 16,
+        titleFontWeight: 'bold',
     },
     // tabBar config
     tabBar: {
