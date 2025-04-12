@@ -935,8 +935,7 @@ onMounted(() => {
         .project {
             height: 200px;
             border-radius: 10px;
-            // border: 1px solid var(--box-shadow);
-            padding: 10px;
+            padding-bottom: 10px;
             margin-bottom: 10px;
             background-color: var(--project-bg);
             overflow: hidden;
@@ -957,10 +956,9 @@ onMounted(() => {
                 width: 100%;
                 // height: 66%;
                 object-fit: cover;
-                border-radius: 26px;
+                // border-radius: 20px;
                 background-color: var(--project-bg);
                 transition: transform 0.2s ease;
-                transition: background-color 0.5s, color 0.5s;
             }
 
             .appPreview {
@@ -970,7 +968,7 @@ onMounted(() => {
 
             .infoBox {
                 z-index: 2;
-                padding: 5px;
+                padding: 0 10px 10px 10px;
                 -webkit-user-select: none; /* Safari */
                 -moz-user-select: none; /* Firefox */
                 -ms-user-select: none; /* IE10+/Edge */
