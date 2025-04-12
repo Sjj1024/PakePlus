@@ -258,6 +258,64 @@ export const tauriConfig = {
     },
 }
 
+// phone config
+export const phoneConfig = {
+    safeArea: {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+    },
+    header: {
+        show: false,
+        title: '',
+        backgroundColor: '',
+        color: '',
+        fontSize: 16,
+        fontWeight: 'bold',
+        loading: false,
+        // left siderDrawer
+        siderDrawer: false,
+        siderDrawerWidth: 0,
+        siderDrawerBackgroundColor: '',
+        siderDrawerColor: '',
+        siderDrawerFontSize: 16,
+        siderDrawerFontWeight: 'bold',
+        siderDrawerTitle: '',
+        siderDrawerTitleColor: '',
+        siderDrawerTitleFontSize: 16,
+        siderDrawerTitleFontWeight: 'bold',
+        // right toolBar
+        toolBar: false,
+        toolBarBackgroundColor: '',
+        toolBarColor: '',
+        toolBarFontSize: 16,
+        toolBarFontWeight: 'bold',
+    },
+    // tabBar config
+    tabBar: {
+        show: false,
+        backgroundColor: '',
+        color: '',
+        activeColor: '',
+        fontSize: 16,
+        fontWeight: 'bold',
+        tabBarItem: [],
+    },
+    // ios config
+    ios: {
+        name: '',
+        appid: '',
+        icon: '',
+    },
+    // android config
+    android: {
+        name: '',
+        appid: '',
+        icon: '',
+    },
+}
+
 // 初始化项目
 export const initProject = {
     name: '',
@@ -284,6 +342,7 @@ export const initProject = {
     htmlPath: '',
     htmlFiles: [],
     more: tauriConfig,
+    phone: phoneConfig,
 }
 
 // 转换为本地时间

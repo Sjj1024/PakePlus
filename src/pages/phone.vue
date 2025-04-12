@@ -988,6 +988,14 @@ const options = [
         value: 'bottom',
         label: '仅底部',
     },
+    {
+        value: 'left',
+        label: '仅左侧',
+    },
+    {
+        value: 'right',
+        label: '仅右侧',
+    },
 ]
 
 // close tauri config dialog
