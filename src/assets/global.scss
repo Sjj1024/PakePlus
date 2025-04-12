@@ -35,3 +35,8 @@ body {
     width: 60% !important;
     height: 90% !important;
 }
+
+.el-button:hover {
+    transform: translateY(-1px);
+    // box-shadow: 0 6px 8px rgba(52, 152, 219, 0.3);
+}

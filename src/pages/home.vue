@@ -929,8 +929,9 @@ onMounted(() => {
 
         .project {
             height: 200px;
-            border-radius: 5px;
-            border: 1px solid var(--box-shadow);
+            border-radius: 10px;
+            // border: 1px solid var(--box-shadow);
+            padding: 10px;
             margin-bottom: 10px;
             background-color: var(--project-bg);
             overflow: hidden;
@@ -939,6 +940,7 @@ onMounted(() => {
             &:hover {
                 box-shadow: var(--box-shadow) 0px 0px 10px;
                 transform: scale(1.01);
+                cursor: pointer;
 
                 .appIcon {
                     transform: scale(1.02);
@@ -948,9 +950,9 @@ onMounted(() => {
             .appIcon {
                 z-index: 1;
                 width: 100%;
-                height: 66%;
+                // height: 66%;
                 object-fit: cover;
-                border-radius: 2px 2px 0 0;
+                border-radius: 26px;
                 background-color: var(--project-bg);
                 transition: transform 0.3s ease;
                 transition: background-color 0.5s, color 0.5s;
@@ -968,7 +970,6 @@ onMounted(() => {
                 -moz-user-select: none; /* Firefox */
                 -ms-user-select: none; /* IE10+/Edge */
                 user-select: none; /* Standard syntax */
-                cursor: default;
 
                 .appBox {
                     display: flex;
@@ -995,10 +996,12 @@ onMounted(() => {
             flex-direction: row;
             justify-content: center;
             align-items: center;
+
             &:hover {
                 color: black;
-                border: 1px solid var(--box-shadow);
+                // border: 1px solid var(--box-shadow);
                 transition: background-color 0.5s, color 0.5s;
+                cursor: pointer;
 
                 .addIcon {
                     color: var(--box-shadow);

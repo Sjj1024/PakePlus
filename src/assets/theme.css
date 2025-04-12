@@ -16,7 +16,7 @@
 /* light主题 */
 :root[theme='light'] {
     --bg-color: #fff;
-    --project-bg: #f7f7f7;
+    --project-bg: #eee;
     --hover-color: #ccc;
     --text-color: #181818;
     --box-shadow: #ccc;
