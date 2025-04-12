@@ -26,7 +26,7 @@ export default {
     back: '戻る',
     configProject: 'プロジェクトを設定',
     configProjectTips:
-        '現在のプロジェクトのWebサイトアドレス、アプリ名、英語名、アプリIDなどを設定します',
+        '現在のプロジェクトのWebサイトアドレス、アプリ名、アプリIDなどを設定します',
     relHistore: 'リリース履歴',
     delProject: 'プロジェクトを削除',
     webUrl: 'Webサイトアドレス',

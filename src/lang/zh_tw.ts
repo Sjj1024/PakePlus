@@ -22,7 +22,7 @@ export default {
     preEnvironment: '準備環境...',
     back: '返回',
     configProject: '配置項目',
-    configProjectTips: '配置當前項目網站地址、APP顯示名稱、英文名稱、APP標識等',
+    configProjectTips: '配置當前項目網站地址、APP名稱、APP標識等',
     relHistore: '發佈歷史',
     delProject: '刪除項目',
     webUrl: '網站地址',

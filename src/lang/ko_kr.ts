@@ -25,7 +25,7 @@ export default {
     back: '뒤로',
     configProject: '프로젝트 설정',
     configProjectTips:
-        '현재 프로젝트의 웹 사이트 주소, 앱 표시 이름, 영어 이름, 앱 ID 등을 설정합니다',
+        '현재 프로젝트의 웹 사이트 주소, 앱 이름, 앱 ID 등을 설정합니다',
     relHistore: '릴리스 기록',
     delProject: '프로젝트 삭제',
     webUrl: '웹 사이트 주소',

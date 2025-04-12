@@ -16,7 +16,7 @@
                     <span> APP配置 </span>
                 </div>
                 <div class="toolTips">
-                    <span> 配置手机APP的配置信息 </span>
+                    <span> 移动端手机APP（iOS/Android）的配置信息 </span>
                     <el-icon
                         class="document"
                         @click="openUrl(urlMap.configdoc)"
@@ -357,7 +357,7 @@
                     </el-form-item>
                 </div>
                 <!-- menu config -->
-                <div class="inLine checkBox">
+                <!-- <div class="inLine checkBox">
                     <el-form-item
                         label="菜单一"
                         prop="icon"
@@ -616,7 +616,7 @@
                             :placeholder="`${t('example')}：0.0.1`"
                         />
                     </el-form-item>
-                </div>
+                </div> -->
             </el-form>
         </div>
 
