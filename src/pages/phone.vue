@@ -282,7 +282,7 @@
                         class="formItem"
                     >
                         <el-checkbox
-                            v-model="store.currentProject.devbug"
+                            v-model="store.currentProject.phone.header.loading"
                             label=""
                             disabled
                         />
@@ -2139,6 +2139,10 @@ onMounted(async () => {
         store.setRelease(store.currentProject.name, { id: 0 })
     } else {
         store.setCurrentRelease()
+    }
+    if (store.currentProject.isHtml) {
+        store.currentProject.url = ''
+        ElMessage.warning('移动端暂不支持静态文件')
     }
 })
 </script>

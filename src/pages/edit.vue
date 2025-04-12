@@ -864,6 +864,7 @@ const handleFileChange = async (event: any) => {
             const fileSize = file.size
             if (fileSize > fileSizeLimit) {
                 ElMessage.error(t('limitSize'))
+                buildLoading.value = false
                 return
             }
         }
