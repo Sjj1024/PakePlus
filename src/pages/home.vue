@@ -2,7 +2,7 @@
     <div class="homeBox" :class="{ isWeb: !isTauri }">
         <div class="homeHeader">
             <div>
-                <div class="headerTitle" @click="supportPP">
+                <div class="headerTitle" @click="delPakePlus">
                     <span>{{ t('projectTitle') }}</span>
                 </div>
                 <div class="toolTips">
@@ -289,10 +289,21 @@ const copyToken = () => {
 }
 
 // logout
-const logout = () => {
+const logout = async () => {
     localStorage.clear()
     userInfoDialog.value = false
     store.$reset()
+}
+
+// del pakeplus!
+const delPakePlus = async () => {
+    await githubApi.deleteProgect(store.userInfo.login, 'PakePlus')
+    await githubApi.deleteProgect(store.userInfo.login, 'PakePlus-iOS')
+    await githubApi.deleteProgect(store.userInfo.login, 'PakePlus-Android')
+    localStorage.removeItem('projectList')
+    localStorage.removeItem('releases')
+    store.$reset()
+    console.log('reset success')
 }
 
 // go project detail
@@ -312,7 +323,20 @@ const goProject = async (pro: Project) => {
                     createBranch(
                         store.userInfo.login,
                         pro.name,
+                        'PakePlus',
                         store.shaInfo.desktopWeb
+                    )
+                    createBranch(
+                        store.userInfo.login,
+                        pro.name,
+                        'PakePlus-iOS',
+                        store.shaInfo.iosWeb
+                    )
+                    createBranch(
+                        store.userInfo.login,
+                        pro.name,
+                        'PakePlus-Android',
+                        store.shaInfo.androidWeb
                     )
                 }
             })
@@ -334,6 +358,13 @@ const showBranchDialog = () => {
     // checkout has github token
     if (store.token === '') {
         ElMessage.error(t('configToken'))
+    } else {
+        getMainSha('PakePlus')
+        getWebSha('PakePlus')
+        getMainSha('PakePlus-iOS')
+        getWebSha('PakePlus-iOS')
+        getMainSha('PakePlus-Android')
+        getWebSha('PakePlus-Android')
     }
     // need creat new branch, first input project name
     branchDialog.value = true
@@ -451,45 +482,43 @@ const commitShas = async (tips: boolean = true) => {
 // fork and start
 const forkStartShas = async (tips: boolean = true) => {
     // fork action is async
-    const forkRes: any = await githubApi.forkProgect('PakePlus', {
-        name: 'PakePlus',
-        default_branch_only: false,
+    const forkRes: any = Promise.all([
+        forkPakePlus('PakePlus'),
+        forkPakePlus('PakePlus-iOS'),
+        forkPakePlus('PakePlus-Android'),
+    ]).then((res) => {
+        console.log('forkRes', res)
+        return res.every((item) => item)
     })
-    if (forkRes.status === 202) {
+    if (forkRes) {
         console.log('forkRes', forkRes)
-    } else if (forkRes.status === 403) {
-        // maybe account has locked
-        store.setUser({ login: '' })
-        testLoading.value = false
-        ElMessage.error(forkRes.data.message || t('tokenError'))
-        return
     } else {
         console.error('fork error', forkRes)
-        store.setUser({ login: '' })
-        testLoading.value = false
-        ElMessage.error(forkRes.data.message || t('tokenError'))
-        return
     }
-    await forkAndroidiOS()
     await supportPP()
     commitShas(tips)
 }
 
 // fork pakeplus-android and pakeplus-ios
-const forkAndroidiOS = async () => {
-    const forkAndroid: any = await githubApi.forkProgect('PakePlus-Android', {
-        name: 'PakePlus-Android',
+const forkPakePlus = async (repo: string = 'PakePlus') => {
+    const forkRes: any = await githubApi.forkProgect(repo, {
+        name: repo,
         default_branch_only: false,
     })
-    const forkiOS: any = await githubApi.forkProgect('PakePlus-iOS', {
-        name: 'PakePlus-iOS',
-        default_branch_only: false,
-    })
-    if (forkAndroid.status === 202) {
-        console.log('forkAndroid', forkAndroid)
-    }
-    if (forkiOS.status === 202) {
-        console.log('forkiOS', forkiOS)
+    if (forkRes.status === 202) {
+        console.log('forkPakePlus', forkRes)
+        return true
+    } else if (forkRes.status === 403) {
+        // maybe account has locked
+        store.setUser({ login: '' })
+        testLoading.value = false
+        ElMessage.error(forkRes.data.message || t('tokenError'))
+        return false
+    } else {
+        store.setUser({ login: '' })
+        testLoading.value = false
+        ElMessage.error(forkRes.data.message || t('tokenError'))
+        return false
     }
 }
 
@@ -538,10 +567,14 @@ const getWebSha = async (repo: string = 'PakePlus') => {
 }
 
 // 获取需要更新的文件sha
-const getFileSha = async (filePath: string, branch: string) => {
+const getFileSha = async (
+    filePath: string,
+    branch: string,
+    repo: string = 'PakePlus'
+) => {
     const res: any = await githubApi.getFileSha(
         store.userInfo.login,
-        'PakePlus',
+        repo,
         filePath,
         { ref: branch }
     )
@@ -592,12 +625,35 @@ const creatProject = async () => {
                 store.setCurrentProject(branchInfo)
                 creatLoading.value = false
                 // update new branch build.yml file
-                createBranch(
-                    store.userInfo.login,
-                    branchName.value,
-                    store.shaInfo.desktopWeb
-                )
-                router.push('/edit')
+                const createRes: any = Promise.all([
+                    createBranch(
+                        store.userInfo.login,
+                        branchName.value,
+                        'PakePlus',
+                        store.shaInfo.desktopWeb
+                    ),
+                    createBranch(
+                        store.userInfo.login,
+                        branchName.value,
+                        'PakePlus-iOS',
+                        store.shaInfo.iosWeb
+                    ),
+                    createBranch(
+                        store.userInfo.login,
+                        branchName.value,
+                        'PakePlus-Android',
+                        store.shaInfo.androidWeb
+                    ),
+                ]).then((res) => {
+                    console.log('createBranch res', res)
+                    return res.every((item) => item)
+                })
+                if (createRes) {
+                    router.push('/edit')
+                } else {
+                    ElMessage.error(t('createBranchError'))
+                    creatLoading.value = false
+                }
             } else if (res.status === 200) {
                 creatLoading.value = false
                 ElMessage.success(t('projectExist'))
@@ -659,7 +715,11 @@ const deleteBuildYml = async (
     branchName: string = mainBranch,
     repo: string = 'PakePlus'
 ) => {
-    const shaRes = await getFileSha('.github/workflows/build.yml', branchName)
+    const shaRes = await getFileSha(
+        '.github/workflows/build.yml',
+        branchName,
+        repo
+    )
     console.log('get build.yml file sha', shaRes)
     if (shaRes.status === 200) {
         const deleteRes: any = await githubApi.deleteBuildYml(
@@ -716,8 +776,8 @@ onMounted(() => {
     } else {
         ElMessage.error(t('webNotStable'))
     }
-    getPakePlusInfo()
     checkUpdate()
+    getPakePlusInfo()
 })
 </script>
 

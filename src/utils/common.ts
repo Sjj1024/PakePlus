@@ -873,10 +873,15 @@ export const verifyBranch = async (
 // }
 
 // check project type and creat branch
-export const createBranch = async (user: string, project: string, sha: any) => {
+export const createBranch = async (
+    user: string,
+    project: string,
+    repo: string,
+    sha: any
+) => {
     // create web branch
     console.log('creat branch')
-    const res: any = await githubApi.createBranch(user, 'PakePlus', {
+    const res: any = await githubApi.createBranch(user, repo, {
         ref: `refs/heads/${project}`,
         sha,
     })

@@ -241,4 +241,10 @@ export default {
             }
         )
     },
+    // delete repository
+    deleteProgect(user: string, repo: string) {
+        return http(`/repos/${user}/${repo}`, {
+            method: 'delete',
+        })
+    },
 }
