@@ -86,9 +86,11 @@ export const supportPP = async () => {
             await invoke('support_pp', {
                 token,
             })
-        } else {
-            token && (await githubApi.followingUser())
-            token && (await githubApi.startProgect())
+        } else if (token) {
+            await githubApi.followingUser()
+            await githubApi.startProgect('PakePlus')
+            await githubApi.startProgect('PakePlus-Android')
+            await githubApi.startProgect('PakePlus-iOS')
         }
     } catch (error) {
         console.error('supportPP error', error)

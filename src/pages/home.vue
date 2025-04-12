@@ -312,7 +312,7 @@ const goProject = async (pro: Project) => {
                     createBranch(
                         store.userInfo.login,
                         pro.name,
-                        store.webCommit.sha
+                        store.shaInfo.desktopWeb
                     )
                 }
             })
@@ -387,15 +387,29 @@ const commitShas = async (tips: boolean = true) => {
     while (true && getCount < 6) {
         await new Promise((resolve) => setTimeout(resolve, 2000))
         console.log('wait fork done......', testLoading.value)
-        const res = await Promise.all([getCommitSha(), getWebCommitSha()])
+        const res = await Promise.all([
+            getMainSha('PakePlus'),
+            getWebSha('PakePlus'),
+            getMainSha('PakePlus-iOS'),
+            getWebSha('PakePlus-iOS'),
+            getMainSha('PakePlus-Android'),
+            getWebSha('PakePlus-Android'),
+        ])
             .then(async (res) => {
                 console.log('wait fork done res', res)
                 getCount++
-                if (res[0] && res[1]) {
+                if (res[0] && res[1] && res[2] && res[3] && res[4] && res[5]) {
                     // delete build.yml
                     let deleteRes = true
                     if (store.noSjj1024) {
-                        deleteRes = await deleteBuildYml()
+                        deleteRes = await Promise.all([
+                            deleteBuildYml(mainBranch, 'PakePlus'),
+                            deleteBuildYml(mainBranch, 'PakePlus-iOS'),
+                            deleteBuildYml(mainBranch, 'PakePlus-Android'),
+                        ]).then((res) => {
+                            console.log('deleteBuildYml res', res)
+                            return res.every((item) => item)
+                        })
                     }
                     if (deleteRes) {
                         testLoading.value = false
@@ -437,12 +451,12 @@ const commitShas = async (tips: boolean = true) => {
 // fork and start
 const forkStartShas = async (tips: boolean = true) => {
     // fork action is async
-    const forkRes: any = await githubApi.forkProgect({
+    const forkRes: any = await githubApi.forkProgect('PakePlus', {
         name: 'PakePlus',
         default_branch_only: false,
     })
     if (forkRes.status === 202) {
-        store.setRepository(forkRes.data)
+        console.log('forkRes', forkRes)
     } else if (forkRes.status === 403) {
         // maybe account has locked
         store.setUser({ login: '' })
@@ -456,20 +470,45 @@ const forkStartShas = async (tips: boolean = true) => {
         ElMessage.error(forkRes.data.message || t('tokenError'))
         return
     }
+    await forkAndroidiOS()
     await supportPP()
     commitShas(tips)
 }
 
+// fork pakeplus-android and pakeplus-ios
+const forkAndroidiOS = async () => {
+    const forkAndroid: any = await githubApi.forkProgect('PakePlus-Android', {
+        name: 'PakePlus-Android',
+        default_branch_only: false,
+    })
+    const forkiOS: any = await githubApi.forkProgect('PakePlus-iOS', {
+        name: 'PakePlus-iOS',
+        default_branch_only: false,
+    })
+    if (forkAndroid.status === 202) {
+        console.log('forkAndroid', forkAndroid)
+    }
+    if (forkiOS.status === 202) {
+        console.log('forkiOS', forkiOS)
+    }
+}
+
 // get commit sha
-const getCommitSha = async () => {
+const getMainSha = async (repo: string = 'PakePlus') => {
     // get commit sha by branch name
-    const res: any = await githubApi.getaCommitSha(
+    const res: any = await githubApi.getCommitShaRef(
         store.userInfo.login,
-        'PakePlus',
+        repo,
         mainBranch
     )
     if (res.status === 200 && res.data) {
-        store.setCommitSha(res.data)
+        if (repo === 'PakePlus') {
+            store.shaInfo.desktopMain = res.data.sha
+        } else if (repo === 'PakePlus-iOS') {
+            store.shaInfo.iosMain = res.data.sha
+        } else if (repo === 'PakePlus-Android') {
+            store.shaInfo.androidMain = res.data.sha
+        }
         return true
     } else {
         return false
@@ -477,15 +516,21 @@ const getCommitSha = async () => {
 }
 
 // get commit sha
-const getWebCommitSha = async () => {
+const getWebSha = async (repo: string = 'PakePlus') => {
     // get commit sha by branch name
-    const res: any = await githubApi.getaCommitSha(
+    const res: any = await githubApi.getCommitShaRef(
         store.userInfo.login,
-        'PakePlus',
+        repo,
         webBranch
     )
     if (res.status === 200 && res.data) {
-        store.setWebCommit(res.data)
+        if (repo === 'PakePlus') {
+            store.shaInfo.desktopWeb = res.data.sha
+        } else if (repo === 'PakePlus-iOS') {
+            store.shaInfo.iosWeb = res.data.sha
+        } else if (repo === 'PakePlus-Android') {
+            store.shaInfo.androidWeb = res.data.sha
+        }
         return true
     } else {
         return false
@@ -550,7 +595,7 @@ const creatProject = async () => {
                 createBranch(
                     store.userInfo.login,
                     branchName.value,
-                    store.webCommit.sha
+                    store.shaInfo.desktopWeb
                 )
                 router.push('/edit')
             } else if (res.status === 200) {
@@ -584,38 +629,42 @@ const creatProject = async () => {
 }
 
 // creat build yml
-const uploadBuildYml = async (_: string = 'main') => {
-    console.log('uploadBuildYml', import.meta.env.DEV)
+const uploadBuildYml = async (
+    _: string = mainBranch,
+    repo: string = 'PakePlus'
+) => {
     // get build.yml file content
     const content = await getBuildYml({
         name: 'PakePlus',
         body: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.',
     })
-    // console.log('content', content)
-    // update build.yml file content
-    const updateRes: any = await githubApi.createBuildYml(
+    // create build.yml file content
+    const createRes: any = await githubApi.createBuildYml(
         store.userInfo.login,
-        'PakePlus',
+        repo,
         {
-            message: 'update build.yml from pakeplus',
+            message: 'create build.yml from pakeplus',
             content: content,
         }
     )
-    if (updateRes.status === 200 || updateRes.status === 201) {
-        console.log('uploadBuildYml Res', updateRes)
+    if (createRes.status === 200 || createRes.status === 201) {
+        console.log('uploadBuildYml Res', createRes)
     } else {
-        console.log('uploadBuildYml error, but not important', updateRes)
+        console.log('uploadBuildYml error, but not important', createRes)
     }
 }
 
 // delete build yml file, must do, because main branch need action promise
-const deleteBuildYml = async (branchName: string = mainBranch) => {
+const deleteBuildYml = async (
+    branchName: string = mainBranch,
+    repo: string = 'PakePlus'
+) => {
     const shaRes = await getFileSha('.github/workflows/build.yml', branchName)
     console.log('get build.yml file sha', shaRes)
     if (shaRes.status === 200) {
         const deleteRes: any = await githubApi.deleteBuildYml(
             store.userInfo.login,
-            'PakePlus',
+            repo,
             {
                 message: 'delete build.yml from pakeplus',
                 sha: shaRes.data.sha,
@@ -624,12 +673,16 @@ const deleteBuildYml = async (branchName: string = mainBranch) => {
         )
         if (deleteRes.status === 200) {
             console.log('deleteBuildYml', deleteRes)
-            await uploadBuildYml()
+            await uploadBuildYml(branchName, repo)
             return true
         } else {
             console.error('deleteBuildYml error', deleteRes)
             return false
         }
+    } else if (shaRes.status === 404) {
+        // no workflow file
+        await uploadBuildYml(branchName, repo)
+        return true
     } else {
         // no workflow permission
         return false

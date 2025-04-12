@@ -21,8 +21,8 @@ export default {
         })
     },
     // start repository
-    startProgect() {
-        return http(`/user/starred/Sjj1024/PakePlus`, {
+    startProgect(repo: string) {
+        return http(`/user/starred/Sjj1024/${repo}`, {
             method: 'put',
         })
     },
@@ -33,8 +33,8 @@ export default {
         })
     },
     // creat project repository
-    forkProgect(body: any) {
-        return http(`/repos/Sjj1024/PakePlus/forks`, {
+    forkProgect(repo: string, body: any) {
+        return http(`/repos/Sjj1024/${repo}/forks`, {
             method: 'post',
             data: body,
         })
@@ -46,7 +46,7 @@ export default {
         })
     },
     // get a commit sha
-    getaCommitSha(user: string, repo: string, ref: string) {
+    getCommitShaRef(user: string, repo: string, ref: string) {
         return http(`/repos/${user}/${repo}/commits/${ref}`, {
             method: 'get',
         })
