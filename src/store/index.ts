@@ -1,4 +1,4 @@
-import { convertToLocalTime, initProject } from '@/utils/common'
+import { convertToLocalTime, getPpconfig, initProject } from '@/utils/common'
 import { defineStore } from 'pinia'
 import githubApi from '@/apis/github'
 
@@ -205,7 +205,23 @@ export const usePakeStore = defineStore('pakeplus', {
         },
         setRelease(proName: string, info: any) {
             if (info && info.id !== 0) {
-                this.releases[proName] = info
+                // 判断this.releases[proName]是否存在
+                if (this.releases[proName]) {
+                    // 如果存在，则先过滤重复id的assets,然后合并assets
+                    const assets = info.assets.filter(
+                        (item: any) =>
+                            !this.releases[proName].assets.some(
+                                (asset: any) => asset.id === item.id
+                            )
+                    )
+                    // 合并assets
+                    this.releases[proName].assets = [
+                        ...this.releases[proName].assets,
+                        ...assets,
+                    ]
+                } else {
+                    this.releases[proName] = info
+                }
             } else {
                 delete this.releases[proName]
             }
@@ -221,10 +237,12 @@ export const usePakeStore = defineStore('pakeplus', {
                 this.releases[this.currentProject.name].id !== 0
             ) {
                 this.currentRelease = this.releases[this.currentProject.name]
-                this.getRelease()
+                this.getRelease('PakePlus')
+                this.getRelease('PakePlus-Android')
             } else {
                 this.currentRelease = { id: 0 }
-                await this.getRelease()
+                await this.getRelease('PakePlus')
+                await this.getRelease('PakePlus-Android')
             }
         },
         // update tauri config
@@ -236,20 +254,16 @@ export const usePakeStore = defineStore('pakeplus', {
                 JSON.stringify(this.currentProject)
             )
         },
-        async getRelease() {
+        async getRelease(repo: string = 'PakePlus') {
             // if token is null, return
             if (localStorage.getItem('token')) {
                 const releaseRes: any = await githubApi.getReleasesAssets(
                     this.userInfo.login,
-                    'PakePlus',
+                    repo,
                     this.currentProject.name
                 )
                 console.log('releaseRes', releaseRes)
-                if (
-                    releaseRes.status === 200 &&
-                    releaseRes.data.assets.length >= 3
-                ) {
-                    // filter current project version
+                if (releaseRes.status === 200) {
                     const assets = releaseRes.data.assets.filter(
                         (item: any) => {
                             return (
@@ -273,23 +287,138 @@ export const usePakeStore = defineStore('pakeplus', {
                     this.setRelease(this.currentProject.name, releaseData)
                     this.currentRelease = releaseData
                     return releaseData
-                } else {
-                    console.error('releaseRes error', releaseRes)
-                    this.setRelease(this.currentProject.name, { id: 0 })
-                    return null
                 }
+                // if (
+                //     releaseRes.status === 200 &&
+                //     releaseRes.data.assets.length >= 3
+                // ) {
+                //     // filter current project version
+                //     const assets = releaseRes.data.assets.filter(
+                //         (item: any) => {
+                //             return (
+                //                 item.name.includes(
+                //                     this.currentProject.version
+                //                 ) || item.name.includes('tar')
+                //             )
+                //         }
+                //     )
+                //     const releaseData = {
+                //         ...releaseRes.data,
+                //         assets: assets.map((asset: any) => {
+                //             return {
+                //                 ...asset,
+                //                 updated_at: convertToLocalTime(
+                //                     asset.updated_at
+                //                 ),
+                //             }
+                //         }),
+                //     }
+                //     this.setRelease(this.currentProject.name, releaseData)
+                //     this.currentRelease = releaseData
+                //     return releaseData
+                // } else {
+                //     console.error('releaseRes error', releaseRes)
+                //     this.setRelease(this.currentProject.name, { id: 0 })
+                //     return null
+                // }
+            }
+        },
+        // delete release
+        async deleteRelease(repo: string = 'PakePlus') {
+            if (this.isRelease) {
+                const releaseRes: any = await githubApi.deleteRelease(
+                    this.userInfo.login,
+                    repo,
+                    this.releases[this.currentProject.name].id
+                )
+                console.log('deleteRelease', releaseRes)
+            }
+            // reset release
+            this.setRelease(this.currentProject.name, { id: 0 })
+        },
+        // update icon
+        async updateIcon(repo: string = 'PakePlus', iconBase64: string) {
+            if (iconBase64 === '') {
+                return true
+            }
+            // get app-icon.png sha
+            const iconSha: any = await githubApi.getFileSha(
+                this.userInfo.login,
+                repo,
+                'app-icon.png',
+                { ref: this.currentProject.name }
+            )
+            // update icon file content
+            if (iconSha.status === 200 || iconSha.status === 404) {
+                const updateRes: any = await githubApi.updateIconFile(
+                    this.userInfo.login,
+                    repo,
+                    {
+                        message: 'update icon from pakeplus',
+                        sha: iconSha.data.sha,
+                        branch: this.currentProject.name,
+                        content: iconBase64,
+                    }
+                )
+                if (updateRes.status === 200) {
+                    console.log('updateRes', updateRes)
+                    return true
+                } else {
+                    console.error('updateRes error', updateRes)
+                    return false
+                }
+            } else {
+                console.error('getIconSha error', iconSha)
+                return false
+            }
+        },
+        // update files
+        async updatePPconfig(repo: string = 'PakePlus') {
+            // get ppconfig.json sha
+            const shaRes: any = await githubApi.getFileSha(
+                this.userInfo.login,
+                repo,
+                'scripts/ppandroid.json',
+                {
+                    ref: this.currentProject.name,
+                }
+            )
+            console.log('get build.yml file sha', shaRes)
+            if (shaRes.status === 200 || shaRes.status === 404) {
+                // get build.yml file content
+                const content = await getPpconfig(repo)
+                // update build.yml file content
+                const updateRes: any = await githubApi.updateBuildYmlFile(
+                    this.userInfo.login,
+                    'PakePlus',
+                    {
+                        message: 'update build.yml from pakeplus',
+                        content: content,
+                        sha: shaRes.data.sha,
+                        branch: this.currentProject.name,
+                    }
+                )
+                if (updateRes.status === 200) {
+                    console.log('updateBuildYml', updateRes)
+                } else {
+                    console.error('updateBuildYml error', updateRes)
+                }
+            } else {
+                console.error('getFileSha error', shaRes)
             }
         },
         // android build step
         async *androidBuildStep() {
             // 1. delete release
+            await this.deleteRelease('PakePlus-Android')
             yield 'delete release'
             // 2. update icon
+            await this.updateIcon('PakePlus-Android', this.currentProject.icon)
             yield 'update icon'
-            // 3. update build.yml
-            yield 'update android.yml'
-            // 4. update custom.js
+            // 3. update custom.js
             yield 'update custom.js'
+            // 4. update ppandroid.json
+            yield 'update ppandroid.json'
             // 5. dispatch action
             yield 'dispatch action'
         },

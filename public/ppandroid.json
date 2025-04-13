@@ -1,0 +1,15 @@
+{
+    "name": "PakePlus",
+    "showName": "Pake Plus",
+    "version": "0.0.1",
+    "webUrl": "https://juejin.cn/",
+    "icon": "./app-icon.png",
+    "input": "./app-icon.png",
+    "output": "./res",
+    "rounded": true,
+    "copyTo": "./app/src/main/res",
+    "androidResDir": "./app/src/main/res",
+    "tagName": "PakePlus-v0.0.1",
+    "releaseName": "PakePlus v0.0.1",
+    "releaseBody": "PakePlus ReleaseBody"
+}

@@ -1012,31 +1012,7 @@ const updateIcon = async () => {
     const iconContent = store.currentProject.iconRound
         ? roundIcon.value.split('base64,')[1]
         : iconBase64.value.split('base64,')[1]
-    // get app-icon.png sha
-    const iconSha: any = await githubApi.getFileSha(
-        store.userInfo.login,
-        'PakePlus',
-        'app-icon.png',
-        { ref: store.currentProject.name }
-    )
-    // update icon file content
-    if (iconSha.status === 200) {
-        const updateRes: any = await githubApi.updateIconFile(
-            store.userInfo.login,
-            'PakePlus',
-            {
-                message: 'update icon from pakeplus',
-                sha: iconSha.data.sha,
-                branch: store.currentProject.name,
-                content: iconContent,
-            }
-        )
-        if (updateRes.status === 200) {
-            console.log('updateRes', updateRes)
-        } else {
-            console.error('updateRes error', updateRes)
-        }
-    }
+    await store.updateIcon('PakePlus', iconContent)
 }
 
 const backHome = () => {
@@ -1255,32 +1231,23 @@ let buildStatus = t('startCompile') + '...'
 let buildSecondTimer: any = null
 let checkDispatchTimer: any = null
 
-// delete lasted release
-const deleteRelease = async () => {
-    if (store.isRelease) {
-        const releaseRes: any = await githubApi.deleteRelease(
-            store.userInfo.login,
-            'PakePlus',
-            store.releases[store.currentProject.name].id
-        )
-        console.log('deleteRelease', releaseRes)
-    }
-    // reset release
-    store.setRelease(store.currentProject.name, { id: 0 })
-}
-
 // update build.yml file content
 const updateBuildYml = async () => {
     loadingText(t('syncConfig') + 'action...')
     // get build.yml file sha
-    const shaRes = await getFileSha(
+    const shaRes: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
         '.github/workflows/build.yml',
-        store.currentProject.name
+        {
+            ref: store.currentProject.name,
+        }
     )
     console.log('get build.yml file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get build.yml file content
         const content = await getBuildYmlFetch({
+            repo: 'PakePlus',
             name: store.currentProject.name,
             body: pubForm.desc,
         })
@@ -1310,9 +1277,13 @@ const updateBuildYml = async () => {
 const updateCargoToml = async () => {
     loadingText(t('syncConfig') + 'Cargo...')
     // get CargoToml file sha
-    const shaRes = await getFileSha(
+    const shaRes: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
         'src-tauri/Cargo.toml',
-        store.currentProject.name
+        {
+            ref: store.currentProject.name,
+        }
     )
     console.log('get CargoToml file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
@@ -1350,9 +1321,13 @@ const updateCargoToml = async () => {
 const updateInitRs = async () => {
     loadingText(t('syncConfig') + 'rust...')
     // get CargoToml file sha
-    const shaRes = await getFileSha(
+    const shaRes: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
         'src-tauri/src/utils/init.rs',
-        store.currentProject.name
+        {
+            ref: store.currentProject.name,
+        }
     )
     console.log('get init.rs file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
@@ -1389,9 +1364,13 @@ const updateInitRs = async () => {
 const updateLibRs = async () => {
     loadingText(t('syncConfig') + 'rust...')
     // get CargoToml file sha
-    const shaRes = await getFileSha(
+    const shaRes: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
         'src-tauri/src/lib.rs',
-        store.currentProject.name
+        {
+            ref: store.currentProject.name,
+        }
     )
     console.log('get lib.rs file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
@@ -1422,9 +1401,13 @@ const updateLibRs = async () => {
 // update build.yml file content
 const libRsConfig = async () => {
     // get CargoToml file sha
-    const shaRes = await getFileSha(
+    const shaRes: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
         'src-tauri/src/lib.rs',
-        store.currentProject.name
+        {
+            ref: store.currentProject.name,
+        }
     )
     console.log('get CargoToml file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
@@ -1455,9 +1438,13 @@ const libRsConfig = async () => {
 const updateCustomJs = async () => {
     loadingText(t('syncConfig') + 'custom...')
     // get CargoToml file sha
-    const shaRes = await getFileSha(
+    const shaRes: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
         'src-tauri/data/custom.js',
-        store.currentProject.name
+        {
+            ref: store.currentProject.name,
+        }
     )
     console.log('get custom file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
@@ -1487,9 +1474,13 @@ const updateCustomJs = async () => {
 const updateTauriConfig = async () => {
     loadingText(t('syncConfig') + 'tauri...')
     // update tauri config json
-    const configSha: any = await getFileSha(
+    const configSha: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus',
         'src-tauri/tauri.conf.json',
-        store.currentProject.name
+        {
+            ref: store.currentProject.name,
+        }
     )
     try {
         // remove label from windows
@@ -1529,7 +1520,7 @@ const publishWeb = async () => {
     loadingText(t('preCheck') + '...')
     try {
         // delete release
-        store.isRelease && (await deleteRelease())
+        store.isRelease && (await store.deleteRelease())
         // publish web or dist
         loadingText(t('syncConfig') + '...')
         if (isTauri) {
@@ -1567,16 +1558,6 @@ const publishWeb = async () => {
     }
 }
 
-const getFileSha = async (filePath: string, branch: string) => {
-    const res: any = await githubApi.getFileSha(
-        store.userInfo.login,
-        'PakePlus',
-        filePath,
-        { ref: branch }
-    )
-    return res
-}
-
 // dispatch workflow action
 const dispatchAction = async () => {
     loadingText(t('preCompile') + 'workflow...')
@@ -1585,9 +1566,6 @@ const dispatchAction = async () => {
         'PakePlus',
         {
             ref: store.currentProject.name,
-            inputs: {
-                branch: store.currentProject.name,
-            },
         }
     )
     if (dispatchRes.status !== 204) {

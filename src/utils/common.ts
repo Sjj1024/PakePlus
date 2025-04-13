@@ -522,6 +522,14 @@ export const getBuildYml = async (params: any) => {
     }
 }
 
+// get ppconfig.json file content
+export const getPpconfig = async (params: any) => {
+    let content = await readFile('ppconfig.json')
+    if (content === 'error') {
+        return 'error'
+    }
+}
+
 // get build.yml file content
 export const getBuildYmlFetch = async (params: any) => {
     // 根据repo选择文件
