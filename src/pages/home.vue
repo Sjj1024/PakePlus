@@ -935,7 +935,7 @@ onMounted(() => {
         .project {
             height: 200px;
             border-radius: 10px;
-            padding-bottom: 10px;
+            padding: 10px 10px 0 10px;
             margin-bottom: 10px;
             background-color: var(--project-bg);
             overflow: hidden;
@@ -956,7 +956,7 @@ onMounted(() => {
                 width: 100%;
                 // height: 66%;
                 object-fit: cover;
-                // border-radius: 20px;
+                border-radius: 20px;
                 background-color: var(--project-bg);
                 transition: transform 0.2s ease;
             }
@@ -968,7 +968,7 @@ onMounted(() => {
 
             .infoBox {
                 z-index: 2;
-                padding: 0 10px 10px 10px;
+                padding: 5px;
                 -webkit-user-select: none; /* Safari */
                 -moz-user-select: none; /* Firefox */
                 -ms-user-select: none; /* IE10+/Edge */
@@ -982,6 +982,13 @@ onMounted(() => {
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
+
+                    .appName {
+                        width: 100px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
                 }
 
                 .appDesc {
