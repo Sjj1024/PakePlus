@@ -121,7 +121,7 @@ export default {
     userLocation: 'Location',
     quit: 'Quit',
     logout: 'Logout',
-    iconRounded: 'Icon Rounded',
+    iconRounded: 'Rounded',
     windowKeep: 'Window Keep',
     injectJq: 'Inject JQ',
     scriptEdit: 'Script Edit',

@@ -15,7 +15,7 @@
 
 /* light主题 */
 :root[theme='light'] {
-    --bg-color: #fff;
+    --bg-color: #fafafa;
     --project-bg: #eee;
     --hover-color: #ccc;
     --text-color: #181818;
@@ -27,3 +27,5 @@
     --api-process: #cdcdcd;
     --filt-item: #ecf5ff;
 }
+
+/* 统一字体大小 */
