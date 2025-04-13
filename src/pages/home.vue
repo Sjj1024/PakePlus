@@ -939,12 +939,12 @@ onMounted(() => {
             margin-bottom: 10px;
             background-color: var(--project-bg);
             overflow: hidden;
-            transition: all 0.2s ease;
+            transition: box-shadow 0.2s, transform 0.2s;
 
             &:hover {
+                cursor: pointer;
                 box-shadow: var(--box-shadow) 0px 0px 10px;
                 transform: scale(1.01);
-                cursor: pointer;
 
                 .appIcon {
                     transform: scale(1.02);
