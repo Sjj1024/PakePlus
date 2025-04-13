@@ -436,7 +436,7 @@ const commitShas = async (tips: boolean = true) => {
                     if (store.noSjj1024) {
                         deleteRes = await Promise.all([
                             deleteBuildYml(mainBranch, 'PakePlus'),
-                            deleteBuildYml(mainBranch, 'PakePlus-iOS'),
+                            // deleteBuildYml(mainBranch, 'PakePlus-iOS'),
                             deleteBuildYml(mainBranch, 'PakePlus-Android'),
                         ]).then((res) => {
                             console.log('deleteBuildYml res', res)
