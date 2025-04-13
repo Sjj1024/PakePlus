@@ -249,6 +249,7 @@ import {
     getBuildYml,
     getCustomJsFetch,
     supportPP,
+    getBuildYmlFetch,
 } from '@/utils/common'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
@@ -690,7 +691,8 @@ const uploadBuildYml = async (
     repo: string = 'PakePlus'
 ) => {
     // get build.yml file content
-    const content = await getBuildYml({
+    const content = await getBuildYmlFetch({
+        repo: repo,
         name: 'PakePlus',
         body: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.',
     })
@@ -892,9 +894,10 @@ onMounted(() => {
                 }
 
                 .userAvatar {
-                    width: 22px;
-                    height: 22px;
+                    width: 23px;
+                    height: 23px;
                     border-radius: 50%;
+                    transition: transform 0.2s ease;
 
                     &:hover {
                         transform: scale(1.08);

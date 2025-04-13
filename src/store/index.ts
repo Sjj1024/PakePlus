@@ -280,5 +280,18 @@ export const usePakeStore = defineStore('pakeplus', {
                 }
             }
         },
+        // android build step
+        async *androidBuildStep() {
+            // 1. delete release
+            yield 'delete release'
+            // 2. update icon
+            yield 'update icon'
+            // 3. update build.yml
+            yield 'update android.yml'
+            // 4. update custom.js
+            yield 'update custom.js'
+            // 5. dispatch action
+            yield 'dispatch action'
+        },
     },
 })

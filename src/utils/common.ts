@@ -10,6 +10,7 @@ export const mainBranch = 'main'
 export const webBranch = 'web'
 export const devBranch = 'dev'
 
+// global file size limit
 export const fileSizeLimit = 1024 * 1024 * 10
 
 // urlMap
@@ -27,6 +28,13 @@ export const urlMap = {
     csdn: 'https://xiaoshen.blog.csdn.net/',
     juejin: 'https://juejin.cn/user/70007368988926',
     windowsConfig: 'https://v2.tauri.app/reference/config/#windowconfig',
+}
+
+// platform map
+export const platformMap = {
+    PakePlus: 'desktop',
+    'PakePlus-iOS': 'ios',
+    'PakePlus-Android': 'android',
 }
 
 export const platforms: { [key: string]: PlatformInfo } = {
@@ -350,6 +358,67 @@ export const initProject = {
     phone: phoneConfig,
 }
 
+// 初始化发布
+export const initRelease = {
+    desktop: {
+        url: '',
+        assets_url: '',
+        upload_url: '',
+        html_url: '',
+        id: 0,
+        node_id: '',
+        tag_name: '',
+        target_commitish: '',
+        name: '',
+        draft: false,
+        prerelease: false,
+        created_at: '2024-09-23T10:46:29Z',
+        published_at: '2024-09-23T10:48:30Z',
+        assets: [],
+        tarball_url: '',
+        zipball_url: '',
+        body: '',
+    },
+    ios: {
+        url: '',
+        assets_url: '',
+        upload_url: '',
+        html_url: '',
+        id: 0,
+        node_id: '',
+        tag_name: '',
+        target_commitish: '',
+        name: '',
+        draft: false,
+        prerelease: false,
+        created_at: '2024-09-23T10:46:29Z',
+        published_at: '2024-09-23T10:48:30Z',
+        assets: [],
+        tarball_url: '',
+        zipball_url: '',
+        body: '',
+    },
+    android: {
+        url: '',
+        assets_url: '',
+        upload_url: '',
+        html_url: '',
+        id: 0,
+        node_id: '',
+        tag_name: '',
+        target_commitish: '',
+        name: '',
+        draft: false,
+        prerelease: false,
+        created_at: '2024-09-23T10:46:29Z',
+        published_at: '2024-09-23T10:48:30Z',
+        assets: [],
+        tarball_url: '',
+        zipball_url: '',
+        body: '',
+    },
+}
+
 // 转换为本地时间
 export const convertToLocalTime = (utcDateTime: string) => {
     // Create a new Date object from the UTC date-time string
@@ -455,7 +524,14 @@ export const getBuildYml = async (params: any) => {
 
 // get build.yml file content
 export const getBuildYmlFetch = async (params: any) => {
-    let content = await readFile('build.yml')
+    // 根据repo选择文件
+    let content = await readFile(
+        params.repo === 'PakePlus'
+            ? 'build.yml'
+            : params.repo === 'PakePlus-iOS'
+            ? 'ios.yml'
+            : 'android.yml'
+    )
     if (content === 'error') {
         return 'error'
     }

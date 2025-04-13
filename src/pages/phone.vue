@@ -724,7 +724,7 @@
                         {{ t('cancel') }}
                     </el-button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <el-button type="primary" @click="publishWeb">
+                    <el-button type="primary" @click="publishAndroid">
                         {{ t('confirm') }}
                     </el-button>
                 </div>
@@ -1888,37 +1888,22 @@ const updateTauriConfig = async () => {
 }
 
 // new publish version
-const publishWeb = async () => {
+const publishAndroid = async () => {
     centerDialogVisible.value = false
     buildLoading.value = true
     loadingText(t('preCheck') + '...')
     try {
-        // delete release
-        store.isRelease && (await deleteRelease())
         // publish web or dist
         loadingText(t('syncConfig') + '...')
-        if (isTauri) {
-            const res = await tauriHtmlUpload()
-            if (res === 'stop') {
-                return
-            }
+        const generator = store.androidBuildStep()
+        let result = await generator.next()
+        while (!result.done) {
+            console.log(`当前执行到: ${result.value}`)
+            result = await generator.next()
         }
-        // update app icon
-        await updateIcon()
-        // update build.yml
-        await updateBuildYml()
-        // update Cargo.toml
-        await updateCargoToml()
-        // update tauri.conf.json
-        await updateTauriConfig()
-        // update custom.js
-        await updateCustomJs()
-        // update init.rs
-        await updateInitRs()
-        // update lib.rs
-        await updateLibRs()
         // dispatch action
-        dispatchAction()
+        // dispatchAction()
+        console.log('publishAndroid end')
     } catch (error: any) {
         warning.value = error.message
         buildTime = 0
