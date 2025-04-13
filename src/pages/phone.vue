@@ -674,15 +674,15 @@
                 <!-- platform select -->
                 <el-form-item :label="t('pubPlatform')">
                     <el-checkbox-group v-model="pubForm.platform">
-                        <el-checkbox :label="t('desktop')" value="desktop" />
+                        <el-checkbox :label="t('androidapp')" value="android" />
                         <el-checkbox
-                            :label="t('mobileEnd')"
-                            value="mobile"
+                            :label="t('iosapp')"
+                            value="ios"
                             disabled
                         />
                         <el-checkbox
-                            :label="t('sourceCode')"
-                            value="source"
+                            :label="t('pwaapp')"
+                            value="pwa"
                             disabled
                         />
                     </el-checkbox-group>
@@ -698,7 +698,9 @@
                 <el-form-item :label="t('pubMode')">
                     <el-radio-group v-model="pubForm.model">
                         <el-radio value="close">{{ t('closeDebug') }}</el-radio>
-                        <el-radio value="debug">{{ t('openDebug') }}</el-radio>
+                        <el-radio value="debug" disabled>
+                            {{ t('openDebug') }}
+                        </el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item :label="t('releaseNotes')">
@@ -1605,7 +1607,7 @@ const createRepo = async () => {
 
 // do not use same name with ref
 const pubForm = reactive({
-    platform: ['desktop'],
+    platform: ['android'],
     chip: 'macos',
     model: 'close',
     desc: '',

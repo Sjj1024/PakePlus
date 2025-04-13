@@ -940,6 +940,7 @@ onMounted(() => {
             background-color: var(--project-bg);
             overflow: hidden;
             transition: box-shadow 0.2s, transform 0.2s;
+            border: 1px solid var(--project-border);
 
             &:hover {
                 cursor: pointer;

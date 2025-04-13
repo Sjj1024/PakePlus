@@ -144,4 +144,9 @@ export default {
     devbug: '開發調試',
     limitSize: '單個文件大小限制為10MB',
     noWorkflowPermission: '沒有workflow權限，請添加權限',
+    iosapp: '蘋果',
+    androidapp: '安卓',
+    pwaapp: 'PWA',
+    desktopapp: '桌面',
+    sourceapp: '源碼',
 }

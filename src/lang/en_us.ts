@@ -152,4 +152,9 @@ export default {
     devbug: 'Debug',
     limitSize: 'Single file size limit is 10MB',
     noWorkflowPermission: 'No workflow permission, please add permission',
+    iosapp: 'iOS',
+    androidapp: 'Android',
+    pwaapp: 'PWA',
+    desktopapp: 'Desktop',
+    sourceapp: 'Source',
 }

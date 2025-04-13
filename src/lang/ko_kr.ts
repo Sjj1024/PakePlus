@@ -153,4 +153,9 @@ export default {
     devbug: '개발 디버그',
     limitSize: '단일 파일 크기는 10MB 이하여야 합니다',
     noWorkflowPermission: 'workflow 권한이 없습니다. 권한을 추가하세요',
+    iosapp: 'iOS',
+    androidapp: 'Android',
+    pwaapp: 'PWA',
+    desktopapp: '데스크탑',
+    sourceapp: '소스 코드',
 }

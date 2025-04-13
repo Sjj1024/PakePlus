@@ -2,6 +2,7 @@
 :root[theme='dark'] {
     --bg-color: #292a2b;
     --project-bg: #383838;
+    --project-border: rgba(255, 255, 255, 0.02);
     --hover-color: #0d1117;
     --text-color: #f0f6fc;
     --box-shadow: #626262;
@@ -17,6 +18,7 @@
 :root[theme='light'] {
     --bg-color: #fafafa;
     --project-bg: #eee;
+    --project-border: rgba(0, 0, 0, 0.02);
     --hover-color: #ccc;
     --text-color: #181818;
     --box-shadow: #ccc;

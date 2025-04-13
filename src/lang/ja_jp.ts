@@ -154,4 +154,9 @@ export default {
     devbug: '開発デバッグ',
     limitSize: '1つのファイルのサイズは10MB以下にしてください',
     noWorkflowPermission: 'workflow権限がありません。権限を追加してください',
+    iosapp: 'iOS',
+    androidapp: 'Android',
+    pwaapp: 'PWA',
+    desktopapp: 'デスクトップ',
+    sourceapp: 'ソースコード',
 }
