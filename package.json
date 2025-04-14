@@ -6,7 +6,7 @@
     "scripts": {
         "tauri": "tauri",
         "icon": "tauri icon",
-        "icns": "node ./cli/creatIcon.cjs",
+        "icns": "node ./scripts/creatIcon.cjs",
         "tauri dev": "tauri dev",
         "tauri build": "tauri build",
         "tauri debug": "tauri build --debug"

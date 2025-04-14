@@ -74,7 +74,7 @@ jobs:
 
             - name: Create Apple icon
               if: matrix.platform == 'macos-latest'
-              run: node ./cli/creatIcon.cjs
+              run: node ./scripts/creatIcon.cjs
 
             - uses: tauri-apps/tauri-action@v0
               env:
