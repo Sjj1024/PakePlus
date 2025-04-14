@@ -111,13 +111,13 @@ jobs:
               run: pnpm install
 
             - name: GitPress Config
-              run: node ./cli/gitpress.cjs gitBase
+              run: node ./scripts/gitpress.cjs gitBase
 
             - name: Build with VitePress
               run: pnpm run docs:build
 
             - name: Copy Static
-              run: node ./cli/gitpress.cjs copyStatic
+              run: node ./scripts/gitpress.cjs copyStatic
 
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3

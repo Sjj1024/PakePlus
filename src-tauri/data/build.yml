@@ -70,7 +70,7 @@ jobs:
 
             - name: Create Apple icon
               if: matrix.platform == 'macos-latest'
-              run: node ./cli/creatIcon.cjs
+              run: node ./scripts/creatIcon.cjs
 
             - name: install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-22.04'
