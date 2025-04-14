@@ -12,4 +12,5 @@
 
 .VPImage:hover {
     filter: drop-shadow(0 0 2em var(--vp-c-brand-1));
+    transition: all 0.5s ease;
 }
