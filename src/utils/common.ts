@@ -85,6 +85,205 @@ export const platforms: { [key: string]: PlatformInfo } = {
     },
 }
 
+// tauri config
+export const tauriConfig = {
+    windows: {
+        label: '',
+        title: '',
+        url: '',
+        userAgent:
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
+        width: 800,
+        height: 600,
+        theme: null,
+        resizable: true,
+        fullscreen: false,
+        maximized: false,
+        minWidth: 400,
+        minHeight: 300,
+        maxWidth: 1920,
+        maxHeight: 1080,
+        decorations: true,
+        transparent: false,
+        titleBarStyle: 'Visible',
+        visible: true,
+        focus: true,
+        closable: true,
+        minimizable: true,
+        maximizable: true,
+        alwaysOnTop: false,
+        alwaysOnBottom: false,
+        center: false,
+        skipTaskbar: false,
+        tabbingIdentifier: null,
+        parent: null,
+        dragDropEnabled: true,
+        browserExtensionsEnabled: false,
+        devtools: true,
+        contentProtected: false,
+        hiddenTitle: false,
+        incognito: false,
+        proxyUrl: null,
+        useHttpsScheme: false,
+        zoomHotkeysEnabled: false,
+        acceptFirstMouse: false,
+        create: false,
+        // if add additionalBrowserArgs, windows cant preview, but can build
+        // additionalBrowserArgs:
+        //     '--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection --autoplay-policy=no-user-gesture-required --auto-accept-camera-and-microphone-capture',
+    },
+}
+
+// phone config
+export const phoneConfig = {
+    safeArea: {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+    },
+    header: {
+        show: false,
+        title: '',
+        backgroundColor: '',
+        color: '',
+        fontSize: 16,
+        fontWeight: 'bold',
+        loading: false,
+        // right toolBar
+        toolBar: false,
+        toolBarBackgroundColor: '',
+        toolBarColor: '',
+        toolBarFontSize: 16,
+        toolBarFontWeight: 'bold',
+    },
+    // sider menu config
+    siderMenu: {
+        // left siderMenu
+        show: false,
+        width: 0,
+        backgroundColor: '',
+        color: '',
+        fontSize: 16,
+        fontWeight: 'bold',
+        title: '',
+        titleColor: '',
+        titleFontSize: 16,
+        titleFontWeight: 'bold',
+    },
+    // tabBar config
+    tabBar: {
+        show: false,
+        backgroundColor: '',
+        color: '',
+        activeColor: '',
+        fontSize: 16,
+        fontWeight: 'bold',
+        tabBarItem: [],
+    },
+}
+
+// 初始化项目
+export const initProject = {
+    name: '',
+    url: '',
+    showName: '',
+    appid: '',
+    icon: '',
+    iconRound: true,
+    state: true,
+    single: true,
+    injectJq: false,
+    tauriApi: false,
+    devbug: false,
+    version: '0.0.1',
+    platform: 'desktop',
+    width: 800,
+    height: 600,
+    desc: '',
+    jsFile: [],
+    filterCss: '',
+    customJs: '',
+    isHtml: false,
+    htmlPath: '',
+    htmlFiles: [],
+    more: tauriConfig,
+    phone: phoneConfig,
+    // ios config
+    ios: {
+        name: '',
+        appid: '',
+        icon: '',
+    },
+    // android config
+    android: {
+        name: '',
+        appid: '',
+        icon: '',
+    },
+}
+
+// 初始化发布
+export const initRelease = {
+    desktop: {
+        url: '',
+        assets_url: '',
+        upload_url: '',
+        html_url: '',
+        id: 0,
+        node_id: '',
+        tag_name: '',
+        target_commitish: '',
+        name: '',
+        draft: false,
+        prerelease: false,
+        created_at: '2024-09-23T10:46:29Z',
+        published_at: '2024-09-23T10:48:30Z',
+        assets: [],
+        tarball_url: '',
+        zipball_url: '',
+        body: '',
+    },
+    ios: {
+        url: '',
+        assets_url: '',
+        upload_url: '',
+        html_url: '',
+        id: 0,
+        node_id: '',
+        tag_name: '',
+        target_commitish: '',
+        name: '',
+        draft: false,
+        prerelease: false,
+        created_at: '2024-09-23T10:46:29Z',
+        published_at: '2024-09-23T10:48:30Z',
+        assets: [],
+        tarball_url: '',
+        zipball_url: '',
+        body: '',
+    },
+    android: {
+        url: '',
+        assets_url: '',
+        upload_url: '',
+        html_url: '',
+        id: 0,
+        node_id: '',
+        tag_name: '',
+        target_commitish: '',
+        name: '',
+        draft: false,
+        prerelease: false,
+        created_at: '2024-09-23T10:46:29Z',
+        published_at: '2024-09-23T10:48:30Z',
+        assets: [],
+        tarball_url: '',
+        zipball_url: '',
+        body: '',
+    },
+}
+
 // support pakeplus
 export const supportPP = async () => {
     console.log('supportPP')
@@ -218,206 +417,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 // end css filter
 `
-
-// tauri config
-export const tauriConfig = {
-    windows: {
-        label: '',
-        title: '',
-        url: '',
-        userAgent:
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
-        width: 800,
-        height: 600,
-        theme: null,
-        resizable: true,
-        fullscreen: false,
-        maximized: false,
-        minWidth: 400,
-        minHeight: 300,
-        maxWidth: 1920,
-        maxHeight: 1080,
-        decorations: true,
-        transparent: false,
-        titleBarStyle: 'Visible',
-        visible: true,
-        focus: true,
-        closable: true,
-        minimizable: true,
-        maximizable: true,
-        alwaysOnTop: false,
-        alwaysOnBottom: false,
-        center: false,
-        skipTaskbar: false,
-        tabbingIdentifier: null,
-        parent: null,
-        dragDropEnabled: true,
-        browserExtensionsEnabled: false,
-        devtools: true,
-        contentProtected: false,
-        hiddenTitle: false,
-        incognito: false,
-        proxyUrl: null,
-        useHttpsScheme: false,
-        zoomHotkeysEnabled: false,
-        acceptFirstMouse: false,
-        create: false,
-        // if add additionalBrowserArgs, windows cant preview, but can build
-        // additionalBrowserArgs:
-        //     '--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection --autoplay-policy=no-user-gesture-required --auto-accept-camera-and-microphone-capture',
-    },
-}
-
-// phone config
-export const phoneConfig = {
-    safeArea: {
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-    },
-    header: {
-        show: false,
-        title: '',
-        backgroundColor: '',
-        color: '',
-        fontSize: 16,
-        fontWeight: 'bold',
-        loading: false,
-        // right toolBar
-        toolBar: false,
-        toolBarBackgroundColor: '',
-        toolBarColor: '',
-        toolBarFontSize: 16,
-        toolBarFontWeight: 'bold',
-    },
-    // sider menu config
-    siderMenu: {
-        // left siderMenu
-        show: false,
-        width: 0,
-        backgroundColor: '',
-        color: '',
-        fontSize: 16,
-        fontWeight: 'bold',
-        title: '',
-        titleColor: '',
-        titleFontSize: 16,
-        titleFontWeight: 'bold',
-    },
-    // tabBar config
-    tabBar: {
-        show: false,
-        backgroundColor: '',
-        color: '',
-        activeColor: '',
-        fontSize: 16,
-        fontWeight: 'bold',
-        tabBarItem: [],
-    },
-    // ios config
-    ios: {
-        name: '',
-        appid: '',
-        icon: '',
-    },
-    // android config
-    android: {
-        name: '',
-        appid: '',
-        icon: '',
-    },
-}
-
-// 初始化项目
-export const initProject = {
-    name: '',
-    node_id: '',
-    url: '',
-    showName: '',
-    appid: '',
-    icon: '',
-    iconRound: true,
-    state: true,
-    single: true,
-    injectJq: false,
-    tauriApi: false,
-    devbug: false,
-    version: '0.0.1',
-    platform: 'desktop',
-    width: 800,
-    height: 600,
-    desc: '',
-    jsFile: [],
-    filterCss: '',
-    customJs: '',
-    isHtml: false,
-    htmlPath: '',
-    htmlFiles: [],
-    more: tauriConfig,
-    phone: phoneConfig,
-}
-
-// 初始化发布
-export const initRelease = {
-    desktop: {
-        url: '',
-        assets_url: '',
-        upload_url: '',
-        html_url: '',
-        id: 0,
-        node_id: '',
-        tag_name: '',
-        target_commitish: '',
-        name: '',
-        draft: false,
-        prerelease: false,
-        created_at: '2024-09-23T10:46:29Z',
-        published_at: '2024-09-23T10:48:30Z',
-        assets: [],
-        tarball_url: '',
-        zipball_url: '',
-        body: '',
-    },
-    ios: {
-        url: '',
-        assets_url: '',
-        upload_url: '',
-        html_url: '',
-        id: 0,
-        node_id: '',
-        tag_name: '',
-        target_commitish: '',
-        name: '',
-        draft: false,
-        prerelease: false,
-        created_at: '2024-09-23T10:46:29Z',
-        published_at: '2024-09-23T10:48:30Z',
-        assets: [],
-        tarball_url: '',
-        zipball_url: '',
-        body: '',
-    },
-    android: {
-        url: '',
-        assets_url: '',
-        upload_url: '',
-        html_url: '',
-        id: 0,
-        node_id: '',
-        tag_name: '',
-        target_commitish: '',
-        name: '',
-        draft: false,
-        prerelease: false,
-        created_at: '2024-09-23T10:46:29Z',
-        published_at: '2024-09-23T10:48:30Z',
-        assets: [],
-        tarball_url: '',
-        zipball_url: '',
-        body: '',
-    },
-}
 
 // 转换为本地时间
 export const convertToLocalTime = (utcDateTime: string) => {
