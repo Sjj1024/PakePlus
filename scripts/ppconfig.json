@@ -131,10 +131,15 @@
         "name": "PakePlus",
         "showName": "Pake Plus",
         "version": "0.0.1",
+        "desc": "PakePlus Desc",
+        "debug": false,
+        "state": false,
+        "single": false,
         "webUrl": "https://juejin.cn/",
         "iconPath": "../app-icon.png",
         "inputPath": "../app-icon.png",
         "tempPath": "./processed-image.png",
-        "icnsPath": "../src-tauri/icons/icon.icns"
+        "icnsPath": "../src-tauri/icons/icon.icns",
+        "pubBody": "PakePlus PubBody"
     }
 }

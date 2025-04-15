@@ -73,11 +73,29 @@ const createIcon = async (inputPath, tempOutputPath, icnsOutputPath) => {
 
 // update build.yml
 const updateBuildYml = () => {
-    console.log('updateBuildYml')
+    console.log('updateBuildYml in pakeplus')
 }
 // update Cargo.toml
-const updateCargoToml = () => {
+const updateCargoToml = async (name, version, desc, debug, single) => {
     console.log('updateCargoToml')
+    const cargoTomlPath = path.join(__dirname, '../src-tauri/Cargo.toml')
+    const cargoToml = fs.readFileSync(cargoTomlPath, 'utf-8')
+    // 更新 name, version, desc, debug, single
+    const newCargoToml = cargoToml
+        .replace('PakePLus', name)
+        .replace('0.0.1', version)
+        .replace('Project Desc', desc)
+        .replace(
+            '"protocol-asset"',
+            debug ? '"protocol-asset", "devtools"' : '"protocol-asset"'
+        )
+        .replace(
+            'tauri-plugin-store = "2.0.0"',
+            single
+                ? 'tauri-plugin-store = "2.0.0" \rtauri-plugin-single-instance = "2"'
+                : 'tauri-plugin-store = "2.0.0"'
+        )
+    fs.writeFileSync(cargoTomlPath, newCargoToml)
 }
 // update tauri.conf.json
 const updateTauriConfig = () => {
@@ -95,7 +113,8 @@ const updateLibRs = () => {
 
 // 初始化项目环境
 const main = async () => {
-    const { iconPath, tempPath, icnsPath } = ppconfig.desktop
+    const { iconPath, tempPath, icnsPath, name, version, desc, debug, single } =
+        ppconfig.desktop
     console.log('iconPath, tempPath, icnsPath', iconPath, tempPath, icnsPath)
     // 输入 PNG 文件路径
     const inputPath = path.join(__dirname, iconPath)
@@ -105,6 +124,8 @@ const main = async () => {
     const icnsOutputPath = path.join(__dirname, icnsPath)
     // 创建 icon
     await createIcon(inputPath, tempOutputPath, icnsOutputPath)
+    // 更新 cargo.toml
+    updateCargoToml(name, version, desc, debug, single)
 }
 
 // run
