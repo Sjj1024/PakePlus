@@ -168,13 +168,12 @@ const main = async () => {
         version,
         desc,
         debug,
-        single,
         showName,
         id,
         tauriApi,
     } = ppconfig.desktop
     const winConfig = ppconfig.more.windows
-    const { isHtml, state, injectJq } = ppconfig
+    const { isHtml, single, state, injectJq } = ppconfig
     console.log('iconPath, tempPath, icnsPath', iconPath, tempPath, icnsPath)
     // 输入 PNG 文件路径
     const inputPath = path.join(__dirname, iconPath)
