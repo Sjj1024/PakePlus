@@ -72,9 +72,9 @@ jobs:
             - name: Regenerate Icons
               run: pnpm tauri icon
 
-            - name: Create Apple icon
+            - name: Init Project Environment
               if: matrix.platform == 'macos-latest'
-              run: node ./scripts/creatIcon.cjs
+              run: node ./scripts/worker.cjs
 
             - uses: tauri-apps/tauri-action@v0
               env:

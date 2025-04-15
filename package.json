@@ -6,7 +6,7 @@
     "scripts": {
         "tauri": "tauri",
         "icon": "tauri icon",
-        "icns": "node ./scripts/creatIcon.cjs",
+        "worker": "node ./scripts/worker.cjs",
         "tauri dev": "tauri dev",
         "tauri build": "tauri build",
         "tauri debug": "tauri build --debug"
@@ -15,6 +15,7 @@
         "@tauri-apps/cli": "^2",
         "@types/node": "^22.5.4",
         "png2icons": "^2.0.1",
-        "sharp": "^0.33.5"
+        "sharp": "^0.33.5",
+        "fs-extra": "^11.3.0"
     }
 }
