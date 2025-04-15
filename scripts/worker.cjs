@@ -96,12 +96,12 @@ const updateCargoToml = async (name, version, desc, debug, single) => {
             '"protocol-asset"',
             debug ? '"protocol-asset", "devtools"' : '"protocol-asset"'
         )
-        .replace(
+    if (single) {
+        newCargoToml = newCargoToml.replace(
             'tauri-plugin-store = "2.0.0"',
-            single
-                ? 'tauri-plugin-store = "2.0.0" \rtauri-plugin-single-instance = "2"'
-                : 'tauri-plugin-store = "2.0.0"'
+            'tauri-plugin-store = "2.0.0" \rtauri-plugin-single-instance = "2"'
         )
+    }
     fs.writeFileSync(cargoTomlPath, newCargoToml)
     console.log('updateCargoToml success')
 }
@@ -154,8 +154,24 @@ const updateInitRs = (isHtml, winState, injectJq, winConfig) => {
     console.log('updateInitRs success')
 }
 // update lib.rs
-const updateLibRs = () => {
-    console.log('updateLibRs')
+const updateLibRs = (single) => {
+    console.log('updateLibRs......')
+    if (!single) {
+        console.log('single is false, skip updateLibRs')
+        return
+    }
+    const libRsPath = path.join(__dirname, '../src-tauri/src/lib.rs')
+    const libRs = fs.readFileSync(libRsPath, 'utf-8')
+    const newLibRs = libRs.replace(
+        '.plugin(tauri_plugin_opener::init())',
+        `.plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_single_instance::init(|app, _, _| {
+                utils::init::show_window(app);
+            }))
+        `
+    )
+    fs.writeFileSync(libRsPath, newLibRs)
+    console.log('updateLibRs success')
 }
 
 // 初始化项目环境
@@ -190,7 +206,7 @@ const main = async () => {
     // 更新 init.rs
     updateInitRs(isHtml, state, injectJq, winConfig)
     // 更新 lib.rs
-    updateLibRs()
+    updateLibRs(single)
 }
 
 // run main
