@@ -142,8 +142,14 @@ const updateInitRs = (isHtml, winState, injectJq, winConfig) => {
     }
     // 更新 init.rs
     const newInitRs = initRs
-        .replace('PakePlus', showName)
-        .replace('0.0.1', version)
+        .replace('{"url": "index.html"}', JSON.stringify(winConfig))
+        .replace('if true {', winState ? 'if true {' : 'if false {')
+        .replace(
+            '.initialization_script(include_str!("../../data/custom.js"))',
+            injectJq
+                ? '.initialization_script(include_str!("../../data/jquery.min.js"))\r.initialization_script(include_str!("../../data/custom.js"))'
+                : '.initialization_script(include_str!("../../data/custom.js"))'
+        )
     fs.writeFileSync(initRsPath, newInitRs)
     console.log('updateInitRs success')
 }
