@@ -73,7 +73,7 @@ const createIcon = async (inputPath, tempOutputPath, icnsOutputPath) => {
 
 // update build.yml
 const updateBuildYml = () => {
-    console.log('updateBuildYml in pakeplus')
+    console.log('updateBuildYml in pakeplus......')
 }
 
 // 是否为字母数字
@@ -84,7 +84,7 @@ const isAlphanumeric = (showName) => {
 
 // update Cargo.toml
 const updateCargoToml = async (name, version, desc, debug, single) => {
-    console.log('updateCargoToml')
+    console.log('updateCargoToml......')
     const cargoTomlPath = path.join(__dirname, '../src-tauri/Cargo.toml')
     const cargoToml = fs.readFileSync(cargoTomlPath, 'utf-8')
     // 更新 name, version, desc, debug, single
@@ -107,7 +107,7 @@ const updateCargoToml = async (name, version, desc, debug, single) => {
 }
 // update tauri.conf.json
 const updateTauriConfig = (showName, version, id, tauriApi) => {
-    console.log('updateTauriConfig')
+    console.log('updateTauriConfig......')
     const tauriConfigPath = path.join(__dirname, '../src-tauri/tauri.conf.json')
     const tauriConfig = fs.readFileSync(tauriConfigPath, 'utf-8')
     const ascii = isAlphanumeric(showName)
@@ -132,7 +132,7 @@ const updateTauriConfig = (showName, version, id, tauriApi) => {
 
 // update init.rs
 const updateInitRs = (isHtml, winState, injectJq, winConfig) => {
-    console.log('updateInitRs')
+    console.log('updateInitRs......')
     const initRsPath = path.join(__dirname, '../src-tauri/src/utils/init.rs')
     const initRs = fs.readFileSync(initRsPath, 'utf-8')
     winConfig.label = 'main'
@@ -173,6 +173,8 @@ const main = async () => {
         id,
         tauriApi,
     } = ppconfig.desktop
+    const winConfig = ppconfig.more.windows
+    const { isHtml, state, injectJq } = ppconfig
     console.log('iconPath, tempPath, icnsPath', iconPath, tempPath, icnsPath)
     // 输入 PNG 文件路径
     const inputPath = path.join(__dirname, iconPath)
@@ -187,7 +189,7 @@ const main = async () => {
     // 更新 tauri.conf.json
     updateTauriConfig(showName, version, id, tauriApi)
     // 更新 init.rs
-    updateInitRs()
+    updateInitRs(isHtml, state, injectJq, winConfig)
     // 更新 lib.rs
     updateLibRs()
 }
