@@ -103,6 +103,7 @@ const updateCargoToml = async (name, version, desc, debug, single) => {
                 : 'tauri-plugin-store = "2.0.0"'
         )
     fs.writeFileSync(cargoTomlPath, newCargoToml)
+    console.log('updateCargoToml success')
 }
 // update tauri.conf.json
 const updateTauriConfig = (showName, version, id, tauriApi) => {
@@ -126,6 +127,7 @@ const updateTauriConfig = (showName, version, id, tauriApi) => {
             tauriApi ? '"withGlobalTauri": true' : '"withGlobalTauri": false'
         )
     fs.writeFileSync(tauriConfigPath, newTauriConfig)
+    console.log('updateTauriConfig success')
 }
 
 // update init.rs
