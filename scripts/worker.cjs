@@ -75,6 +75,13 @@ const createIcon = async (inputPath, tempOutputPath, icnsOutputPath) => {
 const updateBuildYml = () => {
     console.log('updateBuildYml in pakeplus')
 }
+
+// 是否为字母数字
+const isAlphanumeric = (showName) => {
+    const regex = /^[a-zA-Z0-9]+$/
+    return regex.test(showName)
+}
+
 // update Cargo.toml
 const updateCargoToml = async (name, version, desc, debug, single) => {
     console.log('updateCargoToml')
@@ -98,8 +105,27 @@ const updateCargoToml = async (name, version, desc, debug, single) => {
     fs.writeFileSync(cargoTomlPath, newCargoToml)
 }
 // update tauri.conf.json
-const updateTauriConfig = () => {
+const updateTauriConfig = (showName, version, id, tauriApi) => {
     console.log('updateTauriConfig')
+    const tauriConfigPath = path.join(__dirname, '../src-tauri/tauri.conf.json')
+    const tauriConfig = fs.readFileSync(tauriConfigPath, 'utf-8')
+    const ascii = isAlphanumeric(showName)
+    // 更新 showName, version, id, tauriApi
+    const newTauriConfig = tauriConfig
+        .replace('PakePlus', showName)
+        .replace('0.0.1', version)
+        .replace('com.pakeplus.app', id)
+        .replace(
+            '"targets": "all"',
+            ascii
+                ? '"deb", "appimage", "nsis", "app", "dmg"'
+                : '"targets": "all"'
+        )
+        .replace(
+            '"withGlobalTauri": true',
+            tauriApi ? '"withGlobalTauri": true' : '"withGlobalTauri": false'
+        )
+    fs.writeFileSync(tauriConfigPath, newTauriConfig)
 }
 
 // update init.rs
@@ -113,8 +139,19 @@ const updateLibRs = () => {
 
 // 初始化项目环境
 const main = async () => {
-    const { iconPath, tempPath, icnsPath, name, version, desc, debug, single } =
-        ppconfig.desktop
+    const {
+        iconPath,
+        tempPath,
+        icnsPath,
+        name,
+        version,
+        desc,
+        debug,
+        single,
+        showName,
+        id,
+        tauriApi,
+    } = ppconfig.desktop
     console.log('iconPath, tempPath, icnsPath', iconPath, tempPath, icnsPath)
     // 输入 PNG 文件路径
     const inputPath = path.join(__dirname, iconPath)
@@ -126,6 +163,8 @@ const main = async () => {
     await createIcon(inputPath, tempOutputPath, icnsOutputPath)
     // 更新 cargo.toml
     updateCargoToml(name, version, desc, debug, single)
+    // 更新 tauri.conf.json
+    updateTauriConfig(showName, version, id, tauriApi)
 }
 
 // run
