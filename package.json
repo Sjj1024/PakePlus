@@ -7,6 +7,7 @@
         "tauri": "tauri",
         "icon": "tauri icon",
         "worker": "node ./scripts/worker.cjs",
+        "restore": "git restore .",
         "tauri dev": "tauri dev",
         "tauri build": "tauri build",
         "tauri debug": "tauri build --debug"
