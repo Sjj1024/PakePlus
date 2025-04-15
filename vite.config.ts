@@ -10,7 +10,7 @@ import path from 'path'
 const host = process.env.TAURI_DEV_HOST
 
 // https://vitejs.dev/config/
-export default defineConfig(async () => ({
+export default defineConfig(async ({ command }) => ({
     plugins: [
         vue(),
         buildTimePlugin(),
@@ -35,7 +35,7 @@ export default defineConfig(async () => ({
     server: {
         port: 1420,
         strictPort: true,
-        host: host || false,
+        host: command === 'serve' ? '0.0.0.0' : host || false,
         hmr: host
             ? {
                   protocol: 'ws',
