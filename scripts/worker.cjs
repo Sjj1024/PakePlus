@@ -118,7 +118,7 @@ const updateTauriConfig = (showName, version, id, tauriApi) => {
         .replace(
             '"targets": "all"',
             ascii
-                ? '"deb", "appimage", "nsis", "app", "dmg"'
+                ? '"targets": ["deb", "appimage", "nsis", "app", "dmg"]'
                 : '"targets": "all"'
         )
         .replace(
@@ -167,5 +167,9 @@ const main = async () => {
     updateTauriConfig(showName, version, id, tauriApi)
 }
 
-// run
-main()
+// run main
+try {
+    await main()
+} catch (error) {
+    console.error('Error in main:', error)
+}
