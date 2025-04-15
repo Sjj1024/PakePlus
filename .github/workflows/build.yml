@@ -1,4 +1,4 @@
-name: 'publish'
+name: Release
 
 on:
     workflow_dispatch:
@@ -34,9 +34,6 @@ jobs:
                       target: 'x86_64-pc-windows-msvc'
                       args: ''
                     - platform: 'windows-latest'
-                      target: 'i686-pc-windows-msvc'
-                      args: ''
-                    - platform: 'windows-latest'
                       target: 'aarch64-pc-windows-msvc'
                       args: '--target aarch64-pc-windows-msvc'
 
@@ -58,10 +55,29 @@ jobs:
                   node-version: 20
                   cache: pnpm
 
+            - name: Install frontend dependencies
+              run: pnpm install
+
             - name: install Rust stable
               uses: dtolnay/rust-toolchain@stable
               with:
-                  targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+                  targets: ${{ matrix.target }}
+
+            - name: Regenerate Icons
+              run: pnpm tauri icon
+
+            - name: Init Project Config
+              if: matrix.platform == 'macos-latest'
+              run: node ./scripts/worker.cjs
+
+            - name: Init Project Environment
+              run: |
+                  NAME=$(jq -r .desktop.name ./scripts/ppconfig.json)
+                  VERSION=$(jq -r .desktop.version ./scripts/ppconfig.json)
+                  PUBBODY=$(jq -r .desktop.pubBody ./scripts/ppconfig.json)
+                  echo "NAME=$NAME" >> $GITHUB_ENV
+                  echo "VERSION=$VERSION" >> $GITHUB_ENV
+                  echo "PUBBODY=$PUBBODY" >> $GITHUB_ENV
 
             - name: install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-22.04'
@@ -69,23 +85,15 @@ jobs:
                   sudo apt-get update
                   sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
-            - name: install frontend dependencies
-              run: pnpm install # change this to npm, pnpm or bun depending on which one you use.
-
-            - name: Regenerate Icons
-              run: pnpm tauri icon
-
-            - name: Init Project Environment
-              if: matrix.platform == 'macos-latest'
-              run: node ./scripts/worker.cjs
-
-            - uses: tauri-apps/tauri-action@v0
+            - uses: Sjj1024/tauri-zhaction@tauri-zhaciton
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  tagName: PakeDist-v__VERSION__
-                  releaseName: 'PakeDist v__VERSION__'
-                  body_path: ./Note.md
-                  releaseDraft: true
+                  tagName: '$NAME-v__VERSION__'
+                  releaseName: '$NAME v__VERSION__'
+                  releaseBody: '$PUBBODY'
+                  releaseDraft: false
                   prerelease: false
+                  publish: true
                   args: ${{ matrix.args }}
+                  renameArtifacts: '$NAME'
