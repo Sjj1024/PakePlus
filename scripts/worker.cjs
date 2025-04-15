@@ -119,8 +119,8 @@ const updateTauriConfig = (showName, version, id, tauriApi) => {
         .replace(
             '"targets": "all"',
             ascii
-                ? '"targets": ["deb", "appimage", "nsis", "app", "dmg"]'
-                : '"targets": "all"'
+                ? '"targets": "all"'
+                : '"targets": ["deb", "appimage", "nsis", "app", "dmg"]'
         )
         .replace(
             '"withGlobalTauri": true',
