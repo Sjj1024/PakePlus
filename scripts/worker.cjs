@@ -88,7 +88,7 @@ const updateCargoToml = async (name, version, desc, debug, single) => {
     const cargoTomlPath = path.join(__dirname, '../src-tauri/Cargo.toml')
     const cargoToml = fs.readFileSync(cargoTomlPath, 'utf-8')
     // 更新 name, version, desc, debug, single
-    const newCargoToml = cargoToml
+    let newCargoToml = cargoToml
         .replace('PakePLus', name)
         .replace('0.0.1', version)
         .replace('Project Desc', desc)
