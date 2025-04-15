@@ -8,7 +8,7 @@ import { join } from '@tauri-apps/api/path'
 import ppconfig from '@root/scripts/ppconfig.json'
 
 export const mainBranch = 'main'
-export const webBranch = 'web'
+export const webBranch = 'web2'
 export const devBranch = 'dev'
 
 // global file size limit
