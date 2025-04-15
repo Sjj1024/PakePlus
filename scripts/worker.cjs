@@ -169,7 +169,7 @@ const main = async () => {
 
 // run main
 try {
-    await main()
+    main()
 } catch (error) {
     console.error('Error in main:', error)
 }
