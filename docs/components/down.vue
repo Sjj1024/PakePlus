@@ -399,6 +399,7 @@ const linuxImage = lastRelease.assets.find((asset) =>
         padding: 20px;
         width: 70%;
         height: 160px;
+        transition: all 0.5s ease;
 
         &:hover {
             background-color: var(--vp-c-bg-soft);
@@ -444,6 +445,7 @@ const linuxImage = lastRelease.assets.find((asset) =>
 
                 a {
                     color: var(--vp-c-brand-1);
+                    transition: all 0.5s ease;
 
                     &:hover {
                         // color: rgb(58, 58, 254);
