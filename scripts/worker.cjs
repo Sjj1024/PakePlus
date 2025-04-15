@@ -131,8 +131,21 @@ const updateTauriConfig = (showName, version, id, tauriApi) => {
 }
 
 // update init.rs
-const updateInitRs = () => {
+const updateInitRs = (isHtml, winState, injectJq, winConfig) => {
     console.log('updateInitRs')
+    const initRsPath = path.join(__dirname, '../src-tauri/src/utils/init.rs')
+    const initRs = fs.readFileSync(initRsPath, 'utf-8')
+    winConfig.label = 'main'
+    winConfig.visible = false
+    if (isHtml) {
+        winConfig.url = 'index.html'
+    }
+    // 更新 init.rs
+    const newInitRs = initRs
+        .replace('PakePlus', showName)
+        .replace('0.0.1', version)
+    fs.writeFileSync(initRsPath, newInitRs)
+    console.log('updateInitRs success')
 }
 // update lib.rs
 const updateLibRs = () => {
@@ -167,6 +180,10 @@ const main = async () => {
     updateCargoToml(name, version, desc, debug, single)
     // 更新 tauri.conf.json
     updateTauriConfig(showName, version, id, tauriApi)
+    // 更新 init.rs
+    updateInitRs()
+    // 更新 lib.rs
+    updateLibRs()
 }
 
 // run main
