@@ -71,6 +71,28 @@ const createIcon = async (inputPath, tempOutputPath, icnsOutputPath) => {
         })
 }
 
+// update build.yml
+const updateBuildYml = () => {
+    console.log('updateBuildYml')
+}
+// update Cargo.toml
+const updateCargoToml = () => {
+    console.log('updateCargoToml')
+}
+// update tauri.conf.json
+const updateTauriConfig = () => {
+    console.log('updateTauriConfig')
+}
+
+// update init.rs
+const updateInitRs = () => {
+    console.log('updateInitRs')
+}
+// update lib.rs
+const updateLibRs = () => {
+    console.log('updateLibRs')
+}
+
 // 初始化项目环境
 const main = async () => {
     const { iconPath, tempPath, icnsPath } = ppconfig.desktop
