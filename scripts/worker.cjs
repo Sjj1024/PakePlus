@@ -99,7 +99,7 @@ const updateCargoToml = async (name, version, desc, debug, single) => {
     if (single) {
         newCargoToml = newCargoToml.replace(
             'tauri-plugin-store = "2.0.0"',
-            'tauri-plugin-store = "2.0.0" \rtauri-plugin-single-instance = "2"\r'
+            'tauri-plugin-store = "2.0.0"\ntauri-plugin-single-instance = "2"'
         )
     }
     fs.writeFileSync(cargoTomlPath, newCargoToml)
@@ -194,6 +194,8 @@ const setGithubEnv = (name, version, pubBody) => {
             }
         }
         console.log('✅ Environment variables written to GITHUB_ENV')
+        // 查看env 变量
+        console.log(fs.readFileSync(envPath, 'utf-8'))
     } catch (err) {
         console.error('❌ Failed to parse config or write to GITHUB_ENV:', err)
     }
