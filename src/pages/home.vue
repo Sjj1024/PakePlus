@@ -485,7 +485,7 @@ const forkStartShas = async (tips: boolean = true) => {
     // fork action is async
     const forkRes: any = Promise.all([
         forkPakePlus('PakePlus'),
-        forkPakePlus('PakePlus-iOS'),
+        // forkPakePlus('PakePlus-iOS'),
         forkPakePlus('PakePlus-Android'),
     ]).then((res) => {
         console.log('forkRes', res)
