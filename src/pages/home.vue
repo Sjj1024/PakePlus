@@ -299,7 +299,7 @@ const logout = async () => {
 // del pakeplus!
 const delPakePlus = async () => {
     await githubApi.deleteProgect(store.userInfo.login, 'PakePlus')
-    await githubApi.deleteProgect(store.userInfo.login, 'PakePlus-iOS')
+    // await githubApi.deleteProgect(store.userInfo.login, 'PakePlus-iOS')
     await githubApi.deleteProgect(store.userInfo.login, 'PakePlus-Android')
     localStorage.removeItem('projectList')
     localStorage.removeItem('releases')
@@ -327,12 +327,12 @@ const goProject = async (pro: Project) => {
                         'PakePlus',
                         store.shaInfo.desktopWeb
                     )
-                    createBranch(
-                        store.userInfo.login,
-                        pro.name,
-                        'PakePlus-iOS',
-                        store.shaInfo.iosWeb
-                    )
+                    // createBranch(
+                    //     store.userInfo.login,
+                    //     pro.name,
+                    //     'PakePlus-iOS',
+                    //     store.shaInfo.iosWeb
+                    // )
                     createBranch(
                         store.userInfo.login,
                         pro.name,
@@ -362,8 +362,8 @@ const showBranchDialog = () => {
     } else {
         getMainSha('PakePlus')
         getWebSha('PakePlus')
-        getMainSha('PakePlus-iOS')
-        getWebSha('PakePlus-iOS')
+        // getMainSha('PakePlus-iOS')
+        // getWebSha('PakePlus-iOS')
         getMainSha('PakePlus-Android')
         getWebSha('PakePlus-Android')
     }
@@ -422,15 +422,15 @@ const commitShas = async (tips: boolean = true) => {
         const res = await Promise.all([
             getMainSha('PakePlus'),
             getWebSha('PakePlus'),
-            getMainSha('PakePlus-iOS'),
-            getWebSha('PakePlus-iOS'),
+            // getMainSha('PakePlus-iOS'),
+            // getWebSha('PakePlus-iOS'),
             getMainSha('PakePlus-Android'),
             getWebSha('PakePlus-Android'),
         ])
             .then(async (res) => {
                 console.log('wait fork done res', res)
                 getCount++
-                if (res[0] && res[1] && res[2] && res[3] && res[4] && res[5]) {
+                if (res[0] && res[1] && res[2] && res[3]) {
                     // delete build.yml
                     let deleteRes = true
                     if (store.noSjj1024) {
@@ -633,12 +633,12 @@ const creatProject = async () => {
                         'PakePlus',
                         store.shaInfo.desktopWeb
                     ),
-                    createBranch(
-                        store.userInfo.login,
-                        branchName.value,
-                        'PakePlus-iOS',
-                        store.shaInfo.iosWeb
-                    ),
+                    // createBranch(
+                    //     store.userInfo.login,
+                    //     branchName.value,
+                    //     'PakePlus-iOS',
+                    //     store.shaInfo.iosWeb
+                    // ),
                     createBranch(
                         store.userInfo.login,
                         branchName.value,

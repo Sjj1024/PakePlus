@@ -13,10 +13,12 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "preserve",
+        /* Linting */
         "baseUrl": "./",
         "paths": {
             "@": ["src"],
-            "@/*": ["src/*"]
+            "@/*": ["src/*"],
+            "@root": ["./"]
         },
 
         "strict": true,
