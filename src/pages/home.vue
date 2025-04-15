@@ -898,6 +898,7 @@ onMounted(() => {
                     height: 23px;
                     border-radius: 50%;
                     transition: transform 0.2s ease;
+                    box-shadow: 0 0 0 1px var(--avatar-shadow);
 
                     &:hover {
                         transform: scale(1.08);
