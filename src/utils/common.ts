@@ -403,14 +403,8 @@ export const getPpconfig = async (params: any) => {
 
 // get build.yml file content
 export const getBuildYmlFetch = async (params: any) => {
-    // 根据repo选择文件
-    let content = await readFile(
-        params.repo === 'PakePlus'
-            ? 'build.yml'
-            : params.repo === 'PakePlus-iOS'
-            ? 'ios.yml'
-            : 'android.yml'
-    )
+    // 因为工作流文件不用更新，所以这里直接读取build.yml
+    let content = await readFile('build.yml')
     if (content === 'error') {
         return 'error'
     }

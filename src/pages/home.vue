@@ -398,11 +398,13 @@ const testToken = async (tips: boolean = true) => {
                     await commitShas(tips)
                 }
             } else {
+                localStorage.clear()
                 store.setUser({ login: '' })
                 ElMessage.error(t('tokenError'))
                 testLoading.value = false
             }
         } catch (error) {
+            localStorage.clear()
             store.setUser({ login: '' })
             console.error('testToken error', error)
             ElMessage.error(t('networkError'))
@@ -567,21 +569,6 @@ const getWebSha = async (repo: string = 'PakePlus') => {
     }
 }
 
-// 获取需要更新的文件sha
-const getFileSha = async (
-    filePath: string,
-    branch: string,
-    repo: string = 'PakePlus'
-) => {
-    const res: any = await githubApi.getFileSha(
-        store.userInfo.login,
-        repo,
-        filePath,
-        { ref: branch }
-    )
-    return res
-}
-
 // button loading
 const creatLoading = ref(false)
 
@@ -717,10 +704,11 @@ const deleteBuildYml = async (
     branchName: string = mainBranch,
     repo: string = 'PakePlus'
 ) => {
-    const shaRes = await getFileSha(
+    const shaRes: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        repo,
         '.github/workflows/build.yml',
-        branchName,
-        repo
+        { ref: branchName }
     )
     console.log('get build.yml file sha', shaRes)
     if (shaRes.status === 200) {
