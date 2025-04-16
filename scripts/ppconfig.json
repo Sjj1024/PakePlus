@@ -123,9 +123,7 @@
         "rounded": true,
         "copyTo": "./app/src/main/res",
         "androidResDir": "./app/src/main/res",
-        "tagName": "PakePlus-v0.0.1",
-        "releaseName": "PakePlus v0.0.1",
-        "releaseBody": "PakePlus ReleaseBody"
+        "pubBody": "PakePlus PubBody"
     },
     "desktop": {
         "name": "PakePlus2",
