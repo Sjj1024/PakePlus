@@ -136,9 +136,12 @@ export const usePakeStore = defineStore('pakeplus', {
             return {
                 ...state.currentProject,
                 ios: {
-                    name: '',
-                    appid: '',
-                    icon: '',
+                    ...state.currentProject.ios,
+                    name: state.currentProject.name,
+                    showName: state.currentProject.showName,
+                    version: state.currentProject.version,
+                    id: state.currentProject.id + '.ios',
+                    webUrl: state.currentProject.url,
                 },
                 android: {
                     ...state.currentProject.android,
@@ -149,18 +152,12 @@ export const usePakeStore = defineStore('pakeplus', {
                     webUrl: state.currentProject.url,
                 },
                 desktop: {
+                    ...state.currentProject.desktop,
                     name: state.currentProject.name,
                     showName: state.currentProject.showName,
                     version: state.currentProject.version,
                     id: state.currentProject.id + '.desktop',
                     webUrl: state.currentProject.url,
-                    tauriApi: true,
-                    debug: true,
-                    iconPath: '../app-icon.png',
-                    inputPath: '../app-icon.png',
-                    tempPath: './processed-image.png',
-                    icnsPath: '../src-tauri/icons/icon.icns',
-                    pubBody: 'PakePlus PubBody',
                 },
             }
         },

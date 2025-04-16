@@ -113,10 +113,9 @@
         "icon": ""
     },
     "android": {
-        "name": "PakePlus3",
-        "showName": "PakePlus3",
-        "version": "0.0.3",
-        "id": "com.oaikes.pakeplus.android",
+        "name": "PakePlus",
+        "showName": "PakePlus",
+        "version": "0.0.1",
         "webUrl": "https://juejin.cn/",
         "icon": "./app-icon.png",
         "input": "./app-icon.png",
@@ -124,13 +123,14 @@
         "rounded": true,
         "copyTo": "./app/src/main/res",
         "androidResDir": "./app/src/main/res",
-        "pubBody": "PakePlus PubBody3"
+        "desc": "PakePlus Desc2",
+        "pubBody": "PakePlus PubBody"
     },
     "desktop": {
-        "name": "PakePlus",
-        "showName": "PakePlus",
-        "version": "0.0.1",
-        "id": "com.oaikes.pakeplus.desktop",
+        "name": "PakePlus2",
+        "showName": "oaikes",
+        "version": "0.0.2",
+        "id": "com.oaikes.app",
         "tauriApi": true,
         "desc": "PakePlus Desc2",
         "debug": true,
@@ -139,6 +139,10 @@
         "inputPath": "../app-icon.png",
         "tempPath": "./processed-image.png",
         "icnsPath": "../src-tauri/icons/icon.icns",
-        "pubBody": "PakePlus PubBody"
+        "pubBody": "PakePlus PubBody",
+        "isHtml": false,
+        "single": true,
+        "state": true,
+        "injectJq": true
     }
 }
