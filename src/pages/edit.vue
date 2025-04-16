@@ -1077,7 +1077,6 @@ const saveFormInput = async () => {
     store.addUpdatePro({
         ...store.currentProject,
         name: store.currentProject.name,
-        debug: pubForm.model,
         more: store.currentProject.more,
     })
     !configDialogVisible.value && tauriConfigRef.value?.updateCode()
