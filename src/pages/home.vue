@@ -236,7 +236,6 @@ import { Plus } from '@element-plus/icons-vue'
 import {
     urlMap,
     openUrl,
-    initProject,
     isTauri,
     base64Decode,
     platforms,
@@ -248,10 +247,10 @@ import {
     supportPP,
     getBuildYmlFetch,
 } from '@/utils/common'
+import ppconfig from '@root/scripts/ppconfig.json'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
 import { getCurrentWindow } from '@tauri-apps/api/window'
-import { tauriConfig } from '@/utils/common'
 import packageJson from '../../package.json'
 
 const router = useRouter()
@@ -590,15 +589,15 @@ const creatProject = async () => {
             if (res.status === 404 && !include) {
                 const branchInfo: Project = {
                     ...res.data,
-                    ...initProject,
+                    ...ppconfig,
                     name: branchName.value,
                     showName: branchName.value,
                     appid: `com.${branchName.value}.app`,
                     customJs: customJs,
                     more: {
-                        ...tauriConfig,
+                        ...ppconfig.more,
                         windows: {
-                            ...tauriConfig.windows,
+                            ...ppconfig.more.windows,
                             label: branchName.value,
                             title: branchName.value,
                             userAgent: platforms['desktop'].userAgent,
@@ -655,7 +654,7 @@ const creatProject = async () => {
             }
         } else {
             store.setCurrentProject({
-                ...initProject,
+                ...ppconfig,
                 name: branchName.value,
                 showName: branchName.value,
                 appid: `com.${branchName.value}.app`,

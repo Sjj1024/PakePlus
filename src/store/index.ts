@@ -1,6 +1,7 @@
-import { convertToLocalTime, getPpconfig, initProject } from '@/utils/common'
+import { convertToLocalTime, getPpconfig } from '@/utils/common'
 import { defineStore } from 'pinia'
 import githubApi from '@/apis/github'
+import ppconfig from '@root/scripts/ppconfig.json'
 
 export const usePakeStore = defineStore('pakeplus', {
     state: () => {
@@ -55,7 +56,7 @@ export const usePakeStore = defineStore('pakeplus', {
             // 当前项目
             currentProject: localStorage.getItem('currentProject')
                 ? JSON.parse(localStorage.getItem('currentProject') as string)
-                : initProject,
+                : ppconfig,
             // 当前项目发布
             currentRelease: localStorage.getItem('currentRelease')
                 ? JSON.parse(localStorage.getItem('currentRelease') as string)
@@ -135,6 +136,7 @@ export const usePakeStore = defineStore('pakeplus', {
         ppConfig: (state) => {
             return {
                 ...state.currentProject,
+                icon: '',
                 ios: {
                     ...state.currentProject.ios,
                     name: state.currentProject.name,

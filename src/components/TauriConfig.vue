@@ -314,7 +314,9 @@
                                 class="formItem"
                             >
                                 <el-checkbox
-                                    v-model="store.currentProject.injectJq"
+                                    v-model="
+                                        store.currentProject.desktop.injectJq
+                                    "
                                     label=""
                                 />
                             </el-form-item>
@@ -324,7 +326,9 @@
                                 class="formItem"
                             >
                                 <el-checkbox
-                                    v-model="store.currentProject.tauriApi"
+                                    v-model="
+                                        store.currentProject.desktop.tauriApi
+                                    "
                                     label=""
                                 />
                             </el-form-item>

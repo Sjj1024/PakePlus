@@ -5,7 +5,6 @@ import { open } from '@tauri-apps/plugin-dialog'
 import { readDir } from '@tauri-apps/plugin-fs'
 import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 import { join } from '@tauri-apps/api/path'
-import ppconfig from '@root/scripts/ppconfig.json'
 
 export const mainBranch = 'main'
 export const webBranch = 'web2'
@@ -85,15 +84,6 @@ export const platforms: { [key: string]: PlatformInfo } = {
         direction: 'horizontal',
     },
 }
-
-// tauri config
-export const tauriConfig = ppconfig.more
-
-// phone config
-export const phoneConfig = ppconfig.phone
-
-// 初始化项目
-export const initProject = ppconfig
 
 // 初始化发布
 export const initRelease = {

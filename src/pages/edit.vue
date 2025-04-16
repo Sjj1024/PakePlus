@@ -227,7 +227,7 @@
                         class="formItem"
                     >
                         <el-checkbox
-                            v-model="store.currentProject.state"
+                            v-model="store.currentProject.desktop.state"
                             label=""
                         />
                     </el-form-item>
@@ -237,7 +237,7 @@
                         class="formItem"
                     >
                         <el-checkbox
-                            v-model="store.currentProject.single"
+                            v-model="store.currentProject.desktop.single"
                             label=""
                         />
                     </el-form-item>
@@ -312,7 +312,7 @@
                 </el-form-item>
                 <el-form-item :label="t('appDes')" prop="desc">
                     <el-input
-                        v-model.trim="store.currentProject.desc"
+                        v-model.trim="store.currentProject.desktop.desc"
                         type="textarea"
                         autocomplete="off"
                         autoCapitalize="off"
