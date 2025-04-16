@@ -85,7 +85,7 @@ jobs:
                   tagName: '${{ env.NAME }}-v${{ env.VERSION }}'
                   releaseName: '${{ env.NAME }} v${{ env.VERSION }}'
                   releaseBody: '${{ env.PUBBODY }}'
-                  releaseDraft: true
+                  releaseDraft: false
                   prerelease: false
                   args: ${{ matrix.args }}
                   renameArtifacts: '${{ env.NAME }}'
