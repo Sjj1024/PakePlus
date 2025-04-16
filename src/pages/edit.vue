@@ -378,8 +378,10 @@
                     <el-radio-group
                         v-model="store.currentProject.desktop.debug"
                     >
-                        <el-radio value="false">{{ t('closeDebug') }}</el-radio>
-                        <el-radio value="true">{{ t('openDebug') }}</el-radio>
+                        <el-radio :value="false">
+                            {{ t('closeDebug') }}
+                        </el-radio>
+                        <el-radio :value="true">{{ t('openDebug') }}</el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item :label="t('releaseNotes')">
