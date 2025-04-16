@@ -99,7 +99,7 @@
                         <div class="appVersion">{{ pro.version }}</div>
                     </div>
                     <span class="appDesc">
-                        {{ pro.desc || 'this is a pakeplus project' }}
+                        {{ pro.desktop.desc || 'this is a pakeplus project' }}
                     </span>
                 </div>
             </div>

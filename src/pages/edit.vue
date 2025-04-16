@@ -502,9 +502,7 @@ import {
     arrayBufferToBase64,
     cropImageToRound,
     getBuildYmlFetch,
-    getCargoTomlFetch,
     getTauriConfFetch,
-    getInitRustFetch,
     base64Encode,
     loadingText,
     includeHtm,
@@ -514,7 +512,6 @@ import {
     openSelect,
     readDirRecursively,
     replaceFileRoot,
-    getLibRsFetch,
     urlMap,
     fileSizeLimit,
 } from '@/utils/common'
@@ -1293,146 +1290,24 @@ const updatePPconfig = async () => {
     console.log('get ppconfig file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
-        const configContent: any = await getCargoTomlFetch({
-            name: store.currentProject.name,
-            version: store.currentProject.version,
-            desc: store.currentProject.desc,
-            debug: pubForm.model === 'debug',
-            single: store.currentProject.single,
-        })
+        const configContent: any = base64Encode(JSON.stringify(store.ppConfig))
         // update config file
-        const updateRes: any = await githubApi.updateCargoFile(
+        const updateRes: any = await githubApi.updateFileContent(
             store.userInfo.login,
             'PakePlus',
+            'scripts/ppconfig.json',
             {
-                message: 'update Cargo.toml from pakeplus',
+                message: 'update ppconfig from pakeplus',
                 content: configContent,
                 sha: shaRes.data.sha,
                 branch: store.currentProject.name,
             }
         )
         if (updateRes.status === 200) {
-            console.log('updateCargoToml', updateRes)
+            console.log('updatePPconfig', updateRes)
             loadingText(t('syncConfig') + '...')
         } else {
-            console.error('updateCargoToml error', updateRes)
-        }
-    } else {
-        console.error('getFileSha error', shaRes)
-    }
-}
-
-// update build.yml file content
-const updateInitRs = async () => {
-    loadingText(t('syncConfig') + 'rust...')
-    // get CargoToml file sha
-    const shaRes: any = await githubApi.getFileSha(
-        store.userInfo.login,
-        'PakePlus',
-        'src-tauri/src/utils/init.rs',
-        {
-            ref: store.currentProject.name,
-        }
-    )
-    console.log('get init.rs file sha', shaRes)
-    if (shaRes.status === 200 || shaRes.status === 404) {
-        // get CargoToml file content
-        const configContent: any = await getInitRustFetch({
-            config: JSON.stringify(store.currentProject.more.windows),
-            state: store.currentProject.state,
-            injectjq: store.currentProject.injectJq,
-            isHtml: store.currentProject.isHtml,
-        })
-        const updateRes: any = await githubApi.updateFileContent(
-            store.userInfo.login,
-            'PakePlus',
-            'src-tauri/src/utils/init.rs',
-            {
-                message: 'update init rust from pakeplus',
-                content: configContent,
-                sha: shaRes.data.sha,
-                branch: store.currentProject.name,
-            }
-        )
-        if (updateRes.status === 200) {
-            loadingText(t('syncConfig') + 'rust...')
-        } else {
-            console.error('updateInitRs error', updateRes)
-        }
-    } else {
-        console.error('getFileSha error', shaRes)
-    }
-}
-
-// update lib.rs file content
-// update build.yml file content
-const updateLibRs = async () => {
-    loadingText(t('syncConfig') + 'rust...')
-    // get CargoToml file sha
-    const shaRes: any = await githubApi.getFileSha(
-        store.userInfo.login,
-        'PakePlus',
-        'src-tauri/src/lib.rs',
-        {
-            ref: store.currentProject.name,
-        }
-    )
-    console.log('get lib.rs file sha', shaRes)
-    if (shaRes.status === 200 || shaRes.status === 404) {
-        // get CargoToml file content
-        const configContent: any = await getLibRsFetch({
-            single: store.currentProject.single,
-        })
-        const updateRes: any = await githubApi.updateFileContent(
-            store.userInfo.login,
-            'PakePlus',
-            'src-tauri/src/lib.rs',
-            {
-                message: 'update lib rust from pakeplus',
-                content: configContent,
-                sha: shaRes.data.sha,
-                branch: store.currentProject.name,
-            }
-        )
-        if (updateRes.status === 200) {
-            console.log('updateLibRs', updateRes)
-            loadingText(t('syncConfig') + 'rust...')
-        }
-    } else {
-        console.error('getFileSha error', shaRes)
-    }
-}
-
-// update build.yml file content
-const libRsConfig = async () => {
-    // get CargoToml file sha
-    const shaRes: any = await githubApi.getFileSha(
-        store.userInfo.login,
-        'PakePlus',
-        'src-tauri/src/lib.rs',
-        {
-            ref: store.currentProject.name,
-        }
-    )
-    console.log('get CargoToml file sha', shaRes)
-    if (shaRes.status === 200 || shaRes.status === 404) {
-        // get CargoToml file content
-        const configContent: any = await invoke('rust_lib_window', {
-            config: JSON.stringify(store.currentProject.more.windows),
-        })
-        const updateRes: any = await githubApi.updateFileContent(
-            store.userInfo.login,
-            'PakePlus',
-            'src-tauri/src/lib.rs',
-            {
-                message: 'update lib rust from pakeplus',
-                content: configContent,
-                sha: shaRes.data.sha,
-                branch: store.currentProject.name,
-            }
-        )
-        if (updateRes.status === 200) {
-            console.log('updateRes', updateRes)
+            console.error('updatePPconfig error', updateRes)
         }
     } else {
         console.error('getFileSha error', shaRes)
@@ -1541,7 +1416,7 @@ const publishWeb = async () => {
         // update build.yml
         await updatePPconfig()
         // dispatch action
-        dispatchAction()
+        // dispatchAction()
     } catch (error: any) {
         warning.value = error.message
         buildTime = 0

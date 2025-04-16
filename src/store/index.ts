@@ -136,13 +136,12 @@ export const usePakeStore = defineStore('pakeplus', {
         ppConfig: (state) => {
             return {
                 ...state.currentProject,
-                icon: '',
                 ios: {
                     ...state.currentProject.ios,
                     name: state.currentProject.name,
                     showName: state.currentProject.showName,
                     version: state.currentProject.version,
-                    id: state.currentProject.id + '.ios',
+                    id: state.currentProject.appid + '.ios',
                     webUrl: state.currentProject.url,
                     isHtml: state.currentProject.isHtml,
                 },
@@ -151,7 +150,7 @@ export const usePakeStore = defineStore('pakeplus', {
                     name: state.currentProject.name,
                     showName: state.currentProject.showName,
                     version: state.currentProject.version,
-                    id: state.currentProject.id + '.android',
+                    id: state.currentProject.appid + '.android',
                     webUrl: state.currentProject.url,
                     isHtml: state.currentProject.isHtml,
                 },
@@ -160,7 +159,7 @@ export const usePakeStore = defineStore('pakeplus', {
                     name: state.currentProject.name,
                     showName: state.currentProject.showName,
                     version: state.currentProject.version,
-                    id: state.currentProject.id + '.desktop',
+                    id: state.currentProject.appid + '.desktop',
                     webUrl: state.currentProject.url,
                     isHtml: state.currentProject.isHtml,
                 },

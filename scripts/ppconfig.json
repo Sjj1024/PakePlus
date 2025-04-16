@@ -126,7 +126,7 @@
         "rounded": true,
         "copyTo": "./app/src/main/res",
         "androidResDir": "./app/src/main/res",
-        "desc": "PakePlus Desc2",
+        "desc": "PakePlus Project by 1024xiaoshen",
         "pubBody": "PakePlus PubBody",
         "isHtml": false
     },
@@ -135,9 +135,7 @@
         "showName": "oaikes",
         "version": "0.0.2",
         "id": "com.oaikes.app",
-        "tauriApi": true,
-        "desc": "PakePlus Desc2",
-        "debug": true,
+        "desc": "PakePlus Project by 1024xiaoshen",
         "webUrl": "https://juejin.cn/",
         "iconPath": "../app-icon.png",
         "inputPath": "../app-icon.png",
@@ -147,6 +145,8 @@
         "isHtml": false,
         "single": true,
         "state": true,
-        "injectJq": true
+        "injectJq": false,
+        "tauriApi": false,
+        "debug": false
     }
 }
