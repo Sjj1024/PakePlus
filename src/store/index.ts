@@ -132,6 +132,38 @@ export const usePakeStore = defineStore('pakeplus', {
                 state.currentRelease.id !== 0
             )
         },
+        ppConfig: (state) => {
+            return {
+                ...state.currentProject,
+                ios: {
+                    name: '',
+                    appid: '',
+                    icon: '',
+                },
+                android: {
+                    ...state.currentProject.android,
+                    name: state.currentProject.name,
+                    showName: state.currentProject.showName,
+                    version: state.currentProject.version,
+                    id: state.currentProject.id + '.android',
+                    webUrl: state.currentProject.url,
+                },
+                desktop: {
+                    name: state.currentProject.name,
+                    showName: state.currentProject.showName,
+                    version: state.currentProject.version,
+                    id: state.currentProject.id + '.desktop',
+                    webUrl: state.currentProject.url,
+                    tauriApi: true,
+                    debug: true,
+                    iconPath: '../app-icon.png',
+                    inputPath: '../app-icon.png',
+                    tempPath: './processed-image.png',
+                    icnsPath: '../src-tauri/icons/icon.icns',
+                    pubBody: 'PakePlus PubBody',
+                },
+            }
+        },
     },
     actions: {
         actionSecond() {

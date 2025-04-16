@@ -93,7 +93,6 @@
                     <el-button @click="delDialog = false">{{
                         t('cancel')
                     }}</el-button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button
                         type="primary"
                         @click="deleteRelAssets()"

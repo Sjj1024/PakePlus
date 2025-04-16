@@ -142,7 +142,6 @@
                     <el-button @click="cancelToken" :disabled="testLoading">
                         {{ t('cancel') }}
                     </el-button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button
                         type="primary"
                         @click="testToken(false)"
@@ -183,7 +182,6 @@
             <template #footer>
                 <div class="dialog-footer">
                     <el-button @click="logout">{{ t('quit') }}</el-button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button type="primary" @click="userInfoDialog = false">
                         {{ t('confirm') }}
                     </el-button>
@@ -214,7 +212,6 @@
                     <el-button @click="branchDialog = false">{{
                         t('cancel')
                     }}</el-button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button
                         type="primary"
                         @click="creatProject()"
@@ -620,18 +617,18 @@ const creatProject = async () => {
                         'PakePlus',
                         store.shaInfo.desktopWeb
                     ),
-                    // createBranch(
-                    //     store.userInfo.login,
-                    //     branchName.value,
-                    //     'PakePlus-iOS',
-                    //     store.shaInfo.iosWeb
-                    // ),
                     createBranch(
                         store.userInfo.login,
                         branchName.value,
                         'PakePlus-Android',
                         store.shaInfo.androidWeb
                     ),
+                    // createBranch(
+                    //     store.userInfo.login,
+                    //     branchName.value,
+                    //     'PakePlus-iOS',
+                    //     store.shaInfo.iosWeb
+                    // ),
                 ]).then((res) => {
                     console.log('createBranch res', res)
                     return res.every((item) => item)

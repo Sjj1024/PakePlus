@@ -400,7 +400,6 @@
                     <el-button @click="centerDialogVisible = false">
                         {{ t('cancel') }}
                     </el-button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button type="primary" @click="publishWeb">
                         {{ t('confirm') }}
                     </el-button>
@@ -1036,12 +1035,18 @@ const deleteProject = () => {
         confirmButtonText: t('confirm'),
         cancelButtonText: t('cancel'),
         type: 'warning',
+        center: true,
     })
         .then(() => {
             console.log('delete project')
             githubApi.deleteBranch(
                 store.userInfo.login,
                 'PakePlus',
+                store.currentProject.name
+            )
+            githubApi.deleteBranch(
+                store.userInfo.login,
+                'PakePlus-Android',
                 store.currentProject.name
             )
             store.delProject(store.currentProject)
@@ -1274,18 +1279,18 @@ const updateBuildYml = async () => {
 }
 
 // update build.yml file content
-const updateCargoToml = async () => {
-    loadingText(t('syncConfig') + 'Cargo...')
+const updatePPconfig = async () => {
+    loadingText(t('syncConfig') + 'ppconfig...')
     // get CargoToml file sha
     const shaRes: any = await githubApi.getFileSha(
         store.userInfo.login,
         'PakePlus',
-        'src-tauri/Cargo.toml',
+        'scripts/ppconfig.json',
         {
             ref: store.currentProject.name,
         }
     )
-    console.log('get CargoToml file sha', shaRes)
+    console.log('get ppconfig file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
         const configContent: any = await getCargoTomlFetch({
@@ -1531,18 +1536,10 @@ const publishWeb = async () => {
         }
         // update app icon
         await updateIcon()
-        // update build.yml
-        await updateBuildYml()
-        // update Cargo.toml
-        await updateCargoToml()
-        // update tauri.conf.json
-        await updateTauriConfig()
         // update custom.js
         await updateCustomJs()
-        // update init.rs
-        await updateInitRs()
-        // update lib.rs
-        await updateLibRs()
+        // update build.yml
+        await updatePPconfig()
         // dispatch action
         dispatchAction()
     } catch (error: any) {

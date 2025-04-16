@@ -310,16 +310,16 @@ export const base64Decode = (str: string) => {
     return Base64.decode(str)
 }
 
-// 读取文件内容
+// read file
 export const readFile = async (fileName: string) => {
     try {
         const response = await fetch(`/${fileName}`)
         if (!response.ok) {
-            throw new Error('文件读取失败')
+            throw new Error('readFile error')
         }
         return response.text()
     } catch (error) {
-        console.error('读取文件时出错:', error)
+        console.error('readFile error', error)
         return 'error'
     }
 }
@@ -829,7 +829,6 @@ export const createBranch = async (
     sha: any
 ) => {
     // create web branch
-    console.log('creat branch')
     const res: any = await githubApi.createBranch(user, repo, {
         ref: `refs/heads/${project}`,
         sha,

@@ -723,7 +723,6 @@
                     <el-button @click="centerDialogVisible = false">
                         {{ t('cancel') }}
                     </el-button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <el-button type="primary" @click="publishAndroid">
                         {{ t('confirm') }}
                     </el-button>
