@@ -142,6 +142,7 @@ export const usePakeStore = defineStore('pakeplus', {
                     version: state.currentProject.version,
                     id: state.currentProject.id + '.ios',
                     webUrl: state.currentProject.url,
+                    isHtml: state.currentProject.isHtml,
                 },
                 android: {
                     ...state.currentProject.android,
@@ -150,6 +151,7 @@ export const usePakeStore = defineStore('pakeplus', {
                     version: state.currentProject.version,
                     id: state.currentProject.id + '.android',
                     webUrl: state.currentProject.url,
+                    isHtml: state.currentProject.isHtml,
                 },
                 desktop: {
                     ...state.currentProject.desktop,
@@ -158,6 +160,7 @@ export const usePakeStore = defineStore('pakeplus', {
                     version: state.currentProject.version,
                     id: state.currentProject.id + '.desktop',
                     webUrl: state.currentProject.url,
+                    isHtml: state.currentProject.isHtml,
                 },
             }
         },

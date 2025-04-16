@@ -108,15 +108,18 @@
         }
     },
     "ios": {
-        "name": "",
-        "appid": "",
-        "icon": ""
+        "name": "PakePlus",
+        "showName": "PakePlus",
+        "version": "0.0.1",
+        "webUrl": "https://juejin.cn/",
+        "id": "com.oaikes.app"
     },
     "android": {
         "name": "PakePlus",
         "showName": "PakePlus",
         "version": "0.0.1",
         "webUrl": "https://juejin.cn/",
+        "id": "com.oaikes.pakeplus.android",
         "icon": "./app-icon.png",
         "input": "./app-icon.png",
         "output": "./res",
@@ -124,7 +127,8 @@
         "copyTo": "./app/src/main/res",
         "androidResDir": "./app/src/main/res",
         "desc": "PakePlus Desc2",
-        "pubBody": "PakePlus PubBody"
+        "pubBody": "PakePlus PubBody",
+        "isHtml": false
     },
     "desktop": {
         "name": "PakePlus2",
