@@ -375,14 +375,16 @@
                 </el-form-item> -->
                 <!-- debug -->
                 <el-form-item :label="t('pubMode')">
-                    <el-radio-group v-model="pubForm.model">
-                        <el-radio value="close">{{ t('closeDebug') }}</el-radio>
-                        <el-radio value="debug">{{ t('openDebug') }}</el-radio>
+                    <el-radio-group
+                        v-model="store.currentProject.desktop.debug"
+                    >
+                        <el-radio value="false">{{ t('closeDebug') }}</el-radio>
+                        <el-radio value="true">{{ t('openDebug') }}</el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item :label="t('releaseNotes')">
                     <el-input
-                        v-model.trim="pubForm.desc"
+                        v-model.trim="store.currentProject.desktop.pubBody"
                         type="textarea"
                         autocomplete="off"
                         autoCapitalize="off"

@@ -938,6 +938,10 @@ onMounted(() => {
                 .appIcon {
                     transform: scale(1.02);
                 }
+
+                .infoBox {
+                    transform: scale(1.01);
+                }
             }
 
             .appIcon {
@@ -962,10 +966,6 @@ onMounted(() => {
                 -moz-user-select: none; /* Firefox */
                 -ms-user-select: none; /* IE10+/Edge */
                 user-select: none; /* Standard syntax */
-
-                &:hover {
-                    transform: scale(1.01);
-                }
 
                 .appBox {
                     display: flex;
