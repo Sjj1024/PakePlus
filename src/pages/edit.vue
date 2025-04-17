@@ -1419,7 +1419,7 @@ const publishWeb = async () => {
         // update build.yml
         await updatePPconfig()
         // dispatch action
-        // dispatchAction()
+        dispatchAction()
     } catch (error: any) {
         warning.value = error.message
         buildTime = 0

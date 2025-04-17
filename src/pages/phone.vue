@@ -1384,7 +1384,7 @@ const updateIcon = async () => {
     // get app-icon.png sha
     const iconSha: any = await githubApi.getFileSha(
         store.userInfo.login,
-        'PakePlus',
+        'PakePlus-Android',
         'app-icon.png',
         { ref: store.currentProject.name }
     )
@@ -1392,7 +1392,7 @@ const updateIcon = async () => {
     if (iconSha.status === 200) {
         const updateRes: any = await githubApi.updateIconFile(
             store.userInfo.login,
-            'PakePlus',
+            'PakePlus-Android',
             {
                 message: 'update icon from pakeplus',
                 sha: iconSha.data.sha,
@@ -1819,9 +1819,13 @@ const libRsConfig = async () => {
 const updateCustomJs = async () => {
     loadingText(t('syncConfig') + 'custom...')
     // get CargoToml file sha
-    const shaRes = await getFileSha(
+    const shaRes: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus-Android',
         'src-tauri/data/custom.js',
-        store.currentProject.name
+        {
+            ref: store.currentProject.name,
+        }
     )
     console.log('get custom file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
@@ -1892,17 +1896,24 @@ const publishAndroid = async () => {
     buildLoading.value = true
     loadingText(t('preCheck') + '...')
     try {
+        // delete release
+        store.isRelease && (await store.deleteRelease('PakePlus-Android'))
         // publish web or dist
         loadingText(t('syncConfig') + '...')
-        const generator = store.androidBuildStep()
-        let result = await generator.next()
-        while (!result.done) {
-            console.log(`当前执行到: ${result.value}`)
-            result = await generator.next()
-        }
+        // if (isTauri) {
+        //     const res = await tauriHtmlUpload()
+        //     if (res === 'stop') {
+        //         return
+        //     }
+        // }
+        // update app icon
+        await updateIcon()
+        // update custom.js
+        await updateCustomJs()
+        // update build.yml
+        // await updatePPconfig()
         // dispatch action
-        // dispatchAction()
-        console.log('publishAndroid end')
+        dispatchAction()
     } catch (error: any) {
         warning.value = error.message
         buildTime = 0
