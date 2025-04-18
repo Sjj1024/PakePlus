@@ -44,7 +44,7 @@
                 <el-icon
                     v-if="store.isRelease"
                     @click="toHistory"
-                    :size="22"
+                    :size="25"
                     class="publish"
                 >
                     <Paperclip />
@@ -88,7 +88,7 @@
             >
                 <div class="inLine">
                     <el-form-item
-                        :label="t('appName')"
+                        :label="t('exeName')"
                         prop="showName"
                         class="formItem"
                     >
@@ -145,7 +145,7 @@
                 </div>
                 <div class="inLine">
                     <el-form-item
-                        :label="t('appId')"
+                        :label="t('exeId')"
                         prop="appid"
                         class="formItem"
                     >
@@ -159,7 +159,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        :label="t('appVersion')"
+                        :label="t('exeVersion')"
                         prop="version"
                         class="formItem"
                     >
@@ -175,7 +175,7 @@
                 </div>
                 <div class="inLine checkBox">
                     <el-form-item
-                        :label="t('appIcon')"
+                        :label="t('exeIcon')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 13.5%'"

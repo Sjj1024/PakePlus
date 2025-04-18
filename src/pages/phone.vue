@@ -696,16 +696,20 @@
                 </el-form-item> -->
                 <!-- debug -->
                 <el-form-item :label="t('pubMode')">
-                    <el-radio-group v-model="pubForm.model">
-                        <el-radio value="close">{{ t('closeDebug') }}</el-radio>
-                        <el-radio value="debug" disabled>
+                    <el-radio-group
+                        v-model="store.currentProject.android.debug"
+                    >
+                        <el-radio :value="false">
+                            {{ t('closeDebug') }}
+                        </el-radio>
+                        <el-radio :value="true" disabled>
                             {{ t('openDebug') }}
                         </el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item :label="t('releaseNotes')">
                     <el-input
-                        v-model.trim="pubForm.desc"
+                        v-model.trim="store.currentProject.android.pubBody"
                         type="textarea"
                         autocomplete="off"
                         autoCapitalize="off"
@@ -790,14 +794,9 @@ import { useRoute, useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
-import {
-    readFile,
-    readTextFile,
-    writeTextFile,
-    exists,
-} from '@tauri-apps/plugin-fs'
+import { readFile, writeTextFile, exists } from '@tauri-apps/plugin-fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
 import { basename } from '@tauri-apps/api/path'
 import {
@@ -806,7 +805,6 @@ import {
     Edit,
     Picture,
     CircleCloseFilled,
-    ForkSpoon,
     UploadFilled,
     Warning,
     Paperclip,
@@ -817,16 +815,10 @@ import CodeEdit from '@/components/CodeEdit.vue'
 import { useI18n } from 'vue-i18n'
 import {
     CSSFILTER,
-    isAlphanumeric,
     openUrl,
     isTauri,
-    platforms,
     arrayBufferToBase64,
     cropImageToRound,
-    getBuildYmlFetch,
-    getCargoTomlFetch,
-    getTauriConfFetch,
-    getInitRustFetch,
     base64Encode,
     loadingText,
     includeHtm,
@@ -836,7 +828,6 @@ import {
     openSelect,
     readDirRecursively,
     replaceFileRoot,
-    getLibRsFetch,
     urlMap,
     fileSizeLimit,
 } from '@/utils/common'
@@ -863,7 +854,6 @@ const file = ref<any>(null)
 
 const distInput = ref<any>(null)
 const jsFileContents = ref('')
-const jsSelOptions: any = ref<any>([])
 const configDialogVisible = ref(false)
 const codeDialogVisible = ref(false)
 const imgPreviewVisible = ref(false)
@@ -1084,29 +1074,6 @@ const confirmIcon = (base64Data: string) => {
     image.onload = () => {
         roundIcon.value = cropImageToRound(image)
     }
-}
-
-// platform change
-const platformChange = (value: any) => {
-    const platformInfo = platforms[value]
-    store.currentProject.width = platformInfo.width
-    store.currentProject.height = platformInfo.height
-    store.currentProject.more.windows.width = platformInfo.width
-    store.currentProject.more.windows.height = platformInfo.height
-    store.currentProject.more.windows.userAgent = platformInfo.userAgent
-    tauriConfigRef.value?.updateCode()
-}
-
-// rotate width and height
-const rotateWH = () => {
-    const temp = store.currentProject.more.windows.width
-    store.currentProject.more.windows.width =
-        store.currentProject.more.windows.height
-    store.currentProject.more.windows.height = temp
-    store.currentProject.width = store.currentProject.more.windows.width
-    store.currentProject.height = store.currentProject.more.windows.height
-    tauriConfigRef.value?.updateCode()
-    preview(true)
 }
 
 // web upload icon
@@ -1418,28 +1385,6 @@ const toHistory = () => {
     router.push('/history')
 }
 
-// delete current project
-const deleteProject = () => {
-    ElMessageBox.confirm(t('confirmDelProject'), t('tips'), {
-        confirmButtonText: t('confirm'),
-        cancelButtonText: t('cancel'),
-        type: 'warning',
-    })
-        .then(() => {
-            console.log('delete project')
-            githubApi.deleteBranch(
-                store.userInfo.login,
-                'PakePlus',
-                store.currentProject.name
-            )
-            store.delProject(store.currentProject)
-            router.push('/')
-        })
-        .catch(() => {
-            console.log('catch project')
-        })
-}
-
 // save js file content to appDataDir
 const saveJsFile = async () => {
     console.log('saveJsFile', jsFileContents.value)
@@ -1459,7 +1404,6 @@ const saveFormInput = async () => {
     store.addUpdatePro({
         ...store.currentProject,
         name: store.currentProject.name,
-        debug: pubForm.model,
         more: store.currentProject.more,
     })
     !configDialogVisible.value && tauriConfigRef.value?.updateCode()
@@ -1575,6 +1519,10 @@ const preview = async (resize: boolean) => {
                     config: {
                         ...store.currentProject.more.windows,
                         label: 'PreView',
+                        width: 430,
+                        height: 932,
+                        userAgent:
+                            'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
                         url: store.currentProject.isHtml
                             ? 'http://127.0.0.1:3030/index.html'
                             : store.currentProject.url,
@@ -1619,202 +1567,6 @@ let buildStatus = t('startCompile') + '...'
 let buildSecondTimer: any = null
 let checkDispatchTimer: any = null
 
-// delete lasted release
-const deleteRelease = async () => {
-    if (store.isRelease) {
-        const releaseRes: any = await githubApi.deleteRelease(
-            store.userInfo.login,
-            'PakePlus',
-            store.releases[store.currentProject.name].id
-        )
-        console.log('deleteRelease', releaseRes)
-    }
-    // reset release
-    store.setRelease(store.currentProject.name, { id: 0 })
-}
-
-// update build.yml file content
-const updateBuildYml = async () => {
-    loadingText(t('syncConfig') + 'action...')
-    // get build.yml file sha
-    const shaRes = await getFileSha(
-        '.github/workflows/build.yml',
-        store.currentProject.name
-    )
-    console.log('get build.yml file sha', shaRes)
-    if (shaRes.status === 200 || shaRes.status === 404) {
-        // get build.yml file content
-        const content = await getBuildYmlFetch({
-            name: store.currentProject.name,
-            body: pubForm.desc,
-        })
-        // update build.yml file content
-        const updateRes: any = await githubApi.updateBuildYmlFile(
-            store.userInfo.login,
-            'PakePlus',
-            {
-                message: 'update build.yml from pakeplus',
-                content: content,
-                sha: shaRes.data.sha,
-                branch: store.currentProject.name,
-            }
-        )
-        if (updateRes.status === 200) {
-            console.log('updateBuildYml', updateRes)
-            loadingText(t('syncConfig') + '...')
-        } else {
-            console.error('updateBuildYml error', updateRes)
-        }
-    } else {
-        console.error('getFileSha error', shaRes)
-    }
-}
-
-// update build.yml file content
-const updateCargoToml = async () => {
-    loadingText(t('syncConfig') + 'Cargo...')
-    // get CargoToml file sha
-    const shaRes = await getFileSha(
-        'src-tauri/Cargo.toml',
-        store.currentProject.name
-    )
-    console.log('get CargoToml file sha', shaRes)
-    if (shaRes.status === 200 || shaRes.status === 404) {
-        // get CargoToml file content
-        const configContent: any = await getCargoTomlFetch({
-            name: store.currentProject.name,
-            version: store.currentProject.version,
-            desc: store.currentProject.desc,
-            debug: pubForm.model === 'debug',
-            single: store.currentProject.single,
-        })
-        // update config file
-        const updateRes: any = await githubApi.updateCargoFile(
-            store.userInfo.login,
-            'PakePlus',
-            {
-                message: 'update Cargo.toml from pakeplus',
-                content: configContent,
-                sha: shaRes.data.sha,
-                branch: store.currentProject.name,
-            }
-        )
-        if (updateRes.status === 200) {
-            console.log('updateCargoToml', updateRes)
-            loadingText(t('syncConfig') + '...')
-        } else {
-            console.error('updateCargoToml error', updateRes)
-        }
-    } else {
-        console.error('getFileSha error', shaRes)
-    }
-}
-
-// update build.yml file content
-const updateInitRs = async () => {
-    loadingText(t('syncConfig') + 'rust...')
-    // get CargoToml file sha
-    const shaRes = await getFileSha(
-        'src-tauri/src/utils/init.rs',
-        store.currentProject.name
-    )
-    console.log('get init.rs file sha', shaRes)
-    if (shaRes.status === 200 || shaRes.status === 404) {
-        // get CargoToml file content
-        const configContent: any = await getInitRustFetch({
-            config: JSON.stringify(store.currentProject.more.windows),
-            state: store.currentProject.state,
-            injectjq: store.currentProject.injectJq,
-            isHtml: store.currentProject.isHtml,
-        })
-        const updateRes: any = await githubApi.updateFileContent(
-            store.userInfo.login,
-            'PakePlus',
-            'src-tauri/src/utils/init.rs',
-            {
-                message: 'update init rust from pakeplus',
-                content: configContent,
-                sha: shaRes.data.sha,
-                branch: store.currentProject.name,
-            }
-        )
-        if (updateRes.status === 200) {
-            loadingText(t('syncConfig') + 'rust...')
-        } else {
-            console.error('updateInitRs error', updateRes)
-        }
-    } else {
-        console.error('getFileSha error', shaRes)
-    }
-}
-
-// update lib.rs file content
-// update build.yml file content
-const updateLibRs = async () => {
-    loadingText(t('syncConfig') + 'rust...')
-    // get CargoToml file sha
-    const shaRes = await getFileSha(
-        'src-tauri/src/lib.rs',
-        store.currentProject.name
-    )
-    console.log('get lib.rs file sha', shaRes)
-    if (shaRes.status === 200 || shaRes.status === 404) {
-        // get CargoToml file content
-        const configContent: any = await getLibRsFetch({
-            single: store.currentProject.single,
-        })
-        const updateRes: any = await githubApi.updateFileContent(
-            store.userInfo.login,
-            'PakePlus',
-            'src-tauri/src/lib.rs',
-            {
-                message: 'update lib rust from pakeplus',
-                content: configContent,
-                sha: shaRes.data.sha,
-                branch: store.currentProject.name,
-            }
-        )
-        if (updateRes.status === 200) {
-            console.log('updateLibRs', updateRes)
-            loadingText(t('syncConfig') + 'rust...')
-        }
-    } else {
-        console.error('getFileSha error', shaRes)
-    }
-}
-
-// update build.yml file content
-const libRsConfig = async () => {
-    // get CargoToml file sha
-    const shaRes = await getFileSha(
-        'src-tauri/src/lib.rs',
-        store.currentProject.name
-    )
-    console.log('get CargoToml file sha', shaRes)
-    if (shaRes.status === 200 || shaRes.status === 404) {
-        // get CargoToml file content
-        const configContent: any = await invoke('rust_lib_window', {
-            config: JSON.stringify(store.currentProject.more.windows),
-        })
-        const updateRes: any = await githubApi.updateFileContent(
-            store.userInfo.login,
-            'PakePlus',
-            'src-tauri/src/lib.rs',
-            {
-                message: 'update lib rust from pakeplus',
-                content: configContent,
-                sha: shaRes.data.sha,
-                branch: store.currentProject.name,
-            }
-        )
-        if (updateRes.status === 200) {
-            console.log('updateRes', updateRes)
-        }
-    } else {
-        console.error('getFileSha error', shaRes)
-    }
-}
-
 // update build.yml file content
 const updateCustomJs = async () => {
     loadingText(t('syncConfig') + 'custom...')
@@ -1822,7 +1574,7 @@ const updateCustomJs = async () => {
     const shaRes: any = await githubApi.getFileSha(
         store.userInfo.login,
         'PakePlus-Android',
-        'src-tauri/data/custom.js',
+        'app/src/main/assets/custom.js',
         {
             ref: store.currentProject.name,
         }
@@ -1834,7 +1586,7 @@ const updateCustomJs = async () => {
         const jsFileContent: any = await base64Encode(initJsScript)
         const updateRes: any = await githubApi.updateCustomJsFile(
             store.userInfo.login,
-            'PakePlus',
+            'PakePlus-Android',
             {
                 message: 'update custom js from pakeplus',
                 content: jsFileContent,
@@ -1851,42 +1603,42 @@ const updateCustomJs = async () => {
     }
 }
 
-// update tauri.conf.json
-const updateTauriConfig = async () => {
-    loadingText(t('syncConfig') + 'tauri...')
-    // update tauri config json
-    const configSha: any = await getFileSha(
-        'src-tauri/tauri.conf.json',
-        store.currentProject.name
+// update build.yml file content
+const updatePPconfig = async () => {
+    loadingText(t('syncConfig') + 'ppconfig...')
+    // get CargoToml file sha
+    const shaRes: any = await githubApi.getFileSha(
+        store.userInfo.login,
+        'PakePlus-Android',
+        'scripts/ppconfig.json',
+        {
+            ref: store.currentProject.name,
+        }
     )
-    try {
-        // remove label from windows
-        let { label, ...newWindows } = store.currentProject.more.windows
-        const configContent: any = await getTauriConfFetch({
-            name: store.currentProject.showName,
-            version: store.currentProject.version,
-            id: store.currentProject.appid,
-            ascii: isAlphanumeric(store.currentProject.showName),
-            windowConfig: JSON.stringify(newWindows),
-            tauriApi: store.currentProject.tauriApi,
-            isHtml: store.currentProject.isHtml,
-        })
+    console.log('get ppconfig file sha', shaRes)
+    if (shaRes.status === 200 || shaRes.status === 404) {
+        // get CargoToml file content
+        const configContent: any = base64Encode(JSON.stringify(store.ppConfig))
         // update config file
-        const updateRes: any = await githubApi.updateConfigFile(
+        const updateRes: any = await githubApi.updateFileContent(
             store.userInfo.login,
-            'PakePlus',
+            'PakePlus-Android',
+            'scripts/ppconfig.json',
             {
-                message: 'update config from pakeplus',
+                message: 'update ppconfig from pakeplus',
                 content: configContent,
-                sha: configSha.data.sha,
+                sha: shaRes.data.sha,
                 branch: store.currentProject.name,
             }
         )
         if (updateRes.status === 200) {
+            console.log('updatePPconfig', updateRes)
             loadingText(t('syncConfig') + '...')
+        } else {
+            console.error('updatePPconfig error', updateRes)
         }
-    } catch (error) {
-        console.error('Error reading JSON file:', error)
+    } else {
+        console.error('getFileSha error', shaRes)
     }
 }
 
@@ -1911,7 +1663,7 @@ const publishAndroid = async () => {
         // update custom.js
         await updateCustomJs()
         // update build.yml
-        // await updatePPconfig()
+        await updatePPconfig()
         // dispatch action
         dispatchAction()
     } catch (error: any) {
@@ -1927,27 +1679,14 @@ const publishAndroid = async () => {
     }
 }
 
-const getFileSha = async (filePath: string, branch: string) => {
-    const res: any = await githubApi.getFileSha(
-        store.userInfo.login,
-        'PakePlus',
-        filePath,
-        { ref: branch }
-    )
-    return res
-}
-
 // dispatch workflow action
 const dispatchAction = async () => {
     loadingText(t('preCompile') + 'workflow...')
     const dispatchRes: any = await githubApi.dispatchWorkflow(
         store.userInfo.login,
-        'PakePlus',
+        'PakePlus-Android',
         {
             ref: store.currentProject.name,
-            inputs: {
-                branch: store.currentProject.name,
-            },
         }
     )
     if (dispatchRes.status !== 204) {
@@ -2014,7 +1753,7 @@ const reRunFailsJobs = async (id: number, html_url: string) => {
     } else {
         const rerunRes: any = await githubApi.rerunFailedJobs(
             store.userInfo.login,
-            'PakePlus',
+            'PakePlus-Android',
             id
         )
         // 201 is success 403 is running
@@ -2033,7 +1772,7 @@ const reRunFailsJobs = async (id: number, html_url: string) => {
 const checkBuildStatus = async () => {
     const checkRes: any = await githubApi.getWorkflowRuns(
         store.userInfo.login,
-        'PakePlus',
+        'PakePlus-Android',
         {
             branch: store.currentProject.name,
             event: 'workflow_dispatch',
@@ -2080,26 +1819,6 @@ const checkBuildStatus = async () => {
             reRunFailsJobs(id, html_url)
         }
     }
-}
-
-// init jsFileContents from jsFile
-const initJsFileContents = async () => {
-    // read js file content from appDataDir assets dir
-    const appDataPath = await appDataDir()
-    const targetDir = await join(appDataPath, 'assets')
-    const jsFilePath = await join(targetDir, `${store.currentProject.name}.js`)
-    // if file not exist, return
-    if (await exists(jsFilePath)) {
-        const jsFileContent = await readTextFile(jsFilePath)
-        jsFileContents.value = jsFileContent
-        console.log('initJsFileContents', jsFileContent)
-    }
-    jsSelOptions.value = store.currentProject.jsFile?.map((item: any) => {
-        return {
-            label: item,
-            value: item,
-        }
-    })
 }
 
 const handleKeydown = (event: KeyboardEvent) => {
