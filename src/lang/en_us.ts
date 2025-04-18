@@ -23,6 +23,7 @@ export default {
     preEnvironment: 'Preparing the environment...',
     back: 'Back',
     configProject: 'Configure the project',
+    exeProject: 'Configure the Program',
     configProjectTips:
         'Configure the website, name, identifier, etc. of the current project',
     relHistore: 'Release History',
@@ -49,6 +50,7 @@ export default {
     width: 'width',
     height: 'height',
     appDes: 'Desc',
+    exeDes: 'Desc',
     desTips: 'Please enter the project description.',
     save: 'Save',
     preview: 'Preview',

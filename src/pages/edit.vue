@@ -14,7 +14,7 @@
                     </div>
                     <el-divider direction="vertical" />
                     <span>
-                        {{ t('configProject') }}
+                        {{ t('exeProject') }}
                     </span>
                 </div>
                 <div class="toolTips">
@@ -310,7 +310,7 @@
                         :placeholder="t('inputXpathSelectors')"
                     />
                 </el-form-item>
-                <el-form-item :label="t('appDes')" prop="desc">
+                <el-form-item :label="t('exeDes')" prop="desc">
                     <el-input
                         v-model="store.currentProject.desktop.desc"
                         type="textarea"

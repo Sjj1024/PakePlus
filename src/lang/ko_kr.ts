@@ -24,6 +24,7 @@ export default {
     preEnvironment: '환경 준비 중...',
     back: '뒤로',
     configProject: '프로젝트 설정',
+    exeProject: '프로그램 설정',
     configProjectTips:
         '현재 프로젝트의 웹 사이트 주소, 앱 이름, 앱 ID 등을 설정합니다',
     relHistore: '릴리스 기록',
@@ -50,6 +51,7 @@ export default {
     width: '너비',
     height: '높이',
     appDes: '앱 설명',
+    exeDes: '프로그램 설명',
     desTips: '프로젝트 설명을 입력하세요',
     save: '저장',
     preview: '미리보기',

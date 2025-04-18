@@ -25,6 +25,7 @@ export default {
     preEnvironment: '環境を準備しています...',
     back: '戻る',
     configProject: 'プロジェクトを設定',
+    exeProject: 'プログラムを設定',
     configProjectTips:
         '現在のプロジェクトのWebサイトアドレス、アプリ名、アプリIDなどを設定します',
     relHistore: 'リリース履歴',
@@ -49,6 +50,7 @@ export default {
     width: '幅',
     height: '高さ',
     appDes: 'アプリの説明',
+    exeDes: 'プログラムの説明',
     desTips: 'プロジェクトの説明を入力してください',
     save: '保存',
     preview: 'プレビュー',
