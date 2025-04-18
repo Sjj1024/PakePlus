@@ -22,14 +22,14 @@ features:
       details: PakePlus 是开源免费的，你可以在 GitHub 上找到它的源代码
       icon: 🐙
     - title: 跨平台
-      details: PakePLus支持 Windows、macOS 和 Linux，当然也有在线网页版本
+      details: PakePLus和打包后的软件全支持 Windows、macOS 和 Linux等操作系统
       icon: 💻
     - title: 小体积
-      details: 体积比 Electron 包小约 20 倍（小于5M!），性能快 10 倍。
+      details: 体积比 Electron 包小约 20 倍（小于5M!），性能快 10 倍
       icon: 🚀
-    - title: 高性能
-      details: 基于 Rust Tauri，PakePlus 比基于 JS 的框架更轻量、更快
-      icon: ⚡
+    - title: 支持移动端
+      details: 使用原生框架打包 Android 和 iOS APP，比Tauri2体积更小更快
+      icon: 📲
     - title: 简单易用
       details: PakePlus 界面化易于操作使用，只需一个GitHub Token(永久免费)
       icon: 📦

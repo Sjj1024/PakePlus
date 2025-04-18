@@ -71,13 +71,29 @@ export default defineConfig({
         // 侧边栏
         sidebar: {
             '/guide/': [
-                { text: '简介', link: '/guide/' },
-                { text: '下载软件', link: '/guide/down' },
-                { text: '获取Token', link: '/guide/token' },
-                { text: '创建项目', link: '/guide/creat' },
-                { text: '配置项目', link: '/guide/config' },
-                { text: '编译发布', link: '/guide/build' },
-                { text: '进阶配置', link: '/guide/tauri' },
+                {
+                    text: '新手上路',
+                    collapsed: false,
+                    items: [
+                        { text: '简介', link: '/guide/' },
+                        { text: '下载软件', link: '/guide/down' },
+                        { text: '获取Token', link: '/guide/token' },
+                        { text: '创建项目', link: '/guide/creat' },
+                        { text: '简单配置', link: '/guide/config' },
+                        { text: 'APP配置', link: '/guide/phone' },
+                        { text: '编译发布', link: '/guide/build' },
+                    ],
+                },
+                {
+                    text: '进阶配置',
+                    collapsed: false,
+                    items: [{ text: '进阶配置', link: '/guide/tauri' }],
+                },
+                {
+                    text: '高级玩法',
+                    collapsed: false,
+                    items: [{ text: '高级玩法', link: '/guide/superman' }],
+                },
             ],
             '/question/': [
                 { text: '应用已损坏', link: '/question/' },

@@ -31,8 +31,8 @@ Workflows：用来编译打包你的软件
    [Personal access tokens (classic)](https://github.com/settings/tokens)
    或者  
    [Fine-grained personal access tokens](https://github.com/settings/personal-access-tokens) 。
-7. Personal access tokens (classic) 获取操作：
-   只需要勾选下面的权限就可以了：repo 和 workflow 和 user
+7. Personal access tokens (classic) 获取操作：  
+   只需要勾选下面三个权限就可以了：<font color="red">repo 和 workflow 和 user</font>
    ![](../static/imgs/token11.png)
    ![](../static/imgs/token12.webp)  
    然后将得到的 token 复制到 PakePlus 就可以了：
