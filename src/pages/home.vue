@@ -955,7 +955,7 @@ onMounted(() => {
             // min-height: 200px;
             border-radius: 10px;
             padding: 10px 10px 0 10px;
-            margin-bottom: 10px;
+            // margin-bottom: 10px;
             background-color: var(--project-bg);
             overflow: hidden;
             transition: box-shadow 0.2s, transform 0.2s;
@@ -1038,6 +1038,7 @@ onMounted(() => {
                     -webkit-line-clamp: 2;
                     line-clamp: 2;
                     -webkit-box-orient: vertical;
+                    margin-top: 6px;
                 }
             }
         }

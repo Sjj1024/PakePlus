@@ -13,10 +13,10 @@
                         <span>{{ t('back') }}</span>
                     </div>
                     <el-divider direction="vertical" />
-                    <span> APP配置 </span>
+                    <span> {{ t('appProject') }} </span>
                 </div>
                 <div class="toolTips">
-                    <span> 移动端手机APP（iOS/Android）的配置信息 </span>
+                    <span> {{ t('appProjectTips') }} </span>
                     <el-icon
                         class="document"
                         @click="openUrl(urlMap.configdoc)"
@@ -220,7 +220,7 @@
                         </el-icon>
                     </el-form-item>
                     <el-form-item
-                        label="安全区域"
+                        :label="t('safeArea')"
                         prop="tauriApi"
                         class="formItem"
                     >
@@ -242,7 +242,7 @@
                 <!-- app header -->
                 <div class="inLine checkBox">
                     <el-form-item
-                        label="APP标头"
+                        :label="t('appHeader')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: unset'"
@@ -254,7 +254,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="侧边菜单"
+                        :label="t('siderMenu')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: unset'"
@@ -266,7 +266,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="功能菜单"
+                        :label="t('functionMenu')"
                         prop="tauriApi"
                         class="formItem"
                     >
@@ -277,7 +277,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="加载进度"
+                        :label="t('loadingProgress')"
                         prop="tauriApi"
                         class="formItem"
                     >
@@ -288,7 +288,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="APP标题"
+                        :label="t('appTitle')"
                         prop="tauriApi"
                         class="formItem"
                     >
@@ -310,7 +310,7 @@
                 <!-- bottom menu -->
                 <div class="inLine checkBox">
                     <el-form-item
-                        label="底部菜单"
+                        :label="t('appFooter')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: unset'"
@@ -322,7 +322,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="默认颜色"
+                        :label="t('defaultColor')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: unset'"
@@ -334,7 +334,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="激活颜色"
+                        :label="t('activeColor')"
                         prop="tauriApi"
                         class="formItem"
                     >
@@ -347,7 +347,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="背景颜色"
+                        :label="t('backgroundColor')"
                         prop="tauriApi"
                         class="formItem"
                     >
@@ -361,7 +361,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="字体大小"
+                        :label="t('fontSize')"
                         prop="tauriApi"
                         class="formItem"
                     >
@@ -383,14 +383,14 @@
                 <!-- menu config -->
                 <!-- <div class="inLine checkBox">
                     <el-form-item
-                        label="菜单一"
+                        :label="t('menuOne')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 18%'"
                     >
                     </el-form-item>
                     <el-form-item
-                        label="菜单文字"
+                        :label="t('menuText')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 18%'"
@@ -405,7 +405,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="菜单图标"
+                        :label="t('menuIcon')"
                         prop="tauriApi"
                         class="formItem"
                     >
@@ -420,7 +420,7 @@
                     </el-form-item>
                     <el-form-item
                         prop="iconRound"
-                        label="菜单链接"
+                        :label="t('menuLink')"
                         class="formItem"
                     >
                         <el-input
@@ -435,14 +435,14 @@
                 </div>
                 <div class="inLine checkBox">
                     <el-form-item
-                        label="菜单二"
+                        :label="t('menuTwo')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 18%'"
                     >
                     </el-form-item>
                     <el-form-item
-                        label="菜单文字"
+                        :label="t('menuText')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 18%'"
@@ -457,7 +457,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="菜单图标"
+                        :label="t('menuIcon')"
                         prop="tauriApi"
                         class="formItem"
                     >
@@ -472,7 +472,7 @@
                     </el-form-item>
                     <el-form-item
                         prop="iconRound"
-                        label="菜单链接"
+                        :label="t('menuLink')"
                         class="formItem"
                     >
                         <el-input
@@ -487,14 +487,14 @@
                 </div>
                 <div class="inLine checkBox">
                     <el-form-item
-                        label="菜单三"
+                        :label="t('menuThree')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 18%'"
                     >
                     </el-form-item>
                     <el-form-item
-                        label="菜单文字"
+                        :label="t('menuText')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 18%'"
@@ -509,7 +509,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="菜单图标"
+                        :label="t('menuIcon')"
                         prop="tauriApi"
                         class="formItem"
                     >
@@ -524,7 +524,7 @@
                     </el-form-item>
                     <el-form-item
                         prop="iconRound"
-                        label="菜单链接"
+                        :label="t('menuLink')"
                         class="formItem"
                     >
                         <el-input
@@ -539,14 +539,14 @@
                 </div>
                 <div class="inLine checkBox">
                     <el-form-item
-                        label="菜单四"
+                        :label="t('menuFour')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 18%'"
                     >
                     </el-form-item>
                     <el-form-item
-                        label="菜单文字"
+                        :label="t('menuText')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 18%'"
@@ -561,7 +561,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="菜单图标"
+                        :label="t('menuIcon')"
                         prop="tauriApi"
                         class="formItem"
                     >
@@ -576,7 +576,7 @@
                     </el-form-item>
                     <el-form-item
                         prop="iconRound"
-                        label="菜单链接"
+                        :label="t('menuLink')"
                         class="formItem"
                     >
                         <el-input
@@ -591,14 +591,14 @@
                 </div>
                 <div class="inLine checkBox">
                     <el-form-item
-                        label="菜单五"
+                        :label="t('menuFive')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 18%'"
                     >
                     </el-form-item>
                     <el-form-item
-                        label="菜单文字"
+                        :label="t('menuText')"
                         prop="icon"
                         class="formItem"
                         :style="isTauri ? 'width: unset' : 'width: 18%'"
@@ -613,7 +613,7 @@
                         />
                     </el-form-item>
                     <el-form-item
-                        label="菜单图标"
+                        :label="t('menuIcon')"
                         prop="tauriApi"
                         class="formItem"
                     >
@@ -628,7 +628,7 @@
                     </el-form-item>
                     <el-form-item
                         prop="iconRound"
-                        label="菜单链接"
+                        :label="t('menuLink')"
                         class="formItem"
                     >
                         <el-input
@@ -994,23 +994,23 @@ const safeVal = ref('all')
 const safeOptions = [
     {
         value: 'all',
-        label: '全忽略',
+        label: t('ignoreAll'),
     },
     {
         value: 'top',
-        label: '仅头部',
+        label: t('ignoreTop'),
     },
     {
         value: 'bottom',
-        label: '仅底部',
+        label: t('ignoreBottom'),
     },
     {
         value: 'left',
-        label: '仅左侧',
+        label: t('ignoreLeft'),
     },
     {
         value: 'right',
-        label: '仅右侧',
+        label: t('ignoreRight'),
     },
 ]
 // APP标头
@@ -1018,11 +1018,11 @@ const appHeaderVal = ref('default')
 const appHeaderOptions = [
     {
         value: 'default',
-        label: '默认',
+        label: t('default'),
     },
     {
         value: 'custom',
-        label: '自定义',
+        label: t('custom'),
     },
 ]
 
@@ -1388,7 +1388,7 @@ const toHistory = () => {
 
 // more phone config
 const morePhoneConfig = () => {
-    oneMessage.success('更多移动端配置还在开发中...')
+    oneMessage.success(t('morePhoneConfig'))
 }
 
 // save js file content to appDataDir
@@ -1866,7 +1866,7 @@ onMounted(async () => {
     }
     if (store.currentProject.isHtml) {
         store.currentProject.url = ''
-        oneMessage.warning('移动端暂不支持静态文件')
+        oneMessage.warning(t('phoneHtmlNo'))
     }
 })
 </script>
