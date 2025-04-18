@@ -45,8 +45,8 @@
                 >
                     <Paperclip />
                 </el-icon>
-                <el-icon :size="22" class="desktop">
-                    <!-- <ForkSpoon /> -->
+                <el-icon :size="22" class="desktop" @click="morePhoneConfig">
+                    <Orange />
                 </el-icon>
             </div>
         </div>
@@ -794,7 +794,6 @@ import { useRoute, useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
-import { ElMessage } from 'element-plus'
 import { usePakeStore } from '@/store'
 import { readFile, writeTextFile, exists } from '@tauri-apps/plugin-fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
@@ -809,6 +808,7 @@ import {
     Warning,
     Paperclip,
     Document,
+    Orange,
 } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import CodeEdit from '@/components/CodeEdit.vue'
@@ -830,6 +830,7 @@ import {
     replaceFileRoot,
     urlMap,
     fileSizeLimit,
+    oneMessage,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -961,7 +962,7 @@ const appRules = reactive<FormRules>({
 
 // tip warning
 const showWarning = () => {
-    ElMessage.error(warning.value)
+    oneMessage.error(warning.value)
 }
 
 // is json config
@@ -1049,7 +1050,7 @@ const closeConfigDialog = (done: any = () => {}) => {
         configDialogVisible.value = false
         done()
     } else {
-        ElMessage.error(t('jsonError'))
+        oneMessage.error(t('jsonError'))
     }
 }
 
@@ -1106,7 +1107,7 @@ const loadHtml = async () => {
             store.currentProject.htmlPath = selected
             store.currentProject.more.windows.url = configUrl
         } else {
-            ElMessage.error(t('indexHtmError'))
+            oneMessage.error(t('indexHtmError'))
         }
     }
 }
@@ -1128,7 +1129,7 @@ const tauriHtmlUpload = async () => {
                 // limit file size
                 const fileSize = fileContent.byteLength
                 if (fileSize > fileSizeLimit) {
-                    ElMessage.error(t('limitSize'))
+                    oneMessage.error(t('limitSize'))
                     buildLoading.value = false
                     warning.value = t('limitSize')
                     return 'stop'
@@ -1163,7 +1164,7 @@ const activeDistInput = async () => {
         loadHtml()
     } else {
         if (!store.token) {
-            ElMessage.error(t('configToken'))
+            oneMessage.error(t('configToken'))
             return
         } else {
             distInput.value.click()
@@ -1200,7 +1201,7 @@ const handleFileChange = async (event: any) => {
         for (const file of files) {
             const fileSize = file.size
             if (fileSize > fileSizeLimit) {
-                ElMessage.error(t('limitSize'))
+                oneMessage.error(t('limitSize'))
                 return
             }
         }
@@ -1216,17 +1217,17 @@ const handleFileChange = async (event: any) => {
                 await uploadFiles(files)
                 buildLoading.value = false
                 loadingText(t('syncFileSuccess'))
-                ElMessage.success(t('syncFileSuccess'))
+                oneMessage.success(t('syncFileSuccess'))
             } catch (error: any) {
                 console.error('uploadFiles error', error)
                 warning.value = error.message
                 buildLoading.value = false
                 loadingText(t('syncFileError'))
-                ElMessage.error(t('syncFileError'))
+                oneMessage.error(t('syncFileError'))
             }
             store.addUpdatePro(store.currentProject)
         } else {
-            ElMessage.error(t('indexHtmError'))
+            oneMessage.error(t('indexHtmError'))
             buildLoading.value = false
         }
     }
@@ -1290,7 +1291,7 @@ const handleIconChange = (event: any) => {
     if (file) {
         const fileSize = file.size
         if (fileSize > fileSizeLimit) {
-            ElMessage.error(t('limitSize'))
+            oneMessage.error(t('limitSize'))
             return
         }
         fileToBase64(file)
@@ -1329,7 +1330,7 @@ const uploadIcon = async () => {
     console.log('fileSize', fileSize)
     // limit file size
     if (fileSize > 1024 * 1024 * 10) {
-        ElMessage.error(t('limitSize'))
+        oneMessage.error(t('limitSize'))
         return
     }
     const base64Data: any = arrayBufferToBase64(binaryData)
@@ -1385,6 +1386,11 @@ const toHistory = () => {
     router.push('/history')
 }
 
+// more phone config
+const morePhoneConfig = () => {
+    oneMessage.success('更多移动端配置还在开发中...')
+}
+
 // save js file content to appDataDir
 const saveJsFile = async () => {
     console.log('saveJsFile', jsFileContents.value)
@@ -1422,18 +1428,18 @@ const saveProject = async (tips: boolean = true) => {
             if (configDialogVisible.value) {
                 const isJson = tauriConfigRef.value?.checkJson()
                 if (isJson) {
-                    ElMessage.success(t('saveSuccess'))
+                    oneMessage.success(t('saveSuccess'))
                 } else {
-                    ElMessage.error(t('jsonError'))
+                    oneMessage.error(t('jsonError'))
                 }
             } else {
-                tips && ElMessage.success(t('saveSuccess'))
+                tips && oneMessage.success(t('saveSuccess'))
             }
         } else {
             console.error('error submit!', fields)
             for (const key in fields) {
                 if (fields[key].length > 0) {
-                    ElMessage.error(fields[key][0].message)
+                    oneMessage.error(fields[key][0].message)
                     return
                 }
             }
@@ -1483,7 +1489,7 @@ const preview = async (resize: boolean) => {
             platformName === 'windows' &&
             store.currentProject.more.windows.additionalBrowserArgs
         ) {
-            ElMessage.error('additionalBrowserArgs cant preview on windows')
+            oneMessage.error('additionalBrowserArgs cant preview on windows')
             return
         }
         if (
@@ -1497,7 +1503,7 @@ const preview = async (resize: boolean) => {
             store.previewSecond !== 60
         ) {
             console.log('html preview error')
-            ElMessage.error(t('htmlError'))
+            oneMessage.error(t('htmlError'))
             return
         } else {
             console.log('unknown preview error')
@@ -1536,7 +1542,7 @@ const preview = async (resize: boolean) => {
             }
         })
     } else {
-        ElMessage.error(t('notSupportWeb'))
+        oneMessage.error(t('notSupportWeb'))
     }
 }
 
@@ -1697,7 +1703,7 @@ const dispatchAction = async () => {
             ? dispatchRes.data.message
             : dispatchRes.status
         warning.value = t('dispatchError') + ':' + message
-        ElMessage.error(warning.value)
+        oneMessage.error(warning.value)
         buildLoading.value = false
         return
     } else {
@@ -1860,7 +1866,7 @@ onMounted(async () => {
     }
     if (store.currentProject.isHtml) {
         store.currentProject.url = ''
-        ElMessage.warning('移动端暂不支持静态文件')
+        oneMessage.warning('移动端暂不支持静态文件')
     }
 })
 </script>
