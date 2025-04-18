@@ -11,7 +11,7 @@
 sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
 ```
 
-2. **当你打包应用时，Mac 用户可能在安装时看到“应用已损坏”的警告。** 请点击“取消”，然后运行以下命令，再重新打开应用：
+2. **当你打包应用时，Mac 用户可能在安装时看到“应用已损坏”的警告。** 请点击“取消”，然后运行以下命令，输入电脑密码，再重新打开应用：
 
 ```sh
 sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
