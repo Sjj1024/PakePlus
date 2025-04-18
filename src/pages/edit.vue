@@ -300,7 +300,7 @@
                 </el-form-item>
                 <el-form-item :label="t('filterElements')" prop="desc">
                     <el-input
-                        v-model.trim="store.currentProject.filterCss"
+                        v-model="store.currentProject.filterCss"
                         type="textarea"
                         autocomplete="off"
                         autoCapitalize="off"
@@ -312,7 +312,7 @@
                 </el-form-item>
                 <el-form-item :label="t('appDes')" prop="desc">
                     <el-input
-                        v-model.trim="store.currentProject.desktop.desc"
+                        v-model="store.currentProject.desktop.desc"
                         type="textarea"
                         autocomplete="off"
                         autoCapitalize="off"
@@ -386,7 +386,7 @@
                 </el-form-item>
                 <el-form-item :label="t('releaseNotes')">
                     <el-input
-                        v-model.trim="store.currentProject.desktop.pubBody"
+                        v-model="store.currentProject.desktop.pubBody"
                         type="textarea"
                         autocomplete="off"
                         autoCapitalize="off"

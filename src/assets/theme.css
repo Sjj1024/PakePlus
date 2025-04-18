@@ -33,3 +33,11 @@
 }
 
 /* 统一字体大小 */
+:root {
+    --pp-title1: 24px;
+    --pp-title2: 20px;
+    --pp-title3: 18px;
+    --pp-title4: 16px;
+    --pp-title5: 14px;
+    --pp-title6: 12px;
+}

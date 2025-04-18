@@ -709,7 +709,7 @@
                 </el-form-item>
                 <el-form-item :label="t('releaseNotes')">
                     <el-input
-                        v-model.trim="store.currentProject.android.pubBody"
+                        v-model="store.currentProject.android.pubBody"
                         type="textarea"
                         autocomplete="off"
                         autoCapitalize="off"

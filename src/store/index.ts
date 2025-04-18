@@ -236,12 +236,14 @@ export const usePakeStore = defineStore('pakeplus', {
                 )
             }
         },
-        setRelease(proName: string, info: any) {
-            if (info && info.id !== 0) {
+        setRelease(proName: string, releaseData: any) {
+            console.log('setRelease', proName, releaseData)
+            if (releaseData && releaseData.id !== 0) {
                 // 判断this.releases[proName]是否存在
                 if (this.releases[proName]) {
                     // 如果存在，则先过滤重复id的assets,然后合并assets
-                    const assets = info.assets.filter(
+                    console.log('如果存在，过滤重复id的assets,然后合并assets')
+                    const assets = releaseData.assets.filter(
                         (item: any) =>
                             !this.releases[proName].assets.some(
                                 (asset: any) => asset.id === item.id
@@ -253,14 +255,14 @@ export const usePakeStore = defineStore('pakeplus', {
                         ...assets,
                     ]
                 } else {
-                    this.releases[proName] = info
+                    console.log('不存在，直接赋值')
+                    this.releases[proName] = releaseData
                 }
             } else {
                 delete this.releases[proName]
             }
-            if (proName === this.currentProject.name) {
-                this.currentRelease = info
-            }
+            this.currentRelease = this.releases[proName]
+            console.log('setRelease 结束', this.currentRelease)
             localStorage.setItem('releases', JSON.stringify(this.releases))
         },
         async setCurrentRelease() {
@@ -269,10 +271,12 @@ export const usePakeStore = defineStore('pakeplus', {
                 this.releases[this.currentProject.name] &&
                 this.releases[this.currentProject.name].id !== 0
             ) {
+                console.log('setCurrentRelease 存在')
                 this.currentRelease = this.releases[this.currentProject.name]
-                this.getRelease('PakePlus')
-                this.getRelease('PakePlus-Android')
+                await this.getRelease('PakePlus')
+                await this.getRelease('PakePlus-Android')
             } else {
+                console.log('setCurrentRelease 不存在')
                 this.currentRelease = { id: 0 }
                 await this.getRelease('PakePlus')
                 await this.getRelease('PakePlus-Android')
@@ -295,7 +299,7 @@ export const usePakeStore = defineStore('pakeplus', {
                     repo,
                     this.currentProject.name
                 )
-                console.log('releaseRes', releaseRes)
+                console.log('releaseRes', repo, releaseRes)
                 if (releaseRes.status === 200) {
                     const assets = releaseRes.data.assets.filter(
                         (item: any) => {
@@ -317,43 +321,10 @@ export const usePakeStore = defineStore('pakeplus', {
                             }
                         }),
                     }
+                    console.log('releaseData', repo, releaseData)
                     this.setRelease(this.currentProject.name, releaseData)
-                    this.currentRelease = releaseData
                     return releaseData
                 }
-                // if (
-                //     releaseRes.status === 200 &&
-                //     releaseRes.data.assets.length >= 3
-                // ) {
-                //     // filter current project version
-                //     const assets = releaseRes.data.assets.filter(
-                //         (item: any) => {
-                //             return (
-                //                 item.name.includes(
-                //                     this.currentProject.version
-                //                 ) || item.name.includes('tar')
-                //             )
-                //         }
-                //     )
-                //     const releaseData = {
-                //         ...releaseRes.data,
-                //         assets: assets.map((asset: any) => {
-                //             return {
-                //                 ...asset,
-                //                 updated_at: convertToLocalTime(
-                //                     asset.updated_at
-                //                 ),
-                //             }
-                //         }),
-                //     }
-                //     this.setRelease(this.currentProject.name, releaseData)
-                //     this.currentRelease = releaseData
-                //     return releaseData
-                // } else {
-                //     console.error('releaseRes error', releaseRes)
-                //     this.setRelease(this.currentProject.name, { id: 0 })
-                //     return null
-                // }
             }
         },
         // delete release
