@@ -160,8 +160,3 @@ pnpm run build
  <p align="center" style="display:flex; justify-content: flex-start;">
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/pay.png" width=620/>
  </p>
-
-## TODO
-
-1. add auto update feature
-2. support build android apk and build ios ipa
