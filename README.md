@@ -93,7 +93,7 @@ PakePlus supports installation packages for both ARM and Intel architectures. Mo
    double-click to install, and run the app. or visit web: <a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>
 
 2. Configure a Github Token, create a new project, and set up the configurations. get token guide:  
-   <a href="https://sjj1024.github.io/PakePlus/index_en.html">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 50px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_ja.html">日本语</a>
+   <a href="https://sjj1024.github.io/PakePlus/index_en.html">English</a> <a href="https://pakeplus.com/guide/token.html" style="margin: 0 50px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_ja.html">日本语</a>
 
 ```
 Explanation of Github Token permissions:
@@ -156,7 +156,7 @@ pnpm run build
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/wxcode.png" width=300/>
  </p>
 
-1. If PakePlus has brought joy to your life, feel free to support it.
+2. If PakePlus has brought joy to your life, feel free to support it.
  <p align="center" style="display:flex; justify-content: flex-start;">
     <img src="https://files.pakeplus.com/sponsor.webp" width=620/>
  </p>
