@@ -156,5 +156,5 @@ pnpm run build
 
 1. 如果对你有帮，可以请我喝咖啡.
  <p align="center" >
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/pay.png" />
+    <img src="https://files.pakeplus.com/sponsor.webp" />
  </p>

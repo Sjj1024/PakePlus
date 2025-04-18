@@ -1,6 +1,10 @@
 <template>
     <div class="sponsorBox">
-        <img class="wxCode" src="../static/imgs/pay.png" alt="微信二维码" />
+        <img
+            class="wxCode"
+            src="https://files.pakeplus.com/sponsor.webp"
+            alt="微信二维码"
+        />
     </div>
 </template>
 

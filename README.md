@@ -158,5 +158,5 @@ pnpm run build
 
 1. If PakePlus has brought joy to your life, feel free to support it.
  <p align="center" style="display:flex; justify-content: flex-start;">
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/pay.png" width=620/>
+    <img src="https://files.pakeplus.com/sponsor.webp" width=620/>
  </p>
