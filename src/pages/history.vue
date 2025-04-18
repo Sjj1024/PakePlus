@@ -6,7 +6,7 @@
         :element-loading-text="t('requesting')"
     >
         <div class="homeHeader">
-            <div>
+            <div class="headerBox">
                 <div class="headerTitle">
                     <div class="backBox" @click="router.push('/edit')">
                         <el-icon><ArrowLeft /></el-icon>
@@ -182,8 +182,12 @@ onMounted(async () => {
         margin-bottom: 10px;
         position: relative;
 
+        .headerBox {
+            flex: 1;
+        }
+
         .headerTitle {
-            width: 100%;
+            width: 95%;
             font-size: 20px;
             font-weight: bold;
             display: flex;

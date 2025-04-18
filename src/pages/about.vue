@@ -24,6 +24,12 @@
             </div>
             <div class="tools">
                 <p>
+                    <span>PakePLus：</span>
+                    <span class="link" @click="openUrl(urlMap.pakeplus)">
+                        {{ urlMap.pakeplus }}
+                    </span>
+                </p>
+                <p>
                     <span>{{ t('githubRepo') }}：</span>
                     <span class="link" @click="openUrl(urlMap.github)">
                         {{ urlMap.github }}

@@ -96,7 +96,7 @@
                 <div class="infoBox">
                     <div class="appBox">
                         <div class="appName">{{ pro.name }}</div>
-                        <div class="appVersion">{{ pro.version }}</div>
+                        <!-- <div class="appVersion">{{ pro.version }}</div> -->
                     </div>
                     <span class="appDesc">
                         {{ pro.desktop.desc || 'this is a pakeplus project' }}
@@ -971,10 +971,6 @@ onMounted(() => {
                     transform: scale(1.02);
                 }
 
-                .infoBox {
-                    transform: scale(1.01);
-                }
-
                 .addIcon {
                     color: var(--box-shadow);
                     font-size: 36px !important;
@@ -1024,13 +1020,18 @@ onMounted(() => {
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
+                        font-weight: bold;
                     }
+
+                    // .appVersion {
+                    //     font-weight: bold;
+                    // }
                 }
 
                 .appDesc {
                     max-width: 124px;
                     display: -webkit-box;
-                    font-size: small;
+                    font-size: 12px;
                     color: gray;
                     overflow: hidden;
                     text-overflow: ellipsis;

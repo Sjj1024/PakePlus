@@ -16,6 +16,7 @@ export const fileSizeLimit = 1024 * 1024 * 10
 
 // urlMap
 export const urlMap = {
+    pakeplus: 'https://www.pakeplus.com/',
     github: 'https://github.com/Sjj1024/PakePlus',
     ppofficial: 'https://ppofficial.pages.dev/',
     configdoc: 'https://ppofficial.pages.dev/guide/config.html',
