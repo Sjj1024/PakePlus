@@ -283,6 +283,8 @@ const userInfoDialog = ref(false)
 const branchDialog = ref(false)
 const branchName = ref('')
 const testLoading = ref(false)
+// button loading
+const creatLoading = ref(false)
 
 const chageTheme = async (theme: string) => {
     if (theme === 'light') {
@@ -593,9 +595,6 @@ const getWebSha = async (repo: string = 'PakePlus') => {
         return false
     }
 }
-
-// button loading
-const creatLoading = ref(false)
 
 // creat project branch,
 const creatProject = async () => {
