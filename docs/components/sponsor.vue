@@ -3,8 +3,8 @@
 
     <p>
         如果你也喜欢我们的PakePLus项目，欢迎赞助我们，我们会继续开发和维护。
-        您的支持是我们前进的动力。
-        赞助时请务必填写留言，以便我们收录到赞助名单中，感谢您的支持与鼓励！
+        您的支持是我们前进的动力。 赞助时请务必填写留言或发邮箱：
+        1024xiaoshen@gmail.com，以便我们收录到赞助名单中，感谢您的支持与鼓励！
     </p>
 
     <h1>微信/支付宝赞助支持</h1>
@@ -153,8 +153,8 @@ h1 {
     font-family: monospace;
     font-size: 0.9rem;
     word-break: break-all;
-    margin: 0.5rem 0 1rem;
-    background: #f0f0f0;
+    margin: 0rem 1rem;
+    background: var(--vp-c-bg-alt);
     padding: 0.5rem;
     border-radius: 6px;
 }
@@ -165,7 +165,7 @@ img.qr {
     border-radius: 6px;
 }
 .copy-btn {
-    margin-top: 0.5rem;
+    margin: 0 0 0.5rem 0;
     padding: 0.3rem 0.8rem;
     border: none;
     background: #007aff;
