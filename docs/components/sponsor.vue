@@ -19,8 +19,10 @@
     <div class="wallet-grid">
         <!-- 钱包卡片 1 -->
         <div class="wallet-card">
-            <h2>Ethereum (ETH / USDC)</h2>
-            <div class="wallet-address" id="eth-addr">0x1234...abcd</div>
+            <h2>Arbitrum One</h2>
+            <div class="wallet-address" id="eth-addr">
+                0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
+            </div>
             <button class="copy-btn" @click="copyToClipboard('eth-addr')">
                 复制地址
             </button>
@@ -33,8 +35,10 @@
 
         <!-- 钱包卡片 2 -->
         <div class="wallet-card">
-            <h2>Polygon (MATIC / USDC)</h2>
-            <div class="wallet-address" id="polygon-addr">0x1234...abcd</div>
+            <h2>BSC (BNB / USDT)</h2>
+            <div class="wallet-address" id="polygon-addr">
+                0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
+            </div>
             <button class="copy-btn" @click="copyToClipboard('polygon-addr')">
                 复制地址
             </button>
@@ -47,8 +51,10 @@
 
         <!-- 钱包卡片 3 -->
         <div class="wallet-card">
-            <h2>BSC (BNB / USDT)</h2>
-            <div class="wallet-address" id="bsc-addr">0x1234...abcd</div>
+            <h2>Bitcoin</h2>
+            <div class="wallet-address" id="bsc-addr">
+                bc1pcjm3unwrg6shae99qeyex2wak0tszqyz6zw9euf2sthwgyhnp48qhmm42r
+            </div>
             <button class="copy-btn" @click="copyToClipboard('bsc-addr')">
                 复制地址
             </button>
@@ -61,9 +67,9 @@
 
         <!-- 钱包卡片 4 -->
         <div class="wallet-card">
-            <h2>Arbitrum (ETH / USDC)</h2>
+            <h2>Ethereum</h2>
             <div class="wallet-address" id="arbit   rum-addr">
-                0x1234...abcd
+                0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
             </div>
             <button class="copy-btn" @click="copyToClipboard('arbitrum-addr')">
                 复制地址
@@ -77,9 +83,9 @@
 
         <!-- 钱包卡片 5 -->
         <div class="wallet-card">
-            <h2>Tron (USDT-TRC20)</h2>
+            <h2>Solana</h2>
             <div class="wallet-address" id="tron-addr">
-                bc1pcjm3unwrg6shae99qeyex2wak0tszqyz6zw9euf2sthwgyhnp48qhmm42r
+                DU121XejdYxihLxLr4vxcNNViqhpB5Fo5m7hsvmAhUY8
             </div>
             <button class="copy-btn" @click="copyToClipboard('tron-addr')">
                 复制地址
@@ -153,7 +159,7 @@ h1 {
     border-radius: 6px;
 }
 img.qr {
-    width: 40%;
+    width: 50%;
     height: auto;
     margin: 0 auto;
     border-radius: 6px;
