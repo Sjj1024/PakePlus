@@ -1682,6 +1682,8 @@ const publishAndroid = async () => {
 // dispatch workflow action
 const dispatchAction = async () => {
     loadingText(t('preCompile') + 'workflow...')
+    // wait file sync
+    await new Promise((resolve) => setTimeout(resolve, 3000))
     const dispatchRes: any = await githubApi.dispatchWorkflow(
         store.userInfo.login,
         'PakePlus-Android',
