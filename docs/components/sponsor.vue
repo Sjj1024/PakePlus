@@ -1,4 +1,13 @@
 <template>
+    <h1>💖 赞助我们</h1>
+
+    <p>
+        如果你也喜欢我们的PakePLus项目，欢迎赞助我们，我们会继续开发和维护。
+        您的支持是我们前进的动力。
+        赞助时请务必填写留言，以便我们收录到赞助名单中，感谢您的支持与鼓励！
+    </p>
+
+    <h1>微信/支付宝赞助支持</h1>
     <div class="sponsorBox">
         <img
             class="wxCode"
@@ -6,10 +15,94 @@
             alt="微信二维码"
         />
     </div>
+    <h1>Web3 钱包赞助支持</h1>
+    <div class="wallet-grid">
+        <!-- 钱包卡片 1 -->
+        <div class="wallet-card">
+            <h2>Ethereum (ETH / USDC)</h2>
+            <div class="wallet-address" id="eth-addr">0x1234...abcd</div>
+            <button class="copy-btn" @click="copyToClipboard('eth-addr')">
+                复制地址
+            </button>
+            <img
+                class="qr"
+                src="https://files.pakeplus.com/arb.png"
+                alt="Ethereum QR Code"
+            />
+        </div>
+
+        <!-- 钱包卡片 2 -->
+        <div class="wallet-card">
+            <h2>Polygon (MATIC / USDC)</h2>
+            <div class="wallet-address" id="polygon-addr">0x1234...abcd</div>
+            <button class="copy-btn" @click="copyToClipboard('polygon-addr')">
+                复制地址
+            </button>
+            <img
+                class="qr"
+                src="https://files.pakeplus.com/bnb.png"
+                alt="Polygon QR Code"
+            />
+        </div>
+
+        <!-- 钱包卡片 3 -->
+        <div class="wallet-card">
+            <h2>BSC (BNB / USDT)</h2>
+            <div class="wallet-address" id="bsc-addr">0x1234...abcd</div>
+            <button class="copy-btn" @click="copyToClipboard('bsc-addr')">
+                复制地址
+            </button>
+            <img
+                class="qr"
+                src="https://files.pakeplus.com/btc.png"
+                alt="BSC QR Code"
+            />
+        </div>
+
+        <!-- 钱包卡片 4 -->
+        <div class="wallet-card">
+            <h2>Arbitrum (ETH / USDC)</h2>
+            <div class="wallet-address" id="arbit   rum-addr">
+                0x1234...abcd
+            </div>
+            <button class="copy-btn" @click="copyToClipboard('arbitrum-addr')">
+                复制地址
+            </button>
+            <img
+                class="qr"
+                src="https://files.pakeplus.com/eth.png"
+                alt="Arbitrum QR Code"
+            />
+        </div>
+
+        <!-- 钱包卡片 5 -->
+        <div class="wallet-card">
+            <h2>Tron (USDT-TRC20)</h2>
+            <div class="wallet-address" id="tron-addr">
+                bc1pcjm3unwrg6shae99qeyex2wak0tszqyz6zw9euf2sthwgyhnp48qhmm42r
+            </div>
+            <button class="copy-btn" @click="copyToClipboard('tron-addr')">
+                复制地址
+            </button>
+            <img
+                class="qr"
+                src="https://files.pakeplus.com/sol.png"
+                alt="Tron QR Code"
+            />
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
 // import { ref, reactive } from 'vue'
+const copyToClipboard = (id: string) => {
+    const text = document.getElementById(id)?.textContent
+    if (text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('地址已复制：' + text)
+        })
+    }
+}
 </script>
 
 <style scoped>
@@ -20,9 +113,61 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
+    margin-bottom: 2rem;
     /* .wxCode {
         width: 40%;
     } */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.wallet-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.wallet-card {
+    background: var(--vp-c-bg-alt);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+.wallet-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    border: unset;
+    margin-top: 0;
+}
+.wallet-address {
+    font-family: monospace;
+    font-size: 0.9rem;
+    word-break: break-all;
+    margin: 0.5rem 0 1rem;
+    background: #f0f0f0;
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+img.qr {
+    width: 40%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 6px;
+}
+.copy-btn {
+    margin-top: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    border: none;
+    background: #007aff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.copy-btn:hover {
+    background: #005ecc;
 }
 </style>
