@@ -40,7 +40,8 @@ jobs:
         runs-on: ${{ matrix.platform }}
         timeout-minutes: 60
         steps:
-            - uses: actions/checkout@v4
+            - name: Checkout Repository
+              uses: actions/checkout@v4
 
             - name: Install rust target
               run: rustup target add ${{ matrix.target }}
