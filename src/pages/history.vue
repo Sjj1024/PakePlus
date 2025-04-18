@@ -112,7 +112,7 @@ import { useRouter } from 'vue-router'
 import { usePakeStore } from '@/store'
 import { ArrowLeft, Delete } from '@element-plus/icons-vue'
 import githubApi from '@/apis/github'
-import { openUrl, isTauri, copyText } from '@/utils/common'
+import { openUrl, isTauri, copyText, oneMessage } from '@/utils/common'
 import { ElMessage } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 
@@ -137,7 +137,7 @@ const deleteRelAssets = async () => {
         console.log('deleteRelease', releaseRes)
         delLoading.value = false
         delDialog.value = false
-        ElMessage.success(t('delSuccess'))
+        oneMessage.success(t('delSuccess'))
         router.push('/edit?delrelease=true')
     }
     delLoading.value = false
@@ -147,7 +147,7 @@ const deleteRelAssets = async () => {
 // copy downlink
 const copyDownlink = async (asset: any) => {
     await copyText(asset.browser_download_url)
-    ElMessage.success(t('copySuccess'))
+    oneMessage.success(t('copySuccess'))
 }
 
 onMounted(async () => {
