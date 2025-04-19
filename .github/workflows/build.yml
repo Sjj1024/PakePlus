@@ -67,7 +67,7 @@ jobs:
               run: pnpm tauri icon
 
             - name: Init Project Config
-              run: node ./scripts/worker.cjs
+              run: node ./scripts/ppworker.cjs
 
             - name: install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-22.04'
