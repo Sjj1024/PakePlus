@@ -102,7 +102,7 @@ export default {
         'アセット説明：dmgはmacOS版、debはLinux版、exeおよびmsiはWindows版です。アセット名をクリックするとダウンロードリンクをコピーできます。ダウンロードをクリックするとブラウザでパッケージをダウンロードします。',
     githubRepo: 'オープンソースリポジトリ',
     navigation: '使用ガイド',
-    buyCoffee: '助けになった場合は、コーヒーを一杯おごってください',
+    buyCoffee: '💖助けになった場合は、コーヒーを一杯おごってください',
     onlyPng: 'png、jpg、jpeg、webp等の画像形式をサポート',
     hour: '時',
     minute: '分',
@@ -196,4 +196,10 @@ export default {
     morePhoneConfig: 'モバイル設定は開発中です...',
     phoneHtmlNo: 'モバイルは静的ファイルをサポートしていません',
     safeArea: '安全区域',
+    copyAddress: 'アドレスをコピー',
+    sponsor: 'スポンサー',
+    sponsorTips:
+        'PakePlusプロジェクトにご興味をお持ちの場合は、スポンサーになってください。あなたの支持は私たちの動力です。スポンサー時には必ずメッセージを入力してください。これにより、スポンサーリストに記録され、あなたの支持と励ましに感謝します！',
+    sponsorList: 'スポンサーリスト',
+    sponsorListTips: 'あなたの支持と励ましに感謝します！',
 }

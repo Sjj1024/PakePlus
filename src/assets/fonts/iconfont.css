@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4685520 */
-  src: url('iconfont.woff2?t=1730452054919') format('woff2'),
-       url('iconfont.woff?t=1730452054919') format('woff'),
-       url('iconfont.ttf?t=1730452054919') format('truetype');
+  src: url('iconfont.woff2?t=1745032534164') format('woff2'),
+       url('iconfont.woff?t=1745032534164') format('woff'),
+       url('iconfont.ttf?t=1745032534164') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,50 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-bitcoin:before {
+  content: "\e636";
+}
+
+.icon-bitcoin1:before {
+  content: "\e603";
+}
+
+.icon-solana:before {
+  content: "\e652";
+}
+
+.icon-dwasdwas:before {
+  content: "\e60c";
+}
+
+.icon-bnb:before {
+  content: "\e605";
+}
+
+.icon-ETH-Ethereum:before {
+  content: "\e60f";
+}
+
+.icon-zaixian:before {
+  content: "\e658";
+}
+
+.icon-windows1:before {
+  content: "\e69a";
+}
+
+.icon-windows:before {
+  content: "\e6b0";
+}
+
+.icon-linux:before {
+  content: "\e601";
+}
+
+.icon-mac:before {
+  content: "\e60e";
 }
 
 .icon-rotaterightvariant:before {

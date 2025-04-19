@@ -6,6 +6,83 @@
   "description": "PakePlus",
   "glyphs": [
     {
+      "icon_id": "3908363",
+      "name": "bitcoin",
+      "font_class": "bitcoin",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "5545311",
+      "name": "bitcoin",
+      "font_class": "bitcoin1",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "26676818",
+      "name": "solana",
+      "font_class": "solana",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    },
+    {
+      "icon_id": "26913731",
+      "name": "arbitrum",
+      "font_class": "dwasdwas",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "28631700",
+      "name": "bnb",
+      "font_class": "bnb",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "41079798",
+      "name": "ETH-Ethereum",
+      "font_class": "ETH-Ethereum",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "410530",
+      "name": "在线",
+      "font_class": "zaixian",
+      "unicode": "e658",
+      "unicode_decimal": 58968
+    },
+    {
+      "icon_id": "27956204",
+      "name": "windows",
+      "font_class": "windows1",
+      "unicode": "e69a",
+      "unicode_decimal": 59034
+    },
+    {
+      "icon_id": "6605038",
+      "name": "windows",
+      "font_class": "windows",
+      "unicode": "e6b0",
+      "unicode_decimal": 59056
+    },
+    {
+      "icon_id": "8576597",
+      "name": "linux",
+      "font_class": "linux",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "1120947",
+      "name": "mac",
+      "font_class": "mac",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
       "icon_id": "703569",
       "name": "rotate-right-variant",
       "font_class": "rotaterightvariant",

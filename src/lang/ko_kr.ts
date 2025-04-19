@@ -102,7 +102,7 @@ export default {
         '자산 설명: dmg는 macOS 버전, deb는 Linux 버전, exe 및 msi는 Windows 버전입니다. 자산 이름을 클릭하면 다운로드 링크를 복사할 수 있으며, 다운로드 버튼을 클릭하면 브라우저에서 소프트웨어 패키지를 다운로드합니다.',
     githubRepo: '오픈 소스 주소',
     navigation: '사용 방법',
-    buyCoffee: '도움이 되셨다면 커피 한 잔 사 주세요',
+    buyCoffee: '💖도움이 되셨다면 커피 한 잔 사 주세요',
     onlyPng: 'png 형식의 이미지만 지원',
     hour: '시간',
     minute: '분',
@@ -197,4 +197,10 @@ export default {
     morePhoneConfig: '더 많은 모바일 설정은 아직 개발 중입니다...',
     phoneHtmlNo: '모바일은 정적 파일을 지원하지 않습니다',
     safeArea: '안전 영역',
+    copyAddress: '주소 복사',
+    sponsor: '후원',
+    sponsorTips:
+        'PakePlus 프로젝트에 관심이 있으시다면, 후원해주세요. 당신의 지지는 우리의 열정을 움직이는 힘입니다. 후원 시 반드시 메시지를 입력하세요. 이는 후원 목록에 기록되며, 당신의 지지와 격려에 감사드립니다!',
+    sponsorList: '후원 목록',
+    sponsorListTips: '당신의 지지와 격려에 감사드립니다!',
 }

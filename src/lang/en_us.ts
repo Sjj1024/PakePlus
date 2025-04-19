@@ -100,7 +100,7 @@ export default {
         'Resource description: The dmg suffix is the macOS version, the deb suffix is the Linux version, and the exe and msi suffixes are the Windows versions. Clicking on the resource name will copy the download link, and clicking on download will use the browser to download the software package.',
     githubRepo: 'Github',
     navigation: 'Guides',
-    buyCoffee: 'If you find this helpful, you can buy me a cup of coffee.',
+    buyCoffee: '💖Sponsor us',
     onlyPng: 'Support png, jpg, jpeg, webp, etc',
     hour: 'h',
     minute: 'm',
@@ -196,4 +196,10 @@ export default {
     morePhoneConfig: 'More mobile config is under development...',
     phoneHtmlNo: 'Mobile does not support static files',
     safeArea: 'Safe Area',
+    copyAddress: 'Copy Address',
+    sponsor: 'Sponsor',
+    sponsorTips:
+        'If you also like our PakePLus project, welcome to sponsor us, we will continue to develop and maintain it. Your support is our driving force. Please fill in the message when sponsoring, so that we can record it in the sponsor list, thank you for your support and encouragement!',
+    sponsorList: 'Sponsor List',
+    sponsorListTips: 'Thank you for your support and encouragement!',
 }

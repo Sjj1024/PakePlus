@@ -98,7 +98,7 @@ export default {
         '资源说明：dmg结尾的是macOS版本，deb结尾的是Linux版本，exe和msi结尾的是Windows版本，点击资源名称可以复制下载链接，点击下载会使用浏览器下载软件包。',
     githubRepo: '开源地址',
     navigation: '使用教程',
-    buyCoffee: '如果对你有帮助，可以请我喝杯咖啡',
+    buyCoffee: '💖赞助我们',
     onlyPng: '支持png、jpg、jpeg、webp等格式图片',
     hour: '时',
     minute: '分',
@@ -193,4 +193,10 @@ export default {
     morePhoneConfig: '更多移动端配置还在开发中...',
     phoneHtmlNo: '移动端暂不支持静态文件',
     safeArea: '安全区域',
+    copyAddress: '复制地址',
+    sponsor: '赞助',
+    sponsorTips:
+        '如果你也喜欢我们的PakePLus项目，欢迎赞助我们，我们会继续开发和维护。您的支持是我们前进的动力。赞助时请务必填写留言，以便我们收录到赞助名单中，感谢您的支持与鼓励！',
+    sponsorList: '赞助名单',
+    sponsorListTips: '感谢您的支持与鼓励！',
 }

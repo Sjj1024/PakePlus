@@ -55,14 +55,191 @@
                 </p>
             </div>
             <div class="payMe">
-                <p>
-                    {{ t('buyCoffee') }}：
-                    <span class="iconfont weixin" @click="showCode(weixin)">
-                        &#xe64b;
-                    </span>
-                    <span class="iconfont zhifubao" @click="showCode(zhifubao)">
-                        &#xe654;
-                    </span>
+                <p class="payTitle">{{ t('buyCoffee') }}</p>
+                <p class="payDesc">
+                    {{ t('sponsorTips') }}
+                </p>
+                <p class="payIconBox">
+                    <el-popover
+                        popper-class="popoverBox"
+                        :width="286"
+                        placement="top"
+                    >
+                        <template #reference>
+                            <span class="iconfont weixin"> &#xe64b; </span>
+                        </template>
+                        <img :src="weixin" alt="" class="code" />
+                    </el-popover>
+                    <el-popover
+                        popper-class="popoverBox"
+                        :width="286"
+                        placement="top"
+                    >
+                        <template #reference>
+                            <span class="iconfont zhifubao"> &#xe654; </span>
+                        </template>
+                        <img :src="zhifubao" alt="" class="code" />
+                    </el-popover>
+                    <el-popover
+                        popper-class="popoverBox"
+                        :width="286"
+                        placement="top"
+                    >
+                        <template #reference>
+                            <svg class="icon payIcon" aria-hidden="true">
+                                <use xlink:href="#icon-dwasdwas"></use>
+                            </svg>
+                        </template>
+                        <img
+                            src="@/assets/images/arb.png"
+                            alt=""
+                            class="code"
+                        />
+                        <div class="payInfoBox">
+                            <h2 class="coinName">Arbitrum One</h2>
+                            <div class="wallet-address" id="eth-addr">
+                                0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
+                            </div>
+                            <button
+                                class="copy-btn"
+                                @click="
+                                    copyAddress(
+                                        '0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4'
+                                    )
+                                "
+                            >
+                                {{ t('copyAddress') }}
+                            </button>
+                        </div>
+                    </el-popover>
+                    <el-popover
+                        popper-class="popoverBox"
+                        :width="286"
+                        placement="top"
+                    >
+                        <template #reference>
+                            <svg class="icon payIcon" aria-hidden="true">
+                                <use xlink:href="#icon-bnb"></use>
+                            </svg>
+                        </template>
+                        <img
+                            src="@/assets/images/bnb.png"
+                            alt=""
+                            class="code"
+                        />
+                        <div class="payInfoBox">
+                            <h2 class="coinName">BSC (BNB / USDT)</h2>
+                            <div class="wallet-address" id="eth-addr">
+                                0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
+                            </div>
+                            <button
+                                class="copy-btn"
+                                @click="
+                                    copyAddress(
+                                        '0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4'
+                                    )
+                                "
+                            >
+                                {{ t('copyAddress') }}
+                            </button>
+                        </div>
+                    </el-popover>
+                    <el-popover
+                        popper-class="popoverBox"
+                        :width="286"
+                        placement="top"
+                    >
+                        <template #reference>
+                            <svg class="icon payIcon" aria-hidden="true">
+                                <use xlink:href="#icon-bitcoin1"></use>
+                            </svg>
+                        </template>
+                        <img
+                            src="@/assets/images/btc.png"
+                            alt=""
+                            class="code"
+                        />
+                        <div class="payInfoBox">
+                            <h2 class="coinName">Bitcoin</h2>
+                            <div class="wallet-address" id="eth-addr">
+                                3GxwxebSa9fsETahiZGwF5RekxS2fTKj4h
+                            </div>
+                            <button
+                                class="copy-btn"
+                                @click="
+                                    copyAddress(
+                                        '3GxwxebSa9fsETahiZGwF5RekxS2fTKj4h'
+                                    )
+                                "
+                            >
+                                {{ t('copyAddress') }}
+                            </button>
+                        </div>
+                    </el-popover>
+                    <el-popover
+                        popper-class="popoverBox"
+                        :width="286"
+                        placement="top"
+                    >
+                        <template #reference>
+                            <svg class="icon payIcon" aria-hidden="true">
+                                <use xlink:href="#icon-solana"></use>
+                            </svg>
+                        </template>
+                        <img
+                            src="@/assets/images/sol.png"
+                            alt=""
+                            class="code"
+                        />
+                        <div class="payInfoBox">
+                            <h2 class="coinName">Solana</h2>
+                            <div class="wallet-address" id="eth-addr">
+                                DU121XejdYxihLxLr4vxcNNViqhpB5Fo5m7hsvmAhUY8
+                            </div>
+                            <button
+                                class="copy-btn"
+                                @click="
+                                    copyAddress(
+                                        'DU121XejdYxihLxLr4vxcNNViqhpB5Fo5m7hsvmAhUY8'
+                                    )
+                                "
+                            >
+                                {{ t('copyAddress') }}
+                            </button>
+                        </div>
+                    </el-popover>
+                    <el-popover
+                        popper-class="popoverBox"
+                        :width="286"
+                        placement="top"
+                    >
+                        <template #reference>
+                            <svg class="icon payIcon" aria-hidden="true">
+                                <use xlink:href="#icon-ETH-Ethereum"></use>
+                            </svg>
+                        </template>
+                        <img
+                            src="@/assets/images/eth.png"
+                            alt=""
+                            class="code"
+                        />
+                        <div class="payInfoBox">
+                            <h2 class="coinName">Ethereum</h2>
+                            <div class="wallet-address" id="eth-addr">
+                                0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
+                            </div>
+                            <button
+                                class="copy-btn"
+                                @click="
+                                    copyAddress(
+                                        '0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4'
+                                    )
+                                "
+                            >
+                                {{ t('copyAddress') }}
+                            </button>
+                        </div>
+                    </el-popover>
                 </p>
             </div>
             <div class="buildTime">
@@ -89,7 +266,14 @@ import weixin from '@/assets/images/weixin.png'
 import zhifubao from '@/assets/images/zhifubao.png'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import { urlMap, openUrl, isTauri, buildTime } from '@/utils/common'
+import {
+    urlMap,
+    openUrl,
+    isTauri,
+    buildTime,
+    copyText,
+    oneMessage,
+} from '@/utils/common'
 import { ref } from 'vue'
 
 const { t } = useI18n()
@@ -98,9 +282,9 @@ const router = useRouter()
 const dialogVisible = ref(false)
 const codeImg = ref(weixin)
 
-const showCode = (img: any) => {
-    dialogVisible.value = true
-    codeImg.value = img
+const copyAddress = (address: string) => {
+    copyText(address)
+    oneMessage.success(t('copySuccess'))
 }
 
 const handleClose = () => {
@@ -114,6 +298,53 @@ const goBack = () => {
 </script>
 
 <style lang="scss" scoped>
+.popoverBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payInfoBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .coinName {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+}
+
+.code {
+    width: 260px;
+    height: auto;
+}
+
+.wallet-address {
+    font-family: monospace;
+    font-size: 0.9rem;
+    word-break: break-all;
+    // margin: 0.5rem 0;
+    // background: var(--hover-color);
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+
+.copy-btn {
+    padding: 0.3rem 0.8rem;
+    border: none;
+    background: #007aff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    background: #005ecc;
+}
+
 .aboutBox {
     padding: 10px 20px;
 
@@ -189,6 +420,28 @@ const goBack = () => {
         .payMe {
             margin-top: 6px;
 
+            .payTitle {
+                font-size: 16px;
+                font-weight: 600;
+                color: var(--text-color);
+                margin-bottom: 10px;
+            }
+
+            .payIconBox {
+                width: 60%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                // padding: 0 100px;
+                margin: 20px 0;
+            }
+
+            .payIcon {
+                font-size: 36px;
+                cursor: pointer;
+            }
+
             .zhifubao {
                 font-size: 36px;
                 color: #009fe8;
@@ -198,7 +451,6 @@ const goBack = () => {
             .weixin {
                 font-size: 38px;
                 color: #3daf34;
-                margin-right: 20px;
                 cursor: pointer;
             }
         }
@@ -206,6 +458,7 @@ const goBack = () => {
         .buildTime {
             margin-top: 10px;
             font-size: 16px;
+            text-align: right;
             color: #999;
         }
     }
