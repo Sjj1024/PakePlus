@@ -1144,10 +1144,12 @@ const getInitializationScript = () => {
 const preview = async (resize: boolean) => {
     if (isTauri) {
         try {
-            const res = await invoke('start_server', {
-                path: store.currentProject.htmlPath,
-            })
-            console.log('Server started successfully', res)
+            if (store.currentProject.isHtml && store.currentProject.htmlPath) {
+                const res = await invoke('start_server', {
+                    path: store.currentProject.htmlPath,
+                })
+                console.log('Server started successfully', res)
+            }
         } catch (error) {
             console.error('Failed to start server:', error)
         }

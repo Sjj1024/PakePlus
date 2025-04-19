@@ -247,4 +247,30 @@ export default {
             method: 'delete',
         })
     },
+    // get all branchs
+    getAllBranchs(user: string, repo: string) {
+        return http(`/repos/${user}/${repo}/branches`, {
+            method: 'get',
+        })
+    },
+    // merge upstream branch
+    mergeUpstreamBranch(user: string, repo: string, branch: string) {
+        return http(`/repos/${user}/${repo}/merges`, {
+            method: 'post',
+            data: { branch },
+        })
+    },
+    // get upstream branch last commit
+    getUpstreamCommit(user: string, repo: string, branch: string) {
+        return http(`/repos/${user}/${repo}/git/refs/heads/${branch}`, {
+            method: 'get',
+        })
+    },
+    // force update branch
+    forceUpdateBranch(user: string, repo: string, branch: string) {
+        return http(`/repos/${user}/${repo}/git/refs/heads/${branch}`, {
+            method: 'patch',
+            data: { sha: 'sha' },
+        })
+    },
 }

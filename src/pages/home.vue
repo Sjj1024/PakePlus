@@ -444,8 +444,8 @@ const commitShas = async (tips: boolean = true) => {
         const res = await Promise.all([
             getMainSha('PakePlus'),
             getWebSha('PakePlus'),
-            // getMainSha('PakePlus-iOS'),
-            // getWebSha('PakePlus-iOS'),
+            getMainSha('PakePlus-iOS'),
+            getWebSha('PakePlus-iOS'),
             getMainSha('PakePlus-Android'),
             getWebSha('PakePlus-Android'),
         ])
@@ -456,20 +456,16 @@ const commitShas = async (tips: boolean = true) => {
                     // delete build.yml
                     let deleteRes = true
                     if (store.noSjj1024) {
-                        // deleteRes = await Promise.all([
-                        //     deleteBuildYml(mainBranch, 'PakePlus'),
-                        //     // deleteBuildYml(mainBranch, 'PakePlus-iOS'),
-                        //     deleteBuildYml(mainBranch, 'PakePlus-Android'),
-                        // ]).then((res) => {
-                        //     console.log('deleteBuildYml res', res)
-                        //     return res.every((item) => item)
-                        // })
                         const pp = await deleteBuildYml(mainBranch, 'PakePlus')
                         const ppa = await deleteBuildYml(
                             mainBranch,
                             'PakePlus-Android'
                         )
-                        deleteRes = pp && ppa
+                        const ppi = await deleteBuildYml(
+                            mainBranch,
+                            'PakePlus-iOS'
+                        )
+                        deleteRes = pp && ppa && ppi
                     }
                     if (deleteRes) {
                         testLoading.value = false
@@ -514,7 +510,7 @@ const forkStartShas = async (tips: boolean = true) => {
     // fork action is async
     const forkRes: any = Promise.all([
         forkPakePlus('PakePlus'),
-        // forkPakePlus('PakePlus-iOS'),
+        forkPakePlus('PakePlus-iOS'),
         forkPakePlus('PakePlus-Android'),
     ]).then((res) => {
         console.log('forkRes', res)

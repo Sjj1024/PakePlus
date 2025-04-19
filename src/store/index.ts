@@ -109,9 +109,9 @@ export const usePakeStore = defineStore('pakeplus', {
                   } as { [key: string]: any }),
             //  token
             token: localStorage.getItem('token') || '',
-            //  重新预览倒计时
+            //  review second
             previewSecond: 60,
-            // 预览静态文件夹路径
+            // preview html path
             previewPath: '',
             // timer
             timer: 0 as any,
@@ -168,12 +168,6 @@ export const usePakeStore = defineStore('pakeplus', {
     },
     actions: {
         actionSecond() {
-            console.log(
-                'actionSecond',
-                this.previewSecond,
-                this.previewPath,
-                this.currentProject.htmlPath
-            )
             if (
                 this.previewPath !== '' &&
                 this.currentProject.htmlPath === this.previewPath

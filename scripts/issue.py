@@ -5,7 +5,6 @@ import json
 
 
 def get_issue(keyword):
-    print("获取issue内容")
     url = f"https://api.github.com/search/issues?q={keyword}+state:open+in:title+repo:Sjj1024/PakePlus"
     headers = {
         'Authorization': f'Bearer {os.environ.get("TOKEN")}'

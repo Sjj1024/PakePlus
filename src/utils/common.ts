@@ -7,6 +7,12 @@ import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 import { join } from '@tauri-apps/api/path'
 import { ElMessage } from 'element-plus'
 
+// upstream repo info
+export const upstreamUser = 'Sjj1024'
+export const desktopRepo = 'PakePlus'
+export const androidRepo = 'PakePlus-Android'
+export const iosRepo = 'PakePlus-iOS'
+
 export const mainBranch = 'main'
 export const webBranch = 'web2'
 export const devBranch = 'dev'

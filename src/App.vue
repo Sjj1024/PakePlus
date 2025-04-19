@@ -96,7 +96,7 @@ window
 
 // global error
 window.onerror = function (message, source, lineno, colno, error) {
-    console.error('全局错误:', { message, source, lineno, colno, error })
+    console.error('global error:', { message, source, lineno, colno, error })
     return false
 }
 

@@ -21,9 +21,4 @@ createGtag({
     tagId: 'G-7ZK1NBKC95',
 })
 
-app.config.errorHandler = (err, instance, info) => {
-    // catch vue error
-    console.error('Vue error:', err)
-}
-
 app.mount('#app')
