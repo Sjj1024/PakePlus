@@ -40,7 +40,8 @@ jobs:
         runs-on: ${{ matrix.platform }}
         timeout-minutes: 60
         steps:
-            - uses: actions/checkout@v4
+            - name: Checkout Repository
+              uses: actions/checkout@v4
 
             - name: Install rust target
               run: rustup target add ${{ matrix.target }}
@@ -82,10 +83,10 @@ jobs:
                   VERSION: ${{ env.VERSION }}
                   PUBBODY: ${{ env.PUBBODY }}
               with:
-                  tagName: '${{ env.NAME }}-v${{ env.VERSION }}'
+                  tagName: '${{ env.NAME }}'
                   releaseName: '${{ env.NAME }} v${{ env.VERSION }}'
                   releaseBody: '${{ env.PUBBODY }}'
-                  releaseDraft: true
+                  releaseDraft: false
                   prerelease: false
                   args: ${{ matrix.args }}
                   renameArtifacts: '${{ env.NAME }}'
