@@ -156,7 +156,61 @@ pnpm run build
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/wxcode.png" width=300/>
  </p>
 
-2. If PakePlus has brought joy to your life, feel free to support it.
+2. 💖If PakePlus has brought joy to your life, feel free to support it.
  <p align="center" style="display:flex; justify-content: flex-start;">
     <img src="https://files.pakeplus.com/sponsor.webp" width=620/>
  </p>
+
+3. 💖If you like our PakePlus project, welcome to support it through Web3 wallet!
+
+### 🪙 Arbitrum One
+
+地址：  
+`0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4`
+
+<img src="https://files.pakeplus.com/arb.png" width="200" alt="Arbitrum QR Code" />
+
+---
+
+### 🪙 BSC (BNB / USDT)
+
+地址：  
+`0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4`
+
+<img src="https://files.pakeplus.com/bnb.png" width="200" alt="BSC QR Code" />
+
+---
+
+### 🪙 Bitcoin
+
+地址：  
+`bc1pcjm3unwrg6shae99qeyex2wak0tszqyz6zw9euf2sthwgyhnp48qhmm42r`
+
+<img src="https://files.pakeplus.com/btc.png" width="200" alt="Bitcoin QR Code" />
+
+---
+
+### 🪙 Ethereum
+
+地址：  
+`0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4`
+
+<img src="https://files.pakeplus.com/eth.png" width="200" alt="Ethereum QR Code" />
+
+---
+
+### 🪙 Solana
+
+地址：  
+`DU121XejdYxihLxLr4vxcNNViqhpB5Fo5m7hsvmAhUY8`
+
+<img src="https://files.pakeplus.com/sol.png" width="200" alt="Solana QR Code" />
+
+---
+
+### 🪙 Polygon
+
+地址：  
+`0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4`
+
+<img src="https://files.pakeplus.com/poly.jpg" width="200" alt="Polygon QR Code" />

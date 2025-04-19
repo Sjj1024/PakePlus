@@ -96,6 +96,22 @@
                 alt="Tron QR Code"
             />
         </div>
+
+        <!-- 钱包卡片 6 -->
+        <div class="wallet-card">
+            <h2>Polygon</h2>
+            <div class="wallet-address" id="tron-addr">
+                0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
+            </div>
+            <button class="copy-btn" @click="copyToClipboard('tron-addr')">
+                复制地址
+            </button>
+            <img
+                class="qr"
+                src="https://files.pakeplus.com/poly.jpg"
+                alt="Tron QR Code"
+            />
+        </div>
     </div>
 </template>
 
