@@ -231,6 +231,7 @@ export const usePPStore = defineStore('pakeplus', {
             )
         },
         delProject(projectName: string) {
+            // delete branch
             githubApi.deleteBranch(this.userInfo.login, 'PakePlus', projectName)
             githubApi.deleteBranch(
                 this.userInfo.login,

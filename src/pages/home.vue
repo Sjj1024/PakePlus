@@ -349,7 +349,7 @@ const logout = async () => {
 // del pakeplus!
 const delPakePlus = async () => {
     await githubApi.deleteProgect(store.userInfo.login, 'PakePlus')
-    // await githubApi.deleteProgect(store.userInfo.login, 'PakePlus-iOS')
+    await githubApi.deleteProgect(store.userInfo.login, 'PakePlus-iOS')
     await githubApi.deleteProgect(store.userInfo.login, 'PakePlus-Android')
     localStorage.removeItem('projectList')
     localStorage.removeItem('releases')
@@ -710,12 +710,12 @@ const creatProject = async () => {
                         'PakePlus-Android',
                         store.shaInfo.androidWeb
                     ),
-                    // createBranch(
-                    //     store.userInfo.login,
-                    //     branchName.value,
-                    //     'PakePlus-iOS',
-                    //     store.shaInfo.iosWeb
-                    // ),
+                    createBranch(
+                        store.userInfo.login,
+                        branchName.value,
+                        'PakePlus-iOS',
+                        store.shaInfo.iosWeb
+                    ),
                 ]).then((res) => {
                     console.log('createBranch res', res)
                     return res.every((item) => item)
