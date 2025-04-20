@@ -268,6 +268,7 @@ import {
     getBuildYmlFetch,
     oneMessage,
     upstreamUser,
+    ppRepo,
 } from '@/utils/common'
 import ppconfig from '@root/scripts/ppconfig.json'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
@@ -783,24 +784,20 @@ const getPakePlusInfo = async () => {
 }
 
 // creat branch by upstream branch
-const creatBranchByUpstream = async (branch: string) => {
-    console.log('creatBranchByUpstream', branch)
+const creatBranchByUpstream = async (repo: string, branch: string) => {
+    console.log('creatBranchByUpstream', repo, branch)
     const upRes: any = await githubApi.getUpstreamCommit(
         upstreamUser,
-        'PakePlus-iOS',
+        repo,
         branch
     )
     console.log('upRes', upRes)
     const upBranchSha = upRes.data.object.sha
     // create branch
-    const createRes: any = await githubApi.createBranch(
-        store.userName,
-        'PakePlus-iOS',
-        {
-            ref: `refs/heads/${branch}`,
-            sha: upBranchSha,
-        }
-    )
+    const createRes: any = await githubApi.createBranch(store.userName, repo, {
+        ref: `refs/heads/${branch}`,
+        sha: upBranchSha,
+    })
     console.log('createRes', createRes)
     if (createRes.status === 201) {
         console.log('createBranchByUpstream success', branch)
@@ -810,12 +807,12 @@ const creatBranchByUpstream = async (branch: string) => {
 }
 
 // force update branch
-const forceUpdateBranch = async (branch: string) => {
-    console.log('forceUpdateBranch', branch)
+const forceUpdateBranch = async (repo: string, branch: string) => {
+    console.log('forceUpdateBranch', repo, branch)
     // get upstream branch last commit
     const upRes: any = await githubApi.getUpstreamCommit(
         upstreamUser,
-        'PakePlus-iOS',
+        repo,
         branch
     )
     console.log('upRes', upRes)
@@ -823,7 +820,7 @@ const forceUpdateBranch = async (branch: string) => {
     // force update branch
     const forceUpdateRes: any = await githubApi.forceUpdateBranch(
         store.userName,
-        'PakePlus-iOS',
+        repo,
         branch,
         {
             sha: upBranchSha,
@@ -838,11 +835,11 @@ const forceUpdateBranch = async (branch: string) => {
     }
 }
 // merge branch and commit(allways use upstream branch)
-const mergeBranch = async (branch: string) => {
-    console.log('mergeBranch', branch)
+const mergeBranch = async (repo: string, branch: string) => {
+    console.log('mergeBranch', repo, branch)
     const mergeRes: any = await githubApi.mergeUpstreamBranch(
         store.userName,
-        'PakePlus-iOS',
+        repo,
         {
             base: branch,
             head: `${upstreamUser}:${branch}`,
@@ -856,60 +853,35 @@ const mergeBranch = async (branch: string) => {
         console.log('branch status is up to date', branch)
     } else {
         console.error('mergeBranch error', mergeRes)
-        await forceUpdateBranch(branch)
+        await forceUpdateBranch(repo, branch)
     }
 }
 
 // sync branch by upstream branch
-const syncBranch = async (branch: string) => {
-    console.log('syncBranch', branch)
+const syncBranch = async (repo: string, branch: string) => {
+    console.log('syncBranch', repo, branch)
     // create branch by upstream branch
-    await creatBranchByUpstream(branch)
+    await creatBranchByUpstream(repo, branch)
     // merge branch and commit(allways use upstream branch)
-    await mergeBranch(branch)
+    await mergeBranch(repo, branch)
 }
 
 // sync upstrame all branch
 const syncAllBranch = async () => {
-    console.log('syncAllBranch')
-    const upRes: any = await githubApi.getAllBranchs(
-        upstreamUser,
-        'PakePlus-iOS'
-    )
-    console.log('upRes', upRes)
-    const upBranchs = upRes.data.map((item: any) => item.name)
-    console.log('upBranchs', upBranchs)
-    const userRes: any = await githubApi.getAllBranchs(
-        store.userName,
-        'PakePlus-iOS'
-    )
-    console.log('userRes', userRes)
-    const userBranchs = userRes.data.map((item: any) => item.name)
-    console.log('userBranchs', userBranchs)
-
-    for (const branch of upBranchs) {
-        await syncBranch(branch)
+    for (const repo of ppRepo) {
+        console.log('syncAllBranch', repo)
+        const upRes: any = await githubApi.getAllBranchs(upstreamUser, repo)
+        console.log('upRes', upRes)
+        const upBranchs = upRes.data.map((item: any) => item.name)
+        console.log('upBranchs', upBranchs)
+        const userRes: any = await githubApi.getAllBranchs(store.userName, repo)
+        console.log('userRes', userRes)
+        const userBranchs = userRes.data.map((item: any) => item.name)
+        console.log('userBranchs', userBranchs)
+        for (const branch of upBranchs) {
+            await syncBranch(repo, branch)
+        }
     }
-
-    // for (const repo of ppRepo) {
-    //     const upstream_branches = await githubApi.getAllBranchs(
-    //         upstreamUser,
-    //         repo
-    //     )
-    //     console.log('upstream_branches', upstream_branches)
-    //     const user_branches = await githubApi.getAllBranchs(
-    //         store.userName,
-    //         repo
-    //     )
-    //     console.log('user_branches', user_branches)
-    //     // for (const branch of upstream_branches) {
-    //     //     if (user_branches.includes(branch)) {
-    //     //         console.log('branch already exists', branch)
-    //     //     } else {
-    //     //         console.log('branch not exists', branch)
-    //     //     }
-    //     // }
-    // }
 }
 
 onMounted(() => {
