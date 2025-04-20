@@ -175,10 +175,12 @@ import {
     Loading,
     WarningFilled,
 } from '@element-plus/icons-vue'
-import { ref, watch } from 'vue'
+import { watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 
 const { t } = useI18n()
+const router = useRouter()
 
 const visible = defineModel<boolean>('visible', {
     default: true,
@@ -247,26 +249,22 @@ const props = defineProps({
     },
 })
 
-// 桌面端花费时间
-const desktopConsume = ref(0)
-
-// 安卓花费时间
-const androidConsume = ref(0)
-
-// iOS花费时间
-const iosConsume = ref(0)
-
-// PWA花费时间
-const pwaConsume = ref(0)
-
-// watch(
-//     () => props.desktopStatus,
-//     (newVal) => {
-//         if (newVal === 'success' || newVal === 'failed') {
-//             desktopConsume.value = props.desktopTime
-//         }
-//     }
-// )
+watch(props, (newVal) => {
+    console.log('newVal', newVal)
+    if (
+        (newVal.androidStatus === t('buildSuccess') ||
+            newVal.androidStatus === t('failure') ||
+            newVal.androidStatus === t('cancelled')) &&
+        (newVal.iosStatus === t('buildSuccess') ||
+            newVal.iosStatus === t('failure') ||
+            newVal.iosStatus === t('cancelled'))
+    ) {
+        console.log('androidStatus', newVal.androidStatus)
+        setTimeout(() => {
+            router.push('/history')
+        }, 1000)
+    }
+})
 </script>
 
 <style lang="scss" scoped>

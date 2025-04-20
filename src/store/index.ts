@@ -179,6 +179,7 @@ export const usePPStore = defineStore('pakeplus', {
                     webUrl: state.currentProject.url,
                     isHtml: state.currentProject.isHtml,
                 },
+                icon: '',
             }
         },
     },

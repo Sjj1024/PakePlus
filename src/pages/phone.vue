@@ -898,12 +898,12 @@ let buildTimeText = reactive<any>({
     PWA: '',
 })
 
-let buildStatus: any = {
+let buildStatus = reactive<any>({
     PakePLus: '',
     'PakePlus-Android': '',
     'PakePlus-iOS': '',
     PWA: '',
-}
+})
 
 let buildRates = reactive<any>({
     PakePLus: 0,
@@ -913,19 +913,20 @@ let buildRates = reactive<any>({
 })
 
 // 编译时间计时器
-let buildTimer: any = {
+let buildTimer = reactive<any>({
     PakePLus: null,
     'PakePlus-Android': null,
     'PakePlus-iOS': null,
     PWA: null,
-}
+})
+
 // 检查dispatch workflow timer
-let checkDispatchTimer: any = {
+let checkDispatchTimer = reactive<any>({
     PakePLus: null,
     'PakePlus-Android': null,
     'PakePlus-iOS': null,
     PWA: null,
-}
+})
 
 const appRules = reactive<FormRules>({
     showName: [
@@ -1437,8 +1438,10 @@ const updateIcon = async (repo: string) => {
         )
         if (updateRes.status === 200) {
             console.log('updateRes', updateRes)
+            buildStatus[repo] = t('syncConfig') + 'icon success...'
         } else {
             console.error('updateRes error', updateRes)
+            buildStatus[repo] = t('syncConfig') + 'icon error...'
         }
     }
 }
@@ -1676,6 +1679,7 @@ const updatePPconfig = async (repo: string) => {
     )
     console.log('get ppconfig file sha', shaRes)
     if (shaRes.status === 200 || shaRes.status === 404) {
+        console.log('updatePPconfig------', store.ppConfig)
         // get CargoToml file content
         const configContent: any = base64Encode(JSON.stringify(store.ppConfig))
         // update config file
@@ -1766,6 +1770,7 @@ const dispatchAction = async (repo: string) => {
         buildLoading.value = false
         return
     } else {
+        buildStatus[repo] = t('inProgress') + '...'
         buildTimer[repo] = setInterval(() => {
             buildTime[repo] += 1
             const minute = Math.floor(buildTime[repo] / 60)
@@ -1775,21 +1780,13 @@ const dispatchAction = async (repo: string) => {
             )}`
             const buildRate = Math.floor((buildTime[repo] / (60 * 15)) * 100)
             buildRates[repo] = buildRate > 99 ? 99 : buildRate
-            // // loadingText.value = `${buildStatus}...${minute}分${second}秒`
-            // const loadingState = `<div>${minute}${t('minute')}${second}${t(
-            //     'second'
-            // )}</div><div>${buildStatus}${
-            //     buildRate > 99 ? 99 : buildRate
-            // }%...</div>`
-            // // console.log('loadingText---', loadingText)
-            // loadingText(loadingState)
         }, 1000)
         // check build status
         setTimeout(async () => {
             checkDispatchTimer[repo] = setInterval(async () => {
                 checkBuildStatus(repo)
-            }, 1000 * 10)
-        }, 1000 * 60 * 3)
+            }, 1000 * 5)
+        }, 1000 * 60 * 2)
     }
 }
 
@@ -1856,6 +1853,7 @@ const checkBuildStatus = async (repo: string) => {
     )
     const build_runs = checkRes.data.workflow_runs[0]
     const { id, status, conclusion, html_url } = build_runs
+    console.log('buildStatus', repo, status)
     buildStatus[repo] = t(status) || t('inProgress')
     console.log('checkBuildStatus', build_runs)
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
@@ -1866,6 +1864,7 @@ const checkBuildStatus = async (repo: string) => {
             // clear timer
             buildTimer[repo] && clearInterval(buildTimer[repo])
             checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
+            store.setCurrentRelease()
             // buildLoading.value = false
             // buildTime = 0
             // router.push('/history')

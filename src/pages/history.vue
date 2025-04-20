@@ -14,14 +14,14 @@
                     </div>
                     <el-divider direction="vertical" />
                     <span>
-                        {{ store.currentRelease.tag_name }}
-                        v{{ store.currentProject.version }}
+                        {{ store.currentRelease?.tag_name }}
+                        v{{ store.currentProject?.version }}
                     </span>
                 </div>
                 <div class="toolTips">
                     <div class="tipsBody">
                         {{ t('releaseNotes') }}
-                        {{ store.currentRelease.body || t('releaseBody') }}
+                        {{ store.currentRelease?.body || t('releaseBody') }}
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
             </div>
         </div>
         <!-- only get latest version by tag name -->
-        <el-table :data="store.currentRelease.assets" style="width: 100%">
+        <el-table :data="store.currentRelease?.assets" style="width: 100%">
             <el-table-column :label="t('assetName')" width="460">
                 <template #default="scope">
                     <div style="display: flex; align-items: center">
