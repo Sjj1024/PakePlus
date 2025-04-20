@@ -9,7 +9,7 @@ import { ElMessage } from 'element-plus'
 
 // upstream repo info
 export const upstreamUser = 'Sjj1024'
-export const ppRepo = ['PakePlus', 'PakePlus-Android', 'PakePlus-iOS']
+export const ppRepo: string[] = ['PakePlus', 'PakePlus-Android', 'PakePlus-iOS']
 
 export const mainBranch = 'main'
 export const webBranch = 'web2'
@@ -1078,3 +1078,13 @@ typeArr.forEach((type) => {
         return oneMessage(options)
     }
 })
+
+// djb2 hash
+export const djb2Hash = (str: string) => {
+    // 初始种子
+    let hash = 5381
+    for (let i = 0; i < str.length; i++) {
+        hash = (hash * 33) ^ str.charCodeAt(i)
+    }
+    return hash >>> 0
+}

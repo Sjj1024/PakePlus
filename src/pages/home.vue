@@ -231,12 +231,34 @@
             </div>
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button @click="branchDialog = false">{{
-                        t('cancel')
-                    }}</el-button>
+                    <el-button @click="branchDialog = false">
+                        {{ t('cancel') }}
+                    </el-button>
+                    <el-popconfirm
+                        v-if="proExist"
+                        hide-icon
+                        title="确认删除吗"
+                        cancel-button-type="info"
+                        placement="top"
+                        @confirm="delProject"
+                    >
+                        <template #reference>
+                            <el-button type="danger">
+                                {{ t('删除') }}
+                            </el-button>
+                        </template>
+                    </el-popconfirm>
+                    <el-button
+                        type="warning"
+                        disabled
+                        v-if="proExist"
+                        @click="branchDialog = false"
+                    >
+                        {{ t('同步') }}
+                    </el-button>
                     <el-button
                         type="primary"
-                        @click="creatProject()"
+                        @click="creatProject"
                         :loading="creatLoading"
                     >
                         {{ t('confirm') }}
@@ -249,7 +271,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import githubApi from '@/apis/github'
 import { usePPStore } from '@/store'
@@ -270,6 +292,7 @@ import {
     oneMessage,
     upstreamUser,
     ppRepo,
+    djb2Hash,
 } from '@/utils/common'
 import ppconfig from '@root/scripts/ppconfig.json'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
@@ -288,6 +311,12 @@ const branchName = ref('')
 const testLoading = ref(false)
 // button loading
 const creatLoading = ref(false)
+// proExist
+const proExist = ref(false)
+
+watch(branchName, (newVal) => {
+    proExist.value = false
+})
 
 const chageTheme = async (theme: string) => {
     if (theme === 'light') {
@@ -415,7 +444,7 @@ const testToken = async (tips: boolean = true) => {
                 localStorage.setItem('token', store.token)
                 store.setUser(res.data)
                 if (res.data.login !== 'Sjj1024') {
-                    forkStartShas(tips)
+                    await forkStartShas(tips)
                 } else {
                     await commitShas(tips)
                 }
@@ -525,7 +554,9 @@ const forkStartShas = async (tips: boolean = true) => {
         console.error('fork error', forkRes)
     }
     await supportPP()
-    commitShas(tips)
+    await commitShas(tips)
+    // sync all branch
+    syncAllBranch()
 }
 
 // fork pakeplus-android and pakeplus-ios
@@ -601,9 +632,28 @@ const openDebug = () => {
     const _ = new VConsole({ theme: theme })
 }
 
+// delete project confirm
+const delProject = () => {
+    // 不可以删除main/dev/web分支
+    if (
+        branchName.value === 'main' ||
+        branchName.value === 'dev' ||
+        branchName.value === 'web' ||
+        branchName.value === 'web2'
+    ) {
+        oneMessage.error(t('不可以删除'))
+        return
+    } else {
+        store.delProject(branchName.value)
+        branchName.value = ''
+        oneMessage.success(t('删除成功'))
+    }
+}
+
 // creat project branch,
 const creatProject = async () => {
     creatLoading.value = true
+    proExist.value = false
     if (branchName.value === 'ppdebug') {
         openDebug()
         creatLoading.value = false
@@ -678,6 +728,7 @@ const creatProject = async () => {
                 }
             } else if (res.status === 200) {
                 creatLoading.value = false
+                proExist.value = true
                 oneMessage.success(t('projectExist'))
                 // router.push('/publish')
             } else if (res.status === 401) {
@@ -880,18 +931,30 @@ const syncBranch = async (repo: string, branch: string) => {
 
 // sync upstrame all branch
 const syncAllBranch = async () => {
-    for (const repo of ppRepo) {
-        console.log('syncAllBranch', repo)
-        const upRes: any = await githubApi.getAllBranchs(upstreamUser, repo)
-        console.log('upRes', upRes)
-        const upBranchs = upRes.data.map((item: any) => item.name)
-        console.log('upBranchs', upBranchs)
-        const userRes: any = await githubApi.getAllBranchs(store.userName, repo)
-        console.log('userRes', userRes)
-        const userBranchs = userRes.data.map((item: any) => item.name)
-        console.log('userBranchs', userBranchs)
-        for (const branch of upBranchs) {
-            await syncBranch(repo, branch)
+    if (store.token) {
+        for (const repo of ppRepo) {
+            console.log('syncAllBranch', repo)
+            const upRes: any = await githubApi.getAllBranchs(upstreamUser, repo)
+            console.log('upRes', upRes)
+            const upRepoHash = djb2Hash(JSON.stringify(upRes.data))
+            if (upRepoHash === store.upCommitMd5[repo]) {
+                console.log('upRepoHash === store.upCommitMd5[repo]', repo)
+                continue
+            } else {
+                store.updateUpCommitMd5(repo, upRepoHash)
+            }
+            const upBranchs = upRes.data.map((item: any) => item.name)
+            console.log('upBranchs', upBranchs)
+            const userRes: any = await githubApi.getAllBranchs(
+                store.userName,
+                repo
+            )
+            console.log('userRes', userRes)
+            const userBranchs = userRes.data.map((item: any) => item.name)
+            console.log('userBranchs', userBranchs)
+            for (const branch of upBranchs) {
+                await syncBranch(repo, branch)
+            }
         }
     }
 }
@@ -908,6 +971,22 @@ onMounted(() => {
     syncAllBranch()
 })
 </script>
+
+<style>
+.el-popconfirm__action {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.el-popconfirm__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+</style>
 
 <style lang="scss" scoped>
 .homeBox {

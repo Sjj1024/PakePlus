@@ -115,6 +115,14 @@ export const usePPStore = defineStore('pakeplus', {
             previewPath: '',
             // timer
             timer: 0 as any,
+            // upstream repo commit md5
+            upCommitMd5: localStorage.getItem('upCommitMd5')
+                ? JSON.parse(localStorage.getItem('upCommitMd5') as string)
+                : ({
+                      PakePlus: '',
+                      'PakePlus-Android': '',
+                      'PakePlus-iOS': '',
+                  } as { [key: string]: any }),
             age: 18,
             sex: '男',
         }
@@ -128,6 +136,9 @@ export const usePPStore = defineStore('pakeplus', {
         },
         userName: (state) => {
             return state.userInfo.login
+        },
+        isDark: (_) => {
+            return localStorage.getItem('theme') === 'dark'
         },
         isRelease: (state) => {
             console.log('isReleaseisRelease', state.currentRelease)
@@ -219,11 +230,22 @@ export const usePPStore = defineStore('pakeplus', {
                 JSON.stringify(this.projectList)
             )
         },
-        delProject(project: Project) {
+        delProject(projectName: string) {
+            githubApi.deleteBranch(this.userInfo.login, 'PakePlus', projectName)
+            githubApi.deleteBranch(
+                this.userInfo.login,
+                'PakePlus-Android',
+                projectName
+            )
+            githubApi.deleteBranch(
+                this.userInfo.login,
+                'PakePlus-IOS',
+                projectName
+            )
             // delete release
-            this.setRelease(project.name, { id: 0 })
+            this.setRelease(projectName, { id: 0 })
             const exist = this.projectList.findIndex((item: Project) => {
-                return item.name === project.name
+                return item.name === projectName
             })
             if (exist !== -1) {
                 this.projectList.splice(exist, 1)
@@ -422,6 +444,14 @@ export const usePPStore = defineStore('pakeplus', {
             yield 'update ppandroid.json'
             // 5. dispatch action
             yield 'dispatch action'
+        },
+        // update upCommitMd5
+        updateUpCommitMd5(repo: string, repoHash: any) {
+            this.upCommitMd5[repo] = repoHash
+            localStorage.setItem(
+                'upCommitMd5',
+                JSON.stringify(this.upCommitMd5)
+            )
         },
     },
 })

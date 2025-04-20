@@ -1041,17 +1041,7 @@ const deleteProject = () => {
     })
         .then(() => {
             console.log('delete project')
-            githubApi.deleteBranch(
-                store.userInfo.login,
-                'PakePlus',
-                store.currentProject.name
-            )
-            githubApi.deleteBranch(
-                store.userInfo.login,
-                'PakePlus-Android',
-                store.currentProject.name
-            )
-            store.delProject(store.currentProject)
+            store.delProject(store.currentProject.name)
             router.push('/')
         })
         .catch(() => {
