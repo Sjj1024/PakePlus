@@ -109,7 +109,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { usePakeStore } from '@/store'
+import { usePPStore } from '@/store'
 import { ArrowLeft, Delete } from '@element-plus/icons-vue'
 import githubApi from '@/apis/github'
 import { openUrl, isTauri, copyText, oneMessage } from '@/utils/common'
@@ -117,7 +117,7 @@ import { ElMessage } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
-const store = usePakeStore()
+const store = usePPStore()
 const { t } = useI18n()
 
 // getLoading

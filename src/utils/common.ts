@@ -9,9 +9,7 @@ import { ElMessage } from 'element-plus'
 
 // upstream repo info
 export const upstreamUser = 'Sjj1024'
-export const desktopRepo = 'PakePlus'
-export const androidRepo = 'PakePlus-Android'
-export const iosRepo = 'PakePlus-iOS'
+export const ppRepo = ['PakePlus', 'PakePlus-Android', 'PakePlus-iOS']
 
 export const mainBranch = 'main'
 export const webBranch = 'web2'

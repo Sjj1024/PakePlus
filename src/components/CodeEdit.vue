@@ -17,7 +17,7 @@ import { Codemirror } from 'vue-codemirror'
 import { json } from '@codemirror/lang-json'
 import { javascript } from '@codemirror/lang-javascript'
 import { oneDark } from '@codemirror/theme-one-dark'
-import { usePakeStore } from '@/store'
+import { usePPStore } from '@/store'
 
 const props = defineProps({
     lang: {
@@ -26,7 +26,7 @@ const props = defineProps({
     },
 })
 
-const store = usePakeStore()
+const store = usePPStore()
 
 const localTheme = localStorage.getItem('theme') || 'dark'
 

@@ -254,10 +254,10 @@ export default {
         })
     },
     // merge upstream branch
-    mergeUpstreamBranch(user: string, repo: string, branch: string) {
+    mergeUpstreamBranch(user: string, repo: string, body: any) {
         return http(`/repos/${user}/${repo}/merges`, {
             method: 'post',
-            data: { branch },
+            data: body,
         })
     },
     // get upstream branch last commit
@@ -267,10 +267,10 @@ export default {
         })
     },
     // force update branch
-    forceUpdateBranch(user: string, repo: string, branch: string) {
+    forceUpdateBranch(user: string, repo: string, branch: string, body: any) {
         return http(`/repos/${user}/${repo}/git/refs/heads/${branch}`, {
             method: 'patch',
-            data: { sha: 'sha' },
+            data: body,
         })
     },
 }

@@ -252,7 +252,7 @@
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import githubApi from '@/apis/github'
-import { usePakeStore } from '@/store'
+import { usePPStore } from '@/store'
 import { Plus, Check } from '@element-plus/icons-vue'
 import {
     urlMap,
@@ -267,6 +267,7 @@ import {
     supportPP,
     getBuildYmlFetch,
     oneMessage,
+    upstreamUser,
 } from '@/utils/common'
 import ppconfig from '@root/scripts/ppconfig.json'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
@@ -275,7 +276,7 @@ import { getCurrentWindow } from '@tauri-apps/api/window'
 import packageJson from '../../package.json'
 
 const router = useRouter()
-const store = usePakeStore()
+const store = usePPStore()
 const { t, locale } = useI18n()
 const version = ref(packageJson.version)
 const tokenDialog = ref(false)
@@ -781,6 +782,136 @@ const getPakePlusInfo = async () => {
     version.value = pakeVersion
 }
 
+// creat branch by upstream branch
+const creatBranchByUpstream = async (branch: string) => {
+    console.log('creatBranchByUpstream', branch)
+    const upRes: any = await githubApi.getUpstreamCommit(
+        upstreamUser,
+        'PakePlus-iOS',
+        branch
+    )
+    console.log('upRes', upRes)
+    const upBranchSha = upRes.data.object.sha
+    // create branch
+    const createRes: any = await githubApi.createBranch(
+        store.userName,
+        'PakePlus-iOS',
+        {
+            ref: `refs/heads/${branch}`,
+            sha: upBranchSha,
+        }
+    )
+    console.log('createRes', createRes)
+    if (createRes.status === 201) {
+        console.log('createBranchByUpstream success', branch)
+    } else {
+        console.error('createBranchByUpstream error', createRes)
+    }
+}
+
+// force update branch
+const forceUpdateBranch = async (branch: string) => {
+    console.log('forceUpdateBranch', branch)
+    // get upstream branch last commit
+    const upRes: any = await githubApi.getUpstreamCommit(
+        upstreamUser,
+        'PakePlus-iOS',
+        branch
+    )
+    console.log('upRes', upRes)
+    const upBranchSha = upRes.data.object.sha
+    // force update branch
+    const forceUpdateRes: any = await githubApi.forceUpdateBranch(
+        store.userName,
+        'PakePlus-iOS',
+        branch,
+        {
+            sha: upBranchSha,
+            force: true,
+        }
+    )
+    console.log('forceUpdateRes', forceUpdateRes)
+    if (forceUpdateRes.status === 200) {
+        console.log('forceUpdateBranch success', branch)
+    } else {
+        console.error('forceUpdateBranch error', forceUpdateRes)
+    }
+}
+// merge branch and commit(allways use upstream branch)
+const mergeBranch = async (branch: string) => {
+    console.log('mergeBranch', branch)
+    const mergeRes: any = await githubApi.mergeUpstreamBranch(
+        store.userName,
+        'PakePlus-iOS',
+        {
+            base: branch,
+            head: `${upstreamUser}:${branch}`,
+            commit_message: `Auto-sync with upstream ${branch} by PakePlus`,
+        }
+    )
+    console.log('mergeRes', mergeRes)
+    if (mergeRes.status === 201) {
+        console.log('mergeBranch success', branch)
+    } else if (mergeRes.status === 204) {
+        console.log('branch status is up to date', branch)
+    } else {
+        console.error('mergeBranch error', mergeRes)
+        await forceUpdateBranch(branch)
+    }
+}
+
+// sync branch by upstream branch
+const syncBranch = async (branch: string) => {
+    console.log('syncBranch', branch)
+    // create branch by upstream branch
+    await creatBranchByUpstream(branch)
+    // merge branch and commit(allways use upstream branch)
+    await mergeBranch(branch)
+}
+
+// sync upstrame all branch
+const syncAllBranch = async () => {
+    console.log('syncAllBranch')
+    const upRes: any = await githubApi.getAllBranchs(
+        upstreamUser,
+        'PakePlus-iOS'
+    )
+    console.log('upRes', upRes)
+    const upBranchs = upRes.data.map((item: any) => item.name)
+    console.log('upBranchs', upBranchs)
+    const userRes: any = await githubApi.getAllBranchs(
+        store.userName,
+        'PakePlus-iOS'
+    )
+    console.log('userRes', userRes)
+    const userBranchs = userRes.data.map((item: any) => item.name)
+    console.log('userBranchs', userBranchs)
+
+    for (const branch of upBranchs) {
+        await syncBranch(branch)
+    }
+
+    // for (const repo of ppRepo) {
+    //     const upstream_branches = await githubApi.getAllBranchs(
+    //         upstreamUser,
+    //         repo
+    //     )
+    //     console.log('upstream_branches', upstream_branches)
+    //     const user_branches = await githubApi.getAllBranchs(
+    //         store.userName,
+    //         repo
+    //     )
+    //     console.log('user_branches', user_branches)
+    //     // for (const branch of upstream_branches) {
+    //     //     if (user_branches.includes(branch)) {
+    //     //         console.log('branch already exists', branch)
+    //     //     } else {
+    //     //         console.log('branch not exists', branch)
+    //     //     }
+    //     // }
+    // }
+}
+
 onMounted(() => {
     if (isTauri) {
         const window = getCurrentWindow()
@@ -790,6 +921,7 @@ onMounted(() => {
     }
     checkUpdate()
     getPakePlusInfo()
+    syncAllBranch()
 })
 </script>
 

@@ -794,7 +794,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
-import { usePakeStore } from '@/store'
+import { usePPStore } from '@/store'
 import { readFile, writeTextFile, exists } from '@tauri-apps/plugin-fs'
 import { appDataDir, join } from '@tauri-apps/api/path'
 import { basename } from '@tauri-apps/api/path'
@@ -839,7 +839,7 @@ import ImgPreview from '@/components/ImgPreview.vue'
 
 const route = useRoute()
 const router = useRouter()
-const store = usePakeStore()
+const store = usePPStore()
 const { t } = useI18n()
 const tempIconBase64 = ref('')
 const iconBase64 = ref('')

@@ -472,7 +472,7 @@ import { invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { usePakeStore } from '@/store'
+import { usePPStore } from '@/store'
 import {
     readFile,
     readTextFile,
@@ -527,7 +527,7 @@ import ImgPreview from '@/components/ImgPreview.vue'
 
 const route = useRoute()
 const router = useRouter()
-const store = usePakeStore()
+const store = usePPStore()
 const { t } = useI18n()
 const tempIconBase64 = ref('')
 const iconBase64 = ref('')

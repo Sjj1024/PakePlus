@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import githubApi from '@/apis/github'
 import ppconfig from '@root/scripts/ppconfig.json'
 
-export const usePakeStore = defineStore('pakeplus', {
+export const usePPStore = defineStore('pakeplus', {
     state: () => {
         return {
             // 用户信息
@@ -125,6 +125,9 @@ export const usePakeStore = defineStore('pakeplus', {
         },
         noSjj1024: (state) => {
             return state.userInfo.login !== 'Sjj1024'
+        },
+        userName: (state) => {
+            return state.userInfo.login
         },
         isRelease: (state) => {
             console.log('isReleaseisRelease', state.currentRelease)

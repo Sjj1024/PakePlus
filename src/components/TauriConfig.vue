@@ -406,10 +406,10 @@ import { oneDark } from '@codemirror/theme-one-dark'
 import { openUrl, urlMap } from '@/utils/common'
 import { ref } from 'vue'
 import { InfoFilled } from '@element-plus/icons-vue'
-import { usePakeStore } from '@/store'
+import { usePPStore } from '@/store'
 import { useI18n } from 'vue-i18n'
 
-const store = usePakeStore()
+const store = usePPStore()
 const { t } = useI18n()
 const activeName = ref('1')
 const localTheme = localStorage.getItem('theme') || 'dark'
