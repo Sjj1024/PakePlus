@@ -1,0 +1,325 @@
+<template>
+    <el-dialog
+        v-model="visible"
+        fullscreen
+        :show-close="false"
+        center
+        body-class="buildBody"
+    >
+        <template #header="{ close, titleId, titleClass }">
+            <div class="buildHeader">
+                <h4 :id="titleId" :class="titleClass">
+                    编译中请不要做任何操作...
+                </h4>
+            </div>
+        </template>
+        <div class="buildingBox">
+            <div v-if="desktopStatus" class="platform">
+                <el-icon
+                    v-if="desktopStatus === t('buildSuccess')"
+                    size="20"
+                    class="buildIcon success"
+                >
+                    <!-- success -->
+                    <SuccessFilled />
+                </el-icon>
+                <el-icon
+                    v-else-if="desktopStatus === t('failure')"
+                    size="20"
+                    class="buildIcon failure"
+                >
+                    <!-- failure -->
+                    <CircleCloseFilled />
+                </el-icon>
+                <el-icon
+                    v-else-if="desktopStatus === t('cancelled')"
+                    size="20"
+                    class="buildIcon cancelled"
+                >
+                    <!-- cancelled -->
+                    <WarningFilled />
+                </el-icon>
+                <el-icon v-else class="is-loading building buildIcon" size="20">
+                    <!-- loading -->
+                    <Loading />
+                </el-icon>
+                <div>桌面端</div>
+                <div v-if="desktopTime">{{ desktopTime }}</div>
+                <div>
+                    <span>{{ desktopStatus }}</span>
+                    <span v-if="desktopRate">{{ desktopRate }}%</span>
+                </div>
+            </div>
+            <div v-if="androidStatus" class="platform">
+                <el-icon
+                    v-if="androidStatus === t('buildSuccess')"
+                    size="20"
+                    class="buildIcon success"
+                >
+                    <!-- success -->
+                    <SuccessFilled />
+                </el-icon>
+                <el-icon
+                    v-else-if="androidStatus === t('failure')"
+                    size="20"
+                    class="buildIcon failure"
+                >
+                    <!-- failure -->
+                    <CircleCloseFilled />
+                </el-icon>
+                <el-icon
+                    v-else-if="androidStatus === t('cancelled')"
+                    size="20"
+                    class="buildIcon cancelled"
+                >
+                    <!-- cancelled -->
+                    <WarningFilled />
+                </el-icon>
+                <el-icon v-else class="is-loading buildIcon building" size="20">
+                    <!-- loading -->
+                    <Loading />
+                </el-icon>
+                <div>Android</div>
+                <div v-if="androidTime">{{ androidTime }}</div>
+                <div>
+                    <span>{{ androidStatus }}</span>
+                    <span v-if="androidRate">{{ androidRate }}%</span>
+                </div>
+            </div>
+            <div v-if="iosStatus" class="platform">
+                <el-icon
+                    v-if="iosStatus === t('buildSuccess')"
+                    size="20"
+                    class="buildIcon success"
+                >
+                    <!-- success -->
+                    <SuccessFilled />
+                </el-icon>
+                <el-icon
+                    v-else-if="iosStatus === t('failure')"
+                    size="20"
+                    class="buildIcon failure"
+                >
+                    <!-- failure -->
+                    <CircleCloseFilled />
+                </el-icon>
+                <el-icon
+                    v-else-if="iosStatus === t('cancelled')"
+                    size="20"
+                    class="buildIcon cancelled"
+                >
+                    <!-- cancelled -->
+                    <WarningFilled />
+                </el-icon>
+                <el-icon v-else class="is-loading buildIcon building" size="20">
+                    <!-- loading -->
+                    <Loading />
+                </el-icon>
+                <div>iOS</div>
+                <div v-if="iosTime">{{ iosTime }}</div>
+                <div>
+                    <span>{{ iosStatus }}</span>
+                    <span v-if="iosRate">{{ iosRate }}%</span>
+                </div>
+            </div>
+            <div v-if="pwaStatus" class="platform">
+                <el-icon
+                    v-if="pwaStatus === t('buildSuccess')"
+                    size="20"
+                    class="buildIcon success"
+                >
+                    <!-- success -->
+                    <SuccessFilled />
+                </el-icon>
+                <el-icon
+                    v-else-if="pwaStatus === t('failure')"
+                    size="20"
+                    class="buildIcon failure"
+                >
+                    <!-- failure -->
+                    <CircleCloseFilled />
+                </el-icon>
+                <el-icon
+                    v-else-if="pwaStatus === t('cancelled')"
+                    size="20"
+                    class="buildIcon cancelled"
+                >
+                    <!-- cancelled -->
+                    <WarningFilled />
+                </el-icon>
+                <el-icon v-else class="is-loading buildIcon building" size="20">
+                    <!-- loading -->
+                    <Loading />
+                </el-icon>
+                <div>PWA</div>
+                <div v-if="pwaTime">{{ pwaTime }}</div>
+                <div>
+                    <span>{{ pwaStatus }}</span>
+                    <span v-if="pwaRate">{{ pwaRate }}%</span>
+                </div>
+            </div>
+        </div>
+        <template #footer>
+            <!-- <div class="dialog-footer">
+                <el-button>Cancel</el-button>
+                <el-button type="primary"> Confirm </el-button>
+            </div> -->
+        </template>
+    </el-dialog>
+</template>
+
+<script lang="ts" setup>
+import {
+    SuccessFilled,
+    CircleCloseFilled,
+    Loading,
+    WarningFilled,
+} from '@element-plus/icons-vue'
+import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const visible = defineModel<boolean>('visible', {
+    default: true,
+})
+
+const props = defineProps({
+    desktopTime: {
+        type: String,
+        default: '',
+        required: false,
+    },
+    desktopStatus: {
+        type: String,
+        default: '',
+        required: false,
+    },
+    desktopRate: {
+        type: Number,
+        default: 0,
+        required: false,
+    },
+    androidTime: {
+        type: String,
+        default: '',
+        required: false,
+    },
+    androidStatus: {
+        type: String,
+        default: '',
+        required: false,
+    },
+    androidRate: {
+        type: Number,
+        default: 0,
+        required: false,
+    },
+    iosTime: {
+        type: String,
+        default: '',
+        required: false,
+    },
+    iosStatus: {
+        type: String,
+        default: '',
+        required: false,
+    },
+    iosRate: {
+        type: Number,
+        default: 0,
+        required: false,
+    },
+    pwaTime: {
+        type: String,
+        default: '',
+        required: false,
+    },
+    pwaStatus: {
+        type: String,
+        default: '',
+        required: false,
+    },
+    pwaRate: {
+        type: Number,
+        default: 0,
+        required: false,
+    },
+})
+
+// 桌面端花费时间
+const desktopConsume = ref(0)
+
+// 安卓花费时间
+const androidConsume = ref(0)
+
+// iOS花费时间
+const iosConsume = ref(0)
+
+// PWA花费时间
+const pwaConsume = ref(0)
+
+// watch(
+//     () => props.desktopStatus,
+//     (newVal) => {
+//         if (newVal === 'success' || newVal === 'failed') {
+//             desktopConsume.value = props.desktopTime
+//         }
+//     }
+// )
+</script>
+
+<style lang="scss" scoped>
+.buildingBox {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10em;
+
+    .platform {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin: 0 50px;
+
+        .buildIcon {
+            font-weight: bold;
+        }
+
+        .success {
+            color: #13ce66;
+        }
+
+        .failure {
+            color: rgb(249, 42, 42);
+        }
+
+        .cancelled {
+            color: gray;
+        }
+
+        .building {
+            color: rgb(0, 162, 255);
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #4dabf7;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    }
+}
+</style>

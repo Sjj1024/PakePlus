@@ -1,10 +1,5 @@
 <template>
-    <div
-        class="editBox"
-        :class="{ isWeb: !isTauri }"
-        v-loading.fullscreen.lock="buildLoading"
-        :element-loading-text="t('preCheck') + '...'"
-    >
+    <div class="editBox" :class="{ isWeb: !isTauri }">
         <div class="homeHeader">
             <div>
                 <div class="headerTitle">
@@ -674,11 +669,13 @@
                 <!-- platform select -->
                 <el-form-item :label="t('pubPlatform')">
                     <el-checkbox-group v-model="pubForm.platform">
-                        <el-checkbox :label="t('androidapp')" value="android" />
+                        <el-checkbox
+                            :label="t('androidapp')"
+                            value="PakePlus-Android"
+                        />
                         <el-checkbox
                             :label="t('iosapp')"
-                            value="ios"
-                            disabled
+                            value="PakePlus-iOS"
                         />
                         <el-checkbox
                             :label="t('pwaapp')"
@@ -702,7 +699,7 @@
                         <el-radio :value="false">
                             {{ t('closeDebug') }}
                         </el-radio>
-                        <el-radio :value="true" disabled>
+                        <el-radio :value="true">
                             {{ t('openDebug') }}
                         </el-radio>
                     </el-radio-group>
@@ -727,7 +724,7 @@
                     <el-button @click="centerDialogVisible = false">
                         {{ t('cancel') }}
                     </el-button>
-                    <el-button type="primary" @click="publishAndroid">
+                    <el-button type="primary" @click="publishPhone">
                         {{ t('confirm') }}
                     </el-button>
                 </div>
@@ -784,6 +781,22 @@
             "
         >
         </ImgPreview>
+        <!-- 构建状态 -->
+        <Building
+            v-model:visible="buildLoading"
+            :desktopTime="buildTimeText.PakePLus"
+            :desktopStatus="buildStatus['PakePLus']"
+            :desktopRate="buildRates['PakePLus']"
+            :androidTime="buildTimeText['PakePlus-Android']"
+            :androidStatus="buildStatus['PakePlus-Android']"
+            :androidRate="buildRates['PakePlus-Android']"
+            :iosTime="buildTimeText['PakePlus-iOS']"
+            :iosStatus="buildStatus['PakePlus-iOS']"
+            :iosRate="buildRates['PakePlus-iOS']"
+            :pwaTime="buildTimeText['PWA']"
+            :pwaStatus="buildStatus['PWA']"
+            :pwaRate="buildRates['PWA']"
+        />
     </div>
 </template>
 
@@ -836,6 +849,7 @@ import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import TauriConfig from '@/components/TauriConfig.vue'
 import ImgPreview from '@/components/ImgPreview.vue'
+import Building from '@/components/Building.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -859,6 +873,59 @@ const configDialogVisible = ref(false)
 const codeDialogVisible = ref(false)
 const imgPreviewVisible = ref(false)
 const warning = ref('')
+
+// do not use same name with ref
+const pubForm = reactive({
+    platform: ['PakePlus-Android', 'PakePlus-iOS'],
+    chip: 'macos',
+    model: 'close',
+    desc: '',
+})
+
+const buildLoading = ref(false)
+// check dispatch workflow timer
+let buildTime = reactive<any>({
+    PakePLus: 0,
+    'PakePlus-Android': 0,
+    'PakePlus-iOS': 0,
+    PWA: 0,
+})
+
+let buildTimeText = reactive<any>({
+    PakePLus: '',
+    'PakePlus-Android': '',
+    'PakePlus-iOS': '',
+    PWA: '',
+})
+
+let buildStatus: any = {
+    PakePLus: '',
+    'PakePlus-Android': '',
+    'PakePlus-iOS': '',
+    PWA: '',
+}
+
+let buildRates = reactive<any>({
+    PakePLus: 0,
+    'PakePlus-Android': 0,
+    'PakePlus-iOS': 0,
+    PWA: 0,
+})
+
+// 编译时间计时器
+let buildTimer: any = {
+    PakePLus: null,
+    'PakePlus-Android': null,
+    'PakePlus-iOS': null,
+    PWA: null,
+}
+// 检查dispatch workflow timer
+let checkDispatchTimer: any = {
+    PakePLus: null,
+    'PakePlus-Android': null,
+    'PakePlus-iOS': null,
+    PWA: null,
+}
 
 const appRules = reactive<FormRules>({
     showName: [
@@ -1341,8 +1408,8 @@ const uploadIcon = async () => {
 }
 
 // update icon file content
-const updateIcon = async () => {
-    loadingText(t('syncConfig') + 'icon...')
+const updateIcon = async (repo: string) => {
+    buildStatus[repo] = t('syncConfig') + 'icon...'
     if (iconBase64.value === '') {
         return
     }
@@ -1352,7 +1419,7 @@ const updateIcon = async () => {
     // get app-icon.png sha
     const iconSha: any = await githubApi.getFileSha(
         store.userInfo.login,
-        'PakePlus-Android',
+        repo,
         'app-icon.png',
         { ref: store.currentProject.name }
     )
@@ -1360,7 +1427,7 @@ const updateIcon = async () => {
     if (iconSha.status === 200) {
         const updateRes: any = await githubApi.updateIconFile(
             store.userInfo.login,
-            'PakePlus-Android',
+            repo,
             {
                 message: 'update icon from pakeplus',
                 sha: iconSha.data.sha,
@@ -1558,29 +1625,14 @@ const createRepo = async () => {
     })
 }
 
-// do not use same name with ref
-const pubForm = reactive({
-    platform: ['android'],
-    chip: 'macos',
-    model: 'close',
-    desc: '',
-})
-
-const buildLoading = ref(false)
-// check dispatch workflow timer
-let buildTime = 0
-let buildStatus = t('startCompile') + '...'
-let buildSecondTimer: any = null
-let checkDispatchTimer: any = null
-
 // update build.yml file content
-const updateCustomJs = async () => {
-    loadingText(t('syncConfig') + 'custom...')
+const updateCustomJs = async (repo: string, jsPath: string) => {
+    buildStatus[repo] = t('syncConfig') + 'custom...'
     // get CargoToml file sha
     const shaRes: any = await githubApi.getFileSha(
         store.userInfo.login,
-        'PakePlus-Android',
-        'app/src/main/assets/custom.js',
+        repo,
+        jsPath,
         {
             ref: store.currentProject.name,
         }
@@ -1590,9 +1642,10 @@ const updateCustomJs = async () => {
         // get CargoToml file content
         const initJsScript = getInitializationScript()
         const jsFileContent: any = await base64Encode(initJsScript)
-        const updateRes: any = await githubApi.updateCustomJsFile(
+        const updateRes: any = await githubApi.updateFileContent(
             store.userInfo.login,
-            'PakePlus-Android',
+            repo,
+            jsPath,
             {
                 message: 'update custom js from pakeplus',
                 content: jsFileContent,
@@ -1602,7 +1655,7 @@ const updateCustomJs = async () => {
         )
         if (updateRes.status === 200) {
             console.log('updateCustomJs', updateRes)
-            loadingText(t('syncConfig') + '...')
+            buildStatus[repo] = t('syncConfig') + '...'
         }
     } else {
         console.error('getFileSha error', shaRes)
@@ -1610,12 +1663,12 @@ const updateCustomJs = async () => {
 }
 
 // update build.yml file content
-const updatePPconfig = async () => {
-    loadingText(t('syncConfig') + 'ppconfig...')
+const updatePPconfig = async (repo: string) => {
+    buildStatus[repo] = t('syncConfig') + 'ppconfig...'
     // get CargoToml file sha
     const shaRes: any = await githubApi.getFileSha(
         store.userInfo.login,
-        'PakePlus-Android',
+        repo,
         'scripts/ppconfig.json',
         {
             ref: store.currentProject.name,
@@ -1628,7 +1681,7 @@ const updatePPconfig = async () => {
         // update config file
         const updateRes: any = await githubApi.updateFileContent(
             store.userInfo.login,
-            'PakePlus-Android',
+            repo,
             'scripts/ppconfig.json',
             {
                 message: 'update ppconfig from pakeplus',
@@ -1639,7 +1692,7 @@ const updatePPconfig = async () => {
         )
         if (updateRes.status === 200) {
             console.log('updatePPconfig', updateRes)
-            loadingText(t('syncConfig') + '...')
+            buildStatus[repo] = t('syncConfig') + '...'
         } else {
             console.error('updatePPconfig error', updateRes)
         }
@@ -1649,50 +1702,56 @@ const updatePPconfig = async () => {
 }
 
 // new publish version
-const publishAndroid = async () => {
+const publishPhone = async () => {
     centerDialogVisible.value = false
     buildLoading.value = true
-    loadingText(t('preCheck') + '...')
-    try {
-        // delete release
-        store.isRelease && (await store.deleteRelease('PakePlus-Android'))
-        // publish web or dist
-        loadingText(t('syncConfig') + '...')
-        // if (isTauri) {
-        //     const res = await tauriHtmlUpload()
-        //     if (res === 'stop') {
-        //         return
-        //     }
-        // }
-        // update app icon
-        await updateIcon()
-        // update custom.js
-        await updateCustomJs()
-        // update build.yml
-        await updatePPconfig()
-        // dispatch action
-        dispatchAction()
-    } catch (error: any) {
-        warning.value = error.message
-        buildTime = 0
-        loadingText(t('failure'))
-        buildLoading.value = false
-        createIssue(
-            `publish action error: ${error.message}`,
-            'failure',
-            'build error'
-        )
-    }
+    pubForm.platform.forEach(async (repo: string) => {
+        buildStatus[repo] = t('preCheck') + '...'
+        try {
+            // delete release
+            store.isRelease && (await store.deleteRelease(repo))
+            // publish web or dist
+            buildStatus[repo] = t('syncConfig') + '...'
+            // if (isTauri) {
+            //     const res = await tauriHtmlUpload()
+            //     if (res === 'stop') {
+            //         return
+            //     }
+            // }
+            // update app icon
+            await updateIcon(repo)
+            // update custom.js
+            if (repo === 'PakePlus-Android') {
+                await updateCustomJs(repo, 'app/src/main/assets/custom.js')
+            } else {
+                await updateCustomJs(repo, 'PakePlus/custom.js')
+            }
+            // update ppconfig.json
+            await updatePPconfig(repo)
+            // dispatch action
+            await dispatchAction(repo)
+        } catch (error: any) {
+            warning.value = error.message
+            buildTime[repo] = 0
+            loadingText(t('failure'))
+            buildLoading.value = false
+            createIssue(
+                `publish action error: ${error.message}`,
+                'failure',
+                'build error'
+            )
+        }
+    })
 }
 
 // dispatch workflow action
-const dispatchAction = async () => {
-    loadingText(t('preCompile') + 'workflow...')
+const dispatchAction = async (repo: string) => {
+    buildStatus[repo] = t('preCompile') + 'workflow...'
     // wait file sync
     await new Promise((resolve) => setTimeout(resolve, 3000))
     const dispatchRes: any = await githubApi.dispatchWorkflow(
         store.userInfo.login,
-        'PakePlus-Android',
+        repo,
         {
             ref: store.currentProject.name,
         }
@@ -1707,24 +1766,28 @@ const dispatchAction = async () => {
         buildLoading.value = false
         return
     } else {
-        buildSecondTimer = setInterval(() => {
-            buildTime += 1
-            const minute = Math.floor(buildTime / 60)
-            const second = buildTime % 60
-            const buildRate = Math.floor((buildTime / (60 * 15)) * 100)
-            // loadingText.value = `${buildStatus}...${minute}分${second}秒`
-            const loadingState = `<div>${minute}${t('minute')}${second}${t(
+        buildTimer[repo] = setInterval(() => {
+            buildTime[repo] += 1
+            const minute = Math.floor(buildTime[repo] / 60)
+            const second = buildTime[repo] % 60
+            buildTimeText[repo] = `${minute}${t('minute')}${second}${t(
                 'second'
-            )}</div><div>${buildStatus}${
-                buildRate > 99 ? 99 : buildRate
-            }%...</div>`
-            // console.log('loadingText---', loadingText)
-            loadingText(loadingState)
+            )}`
+            const buildRate = Math.floor((buildTime[repo] / (60 * 15)) * 100)
+            buildRates[repo] = buildRate > 99 ? 99 : buildRate
+            // // loadingText.value = `${buildStatus}...${minute}分${second}秒`
+            // const loadingState = `<div>${minute}${t('minute')}${second}${t(
+            //     'second'
+            // )}</div><div>${buildStatus}${
+            //     buildRate > 99 ? 99 : buildRate
+            // }%...</div>`
+            // // console.log('loadingText---', loadingText)
+            // loadingText(loadingState)
         }, 1000)
         // check build status
         setTimeout(async () => {
-            checkDispatchTimer = setInterval(async () => {
-                checkBuildStatus()
+            checkDispatchTimer[repo] = setInterval(async () => {
+                checkBuildStatus(repo)
             }, 1000 * 10)
         }, 1000 * 60 * 3)
     }
@@ -1745,42 +1808,47 @@ const createIssue = async (url: string, label: string, title: string) => {
 }
 
 // rerun fails jobs
-let rerunCount = 0
-const reRunFailsJobs = async (id: number, html_url: string) => {
-    rerunCount += 1
-    if (rerunCount >= 3) {
-        console.log('rerun cancel', rerunCount)
-        buildLoading.value = false
-        buildTime = 0
+let rerunCounts: any = {
+    PakePLus: 0,
+    'PakePlus-Android': 0,
+    'PakePlus-iOS': 0,
+    PWA: 0,
+}
+const reRunFailsJobs = async (repo: string, id: number, html_url: string) => {
+    rerunCounts[repo] += 1
+    if (rerunCounts[repo] >= 3) {
+        console.log('rerun cancel', rerunCounts[repo])
+        // buildLoading.value = false
+        // buildTime = 0
         warning.value = 'rerun cancel and rerun count > 3'
         createIssue(html_url, 'failure', 'build error')
         openUrl(html_url)
         loadingText(t('failure'))
-        buildSecondTimer && clearInterval(buildSecondTimer)
-        checkDispatchTimer && clearInterval(checkDispatchTimer)
+        buildTimer[repo] && clearInterval(buildTimer[repo])
+        checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
     } else {
         const rerunRes: any = await githubApi.rerunFailedJobs(
             store.userInfo.login,
-            'PakePlus-Android',
+            repo,
             id
         )
         // 201 is success 403 is running
         if (rerunRes.status === 201 || rerunRes.status === 403) {
             console.log('rerun success')
             if (rerunRes.status === 403) {
-                rerunCount -= 1
+                rerunCounts[repo] -= 1
             }
         } else {
-            reRunFailsJobs(id, html_url)
+            reRunFailsJobs(repo, id, html_url)
         }
     }
 }
 
 // check build workflow status
-const checkBuildStatus = async () => {
+const checkBuildStatus = async (repo: string) => {
     const checkRes: any = await githubApi.getWorkflowRuns(
         store.userInfo.login,
-        'PakePlus-Android',
+        repo,
         {
             branch: store.currentProject.name,
             event: 'workflow_dispatch',
@@ -1788,43 +1856,45 @@ const checkBuildStatus = async () => {
     )
     const build_runs = checkRes.data.workflow_runs[0]
     const { id, status, conclusion, html_url } = build_runs
-    buildStatus = t(status) || t('inProgress')
+    buildStatus[repo] = t(status) || t('inProgress')
     console.log('checkBuildStatus', build_runs)
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
         if (status === 'completed' && conclusion === 'success') {
             createIssue(html_url, 'success', 'build success')
-            loadingText(t('buildSuccess'))
+            buildStatus[repo] = t('buildSuccess')
+            buildRates[repo] = 100
             // clear timer
-            buildSecondTimer && clearInterval(buildSecondTimer)
-            checkDispatchTimer && clearInterval(checkDispatchTimer)
-            buildLoading.value = false
-            buildTime = 0
-            router.push('/history')
+            buildTimer[repo] && clearInterval(buildTimer[repo])
+            checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
+            // buildLoading.value = false
+            // buildTime = 0
+            // router.push('/history')
         } else if (status === 'completed' && conclusion === 'cancelled') {
             createIssue(html_url, 'cancelled', 'build cancelled')
-            loadingText(t('cancelled'))
-            buildLoading.value = false
-            buildTime = 0
+            buildStatus[repo] = t('cancelled')
+            // buildLoading.value = false
+            // buildTime = 0
             // clear interval
-            buildSecondTimer && clearInterval(buildSecondTimer)
-            checkDispatchTimer && clearInterval(checkDispatchTimer)
+            buildTimer[repo] && clearInterval(buildTimer[repo])
+            checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
         } else if (status === 'failure' || conclusion === 'failure') {
-            reRunFailsJobs(id, html_url)
+            reRunFailsJobs(repo, id, html_url)
         } else if (status === 'completed' && conclusion === 'failure') {
-            reRunFailsJobs(id, html_url)
+            reRunFailsJobs(repo, id, html_url)
         } else if (status === 'in_progress') {
             console.log('build in progress...')
         }
     } else {
-        if (rerunCount >= 2) {
-            buildTime = 0
-            buildLoading.value = false
+        if (rerunCounts[repo] >= 2) {
+            // buildTime = 0
+            // buildLoading.value = false
             openUrl(html_url)
-            buildSecondTimer && clearInterval(buildSecondTimer)
-            checkDispatchTimer && clearInterval(checkDispatchTimer)
-            loadingText(t('failure'))
+            buildTimer[repo] && clearInterval(buildTimer[repo])
+            checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
+            // loadingText(t('failure'))
+            buildStatus[repo] = t('failure')
         } else {
-            reRunFailsJobs(id, html_url)
+            reRunFailsJobs(repo, id, html_url)
         }
     }
 }
@@ -1841,14 +1911,23 @@ onUnmounted(() => {
     stopServer()
     window.removeEventListener('keydown', handleKeydown)
     // clear interval
-    buildSecondTimer && clearInterval(buildSecondTimer)
-    checkDispatchTimer && clearInterval(checkDispatchTimer)
+    Object.keys(buildTimer).forEach((repo) => {
+        buildTimer[repo] && clearInterval(buildTimer[repo])
+        checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
+    })
+    // clear checkDispatchTimer
+    Object.keys(checkDispatchTimer).forEach((repo) => {
+        checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
+    })
 })
 
 onMounted(async () => {
     window.addEventListener('keydown', handleKeydown)
     // 重制编译时间
-    buildTime = 0
+    buildTime.PakePLus = 0
+    buildTime['PakePlus-Android'] = 0
+    buildTime['PakePlus-iOS'] = 0
+    buildTime['PWA'] = 0
     if (store.currentProject.icon) {
         confirmIcon(store.currentProject.icon)
     }

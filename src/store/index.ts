@@ -158,6 +158,8 @@ export const usePPStore = defineStore('pakeplus', {
                     id: state.currentProject.appid + '.ios',
                     webUrl: state.currentProject.url,
                     isHtml: state.currentProject.isHtml,
+                    pubBody: state.currentProject.android.pubBody,
+                    debug: state.currentProject.android.debug,
                 },
                 android: {
                     ...state.currentProject.android,
@@ -294,11 +296,13 @@ export const usePPStore = defineStore('pakeplus', {
                 console.log('setCurrentRelease 存在')
                 this.currentRelease = this.releases[this.currentProject.name]
                 await this.getRelease('PakePlus')
+                await this.getRelease('PakePlus-iOS')
                 await this.getRelease('PakePlus-Android')
             } else {
                 console.log('setCurrentRelease 不存在')
                 this.currentRelease = { id: 0 }
                 await this.getRelease('PakePlus')
+                await this.getRelease('PakePlus-iOS')
                 await this.getRelease('PakePlus-Android')
             }
         },
