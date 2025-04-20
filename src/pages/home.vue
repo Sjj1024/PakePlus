@@ -253,6 +253,7 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import githubApi from '@/apis/github'
 import { usePPStore } from '@/store'
+import VConsole from 'vconsole'
 import { Plus, Check } from '@element-plus/icons-vue'
 import {
     urlMap,
@@ -594,10 +595,21 @@ const getWebSha = async (repo: string = 'PakePlus') => {
     }
 }
 
+// open vconsole
+const openDebug = () => {
+    const theme: any = localStorage.getItem('theme') || 'light'
+    const _ = new VConsole({ theme: theme })
+}
+
 // creat project branch,
 const creatProject = async () => {
     creatLoading.value = true
-    // update build.yml file content
+    if (branchName.value === 'ppdebug') {
+        openDebug()
+        creatLoading.value = false
+        branchDialog.value = false
+        return
+    }
     // token.value && (await uploadBuildYml())
     if (branchName.value && /^[A-Za-z][A-Za-z0-9]*$/.test(branchName.value)) {
         const customJs = await getCustomJsFetch()
