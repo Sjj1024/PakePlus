@@ -24,12 +24,12 @@
                 <h1 class="title">MacOS</h1>
                 <div class="item">
                     <a :href="macArm.browser_download_url">
-                        点击下载ARM(M芯片)版本
+                        下载ARM(M芯片)版本
                     </a>
                 </div>
                 <div class="item">
                     <a :href="macX64.browser_download_url">
-                        点击下载 Intel芯片 版本
+                        下载 Intel芯片 版本
                     </a>
                 </div>
             </div>
@@ -58,12 +58,12 @@
                 <h1 class="title">Windows</h1>
                 <div class="item">
                     <a :href="windowsX64.browser_download_url">
-                        点击下载 X64 版本
+                        下载 X64 版本
                     </a>
                 </div>
                 <div class="item">
                     <a :href="windowsArm64.browser_download_url">
-                        点击下载 ARM64 版本
+                        下载 ARM64 版本
                     </a>
                 </div>
             </div>
@@ -90,18 +90,14 @@
             <div class="rightContent">
                 <h1 class="title">Linux</h1>
                 <div class="item">
-                    <a :href="linuxDeb.browser_download_url">
-                        点击下载 dep 版本
-                    </a>
+                    <a :href="linuxDeb.browser_download_url"> 下载 dep 版本 </a>
                 </div>
                 <div class="item">
-                    <a :href="linuxRpm.browser_download_url">
-                        点击下载 rpm 版本
-                    </a>
+                    <a :href="linuxRpm.browser_download_url"> 下载 rpm 版本 </a>
                 </div>
                 <div class="item">
                     <a :href="linuxImage.browser_download_url">
-                        点击下载 AppImage 版本
+                        下载 AppImage 版本
                     </a>
                 </div>
             </div>

@@ -34,7 +34,7 @@ features:
       details: PakePlus界面化易于操作使用，只需要点点点即可完成所有操作
       icon: 📦
     - title: 同时编译
-      details: 只需几分钟，一键编译所有平台安装包，不用再为环境和时间焦虑
+      details: 只需几分钟，一键同时编译所有平台安装包，不用再为环境和时间焦虑
       icon: 🧘‍♀️
     - title: 国际化
       details: 支持国际化，对全球用户都友好，并且会自动跟随你的电脑系统语言
@@ -46,7 +46,7 @@ features:
       details: 支持将静态html文件或Vue/React等项目编译后的dist打包发布
       icon: 🍀
     - title: 支持调试
-      details: 支持预览模式下调试和发布为调试模式的安装包，就像浏览器一样熟悉
+      details: 支持debug调试模式，无论是预览阶段还是发布阶段，都可以找到bug并消灭bug
       icon: 🐞
     - title: 数据安全
       details: PakePlus 不会上传你的任何数据，所有数据都保存在你的电脑上
