@@ -96,6 +96,7 @@ export default {
     requesting: 'リクエスト中...',
     assetName: 'アセット名',
     download: 'ダウンロード',
+    assetType: 'アセットタイプ',
     assetSize: 'アセットサイズ',
     releaseDate: 'リリース日',
     assetDesc:
@@ -202,4 +203,6 @@ export default {
     sponsorList: 'スポンサーリスト',
     sponsorListTips: 'あなたの支持と励ましに感謝します！',
     buildTips: 'ビルド中は何も操作しないでください...',
+    zipFile: '圧縮ファイル',
+    unknown: '不明',
 }

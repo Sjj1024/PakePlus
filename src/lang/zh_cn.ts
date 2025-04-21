@@ -92,6 +92,7 @@ export default {
     requesting: '请求中...',
     assetName: '资源名称',
     download: '下载',
+    assetType: '资源类型',
     assetSize: '资源大小',
     releaseDate: '发布日期',
     assetDesc:
@@ -200,4 +201,6 @@ export default {
     sponsorList: '赞助名单',
     sponsorListTips: '感谢您的支持与鼓励！',
     buildTips: '编译中请不要做任何操作...',
+    zipFile: '压缩包',
+    unknown: '未知',
 }

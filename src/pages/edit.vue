@@ -1534,6 +1534,8 @@ const checkBuildStatus = async () => {
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
         if (status === 'completed' && conclusion === 'success') {
             createIssue(html_url, 'success', 'build success')
+            await new Promise((resolve) => setTimeout(resolve, 3000))
+            store.setCurrentRelease()
             loadingText(t('buildSuccess'))
             // clear timer
             buildSecondTimer && clearInterval(buildSecondTimer)
@@ -1608,7 +1610,6 @@ onUnmounted(() => {
 
 onMounted(async () => {
     window.addEventListener('keydown', handleKeydown)
-    // 重制编译时间
     buildTime = 0
     if (store.currentProject.icon) {
         confirmIcon(store.currentProject.icon)

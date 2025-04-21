@@ -96,6 +96,7 @@ export default {
     requesting: '요청 중...',
     assetName: '자산 이름',
     download: '다운로드',
+    assetType: '자산 타입',
     assetSize: '자산 크기',
     releaseDate: '릴리스 날짜',
     assetDesc:
@@ -204,4 +205,6 @@ export default {
     sponsorList: '후원 목록',
     sponsorListTips: '당신의 지지와 격려에 감사드립니다!',
     buildTips: '빌드 중 아무 작업도 하지 마세요...',
+    zipFile: '압축 파일',
+    unknown: '알 수 없음',
 }

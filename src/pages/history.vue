@@ -53,6 +53,17 @@
                     </div>
                 </template>
             </el-table-column>
+            <!-- asset type -->
+            <el-table-column :label="t('assetType')" width="120">
+                <template #default="scope">
+                    <div style="display: flex; align-items: center">
+                        <span>
+                            {{ typeFunc(scope.row.name) }}
+                        </span>
+                    </div>
+                </template>
+            </el-table-column>
+            <!-- asset size -->
             <el-table-column :label="t('assetSize')" width="120">
                 <template #default="scope">
                     <div style="display: flex; align-items: center">
@@ -63,6 +74,7 @@
                     </div>
                 </template>
             </el-table-column>
+            <!-- publish time -->
             <el-table-column prop="updated_at" :label="t('releaseDate')" />
         </el-table>
         <!-- share and push bug -->
@@ -124,6 +136,31 @@ const { t } = useI18n()
 const getLoading = ref(false)
 const delDialog = ref(false)
 const delLoading = ref(false)
+
+// asset type
+const typeFunc = (name: string) => {
+    if (name.includes('.dmg')) {
+        return t('macOS')
+    } else if (
+        name.includes('.deb') ||
+        name.includes('.AppImage') ||
+        name.includes('.rpm')
+    ) {
+        return 'Linux'
+    } else if (name.includes('.exe') || name.includes('.msi')) {
+        return 'Windows'
+    } else if (name.includes('.apk')) {
+        return 'Android'
+    } else if (name.includes('.ipa')) {
+        return 'iOS'
+    } else if (name.includes('.pwa')) {
+        return 'PWA'
+    } else if (name.includes('.gz')) {
+        return t('zipFile')
+    } else {
+        return t('unknown')
+    }
+}
 
 // delete lasted release
 const deleteRelAssets = async () => {

@@ -92,8 +92,9 @@ export default {
     timed_out: 'timed out',
     completed: 'completed',
     requesting: 'requesting...',
-    assetName: 'Resource Name',
+    assetName: 'Name',
     download: 'download',
+    assetType: 'Type',
     assetSize: 'Size',
     releaseDate: 'Date',
     assetDesc:
@@ -203,4 +204,6 @@ export default {
     sponsorList: 'Sponsor List',
     sponsorListTips: 'Thank you for your support and encouragement!',
     buildTips: 'Please do not do any operations during building...',
+    zipFile: 'Zip File',
+    unknown: 'Unknown',
 }

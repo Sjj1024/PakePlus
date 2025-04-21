@@ -92,6 +92,7 @@ export default {
     requesting: '請求中...',
     assetName: '資源名稱',
     download: '下載',
+    assetType: '資源類型',
     assetSize: '資源大小',
     releaseDate: '發佈日期',
     assetDesc:
@@ -195,4 +196,6 @@ export default {
     sponsorList: '贊助名單',
     sponsorListTips: '感謝您的支持與鼓勵！',
     buildTips: '編譯中請不要做任何操作...',
+    zipFile: '壓縮包',
+    unknown: '未知',
 }
