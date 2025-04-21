@@ -24,8 +24,8 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
 
     let window_size: Option<serde_json::Value> = store.get("window_size");
     // println!("windows_size: {:?}", window_size);
-    let mut width = 920.0;
-    let mut height = 680.0;
+    let mut width = 960.0;
+    let mut height = 780.0;
     if let Some(window_size) = window_size {
         let size = window_size.as_object().unwrap();
         width = size["width"].as_f64().unwrap();

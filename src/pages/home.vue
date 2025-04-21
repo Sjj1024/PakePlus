@@ -669,6 +669,7 @@ const creatProject = async () => {
     proExist.value = false
     if (branchName.value === 'ppdebug') {
         openDebug()
+        branchName.value = ''
         creatLoading.value = false
         branchDialog.value = false
         return
