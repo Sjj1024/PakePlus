@@ -645,7 +645,7 @@
             <el-button @click="preview(false)">
                 {{ t('preview') }}
             </el-button>
-            <el-button :disabled="token === null" @click="createRepo">
+            <el-button :disabled="token === null" @click="creatBuild">
                 {{ t('publish') }}
             </el-button>
         </div>
@@ -781,7 +781,6 @@
             "
         >
         </ImgPreview>
-        <!-- 构建状态 -->
         <Building
             v-model:visible="buildLoading"
             :desktopTime="buildTimeText.PakePLus"
@@ -1425,13 +1424,14 @@ const updateIcon = async (repo: string) => {
         { ref: store.currentProject.name }
     )
     // update icon file content
-    if (iconSha.status === 200) {
+    console.log('iconSha----', iconSha)
+    if (iconSha.status === 200 || iconSha.status === 404) {
         const updateRes: any = await githubApi.updateIconFile(
             store.userInfo.login,
             repo,
             {
                 message: 'update icon from pakeplus',
-                sha: iconSha.data.sha,
+                sha: iconSha?.data?.sha,
                 branch: store.currentProject.name,
                 content: iconContent,
             }
@@ -1616,11 +1616,10 @@ const preview = async (resize: boolean) => {
     }
 }
 
-const createRepo = async () => {
+const creatBuild = async () => {
     appFormRef.value?.validate(async (valid, fields) => {
         if (valid) {
             saveProject(false)
-            console.log('submit!', store.currentProject)
             centerDialogVisible.value = true
         } else {
             console.error('error submit!', fields)
@@ -1644,7 +1643,7 @@ const updateCustomJs = async (repo: string, jsPath: string) => {
     if (shaRes.status === 200 || shaRes.status === 404) {
         // get CargoToml file content
         const initJsScript = getInitializationScript()
-        const jsFileContent: any = await base64Encode(initJsScript)
+        const jsFileContent: any = base64Encode(initJsScript)
         const updateRes: any = await githubApi.updateFileContent(
             store.userInfo.login,
             repo,
@@ -1652,7 +1651,7 @@ const updateCustomJs = async (repo: string, jsPath: string) => {
             {
                 message: 'update custom js from pakeplus',
                 content: jsFileContent,
-                sha: shaRes.data.sha,
+                sha: shaRes?.data?.sha,
                 branch: store.currentProject.name,
             }
         )
@@ -1690,7 +1689,7 @@ const updatePPconfig = async (repo: string) => {
             {
                 message: 'update ppconfig from pakeplus',
                 content: configContent,
-                sha: shaRes.data.sha,
+                sha: shaRes?.data?.sha,
                 branch: store.currentProject.name,
             }
         )

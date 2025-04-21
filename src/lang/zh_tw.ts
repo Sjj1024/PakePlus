@@ -95,7 +95,7 @@ export default {
     assetSize: '資源大小',
     releaseDate: '發佈日期',
     assetDesc:
-        '資源說明：dmg結尾的是macOS版本，deb結尾的是Linux版本，exe和msi結尾的是Windows版本，點擊資源名稱可以複製下載鏈接，點擊下載會使用瀏覽器下載軟件包。',
+        '資源說明：dmg結尾的是macOS版本，deb結尾的是Linux版本，exe和msi結尾的是Windows版本，點擊資源名稱可以複製下載鏈接，點擊下載會使用瀏覽器下載軟件包',
     githubRepo: '開源地址',
     navigation: '使用教程',
     buyCoffee: '💖贊助我們',
@@ -157,7 +157,7 @@ export default {
     iosapp: '蘋果',
     androidapp: '安卓',
     pwaapp: 'PWA',
-    desktopapp: '桌面',
+    desktopapp: '桌面端',
     sourceapp: '源碼',
     appHeader: '頂部導航',
     siderMenu: '側邊菜單',
@@ -194,4 +194,5 @@ export default {
         '如果你也喜歡我們的PakePLus項目，歡迎贊助我們，我們會繼續開發和維護。您的支持是我們前進的動力。贊助時請務必填寫留言，以便我們收錄到贊助名單中，感謝您的支持與鼓勵！',
     sponsorList: '贊助名單',
     sponsorListTips: '感謝您的支持與鼓勵！',
+    buildTips: '編譯中請不要做任何操作...',
 }

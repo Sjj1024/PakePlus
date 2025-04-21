@@ -1458,7 +1458,7 @@ const dispatchAction = async () => {
                 'second'
             )}</div><div>${buildStatus}${
                 buildRate > 99 ? 99 : buildRate
-            }%...</div>`
+            }%</div>`
             // console.log('loadingText---', loadingText)
             loadingText(loadingState)
         }, 1000)

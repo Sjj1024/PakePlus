@@ -124,7 +124,13 @@
         <!-- version -->
         <div class="version" @click="goAbout">v{{ version }}</div>
         <!-- config github token -->
-        <el-dialog v-model="tokenDialog" width="500" center>
+        <el-dialog
+            v-model="tokenDialog"
+            width="500"
+            center
+            :show-close="false"
+            :close-on-click-modal="false"
+        >
             <template #header>
                 <div class="diaHeader">
                     <span>Github Token</span>
@@ -211,7 +217,13 @@
             </template>
         </el-dialog>
         <!-- config new project name -->
-        <el-dialog v-model="branchDialog" width="400" center>
+        <el-dialog
+            v-model="branchDialog"
+            width="400"
+            center
+            :show-close="false"
+            :close-on-click-modal="false"
+        >
             <template #header>
                 <div class="diaHeader">
                     <span>{{ t('projectName') }}</span>

@@ -384,7 +384,7 @@ export const usePPStore = defineStore('pakeplus', {
                     repo,
                     {
                         message: 'update icon from pakeplus',
-                        sha: iconSha.data.sha,
+                        sha: iconSha?.data?.sha,
                         branch: this.currentProject.name,
                         content: iconBase64,
                     }

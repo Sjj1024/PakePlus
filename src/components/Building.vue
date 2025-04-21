@@ -9,7 +9,7 @@
         <template #header="{ close, titleId, titleClass }">
             <div class="buildHeader">
                 <h4 :id="titleId" :class="titleClass">
-                    编译中请不要做任何操作...
+                    {{ t('buildTips') }}
                 </h4>
             </div>
         </template>
@@ -43,11 +43,11 @@
                     <!-- loading -->
                     <Loading />
                 </el-icon>
-                <div>桌面端</div>
+                <div>{{ t('desktopapp') }}</div>
                 <div v-if="desktopTime">{{ desktopTime }}</div>
                 <div>
                     <span>{{ desktopStatus }}</span>
-                    <span v-if="desktopRate">{{ desktopRate }}%</span>
+                    <span v-if="desktopTime">{{ desktopRate }}%</span>
                 </div>
             </div>
             <div v-if="androidStatus" class="platform">
@@ -79,11 +79,11 @@
                     <!-- loading -->
                     <Loading />
                 </el-icon>
-                <div>Android</div>
+                <div>{{ t('androidapp') }}</div>
                 <div v-if="androidTime">{{ androidTime }}</div>
                 <div>
                     <span>{{ androidStatus }}</span>
-                    <span v-if="androidRate">{{ androidRate }}%</span>
+                    <span v-if="androidTime">{{ androidRate }}%</span>
                 </div>
             </div>
             <div v-if="iosStatus" class="platform">
@@ -115,11 +115,11 @@
                     <!-- loading -->
                     <Loading />
                 </el-icon>
-                <div>iOS</div>
+                <div>{{ t('iosapp') }}</div>
                 <div v-if="iosTime">{{ iosTime }}</div>
                 <div>
                     <span>{{ iosStatus }}</span>
-                    <span v-if="iosRate">{{ iosRate }}%</span>
+                    <span v-if="iosTime">{{ iosRate }}%</span>
                 </div>
             </div>
             <div v-if="pwaStatus" class="platform">
@@ -151,11 +151,11 @@
                     <!-- loading -->
                     <Loading />
                 </el-icon>
-                <div>PWA</div>
+                <div>{{ t('pwaapp') }}</div>
                 <div v-if="pwaTime">{{ pwaTime }}</div>
                 <div>
                     <span>{{ pwaStatus }}</span>
-                    <span v-if="pwaRate">{{ pwaRate }}%</span>
+                    <span v-if="pwaTime">{{ pwaRate }}%</span>
                 </div>
             </div>
         </div>
@@ -254,10 +254,12 @@ watch(props, (newVal) => {
     if (
         (newVal.androidStatus === t('buildSuccess') ||
             newVal.androidStatus === t('failure') ||
-            newVal.androidStatus === t('cancelled')) &&
+            newVal.androidStatus === t('cancelled') ||
+            newVal.androidStatus === '') &&
         (newVal.iosStatus === t('buildSuccess') ||
             newVal.iosStatus === t('failure') ||
-            newVal.iosStatus === t('cancelled'))
+            newVal.iosStatus === t('cancelled') ||
+            newVal.iosStatus === '')
     ) {
         console.log('androidStatus', newVal.androidStatus)
         setTimeout(() => {

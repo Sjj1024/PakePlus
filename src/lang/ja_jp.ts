@@ -1,6 +1,6 @@
 export default {
     projectTitle: 'プロジェクト管理',
-    projectTips: 'このソフトウェアはオープンソースで無料です。',
+    projectTips: 'このソフトウェアはオープンソースで無料です',
     darkMode: 'ダークテーマ',
     lightMode: 'ライトテーマ',
     testToken: 'テスト',
@@ -12,7 +12,7 @@ export default {
     projectNamePlaceholder:
         '英語のプロジェクト名を入力してください（例: PakePlus）',
     releaseBody:
-        'このバージョンのリソースをダウンロードおよびインストールするには、参照してください。',
+        'このバージョンのリソースをダウンロードおよびインストールするには、参照してください',
     aboutTitle: 'PakePlusについて',
     aboutTips:
         'オープンソースで無料、Webページをパッケージしてクロスプラットフォームアプリを作成するには、Githubトークンが1つだけ必要です',
@@ -37,7 +37,7 @@ export default {
     example: '例',
     appName: 'アプリ名',
     exeName: 'プログラム名',
-    exeNameInvalid: 'プログラム名には特殊文字を含めることはできません。',
+    exeNameInvalid: 'プログラム名には特殊文字を含めることはできません',
     appId: 'アプリID',
     exeId: 'プログラムID',
     exeIdInvalid: 'プログラムIDは英数字と.で構成されている必要があります',
@@ -99,7 +99,7 @@ export default {
     assetSize: 'アセットサイズ',
     releaseDate: 'リリース日',
     assetDesc:
-        'アセット説明：dmgはmacOS版、debはLinux版、exeおよびmsiはWindows版です。アセット名をクリックするとダウンロードリンクをコピーできます。ダウンロードをクリックするとブラウザでパッケージをダウンロードします。',
+        'アセット説明：dmgはmacOS版、debはLinux版、exeおよびmsiはWindows版です。アセット名をクリックするとダウンロードリンクをコピーできます。ダウンロードをクリックするとブラウザでパッケージをダウンロードします',
     githubRepo: 'オープンソースリポジトリ',
     navigation: '使用ガイド',
     buyCoffee: '💖助けになった場合は、コーヒーを一杯おごってください',
@@ -136,8 +136,7 @@ export default {
     dispatchError: 'dispatchエラー',
     dispatchSuccess: 'dispatch成功',
     jsonError: 'json形式エラー',
-    tokenTips:
-        'トークンはローカルに保存され、サーバーにアップロードされません。',
+    tokenTips: 'トークンはローカルに保存され、サーバーにアップロードされません',
     staticFile: '静的ファイルまたはフォルダー',
     indexHtmError: 'index.htmlファイルが必要です',
     syncFileStart: 'ファイルを同期開始',
@@ -148,7 +147,7 @@ export default {
     syncFileCancel: '同期キャンセル',
     syncTileTips: '同期中は何も操作しないでください',
     webNotStable:
-        'Webは安定していません。デスクトップを使用することをお勧めします。',
+        'Webは安定していません。デスクトップを使用することをお勧めします',
     moreAssets: '等資源',
     staticPreview: '静的資源は預覧できません',
     htmlError: '静的資源を切り替えた後、1分待ってから預覧してください',
@@ -202,4 +201,5 @@ export default {
         'PakePlusプロジェクトにご興味をお持ちの場合は、スポンサーになってください。あなたの支持は私たちの動力です。スポンサー時には必ずメッセージを入力してください。これにより、スポンサーリストに記録され、あなたの支持と励ましに感謝します！',
     sponsorList: 'スポンサーリスト',
     sponsorListTips: 'あなたの支持と励ましに感謝します！',
+    buildTips: 'ビルド中は何も操作しないでください...',
 }
