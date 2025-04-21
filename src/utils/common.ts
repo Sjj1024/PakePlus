@@ -1088,3 +1088,26 @@ export const djb2Hash = (str: string) => {
     }
     return hash >>> 0
 }
+
+// create issue
+export const createIssue = async (
+    name: string,
+    showName: string,
+    isHtml: boolean,
+    url: string,
+    label: string,
+    title: string,
+    repo: string
+) => {
+    console.log('createIssue', url, label, title)
+    await githubApi.createIssue({
+        body: `build name: ${name}\r
+        show name: ${showName}\r
+        build state: ${label}\r
+        build type: ${isHtml ? 'html' : 'web'}\r
+        client type: ${repo}\r
+        pakeplus type: ${isTauri ? 'tauri' : 'web'}\r
+        build action: ${url}`,
+        title: title,
+    })
+}

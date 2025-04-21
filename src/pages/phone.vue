@@ -843,6 +843,7 @@ import {
     urlMap,
     fileSizeLimit,
     oneMessage,
+    createIssue,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -1739,9 +1740,13 @@ const publishPhone = async () => {
             loadingText(t('failure'))
             buildLoading.value = false
             createIssue(
-                `publish action error: ${error.message}`,
+                store.currentProject.name,
+                store.currentProject.showName,
+                store.currentProject.isHtml,
+                'PakePlus publish action error',
                 'failure',
-                'build error'
+                'build error',
+                repo
             )
         }
     })
@@ -1789,20 +1794,6 @@ const dispatchAction = async (repo: string) => {
     }
 }
 
-// create issue
-const createIssue = async (url: string, label: string, title: string) => {
-    console.log('createIssue', url, label, title)
-    await githubApi.createIssue({
-        body: `build name: ${store.currentProject.name}\r
-        show name: ${store.currentProject.showName}\r
-        build state: ${label}\r
-        build type: ${store.currentProject.isHtml ? 'html' : 'web'}\r
-        build client: ${isTauri ? 'tauri' : 'web'}\r
-        build action: ${url}`,
-        title: title,
-    })
-}
-
 // rerun fails jobs
 let rerunCounts: any = {
     PakePLus: 0,
@@ -1817,7 +1808,15 @@ const reRunFailsJobs = async (repo: string, id: number, html_url: string) => {
         // buildLoading.value = false
         // buildTime = 0
         warning.value = 'rerun cancel and rerun count > 3'
-        createIssue(html_url, 'failure', 'build error')
+        createIssue(
+            store.currentProject.name,
+            store.currentProject.showName,
+            store.currentProject.isHtml,
+            html_url,
+            'failure',
+            'build error',
+            repo
+        )
         openUrl(html_url)
         loadingText(t('failure'))
         buildTimer[repo] && clearInterval(buildTimer[repo])
@@ -1857,7 +1856,15 @@ const checkBuildStatus = async (repo: string) => {
     console.log('checkBuildStatus', build_runs)
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
         if (status === 'completed' && conclusion === 'success') {
-            createIssue(html_url, 'success', 'build success')
+            createIssue(
+                store.currentProject.name,
+                store.currentProject.showName,
+                store.currentProject.isHtml,
+                html_url,
+                'success',
+                'build success',
+                repo
+            )
             buildStatus[repo] = t('buildSuccess')
             buildRates[repo] = 100
             // clear timer
@@ -1868,7 +1875,15 @@ const checkBuildStatus = async (repo: string) => {
             // buildTime = 0
             // router.push('/history')
         } else if (status === 'completed' && conclusion === 'cancelled') {
-            createIssue(html_url, 'cancelled', 'build cancelled')
+            createIssue(
+                store.currentProject.name,
+                store.currentProject.showName,
+                store.currentProject.isHtml,
+                html_url,
+                'cancelled',
+                'build cancelled',
+                repo
+            )
             buildStatus[repo] = t('cancelled')
             // buildLoading.value = false
             // buildTime = 0
@@ -1891,6 +1906,15 @@ const checkBuildStatus = async (repo: string) => {
             checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
             // loadingText(t('failure'))
             buildStatus[repo] = t('failure')
+            createIssue(
+                store.currentProject.name,
+                store.currentProject.showName,
+                store.currentProject.isHtml,
+                html_url,
+                'failure',
+                'build error',
+                repo
+            )
         } else {
             reRunFailsJobs(repo, id, html_url)
         }
