@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>PNG圆角图标生成器</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Arial, sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f5f5f7;
+                color: #333;
+            }
+            .container {
+                background-color: white;
+                border-radius: 12px;
+                padding: 25px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                color: #0066cc;
+                text-align: center;
+                margin-bottom: 25px;
+            }
+            .upload-area {
+                border: 2px dashed #ccc;
+                border-radius: 8px;
+                padding: 30px;
+                text-align: center;
+                margin-bottom: 20px;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+            .upload-area:hover {
+                border-color: #0066cc;
+                background-color: #f0f7ff;
+            }
+            .controls {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                margin-bottom: 20px;
+                align-items: center;
+            }
+            .control-group {
+                display: flex;
+                flex-direction: column;
+                min-width: 150px;
+            }
+            label {
+                margin-bottom: 5px;
+                font-weight: 500;
+                color: #555;
+            }
+            input[type='range'] {
+                width: 100%;
+            }
+            .radius-value {
+                text-align: center;
+                font-size: 14px;
+                color: #666;
+            }
+            button {
+                background-color: #0066cc;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.2s;
+                margin-top: 10px;
+            }
+            button:hover {
+                background-color: #0052a3;
+            }
+            button:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+            .preview {
+                display: flex;
+                justify-content: center;
+                margin-top: 30px;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            canvas {
+                max-width: 100%;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+            .original,
+            .result {
+                text-align: center;
+                margin-bottom: 10px;
+                font-weight: 500;
+            }
+            #fileInput {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>PNG圆角图标生成器</h1>
+
+            <div class="upload-area" id="uploadArea">
+                <p>点击或拖放PNG图片到此处</p>
+                <input type="file" id="fileInput" accept="image/png" />
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="radiusSlider">圆角半径</label>
+                    <input
+                        type="range"
+                        id="radiusSlider"
+                        min="0"
+                        max="150"
+                        value="50"
+                    />
+                    <span class="radius-value" id="radiusValue">50px</span>
+                </div>
+
+                <div class="control-group">
+                    <label for="squircleSlider">圆角平滑度</label>
+                    <input
+                        type="range"
+                        id="squircleSlider"
+                        min="1"
+                        max="10"
+                        value="4"
+                        step="0.1"
+                    />
+                    <span class="radius-value" id="squircleValue">4</span>
+                </div>
+
+                <div class="control-group">
+                    <label for="sizeSlider">输出尺寸</label>
+                    <input
+                        type="range"
+                        id="sizeSlider"
+                        min="64"
+                        max="1024"
+                        value="256"
+                        step="64"
+                    />
+                    <span class="radius-value" id="sizeValue">256px</span>
+                </div>
+            </div>
+
+            <button id="downloadBtn" disabled>下载圆角图标</button>
+
+            <div class="preview">
+                <div>
+                    <div class="original">原始图片</div>
+                    <canvas id="originalCanvas"></canvas>
+                </div>
+                <div>
+                    <div class="result">圆角结果</div>
+                    <canvas id="resultCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // 获取DOM元素
+            const fileInput = document.getElementById('fileInput')
+            const uploadArea = document.getElementById('uploadArea')
+            const radiusSlider = document.getElementById('radiusSlider')
+            const radiusValue = document.getElementById('radiusValue')
+            const squircleSlider = document.getElementById('squircleSlider')
+            const squircleValue = document.getElementById('squircleValue')
+            const sizeSlider = document.getElementById('sizeSlider')
+            const sizeValue = document.getElementById('sizeValue')
+            const downloadBtn = document.getElementById('downloadBtn')
+            const originalCanvas = document.getElementById('originalCanvas')
+            const resultCanvas = document.getElementById('resultCanvas')
+            const originalCtx = originalCanvas.getContext('2d')
+            const resultCtx = resultCanvas.getContext('2d')
+
+            let originalImage = null
+
+            // 更新滑块显示值
+            radiusSlider.addEventListener('input', updateRadius)
+            squircleSlider.addEventListener('input', updateSquircle)
+            sizeSlider.addEventListener('input', updateSize)
+
+            function updateRadius() {
+                radiusValue.textContent = `${radiusSlider.value}px`
+                processImage()
+            }
+
+            function updateSquircle() {
+                squircleValue.textContent = squircleSlider.value
+                processImage()
+            }
+
+            function updateSize() {
+                sizeValue.textContent = `${sizeSlider.value}px`
+                processImage()
+            }
+
+            // 上传区域点击事件
+            uploadArea.addEventListener('click', () => fileInput.click())
+
+            // 拖放功能
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault()
+                uploadArea.style.borderColor = '#0066cc'
+                uploadArea.style.backgroundColor = '#f0f7ff'
+            })
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.borderColor = '#ccc'
+                uploadArea.style.backgroundColor = 'transparent'
+            })
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault()
+                uploadArea.style.borderColor = '#ccc'
+                uploadArea.style.backgroundColor = 'transparent'
+
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files
+                    handleFileSelect()
+                }
+            })
+
+            // 文件选择处理
+            fileInput.addEventListener('change', handleFileSelect)
+
+            function handleFileSelect() {
+                const file = fileInput.files[0]
+                if (!file || !file.type.match('image.*')) {
+                    alert('请选择PNG图片文件')
+                    return
+                }
+
+                const reader = new FileReader()
+                reader.onload = function (event) {
+                    originalImage = new Image()
+                    originalImage.onload = function () {
+                        // 显示原始图片
+                        displayOriginalImage()
+                        // 处理图片
+                        processImage()
+                        // 启用下载按钮
+                        downloadBtn.disabled = false
+                    }
+                    originalImage.src = event.target.result
+                }
+                reader.readAsDataURL(file)
+            }
+
+            // 显示原始图片
+            function displayOriginalImage() {
+                const maxDisplaySize = 300
+                let displayWidth = originalImage.width
+                let displayHeight = originalImage.height
+
+                if (
+                    displayWidth > maxDisplaySize ||
+                    displayHeight > maxDisplaySize
+                ) {
+                    const ratio = Math.min(
+                        maxDisplaySize / displayWidth,
+                        maxDisplaySize / displayHeight
+                    )
+                    displayWidth = Math.floor(displayWidth * ratio)
+                    displayHeight = Math.floor(displayHeight * ratio)
+                }
+
+                originalCanvas.width = displayWidth
+                originalCanvas.height = displayHeight
+                originalCtx.clearRect(0, 0, displayWidth, displayHeight)
+                originalCtx.drawImage(
+                    originalImage,
+                    0,
+                    0,
+                    displayWidth,
+                    displayHeight
+                )
+            }
+
+            // 处理图片生成圆角
+            function processImage() {
+                if (!originalImage) return
+
+                const outputSize = parseInt(sizeSlider.value)
+                const radius = parseInt(radiusSlider.value)
+                const squircleFactor = parseFloat(squircleSlider.value)
+
+                // 设置结果画布大小
+                resultCanvas.width = outputSize
+                resultCanvas.height = outputSize
+                resultCtx.clearRect(0, 0, outputSize, outputSize)
+
+                // 创建圆角路径
+                createRoundedPath(
+                    resultCtx,
+                    0,
+                    0,
+                    outputSize,
+                    outputSize,
+                    radius,
+                    squircleFactor
+                )
+                resultCtx.clip()
+
+                // 绘制图片
+                resultCtx.drawImage(originalImage, 0, 0, outputSize, outputSize)
+            }
+
+            // 创建超椭圆路径（Apple风格圆角）
+            function createRoundedPath(ctx, x, y, width, height, radius, n) {
+                const w = width / 2
+                const h = height / 2
+                const r = Math.min(radius, w, h)
+
+                ctx.beginPath()
+
+                // 优化：对于n=2（普通圆角矩形）使用更简单的路径
+                if (n === 2) {
+                    ctx.moveTo(x + r, y)
+                    ctx.lineTo(x + width - r, y)
+                    ctx.quadraticCurveTo(x + width, y, x + width, y + r)
+                    ctx.lineTo(x + width, y + height - r)
+                    ctx.quadraticCurveTo(
+                        x + width,
+                        y + height,
+                        x + width - r,
+                        y + height
+                    )
+                    ctx.lineTo(x + r, y + height)
+                    ctx.quadraticCurveTo(x, y + height, x, y + height - r)
+                    ctx.lineTo(x, y + r)
+                    ctx.quadraticCurveTo(x, y, x + r, y)
+                } else {
+                    // 超椭圆路径
+                    for (let i = 0; i <= 360; i++) {
+                        const angle = (i * Math.PI) / 180
+                        const cos = Math.cos(angle)
+                        const sin = Math.sin(angle)
+
+                        const rx =
+                            Math.pow(Math.abs(cos), 2 / n) *
+                                w *
+                                Math.sign(cos) +
+                            w
+                        const ry =
+                            Math.pow(Math.abs(sin), 2 / n) *
+                                h *
+                                Math.sign(sin) +
+                            h
+
+                        const px = x + rx
+                        const py = y + ry
+
+                        if (i === 0) {
+                            ctx.moveTo(px, py)
+                        } else {
+                            ctx.lineTo(px, py)
+                        }
+                    }
+                }
+
+                ctx.closePath()
+            }
+
+            // 下载处理后的图片
+            downloadBtn.addEventListener('click', function () {
+                if (!originalImage) return
+
+                // 创建临时画布以生成高质量下载
+                const tempCanvas = document.createElement('canvas')
+                const tempCtx = tempCanvas.getContext('2d')
+                const outputSize = parseInt(sizeSlider.value)
+                const radius = parseInt(radiusSlider.value)
+                const squircleFactor = parseFloat(squircleSlider.value)
+
+                tempCanvas.width = outputSize
+                tempCanvas.height = outputSize
+
+                // 创建圆角路径
+                createRoundedPath(
+                    tempCtx,
+                    0,
+                    0,
+                    outputSize,
+                    outputSize,
+                    radius,
+                    squircleFactor
+                )
+                tempCtx.clip()
+
+                // 绘制图片
+                tempCtx.drawImage(originalImage, 0, 0, outputSize, outputSize)
+
+                // 触发下载
+                const link = document.createElement('a')
+                link.download = `rounded-icon-${outputSize}x${outputSize}.png`
+                link.href = tempCanvas.toDataURL('image/png')
+                link.click()
+            })
+
+            // 初始化
+            updateRadius()
+            updateSquircle()
+            updateSize()
+        </script>
+    </body>
+</html>
