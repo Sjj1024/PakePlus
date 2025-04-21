@@ -1,6 +1,6 @@
 <h4 align="right"> 
 <span href=".README.md">English</span> 
-<a href="https://github.com/Sjj1024/PakePlus/discussions/2" 
+<a href="http://www.pakeplus.com/" 
 style="margin: 0 10px;" >简体中文</a> 
 <a href="https://github.com/Sjj1024/PakePlus/discussions/108">日本语</a>
 </h4>  
@@ -16,19 +16,33 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
 ## Features
 
--   🎐 About 20 times smaller than Electron packages (approximately 5MB!)，It is 10 times faster in performance.
--   🚀 Powered by Rust and Tauri, PakePlus is lighter and faster than JS-based frameworks.
--   📦 Rich built-in feature packs—supporting shortcuts, immersive windows, and minimal customization.
--   👻 PakePlus is just a simple tool—using Tauri to replace older packaging methods，It supports cross - platform desktops and will support mobile devices soon..
--   🤗 PakePlus is easy to use; all you need is a GitHub Token to get a desktop app.
--   🌹 No need to install complex dependencies locally; use Github Action for cloud-based auto-packaging.
--   🌎 Supports internationalization, user-friendly for a global audience, and it follows your system language automatically.
--   💡 Supports custom js injection. you can write your own js code to inject into the page.
--   🎨 ui is more beautiful, more comfortable to use.
--   📡 It can be directly used on the web side, but the client-side has more powerful functions.
--   🔐 Data security. Your token is only saved locally on your device and will not be uploaded to the server. Your projects are also safely stored in your own Git repository.
--   🍀 Support static file / vue / React packaging. Just drop your dist directory or index.html in, and it becomes a client. Why limit it to a website?
--   🐞 Supports debug mode. Whether it is in preview or release, you can find bugs and eliminate bugs.
+🎐 Approximately 20 times smaller than Electron (less than 5MB!) and 10 times faster.
+🚀 Built with Rust Tauri, PakePlus is lighter and faster than JavaScript-based frameworks.
+📦 Comes with rich built-in features — supports shortcuts, immersive windows, and minimalist customization.
+👻 PakePlus is a minimalist tool that replaces traditional packaging with Tauri for cross-platform desktop apps.
+📲 Uses native frameworks to package Android and iOS apps — smaller and faster than Tauri2.
+🤗 Easy to use — just one GitHub Token is all you need to get a desktop app.
+🌹 No need to install complex dependencies locally — use GitHub Actions for cloud-based automatic packaging.
+🧑‍🤝‍🧑 Internationalization support — automatically follows your system language.
+💡 Supports custom JavaScript injection — write your own JS to inject into the page.
+🎨 Beautiful and user-friendly UI — better experience for beginners, supports Chinese names for packaging.
+📡 Usable directly via the web, but the client offers stronger functionality and is recommended.
+🔐 Data security — your token is stored only locally, and your project stays safely in your own Git repo.
+🍀 Supports static file packaging — drop in a compiled dist folder or index.html from Vue/React to create a client app.
+🐞 Debug mode supported — find and eliminate bugs during preview or release.
+💬 If you run into any issues, feel free to join our technical community for help.
+
+## Use Cases
+
+Have a website? Instantly turn it into a desktop app and elevate its appearance.
+Have a Vue/React project and don’t want to buy a server? Package it as a desktop app.
+Want your Cocos game to run as a cross-platform client? No problem.
+Need to build your Unity project as a cross-platform client? Also no problem.
+Hide your website address from casual sharing or bots scraping your content.
+For internal company platforms — restrict access to your site via a dedicated client only.
+Turn any website into your custom client — inject JS for automation and custom features.
+Annoyed by website ads? Hide them with powerful JS.
+Want to use Tauri2 but the environment is too heavy? Use PakePlus instead!
 
 ## Popular Packages
 
