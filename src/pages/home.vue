@@ -610,6 +610,7 @@ const getMainSha = async (repo: string = 'PakePlus') => {
         } else if (repo === 'PakePlus-Android') {
             store.shaInfo.androidMain = res.data.sha
         }
+        localStorage.setItem('shaInfo', JSON.stringify(store.shaInfo))
         return true
     } else {
         return false

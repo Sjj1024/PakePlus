@@ -45,14 +45,16 @@ export const usePPStore = defineStore('pakeplus', {
                       updated_at: '2024-08-22T04:54:05Z',
                   },
             // sha info
-            shaInfo: {
-                desktopMain: '',
-                desktopWeb: '',
-                iosMain: '',
-                iosWeb: '',
-                androidMain: '',
-                androidWeb: '',
-            },
+            shaInfo: localStorage.getItem('shaInfo')
+                ? JSON.parse(localStorage.getItem('shaInfo') as string)
+                : {
+                      desktopMain: '',
+                      desktopWeb: '',
+                      iosMain: '',
+                      iosWeb: '',
+                      androidMain: '',
+                      androidWeb: '',
+                  },
             // 当前项目
             currentProject: localStorage.getItem('currentProject')
                 ? JSON.parse(localStorage.getItem('currentProject') as string)
