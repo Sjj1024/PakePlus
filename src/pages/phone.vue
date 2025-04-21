@@ -1865,12 +1865,13 @@ const checkBuildStatus = async (repo: string) => {
                 'build success',
                 repo
             )
+            await new Promise((resolve) => setTimeout(resolve, 3000))
+            store.setCurrentRelease()
             buildStatus[repo] = t('buildSuccess')
             buildRates[repo] = 100
             // clear timer
             buildTimer[repo] && clearInterval(buildTimer[repo])
             checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
-            store.setCurrentRelease()
             // buildLoading.value = false
             // buildTime = 0
             // router.push('/history')
