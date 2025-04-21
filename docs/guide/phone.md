@@ -1,6 +1,6 @@
 # APP 配置
 
-注意：现在仅 PakePLus bate 网页版本支持，PakePLus 客户端正在测试中...  
+注意：现在仅 PakePLus beta 网页版本支持，PakePLus 客户端正在测试中...  
 点击软件配置界面右上角的手机图标，即可进入移动端配置界面。
 ![](../static/imgs/phone1.webp)
 
