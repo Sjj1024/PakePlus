@@ -950,7 +950,7 @@ const syncAllBranch = async () => {
                 repo
             )
             console.log('userRes', userRes)
-            const userBranchs = userRes.data.map((item: any) => item.name)
+            const userBranchs = userRes.data?.map((item: any) => item.name)
             console.log('userBranchs', userBranchs)
             for (const branch of upBranchs) {
                 await syncBranch(repo, branch)
