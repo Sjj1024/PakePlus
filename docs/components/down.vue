@@ -134,7 +134,7 @@
                     </a>
                 </div>
                 <div class="item">
-                    <span> 不推荐，因为是bate版本 </span>
+                    <span> 不推荐，因为是beta版本 </span>
                 </div>
             </div>
         </div>
