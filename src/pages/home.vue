@@ -249,14 +249,14 @@
                     <el-popconfirm
                         v-if="proExist"
                         hide-icon
-                        title="确认删除吗"
+                        :title="t('confirmDelete')"
                         cancel-button-type="info"
                         placement="top"
                         @confirm="delProject"
                     >
                         <template #reference>
                             <el-button type="danger">
-                                {{ t('删除') }}
+                                {{ t('delete') }}
                             </el-button>
                         </template>
                     </el-popconfirm>
@@ -266,7 +266,7 @@
                         v-if="proExist"
                         @click="branchDialog = false"
                     >
-                        {{ t('同步') }}
+                        {{ t('sync') }}
                     </el-button>
                     <el-button
                         type="primary"
@@ -420,7 +420,8 @@ const showBranchDialog = () => {
     // token.value && getCommitSha()
     // checkout has github token
     if (store.token === '') {
-        oneMessage.error(t('configToken'))
+        // oneMessage.error(t('configToken'))
+        console.log(t('configToken'))
     } else {
         getMainSha('PakePlus')
         getWebSha('PakePlus')
@@ -647,19 +648,18 @@ const openDebug = () => {
 
 // delete project confirm
 const delProject = () => {
-    // 不可以删除main/dev/web分支
     if (
         branchName.value === 'main' ||
         branchName.value === 'dev' ||
         branchName.value === 'web' ||
         branchName.value === 'web2'
     ) {
-        oneMessage.error(t('不可以删除'))
+        oneMessage.error(t('cantDelete'))
         return
     } else {
         store.delProject(branchName.value)
         branchName.value = ''
-        oneMessage.success(t('删除成功'))
+        oneMessage.success(t('deleteSuccess'))
     }
 }
 

@@ -67,7 +67,7 @@ export default {
     releaseNotes: '릴리스 노트:',
     inputRelNotes: '릴리스 노트를 입력하세요',
     pubNotesTips:
-        '참고: 빌드 및 게시에는 약 15분 정도 소요되며, 잠시만 기다려 주세요......',
+        '참고: 모바일 설정과 빌드 및 게시에는 약 9분 정도 소요되며, 잠시만 기다려 주세요......',
     inputWebPlaceholder: '웹 사이트 주소를 입력하세요',
     inputAppNamePlaceholder: '앱 이름을 입력하세요',
     inputAppIdPlaceholder: '앱 ID를 입력하세요',
@@ -207,4 +207,18 @@ export default {
     buildTips: '빌드 중 아무 작업도 하지 마세요...',
     zipFile: '압축 파일',
     unknown: '알 수 없음',
+    pubPhoneTips:
+        '참고: 패키지 및 게시에는 약 3분 정도 소요됩니다. 잠시만 기다려 주세요...',
+    cantDelete: '삭제할 수 없습니다',
+    deleteSuccess: '삭제 성공',
+    confirmDelete: '현재 프로젝트를 삭제하시겠습니까?',
+    deleteError: '삭제 실패',
+    delete: '삭제',
+    sync: '동기화',
+    syncSuccess: '동기화 성공',
+    syncError: '동기화 실패',
+    syncTips: '동기화 중 아무 작업도 하지 마세요...',
+    syncCancel: '동기화 취소',
+    syncWaiting: '동기화 대기 중...',
+    syncInProgress: '동기화 진행 중...',
 }

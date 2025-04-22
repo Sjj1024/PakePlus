@@ -645,7 +645,7 @@
             <el-button @click="preview(false)">
                 {{ t('preview') }}
             </el-button>
-            <el-button :disabled="token === null" @click="creatBuild">
+            <el-button @click="creatBuild">
                 {{ t('publish') }}
             </el-button>
         </div>
@@ -717,7 +717,7 @@
                 </el-form-item>
             </el-form>
             <span style="color: #aaa">
-                {{ t('pubNotesTips') }}
+                {{ t('pubPhoneTips') }}
             </span>
             <template #footer>
                 <div class="dialog-footer">
@@ -862,8 +862,6 @@ const cutVisible = ref(false)
 const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
-
-const token = localStorage.getItem('token')
 const iconFileName = ref('')
 const file = ref<any>(null)
 
@@ -1707,6 +1705,10 @@ const updatePPconfig = async (repo: string) => {
 
 // new publish version
 const publishPhone = async () => {
+    if (store.token === '') {
+        oneMessage.error(t('configToken'))
+        return
+    }
     centerDialogVisible.value = false
     buildLoading.value = true
     pubForm.platform.forEach(async (repo: string) => {

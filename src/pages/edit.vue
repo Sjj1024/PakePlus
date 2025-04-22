@@ -329,7 +329,7 @@
             <el-button @click="preview(false)">
                 {{ t('preview') }}
             </el-button>
-            <el-button :disabled="token === null" @click="createRepo">
+            <el-button @click="createRepo">
                 {{ t('publish') }}
             </el-button>
         </div>
@@ -471,7 +471,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessageBox } from 'element-plus'
 import { usePPStore } from '@/store'
 import {
     readFile,
@@ -538,7 +538,6 @@ const centerDialogVisible = ref(false)
 const formSize = ref<ComponentSize>('default')
 const appFormRef = ref<FormInstance>()
 
-const token = localStorage.getItem('token')
 const iconFileName = ref('')
 const file = ref<any>(null)
 
@@ -1392,6 +1391,10 @@ const updateTauriConfig = async () => {
 
 // new publish version
 const publishWeb = async () => {
+    if (store.token === '') {
+        oneMessage.error(t('configToken'))
+        return
+    }
     centerDialogVisible.value = false
     buildLoading.value = true
     loadingText(t('preCheck') + '...')

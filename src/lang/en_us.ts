@@ -66,7 +66,7 @@ export default {
     releaseNotes: 'Notes:',
     inputRelNotes: 'Please enter the release notes',
     pubNotesTips:
-        'Note: The build and publish process usually takes about 15 minutes......',
+        'Note: The Phone config in the upper right corner, The build and publish process usually takes about 9 minutes......',
     inputWebPlaceholder: 'Please enter the website address.',
     inputAppNamePlaceholder: 'Please enter the APP name.',
     inputAppIdPlaceholder: 'Please enter the APPID',
@@ -207,4 +207,18 @@ export default {
     buildTips: 'Please do not do any operations during building...',
     zipFile: 'Zip File',
     unknown: 'Unknown',
+    pubPhoneTips:
+        'Note: The build usually takes about 3 minutes, please be patient...',
+    cantDelete: 'Cannot delete',
+    deleteSuccess: 'Delete success',
+    confirmDelete: 'Are you sure?',
+    deleteError: 'Delete failed',
+    delete: 'Delete',
+    sync: 'Sync',
+    syncSuccess: 'Sync success',
+    syncError: 'Sync failed',
+    syncTips: 'Syncing, please do not perform any operations...',
+    syncCancel: 'Sync cancel',
+    syncWaiting: 'Sync waiting...',
+    syncInProgress: 'Sync in progress...',
 }
