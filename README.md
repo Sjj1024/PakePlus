@@ -34,15 +34,15 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
 ## Use Cases
 
-Have a website? Instantly turn it into a desktop app and elevate its appearance.  
-Have a Vue/React project and don’t want to buy a server? Package it as a desktop app.  
-Want your Cocos game to run as a cross-platform client? No problem.  
-Need to build your Unity project as a cross-platform client? Also no problem.  
-Hide your website address from casual sharing or bots scraping your content.  
-For internal company platforms — restrict access to your site via a dedicated client only.  
-Turn any website into your custom client — inject JS for automation and custom features.  
-Annoyed by website ads? Hide them with powerful JS.  
-Want to use Tauri2 but the environment is too heavy? Use PakePlus instead!
+-   Have a website? Instantly turn it into a desktop app and elevate its appearance.
+-   Have a Vue/React project and don’t want to buy a server? Package it as a desktop app.
+-   Want your Cocos game to run as a cross-platform client? No problem.
+-   Need to build your Unity project as a cross-platform client? Also no problem.
+-   Hide your website address from casual sharing or bots scraping your content.
+-   For internal company platforms — restrict access to your site via a dedicated client only.
+-   Turn any website into your custom client — inject JS for automation and custom features.
+-   Annoyed by website ads? Hide them with powerful JS.
+-   Want to use Tauri2 but the environment is too heavy? Use PakePlus instead!
 
 ## Popular Packages
 
