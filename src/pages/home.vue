@@ -153,6 +153,7 @@
                     @click="testToken(true)"
                     :loading="testLoading"
                     :type="store.userInfo.login !== '' ? 'success' : ''"
+                    class="testTokenBtn"
                 >
                     {{ t('testToken') }}
                 </el-button>
@@ -161,6 +162,7 @@
                     @click="testToken(false)"
                     :loading="testLoading"
                     type="success"
+                    class="testTokenBtn"
                 >
                     <el-icon><Check /></el-icon>
                 </el-button>
@@ -567,9 +569,9 @@ const forkStartShas = async (tips: boolean = true) => {
         console.error('fork error', forkRes)
     }
     await supportPP()
-    await commitShas(tips)
     // sync all branch
-    syncAllBranch()
+    await syncAllBranch()
+    await commitShas(tips)
 }
 
 // fork pakeplus-android and pakeplus-ios
@@ -949,25 +951,35 @@ const syncAllBranch = async () => {
         for (const repo of ppRepo) {
             console.log('syncAllBranch', repo)
             const upRes: any = await githubApi.getAllBranchs(upstreamUser, repo)
-            console.log('upRes', upRes)
-            const upRepoHash = djb2Hash(JSON.stringify(upRes.data))
-            if (upRepoHash === store.upCommitMd5[repo]) {
-                console.log('upRepoHash === store.upCommitMd5[repo]', repo)
-                continue
-            } else {
-                store.updateUpCommitMd5(repo, upRepoHash)
-            }
-            const upBranchs = upRes.data.map((item: any) => item.name)
+            console.log('up branchs Res', upRes)
+            const upBranchs = upRes.data?.map((item: any) => {
+                return {
+                    name: item.name,
+                    sha: item.commit.sha,
+                }
+            })
             console.log('upBranchs', upBranchs)
             const userRes: any = await githubApi.getAllBranchs(
                 store.userName,
                 repo
             )
-            console.log('userRes', userRes)
-            const userBranchs = userRes.data?.map((item: any) => item.name)
+            console.log('user branchs Res', userRes)
+            const userBranchs = userRes.data?.map((item: any) => {
+                return {
+                    name: item.name,
+                    sha: item.commit.sha,
+                }
+            })
             console.log('userBranchs', userBranchs)
             for (const branch of upBranchs) {
-                await syncBranch(repo, branch)
+                // check branch is exist in userBranchs and sha is same
+                const userBranch = userBranchs.find(
+                    (item: any) => item.name === branch.name
+                )
+                // if sha not same or branch not exist, sync branch
+                if (!userBranch || userBranch.sha !== branch.sha) {
+                    await syncBranch(repo, branch.name)
+                }
             }
         }
     }
@@ -1302,6 +1314,10 @@ onMounted(() => {
         justify-content: center;
         align-items: center;
     }
+}
+
+.testTokenBtn {
+    width: 58px;
 }
 
 .diaHeader {
