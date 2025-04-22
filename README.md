@@ -16,21 +16,21 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
 ## Features
 
-🎐 Approximately 20 times smaller than Electron (less than 5MB!) and 10 times faster.  
-🚀 Built with Rust Tauri, PakePlus is lighter and faster than JavaScript-based frameworks.  
-📦 Comes with rich built-in features — supports shortcuts, immersive windows, and minimalist customization.  
-👻 PakePlus is a minimalist tool that replaces traditional packaging with Tauri for cross-platform desktop apps.  
-📲 Uses native frameworks to package Android and iOS apps — smaller and faster than Tauri2.  
-🤗 Easy to use — just one GitHub Token is all you need to get a desktop app.  
-🌹 No need to install complex dependencies locally — use GitHub Actions for cloud-based automatic packaging.  
-🧑‍🤝‍🧑 Internationalization support — automatically follows your system language.  
-💡 Supports custom JavaScript injection — write your own JS to inject into the page.  
-🎨 Beautiful and user-friendly UI — better experience for beginners, supports Chinese names for packaging.  
-📡 Usable directly via the web, but the client offers stronger functionality and is recommended.  
-🔐 Data security — your token is stored only locally, and your project stays safely in your own Git repo.  
-🍀 Supports static file packaging — drop in a compiled dist folder or index.html from Vue/React to create a client app.  
-🐞 Debug mode supported — find and eliminate bugs during preview or release.  
-💬 If you run into any issues, feel free to join our technical community for help.
+-   🎐 Approximately 20 times smaller than Electron (less than 5MB!) and 10 times faster.
+-   🚀 Built with Rust Tauri, PakePlus is lighter and faster than JavaScript-based frameworks.
+-   📦 Comes with rich built-in features — supports shortcuts, immersive windows, and minimalist customization.
+-   👻 PakePlus is a minimalist tool that replaces traditional packaging with Tauri for cross-platform desktop apps.
+-   📲 Uses native frameworks to package Android and iOS apps — smaller and faster than Tauri2.
+-   🤗 Easy to use — just one GitHub Token is all you need to get a desktop app.
+-   🌹 No need to install complex dependencies locally — use GitHub Actions for cloud-based automatic packaging.
+-   🧑‍🤝‍🧑 Internationalization support — automatically follows your system language.
+-   💡 Supports custom JavaScript injection — write your own JS to inject into the page.
+-   🎨 Beautiful and user-friendly UI — better experience for beginners, supports Chinese names for packaging.
+-   📡 Usable directly via the web, but the client offers stronger functionality and is recommended.
+-   🔐 Data security — your token is stored only locally, and your project stays safely in your own Git repo.
+-   🍀 Supports static file packaging — drop in a compiled dist folder or index.html from Vue/React to create a client app.
+-   🐞 Debug mode supported — find and eliminate bugs during preview or release.
+-   💬 If you run into any issues, feel free to join our technical community for help.
 
 ## Use Cases
 
