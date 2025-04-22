@@ -34,7 +34,7 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
 ## Use Cases
 
--   Have a website? Instantly turn it into a desktop app and elevate its appearance.
+-   Have a website? Instantly turn it into a app and elevate its appearance.
 -   Have a Vue/React project and don’t want to buy a server? Package it as a desktop app.
 -   Want your Cocos game to run as a cross-platform client? No problem.
 -   Need to build your Unity project as a cross-platform client? Also no problem.
