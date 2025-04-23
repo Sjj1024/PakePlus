@@ -31,7 +31,7 @@ features:
       details: 使用原生框架打包 Android 和 iOS APP，比Tauri2体积更小更快
       icon: 📲
     - title: 简单易用
-      details: UI操作简单，不用在本地安装任何开发环境，省心省事省硬盘空间
+      details: UI操作简单，不用在本地安装任何开发环境，省时省心省硬盘空间
       icon: 📦
     - title: 同时编译
       details: 只需几分钟，一键同时编译多平台安装包，不再有环境和时间焦虑
