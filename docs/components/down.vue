@@ -1,7 +1,7 @@
 <template>
     <div class="downBox">
         <div class="title">我应该使用哪个版本？</div>
-        <div class="platform">
+        <div class="platform mac">
             <div class="leftIcon">
                 <svg
                     t="1742708135449"
@@ -23,18 +23,14 @@
             <div class="rightContent">
                 <h1 class="title">MacOS</h1>
                 <div class="item">
-                    <a :href="macArm.browser_download_url">
-                        下载ARM(M芯片)版本
-                    </a>
+                    <a :href="macArm.browser_download_url"> ARM(M芯片)版本 </a>
                 </div>
                 <div class="item">
-                    <a :href="macX64.browser_download_url">
-                        下载 Intel芯片 版本
-                    </a>
+                    <a :href="macX64.browser_download_url"> Intel芯片 版本 </a>
                 </div>
             </div>
         </div>
-        <div class="platform">
+        <div class="platform windows">
             <div class="leftIcon">
                 <svg
                     t="1742708953461"
@@ -57,18 +53,16 @@
             <div class="rightContent">
                 <h1 class="title">Windows</h1>
                 <div class="item">
-                    <a :href="windowsX64.browser_download_url">
-                        下载 X64 版本
-                    </a>
+                    <a :href="windowsX64.browser_download_url"> X64 版本 </a>
                 </div>
                 <div class="item">
                     <a :href="windowsArm64.browser_download_url">
-                        下载 ARM64 版本
+                        ARM64 版本
                     </a>
                 </div>
             </div>
         </div>
-        <div class="platform">
+        <div class="platform linux">
             <div class="leftIcon">
                 <svg
                     t="1742708821867"
@@ -90,19 +84,19 @@
             <div class="rightContent">
                 <h1 class="title">Linux</h1>
                 <div class="item">
-                    <a :href="linuxDeb.browser_download_url"> 下载 dep 版本 </a>
+                    <a :href="linuxDeb.browser_download_url"> dep 版本 </a>
                 </div>
                 <div class="item">
-                    <a :href="linuxRpm.browser_download_url"> 下载 rpm 版本 </a>
+                    <a :href="linuxRpm.browser_download_url"> rpm 版本 </a>
                 </div>
                 <div class="item">
                     <a :href="linuxImage.browser_download_url">
-                        下载 AppImage 版本
+                        AppImage 版本
                     </a>
                 </div>
             </div>
         </div>
-        <div class="platform">
+        <div class="platform web">
             <div class="leftIcon">
                 <svg
                     t="1742721374498"
@@ -385,21 +379,75 @@ const linuxImage = lastRelease.assets.find((asset) =>
         font-size: 30px;
     }
 
+    .mac {
+        background: linear-gradient(
+            135deg,
+            rgba(171, 200, 250, 0.8),
+            rgba(230, 210, 255, 0.6)
+        );
+        // filter: blur(1px);
+
+        &:hover {
+            // box-shadow: var(--vp-c-text-1) 0px 0px 10px;
+            box-shadow: 0 0 10px rgba(200, 220, 255, 0.8),
+                0 0 20px rgba(230, 210, 255, 0.6);
+        }
+    }
+
+    .windows {
+        background: linear-gradient(
+            45deg,
+            rgba(0, 120, 215, 0.6),
+            rgba(105, 0, 255, 0.3)
+        );
+
+        &:hover {
+            // box-shadow: var(--vp-c-text-1) 0px 0px 10px;
+            box-shadow: 0 0 10px rgba(0, 120, 215, 0.3),
+                0 0 20px rgba(105, 0, 255, 0.2);
+        }
+    }
+
+    .linux {
+        background: linear-gradient(
+            45deg,
+            rgba(255, 140, 0, 0.3),
+            rgba(0, 200, 80, 0.2)
+        );
+        &:hover {
+            // box-shadow: var(--vp-c-text-1) 0px 0px 10px;
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.2),
+                0 0 20px rgba(0, 200, 80, 0.1);
+        }
+    }
+
+    .web {
+        background: linear-gradient(
+            135deg,
+            rgba(100, 120, 255, 0.3),
+            rgba(0, 200, 220, 0.3)
+        );
+        &:hover {
+            // box-shadow: var(--vp-c-text-1) 0px 0px 10px;
+            box-shadow: 0 0 10px rgba(100, 120, 255, 0.2),
+                0 0 20px rgba(0, 200, 220, 0.2);
+        }
+    }
+
     .platform {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        border: 1px solid var(--vp-c-text-1);
         border-radius: 10px;
         padding: 20px;
         width: 70%;
         height: 160px;
-        transition: all 0.5s ease;
+        transition: all 0.3s ease;
+        // border: 1px solid var(--vp-c-text-1);
 
         &:hover {
-            background-color: var(--vp-c-bg-soft);
-            box-shadow: var(--vp-c-text-1) 0px 0px 10px;
+            transform: translateY(-1px);
         }
 
         .leftIcon {
