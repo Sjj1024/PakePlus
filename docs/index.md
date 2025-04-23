@@ -31,10 +31,10 @@ features:
       details: 使用原生框架打包 Android 和 iOS APP，比Tauri2体积更小更快
       icon: 📲
     - title: 简单易用
-      details: PakePlus界面化易于操作使用，只需要点点点即可完成所有操作
+      details: UI操作简单，不用在本地安装任何开发环境，省心省事省硬盘空间
       icon: 📦
     - title: 同时编译
-      details: 只需几分钟，一键同时编译所有平台安装包，不用再为环境和时间焦虑
+      details: 只需几分钟，一键同时编译多平台安装包，不再有环境和时间焦虑
       icon: 🧘‍♀️
     - title: 国际化
       details: 支持国际化，对全球用户都友好，并且会自动跟随你的电脑系统语言
