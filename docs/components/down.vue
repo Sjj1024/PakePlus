@@ -373,6 +373,13 @@ const proxyGithub = (url) => {
     console.log('newURL', newURL)
     return newURL
 }
+
+
+const isMobile = () => {
+    return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+        navigator.userAgent.toLowerCase()
+    )
+}
 </script>
 
 <style scoped lang="scss">
