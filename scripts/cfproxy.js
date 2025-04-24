@@ -1,197 +1,73 @@
-'use strict'
+addEventListener('fetch', event => {
+    event.respondWith(handleRequest(event.request))
+  })
+  
+  async function handleRequest(request) {
+    // 定义 GitHub 原始域名和你的加速域名
+    const GITHUB_HOST = 'github.com'
+    const GITHUB_RAW_HOST = 'raw.githubusercontent.com'
+    const GITHUB_USER_CONTENT_HOST = 'githubusercontent.com'
+    
+    const url = new URL(request.url)
 
-/**
- * static files (404.html, sw.js, conf.js)
- */
-const ASSET_URL = 'https://hunshcn.github.io/gh-proxy/'
-// 前缀，如果自定义路由为example.com/gh/*，将PREFIX改为 '/gh/'，注意，少一个杠都会错！
-const PREFIX = '/'
-// 分支文件使用jsDelivr镜像的开关，0为关闭，默认关闭
-const Config = {
-    jsdelivr: 0,
-}
-
-const whiteList = [] // 白名单，路径里面有包含字符的才会通过，e.g. ['/username/']
-
-/** @type {ResponseInit} */
-const PREFLIGHT_INIT = {
-    status: 204,
-    headers: new Headers({
-        'access-control-allow-origin': '*',
-        'access-control-allow-methods':
-            'GET,POST,PUT,PATCH,TRACE,DELETE,HEAD,OPTIONS',
-        'access-control-max-age': '1728000',
-    }),
-}
-
-const exp1 =
-    /^(?:https?:\/\/)?github\.com\/.+?\/.+?\/(?:releases|archive)\/.*$/i
-const exp2 = /^(?:https?:\/\/)?github\.com\/.+?\/.+?\/(?:blob|raw)\/.*$/i
-const exp3 = /^(?:https?:\/\/)?github\.com\/.+?\/.+?\/(?:info|git-).*$/i
-const exp4 =
-    /^(?:https?:\/\/)?raw\.(?:githubusercontent|github)\.com\/.+?\/.+?\/.+?\/.+$/i
-const exp5 =
-    /^(?:https?:\/\/)?gist\.(?:githubusercontent|github)\.com\/.+?\/.+?\/.+$/i
-const exp6 = /^(?:https?:\/\/)?github\.com\/.+?\/.+?\/tags.*$/i
-
-/**
- * @param {any} body
- * @param {number} status
- * @param {Object<string, string>} headers
- */
-function makeRes(body, status = 200, headers = {}) {
-    headers['access-control-allow-origin'] = '*'
-    return new Response(body, { status, headers })
-}
-
-/**
- * @param {string} urlStr
- */
-function newUrl(urlStr) {
-    try {
-        return new URL(urlStr)
-    } catch (err) {
-        return null
-    }
-}
-
-addEventListener('fetch', (e) => {
-    const ret = fetchHandler(e).catch((err) =>
-        makeRes('cfworker error:\n' + err.stack, 502)
-    )
-    e.respondWith(ret)
-})
-
-function checkUrl(u) {
-    for (let i of [exp1, exp2, exp3, exp4, exp5, exp6]) {
-        if (u.search(i) === 0) {
-            return true
-        }
-    }
-    return false
-}
-
-/**
- * @param {FetchEvent} e
- */
-async function fetchHandler(e) {
-    const req = e.request
-    const urlStr = req.url
-    const urlObj = new URL(urlStr)
-    let path = urlObj.searchParams.get('q')
-    if (path) {
-        return Response.redirect('https://' + urlObj.host + PREFIX + path, 301)
-    }
-    // cfworker 会把路径中的 `//` 合并成 `/`
-    path = urlObj.href
-        .substr(urlObj.origin.length + PREFIX.length)
-        .replace(/^https?:\/+/, 'https://')
-    if (
-        path.search(exp1) === 0 ||
-        path.search(exp5) === 0 ||
-        path.search(exp6) === 0 ||
-        path.search(exp3) === 0 ||
-        path.search(exp4) === 0
-    ) {
-        return httpHandler(req, path)
-    } else if (path.search(exp2) === 0) {
-        if (Config.jsdelivr) {
-            const newUrl = path
-                .replace('/blob/', '@')
-                .replace(
-                    /^(?:https?:\/\/)?github\.com/,
-                    'https://cdn.jsdelivr.net/gh'
-                )
-            return Response.redirect(newUrl, 302)
-        } else {
-            path = path.replace('/blob/', '/raw/')
-            return httpHandler(req, path)
-        }
-    } else if (path.search(exp4) === 0) {
-        const newUrl = path
-            .replace(/(?<=com\/.+?\/.+?)\/(.+?\/)/, '@$1')
-            .replace(
-                /^(?:https?:\/\/)?raw\.(?:githubusercontent|github)\.com/,
-                'https://cdn.jsdelivr.net/gh'
-            )
-        return Response.redirect(newUrl, 302)
-    } else {
-        return fetch(ASSET_URL + path)
-    }
-}
-
-/**
- * @param {Request} req
- * @param {string} pathname
- */
-function httpHandler(req, pathname) {
-    const reqHdrRaw = req.headers
-
-    // preflight
-    if (
-        req.method === 'OPTIONS' &&
-        reqHdrRaw.has('access-control-request-headers')
-    ) {
-        return new Response(null, PREFLIGHT_INIT)
+     // 验证 URL 是否合法
+    if (!url || !url.pathname.includes('PakePlus')) {
+        return new Response('Invalid PakePlus release URL', { status: 400 })
     }
 
-    const reqHdrNew = new Headers(reqHdrRaw)
-
-    let urlStr = pathname
-    let flag = !Boolean(whiteList.length)
-    for (let i of whiteList) {
-        if (urlStr.includes(i)) {
-            flag = true
-            break
-        }
+    // 匹配 GitHub 资源路径
+    if (url.pathname.startsWith('/gh/') || url.pathname.startsWith('/github/')) {
+      // 构造新的 GitHub URL
+      let newUrl = new URL(url.pathname.replace(/^\/gh\/|^\/github\//, ''), `https://${GITHUB_HOST}`)
+      
+      // 处理 raw.githubusercontent.com 的请求
+      if (url.pathname.includes('/raw/')) {
+        newUrl = new URL(url.pathname.replace(/^\/gh\/|^\/github\//, ''), `https://${GITHUB_RAW_HOST}`)
+      }
+      
+      // 处理 user content 的请求
+      if (url.hostname.includes(GITHUB_USER_CONTENT_HOST)) {
+        newUrl = new URL(url.pathname, `https://${GITHUB_USER_CONTENT_HOST}`)
+      }
+      
+      // 复制原始请求的 headers
+      const headers = new Headers(request.headers)
+      
+      // 修改必要的 headers
+      headers.set('Host', newUrl.hostname)
+      headers.delete('Referer')
+      
+      // 发起代理请求
+      const response = await fetch(newUrl.toString(), {
+        method: request.method,
+        headers: headers,
+        body: request.body
+      })
+      
+      // 复制 GitHub 的响应 headers
+      const newHeaders = new Headers(response.headers)
+      
+      // 设置 CORS 头（可选）
+      newHeaders.set('Access-Control-Allow-Origin', '*')
+      
+      // 缓存设置（建议缓存 GitHub 资源）
+      newHeaders.set('Cache-Control', 'public, max-age=14400') // 4小时缓存
+      
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: newHeaders
+      })
     }
-    if (!flag) {
-        return new Response('blocked', { status: 403 })
-    }
-    if (urlStr.search(/^https?:\/\//) !== 0) {
-        urlStr = 'https://' + urlStr
-    }
-    const urlObj = newUrl(urlStr)
+    
+    // 如果不是 GitHub 资源请求，返回默认响应
+    return new Response('Not a GitHub resource request', { status: 404 })
+  }
 
-    /** @type {RequestInit} */
-    const reqInit = {
-        method: req.method,
-        headers: reqHdrNew,
-        redirect: 'manual',
-        body: req.body,
-    }
-    return proxy(urlObj, reqInit)
-}
 
-/**
- *
- * @param {URL} urlObj
- * @param {RequestInit} reqInit
- */
-async function proxy(urlObj, reqInit) {
-    const res = await fetch(urlObj.href, reqInit)
-    const resHdrOld = res.headers
-    const resHdrNew = new Headers(resHdrOld)
 
-    const status = res.status
+// 原始链接
+// https://github.com/Aniooy/PakePlus/releases/download/ChatGPT/ChatGPT_0.0.1_x64-setup.exe
 
-    if (resHdrNew.has('location')) {
-        let _location = resHdrNew.get('location')
-        if (checkUrl(_location)) resHdrNew.set('location', PREFIX + _location)
-        else {
-            reqInit.redirect = 'follow'
-            return proxy(newUrl(_location), reqInit)
-        }
-    }
-    resHdrNew.set('access-control-expose-headers', '*')
-    resHdrNew.set('access-control-allow-origin', '*')
-
-    resHdrNew.delete('content-security-policy')
-    resHdrNew.delete('content-security-policy-report-only')
-    resHdrNew.delete('clear-site-data')
-
-    return new Response(res.body, {
-        status,
-        headers: resHdrNew,
-    })
-}
+// 加速链接
+// https://github.pakeplus.com/gh/Aniooy/PakePlus/releases/download/ChatGPT/ChatGPT_0.0.1_x64-setup.exe
