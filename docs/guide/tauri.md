@@ -64,7 +64,7 @@ Tauri是否应在应用启动时创建此窗口。<br>
 启用通常称为浏览器开发者工具的网页检查器。默认启用。<br>
 此API在调试版本中有效，但在发布版本中需要devtools功能标志才能启用。</p>
 <p class="has-line-data" data-line-start="57" data-line-end="61">dragDropEnabled: boolean<br>
-网页视图上是否启用拖放。默认启用。<br>
+网页视图上是否启用拖放。默认启用。如果想要网页元素可以拖拽，请将其关闭<br>
 在Windows上禁用此功能才能在前端使用HTML5拖放。<br>
 默认值：true</p>
 <p class="has-line-data" data-line-start="62" data-line-end="65">focus: boolean<br>
