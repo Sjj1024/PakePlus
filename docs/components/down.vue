@@ -23,16 +23,25 @@
             <div class="rightContent">
                 <h1 class="title">MacOS</h1>
                 <div class="item">
-                    <a :href="proxyGithub(macArm.browser_download_url)"> ARM(M芯片)版本 </a>
+                    <a :href="proxyGithub(macArm.browser_download_url)">
+                        ARM(M芯片)版本
+                    </a>
                 </div>
                 <div class="item">
-                    <a :href="proxyGithub(macX64.browser_download_url)"> Intel芯片 版本 </a>
+                    <a :href="proxyGithub(macX64.browser_download_url)">
+                        Intel芯片 版本
+                    </a>
                 </div>
             </div>
         </div>
         <div class="platform windows">
             <div class="leftIcon">
-                <svg
+                <img
+                    src="../static/imgs/windowslogo.png"
+                    alt="windows"
+                    class="winLogo"
+                />
+                <!-- <svg
                     t="1742708953461"
                     class="icon"
                     viewBox="0 0 1024 1024"
@@ -48,12 +57,14 @@
                         fill-opacity=".85"
                         p-id="1665"
                     ></path>
-                </svg>
+                </svg> -->
             </div>
             <div class="rightContent">
                 <h1 class="title">Windows</h1>
                 <div class="item">
-                    <a :href="proxyGithub(windowsX64.browser_download_url)"> X64 版本 </a>
+                    <a :href="proxyGithub(windowsX64.browser_download_url)">
+                        X64 版本
+                    </a>
                 </div>
                 <div class="item">
                     <a :href="proxyGithub(windowsArm64.browser_download_url)">
@@ -64,7 +75,12 @@
         </div>
         <div class="platform linux">
             <div class="leftIcon">
-                <svg
+                <img
+                    src="../static/imgs/linuxlogo.png"
+                    alt="linux"
+                    class="linuxLogo"
+                />
+                <!-- <svg
                     t="1742708821867"
                     class="icon"
                     viewBox="0 0 1024 1024"
@@ -79,15 +95,19 @@
                         fill="#2C2C2C"
                         p-id="1635"
                     ></path>
-                </svg>
+                </svg> -->
             </div>
             <div class="rightContent">
                 <h1 class="title">Linux</h1>
                 <div class="item">
-                    <a :href="proxyGithub(linuxDeb.browser_download_url)"> deb 版本 </a>
+                    <a :href="proxyGithub(linuxDeb.browser_download_url)">
+                        deb 版本
+                    </a>
                 </div>
                 <div class="item">
-                    <a :href="proxyGithub(linuxRpm.browser_download_url)"> rpm 版本 </a>
+                    <a :href="proxyGithub(linuxRpm.browser_download_url)">
+                        rpm 版本
+                    </a>
                 </div>
                 <div class="item">
                     <a :href="proxyGithub(linuxImage.browser_download_url)">
@@ -341,7 +361,6 @@ const macArm = lastRelease.assets.find((asset) =>
     asset.name.includes('aarch64.dmg')
 )
 
-
 const macX64 = lastRelease.assets.find((asset) =>
     asset.name.includes('x64.dmg')
 )
@@ -366,7 +385,6 @@ const linuxImage = lastRelease.assets.find((asset) =>
     asset.name.includes('amd64.AppImage')
 )
 
-
 // 替换github.com为github.pakeplus.com
 const proxyGithub = (url) => {
     const newURL = url.replace('github.com', 'github.pakeplus.com/gh')
@@ -390,57 +408,69 @@ const proxyGithub = (url) => {
     }
 
     .mac {
-        background: linear-gradient(
-            135deg,
-            rgba(171, 200, 250, 0.8),
-            rgba(230, 210, 255, 0.6)
-        );
+        // background: linear-gradient(
+        //     135deg,
+        //     rgba(144, 169, 213, 0.8),
+        //     rgba(230, 210, 255, 0.6)
+        // );
         // filter: blur(1px);
+
+        box-shadow: 0 0 10px rgba(200, 220, 255, 0.8),
+            0 0 20px rgba(230, 210, 255, 0.6);
 
         &:hover {
             // box-shadow: var(--vp-c-text-1) 0px 0px 10px;
-            box-shadow: 0 0 10px rgba(200, 220, 255, 0.8),
-                0 0 20px rgba(230, 210, 255, 0.6);
+            box-shadow: 0 0 15px rgba(200, 220, 255, 0.8),
+                0 0 25px rgba(230, 210, 255, 0.6);
         }
     }
 
     .windows {
-        background: linear-gradient(
-            45deg,
-            rgba(0, 120, 215, 0.6),
-            rgba(105, 0, 255, 0.3)
-        );
+        // background: linear-gradient(
+        //     45deg,
+        //     rgba(0, 120, 215, 0.6),
+        //     rgba(105, 0, 255, 0.3)
+        // );
+
+        box-shadow: 0 0 10px rgba(0, 120, 215, 0.3),
+            0 0 20px rgba(105, 0, 255, 0.3);
 
         &:hover {
             // box-shadow: var(--vp-c-text-1) 0px 0px 10px;
-            box-shadow: 0 0 10px rgba(0, 120, 215, 0.3),
-                0 0 20px rgba(105, 0, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 120, 215, 0.3),
+                0 0 30px rgba(105, 0, 255, 0.3);
         }
     }
 
     .linux {
-        background: linear-gradient(
-            45deg,
-            rgba(255, 140, 0, 0.3),
-            rgba(0, 200, 80, 0.2)
-        );
+        // background: linear-gradient(
+        //     45deg,
+        //     rgba(255, 140, 0, 0.3),
+        //     rgba(0, 200, 80, 0.2)
+        // );
+
+        box-shadow: 0 0 10px rgba(255, 140, 0, 0.3),
+            0 0 20px rgba(0, 200, 80, 0.3);
         &:hover {
             // box-shadow: var(--vp-c-text-1) 0px 0px 10px;
-            box-shadow: 0 0 10px rgba(255, 140, 0, 0.2),
-                0 0 20px rgba(0, 200, 80, 0.1);
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.3),
+                0 0 30px rgba(0, 200, 80, 0.3);
         }
     }
 
     .web {
-        background: linear-gradient(
-            135deg,
-            rgba(100, 120, 255, 0.3),
-            rgba(0, 200, 220, 0.3)
-        );
+        // background: linear-gradient(
+        //     135deg,
+        //     rgba(100, 120, 255, 0.3),
+        //     rgba(0, 200, 220, 0.3)
+        // );
+
+        box-shadow: 0 0 10px rgba(100, 120, 255, 0.3),
+            0 0 20px rgba(0, 200, 220, 0.3);
         &:hover {
             // box-shadow: var(--vp-c-text-1) 0px 0px 10px;
-            box-shadow: 0 0 10px rgba(100, 120, 255, 0.2),
-                0 0 20px rgba(0, 200, 220, 0.2);
+            box-shadow: 0 0 20px rgba(100, 120, 255, 0.3),
+                0 0 30px rgba(0, 200, 220, 0.3);
         }
     }
 
@@ -470,6 +500,16 @@ const proxyGithub = (url) => {
                 path {
                     fill: var(--vp-c-text-1);
                 }
+            }
+
+            .winLogo {
+                width: 80%;
+                height: 80%;
+            }
+
+            .linuxLogo {
+                width: 80%;
+                height: 80%;
             }
         }
 
