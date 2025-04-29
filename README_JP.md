@@ -9,6 +9,14 @@
 <h1 align="center">PakePlus</h1>  
 <p align="center"><strong>9分で任意のウェブページをデスクトップアプリやモバイルアプリに変換。シンプルで使いやすい。</strong></p>
 
+<p align="center">
+    <a href="https://github.com/Sjj1024/PakePlus/releases"><img src="https://img.shields.io/github/v/release/Sjj1024/PakePlus?style=for-the-badge&logo=github" alt="Release"></a>
+    <a href="https://github.com/Sjj1024/PakePlus/stargazers"><img src="https://img.shields.io/github/stars/Sjj1024/PakePlus?style=for-the-badge&logo=github" alt="Stars"></a>
+    <a href="https://github.com/Sjj1024/PakePlus/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/Sjj1024/PakePlus/build.yml?style=for-the-badge&logo=github" alt="Build"></a>
+    <a href="https://github.com/Sjj1024/PakePlus/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Sjj1024/PakePlus?style=for-the-badge&logo=github" alt="License"></a>
+    <a href="https://hellogithub.com/repository/d148f8fac78b45fe9b94c82757c3f86b" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=d148f8fac78b45fe9b94c82757c3f86b&claim_uid=LXfeQOxRDEmSUGC&theme=small" alt="Featured｜HelloGitHub" /></a>
+</p>
+
 <div align="left">PakePlus は Mac、Windows、および Linux に対応しており、Android と iOS も間もなくサポート予定です。ローカルに複雑な依存環境をインストールする必要はなく、Github トークンだけで利用できます。また、PakePlus 自体のサイズはわずか約5MBです。最新バージョンについては<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">リリースページ</a>をご確認ください。また、PakePlus Web 版も利用できます。<a href="URL_ADDRESS また、PakePlus Web 版も利用できます。<a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>。
 <a href="#popular-packages">人気パッケージ</a>や<a href="#development">カスタム開発</a>については README をご覧ください。<a href="https://github.com/Sjj1024/PakePlus/discussions">ディスカッションエリア</a>でご意見をお待ちしています。</div>
 
