@@ -18,7 +18,7 @@
 </p>
 
 
-<div align="left">PakePlus 支持 Mac、Windows 和 Linux，很快也将支持 Android 和 iOS。无需在本地安装复杂的依赖环境，只需要一个Github Token就可以了，而且PakePlus本身也才仅仅5M左右小大，最新版本下载请看：<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">发布地址</a>。或者访问网页版: <a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>。 查看 README 以获取<a href="#popular-packages">热门包</a>和<a href="#development">自定义开发</a>信息。欢迎在<a href=https://github.com/Sjj1024/PakePlus/discussions>讨论区</a>分享你的建议。</div> 加我微信进微信交流群：lanxingme 。
+<div align="left">PakePlus 不仅支持 Mac、Windows 和 Linux，并且支持 Android 和 iOS。无需在本地安装任何依赖环境，只需要一个Github Token就可以了，而且PakePlus本身也才仅仅5M左右小大，最新版本下载请看：<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">发布地址</a>。或者访问网页版: <a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>。 查看 README 以获取<a href="#popular-packages">热门包</a>和<a href="#development">自定义开发</a>信息。欢迎在<a href=https://github.com/Sjj1024/PakePlus/discussions>讨论区</a>分享你的建议。</div> 加我微信进微信交流群：lanxingme 。
 
 https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
@@ -191,3 +191,8 @@ pnpm run build
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/mywx.png" width=300/>
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/wxcode.png" width=300/>
  </p>
+
+
+ ## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Sjj1024/PakePlus&type=Date)](https://www.star-history.com/#Sjj1024/PakePlus&Date)
