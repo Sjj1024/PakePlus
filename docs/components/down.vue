@@ -117,7 +117,7 @@
             </div>
         </div>
         <div class="platform web">
-            <div class="leftIcon">
+            <div class="leftIcon cloud-icon">
                 <svg
                     t="1742721374498"
                     class="icon"
@@ -392,7 +392,6 @@ const proxyGithub = (url) => {
     return newURL
 }
 
-
 const isMobile = () => {
     return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
         navigator.userAgent.toLowerCase()
@@ -519,6 +518,40 @@ const isMobile = () => {
                 height: 80%;
             }
         }
+
+        .cloud-icon {
+            position: relative;
+        }
+
+        .cloud-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .cloud-icon path {
+            fill: #f0f0f0; /* 基础颜色 */
+        }
+
+        /* 使用伪元素叠加渐变 */
+        .cloud-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at 30% 30%,
+                rgba(255, 255, 255, 0.9) 0%,
+                rgba(240, 240, 240, 0.7) 50%,
+                rgba(220, 220, 220, 0.5) 100%
+            );
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1565 1024"><path d="M1206.51 299.33c-27.36 0-53.87 3.35-79.47 9.12C1078.55 130.79 916.43 0 723.4 0c-231.33 0-418.82 187.49-418.82 418.79 0 16.02 1.11 31.79 2.87 47.35-9.15-0.88-18.4-1.4-27.81-1.4C125.22 464.74 0 589.93 0 744.37s125.22 279.63 279.63 279.63c134.93 0 782.15 0 926.85 0 197.95 0 358.41-168.34 358.41-366.29 0-197.95-160.46-358.41-358.41-358.41z"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1565 1024"><path d="M1206.51 299.33c-27.36 0-53.87 3.35-79.47 9.12C1078.55 130.79 916.43 0 723.4 0c-231.33 0-418.82 187.49-418.82 418.79 0 16.02 1.11 31.79 2.87 47.35-9.15-0.88-18.4-1.4-27.81-1.4C125.22 464.74 0 589.93 0 744.37s125.22 279.63 279.63 279.63c134.93 0 782.15 0 926.85 0 197.95 0 358.41-168.34 358.41-366.29 0-197.95-160.46-358.41-358.41-358.41z"/></svg>');
+            mask-repeat: no-repeat;
+            mask-size: 100% 100%;
+        }
+
 
         .rightContent {
             width: 90%;
