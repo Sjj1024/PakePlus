@@ -23,10 +23,198 @@ export default defineConfig({
         root: {
             label: '简体中文',
             lang: 'zh',
+            themeConfig: {
+                // 基础配置
+                logo: {
+                    src: './app.svg',
+                    alt: 'PakePlus',
+                },
+                // 导航栏
+                nav: [
+                    { text: '首页', link: '/' },
+                    { text: '下载', link: '/download' },
+                    {
+                        text: '使用指南',
+                        link: '/guide/',
+                        activeMatch: '/guide/',
+                    },
+                    {
+                        text: '常见问题',
+                        link: '/question/',
+                        activeMatch: '/question/',
+                    },
+                    {
+                        text: '社区交流',
+                        link: '/exchange/',
+                        activeMatch: '/exchange/',
+                    },
+                    {
+                        text: '赞助我们',
+                        link: '/sponsor/',
+                        activeMatch: '/sponsor/',
+                    },
+                ],
+                // 侧边栏
+                sidebar: {
+                    '/guide/': [
+                        {
+                            text: '新手上路',
+                            collapsed: false,
+                            items: [
+                                { text: '简介', link: '/guide/' },
+                                { text: '下载软件', link: '/guide/down' },
+                                { text: '获取Token', link: '/guide/token' },
+                                { text: '创建项目', link: '/guide/creat' },
+                                { text: '简单配置', link: '/guide/config' },
+                                { text: 'APP配置', link: '/guide/phone' },
+                                { text: '编译发布', link: '/guide/build' },
+                            ],
+                        },
+                        {
+                            text: '进阶配置',
+                            collapsed: false,
+                            items: [{ text: '进阶配置', link: '/guide/tauri' }],
+                        },
+                        {
+                            text: '高级玩法',
+                            collapsed: false,
+                            items: [
+                                { text: '高级玩法', link: '/guide/superman' },
+                            ],
+                        },
+                    ],
+                    '/question/': [
+                        { text: '应用已损坏', link: '/question/' },
+                        { text: 'Token无效', link: '/question/invalid' },
+                        { text: '项目已存在', link: '/question/exist' },
+                        { text: '编译失败', link: '/question/build' },
+                        { text: '打包html项目', link: '/question/html' },
+                        { text: '打包Vue等项目', link: '/question/vue' },
+                        { text: 'ipa/apk安装', link: '/question/phone' },
+                        { text: '窗口跳转', link: '/question/jump' },
+                        { text: '其他问题', link: '/question/other' },
+                        { text: 'Issue', link: '/question/issue' },
+                    ],
+                    '/exchange/': [
+                        { text: '加入群聊', link: '/exchange/' },
+                        { text: 'Github讨论', link: '/exchange/github' },
+                    ],
+                    '/sponsor/': [
+                        { text: '赞助我们', link: '/sponsor/' },
+                        { text: '赞助名单', link: '/sponsor/list' },
+                    ],
+                },
+                // 社交链接
+                socialLinks: [
+                    {
+                        icon: 'github',
+                        link: 'https://github.com/Sjj1024/PakePlus',
+                    },
+                ],
+                // footer
+                footer: {
+                    message: 'Released under the MIT License.',
+                    copyright: 'Copyright © 2019-present 1024小神',
+                },
+            },
         },
         en: {
             label: 'English',
             lang: 'en',
+            themeConfig: {
+                // 基础配置
+                logo: {
+                    src: '../app.svg',
+                    alt: 'PakePlus',
+                },
+                // 导航栏
+                nav: [
+                    { text: 'Home', link: '/en/' },
+                    { text: 'Download', link: '/download' },
+                    {
+                        text: 'Guide',
+                        link: '/guide/',
+                        activeMatch: '/guide/',
+                    },
+                    {
+                        text: 'Question',
+                        link: '/question/',
+                        activeMatch: '/question/',
+                    },
+                    {
+                        text: 'Exchange',
+                        link: '/exchange/',
+                        activeMatch: '/exchange/',
+                    },
+                    {
+                        text: 'Sponsor',
+                        link: '/sponsor/',
+                        activeMatch: '/sponsor/',
+                    },
+                ],
+                // 侧边栏
+                sidebar: {
+                    '/guide/': [
+                        {
+                            text: '新手上路',
+                            collapsed: false,
+                            items: [
+                                { text: '简介', link: '/guide/' },
+                                { text: '下载软件', link: '/guide/down' },
+                                { text: '获取Token', link: '/guide/token' },
+                                { text: '创建项目', link: '/guide/creat' },
+                                { text: '简单配置', link: '/guide/config' },
+                                { text: 'APP配置', link: '/guide/phone' },
+                                { text: '编译发布', link: '/guide/build' },
+                            ],
+                        },
+                        {
+                            text: '进阶配置',
+                            collapsed: false,
+                            items: [{ text: '进阶配置', link: '/guide/tauri' }],
+                        },
+                        {
+                            text: '高级玩法',
+                            collapsed: false,
+                            items: [
+                                { text: '高级玩法', link: '/guide/superman' },
+                            ],
+                        },
+                    ],
+                    '/question/': [
+                        { text: '应用已损坏', link: '/question/' },
+                        { text: 'Token无效', link: '/question/invalid' },
+                        { text: '项目已存在', link: '/question/exist' },
+                        { text: '编译失败', link: '/question/build' },
+                        { text: '打包html项目', link: '/question/html' },
+                        { text: '打包Vue等项目', link: '/question/vue' },
+                        { text: 'ipa/apk安装', link: '/question/phone' },
+                        { text: '窗口跳转', link: '/question/jump' },
+                        { text: '其他问题', link: '/question/other' },
+                        { text: 'Issue', link: '/question/issue' },
+                    ],
+                    '/exchange/': [
+                        { text: '加入群聊', link: '/exchange/' },
+                        { text: 'Github讨论', link: '/exchange/github' },
+                    ],
+                    '/sponsor/': [
+                        { text: '赞助我们', link: '/sponsor/' },
+                        { text: '赞助名单', link: '/sponsor/list' },
+                    ],
+                },
+                // 社交链接
+                socialLinks: [
+                    {
+                        icon: 'github',
+                        link: 'https://github.com/Sjj1024/PakePlus',
+                    },
+                ],
+                // footer
+                footer: {
+                    message: 'Released under the MIT License.',
+                    copyright: 'Copyright © 2019-present 1024xiaoshen',
+                },
+            },
         },
     },
     head: [['link', { rel: 'icon', href: './app.svg' }]],
@@ -51,6 +239,22 @@ export default defineConfig({
                             },
                         },
                     },
+                    en: {
+                        translations: {
+                            button: {
+                                buttonText: 'Search',
+                                buttonAriaLabel: 'Search',
+                            },
+                            modal: {
+                                noResultsText: 'No results found',
+                                resetButtonTitle: 'Reset',
+                                footer: {
+                                    selectText: 'Select',
+                                    navigateText: 'Switch',
+                                },
+                            },
+                        },
+                    },
                 },
             },
         },
@@ -58,72 +262,6 @@ export default defineConfig({
         logo: {
             src: './app.svg',
             alt: 'PakePlus',
-        },
-        // 导航栏
-        nav: [
-            { text: '首页', link: '/' },
-            { text: '下载', link: '/download' },
-            { text: '使用指南', link: '/guide/', activeMatch: '/guide/' },
-            { text: '常见问题', link: '/question/', activeMatch: '/question/' },
-            { text: '社区交流', link: '/exchange/', activeMatch: '/exchange/' },
-            { text: '赞助我们', link: '/sponsor/', activeMatch: '/sponsor/' },
-        ],
-        // 侧边栏
-        sidebar: {
-            '/guide/': [
-                {
-                    text: '新手上路',
-                    collapsed: false,
-                    items: [
-                        { text: '简介', link: '/guide/' },
-                        { text: '下载软件', link: '/guide/down' },
-                        { text: '获取Token', link: '/guide/token' },
-                        { text: '创建项目', link: '/guide/creat' },
-                        { text: '简单配置', link: '/guide/config' },
-                        { text: 'APP配置', link: '/guide/phone' },
-                        { text: '编译发布', link: '/guide/build' },
-                    ],
-                },
-                {
-                    text: '进阶配置',
-                    collapsed: false,
-                    items: [{ text: '进阶配置', link: '/guide/tauri' }],
-                },
-                {
-                    text: '高级玩法',
-                    collapsed: false,
-                    items: [{ text: '高级玩法', link: '/guide/superman' }],
-                },
-            ],
-            '/question/': [
-                { text: '应用已损坏', link: '/question/' },
-                { text: 'Token无效', link: '/question/invalid' },
-                { text: '项目已存在', link: '/question/exist' },
-                { text: '编译失败', link: '/question/build' },
-                { text: '打包html项目', link: '/question/html' },
-                { text: '打包Vue等项目', link: '/question/vue' },
-                { text: 'ipa/apk安装', link: '/question/phone' },
-                { text: '窗口跳转', link: '/question/jump' },
-                { text: '其他问题', link: '/question/other' },
-                { text: 'Issue', link: '/question/issue' },
-            ],
-            '/exchange/': [
-                { text: '加入群聊', link: '/exchange/' },
-                { text: 'Github讨论', link: '/exchange/github' },
-            ],
-            '/sponsor/': [
-                { text: '赞助我们', link: '/sponsor/' },
-                { text: '赞助名单', link: '/sponsor/list' },
-            ],
-        },
-        // 社交链接
-        socialLinks: [
-            { icon: 'github', link: 'https://github.com/Sjj1024/PakePlus' },
-        ],
-        // footer
-        footer: {
-            message: 'Released under the MIT License.',
-            copyright: 'Copyright © 2019-present 1024小神',
         },
     },
 })
