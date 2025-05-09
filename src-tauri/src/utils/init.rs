@@ -4,6 +4,8 @@ use tauri_plugin_store::StoreExt;
 
 // handle something when start app
 pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
+    // 本地存储
+    let store = app.store("app_data.json").unwrap();
     let app_handle = app.handle();
     // 示例 JSON 字符串
     let window_json = r#"{"url": "index.html"}"#;
@@ -17,12 +19,8 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
 
     // 是否记录窗口位置和大小
     if true {
-        // 获取记录窗口大小
-        let store = app.store("app_data.json").unwrap();
-
         // 获取记录窗口全屏
         let window_fullscreen: Option<serde_json::Value> = store.get("window_fullscreen");
-
         // 获取记录窗口大小
         let window_size: Option<serde_json::Value> = store.get("window_size");
         let mut width = 800.0;
