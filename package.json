@@ -50,6 +50,7 @@
     "devDependencies": {
         "@tauri-apps/cli": "^2",
         "@types/node": "^22.5.4",
+        "@vite-pwa/vitepress": "^1.0.0",
         "@vitejs/plugin-vue": "^5.2.1",
         "fs-extra": "^11.3.0",
         "png2icons": "^2.0.1",

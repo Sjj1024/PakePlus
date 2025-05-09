@@ -18,6 +18,7 @@ export default defineConfig({
                 },
             },
         },
+        plugins: [],
     },
     locales: {
         root: {
@@ -130,76 +131,76 @@ export default defineConfig({
                 // 导航栏
                 nav: [
                     { text: 'Home', link: '/en/' },
-                    { text: 'Download', link: '/download' },
+                    { text: 'Download', link: '/en/download' },
                     {
                         text: 'Guide',
-                        link: '/guide/',
-                        activeMatch: '/guide/',
+                        link: '/en/guide/',
+                        activeMatch: '/en/guide/',
                     },
                     {
                         text: 'Question',
-                        link: '/question/',
-                        activeMatch: '/question/',
+                        link: '/en/question/',
+                        activeMatch: '/en/question/',
                     },
                     {
                         text: 'Exchange',
-                        link: '/exchange/',
-                        activeMatch: '/exchange/',
+                        link: '/en/exchange/',
+                        activeMatch: '/en/exchange/',
                     },
                     {
                         text: 'Sponsor',
-                        link: '/sponsor/',
-                        activeMatch: '/sponsor/',
+                        link: '/en/sponsor/',
+                        activeMatch: '/en/sponsor/',
                     },
                 ],
                 // 侧边栏
                 sidebar: {
-                    '/guide/': [
+                    '/en/guide/': [
                         {
-                            text: '新手上路',
+                            text: 'Guide',
                             collapsed: false,
                             items: [
-                                { text: '简介', link: '/guide/' },
-                                { text: '下载软件', link: '/guide/down' },
-                                { text: '获取Token', link: '/guide/token' },
-                                { text: '创建项目', link: '/guide/creat' },
-                                { text: '简单配置', link: '/guide/config' },
-                                { text: 'APP配置', link: '/guide/phone' },
-                                { text: '编译发布', link: '/guide/build' },
+                                { text: 'Introduction', link: '/en/guide/' },
+                                { text: 'Download', link: '/en/guide/down' },
+                                { text: 'Get Token', link: '/en/guide/token' },
+                                { text: 'Create Project', link: '/en/guide/creat' },
+                                { text: 'Configuration', link: '/en/guide/config' },
+                                { text: 'APP Configuration', link: '/en/guide/phone' },
+                                { text: 'Build and Release', link: '/en/guide/build' },
                             ],
                         },
                         {
-                            text: '进阶配置',
+                            text: 'Advanced Configuration',
                             collapsed: false,
-                            items: [{ text: '进阶配置', link: '/guide/tauri' }],
+                            items: [{ text: 'Advanced Configuration', link: '/en/guide/tauri' }],
                         },
                         {
-                            text: '高级玩法',
+                            text: 'Advanced Play',
                             collapsed: false,
                             items: [
-                                { text: '高级玩法', link: '/guide/superman' },
+                                { text: 'Advanced Play', link: '/en/guide/superman' },
                             ],
                         },
                     ],
-                    '/question/': [
-                        { text: '应用已损坏', link: '/question/' },
-                        { text: 'Token无效', link: '/question/invalid' },
-                        { text: '项目已存在', link: '/question/exist' },
-                        { text: '编译失败', link: '/question/build' },
-                        { text: '打包html项目', link: '/question/html' },
-                        { text: '打包Vue等项目', link: '/question/vue' },
-                        { text: 'ipa/apk安装', link: '/question/phone' },
-                        { text: '窗口跳转', link: '/question/jump' },
-                        { text: '其他问题', link: '/question/other' },
-                        { text: 'Issue', link: '/question/issue' },
+                    '/en/question/': [
+                        { text: 'Application Damaged', link: '/en/question/' },
+                        { text: 'Token Invalid', link: '/en/question/invalid' },
+                        { text: 'Project Exists', link: '/en/question/exist' },
+                        { text: 'Compilation Failed', link: '/en/question/build' },
+                        { text: 'Packaging HTML Project', link: '/en/question/html' },
+                        { text: 'Packaging Vue Project', link: '/en/question/vue' },
+                        { text: 'ipa/apk Installation', link: '/en/question/phone' },
+                        { text: 'Window Jump', link: '/en/question/jump' },
+                        { text: 'Other Issues', link: '/en/question/other' },
+                        { text: 'Issue', link: '/en/question/issue' },
                     ],
-                    '/exchange/': [
-                        { text: '加入群聊', link: '/exchange/' },
-                        { text: 'Github讨论', link: '/exchange/github' },
+                    '/en/exchange/': [
+                        { text: 'Join Group Chat', link: '/en/exchange/' },
+                        { text: 'Github Discussion', link: '/en/exchange/github' },
                     ],
-                    '/sponsor/': [
-                        { text: '赞助我们', link: '/sponsor/' },
-                        { text: '赞助名单', link: '/sponsor/list' },
+                    '/en/sponsor/': [
+                        { text: 'Sponsor Us', link: '/en/sponsor/' },
+                        { text: 'Sponsor List', link: '/en/sponsor/list' },
                     ],
                 },
                 // 社交链接
