@@ -1543,12 +1543,13 @@ const getInitializationScript = () => {
 }
 
 const preview = async (resize: boolean) => {
+    let serverPort = 3030
     if (isTauri) {
         try {
-            const res = await invoke('start_server', {
+            serverPort = await invoke('start_server', {
                 path: store.currentProject.htmlPath,
             })
-            console.log('Server started successfully', res)
+            console.log('Server started successfully', serverPort)
         } catch (error) {
             console.error('Failed to start server:', error)
         }
@@ -1599,7 +1600,7 @@ const preview = async (resize: boolean) => {
                         userAgent:
                             'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
                         url: store.currentProject.isHtml
-                            ? 'http://127.0.0.1:3030/index.html'
+                            ? `http://127.0.0.1:${serverPort}/index.html`
                             : store.currentProject.url,
                     },
                     jsContent: initJsScript,

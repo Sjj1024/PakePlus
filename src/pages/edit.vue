@@ -1133,12 +1133,13 @@ const getInitializationScript = () => {
 
 const preview = async (resize: boolean) => {
     if (isTauri) {
+        let serverPort = 3030
         try {
             if (store.currentProject.isHtml && store.currentProject.htmlPath) {
-                const res = await invoke('start_server', {
+                serverPort = await invoke('start_server', {
                     path: store.currentProject.htmlPath,
                 })
-                console.log('Server started successfully', res)
+                console.log('Server started successfully', serverPort)
             }
         } catch (error) {
             console.error('Failed to start server:', error)
@@ -1186,7 +1187,7 @@ const preview = async (resize: boolean) => {
                         ...store.currentProject.more.windows,
                         label: 'PreView',
                         url: store.currentProject.isHtml
-                            ? 'http://127.0.0.1:3030/index.html'
+                            ? `http://127.0.0.1:${serverPort}/index.html`
                             : store.currentProject.url,
                     },
                     jsContent: initJsScript,

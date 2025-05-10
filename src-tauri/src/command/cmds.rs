@@ -1,3 +1,4 @@
+use crate::command::model::find_port;
 use crate::command::model::ServerState;
 use base64::prelude::*;
 use std::io::Read;
@@ -11,12 +12,14 @@ use warp::Filter;
 pub async fn start_server(
     state: tauri::State<'_, Arc<Mutex<ServerState>>>,
     path: String,
-) -> Result<(), String> {
+) -> Result<u16, String> {
     let mut state = state.lock().unwrap();
     if state.server_handle.is_some() {
         return Err("Server is already running".into());
     }
     let path_clone = path.clone();
+    let port = find_port().unwrap();
+    println!("port: {}", port);
     let server_handle = tokio::spawn(async move {
         let route = warp::fs::dir(path_clone)
             .map(|reply| {
@@ -30,10 +33,10 @@ pub async fn start_server(
             .map(|reply| warp::reply::with_header(reply, "Surrogate-Control", "no-store"))
             .map(|reply| warp::reply::with_header(reply, "Pragma", "no-cache"))
             .map(|reply| warp::reply::with_header(reply, "Expires", "0"));
-        warp::serve(route).run(([127, 0, 0, 1], 3030)).await;
+        warp::serve(route).run(([127, 0, 0, 1], port)).await;
     });
     state.server_handle = Some(server_handle);
-    Ok(())
+    Ok(port)
 }
 
 #[tauri::command]

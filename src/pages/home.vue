@@ -1237,6 +1237,7 @@ onMounted(() => {
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
+                        font-size: 18px;
                         font-weight: bold;
                     }
 
