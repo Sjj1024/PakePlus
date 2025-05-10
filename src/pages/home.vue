@@ -676,6 +676,13 @@ const creatProject = async () => {
         branchDialog.value = false
         return
     }
+    if (branchName.value === 'ppdev') {
+        router.push('/tauriapi')
+        branchName.value = ''
+        creatLoading.value = false
+        branchDialog.value = false
+        return
+    }
     // token.value && (await uploadBuildYml())
     if (branchName.value && /^[A-Za-z][A-Za-z0-9]*$/.test(branchName.value)) {
         const customJs = await getCustomJsFetch()
