@@ -207,7 +207,6 @@ onMounted(async () => {
 }
 
 .historyBox {
-    // width: 100%;
     padding: 10px 20px;
 
     .homeHeader {

@@ -114,6 +114,7 @@ export default {
         '虽然它叫PakePlus，但是它和Pake没有关系哦，就像JavaScript和Java一样。开源免费，Web网页打包跨平台APP，仅仅只需要一个GithubToken，就可以将你的网页打包成一个独立可执行程序，目前支持Windows,macOS, Linux系统，未来还会支持Android,iOS等移动端。有问题可以加我微信：lanxingme，备注：PakePlus，或者给我发送邮件',
     followme: '關注小神',
     moreConfig: '더 많은 설정',
+    superpower: '능력',
     scriptFile: '스크립트 파일',
     selectJsScriptFile: 'js 스크립트 파일을 선택하세요',
     customize: '사용자 지정',

@@ -108,6 +108,7 @@ export default {
     copySuccess: '複製成功',
     delSuccess: '刪除成功',
     moreConfig: '更多配置',
+    superpower: '能力演示',
     scriptFile: '腳本文件',
     selectJsScriptFile: '請選擇js腳本文件',
     customize: '自定義',

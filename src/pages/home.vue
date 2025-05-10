@@ -1023,8 +1023,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .homeBox {
-    width: 100%;
-    height: 100%;
     padding: 10px 20px;
     position: relative;
     background-color: var(--bg-color);
@@ -1176,10 +1174,8 @@ onMounted(() => {
 
         .project {
             height: 100%;
-            // min-height: 200px;
             border-radius: 10px;
-            padding: 10px 10px 0 10px;
-            // margin-bottom: 10px;
+            padding: 0px 10px 0 10px;
             background-color: var(--project-bg);
             overflow: hidden;
             transition: box-shadow 0.2s, transform 0.2s;
@@ -1205,7 +1201,7 @@ onMounted(() => {
             .appIcon {
                 z-index: 1;
                 width: 100%;
-                // height: 66%;
+                margin-top: 10px;
                 object-fit: cover;
                 border-radius: 20px;
                 background-color: var(--project-bg);

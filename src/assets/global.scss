@@ -15,10 +15,10 @@ body {
 #app,
 .container {
     width: 100%;
-    // height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     background-color: var(--bg-color);
     transition: background-color 0.5s, color 0.5s;
 }

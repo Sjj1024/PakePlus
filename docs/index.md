@@ -62,6 +62,9 @@ features:
 
 <script setup>
 import { data } from './static/js/buildtime.data.ts'
+
+
+alert("由于我的github账号被封，所以PakePLus暂时无法使用，正在和github沟通，有最新消息会第一时间在群里通知大家，可以加我微信：lanxingme 拉你进群，感谢你的关注和支持！")
 </script>
 
 <style module>

@@ -62,6 +62,9 @@
                             <el-dropdown-item @click="showConfigDialog">
                                 {{ t('moreConfig') }}
                             </el-dropdown-item>
+                            <el-dropdown-item @click="showSuperpower">
+                                {{ t('superpower') }}
+                            </el-dropdown-item>
                             <el-dropdown-item
                                 :disabled="!store.isRelease"
                                 @click="toHistory"
@@ -681,6 +684,11 @@ const changeUrl = (value: string) => {
 const showConfigDialog = () => {
     configDialogVisible.value = true
     tauriConfigRef.value?.updateCode()
+}
+
+// show superpower
+const showSuperpower = () => {
+    router.push('/tauriapi')
 }
 
 // close tauri config dialog
@@ -1650,8 +1658,6 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .editBox {
-    width: 100%;
-    height: 100%;
     padding: 10px 20px;
 
     .configHeader {
@@ -1682,7 +1688,6 @@ onMounted(async () => {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 10px;
         position: relative;
 
         .headerTitle {
@@ -1854,6 +1859,10 @@ onMounted(async () => {
                             top: -6px;
                             right: -6px;
                             cursor: pointer;
+
+                            &:hover {
+                                color: #f56c6c;
+                            }
                         }
                     }
 

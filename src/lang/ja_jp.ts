@@ -111,6 +111,7 @@ export default {
     copySuccess: 'コピー成功',
     delSuccess: '削除成功',
     moreConfig: 'より多くの設定',
+    superpower: '能力',
     scriptFile: 'スクリプトファイル',
     selectJsScriptFile: 'jsスクリプトファイルを選択してください',
     customize: 'カスタマイズ',
