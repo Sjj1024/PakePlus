@@ -48,3 +48,7 @@ body {
     fill: currentColor;
     overflow: hidden;
 }
+
+.el-menu-item:active {
+    transform: scale(0.95);
+}

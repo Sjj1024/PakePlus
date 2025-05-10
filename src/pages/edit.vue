@@ -62,9 +62,6 @@
                             <el-dropdown-item @click="showConfigDialog">
                                 {{ t('moreConfig') }}
                             </el-dropdown-item>
-                            <el-dropdown-item @click="showSuperpower">
-                                {{ t('superpower') }}
-                            </el-dropdown-item>
                             <el-dropdown-item
                                 :disabled="!store.isRelease"
                                 @click="toHistory"
@@ -73,6 +70,9 @@
                             </el-dropdown-item>
                             <el-dropdown-item @click="deleteProject">
                                 {{ t('delProject') }}
+                            </el-dropdown-item>
+                            <el-dropdown-item @click="showSuperpower">
+                                {{ t('superpower') }}
                             </el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
