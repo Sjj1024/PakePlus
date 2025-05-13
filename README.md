@@ -13,6 +13,7 @@ style="margin: 0 10px;" >简体中文</a>
 <p align="center">
     <a href="https://github.com/Sjj1024/PakePlus/releases"><img src="https://img.shields.io/github/v/release/Sjj1024/PakePlus?style=flat-square&logo=github" alt="Release"></a>
     <a href="https://github.com/Sjj1024/PakePlus/stargazers"><img src="https://img.shields.io/github/stars/Sjj1024/PakePlus?style=flat-square&logo=github" alt="Stars"></a>
+    <a href="https://github.com/Sjj1024/PakePlus/stargazers"><img src="https://img.shields.io/github/forks/Sjj1024/PakePlus?style=flat-square&logo=github" alt="Forks"></a>
     <a href="https://github.com/Sjj1024/PakePlus/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/Sjj1024/PakePlus/build.yml?style=flat-square&logo=github" alt="Build"></a>
     <a href="https://github.com/Sjj1024/PakePlus/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Sjj1024/PakePlus?style=flat-square&logo=github" alt="License"></a>
     <a href="https://hellogithub.com/repository/d148f8fac78b45fe9b94c82757c3f86b" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=d148f8fac78b45fe9b94c82757c3f86b&claim_uid=LXfeQOxRDEmSUGC&theme=small" alt="Featured｜HelloGitHub"></a>
@@ -182,7 +183,6 @@ pnpm run build
  <p align="center" style="display:flex; justify-content: flex-start;">
     <img src="https://files.pakeplus.com/sponsor.webp" width=620/>
  </p>
-
 
 ## Star History
 
