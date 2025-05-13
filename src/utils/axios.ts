@@ -1,4 +1,6 @@
 import axios from 'axios'
+import i18n from '@/lang/index'
+import { oneMessage } from './common'
 
 const http = axios.create({
     baseURL: 'https://api.github.com',
@@ -24,7 +26,10 @@ http.interceptors.response.use(
             reset: res.headers['x-ratelimit-reset'],
             used: res.headers['x-ratelimit-used'],
         }
-        console.log('rateLimit', rateLimit)
+        // 如果已使用超过1000次，显示错误
+        if (rateLimit.used > 1000) {
+            oneMessage.error(i18n.global.t('apiLimit'))
+        }
         return Promise.resolve(res)
     },
     (error) => {

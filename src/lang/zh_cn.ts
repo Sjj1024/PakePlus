@@ -234,4 +234,5 @@ export default {
     disableCors: '禁用跨域',
     limitProject: '限制：项目最多1个，每日编译1次',
     pubPlatformTips: '请选择发布平台',
+    apiLimit: 'API调用次数已达今日限制，请明天再试',
 }

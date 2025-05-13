@@ -237,4 +237,5 @@ export default {
     disableCors: 'CORS 비활성화',
     limitProject: '제한: 프로젝트 최대 1개, 매일 최대 1회 배포 컴파일',
     pubPlatformTips: '플랫폼을 선택하세요',
+    apiLimit: 'API 호출 횟수가 오늘의 제한에 도달했습니다. 내일 다시 시도해주세요',
 }

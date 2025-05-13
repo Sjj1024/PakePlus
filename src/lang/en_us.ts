@@ -238,4 +238,5 @@ export default {
     disableCors: 'Disable Cors',
     limitProject: 'Limit: 1 project, 1 daily build.',
     pubPlatformTips: 'Please select platform',
+    apiLimit: 'API call limit exceeded, please try again tomorrow',
 }
