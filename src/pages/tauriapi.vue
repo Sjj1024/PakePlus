@@ -14,16 +14,16 @@
                     </div>
                     <el-sub-menu index="1">
                         <template #title>Tauri2Api</template>
-                        <el-menu-item index="1-1">api/apps</el-menu-item>
-                        <el-menu-item index="1-2">api/core</el-menu-item>
-                        <el-menu-item index="1-3">api/dpi</el-menu-item>
-                        <el-menu-item index="1-4">api/event</el-menu-item>
-                        <el-menu-item index="1-5">api/menu</el-menu-item>
-                        <el-menu-item index="1-6">api/mocks</el-menu-item>
-                        <el-menu-item index="1-7">api/path</el-menu-item>
-                        <el-menu-item index="1-8">api/tray</el-menu-item>
-                        <el-menu-item index="1-9">api/webview</el-menu-item>
-                        <el-menu-item index="1-10">api/window</el-menu-item>
+                        <el-menu-item index="1-1">apps</el-menu-item>
+                        <el-menu-item index="1-2">core</el-menu-item>
+                        <el-menu-item index="1-3">dpi</el-menu-item>
+                        <el-menu-item index="1-4">event</el-menu-item>
+                        <el-menu-item index="1-5">menu</el-menu-item>
+                        <el-menu-item index="1-6">mocks</el-menu-item>
+                        <el-menu-item index="1-7">path</el-menu-item>
+                        <el-menu-item index="1-8">tray</el-menu-item>
+                        <el-menu-item index="1-9">webview</el-menu-item>
+                        <el-menu-item index="1-10">window</el-menu-item>
                         <el-menu-item index="1-11">webviewWindow</el-menu-item>
                     </el-sub-menu>
                     <el-sub-menu index="2">
@@ -55,22 +55,48 @@
                     </el-sub-menu>
                     <el-sub-menu index="3">
                         <template #title>PakePlusApi</template>
-                        <el-menu-item index="3-1">链接跳转</el-menu-item>
-                        <el-menu-item index="3-2">过滤广告</el-menu-item>
-                        <el-menu-item index="3-3">移除元素</el-menu-item>
-                        <el-menu-item index="3-4">添加元素</el-menu-item>
-                        <el-menu-item index="3-5">监听数据</el-menu-item>
-                        <el-menu-item index="3-6">数据统计</el-menu-item>
-                        <el-menu-item index="3-7">生成图标</el-menu-item>
-                        <el-menu-item index="3-8">网站样式</el-menu-item>
-                        <el-menu-item index="3-9">添加标识</el-menu-item>
-                        <el-menu-item index="3-10">启动参数</el-menu-item>
-                        <el-menu-item index="3-11">调试模式</el-menu-item>
-                        <el-menu-item index="3-12">注入JQ</el-menu-item>
-                        <el-menu-item index="3-13">禁用跨域</el-menu-item>
+                        <el-menu-item index="3-1">{{
+                            t('linkTo')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-2">{{
+                            t('filterAd')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-3">{{
+                            t('removeElement')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-4">{{
+                            t('addElement')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-5">{{
+                            t('listenData')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-6">{{
+                            t('dataStatistics')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-7">{{
+                            t('generateIcon')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-8">{{
+                            t('websiteStyle')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-9">{{
+                            t('addFlag')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-10">{{
+                            t('startParams')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-11">{{
+                            t('debugMode')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-12">{{
+                            t('injectJQ')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-13">{{
+                            t('disableCors')
+                        }}</el-menu-item>
                     </el-sub-menu>
                     <el-menu-item index="4">
-                        <span>关于我们</span>
+                        <span>{{ t('aboutUs') }}</span>
                     </el-menu-item>
                 </el-menu>
             </el-scrollbar>
@@ -81,7 +107,7 @@
             <el-header class="headerBox">
                 <div v-if="menuIndex !== '4'" class="backBtn" @click="goBack">
                     <el-icon><ArrowLeft /></el-icon>
-                    <span>返回</span>
+                    <span>{{ t('back') }}</span>
                 </div>
                 <!-- 输出 -->
                 <el-input
@@ -123,9 +149,13 @@
                 <div v-if="menuIndex === '1-1'" class="cardContent">
                     <h2>app</h2>
                     <p>
-                        @tauri-apps/api/app 是 Tauri 提供的
-                        JavaScript/TypeScript API，用于访问 Tauri
-                        应用程序本身的一些元信息。这个模块提供了若干函数，主要用于获取应用的元数据（如名称、版本、描述等），可以在前端中调用这些方法来获取对应的信息。
+                        @Tauri apps/app is provided by Tauri
+                        JavaScript/TypeScript API， Used to access Tauri Some
+                        metadata of the application itself. This module provides
+                        several functions, which are mainly used to obtain
+                        application metadata (such as name, version,
+                        description, etc.). These methods can be called in the
+                        front end to obtain corresponding information.
                     </p>
                     <div class="cardBox">
                         <el-tooltip
@@ -179,7 +209,7 @@
                     </div>
                 </div>
                 <!-- api/core -->
-                <div v-if="menuIndex === '1-2'" class="cardContent">
+                <div v-else-if="menuIndex === '1-2'" class="cardContent">
                     <h2>core</h2>
                     <p>
                         Invoke your custom commands. This package is also
@@ -229,23 +259,23 @@
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button @click="setThemeApi"
-                                >requestPermissions</el-button
-                            >
+                            <el-button @click="setThemeApi">
+                                requestPermissions
+                            </el-button>
                         </el-tooltip>
                         <el-tooltip
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button @click="showApi"
-                                >transformCallback</el-button
-                            >
+                            <el-button @click="showApi">
+                                transformCallback
+                            </el-button>
                         </el-tooltip>
                     </div>
                 </div>
                 <!-- api/dpi -->
                 <!-- api/core -->
-                <div v-if="menuIndex === '1-3'" class="cardContent">
+                <div v-else-if="menuIndex === '1-3'" class="cardContent">
                     <h2>dpi</h2>
                     <p>A position represented in logical pixels.</p>
                     <div class="cardBox">
@@ -296,7 +326,7 @@
                     </div>
                 </div>
                 <!-- api/app -->
-                <div v-if="menuIndex === '1-4'" class="cardContent">
+                <div v-else-if="menuIndex === '1-4'" class="cardContent">
                     <h1 class="cardTitle">event</h1>
                     <p>
                         The event system allows you to emit events to the
@@ -340,7 +370,7 @@
                     </div>
                 </div>
                 <!-- api/menu -->
-                <div v-if="menuIndex === '1-5'" class="cardContent">
+                <div v-else-if="menuIndex === '1-5'" class="cardContent">
                     <h1 class="cardTitle">menu</h1>
                     <p>
                         The menu system allows you to create and manage menus
@@ -353,29 +383,31 @@
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button>create</el-button>
+                            <el-button>{{ t('waitDev') }}</el-button>
                         </el-tooltip>
                     </div>
                 </div>
                 <!-- api/mocks -->
-                <div v-if="menuIndex === '1-6'" class="cardContent">
+                <div v-else-if="menuIndex === '1-6'" class="cardContent">
                     <h1 class="cardTitle">mocks</h1>
                     <p>
-                        @tauri-apps/api/mocks 是 Tauri
-                        提供的一个用于测试和开发环境模拟的工具模块，它允许你在不调用实际系统
-                        API 的情况下模拟 Tauri 的各种功能。
+                        @Tauri apps/app/mocks are Tauri A tool module provided
+                        for testing and development environment simulation,
+                        which allows you to simulate without calling the actual
+                        system Simulate various functionalities of Tauri using
+                        API.
                     </p>
                     <div class="cardBox">
                         <el-tooltip
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button>create</el-button>
+                            <el-button>{{ t('waitDev') }}</el-button>
                         </el-tooltip>
                     </div>
                 </div>
                 <!-- api/path -->
-                <div v-if="menuIndex === '1-7'" class="cardContent">
+                <div v-else-if="menuIndex === '1-7'" class="cardContent">
                     <h1 class="cardTitle">path</h1>
                     <p>
                         The path module provides utilities for working with file
@@ -390,12 +422,12 @@
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button>create</el-button>
+                            <el-button>{{ t('waitDev') }}</el-button>
                         </el-tooltip>
                     </div>
                 </div>
                 <!-- api/tray -->
-                <div v-if="menuIndex === '1-8'" class="cardContent">
+                <div v-else-if="menuIndex === '1-8'" class="cardContent">
                     <h1 class="cardTitle">tray</h1>
                     <p>
                         The tray module provides utilities for working with the
@@ -406,12 +438,12 @@
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button>create</el-button>
+                            <el-button>{{ t('waitDev') }}</el-button>
                         </el-tooltip>
                     </div>
                 </div>
                 <!-- api/webview -->
-                <div v-if="menuIndex === '1-9'" class="cardContent">
+                <div v-else-if="menuIndex === '1-9'" class="cardContent">
                     <h1 class="cardTitle">webview</h1>
                     <p>
                         Provides APIs to create webviews, communicate with other
@@ -422,12 +454,12 @@
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button>create</el-button>
+                            <el-button>{{ t('waitDev') }}</el-button>
                         </el-tooltip>
                     </div>
                 </div>
                 <!-- api/window -->
-                <div v-if="menuIndex === '1-10'" class="cardContent">
+                <div v-else-if="menuIndex === '1-10'" class="cardContent">
                     <h1 class="cardTitle">window</h1>
                     <p>
                         Provides APIs to create windows, communicate with other
@@ -438,12 +470,12 @@
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button>create</el-button>
+                            <el-button>{{ t('waitDev') }}</el-button>
                         </el-tooltip>
                     </div>
                 </div>
                 <!-- api/webviewWindow -->
-                <div v-if="menuIndex === '1-11'" class="cardContent">
+                <div v-else-if="menuIndex === '1-11'" class="cardContent">
                     <h1 class="cardTitle">webviewWindow</h1>
                     <p>
                         Create new webview or get a handle to an existing one.
@@ -457,12 +489,12 @@
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button>create</el-button>
+                            <el-button>{{ t('waitDev') }}</el-button>
                         </el-tooltip>
                     </div>
                 </div>
                 <!-- api/template -->
-                <div v-if="menuIndex === '1-111'" class="cardContent">
+                <div v-else-if="menuIndex === '1-111'" class="cardContent">
                     <h1 class="cardTitle">menu</h1>
                     <p>
                         The menu system allows you to create and manage menus
@@ -475,13 +507,17 @@
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button>create</el-button>
+                            <el-button>{{ t('waitDev') }}</el-button>
                         </el-tooltip>
                     </div>
                 </div>
                 <!-- 关于 -->
-                <div v-if="menuIndex === '4'" class="cardContent">
+                <div v-else-if="menuIndex === '4'" class="cardContent">
                     <About />
+                </div>
+                <!-- 待开发 -->
+                <div v-else class="waitContent">
+                    <h1 class="cardTitle">{{ t('waitDev') }}</h1>
                 </div>
             </el-main>
         </el-container>
@@ -571,7 +607,9 @@ import {
     getAllWebviews,
 } from '@tauri-apps/api/webview'
 import { Window } from '@tauri-apps/api/window'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const textarea = ref('')
@@ -762,6 +800,15 @@ onMounted(() => {
 
     .el-main {
         padding: 0;
+
+        .waitContent {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
     }
 
     .toolbar {

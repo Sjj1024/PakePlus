@@ -172,7 +172,7 @@ pnpm run build
 
 ## Support
 
-1. wechat and group
+1. wechat and group，my wechat is lanxingme，welcome to join the wechat group.
  <p align="center" style="display:flex; justify-content: flex-start;" >
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/mywx.png" width=300/>
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/wxcode.png" width=300/>

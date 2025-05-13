@@ -17,8 +17,7 @@
             </div>
             <div class="description">
                 <p>
-                    {{ t('aboutGuide') }}:
-                    {{ urlMap.email }}
+                    {{ t('aboutGuide') }}
                 </p>
             </div>
             <div class="tools">

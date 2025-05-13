@@ -574,7 +574,7 @@ const forkStartShas = async (tips: boolean = true) => {
     }
     await supportPP()
     // sync all branch
-    await syncAllBranch()
+    // await syncAllBranch()
     await commitShas(tips)
 }
 
@@ -1003,9 +1003,9 @@ onMounted(() => {
     } else {
         oneMessage.error(t('webNotStable'))
     }
-    checkUpdate()
-    getPakePlusInfo()
-    syncAllBranch()
+    // checkUpdate()
+    // getPakePlusInfo()
+    // syncAllBranch()
 })
 </script>
 
