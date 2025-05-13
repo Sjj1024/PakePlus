@@ -235,4 +235,5 @@ export default {
     startParams: '시작 매개변수',
     debugMode: '디버그 모드',
     disableCors: 'CORS 비활성화',
+    limitProject: '제한: 프로젝트 최대 1개, 매일 최대 1회 배포 컴파일',
 }

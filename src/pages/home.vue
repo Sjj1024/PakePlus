@@ -422,6 +422,10 @@ const goAbout = () => {
 
 // new barnch config
 const showBranchDialog = () => {
+    if (store.projectList.length !== 0) {
+        oneMessage.error(t('limitProject'))
+        return
+    }
     // if token exist, then creat branch, else next page
     // token.value && getCommitSha()
     // checkout has github token

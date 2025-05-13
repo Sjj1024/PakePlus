@@ -235,4 +235,5 @@ export default {
     startParams: '起動パラメータ',
     debugMode: 'デバッグモード',
     disableCors: 'CORSを無効にする',
+    limitProject: '制限:プロジェクト数は1個まで、毎日の発行コンパイルは1回まで',
 }

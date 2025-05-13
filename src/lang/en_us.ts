@@ -236,4 +236,5 @@ export default {
     startParams: 'Start Params',
     debugMode: 'Debug Mode',
     disableCors: 'Disable Cors',
+    limitProject: 'Limit: 1 project, 1 daily build.',
 }

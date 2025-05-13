@@ -232,4 +232,5 @@ export default {
     startParams: '启动参数',
     debugMode: '调试模式',
     disableCors: '禁用跨域',
+    limitProject: '限制：项目最多1个，每日编译1次',
 }
