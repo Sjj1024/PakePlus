@@ -12,7 +12,7 @@ hero:
     actions:
         - theme: brand
           text: 下载地址
-          link: https://github.com/Sjj1024/PakePlus/releases
+          link: /download/
         - theme: alt
           text: 使用指南
           link: /guide/

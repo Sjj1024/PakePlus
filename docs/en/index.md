@@ -12,7 +12,7 @@ hero:
     actions:
         - theme: brand
           text: Download
-          link: https://github.com/Sjj1024/PakePlus/releases
+          link: /download/
         - theme: alt
           text: Guide
           link: /guide/

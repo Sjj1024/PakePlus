@@ -86,6 +86,7 @@ export default defineConfig({
                     ],
                     '/question/': [
                         { text: '应用已损坏', link: '/question/' },
+                        { text: '使用限制', link: '/question/limit' },
                         { text: 'Token无效', link: '/question/invalid' },
                         { text: '项目已存在', link: '/question/exist' },
                         { text: '编译失败', link: '/question/build' },
@@ -184,6 +185,7 @@ export default defineConfig({
                     ],
                     '/en/question/': [
                         { text: 'Application Damaged', link: '/en/question/' },
+                        { text: 'Limits', link: '/en/question/limit' },
                         { text: 'Token Invalid', link: '/en/question/invalid' },
                         { text: 'Project Exists', link: '/en/question/exist' },
                         { text: 'Compilation Failed', link: '/en/question/build' },
