@@ -999,9 +999,9 @@ onMounted(() => {
     } else {
         oneMessage.error(t('webNotStable'))
     }
-    checkUpdate()
-    getPakePlusInfo()
-    syncAllBranch()
+    // checkUpdate()
+    // getPakePlusInfo()
+    // syncAllBranch()
 })
 </script>
 
