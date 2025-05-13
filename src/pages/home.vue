@@ -391,12 +391,12 @@ const goProject = async (pro: Project) => {
                         'PakePlus',
                         store.shaInfo.desktopWeb
                     )
-                    // createBranch(
-                    //     store.userInfo.login,
-                    //     pro.name,
-                    //     'PakePlus-iOS',
-                    //     store.shaInfo.iosWeb
-                    // )
+                    createBranch(
+                        store.userInfo.login,
+                        pro.name,
+                        'PakePlus-iOS',
+                        store.shaInfo.iosWeb
+                    )
                     createBranch(
                         store.userInfo.login,
                         pro.name,
