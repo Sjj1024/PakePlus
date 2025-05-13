@@ -48,10 +48,11 @@ jobs:
             - uses: actions/checkout@v4
 
             - name: Check Tauri
-              if: ${{ !secrets.TAURI_KEY_PASSWORD }}
               run: |
-                  echo "::error::TAURI_PRIVATE_KEY is required"
-                  exit 1
+                  if [ -z "${{ secrets.TAURI_KEY_PASSWORD }}" ]; then
+                    echo "::error::TAURI_KEY_PASSWORD is required but not set."
+                    exit 1
+                  fi
 
             - name: Install rust target
               run: rustup target add ${{ matrix.target }}
