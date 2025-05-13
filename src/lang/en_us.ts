@@ -25,7 +25,7 @@ export default {
     configProject: 'Configure the project',
     exeProject: 'Configure the Program',
     appProject: 'Configure the APP',
-    appProjectTips: 'Mobile phone APP (iOS/Android) configuration information',
+    appProjectTips: 'Mobile APP (iOS/Android) configuration information',
     configProjectTips:
         'Configure the website, name, identifier, etc. of the current project',
     relHistore: 'Release History',

@@ -2182,8 +2182,8 @@ onMounted(async () => {
                     }
 
                     .iconPreview {
-                        width: 21px;
-                        height: 21px;
+                        width: 22px;
+                        height: 22px;
                         color: gray;
                         border: 1px dashed gray;
                         border-radius: 4px;

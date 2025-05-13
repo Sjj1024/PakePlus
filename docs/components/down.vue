@@ -552,7 +552,6 @@ const isMobile = () => {
             mask-size: 100% 100%;
         }
 
-
         .rightContent {
             width: 90%;
             height: 100px;

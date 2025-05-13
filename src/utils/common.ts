@@ -33,6 +33,12 @@ export const urlMap = {
     google: '',
     csdn: 'https://xiaoshen.blog.csdn.net/',
     juejin: 'https://juejin.cn/user/70007368988926',
+    gitee: 'https://gitee.com/xiaoshen-1024',
+    bilibili: 'https://space.bilibili.com/405719127?spm_id_from=333.33.0.0',
+    twitter: 'https://x.com/1024xiaoshen',
+    youtube: 'https://www.youtube.com/@1024xiaoshen',
+    douyin: '',
+    tiktok: '',
     windowsConfig: 'https://v2.tauri.app/reference/config/#windowconfig',
 }
 

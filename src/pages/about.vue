@@ -1,15 +1,14 @@
 <template>
     <div class="aboutBox" :class="{ isWeb: !isTauri }">
-        <div class="aboutHeader">
+        <!-- <div class="aboutHeader">
             <div class="toolBox">
                 <div class="setting">
-                    <!-- <span class="userName">{{ store.userInfo.login }}</span> -->
                     <span class="iconfont setIcon" @click="goBack">
                         &#xe644;
                     </span>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- content -->
         <div class="content">
             <div class="title">
@@ -51,6 +50,18 @@
                     </span>
                     <span class="link" @click="openUrl(urlMap.github)">
                         Github
+                    </span>
+                    <span class="link" @click="openUrl(urlMap.gitee)">
+                        Gitee
+                    </span>
+                    <span class="link" @click="openUrl(urlMap.bilibili)">
+                        Bilibili
+                    </span>
+                    <span class="link" @click="openUrl(urlMap.twitter)">
+                        Twitter
+                    </span>
+                    <span class="link" @click="openUrl(urlMap.youtube)">
+                        Youtube
                     </span>
                 </p>
             </div>
@@ -421,10 +432,10 @@ const goBack = () => {
             margin-top: 6px;
 
             .payTitle {
-                font-size: 16px;
-                font-weight: 600;
+                font-size: 20px;
+                font-weight: 700;
                 color: var(--text-color);
-                margin-bottom: 10px;
+                margin: 10px 10px 10px 0;
             }
 
             .payIconBox {

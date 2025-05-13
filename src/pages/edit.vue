@@ -355,7 +355,7 @@
             >
                 <!-- platform select -->
                 <el-form-item :label="t('pubPlatform')">
-                    <el-checkbox-group v-model="pubForm.platform">
+                    <!-- <el-checkbox-group v-model="pubForm.platform">
                         <el-checkbox :label="t('desktop')" value="desktop" />
                         <el-checkbox
                             :label="t('mobileEnd')"
@@ -367,7 +367,18 @@
                             value="source"
                             disabled
                         />
-                    </el-checkbox-group>
+                    </el-checkbox-group> -->
+                    <el-tree-select
+                        v-model="value"
+                        :data="platData"
+                        multiple
+                        collapse-tags
+                        collapse-tags-tooltip
+                        :max-collapse-tags="4"
+                        :render-after-expand="false"
+                        show-checkbox
+                        placeholder="请选择平台"
+                    />
                 </el-form-item>
                 <!-- build package selcted -->
                 <!-- <el-form-item label="目标架构">
@@ -660,6 +671,63 @@ const showWarning = () => {
 // is json config
 const isJson = ref(false)
 const tauriConfigRef = ref<any>(null)
+
+// 发布编译选项
+const value = ref()
+const platData = [
+    {
+        value: '1',
+        label: 'Windows',
+        children: [
+            {
+                value: '1-2',
+                label: 'x64',
+            },
+            {
+                value: '1-3',
+                label: 'Arm64',
+            },
+        ],
+    },
+    {
+        value: '2',
+        label: 'macOS',
+        children: [
+            {
+                value: '2-1',
+                label: 'Intel',
+            },
+            {
+                value: '2-2',
+                label: 'M芯片',
+            },
+        ],
+    },
+    {
+        value: '3',
+        label: 'Linux',
+        children: [
+            {
+                value: '3-1',
+                label: 'x64',
+            },
+            {
+                value: '3-2',
+                label: 'Arm64',
+            },
+        ],
+    },
+    {
+        value: '4',
+        label: 'Android',
+        disabled: true,
+    },
+    {
+        value: '5',
+        label: 'iOS',
+        disabled: true,
+    },
+]
 
 // change app name
 const changeAppName = (value: string) => {
@@ -1867,8 +1935,8 @@ onMounted(async () => {
                     }
 
                     .iconPreview {
-                        width: 21px;
-                        height: 21px;
+                        width: 22px;
+                        height: 22px;
                         color: gray;
                         border: 1px dashed gray;
                         border-radius: 4px;

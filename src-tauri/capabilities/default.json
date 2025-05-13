@@ -14,6 +14,9 @@
     },
     "permissions": [
         "core:default",
+        "core:app:allow-default-window-icon",
+        "core:app:allow-app-hide",
+        "core:app:allow-app-show",
         "core:app:allow-set-app-theme",
         "core:app:allow-name",
         "core:window:allow-set-title",

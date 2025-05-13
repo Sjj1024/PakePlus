@@ -413,7 +413,11 @@ const goProject = async (pro: Project) => {
 
 // go about
 const goAbout = () => {
-    router.push('/about')
+    if (isTauri) {
+        router.push('/tauriapi?about=true')
+    } else {
+        router.push('/about')
+    }
 }
 
 // new barnch config
@@ -999,9 +1003,9 @@ onMounted(() => {
     } else {
         oneMessage.error(t('webNotStable'))
     }
-    // checkUpdate()
-    // getPakePlusInfo()
-    // syncAllBranch()
+    checkUpdate()
+    getPakePlusInfo()
+    syncAllBranch()
 })
 </script>
 
@@ -1259,7 +1263,7 @@ onMounted(() => {
                     -webkit-line-clamp: 2;
                     line-clamp: 2;
                     -webkit-box-orient: vertical;
-                    margin-top: 6px;
+                    // margin-top: 6px;
                 }
             }
         }

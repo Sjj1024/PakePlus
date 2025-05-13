@@ -4,21 +4,17 @@
         <el-aside width="170px">
             <el-scrollbar>
                 <el-menu
-                    default-active="1-1"
-                    @open="handleOpen"
-                    @close="handleClose"
+                    :default-active="defaultMenu"
                     @select="handleMenu"
-                    :collapse="isCollapse"
                     unique-opened
                 >
-                    <div class="menuTitle">
+                    <div class="menuTitle" @click="goBack">
                         <img :src="ppIcon" alt="logo" class="menuIcon" />
                         <div class="menuTitleText">PakePLus</div>
                     </div>
                     <el-sub-menu index="1">
-                        <template #title>TauriApi</template>
-                        <el-menu-item index="1-0">apps/api</el-menu-item>
-                        <el-menu-item index="1-1">api/app</el-menu-item>
+                        <template #title>Tauri2Api</template>
+                        <el-menu-item index="1-1">api/apps</el-menu-item>
                         <el-menu-item index="1-2">api/core</el-menu-item>
                         <el-menu-item index="1-3">api/dpi</el-menu-item>
                         <el-menu-item index="1-4">api/event</el-menu-item>
@@ -34,31 +30,48 @@
                         <template #title>PluginApi</template>
                         <el-menu-item index="2-1">scanner</el-menu-item>
                         <el-menu-item index="2-2">biometric</el-menu-item>
-                        <el-menu-item index="2-3">clipboard</el-menu-item>
-                        <el-menu-item index="2-4">dialog</el-menu-item>
-                        <el-menu-item index="2-5">dialog</el-menu-item>
+                        <el-menu-item index="2-3">cli</el-menu-item>
+                        <el-menu-item index="2-4">clipboard</el-menu-item>
+                        <el-menu-item index="2-5">deep-link</el-menu-item>
                         <el-menu-item index="2-6">dialog</el-menu-item>
-                        <el-menu-item index="2-7">dialog</el-menu-item>
-                        <el-menu-item index="2-8">dialog</el-menu-item>
-                        <el-menu-item index="2-9">dialog</el-menu-item>
+                        <el-menu-item index="2-7">fs</el-menu-item>
+                        <el-menu-item index="2-8">shortcut</el-menu-item>
+                        <el-menu-item index="2-9">http</el-menu-item>
+                        <el-menu-item index="2-10">log</el-menu-item>
+                        <el-menu-item index="2-11">nfc</el-menu-item>
+                        <el-menu-item index="2-12">notification</el-menu-item>
+                        <el-menu-item index="2-13">opener</el-menu-item>
+                        <el-menu-item index="2-14">os</el-menu-item>
+                        <el-menu-item index="2-15">positioner</el-menu-item>
+                        <el-menu-item index="2-16">process</el-menu-item>
+                        <el-menu-item index="2-17">shell</el-menu-item>
+                        <el-menu-item index="2-18">sql</el-menu-item>
+                        <el-menu-item index="2-19">store</el-menu-item>
+                        <el-menu-item index="2-20">stronghold</el-menu-item>
+                        <el-menu-item index="2-21">updater</el-menu-item>
+                        <el-menu-item index="2-22">upload</el-menu-item>
+                        <el-menu-item index="2-23">websocket</el-menu-item>
+                        <el-menu-item index="2-24">window-state</el-menu-item>
                     </el-sub-menu>
                     <el-sub-menu index="3">
                         <template #title>PakePlusApi</template>
-                        <el-menu-item-group>
-                            <template #title>Group 1</template>
-                            <el-menu-item index="3-1">Option 1</el-menu-item>
-                            <el-menu-item index="3-2">Option 2</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="Group 2">
-                            <el-menu-item index="3-3">Option 3</el-menu-item>
-                        </el-menu-item-group>
-                        <el-sub-menu index="3-4">
-                            <template #title>Option 4</template>
-                            <el-menu-item index="3-4-1"
-                                >Option 4-1</el-menu-item
-                            >
-                        </el-sub-menu>
+                        <el-menu-item index="3-1">链接跳转</el-menu-item>
+                        <el-menu-item index="3-2">过滤广告</el-menu-item>
+                        <el-menu-item index="3-3">移除元素</el-menu-item>
+                        <el-menu-item index="3-4">添加元素</el-menu-item>
+                        <el-menu-item index="3-5">监听数据</el-menu-item>
+                        <el-menu-item index="3-6">数据统计</el-menu-item>
+                        <el-menu-item index="3-7">生成图标</el-menu-item>
+                        <el-menu-item index="3-8">网站样式</el-menu-item>
+                        <el-menu-item index="3-9">添加标识</el-menu-item>
+                        <el-menu-item index="3-10">启动参数</el-menu-item>
+                        <el-menu-item index="3-11">调试模式</el-menu-item>
+                        <el-menu-item index="3-12">注入JQ</el-menu-item>
+                        <el-menu-item index="3-13">禁用跨域</el-menu-item>
                     </el-sub-menu>
+                    <el-menu-item index="4">
+                        <span>关于我们</span>
+                    </el-menu-item>
                 </el-menu>
             </el-scrollbar>
         </el-aside>
@@ -66,17 +79,29 @@
         <el-container>
             <!-- 头部 -->
             <el-header class="headerBox">
-                <div class="backBtn" @click="goBack">
+                <div v-if="menuIndex !== '4'" class="backBtn" @click="goBack">
                     <el-icon><ArrowLeft /></el-icon>
                     <span>返回</span>
                 </div>
+                <!-- 输出 -->
                 <el-input
+                    v-if="menuIndex !== '4'"
                     v-model="textarea"
                     :rows="2"
                     type="textarea"
                     class="searchInput"
                 />
-                <div class="toolbar">
+                <!-- 图片 -->
+                <img
+                    v-if="menuIndex !== '4'"
+                    :src="image"
+                    alt="image"
+                    class="image"
+                />
+                <!-- <div v-else>
+                    <el-button>留言</el-button>
+                </div> -->
+                <!-- <div class="toolbar">
                     <el-dropdown>
                         <el-icon style="margin-right: 8px; margin-top: 1px">
                             <setting />
@@ -90,19 +115,373 @@
                         </template>
                     </el-dropdown>
                     <span></span>
-                </div>
+                </div> -->
             </el-header>
             <!-- 主内容 -->
             <el-main>
-                <div class="cardContent">
-                    <el-button>Default</el-button>
-                    <el-button>Default</el-button>
-                    <el-button>Default</el-button>
-                    <el-button>Default</el-button>
-                    <el-button>Default</el-button>
-                    <el-button>Default</el-button>
-                    <el-button>Default</el-button>
-                    <el-button>Default</el-button>
+                <!-- api/app -->
+                <div v-if="menuIndex === '1-1'" class="cardContent">
+                    <h2>app</h2>
+                    <p>
+                        @tauri-apps/api/app 是 Tauri 提供的
+                        JavaScript/TypeScript API，用于访问 Tauri
+                        应用程序本身的一些元信息。这个模块提供了若干函数，主要用于获取应用的元数据（如名称、版本、描述等），可以在前端中调用这些方法来获取对应的信息。
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="defaultWindowIconApi">
+                                defaultWindowIcon
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Gets the application name."
+                            placement="bottom"
+                        >
+                            <el-button @click="getNameApi">getName</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Gets the Tauri version."
+                            placement="bottom"
+                        >
+                            <el-button @click="getTauriVersionApi">
+                                getTauriVersion
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Gets the application version."
+                            placement="bottom"
+                        >
+                            <el-button @click="getVersionApi">
+                                getVersion
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="hideApi">hide</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="setThemeApi">setTheme</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="showApi">show</el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/core -->
+                <div v-if="menuIndex === '1-2'" class="cardContent">
+                    <h2>core</h2>
+                    <p>
+                        Invoke your custom commands. This package is also
+                        accessible with window.__TAURI__.core when
+                        app.withGlobalTauri in tauri.conf.json is set to true.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="defaultWindowIconApi">
+                                addPluginListener
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Gets the application name."
+                            placement="bottom"
+                        >
+                            <el-button @click="getNameApi"
+                                >checkPermissions</el-button
+                            >
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Gets the Tauri version."
+                            placement="bottom"
+                        >
+                            <el-button @click="getTauriVersionApi">
+                                convertFileSrc
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Gets the application version."
+                            placement="bottom"
+                        >
+                            <el-button @click="getVersionApi">
+                                invoke
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="hideApi">isTauri</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="setThemeApi"
+                                >requestPermissions</el-button
+                            >
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="showApi"
+                                >transformCallback</el-button
+                            >
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/dpi -->
+                <!-- api/core -->
+                <div v-if="menuIndex === '1-3'" class="cardContent">
+                    <h2>dpi</h2>
+                    <p>A position represented in logical pixels.</p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="defaultWindowIconApi">
+                                LogicalPosition
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Gets the application name."
+                            placement="bottom"
+                        >
+                            <el-button @click="getNameApi"
+                                >PhysicalPosition</el-button
+                            >
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Gets the Tauri version."
+                            placement="bottom"
+                        >
+                            <el-button @click="getTauriVersionApi">
+                                Position
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Gets the application version."
+                            placement="bottom"
+                        >
+                            <el-button @click="getVersionApi">
+                                LogicalSize
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="hideApi">PhysicalSize</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="setThemeApi">Size</el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/app -->
+                <div v-if="menuIndex === '1-4'" class="cardContent">
+                    <h1 class="cardTitle">event</h1>
+                    <p>
+                        The event system allows you to emit events to the
+                        backend and listen to events from it. This package is
+                        also accessible with window.__TAURI__.event when
+                        app.withGlobalTauri in tauri.conf.json is set to true.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="listenEvent">listen</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="sendEvent">emit</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="sendEvent">emitTo</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="unlistenEvent"
+                                >unlisten</el-button
+                            >
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="listenEvent">once</el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/menu -->
+                <div v-if="menuIndex === '1-5'" class="cardContent">
+                    <h1 class="cardTitle">menu</h1>
+                    <p>
+                        The menu system allows you to create and manage menus
+                        for your application. This package is also accessible
+                        with window.__TAURI__.menu when app.withGlobalTauri in
+                        tauri.conf.json is set to true.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button>create</el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/mocks -->
+                <div v-if="menuIndex === '1-6'" class="cardContent">
+                    <h1 class="cardTitle">mocks</h1>
+                    <p>
+                        @tauri-apps/api/mocks 是 Tauri
+                        提供的一个用于测试和开发环境模拟的工具模块，它允许你在不调用实际系统
+                        API 的情况下模拟 Tauri 的各种功能。
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button>create</el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/path -->
+                <div v-if="menuIndex === '1-7'" class="cardContent">
+                    <h1 class="cardTitle">path</h1>
+                    <p>
+                        The path module provides utilities for working with file
+                        and directory paths. This package is also accessible
+                        with window.__TAURI__.path when app.withGlobalTauri in
+                        tauri.conf.json is set to true. It is recommended to
+                        allowlist only the APIs you use for optimal bundle size
+                        and security.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button>create</el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/tray -->
+                <div v-if="menuIndex === '1-8'" class="cardContent">
+                    <h1 class="cardTitle">tray</h1>
+                    <p>
+                        The tray module provides utilities for working with the
+                        system tray. This package is also accessible
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button>create</el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/webview -->
+                <div v-if="menuIndex === '1-9'" class="cardContent">
+                    <h1 class="cardTitle">webview</h1>
+                    <p>
+                        Provides APIs to create webviews, communicate with other
+                        webviews and manipulate the current webview.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button>create</el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/window -->
+                <div v-if="menuIndex === '1-10'" class="cardContent">
+                    <h1 class="cardTitle">window</h1>
+                    <p>
+                        Provides APIs to create windows, communicate with other
+                        windows and manipulate the current window.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button>create</el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/webviewWindow -->
+                <div v-if="menuIndex === '1-11'" class="cardContent">
+                    <h1 class="cardTitle">webviewWindow</h1>
+                    <p>
+                        Create new webview or get a handle to an existing one.
+                        Webviews are identified by a label a unique identifier
+                        that can be used to reference it later. It may only
+                        contain alphanumeric characters a-zA-Z plus the
+                        following special characters -, /, : and _.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button>create</el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/template -->
+                <div v-if="menuIndex === '1-111'" class="cardContent">
+                    <h1 class="cardTitle">menu</h1>
+                    <p>
+                        The menu system allows you to create and manage menus
+                        for your application. This package is also accessible
+                        with window.__TAURI__.menu when app.withGlobalTauri in
+                        tauri.conf.json is set to true.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button>create</el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- 关于 -->
+                <div v-if="menuIndex === '4'" class="cardContent">
+                    <About />
                 </div>
             </el-main>
         </el-container>
@@ -111,17 +490,12 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { oneMessage } from '@/utils/common'
+import About from '@/pages/about.vue'
 import ppIcon from '@/assets/images/pakeplus.png'
-import { Setting, ArrowLeft } from '@element-plus/icons-vue'
+import { ArrowLeft } from '@element-plus/icons-vue'
 import { getCurrentWindow } from '@tauri-apps/api/window'
-import {
-    isTauri,
-    Resource,
-    invoke,
-    SERIALIZE_TO_IPC_FN,
-    convertFileSrc,
-} from '@tauri-apps/api/core'
-import { event, window, path } from '@tauri-apps/api'
 import {
     defaultWindowIcon,
     getName,
@@ -131,6 +505,33 @@ import {
     setTheme,
     show,
 } from '@tauri-apps/api/app'
+import {
+    isTauri,
+    Resource,
+    invoke,
+    SERIALIZE_TO_IPC_FN,
+    convertFileSrc,
+} from '@tauri-apps/api/core'
+import {
+    LogicalPosition,
+    LogicalSize,
+    PhysicalSize,
+    PhysicalPosition,
+} from '@tauri-apps/api/dpi'
+import { emit, emitTo, listen, once } from '@tauri-apps/api/event'
+import {
+    Menu, // 创建和管理菜单
+    MenuItem, // 创建和管理菜单项
+    Submenu, // 创建和管理子菜单
+    CheckMenuItem, // 创建和管理复选菜单项
+    IconMenuItem, // 创建和管理图标菜单项
+} from '@tauri-apps/api/menu'
+import {
+    mockWindows,
+    clearMocks,
+    mockIPC,
+    mockConvertFileSrc,
+} from '@tauri-apps/api/mocks'
 import {
     appDataDir, // 获取应用数据目录（跨平台，如 ~/.local/share/your-app）
     appConfigDir, // 获取应用配置目录（跨平台，如 ~/.config/your-app）
@@ -169,60 +570,133 @@ import {
     Webview,
     getAllWebviews,
 } from '@tauri-apps/api/webview'
-import {
-    LogicalPosition,
-    LogicalSize,
-    PhysicalSize,
-    PhysicalPosition,
-} from '@tauri-apps/api/dpi'
-import { emit, emitTo, listen, once } from '@tauri-apps/api/event'
-import {
-    Menu, // 创建和管理菜单
-    MenuItem, // 创建和管理菜单项
-    Submenu, // 创建和管理子菜单
-    CheckMenuItem, // 创建和管理复选菜单项
-    IconMenuItem, // 创建和管理图标菜单项
-} from '@tauri-apps/api/menu'
-
-import {
-    mockWindows,
-    clearMocks,
-    mockIPC,
-    mockConvertFileSrc,
-} from '@tauri-apps/api/mocks'
 import { Window } from '@tauri-apps/api/window'
-import { useRouter } from 'vue-router'
 
+const route = useRoute()
 const router = useRouter()
-
 const textarea = ref('')
-const isCollapse = ref(false)
-
-const handleOpen = () => {
-    // isCollapse.value = false
-}
-
-const handleClose = () => {
-    // isCollapse.value = true
-}
+const image = ref()
+const defaultMenu = ref('1-1')
+const menuIndex = ref('1-1')
 
 const handleMenu = (index: string) => {
     console.log('handleMenu', index)
+    menuIndex.value = index
 }
 
 const goBack = () => {
     router.back()
 }
 
+// defaultWindowIcon
+
+const defaultWindowIconApi = async () => {
+    const icon = await defaultWindowIcon()
+    if (!icon) return
+    const size = await icon.size()
+    console.log('size', size)
+    textarea.value = 'size:' + JSON.stringify(size)
+    const rgba = await icon.rgba()
+    console.log('rgba', rgba)
+    const imageData = new ImageData(
+        new Uint8ClampedArray(rgba),
+        size.width,
+        size.height
+    )
+    console.log('imageData', imageData)
+    const canvas = document.createElement('canvas')
+    canvas.width = size.width
+    canvas.height = size.height
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+    ctx.putImageData(imageData, 0, 0)
+    const base64 = canvas.toDataURL('image/png')
+    console.log('base64', base64)
+    image.value = base64
+}
+
+// app:获取应用信息
+const getNameApi = async () => {
+    const name = await getName()
+    console.log('name', name)
+    textarea.value = 'name:' + name
+}
+
+const getTauriVersionApi = async () => {
+    const tauriVersion = await getTauriVersion()
+    console.log('tauriVersion', tauriVersion)
+    textarea.value = 'tauriVersion:' + tauriVersion
+}
+
+const getVersionApi = async () => {
+    const version = await getVersion()
+    console.log('version', version)
+    textarea.value = 'pakeplus version:' + version
+}
+
+const hideApi = async () => {
+    await hide()
+    oneMessage.success('隐藏应用成功')
+}
+
+const setThemeApi = async () => {
+    let pptheme: any = localStorage.getItem('theme')
+    pptheme = pptheme === 'light' ? 'dark' : 'light'
+    await setTheme(pptheme)
+    localStorage.setItem('theme', pptheme)
+    oneMessage.success('设置主题成功，重启应用生效')
+}
+
+const showApi = async () => {
+    await show()
+}
+
+// event:监听事件
+let unlisten: any = null
+const listenEvent = async () => {
+    unlisten = await listen('my-event', (event: any) => {
+        console.log('收到事件:', event.payload)
+        textarea.value = 'event:收到事件:' + event.payload.message
+    })
+    textarea.value = 'event:开启监听'
+}
+
+// event:发送事件
+const sendEvent = async () => {
+    await emit('my-event', { message: 'Hello, PakePLus!' })
+}
+
+// event:取消监听
+const unlistenEvent = async () => {
+    unlisten && unlisten()
+    textarea.value = 'event:取消监听'
+}
+
+// window:窗口
+const openWindow = async () => {
+    console.log('window')
+}
+
+// 页面初始化
 onMounted(() => {
     if (isTauri()) {
         const window = getCurrentWindow()
         window.setTitle('FEATURE')
     }
+    console.log('route.query', route.query)
+    const about = route.query.about
+    if (about) {
+        defaultMenu.value = '4'
+        menuIndex.value = '4'
+    }
 })
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+.el-button {
+    margin: 0;
+}
+
 .layoutBox {
     width: 100%;
     height: 100%;
@@ -236,8 +710,8 @@ onMounted(() => {
         cursor: pointer;
 
         .menuIcon {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
         }
 
         .menuTitleText {
@@ -250,11 +724,17 @@ onMounted(() => {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 0 10px;
 
         .searchInput {
             margin: 0 10px;
             font-size: 14px;
         }
+
+        // .image {
+        //     width: 40px;
+        //     height: 40px;
+        // }
 
         .backBtn {
             width: 60px;
@@ -293,13 +773,22 @@ onMounted(() => {
     }
 
     .cardContent {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 10px;
+        padding: 0px 10px;
 
-        .el-button {
-            margin: 0;
+        .cardTitle {
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        .cardBox {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+
+            .el-button {
+                margin: 0;
+            }
         }
     }
 }

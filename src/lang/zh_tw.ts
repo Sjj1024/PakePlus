@@ -24,7 +24,7 @@ export default {
     configProject: '配置項目',
     exeProject: '軟件配置',
     appProject: 'APP配置',
-    appProjectTips: '移動端手機APP（iOS/Android）的配置信息',
+    appProjectTips: '移動端APP（iOS/Android）配置信息',
     configProjectTips: '配置當前項目網站地址、軟件名稱、軟件唯一標識等',
     relHistore: '發佈歷史',
     delProject: '刪除項目',
