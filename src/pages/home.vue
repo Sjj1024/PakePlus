@@ -146,6 +146,7 @@
                     spellCheck="false"
                     placeholder="github token"
                     class="tokenInput"
+                    :disabled="testLoading"
                     @keyup.enter="testToken(true)"
                 />
                 <el-button

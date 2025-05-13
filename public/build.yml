@@ -42,6 +42,12 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
+            - name: Check Tauri
+              if: env.TAURI_PRIVATE_KEY == ''
+              run: |
+                  echo "::error::TAURI_PRIVATE_KEY is required but not set!"
+                  exit 1
+
             - name: Install rust target
               run: rustup target add ${{ matrix.target }}
 
