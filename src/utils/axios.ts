@@ -18,6 +18,13 @@ http.interceptors.request.use((config) => {
 
 http.interceptors.response.use(
     (res) => {
+        const rateLimit = {
+            limit: res.headers['x-ratelimit-limit'],
+            remaining: res.headers['x-ratelimit-remaining'],
+            reset: res.headers['x-ratelimit-reset'],
+            used: res.headers['x-ratelimit-used'],
+        }
+        console.log('rateLimit', rateLimit)
         return Promise.resolve(res)
     },
     (error) => {

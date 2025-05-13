@@ -61,10 +61,10 @@ export default {
     publish: '게시',
     build: '빌드 및 게시',
     pubPlatform: '게시 플랫폼',
-    pubMode: '게시 모드',
+    pubMode: '디버그 모드',
     closeDebug: '디버그 닫기',
     openDebug: '디버그 열기',
-    releaseNotes: '릴리스 노트:',
+    releaseNotes: '릴리스 노트',
     inputRelNotes: '릴리스 노트를 입력하세요',
     pubNotesTips:
         '참고: 모바일 설정과 빌드 및 게시에는 약 9분 정도 소요되며, 잠시만 기다려 주세요......',
@@ -236,4 +236,5 @@ export default {
     debugMode: '디버그 모드',
     disableCors: 'CORS 비활성화',
     limitProject: '제한: 프로젝트 최대 1개, 매일 최대 1회 배포 컴파일',
+    pubPlatformTips: '플랫폼을 선택하세요',
 }

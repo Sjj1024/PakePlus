@@ -58,10 +58,10 @@ export default {
     publish: '发布',
     build: '打包发布',
     pubPlatform: '发布平台',
-    pubMode: '发布模式',
+    pubMode: '调试模式',
     closeDebug: '关闭调试',
     openDebug: '开启调试',
-    releaseNotes: '发布说明:',
+    releaseNotes: '发布说明',
     inputRelNotes: '请输入发布说明',
     pubNotesTips:
         '注：移动端配置和打包请从右上角手机图标进入，桌面端打包大概需要9分钟左右，打包过程中不要做任何操作，请耐心等待...',
@@ -233,4 +233,5 @@ export default {
     debugMode: '调试模式',
     disableCors: '禁用跨域',
     limitProject: '限制：项目最多1个，每日编译1次',
+    pubPlatformTips: '请选择发布平台',
 }

@@ -4,7 +4,7 @@ layout: doc
 
 # PakePLus 简介
 
-PakePlus 是一个基于 Tauri2 和 Github 的打包工具，你也可以叫我 PP 或者 2P🫣，只需要一个 Github Token 就可以将任意网站/Vue/React 等项目的 dist 静态文件打包为跨平台桌面软件，体积小巧(小于 5M)并且性能还高，而且 PakePlus 本身也才仅仅 8M 左右。现阶段避免大量使用导致Github服务器压力过大，已做限制：仅可创建1个项目，每天仅可发布一次！  
+PakePlus 是一个基于 Tauri2 和 Github 的打包工具，你也可以叫我 PP 或者 2P🫣，只需要一个 Github Token 就可以将任意网站/Vue/React 等项目的 dist 静态文件打包为跨平台桌面软件，体积小巧(小于 5M)并且性能还高，而且 PakePlus 本身也才仅仅 8M 左右。现阶段避免大量使用导致Github服务器压力过大，PakePLus已做限制：仅可创建1个项目，每天仅可发布一次！ 
 相比 Pake 优势在于：
 1. Pake 需要在本地安装复杂臃肿的 rust 和 node 依赖环境，动辄几个 G 的电脑存储就没有了，我的电脑硬盘根本不够用啊...
 2. 不需要懂命令行和各种复杂配置，PakePLus 界面化操作只需要点点点即可完成打包任务，小学生来了都可以轻松上手 😌

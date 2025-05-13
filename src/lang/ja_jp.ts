@@ -61,10 +61,10 @@ export default {
     publish: '公開',
     build: 'ビルド＆公開',
     pubPlatform: '公開プラットフォーム',
-    pubMode: '公開モード',
+    pubMode: 'デバッグモード',
     closeDebug: 'デバッグをオフにする',
     openDebug: 'デバッグをオンにする',
-    releaseNotes: 'リリースノート:',
+    releaseNotes: 'リリースノート',
     inputRelNotes: 'リリースノートを入力してください',
     pubNotesTips:
         '注：モバイル端末の設定とビルドと公開には約9分かかりますので、しばらくお待ちください……',
@@ -236,4 +236,5 @@ export default {
     debugMode: 'デバッグモード',
     disableCors: 'CORSを無効にする',
     limitProject: '制限:プロジェクト数は1個まで、毎日の発行コンパイルは1回まで',
+    pubPlatformTips: 'プラットフォームを選択してください',
 }

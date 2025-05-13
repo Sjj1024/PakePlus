@@ -355,38 +355,18 @@
             >
                 <!-- platform select -->
                 <el-form-item :label="t('pubPlatform')">
-                    <!-- <el-checkbox-group v-model="pubForm.platform">
-                        <el-checkbox :label="t('desktop')" value="desktop" />
-                        <el-checkbox
-                            :label="t('mobileEnd')"
-                            value="mobile"
-                            disabled
-                        />
-                        <el-checkbox
-                            :label="t('sourceCode')"
-                            value="source"
-                            disabled
-                        />
-                    </el-checkbox-group> -->
                     <el-tree-select
-                        v-model="value"
+                        v-model="store.currentProject.platform"
                         :data="platData"
                         multiple
                         collapse-tags
                         collapse-tags-tooltip
-                        :max-collapse-tags="4"
+                        :max-collapse-tags="3"
                         :render-after-expand="false"
                         show-checkbox
-                        placeholder="请选择平台"
+                        :placeholder="t('pubPlatformTips')"
                     />
                 </el-form-item>
-                <!-- build package selcted -->
-                <!-- <el-form-item label="目标架构">
-                    <el-radio-group v-model="pubForm.chip">
-                        <el-radio value="macos">m</el-radio>
-                        <el-radio value="debug">macos-Intel</el-radio>
-                    </el-radio-group>
-                </el-form-item> -->
                 <!-- debug -->
                 <el-form-item :label="t('pubMode')">
                     <el-radio-group
@@ -680,11 +660,11 @@ const platData = [
         label: 'Windows',
         children: [
             {
-                value: '1-2',
-                label: 'x64',
+                value: '1-1',
+                label: 'X64',
             },
             {
-                value: '1-3',
+                value: '1-2',
                 label: 'Arm64',
             },
         ],
@@ -695,11 +675,11 @@ const platData = [
         children: [
             {
                 value: '2-1',
-                label: 'Intel',
+                label: 'Intel x64',
             },
             {
                 value: '2-2',
-                label: 'M芯片',
+                label: 'Apple Silicon',
             },
         ],
     },
@@ -709,7 +689,7 @@ const platData = [
         children: [
             {
                 value: '3-1',
-                label: 'x64',
+                label: 'X64',
             },
             {
                 value: '3-2',
@@ -1574,6 +1554,7 @@ const reRunFailsJobs = async (id: number, html_url: string) => {
             'build error',
             'PakePlus'
         )
+        await new Promise((resolve) => setTimeout(resolve, 3000))
         openUrl(html_url)
         loadingText(t('failure'))
         buildSecondTimer && clearInterval(buildSecondTimer)
@@ -1593,6 +1574,7 @@ const reRunFailsJobs = async (id: number, html_url: string) => {
         } else {
             reRunFailsJobs(id, html_url)
         }
+        await new Promise((resolve) => setTimeout(resolve, 3000))
     }
 }
 
@@ -1640,6 +1622,7 @@ const checkBuildStatus = async () => {
                 'build cancelled',
                 'PakePlus'
             )
+            await new Promise((resolve) => setTimeout(resolve, 3000))
             loadingText(t('cancelled'))
             buildLoading.value = false
             buildTime = 0
@@ -1648,8 +1631,10 @@ const checkBuildStatus = async () => {
             checkDispatchTimer && clearInterval(checkDispatchTimer)
         } else if (status === 'failure' || conclusion === 'failure') {
             reRunFailsJobs(id, html_url)
+            await new Promise((resolve) => setTimeout(resolve, 3000))
         } else if (status === 'completed' && conclusion === 'failure') {
             reRunFailsJobs(id, html_url)
+            await new Promise((resolve) => setTimeout(resolve, 3000))
         } else if (status === 'in_progress') {
             console.log('build in progress...')
         }
@@ -1663,6 +1648,7 @@ const checkBuildStatus = async () => {
             loadingText(t('failure'))
         } else {
             reRunFailsJobs(id, html_url)
+            await new Promise((resolve) => setTimeout(resolve, 3000))
         }
     }
 }
@@ -1706,6 +1692,7 @@ onUnmounted(() => {
 onMounted(async () => {
     window.addEventListener('keydown', handleKeydown)
     buildTime = 0
+    rerunCount = 0
     if (store.currentProject.icon) {
         confirmIcon(store.currentProject.icon)
     }

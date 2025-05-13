@@ -58,10 +58,10 @@ export default {
     publish: '發佈',
     build: '打包發佈',
     pubPlatform: '發佈平台',
-    pubMode: '發佈模式',
+    pubMode: '調試模式',
     closeDebug: '關閉調試',
     openDebug: '開啟調試',
-    releaseNotes: '發佈說明:',
+    releaseNotes: '發佈說明',
     inputRelNotes: '請輸入發佈說明',
     pubNotesTips:
         '註：移動端配置和打包請從右上角手機圖標進入，桌面端打包大概需要15分鐘左右的時間，打包過程中不要做任何操作，請耐心等待......',
@@ -230,4 +230,5 @@ export default {
     debugMode: '調試模式',
     disableCors: '禁用跨域',
     limitProject: '限制:項目最多1個，每日編譯1次',
+    pubPlatformTips: '請選擇發佈平台',
 }

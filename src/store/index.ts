@@ -267,7 +267,6 @@ export const usePPStore = defineStore('pakeplus', {
                 // 判断this.releases[proName]是否存在
                 if (this.releases[proName]) {
                     // 如果存在，则先过滤重复id的assets,然后合并assets
-                    console.log('如果存在，过滤重复id的assets,然后合并assets')
                     const assets = releaseData.assets.filter(
                         (item: any) =>
                             !this.releases[proName].assets.some(
@@ -280,14 +279,12 @@ export const usePPStore = defineStore('pakeplus', {
                         ...assets,
                     ]
                 } else {
-                    console.log('不存在，直接赋值')
                     this.releases[proName] = releaseData
                 }
             } else {
                 delete this.releases[proName]
             }
             this.currentRelease = this.releases[proName]
-            console.log('setRelease 结束', this.currentRelease)
             localStorage.setItem('releases', JSON.stringify(this.releases))
         },
         async setCurrentRelease() {
@@ -296,13 +293,11 @@ export const usePPStore = defineStore('pakeplus', {
                 this.releases[this.currentProject.name] &&
                 this.releases[this.currentProject.name].id !== 0
             ) {
-                console.log('setCurrentRelease 存在')
                 this.currentRelease = this.releases[this.currentProject.name]
                 await this.getRelease('PakePlus')
                 await this.getRelease('PakePlus-iOS')
                 await this.getRelease('PakePlus-Android')
             } else {
-                console.log('setCurrentRelease 不存在')
                 this.currentRelease = { id: 0 }
                 await this.getRelease('PakePlus')
                 await this.getRelease('PakePlus-iOS')

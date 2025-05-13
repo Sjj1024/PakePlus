@@ -139,7 +139,7 @@ const delLoading = ref(false)
 // asset type
 const typeFunc = (name: string) => {
     if (name.includes('.dmg')) {
-        return t('macOS')
+        return 'macOS'
     } else if (
         name.includes('.deb') ||
         name.includes('.AppImage') ||

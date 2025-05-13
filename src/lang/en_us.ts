@@ -63,7 +63,7 @@ export default {
     pubMode: 'Mode',
     closeDebug: 'close debug',
     openDebug: 'open debug',
-    releaseNotes: 'Notes:',
+    releaseNotes: 'Notes',
     inputRelNotes: 'Please enter the release notes',
     pubNotesTips:
         'Note: The Phone config in the upper right corner, The build and publish process usually takes about 9 minutes......',
@@ -237,4 +237,5 @@ export default {
     debugMode: 'Debug Mode',
     disableCors: 'Disable Cors',
     limitProject: 'Limit: 1 project, 1 daily build.',
+    pubPlatformTips: 'Please select platform',
 }
