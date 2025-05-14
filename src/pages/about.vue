@@ -16,9 +16,7 @@
                 <span class="pakeplus">PakePlus</span>
             </div>
             <div class="description">
-                <p>
-                    {{ t('aboutGuide') }}
-                </p>
+                <p>{{ t('aboutGuide') }}：1024xiaoshen@gmail.com</p>
             </div>
             <div class="tools">
                 <p>

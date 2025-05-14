@@ -89,7 +89,7 @@
                             t('debugMode')
                         }}</el-menu-item>
                         <el-menu-item index="3-12">{{
-                            t('injectJQ')
+                            t('injectJq')
                         }}</el-menu-item>
                         <el-menu-item index="3-13">{{
                             t('disableCors')

@@ -219,10 +219,10 @@ export default {
         )
     },
     // update and merge
-    mergeUpdateRep(user: string, repo: string) {
+    mergeUpdateRep(user: string, repo: string, branch: string) {
         return http(`/repos/${user}/${repo}/merge-upstream`, {
             method: 'post',
-            data: { branch: 'muster' },
+            data: { branch },
         })
     },
     // creat issue
@@ -251,13 +251,6 @@ export default {
     getAllBranchs(user: string, repo: string) {
         return http(`/repos/${user}/${repo}/branches`, {
             method: 'get',
-        })
-    },
-    // merge upstream branch
-    mergeUpstreamBranch(user: string, repo: string, body: any) {
-        return http(`/repos/${user}/${repo}/merges`, {
-            method: 'post',
-            data: body,
         })
     },
     // get upstream branch last commit

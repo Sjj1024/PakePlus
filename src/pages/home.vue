@@ -901,71 +901,21 @@ const creatBranchByUpstream = async (repo: string, branch: string) => {
     }
 }
 
-// force update branch
-const forceUpdateBranch = async (repo: string, branch: string) => {
-    console.log('forceUpdateBranch', repo, branch)
-    // get upstream branch last commit
-    const upRes: any = await githubApi.getUpstreamCommit(
-        upstreamUser,
-        repo,
-        branch
-    )
-    console.log('upRes', upRes)
-    const upBranchSha = upRes.data.object.sha
-    // force update branch
-    const forceUpdateRes: any = await githubApi.forceUpdateBranch(
-        store.userName,
-        repo,
-        branch,
-        {
-            sha: upBranchSha,
-            force: true,
-        }
-    )
-    console.log('forceUpdateRes', forceUpdateRes)
-    if (forceUpdateRes.status === 200) {
-        console.log('forceUpdateBranch success', branch)
-    } else {
-        console.error('forceUpdateBranch error', forceUpdateRes)
-    }
-}
-
 // merge branch and commit(allways use upstream branch)
 const mergeBranch = async (repo: string, branch: string) => {
     console.log('mergeBranch', repo, branch)
-    const mergeRes: any = await githubApi.mergeUpstreamBranch(
+    const mergeRes: any = await githubApi.mergeUpdateRep(
         store.userName,
         repo,
-        {
-            base: branch,
-            head: `${upstreamUser}:${branch}`,
-            commit_message: `Auto-sync with upstream ${branch} by PakePlus`,
-        }
+        branch
     )
     console.log('mergeRes', mergeRes)
-    if (mergeRes.status === 201) {
+    if (mergeRes.status === 200) {
         console.log('mergeBranch success', branch)
     } else if (mergeRes.status === 204) {
         console.log('branch status is up to date', branch)
     } else {
         console.error('mergeBranch error', mergeRes)
-        await forceUpdateBranch(repo, branch)
-    }
-}
-
-// sync branch by upstream branch
-const syncBranch = async (
-    repo: string,
-    branch: string,
-    exist: boolean = false
-) => {
-    console.log('syncBranch', repo, branch)
-    if (exist) {
-        // merge branch and commit(allways use upstream branch)
-        await mergeBranch(repo, branch)
-    } else {
-        // create branch by upstream branch
-        await creatBranchByUpstream(repo, branch)
     }
 }
 
