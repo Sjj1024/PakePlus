@@ -69,9 +69,9 @@ jobs:
                       target: 'aarch64-pc-windows-msvc'
                       args: '--target aarch64-pc-windows-msvc'
                       enabled: ${{ github.event.inputs.build_windows_aarch64 == 'true' }}
-
-        runs-on: ${{ matrix.platform }}
+        
         if: ${{ matrix.enabled == true }}
+        runs-on: ${{ matrix.platform }}
         timeout-minutes: 60
         steps:
             - name: Checkout
