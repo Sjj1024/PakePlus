@@ -97,7 +97,7 @@ export default {
     assetSize: '资源大小',
     releaseDate: '发布日期',
     assetDesc:
-        '资源说明：dmg结尾的是macOS版本，deb结尾的是Linux版本，exe和msi结尾的是Windows版本，点击资源名称可以复制下载链接，点击下载会使用浏览器下载软件包',
+        '资源说明：dmg结尾的是macOS版本，deb结尾的是Linux版本，exe和msi结尾的是Windows版本，apk结尾的是Android版本，ipa结尾的是iOS版本，点击资源名称可以复制下载链接，点击下载会使用浏览器下载软件包',
     githubRepo: '开源地址',
     navigation: '使用教程',
     buyCoffee: '💖赞助我们',

@@ -100,7 +100,7 @@ export default {
     assetSize: 'アセットサイズ',
     releaseDate: 'リリース日',
     assetDesc:
-        'アセット説明：dmgはmacOS版、debはLinux版、exeおよびmsiはWindows版です。アセット名をクリックするとダウンロードリンクをコピーできます。ダウンロードをクリックするとブラウザでパッケージをダウンロードします',
+        'アセット説明：dmgはmacOS版、debはLinux版、exeおよびmsiはWindows版です。apkはAndroid版、ipaはiOS版です。アセット名をクリックするとダウンロードリンクをコピーできます。ダウンロードをクリックするとブラウザでパッケージをダウンロードします',
     githubRepo: 'オープンソースリポジトリ',
     navigation: '使用ガイド',
     buyCoffee: '💖助けになった場合は、コーヒーを一杯おごってください',

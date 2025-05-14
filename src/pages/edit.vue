@@ -268,9 +268,9 @@
                         </el-icon>
                     </el-form-item>
                 </div>
-                <el-form-item :label="t('platform')" prop="platform">
+                <el-form-item :label="t('platform')" prop="preview">
                     <el-radio-group
-                        v-model="store.currentProject.platform"
+                        v-model="store.currentProject.preview"
                         @change="platformChange"
                     >
                         <el-radio value="desktop">{{ t('desktop') }}</el-radio>
@@ -627,7 +627,7 @@ const appRules = reactive<FormRules>({
             trigger: 'blur',
         },
     ],
-    platform: [
+    preview: [
         {
             required: false,
             message: t('inputPrePlatformPlaceholder'),

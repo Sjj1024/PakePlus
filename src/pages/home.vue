@@ -307,7 +307,6 @@ import {
     oneMessage,
     upstreamUser,
     ppRepo,
-    djb2Hash,
 } from '@/utils/common'
 import ppconfig from '@root/scripts/ppconfig.json'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
@@ -579,7 +578,8 @@ const forkStartShas = async (tips: boolean = true) => {
     }
     await supportPP()
     // sync all branch
-    // await syncAllBranch()
+    await syncAllBranch()
+    // get commit sha
     await commitShas(tips)
 }
 
@@ -929,6 +929,7 @@ const forceUpdateBranch = async (repo: string, branch: string) => {
         console.error('forceUpdateBranch error', forceUpdateRes)
     }
 }
+
 // merge branch and commit(allways use upstream branch)
 const mergeBranch = async (repo: string, branch: string) => {
     console.log('mergeBranch', repo, branch)
@@ -953,12 +954,19 @@ const mergeBranch = async (repo: string, branch: string) => {
 }
 
 // sync branch by upstream branch
-const syncBranch = async (repo: string, branch: string) => {
+const syncBranch = async (
+    repo: string,
+    branch: string,
+    exist: boolean = false
+) => {
     console.log('syncBranch', repo, branch)
-    // create branch by upstream branch
-    await creatBranchByUpstream(repo, branch)
-    // merge branch and commit(allways use upstream branch)
-    await mergeBranch(repo, branch)
+    if (exist) {
+        // merge branch and commit(allways use upstream branch)
+        await mergeBranch(repo, branch)
+    } else {
+        // create branch by upstream branch
+        await creatBranchByUpstream(repo, branch)
+    }
 }
 
 // sync upstrame all branch
@@ -992,9 +1000,12 @@ const syncAllBranch = async () => {
                 const userBranch = userBranchs.find(
                     (item: any) => item.name === branch.name
                 )
-                // if sha not same or branch not exist, sync branch
-                if (!userBranch || userBranch.sha !== branch.sha) {
-                    await syncBranch(repo, branch.name)
+                if (userBranch && userBranch.sha !== branch.sha) {
+                    // merge branch and commit(allways use upstream branch)
+                    await mergeBranch(repo, branch.name)
+                } else if (userBranch === undefined) {
+                    // create branch by upstream branch
+                    await creatBranchByUpstream(repo, branch.name)
                 }
             }
         }

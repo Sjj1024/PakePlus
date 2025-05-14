@@ -2,9 +2,31 @@ name: 'Publish and Deploy'
 
 on:
     workflow_dispatch:
-    # push:
-    #     branches:
-    #         - main
+        inputs:
+            build_macos_aarch64:
+                description: 'Build for macOS aarch64'
+                required: false
+                default: 'true'
+            build_macos_x86_64:
+                description: 'Build for macOS x86_64'
+                required: false
+                default: 'true'
+            build_linux_x86_64:
+                description: 'Build for Linux x86_64'
+                required: false
+                default: 'true'
+            build_linux_aarch64:
+                description: 'Build for Linux aarch64'
+                required: false
+                default: 'true'
+            build_windows_x86_64:
+                description: 'Build for Windows x86_64'
+                required: false
+                default: 'true'
+            build_windows_aarch64:
+                description: 'Build for Windows aarch64'
+                required: false
+                default: 'true'
 
 permissions:
     contents: write
@@ -26,27 +48,35 @@ jobs:
                     - platform: 'macos-latest'
                       target: 'aarch64-apple-darwin'
                       args: '--target aarch64-apple-darwin'
+                      enabled: ${{ github.event.inputs.build_macos_aarch64 == 'true' }}
                     - platform: 'macos-latest'
                       target: 'x86_64-apple-darwin'
                       args: '--target x86_64-apple-darwin'
+                      enabled: ${{ github.event.inputs.build_macos_x86_64 == 'true' }}
                     - platform: 'ubuntu-22.04'
                       target: 'x86_64-unknown-linux-gnu'
                       args: ''
+                      enabled: ${{ github.event.inputs.build_linux_x86_64 == 'true' }}
                     - platform: 'ubuntu-22.04'
                       target: 'aarch64-unknown-linux-gnu'
                       args: ''
+                      enabled: ${{ github.event.inputs.build_linux_aarch64 == 'true' }}
                     - platform: 'windows-latest'
                       target: 'x86_64-pc-windows-msvc'
                       args: ''
+                      enabled: ${{ github.event.inputs.build_windows_x86_64 == 'true' }}
                     - platform: 'windows-latest'
                       target: 'aarch64-pc-windows-msvc'
                       args: '--target aarch64-pc-windows-msvc'
+                      enabled: ${{ github.event.inputs.build_windows_aarch64 == 'true' }}
 
         runs-on: ${{ matrix.platform }}
+        if: ${{ matrix.enabled == true }}
         timeout-minutes: 60
         steps:
-            - uses: actions/checkout@v4
-
+            - name: Checkout
+              uses: actions/checkout@v3
+              
             - name: Check Tauri
               shell: bash
               run: |

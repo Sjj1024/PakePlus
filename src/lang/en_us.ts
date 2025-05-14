@@ -99,7 +99,7 @@ export default {
     assetSize: 'Size',
     releaseDate: 'Date',
     assetDesc:
-        'Resource description: The dmg suffix is the macOS version, the deb suffix is the Linux version, and the exe and msi suffixes are the Windows versions. Clicking on the resource name will copy the download link, and clicking on download will use the browser to download the software package.',
+        'Desc: The dmg suffix is the macOS version, the deb suffix is the Linux version, and the exe and msi suffixes are the Windows versions. apk suffix is the Android version, ipa suffix is the iOS version. Clicking on the resource name will copy the download link, and clicking on download will use the browser to download the software package.',
     githubRepo: 'Github',
     navigation: 'Guides',
     buyCoffee: '💖Sponsor us',

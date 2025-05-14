@@ -100,7 +100,7 @@ export default {
     assetSize: '자산 크기',
     releaseDate: '릴리스 날짜',
     assetDesc:
-        '자산 설명: dmg는 macOS 버전, deb는 Linux 버전, exe 및 msi는 Windows 버전입니다. 자산 이름을 클릭하면 다운로드 링크를 복사할 수 있으며, 다운로드 버튼을 클릭하면 브라우저에서 소프트웨어 패키지를 다운로드합니다.',
+        '자산 설명: dmg는 macOS 버전, deb는 Linux 버전, exe 및 msi는 Windows 버전입니다. apk는 Android 버전, ipa는 iOS 버전입니다. 자산 이름을 클릭하면 다운로드 링크를 복사할 수 있으며, 다운로드 버튼을 클릭하면 브라우저에서 소프트웨어 패키지를 다운로드합니다.',
     githubRepo: '오픈 소스 주소',
     navigation: '사용 방법',
     buyCoffee: '💖도움이 되셨다면 커피 한 잔 사 주세요',
