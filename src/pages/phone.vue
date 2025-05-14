@@ -874,7 +874,7 @@ const warning = ref('')
 
 // do not use same name with ref
 const pubForm = reactive({
-    platform: ['PakePlus-Android', 'PakePlus-iOS'],
+    platform: ['PakePlus-Android'],
     chip: 'macos',
     model: 'close',
     desc: '',
