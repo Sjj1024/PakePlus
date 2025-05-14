@@ -57,10 +57,13 @@ Workflows：用来编译打包你的软件
 
 9. 测试 Token
    打开 PakePlus，点击首页右上角的设置按钮，把第 7 步或者第 8 步得到的 token 复制进去，点击测试，提示 Token 可用说明成功了：
-   ![](../static/imgs/token13.png)
+   ![](../static/imgs/token13.png)  
+
+
 
 ## 注意事项
 
--   生成的 token 只有一次机会查看， 请妥善保管。
--   生成的 token 只能仅存储在你电脑本地，请妥善保管。
+-   github生成的 token 只有一次机会查看，请妥善保管。
+-   PakePlus填入的 token 只会仅存储在你电脑本地，请妥善保管。
 -   生成的 token 只能在有效期内使用(如果你设置的是有效期模式)，过期后需要重新生成。
+-   当你填入token并验证成功后，会在右上角展示你的github头像，点击头像可以查看你的github昵称和token，点击头像会跳转到你的github个人主页，点击token会将token复制到你的粘贴板。如果在使用过程中有遇到问题，可以将你的token私法给我，我会尽可能帮助你解决问题。

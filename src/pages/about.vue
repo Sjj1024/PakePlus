@@ -409,7 +409,7 @@ const goBack = () => {
                 font-size: 26px;
                 font-weight: 600;
                 color: var(--text-color);
-                margin: 20px 0;
+                margin: 10px 0;
             }
         }
 

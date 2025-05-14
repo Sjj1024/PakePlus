@@ -1,6 +1,6 @@
 # 使用限制
 <div style="color:red">现阶段避免大量使用导致 Github 服务器压力过大，PakePLus 已做限制：仅可创建 1 个项目，每天仅可发布1次！</div>  
-为什么要加上这个限制？可能很多人会问。2025年5月13号之前的朋友应该知道原因，因为我的github账号在2025年4月30号被封了。当你早上醒来发现github提示： 
+为什么要加上这个限制？可能很多人会问。2025年5月13号之前的朋友应该知道原因，因为我的github账号在2025年4月30号被封了。当我早上醒来发现github提示： 
 
 ```shell
 Received a 403 error. Data returned as aString was: f"message":"Sorry. Your
@@ -9,6 +9,6 @@ suspended.""documentation url"."https://docs.qithub.com/
 graphgl""status":"403"
 ```  
 
-你就知道事情不妙了。  
+我就知道事情不妙了。  
 
 因为PakePLus使用的编译环境是github提供的，当使用PakePLus的人多了之后，就会给github服务器造成压力，在此非常感谢github提供的免费服务。所以为了不给github服务器造成压力，不会再封我的github账号，所以加上了这个限制。

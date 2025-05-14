@@ -1094,6 +1094,7 @@ const deleteProject = () => {
         cancelButtonText: t('cancel'),
         type: 'warning',
         center: true,
+        autofocus: false,
     })
         .then(() => {
             console.log('delete project')
