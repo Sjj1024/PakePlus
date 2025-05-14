@@ -69,15 +69,16 @@ jobs:
                       target: 'aarch64-pc-windows-msvc'
                       args: '--target aarch64-pc-windows-msvc'
                       enabled: ${{ github.event.inputs.build_windows_aarch64 == 'true' }}
-        
-        if: ${{ matrix.enabled == true }}
+
         runs-on: ${{ matrix.platform }}
         timeout-minutes: 60
         steps:
             - name: Checkout
+              if: ${{ matrix.enabled }}
               uses: actions/checkout@v3
-              
+
             - name: Check Tauri
+              if: ${{ matrix.enabled }}
               shell: bash
               run: |
                   if [ -z "${{ secrets.TAURI_KEY_PASSWORD }}" ]; then
@@ -86,33 +87,39 @@ jobs:
                   fi
 
             - name: Install rust target
+              if: ${{ matrix.enabled }}
               run: rustup target add ${{ matrix.target }}
 
             - uses: pnpm/action-setup@v3
+              if: ${{ matrix.enabled }}
               with:
                   version: latest
 
             - name: Sync node version and setup cache
+              if: ${{ matrix.enabled }}
               uses: actions/setup-node@v4
               with:
                   node-version: 20
                   cache: pnpm
 
             - name: Install Rust stable
+              if: ${{ matrix.enabled }}
               uses: dtolnay/rust-toolchain@stable
               with:
                   targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
             - name: Install dependencies (ubuntu only)
-              if: matrix.platform == 'ubuntu-22.04'
+              if: ${{ matrix.enabled && matrix.platform == 'ubuntu-22.04'}}
               run: |
                   sudo apt-get update
                   sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
             - name: Install frontend dependencies
+              if: ${{ matrix.enabled }}
               run: pnpm install
 
             - uses: tauri-apps/tauri-action@v0
+              if: ${{ matrix.enabled }}
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
