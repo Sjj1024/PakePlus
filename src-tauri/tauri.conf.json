@@ -42,6 +42,7 @@
         "active": true,
         "targets": "all",
         "resources": ["./data/*"],
+        "createUpdaterArtifacts": true,
         "icon": [
             "icons/32x32.png",
             "icons/128x128.png",
@@ -49,5 +50,17 @@
             "icons/icon.icns",
             "icons/icon.ico"
         ]
+    },
+    "plugins": {
+        "updater": {
+            "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEI0MkI3NDVCOUM2NDE1QTgKUldTb0ZXU2NXM1FydEsrN29Edjg2c0kxZmk1YWpRa3ZUMjE1S2NLeGVFRkJRWW1SSnhXQ2F3S0EK",
+            "endpoints": [
+                "https://releases.myapp.com/{{target}}/{{arch}}/{{current_version}}",
+                "https://github.com/user/repo/releases/latest/download/latest.json"
+            ],
+            "windows": {
+                "installMode": "passive"
+            }
+        }
     }
 }
