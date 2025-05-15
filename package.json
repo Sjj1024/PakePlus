@@ -32,6 +32,7 @@
         "@tauri-apps/plugin-os": "^2.2.0",
         "@tauri-apps/plugin-shell": "^2.2.0",
         "@tauri-apps/plugin-store": "^2.2.0",
+        "@tauri-apps/plugin-updater": "^2.7.1",
         "@tauri-apps/plugin-window-state": "^2.2.1",
         "axios": "^1.7.9",
         "codemirror": "^6.0.1",
