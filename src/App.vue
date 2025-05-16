@@ -3,6 +3,8 @@ import { onMounted } from 'vue'
 import { locale as osLocale } from '@tauri-apps/plugin-os'
 import { useI18n } from 'vue-i18n'
 import { isTauri, isMobile, buildTime } from './utils/common'
+import { check } from '@tauri-apps/plugin-updater';
+
 
 const { locale } = useI18n()
 
@@ -85,6 +87,11 @@ const initEnv = async () => {
     // }
 }
 
+const checkUpdate = async () => {
+    const update = await check();
+    console.log('update', update);
+}
+
 // listen theme change
 window
     .matchMedia('(prefers-color-scheme: dark)')
@@ -102,6 +109,7 @@ window.onerror = function (message, source, lineno, colno, error) {
 
 onMounted(() => {
     initEnv()
+    checkUpdate()
 })
 </script>
 
