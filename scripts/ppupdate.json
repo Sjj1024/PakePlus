@@ -1,7 +1,7 @@
 {
-    "version": "",
-    "notes": "",
-    "pub_date": "",
+    "version": "0.5.27",
+    "notes": "更新说明。",
+    "pub_date": "2025-05-16",
     "platforms": {
         "linux-x86_64": {
             "signature": "",
