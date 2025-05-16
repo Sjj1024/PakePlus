@@ -122,7 +122,14 @@
             </div>
         </div>
         <!-- version -->
-        <div class="version" @click="goAbout">v{{ version }}</div>
+        <el-dropdown placement="top" size="small">
+            <div class="version" @click="goAbout">v{{ version }}</div>
+            <template #dropdown>
+                <el-dropdown-menu>
+                    <el-dropdown-item>{{ t('update') }}</el-dropdown-item>
+                </el-dropdown-menu>
+            </template>
+        </el-dropdown>
         <!-- config github token -->
         <el-dialog
             v-model="tokenDialog"
@@ -296,7 +303,6 @@ import {
     urlMap,
     openUrl,
     isTauri,
-    base64Decode,
     platforms,
     createBranch,
     webBranch,
@@ -315,7 +321,6 @@ import { getCurrentWindow } from '@tauri-apps/api/window'
 import packageJson from '../../package.json'
 import { check } from '@tauri-apps/plugin-updater'
 import { getVersion } from '@tauri-apps/api/app'
-import { ElMessageBox } from 'element-plus'
 
 const router = useRouter()
 const store = usePPStore()
@@ -862,6 +867,7 @@ const deleteBuildYml = async (
 }
 
 // check update
+const uploading = ref(false)
 const checkUpdate = async () => {
     const update = await check()
     console.log('update', update)
@@ -1293,6 +1299,7 @@ onMounted(() => {
         right: 20px;
         color: gray;
         cursor: pointer;
+        font-size: 17px;
         -webkit-user-select: none; /* Safari */
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+/Edge */
