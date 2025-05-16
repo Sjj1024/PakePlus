@@ -238,4 +238,6 @@ export default {
     limitProject: '制限:プロジェクト数は1個まで、毎日の発行コンパイルは1回まで',
     pubPlatformTips: 'プラットフォームを選択してください',
     apiLimit: 'API呼び出し回数が今日の制限に達しました。明日再試してください',
+    update: '更新',
+    updateTips: '更新提示',
 }

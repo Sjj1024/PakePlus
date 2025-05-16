@@ -1,19 +1,17 @@
 {
-    "version": "0.5.27",
-    "notes": "更新说明。",
-    "pub_date": "2025-05-16",
+    "version": "0.5.28",
+    "notes": "",
+    "pub_date": "2025-05-16T02:58:42.598Z",
+    "force": false,
+    "zh": "更新一下",
+    "en": "Update",
+    "ja": "更新します",
+    "ko": "업데이트",
+    "zhTw": "更新一下",
     "platforms": {
-        "linux-x86_64": {
-            "signature": "",
-            "url": ""
-        },
-        "windows-x86_64": {
-            "signature": "",
-            "url": ""
-        },
-        "darwin-x86_64": {
-            "signature": "",
-            "url": ""
+        "darwin-aarch64": {
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEVLS1NtUGg5K1hqZkhyaTBjNGNJb0IxL0ZXRWpMUVo5MWRLQTFFRnROT2x6bjJSZ0ltdDFJWmcranQ4WTNsTzNHQ1lRT0NGaStWcGtjdHQrayt1emc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQ3MzY0MzE2CWZpbGU6UGFrZVBsdXMuYXBwLnRhci5negppK1F4SUNmYi9ma3V4T081MXNIUXFNNWp0anRzUlM5bWlHZXpkdkFuWXQzRGVWMnlET2pZQ1ZZZG5NRk83bnBHRklqSFZ2REtEUmhVeVEzWTdQS3lEdz09Cg==",
+            "url": "https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.28/PakePlus_aarch64.app.tar.gz"
         }
     }
 }

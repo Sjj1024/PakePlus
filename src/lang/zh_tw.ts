@@ -232,4 +232,6 @@ export default {
     limitProject: '限制:項目最多1個，每日編譯1次',
     pubPlatformTips: '請選擇發佈平台',
     apiLimit: 'API調用次數已達今日限制，請明天再試',
+    update: '更新',
+    updateTips: '更新提示',
 }

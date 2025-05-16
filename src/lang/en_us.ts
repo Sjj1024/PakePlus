@@ -239,4 +239,6 @@ export default {
     limitProject: 'Limit: 1 project, 1 daily build.',
     pubPlatformTips: 'Please select platform',
     apiLimit: 'API call limit exceeded, please try again tomorrow',
+    update: 'Update',
+    updateTips: 'Update Tips',
 }

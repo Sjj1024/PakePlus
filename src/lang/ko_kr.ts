@@ -238,4 +238,6 @@ export default {
     limitProject: '제한: 프로젝트 최대 1개, 매일 최대 1회 배포 컴파일',
     pubPlatformTips: '플랫폼을 선택하세요',
     apiLimit: 'API 호출 횟수가 오늘의 제한에 도달했습니다. 내일 다시 시도해주세요',
+    update: '업데이트',
+    updateTips: '업데이트 힌트',
 }

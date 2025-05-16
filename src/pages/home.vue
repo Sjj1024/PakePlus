@@ -313,6 +313,9 @@ import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import packageJson from '../../package.json'
+import { check } from '@tauri-apps/plugin-updater'
+import { getVersion } from '@tauri-apps/api/app'
+import { ElMessageBox } from 'element-plus'
 
 const router = useRouter()
 const store = usePPStore()
@@ -860,22 +863,42 @@ const deleteBuildYml = async (
 
 // check update
 const checkUpdate = async () => {
-    const response = await githubApi.getPakePlusInfo()
-    console.log('updateJson', response)
-    const content = base64Decode(response.data.content)
-    const pakePlusJson = JSON.parse(content)
-    console.log('json', pakePlusJson)
-    const version = pakePlusJson.version
-    console.log('version', version)
-    if (version !== packageJson.version) {
-        console.log('update', version)
+    const update = await check()
+    console.log('update', update)
+    const ppversion = await getVersion()
+    console.log('ppversion', ppversion)
+    if (update && ppversion !== update.version) {
+        const rawJson = update.rawJson
+        const notes: any = rawJson[locale.value] || rawJson.zh
+        // ElMessageBox.confirm(notes, t('updateTips'), {
+        //     confirmButtonText: t('update'),
+        //     cancelButtonText: t('cancel'),
+        //     type: 'warning',
+        //     center: true,
+        //     autofocus: false,
+        // })
+        //     .then(async () => {
+        //         console.log('update project')
+        //         let downloaded = 0
+        //         let contentLength = 0
+        //         await update.downloadAndInstall((event) => {
+        //             switch (event.event) {
+        //                 case 'Started':
+        //                     contentLength = event.data.contentLength || 0
+        //                     break
+        //                 case 'Progress':
+        //                     downloaded += event.data.chunkLength
+        //                     break
+        //                 case 'Finished':
+        //                     console.log('download finished')
+        //                     break
+        //             }
+        //         })
+        //     })
+        //     .catch(() => {
+        //         console.log('catch project')
+        //     })
     }
-}
-
-const getPakePlusInfo = async () => {
-    const pakeVersion = packageJson.version
-    console.log('pakeVersion', pakeVersion)
-    version.value = pakeVersion
 }
 
 // creat branch by upstream branch
@@ -969,6 +992,7 @@ onMounted(() => {
     } else {
         oneMessage.error(t('webNotStable'))
     }
+    checkUpdate()
     // checkUpdate()
     // getPakePlusInfo()
     // syncAllBranch()
@@ -1269,6 +1293,10 @@ onMounted(() => {
         right: 20px;
         color: gray;
         cursor: pointer;
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard syntax */
 
         &:hover {
             color: var(--text-color);
