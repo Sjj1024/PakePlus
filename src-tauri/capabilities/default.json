@@ -35,6 +35,7 @@
         "updater:allow-check",
         "updater:allow-download",
         "updater:allow-install",
+        "updater:allow-download-and-install",
         "opener:default",
         "http:allow-fetch",
         "http:default",

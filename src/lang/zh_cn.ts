@@ -236,5 +236,7 @@ export default {
     pubPlatformTips: '请选择发布平台',
     apiLimit: 'API调用次数已达今日限制，请明天再试',
     update: '更新',
+    updateNow: '立即更新',
     updateTips: '更新提示',
+    checkUpdate: '检查更新',
 }

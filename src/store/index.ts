@@ -117,14 +117,9 @@ export const usePPStore = defineStore('pakeplus', {
             previewPath: '',
             // timer
             timer: 0 as any,
-            // upstream repo commit md5
-            upCommitMd5: localStorage.getItem('upCommitMd5')
-                ? JSON.parse(localStorage.getItem('upCommitMd5') as string)
-                : ({
-                      PakePlus: '',
-                      'PakePlus-Android': '',
-                      'PakePlus-iOS': '',
-                  } as { [key: string]: any }),
+            ppversion: '1.0.0',
+            isUpdate: false,
+            name: '1024xiaoshen',
             age: 18,
             sex: '男',
         }
@@ -447,14 +442,6 @@ export const usePPStore = defineStore('pakeplus', {
             yield 'update ppandroid.json'
             // 5. dispatch action
             yield 'dispatch action'
-        },
-        // update upCommitMd5
-        updateUpCommitMd5(repo: string, repoHash: any) {
-            this.upCommitMd5[repo] = repoHash
-            localStorage.setItem(
-                'upCommitMd5',
-                JSON.stringify(this.upCommitMd5)
-            )
         },
     },
 })

@@ -3,6 +3,7 @@ import { onMounted } from 'vue'
 import { locale as osLocale } from '@tauri-apps/plugin-os'
 import { useI18n } from 'vue-i18n'
 import { isTauri, isMobile, buildTime } from './utils/common'
+import Updater from './components/Updater.vue'
 
 const { locale } = useI18n()
 
@@ -108,6 +109,7 @@ onMounted(() => {
 <template>
     <div class="container" :class="{ isTauri: isTauri, webBox: !isTauri }">
         <router-view></router-view>
+        <Updater />
     </div>
 </template>
 

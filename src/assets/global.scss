@@ -52,3 +52,15 @@ body {
 .el-menu-item:active {
     transform: scale(0.95);
 }
+
+.updateMenu {
+    overflow: hidden;
+}
+
+.updateBtn {
+    color: #e83737 !important;
+    &:hover {
+        font-weight: bold !important;
+        transform: scale(1.05);
+    }
+}

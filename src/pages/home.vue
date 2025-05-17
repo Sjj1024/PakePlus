@@ -122,7 +122,46 @@
             </div>
         </div>
         <!-- version -->
-        <div class="version" @click="goAbout">v{{ version }}</div>
+        <!-- <el-popover width="50" content="Top" placement="top">
+            <template #reference>
+                <div class="version" @click="goAbout">v{{ version }}</div>
+            </template>
+        </el-popover> -->
+        <!-- <el-button @click="goAbout" link class="version">
+            v{{ version }}
+        </el-button> -->
+        <!-- <el-button @click="goAbout" text link class="version">
+            v{{ version }}
+        </el-button> -->
+        <el-dropdown placement="top" size="small">
+            <div
+                class="version"
+                :class="{ isUpdate: store.isUpdate }"
+                @click="goAbout"
+            >
+                v{{ store.ppversion }}
+            </div>
+            <template #dropdown>
+                <el-dropdown-menu class="updateMenu">
+                    <el-dropdown-item
+                        class="updateBtn"
+                        v-if="store.isUpdate"
+                        @click="sendUpdateEvent('update-now')"
+                    >
+                        {{ t('updateNow') }}
+                    </el-dropdown-item>
+                    <el-dropdown-item
+                        v-else-if="isTauri"
+                        @click="sendUpdateEvent('update-check')"
+                    >
+                        {{ t('checkUpdate') }}
+                    </el-dropdown-item>
+                    <el-dropdown-item @click="goAbout">
+                        {{ t('superpower') }}
+                    </el-dropdown-item>
+                </el-dropdown-menu>
+            </template>
+        </el-dropdown>
         <!-- config github token and user info -->
         <el-dialog
             v-model="tokenDialog"
@@ -287,7 +326,6 @@
                 </div>
             </template>
         </el-dialog>
-        <!-- tips new version -->
     </div>
 </template>
 
@@ -302,7 +340,6 @@ import {
     urlMap,
     openUrl,
     isTauri,
-    base64Decode,
     platforms,
     createBranch,
     webBranch,
@@ -322,6 +359,7 @@ import packageJson from '../../package.json'
 import { check } from '@tauri-apps/plugin-updater'
 import { getVersion } from '@tauri-apps/api/app'
 import { ElMessageBox } from 'element-plus'
+import { emit } from '@tauri-apps/api/event'
 
 const router = useRouter()
 const store = usePPStore()
@@ -866,43 +904,8 @@ const deleteBuildYml = async (
 }
 
 // check update
-const checkUpdate = async () => {
-    const update = await check()
-    console.log('update', update)
-    const ppversion = await getVersion()
-    console.log('ppversion', ppversion)
-    if (update && ppversion !== update.version) {
-        const rawJson = update.rawJson
-        const notes: any = rawJson[locale.value] || rawJson.zh
-        // ElMessageBox.confirm(notes, t('updateTips'), {
-        //     confirmButtonText: t('update'),
-        //     cancelButtonText: t('cancel'),
-        //     type: 'warning',
-        //     center: true,
-        //     autofocus: false,
-        // })
-        //     .then(async () => {
-        //         console.log('update project')
-        //         let downloaded = 0
-        //         let contentLength = 0
-        //         await update.downloadAndInstall((event) => {
-        //             switch (event.event) {
-        //                 case 'Started':
-        //                     contentLength = event.data.contentLength || 0
-        //                     break
-        //                 case 'Progress':
-        //                     downloaded += event.data.chunkLength
-        //                     break
-        //                 case 'Finished':
-        //                     console.log('download finished')
-        //                     break
-        //             }
-        //         })
-        //     })
-        //     .catch(() => {
-        //         console.log('catch project')
-        //     })
-    }
+const sendUpdateEvent = async (type: string) => {
+    await emit('update-event', { type: type })
 }
 
 // creat branch by upstream branch
@@ -996,8 +999,6 @@ onMounted(() => {
     } else {
         oneMessage.error(t('webNotStable'))
     }
-    checkUpdate()
-    // checkUpdate()
     // getPakePlusInfo()
     // syncAllBranch()
 })
@@ -1297,6 +1298,7 @@ onMounted(() => {
         right: 20px;
         color: gray;
         cursor: pointer;
+        font-size: 17px;
         -webkit-user-select: none; /* Safari */
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+/Edge */
@@ -1305,6 +1307,10 @@ onMounted(() => {
         &:hover {
             color: var(--text-color);
         }
+    }
+
+    .isUpdate {
+        color: #e83737;
     }
 }
 
