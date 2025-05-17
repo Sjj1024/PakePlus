@@ -68,7 +68,7 @@ const confirmUpdate = async () => {
     let contentLength = 0
     const loading = ElLoading.service({
         lock: true,
-        text: '开始更新...',
+        text: t('startUpdate'),
         background: 'rgba(0, 0, 0, 0.7)',
     })
     try {
@@ -90,20 +90,9 @@ const confirmUpdate = async () => {
             }
         })
         await relaunch()
-
-        // contentLength = 100
-        // while (true) {
-        //     downloaded += 1
-        //     console.log('downloaded', downloaded)
-        //     loadingText(
-        //         `${t('updateProgress')}
-        //         ${((downloaded / contentLength) * 100).toFixed(2)}%`
-        //     )
-        //     await new Promise((resolve) => setTimeout(resolve, 1000))
-        // }
     } catch (error: any) {
         console.log('error', error)
-        oneMessage.error(error || '更新失败')
+        oneMessage.error(error || t('updateError'))
         loading.close()
     }
 }
@@ -113,7 +102,6 @@ onMounted(async () => {
     store.ppversion = packageJson.version
     isTauri && checkUpdate()
     await listen('update-event', (event: any) => {
-        console.log('收到事件:', event.payload)
         if (event.payload.type === 'update-now') {
             confirmUpdate()
         } else if (event.payload.type === 'update-check') {

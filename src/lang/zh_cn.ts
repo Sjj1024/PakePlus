@@ -241,4 +241,7 @@ export default {
     checkUpdate: '检查更新',
     versionTips: '当前已是最新版本',
     updateProgress: '更新中...',
+    updateSuccess: '更新成功',
+    updateError: '更新失败',
+    startUpdate: '开始更新...',
 }

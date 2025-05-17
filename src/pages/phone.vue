@@ -1743,7 +1743,7 @@ const publishPhone = async () => {
                 store.currentProject.name,
                 store.currentProject.showName,
                 store.currentProject.isHtml,
-                'PakePlus publish action error',
+                'PakePlus publish action error' + error.message,
                 'failure',
                 'build error',
                 repo
