@@ -12,10 +12,7 @@
                 </div>
                 <div class="toolTips">
                     <span> {{ t('appProjectTips') }} </span>
-                    <el-icon
-                        class="document"
-                        @click="openUrl(urlMap.configdoc)"
-                    >
+                    <el-icon class="document" @click="openUrl(urlMap.phonedoc)">
                         <Document />
                     </el-icon>
                 </div>

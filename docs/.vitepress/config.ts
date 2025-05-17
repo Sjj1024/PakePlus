@@ -164,22 +164,42 @@ export default defineConfig({
                                 { text: 'Introduction', link: '/en/guide/' },
                                 { text: 'Download', link: '/en/guide/down' },
                                 { text: 'Get Token', link: '/en/guide/token' },
-                                { text: 'Create Project', link: '/en/guide/creat' },
-                                { text: 'Configuration', link: '/en/guide/config' },
-                                { text: 'APP Configuration', link: '/en/guide/phone' },
-                                { text: 'Build and Release', link: '/en/guide/build' },
+                                {
+                                    text: 'Create Project',
+                                    link: '/en/guide/creat',
+                                },
+                                {
+                                    text: 'Configuration',
+                                    link: '/en/guide/config',
+                                },
+                                {
+                                    text: 'APP Configuration',
+                                    link: '/en/guide/phone',
+                                },
+                                {
+                                    text: 'Build and Release',
+                                    link: '/en/guide/build',
+                                },
                             ],
                         },
                         {
                             text: 'Advanced Configuration',
                             collapsed: false,
-                            items: [{ text: 'Advanced Configuration', link: '/en/guide/tauri' }],
+                            items: [
+                                {
+                                    text: 'Advanced Configuration',
+                                    link: '/en/guide/tauri',
+                                },
+                            ],
                         },
                         {
                             text: 'Advanced Play',
                             collapsed: false,
                             items: [
-                                { text: 'Advanced Play', link: '/en/guide/superman' },
+                                {
+                                    text: 'Advanced Play',
+                                    link: '/en/guide/superman',
+                                },
                             ],
                         },
                     ],
@@ -188,17 +208,32 @@ export default defineConfig({
                         { text: 'Limits', link: '/en/question/limit' },
                         { text: 'Token Invalid', link: '/en/question/invalid' },
                         { text: 'Project Exists', link: '/en/question/exist' },
-                        { text: 'Compilation Failed', link: '/en/question/build' },
-                        { text: 'Packaging HTML Project', link: '/en/question/html' },
-                        { text: 'Packaging Vue Project', link: '/en/question/vue' },
-                        { text: 'ipa/apk Installation', link: '/en/question/phone' },
+                        {
+                            text: 'Compilation Failed',
+                            link: '/en/question/build',
+                        },
+                        {
+                            text: 'Packaging HTML Project',
+                            link: '/en/question/html',
+                        },
+                        {
+                            text: 'Packaging Vue Project',
+                            link: '/en/question/vue',
+                        },
+                        {
+                            text: 'ipa/apk Installation',
+                            link: '/en/question/phone',
+                        },
                         { text: 'Window Jump', link: '/en/question/jump' },
                         { text: 'Other Issues', link: '/en/question/other' },
                         { text: 'Issue', link: '/en/question/issue' },
                     ],
                     '/en/exchange/': [
                         { text: 'Join Group Chat', link: '/en/exchange/' },
-                        { text: 'Github Discussion', link: '/en/exchange/github' },
+                        {
+                            text: 'Github Discussion',
+                            link: '/en/exchange/github',
+                        },
                     ],
                     '/en/sponsor/': [
                         { text: 'Sponsor Us', link: '/en/sponsor/' },

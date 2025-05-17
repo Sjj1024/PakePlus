@@ -1,6 +1,7 @@
 export default {
     projectTitle: 'プロジェクト管理',
-    projectTips: 'このソフトウェアはオープンソースで無料です',
+    projectTips:
+        'オープンソース無料、数分でクロスプラットフォームアプリをパッケージ化',
     darkMode: 'ダークテーマ',
     lightMode: 'ライトテーマ',
     testToken: 'テスト',
@@ -15,7 +16,7 @@ export default {
         'このバージョンのリソースをダウンロードおよびインストールするには、参照してください',
     aboutTitle: 'PakePlusについて',
     aboutTips:
-        'オープンソースで無料、Webページをパッケージしてクロスプラットフォームアプリを作成するには、Githubトークンが1つだけ必要です',
+        'オープンソース無料、数分でクロスプラットフォームアプリをパッケージ化',
     configToken: 'まずトークンを設定してください',
     tokenOk: 'トークンが有効です',
     tokenError: 'トークンが無効です、再設定してください',
@@ -27,9 +28,9 @@ export default {
     configProject: 'プロジェクトを設定',
     exeProject: 'プログラムを設定',
     appProject: 'アプリを設定',
-    appProjectTips: 'モバイルアプリ（iOS/Android）の設定情報',
+    appProjectTips: 'モバイルアプリ（iOS/Android/PWA）の設定情報',
     configProjectTips:
-        '現在のプロジェクトのWebサイトアドレス、アプリ名、アプリIDなどを設定します',
+        '現在のプロジェクトのアドレス、名前、唯一の識別子などを設定します',
     relHistore: 'リリース履歴',
     delProject: 'プロジェクトを削除',
     webUrl: 'Webサイトアドレス',

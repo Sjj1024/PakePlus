@@ -1,6 +1,6 @@
 export default {
     projectTitle: 'Project Manager',
-    projectTips: 'Open source free web packaging of cross platform apps',
+    projectTips: 'Open source free packaging of cross platform apps',
     darkMode: 'Dark Mode',
     lightMode: 'Light Mode',
     testToken: 'Test',
@@ -12,8 +12,7 @@ export default {
     projectNamePlaceholder: 'Please enter the project name, example: PakePlus',
     releaseBody: 'See the assets to download and install this version.',
     aboutTitle: 'About PakePlus',
-    aboutTips:
-        'Open source and free, web page packaging cross-platform APP, just need a Github Token',
+    aboutTips: 'Open source and free, packaging cross-platform APP',
     configToken: 'Please configure the token first',
     tokenOk: 'The token is available',
     tokenError: 'The token is not available, please reconfigure',
@@ -25,7 +24,7 @@ export default {
     configProject: 'Configure the project',
     exeProject: 'Configure the Program',
     appProject: 'Configure the APP',
-    appProjectTips: 'Mobile APP (iOS/Android) configuration information',
+    appProjectTips: 'Mobile APP (iOS/Android/PWA) configuration information',
     configProjectTips:
         'Configure the website, name, identifier, etc. of the current project',
     relHistore: 'Release History',
@@ -110,7 +109,7 @@ export default {
     copySuccess: 'Copy successful',
     delSuccess: 'Delete successful',
     aboutGuide:
-        "PakePlus is open-source and free. It allows you to package web pages or projects like Vue/React into cross-platform apps with just a GitHub Token. It supports standalone executables for Windows, macOS, and Linux, as well as mobile platforms like Android and iOS. If you have any questions, feel free to add me on WeChat: lanxingme (note: PakePlus) or email me at",
+        'PakePlus is open-source and free. It allows you to package web pages or projects like Vue/React into cross-platform apps with just a GitHub Token. It supports standalone executables for Windows, macOS, and Linux, as well as mobile platforms like Android and iOS. If you have any questions, feel free to add me on WeChat: lanxingme (note: PakePlus) or email me at',
     followme: 'Follow me',
     moreConfig: 'More Config',
     superpower: 'Superpower',
