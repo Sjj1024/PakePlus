@@ -1,4 +1,4 @@
-# 应用已随坏
+# mac 应用已随坏
 
 ![](../static/imgs/macerror.png)
 这是因为没有给苹果给钱，所以苹果会拒绝你的应用。
@@ -16,3 +16,10 @@ sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
 ```sh
 sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
 ```
+
+# 发布失败问题自查
+
+-   检查 token 权限是否给正确了，
+-   token 重新填写再试试
+-   用最原始的配置打包是否成功
+-   是否做了更多配置的操作或脚本操作
