@@ -67,7 +67,7 @@
                     <img
                         v-if="store.userInfo.avatar_url"
                         :src="store.userInfo.avatar_url"
-                        @click="userInfoDialog = true"
+                        @click="tokenDialog = true"
                         class="userAvatar"
                         alt="userAvatar"
                     />
@@ -123,7 +123,7 @@
         </div>
         <!-- version -->
         <div class="version" @click="goAbout">v{{ version }}</div>
-        <!-- config github token -->
+        <!-- config github token and user info -->
         <el-dialog
             v-model="tokenDialog"
             width="500"
@@ -133,11 +133,40 @@
         >
             <template #header>
                 <div class="diaHeader">
-                    <span>Github Token</span>
-                    <!-- <el-icon class="diaTipsIcon"><Warning /></el-icon> -->
+                    <span>
+                        {{
+                            store.userInfo.login && !testLoading
+                                ? ''
+                                : 'Github Token'
+                        }}
+                    </span>
                 </div>
             </template>
-            <div class="diaContent">
+            <!-- user info -->
+            <div
+                v-if="store.userInfo.login && !testLoading"
+                class="userContent"
+            >
+                <div class="userAvatarBox">
+                    <img
+                        class="userAvatar"
+                        :src="store.userInfo.avatar_url"
+                        alt="avatar"
+                        @click="openUrl(store.userInfo.html_url)"
+                    />
+                </div>
+                <div class="line">
+                    {{ t('userName') }}: {{ store.userInfo.login }}
+                </div>
+                <div class="line tokenLine" @click="copyToken">
+                    token: {{ store.token }}
+                </div>
+                <div class="tokenTips">
+                    {{ t('tokenTips') }}
+                </div>
+            </div>
+            <!-- token input -->
+            <div v-else class="diaContent">
                 <el-input
                     v-model.trim="store.token"
                     autocomplete="off"
@@ -169,51 +198,28 @@
                 </el-button>
             </div>
             <template #footer>
-                <div class="dialog-footer">
+                <div
+                    v-if="store.userInfo.login && !testLoading"
+                    class="dialog-footer"
+                >
+                    <!-- user logout -->
+                    <el-button @click="logout">{{ t('quit') }}</el-button>
+                    <!-- user confirm -->
+                    <el-button type="primary" @click="tokenDialog = false">
+                        {{ t('confirm') }}
+                    </el-button>
+                </div>
+                <div v-else class="dialog-footer">
+                    <!-- token cancel -->
                     <el-button @click="cancelToken" :disabled="testLoading">
                         {{ t('cancel') }}
                     </el-button>
+                    <!-- token confirm -->
                     <el-button
                         type="primary"
                         @click="testToken(false)"
                         :disabled="testLoading"
                     >
-                        {{ t('confirm') }}
-                    </el-button>
-                </div>
-            </template>
-        </el-dialog>
-        <!-- github user info -->
-        <el-dialog v-model="userInfoDialog" width="500" center>
-            <template #header>
-                <div class="diaHeader">
-                    <!-- <span>User Info</span> -->
-                    <!-- <el-icon class="diaTipsIcon"><Warning /></el-icon> -->
-                </div>
-            </template>
-            <div class="userContent">
-                <div class="userAvatarBox">
-                    <img
-                        class="userAvatar"
-                        :src="store.userInfo.avatar_url"
-                        alt="avatar"
-                        @click="openUrl(store.userInfo.html_url)"
-                    />
-                </div>
-                <div class="line">
-                    {{ t('userName') }}: {{ store.userInfo.login }}
-                </div>
-                <div class="line tokenLine" @click="copyToken">
-                    token: {{ store.token }}
-                </div>
-                <div class="tokenTips">
-                    {{ t('tokenTips') }}
-                </div>
-            </div>
-            <template #footer>
-                <div class="dialog-footer">
-                    <el-button @click="logout">{{ t('quit') }}</el-button>
-                    <el-button type="primary" @click="userInfoDialog = false">
                         {{ t('confirm') }}
                     </el-button>
                 </div>
@@ -322,7 +328,6 @@ const store = usePPStore()
 const { t, locale } = useI18n()
 const version = ref(packageJson.version)
 const tokenDialog = ref(false)
-const userInfoDialog = ref(false)
 const branchDialog = ref(false)
 const branchName = ref('')
 const testLoading = ref(false)
@@ -359,7 +364,6 @@ const copyToken = () => {
 // logout
 const logout = async () => {
     localStorage.clear()
-    userInfoDialog.value = false
     store.$reset()
 }
 
