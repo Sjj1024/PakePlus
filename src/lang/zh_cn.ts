@@ -239,4 +239,6 @@ export default {
     updateNow: '立即更新',
     updateTips: '更新提示',
     checkUpdate: '检查更新',
+    versionTips: '当前已是最新版本',
+    updateProgress: '更新中...',
 }

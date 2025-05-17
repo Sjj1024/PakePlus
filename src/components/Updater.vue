@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { isTauri, oneMessage } from '@/utils/common'
+import { isTauri, loadingText, oneMessage } from '@/utils/common'
 import { ref, onMounted } from 'vue'
 import { usePPStore } from '@/store'
 import packageJson from '@root/package.json'
@@ -37,6 +37,7 @@ import { check } from '@tauri-apps/plugin-updater'
 import { useI18n } from 'vue-i18n'
 import { ElLoading } from 'element-plus'
 import { listen } from '@tauri-apps/api/event'
+import { relaunch } from '@tauri-apps/plugin-process'
 
 const { t } = useI18n()
 const store = usePPStore()
@@ -55,6 +56,8 @@ const checkUpdate = async () => {
         rawJson.value = update.rawJson as any
         notes.value = rawJson.value[localStorage.getItem('locale') || 'zh']
         console.log('notes', notes)
+    } else {
+        oneMessage.success(t('versionTips'))
     }
 }
 
@@ -70,24 +73,34 @@ const confirmUpdate = async () => {
     })
     try {
         await update.downloadAndInstall((event: any) => {
+            loadingText(
+                `${t('updateProgress')}
+                ${((downloaded / contentLength) * 100).toFixed(2)}%`
+            )
             switch (event.event) {
                 case 'Started':
                     contentLength = event.data.contentLength
-                    console.log(
-                        `started downloading ${event.data.contentLength} bytes`
-                    )
                     break
                 case 'Progress':
                     downloaded += event.data.chunkLength
-                    console.log(
-                        `downloaded ${downloaded} from ${contentLength}`
-                    )
                     break
                 case 'Finished':
                     console.log('download finished')
                     break
             }
         })
+        await relaunch()
+
+        // contentLength = 100
+        // while (true) {
+        //     downloaded += 1
+        //     console.log('downloaded', downloaded)
+        //     loadingText(
+        //         `${t('updateProgress')}
+        //         ${((downloaded / contentLength) * 100).toFixed(2)}%`
+        //     )
+        //     await new Promise((resolve) => setTimeout(resolve, 1000))
+        // }
     } catch (error: any) {
         console.log('error', error)
         oneMessage.error(error || '更新失败')
