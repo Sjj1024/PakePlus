@@ -8,7 +8,7 @@ style="margin: 0 10px;" >简体中文</a>
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/pakeplus.png" width=138/>
 </p>  
 <h1 align="center">PakePlus</h1>  
-<p align="center"><strong>Turn any webpage/Vue/React and so on into a desktop and mobile app with easy in just few minutes</strong></p>
+<p align="center"><strong>Turn any webpage/Vue/React and so on into desktop and mobile app under 5M with easy in few minutes</strong></p>
 
 <p align="center">
     <a href="https://github.com/Sjj1024/PakePlus/releases"><img src="https://img.shields.io/github/v/release/Sjj1024/PakePlus?style=flat-square&logo=github" alt="Release"></a>
