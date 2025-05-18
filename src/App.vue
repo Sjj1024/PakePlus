@@ -56,7 +56,34 @@ const chageTheme = (theme: string) => {
 }
 
 const initEnv = async () => {
-    console.log('Build time:', buildTime)
+    // listen theme change
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    if (mediaQuery) {
+        const listener = (e: any) => {
+            const newTheme = e.matches ? 'dark' : 'light'
+            console.log('theme change', newTheme)
+            chageTheme(newTheme) // 确保 chageTheme 函数已定义
+        }
+        // 优先使用 addEventListener，否则回退到 addListener
+        if (mediaQuery.addEventListener) {
+            mediaQuery.addEventListener('change', listener)
+        } else if (mediaQuery.addListener) {
+            mediaQuery.addListener(listener)
+        } else {
+            console.warn('matchMedia API not supported')
+        }
+    }
+    // global error
+    window.onerror = function (message, source, lineno, colno, error) {
+        console.error('global error:', {
+            message,
+            source,
+            lineno,
+            colno,
+            error,
+        })
+        return false
+    }
     if (isMobile()) {
         // to https://sjj1024.github.io/PakePlus/
         window.location.href = 'https://ppofficial.pages.dev/'
@@ -76,7 +103,6 @@ const initEnv = async () => {
         lang = 'ko' // Korean
     }
     locale.value = localStorage.getItem('lang') || lang
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const currentTheme = mediaQuery.matches ? 'dark' : 'light'
     const localTheme = localStorage.getItem('theme')
     chageTheme(localTheme || currentTheme)
@@ -86,23 +112,12 @@ const initEnv = async () => {
     // }
 }
 
-// listen theme change
-window
-    .matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener('change', (e) => {
-        const newTheme = e.matches ? 'dark' : 'light'
-        console.log('theme change', newTheme)
-        chageTheme(newTheme)
-    })
-
-// global error
-window.onerror = function (message, source, lineno, colno, error) {
-    console.error('global error:', { message, source, lineno, colno, error })
-    return false
-}
-
 onMounted(() => {
-    initEnv()
+    try {
+        initEnv()
+    } catch (error) {
+        console.error('initEnv error:', error)
+    }
 })
 </script>
 
