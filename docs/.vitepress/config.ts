@@ -85,7 +85,7 @@ export default defineConfig({
                         },
                     ],
                     '/question/': [
-                        { text: '应用已损坏', link: '/question/' },
+                        { text: '常见问题', link: '/question/' },
                         { text: '使用限制', link: '/question/limit' },
                         { text: 'Token无效', link: '/question/invalid' },
                         { text: '项目已存在', link: '/question/exist' },

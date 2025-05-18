@@ -1,13 +1,11 @@
 <template>
     <h1>💖 赞助我们</h1>
-
     <p>
         如果你也喜欢我们的PakePLus项目，欢迎赞助我们，我们会继续开发和维护。
         您的支持是我们前进的动力。 赞助时请务必填写留言或发邮箱：
-        1024xiaoshen@gmail.com，以便我们收录到赞助名单中，感谢您的支持与鼓励！
+        1024xiaoshen@gmail.com，以便我们收录到赞助名单中，感谢您的支持与鼓励！同时我们还在寻找天使投资人，你必须带上美好的大饼来投资我们，我们才能一起走得更远，成熟的投资人已经开始和面准备了，嘻嘻嘻😜
     </p>
-
-    <h1>微信/支付宝赞助支持</h1>
+    <h1>微信/支付宝赞助</h1>
     <div class="sponsorBox">
         <img
             class="wxCode"
@@ -15,7 +13,7 @@
             alt="微信二维码"
         />
     </div>
-    <h1>Web3 钱包赞助支持</h1>
+    <h1>Web3 钱包赞助</h1>
     <div class="wallet-grid">
         <!-- 钱包卡片 1 -->
         <div class="wallet-card">
@@ -142,7 +140,7 @@ const copyToClipboard = (id: string) => {
 }
 
 h1 {
-    text-align: center;
+    text-align: left;
     margin-bottom: 2rem;
 }
 .wallet-grid {
