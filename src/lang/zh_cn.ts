@@ -232,7 +232,7 @@ export default {
     startParams: '启动参数',
     debugMode: '调试模式',
     disableCors: '禁用跨域',
-    limitProject: '限制：项目最多1个，每日编译1次',
+    limitProject: '限制：项目最多1个，每小时发布1次',
     pubPlatformTips: '请选择发布平台',
     apiLimit: 'API调用次数已达今日限制，请明天再试',
     update: '更新',

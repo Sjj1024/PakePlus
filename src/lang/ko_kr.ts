@@ -234,10 +234,17 @@ export default {
     startParams: '시작 매개변수',
     debugMode: '디버그 모드',
     disableCors: 'CORS 비활성화',
-    limitProject: '제한: 프로젝트 최대 1개, 매일 최대 1회 배포 컴파일',
+    limitProject: '제한: 프로젝트 최대 1개, 매시간 최대 1회 배포 컴파일',
     pubPlatformTips: '플랫폼을 선택하세요',
     apiLimit:
         'API 호출 횟수가 오늘의 제한에 도달했습니다. 내일 다시 시도해주세요',
     update: '업데이트',
     updateTips: '업데이트 힌트',
+    updateNow: '지금 업데이트',
+    checkUpdate: '업데이트 확인',
+    versionTips: '현재 최신 버전입니다',
+    updateProgress: '업데이트 중...',
+    updateSuccess: '업데이트 성공',
+    updateError: '업데이트 실패',
+    startUpdate: '업데이트 시작...',
 }

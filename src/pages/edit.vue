@@ -514,6 +514,7 @@ import {
     fileSizeLimit,
     oneMessage,
     createIssue,
+    checkLastPublish,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -1452,6 +1453,9 @@ const publishWeb = async () => {
     if (store.token === '') {
         oneMessage.error(t('configToken'))
         return
+    } else if (checkLastPublish()) {
+        oneMessage.error(t('limitProject'))
+        return
     }
     centerDialogVisible.value = false
     buildLoading.value = true
@@ -1494,6 +1498,8 @@ const publishWeb = async () => {
 
 // dispatch workflow action
 const dispatchAction = async () => {
+    const now = new Date()
+    localStorage.setItem('lastClickTime', now.toISOString())
     loadingText(t('preCompile') + 'workflow...')
     // wait file sync
     await new Promise((resolve) => setTimeout(resolve, 3000))

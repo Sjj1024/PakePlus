@@ -1120,3 +1120,13 @@ export const createIssue = async (
         title: title,
     })
 }
+
+// check last publish date
+export const checkLastPublish = () => {
+    const savedTime = localStorage.getItem('lastClickTime')
+    if (!savedTime) return false
+    const now = new Date()
+    const oneHourAfterClick = new Date(savedTime)
+    oneHourAfterClick.setHours(oneHourAfterClick.getHours() + 1)
+    return now < oneHourAfterClick
+}

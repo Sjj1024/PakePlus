@@ -62,7 +62,7 @@ const checkUpdate = async (tips: boolean = false) => {
         store.isUpdate = true
         versionDialog.value = true
         rawJson.value = update.rawJson as any
-        notes.value = rawJson.value[localStorage.getItem('locale') || 'zh']
+        notes.value = rawJson.value[localStorage.getItem('lang') || 'zh']
         console.log('notes', notes)
     } else {
         tips && oneMessage.success(t('versionTips'))
@@ -118,16 +118,6 @@ onMounted(async () => {
         }
     })
 })
-
-// // check update
-// async checkUpdate() {
-//     this.ppversion = await getVersion()
-//     const update = await check()
-//     if (update) {
-//         this.latest = update.rawJson as any
-//         console.log('update', this.latest)
-//     }
-// },
 </script>
 
 <style scoped></style>
