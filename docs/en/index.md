@@ -13,6 +13,9 @@ hero:
         - theme: brand
           text: Download
           link: /download/
+        - theme: brand
+          text: WebBeta
+          link: https://pakeplus.netlify.app/
         - theme: alt
           text: Guide
           link: /guide/
