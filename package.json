@@ -1,7 +1,7 @@
 {
     "name": "pakeplus",
     "private": true,
-    "version": "0.5.29",
+    "version": "0.5.28",
     "type": "module",
     "scripts": {
         "tauri dev": "tauri dev",
