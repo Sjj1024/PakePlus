@@ -47,7 +47,15 @@ const rawJson = ref<any>(ppupdate)
 const notes = ref<any>('')
 let update: any = null
 
-const checkUpdate = async () => {
+const checkUpdate = async (tips: boolean = false) => {
+    let loading = null
+    if (tips) {
+        loading = ElLoading.service({
+            lock: true,
+            text: t('checkUpdate'),
+            background: 'rgba(0, 0, 0, 0.7)',
+        })
+    }
     update = await check()
     console.log('update', update)
     if (update && update.version !== packageJson.version) {
@@ -57,8 +65,9 @@ const checkUpdate = async () => {
         notes.value = rawJson.value[localStorage.getItem('locale') || 'zh']
         console.log('notes', notes)
     } else {
-        oneMessage.success(t('versionTips'))
+        tips && oneMessage.success(t('versionTips'))
     }
+    loading && loading.close()
 }
 
 const confirmUpdate = async () => {
@@ -105,7 +114,7 @@ onMounted(async () => {
         if (event.payload.type === 'update-now') {
             confirmUpdate()
         } else if (event.payload.type === 'update-check') {
-            checkUpdate()
+            checkUpdate(true)
         }
     })
 })
