@@ -1,7 +1,6 @@
 export default {
     projectTitle: '프로젝트 관리',
-    projectTips:
-        '오픈 소스 및 무료, 웹 페이지를 패키징하여 크로스 플랫폼 앱을 만들려면 Github 토큰 하나만 필요합니다',
+    projectTips: '오픈 소스 무료, 플랫폼 간 APP 포장 몇 분 만에 가능',
     darkMode: '다크 모드',
     lightMode: '라이트 모드',
     testToken: '테스트',
@@ -13,8 +12,7 @@ export default {
     projectNamePlaceholder: '영어 프로젝트 이름을 입력하세요 (예: PakePlus)',
     releaseBody: '이 버전의 리소스를 다운로드 및 설치하려면 참조하세요.',
     aboutTitle: 'PakePlus에 대하여',
-    aboutTips:
-        '오픈 소스 및 무료, 웹 페이지를 패키징하여 크로스 플랫폼 앱을 만들려면 Github 토큰 하나만 필요합니다',
+    aboutTips: '오픈 소스 무료, 플랫폼 간 APP 포장 몇 분 만에 가능',
     configToken: '먼저 토큰을 설정하세요',
     tokenOk: '토큰이 유효합니다',
     tokenError: '토큰이 유효하지 않습니다, 다시 설정해주세요',
@@ -26,9 +24,9 @@ export default {
     configProject: '프로젝트 설정',
     exeProject: '프로그램 설정',
     appProject: '앱 설정',
-    appProjectTips: '모바일 앱(iOS/Android) 설정 정보',
+    appProjectTips: '모바일 앱(iOS/Android/PWA) 설정 정보',
     configProjectTips:
-        '현재 프로젝트의 웹 사이트 주소, 앱 이름, 앱 ID 등을 설정합니다',
+        '현재 프로젝트의 주소, 이름, 고유 식별자 등을 설정합니다',
     relHistore: '릴리스 기록',
     delProject: '프로젝트 삭제',
     webUrl: '웹 사이트 주소',
@@ -110,7 +108,8 @@ export default {
     second: '초',
     copySuccess: '복사 성공',
     delSuccess: '삭제 성공',
-    aboutGuide: 'PakePlus는 오픈 소스이며 무료입니다. Github Token 하나만 있으면 웹 페이지를 패키징하여 크로스 플랫폼 앱을 만들 수 있습니다. Windows, macOS, Linux 시스템을 지원하며, 미래에는 Android, iOS 등 모바일 플랫폼도 지원할 것입니다. 문제가 있으시면 저의 WeChat에 추가하세요: lanxingme (참고: PakePlus), 또는 제 이메일을 보내세요',
+    aboutGuide:
+        'PakePlus는 오픈 소스이며 무료입니다. Github Token 하나만 있으면 웹 페이지를 패키징하여 크로스 플랫폼 앱을 만들 수 있습니다. Windows, macOS, Linux 시스템을 지원하며, 미래에는 Android, iOS 등 모바일 플랫폼도 지원할 것입니다. 문제가 있으시면 저의 WeChat에 추가하세요: lanxingme (참고: PakePlus), 또는 제 이메일을 보내세요',
     followme: '關注小神',
     moreConfig: '더 많은 설정',
     superpower: '능력',
@@ -235,9 +234,17 @@ export default {
     startParams: '시작 매개변수',
     debugMode: '디버그 모드',
     disableCors: 'CORS 비활성화',
-    limitProject: '제한: 프로젝트 최대 1개, 매일 최대 1회 배포 컴파일',
+    limitProject: '제한: 프로젝트 최대 1개, 매시간 최대 1회 배포 컴파일',
     pubPlatformTips: '플랫폼을 선택하세요',
-    apiLimit: 'API 호출 횟수가 오늘의 제한에 도달했습니다. 내일 다시 시도해주세요',
+    apiLimit:
+        'API 호출 횟수가 오늘의 제한에 도달했습니다. 내일 다시 시도해주세요',
     update: '업데이트',
     updateTips: '업데이트 힌트',
+    updateNow: '지금 업데이트',
+    checkUpdate: '업데이트 확인',
+    versionTips: '현재 최신 버전입니다',
+    updateProgress: '업데이트 중...',
+    updateSuccess: '업데이트 성공',
+    updateError: '업데이트 실패',
+    startUpdate: '업데이트 시작...',
 }

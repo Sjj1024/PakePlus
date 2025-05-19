@@ -17,7 +17,6 @@
     <a href="https://hellogithub.com/repository/d148f8fac78b45fe9b94c82757c3f86b" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=d148f8fac78b45fe9b94c82757c3f86b&claim_uid=LXfeQOxRDEmSUGC&theme=small" alt="Featured｜HelloGitHub"></a>
 </p>
 
-
 <div align="left">PakePlus 不仅支持 Mac、Windows 和 Linux，并且支持 Android 和 iOS。无需在本地安装任何依赖环境，只需要一个Github Token就可以了，而且PakePlus本身也才仅仅5M左右小大，最新版本下载请看：<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">发布地址</a>。或者访问网页版: <a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>。 查看 README 以获取<a href="#popular-packages">热门包</a>和<a href="#development">自定义开发</a>信息。欢迎在<a href=https://github.com/Sjj1024/PakePlus/discussions>讨论区</a>分享你的建议。</div> 加我微信进微信交流群：lanxingme 。
 
 https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
@@ -177,11 +176,12 @@ pnpm run build
  </p>
 
 如果你有微信，可以加入我们的群聊或者加我微信(lanxingme)，我会拉你进群聊。注意：
+
 1. 优先推荐加入群聊，有问题先在群里问，说不定有人已经解决了，就会及时帮到你。
 2. 群里讨论，会将大家遇到的问题汇总，如果别人同样遇到了，就会帮助更多的人。
 3. 如果群里没有人能解决你的问题，可以艾特@我，我看到了就会回复你。
 4. 群二维码过期或者群人数过多了，可以加我微信，我会拉你进群聊。
-5. 如果有问题需要单独加我微信，请先赞助 PakePLus，然后再咨询问题。
+5. 如果有问题需要单独咨询服务，请先赞助 PakePLus，然后再咨询问题。
 6. 如果不方便加微信，也可以在 github 上提 issue，我会尽快回复。
 7. 由于我一个人时间精力有限，所以请务必按照上述流程咨询。
 8. 群内仅限讨论技术问题，不要发广告、发垃圾信息、发其他无关的信息。
@@ -191,7 +191,6 @@ pnpm run build
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/wxcode.png" width=300/>
  </p>
 
-
- ## Star History
+## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Sjj1024/PakePlus&type=Date)](https://www.star-history.com/#Sjj1024/PakePlus&Date)

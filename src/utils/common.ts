@@ -24,6 +24,7 @@ export const urlMap = {
     github: 'https://github.com/Sjj1024/PakePlus',
     ppofficial: 'https://ppofficial.pages.dev/',
     configdoc: 'https://ppofficial.pages.dev/guide/config.html',
+    phonedoc: 'https://www.pakeplus.com/guide/phone.html',
     pakeplusdev: 'https://pakeplus.pages.dev/',
     weixin: 'https://github.com/Sjj1024/PakePlus',
     qq: '',
@@ -1005,6 +1006,8 @@ export const copyText = async (text: string) => {
 export const loadingText = (text: string) => {
     if (document.querySelector('.el-loading-text')) {
         document.querySelector('.el-loading-text')!.innerHTML = text
+    } else {
+        console.log('no loading')
     }
 }
 
@@ -1116,4 +1119,14 @@ export const createIssue = async (
         build action: ${url}`,
         title: title,
     })
+}
+
+// check last publish date
+export const checkLastPublish = () => {
+    const savedTime = localStorage.getItem('lastClickTime')
+    if (!savedTime) return false
+    const now = new Date()
+    const oneHourAfterClick = new Date(savedTime)
+    oneHourAfterClick.setHours(oneHourAfterClick.getHours() + 1)
+    return now < oneHourAfterClick
 }

@@ -13,6 +13,9 @@ hero:
         - theme: brand
           text: 下载地址
           link: /download/
+        - theme: brand
+          text: WebBeta
+          link: https://pakeplus.netlify.app/
         - theme: alt
           text: 使用指南
           link: /guide/

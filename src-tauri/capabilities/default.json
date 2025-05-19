@@ -35,6 +35,10 @@
         "updater:allow-check",
         "updater:allow-download",
         "updater:allow-install",
+        "updater:allow-download-and-install",
+        "process:default",
+        "process:allow-restart",
+        "process:allow-exit",
         "opener:default",
         "http:allow-fetch",
         "http:default",
@@ -47,11 +51,21 @@
         {
             "identifier": "http:default",
             "allow": [
-                { "url": "https://**" },
-                { "url": "file://**" },
-                { "url": "http://**" },
-                { "url": "asset://localhost/**" },
-                { "url": "https://api.github.com/**" }
+                {
+                    "url": "https://**"
+                },
+                {
+                    "url": "file://**"
+                },
+                {
+                    "url": "http://**"
+                },
+                {
+                    "url": "asset://localhost/**"
+                },
+                {
+                    "url": "https://api.github.com/**"
+                }
             ]
         },
         {

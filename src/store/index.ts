@@ -117,6 +117,9 @@ export const usePPStore = defineStore('pakeplus', {
             previewPath: '',
             // timer
             timer: 0 as any,
+            ppversion: '1.0.0',
+            isUpdate: false,
+            name: '1024xiaoshen',
             age: 18,
             sex: '男',
         }

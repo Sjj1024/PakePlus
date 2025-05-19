@@ -1,7 +1,7 @@
 {
     "name": "pakeplus",
     "private": true,
-    "version": "0.5.27",
+    "version": "0.5.28",
     "type": "module",
     "scripts": {
         "tauri dev": "tauri dev",
@@ -12,7 +12,6 @@
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
         "preview": "vite preview",
-        "tauri": "tauri",
         "icon": "tauri icon",
         "tauri build": "tauri build",
         "tauri preview": "tauri preview",
@@ -23,13 +22,14 @@
         "@codemirror/lang-json": "^6.0.1",
         "@codemirror/theme-one-dark": "^6.1.2",
         "@element-plus/icons-vue": "^2.3.1",
-        "@tauri-apps/api": "^2",
+        "@tauri-apps/api": "^2.5.0",
         "@tauri-apps/plugin-clipboard-manager": "^2.2.0",
         "@tauri-apps/plugin-dialog": "^2.2.0",
         "@tauri-apps/plugin-fs": "^2.2.0",
         "@tauri-apps/plugin-http": "^2.2.0",
         "@tauri-apps/plugin-opener": "^2",
         "@tauri-apps/plugin-os": "^2.2.0",
+        "@tauri-apps/plugin-process": "~2.2.1",
         "@tauri-apps/plugin-shell": "^2.2.0",
         "@tauri-apps/plugin-store": "^2.2.0",
         "@tauri-apps/plugin-updater": "^2.7.1",
@@ -49,7 +49,7 @@
         "vue-router": "4"
     },
     "devDependencies": {
-        "@tauri-apps/cli": "^2",
+        "@tauri-apps/cli": "^2.5.0",
         "@types/node": "^22.5.4",
         "@vite-pwa/vitepress": "^1.0.0",
         "@vitejs/plugin-vue": "^5.2.1",

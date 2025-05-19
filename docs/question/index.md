@@ -1,4 +1,14 @@
-# 应用已随坏
+# 问题自查
+
+如果有遇到问题，自查往往更有效果。
+
+1. 到 PakePLus issue 中自查，往往有效果：https://github.com/Sjj1024/PakePlus/issues
+
+2. 检查自己是否修改过配置或脚本文件，用最原始的配置试试
+3. 检查 token 权限是否给正确了，或者重新填写 token 再试试
+4. 是否有在群里咨询过，没有的话，先在群里问问试试
+
+# mac 应用已随坏
 
 ![](../static/imgs/macerror.png)
 这是因为没有给苹果给钱，所以苹果会拒绝你的应用。
@@ -16,3 +26,17 @@ sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
 ```sh
 sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
 ```
+
+# 无法拖拽文件或元素拖动
+
+原因：[https://v2.tauri.app/reference/config/#dragdropenabled](https://v2.tauri.app/reference/config/#dragdropenabled)  
+解决办法  
+在更多配置中，关闭 dragDropEnabled 选项即可
+
+# 窗口置顶
+
+在更多配置中，开启 alwaysOnTop 即可
+
+# 全屏模式
+
+在更多配置中，开启 fullscreen 即可

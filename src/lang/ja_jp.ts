@@ -1,6 +1,7 @@
 export default {
     projectTitle: 'プロジェクト管理',
-    projectTips: 'このソフトウェアはオープンソースで無料です',
+    projectTips:
+        'オープンソース無料、数分でクロスプラットフォームアプリをパッケージ化',
     darkMode: 'ダークテーマ',
     lightMode: 'ライトテーマ',
     testToken: 'テスト',
@@ -15,7 +16,7 @@ export default {
         'このバージョンのリソースをダウンロードおよびインストールするには、参照してください',
     aboutTitle: 'PakePlusについて',
     aboutTips:
-        'オープンソースで無料、Webページをパッケージしてクロスプラットフォームアプリを作成するには、Githubトークンが1つだけ必要です',
+        'オープンソース無料、数分でクロスプラットフォームアプリをパッケージ化',
     configToken: 'まずトークンを設定してください',
     tokenOk: 'トークンが有効です',
     tokenError: 'トークンが無効です、再設定してください',
@@ -27,9 +28,9 @@ export default {
     configProject: 'プロジェクトを設定',
     exeProject: 'プログラムを設定',
     appProject: 'アプリを設定',
-    appProjectTips: 'モバイルアプリ（iOS/Android）の設定情報',
+    appProjectTips: 'モバイルアプリ（iOS/Android/PWA）の設定情報',
     configProjectTips:
-        '現在のプロジェクトのWebサイトアドレス、アプリ名、アプリIDなどを設定します',
+        '現在のプロジェクトのアドレス、名前、唯一の識別子などを設定します',
     relHistore: 'リリース履歴',
     delProject: 'プロジェクトを削除',
     webUrl: 'Webサイトアドレス',
@@ -235,9 +236,17 @@ export default {
     startParams: '起動パラメータ',
     debugMode: 'デバッグモード',
     disableCors: 'CORSを無効にする',
-    limitProject: '制限:プロジェクト数は1個まで、毎日の発行コンパイルは1回まで',
+    limitProject:
+        '制限:プロジェクト数は1個まで、毎時間の発行コンパイルは1回まで',
     pubPlatformTips: 'プラットフォームを選択してください',
     apiLimit: 'API呼び出し回数が今日の制限に達しました。明日再試してください',
     update: '更新',
+    updateNow: '今すぐ更新',
     updateTips: '更新提示',
+    checkUpdate: '更新を確認',
+    versionTips: '現在のバージョンは最新です',
+    updateProgress: '更新中...',
+    updateSuccess: '更新成功',
+    updateError: '更新失敗',
+    startUpdate: '更新を開始...',
 }
