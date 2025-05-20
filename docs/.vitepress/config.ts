@@ -255,7 +255,20 @@ export default defineConfig({
             },
         },
     },
-    head: [['link', { rel: 'icon', href: './app.svg' }]],
+    head: [
+        ['link', { rel: 'icon', href: './app.svg' }],
+        [
+            'script',
+            {},
+            `var _hmt = _hmt || [];
+            (function() {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?63127d959845e83b472b4316ecda1e14";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+            })();`,
+        ],
+    ],
     themeConfig: {
         search: {
             provider: 'local',
