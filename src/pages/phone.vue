@@ -1746,7 +1746,7 @@ const publishPhone = async () => {
                 store.currentProject.name,
                 store.currentProject.showName,
                 store.currentProject.isHtml,
-                'PakePlus publish action error' + error.message,
+                'PakePlus publish action error ' + error.message,
                 'failure',
                 'build error',
                 repo
@@ -1757,8 +1757,6 @@ const publishPhone = async () => {
 
 // dispatch workflow action
 const dispatchAction = async (repo: string) => {
-    const now = new Date()
-    localStorage.setItem('lastClickTime', now.toISOString())
     buildStatus[repo] = t('preCompile') + 'workflow...'
     // wait file sync
     await new Promise((resolve) => setTimeout(resolve, 3000))
@@ -1777,6 +1775,15 @@ const dispatchAction = async (repo: string) => {
         warning.value = t('dispatchError') + ':' + message
         oneMessage.error(warning.value)
         buildLoading.value = false
+        createIssue(
+            store.currentProject.name,
+            store.currentProject.showName,
+            store.currentProject.isHtml,
+            'PakePlus dispatch error ' + message,
+            'failure',
+            'build error',
+            'PakePlus'
+        )
         return
     } else {
         buildStatus[repo] = t('inProgress') + '...'
@@ -1861,6 +1868,8 @@ const checkBuildStatus = async (repo: string) => {
     console.log('checkBuildStatus', build_runs)
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
         if (status === 'completed' && conclusion === 'success') {
+            const now = new Date()
+            localStorage.setItem('lastClickTime', now.toISOString())
             createIssue(
                 store.currentProject.name,
                 store.currentProject.showName,

@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { isTauri, loadingText, oneMessage } from '@/utils/common'
+import { isTauri, loadingText, oneMessage, isNow } from '@/utils/common'
 import { ref, onMounted } from 'vue'
 import { usePPStore } from '@/store'
 import packageJson from '@root/package.json'
@@ -58,12 +58,13 @@ const checkUpdate = async (tips: boolean = false) => {
     }
     update = await check()
     console.log('update', update)
-    if (update && update.version !== packageJson.version) {
+    if (update && isNow(update.version, packageJson.version)) {
         store.isUpdate = true
-        versionDialog.value = true
         rawJson.value = update.rawJson as any
-        notes.value = rawJson.value[localStorage.getItem('lang') || 'zh']
-        console.log('notes', notes)
+        notes.value =
+            rawJson.value[localStorage.getItem('lang') || 'zh'] ||
+            'There is a new version available(有新版本更新)'
+        versionDialog.value = true
     } else {
         tips && oneMessage.success(t('versionTips'))
     }
@@ -107,7 +108,6 @@ const confirmUpdate = async () => {
 }
 
 onMounted(async () => {
-    console.log('updater mounted')
     store.ppversion = packageJson.version
     isTauri && checkUpdate()
     await listen('update-event', (event: any) => {
