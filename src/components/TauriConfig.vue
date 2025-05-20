@@ -309,18 +309,6 @@
                                 </el-select>
                             </el-form-item>
                             <el-form-item
-                                :label="t('injectJq')"
-                                prop="injectJq"
-                                class="formItem"
-                            >
-                                <el-checkbox
-                                    v-model="
-                                        store.currentProject.desktop.injectJq
-                                    "
-                                    label=""
-                                />
-                            </el-form-item>
-                            <el-form-item
                                 label="TauriApi"
                                 prop="tauriApi"
                                 class="formItem"

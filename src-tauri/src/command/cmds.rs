@@ -114,7 +114,6 @@ pub async fn preview_from_config(
     resize: bool,
     config: WindowConfig,
     js_content: String,
-    injectjq: bool,
     devbug: bool,
 ) {
     let window_label = "PreView";
@@ -138,9 +137,6 @@ pub async fn preview_from_config(
         }
     }
     let mut contents = String::new();
-    if injectjq {
-        contents += include_str!("../../data/jquery.min.js");
-    }
     if devbug {
         contents += include_str!("../../data/vconsole.min.js");
         contents += "var vConsole = new window.VConsole();";

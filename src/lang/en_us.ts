@@ -122,7 +122,7 @@ export default {
     mobileEnd: 'Mobile End',
     sourceCode: 'Source Code',
     editImg: 'Edit Image',
-    networkError: 'Network error, please close the proxy and try again!',
+    networkError: 'Network error, please check the network and try again!',
     readFileError: 'File read error',
     notSupportWeb: 'Web does not support preview',
     userName: 'User Name',

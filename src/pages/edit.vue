@@ -1249,7 +1249,6 @@ const preview = async (resize: boolean) => {
                             : store.currentProject.url,
                     },
                     jsContent: initJsScript,
-                    injectjq: store.currentProject.injectJq,
                     devbug: store.currentProject.devbug,
                 })
             } else {

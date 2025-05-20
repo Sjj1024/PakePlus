@@ -120,7 +120,7 @@ export default {
     mobileEnd: '移动端',
     sourceCode: '源代码',
     editImg: '编辑图片',
-    networkError: '网络请求失败，请关闭代理再试!',
+    networkError: '网络请求失败，请检查网络再试!',
     readFileError: '文件读取失败',
     notSupportWeb: 'Web端不支持预览',
     userName: '用户名',
