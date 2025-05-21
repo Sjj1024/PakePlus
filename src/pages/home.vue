@@ -139,7 +139,7 @@
                 :class="{ isUpdate: store.isUpdate }"
                 @click="goAbout"
             >
-                v{{ store.ppversion }}
+                v{{ packageJson.version }}
             </div>
             <template #dropdown>
                 <el-dropdown-menu class="updateMenu">
@@ -356,9 +356,6 @@ import pakePlusIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import packageJson from '../../package.json'
-import { check } from '@tauri-apps/plugin-updater'
-import { getVersion } from '@tauri-apps/api/app'
-import { ElMessageBox } from 'element-plus'
 import { emit } from '@tauri-apps/api/event'
 
 const router = useRouter()

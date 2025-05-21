@@ -108,7 +108,8 @@ const confirmUpdate = async () => {
 }
 
 onMounted(async () => {
-    store.ppversion = packageJson.version
+    // TODO check action is over
+    // check version
     isTauri && checkUpdate()
     await listen('update-event', (event: any) => {
         if (event.payload.type === 'update-now') {

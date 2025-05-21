@@ -6,6 +6,7 @@
 2. 检查自己是否修改过配置或脚本文件，用最原始的配置试试
 3. 检查 token 权限是否给正确了，或者重新填写 token 再试试
 4. 是否有在群里咨询过，没有的话，先在群里问问试试，[进群交流](../exchange/index.md)
+5. 网络问题请检查是否使用了代理或者云电脑等，可以尝试切换网络试试。
 
 # mac 应用已随坏
 
@@ -45,3 +46,6 @@ sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
 # 全屏模式
 
 在更多配置中，开启 fullscreen 即可
+
+
+# 
