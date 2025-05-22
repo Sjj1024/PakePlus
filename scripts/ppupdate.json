@@ -1,33 +1,33 @@
 {
     "version": "0.5.29",
     "notes": "",
-    "pub_date": "2025-05-17T14:32:28.884Z",
+    "pub_date": "2025-05-22T10:56:45.315Z",
     "force": false,
-    "zh": "更新一下",
-    "en": "Update",
-    "ja": "更新します",
-    "ko": "업데이트",
-    "zhTw": "更新一下",
+    "zh": "修复windows下js脚本bug",
+    "en": "Fix js script bug in windows",
+    "ja": "WindowsでのJSスクリプトのバグを修正しました",
+    "ko": "윈도우에서 JS 스크립트 버그를 수정했습니다.",
+    "zhTw": "修復windows下js腳本bug",
     "platforms": {
       "darwin-aarch64": {
-        "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEZycVFJVXJ6T3ZqZTI4dzhNVEk1REdtQTdaWi9Fb1ZuY1c5aHY0bTBLdWI5b2lnRWpLSWlEZ1RlNjJMdmlFNk8zWkg1T1JKSkxLenhXY2EwRnN0QVFBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQ3NzM5MTYzCWZpbGU6UGFrZVBsdXMuYXBwLnRhci5negpia0VnK012VTA1UkFEL0g0WEhqUGxsTW5rZWQwbE8vc3BhU1VoZUJYb1pJM05VL3FmbHdZa3VmT0NiSWtmUERoY2hGeHpOMFVTTGVWUEdMbHFSTnVEdz09Cg==",
-        "url": "https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.29/PakePlus_aarch64.app.tar.gz"
+        "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEt4Ny9OQzlOZFRCK0dBVklSVVRtdGxJWEVoNG5UL0I5L1BSRnJ5TWdrcE9GWnVUMDFyNjI0K0J1dE1sak13enhxZzcxTy9hMG9OWng2elFIT3BFRlEwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQ3OTEwOTk2CWZpbGU6UGFrZVBsdXMuYXBwLnRhci5negprNFcveVBXY1hnYkhTMk9qUjR5bmhiMHE3cnM0VXhNMDdxS0JUeW1vaW5XNU5jSEV4M2hmY0FFQkpNT0VWTElIOU9NN0ljSUJoSUtYVmR2ZzRtTExBZz09Cg==",
+        "url": "https://gh-proxy.com/github.com/Sjj1024/PakePlus/releases/latest/download/PakePlus_aarch64.app.tar.gz"
       },
       "darwin-x86_64": {
-        "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEM1cUVxQXY2dUh4aWVZa0lOZjRGUTJsUkkzeWtzemtMYkY3WHhhT1M1TUxyOTk3SFd6TFRNc2NjbE5ZZWFxS0c3YXdoakR4R0ZPSWFqRXcybjUzMEFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQ3NzM5MTgxCWZpbGU6UGFrZVBsdXMuYXBwLnRhci5negpHeDJvbmQ2VzhHUDFUYSszZWNGcFZ6MzZiV3RCbXVSRXJoNlQrMXFvd3dKZnBLL2FhSE5wWGp4UzhVVTNFdHNyVmJsOFdMQ2U5eVc5eXp1M2l6T3JCUT09Cg==",
-        "url": "https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.29/PakePlus_x64.app.tar.gz"
+        "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydE9XR0VuVThPR2w0T3owOXZwYm50ZHBma2pnQkJJRHNSZEtqUGxWK2dIRHNvV05lc2tJTlpsbVNQM0xHWXVQZW5yaDNVVzZsUDgyZXNTN3V0dmlrQWdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQ3OTExMjMxCWZpbGU6UGFrZVBsdXMuYXBwLnRhci5negphUmNCZTZNTldBbnR0VXNaakZEd0RsMXhhaEkvNkoxaEVYakRiWVdwcWlGTFBnOWx5MkRtcUxSNEZjMTFWV3NQUTJVYVNxVGRYeVFlRG9Oai9oUUdDUT09Cg==",
+        "url": "https://gh-proxy.com/github.com/Sjj1024/PakePlus/releases/latest/download/PakePlus_x64.app.tar.gz"
       },
       "linux-x86_64": {
-        "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydElSZ1JxaTI3WUV3UFRDWThPMklOY3kzV2sxTnZNK29kZDdPYnV2cGh6MGZKUWpLUlZ6YVpKaTVtNnB2dmpxcU14a3ArZWhUTjl0NUpEZGs3bmdUZ3dRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQ3NzM5Mzc0CWZpbGU6UGFrZVBsdXNfMC41LjI5X2FtZDY0LkFwcEltYWdlCmtRQk5YaWNzdThHRGlveDlaSWpFelBqbnJuMHZDMXNjNk0yakV2eEtLQnl4UVJMdHF1dlNBYUYxU0RRMHdmWGpQS1dUWmoyOFZ6ZGpLajRmM0VZUUFRPT0K",
-        "url": "https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.29/PakePlus_0.5.29_amd64.AppImage"
+        "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEkzbGpYdDJjQ2FiU0V1UXRWVWFBZVhnV1UxZUJPa1pxSEFwVDBPdHBNTEUyTVhzcndCSmthU29xY2FQdjlzYUVOM0NxZEhQSDlQd29XcmFMVWpNN0FvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQ3OTExMjg3CWZpbGU6UGFrZVBsdXNfMC41LjI5X2FtZDY0LkFwcEltYWdlCmlxY1Z6T3ZjYUFVQy9kcys3azFiZGlXb1F3VXJLRDl6TXZvVWZOVFlXL1V1V0FwVHI3Q1BmN1hVTlZsMVFkWGJIdHNGTzBwSW9hNnFaN1g2Y3ZGQURnPT0K",
+        "url": "https://gh-proxy.com/github.com/Sjj1024/PakePlus/releases/latest/download/PakePlus_0.5.29_amd64.AppImage"
       },
       "windows-x86_64": {
-        "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydExZZFNFVzNNWEdUamxBaDk5RExzaDJJTGpvR3FlWTlrUlV5NVk0TGVhMnowL1lYZUxXNkhWc2ovYll5QUlpdWRweVRCdFZ5VmtFcUlYSDB3TlZhSWdBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQ3NzM5NTI3CWZpbGU6UGFrZVBsdXNfMC41LjI5X3g2NF9lbi1VUy5tc2kKMVUzdVNxWk03enZOZXYzcXg1NHM2dHJwbkNaNlV5dWVocnNxWDVJSUJwSWo3UG0xM2phZ2o0akJNbmh0QUpUb3pTdGRIMHlSbkhTUXovWEZuQUNlQ0E9PQo=",
-        "url": "https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.29/PakePlus_0.5.29_x64_en-US.msi"
+        "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEgvaFlaeXoveUdoWWk2N2RrbXhJeUtNSDhPbTZodlhwTFJiK2ViRW04SE1qaDFYODd2TGt5ckRNanp1TXhnREtaT25KcHA0dnZMRSt5NDZodmtpRWdNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQ3OTExMzc1CWZpbGU6UGFrZVBsdXNfMC41LjI5X3g2NF9lbi1VUy5tc2kKL2JUVHFtdjA4TWN3NkVuMEgzRkZSNi84QTE1NldIWkVQOEZZSkVENVlqSUt6NDkyVTBEazY3UGNRQmJJZmFuNzMrajhLWmRYVlA0NjZ2WFFEeXRQQlE9PQo=",
+        "url": "https://gh-proxy.com/github.com/Sjj1024/PakePlus/releases/latest/download/PakePlus_0.5.29_x64_en-US.msi"
       },
       "windows-aarch64": {
-        "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEhJR285ek44NkI4aTQyaHJabm5oTmZUUUhzUGR6ZFRRVTVKV0NnMTFHbUJMdTdMLzE2dncvRUl5ZVBBMXN4cUl5V0ZRYVcvN3RmRWJUOWFqd1YxZUFNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQ3NzM5NTQ4CWZpbGU6UGFrZVBsdXNfMC41LjI5X2FybTY0X2VuLVVTLm1zaQpQS3RFdkx3OFRzVmNDTnBPVTVqZzBmZVJobzgzdFE1c1dTMitFeUc3aThSVEZJZ1RFQjVldU10VTRmOXNxM1BCU2VLZEZ6N1J3Z0N3dUExT0F2RVhBQT09Cg==",
-        "url": "https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.29/PakePlus_0.5.29_arm64_en-US.msi"
+        "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEJ3R3d4UWpQd3I3TnBUUXpIZmFZSkQ1RU1IYi82OThINWJDTk1DZTFlUDF5ZlBiMjdWV1BHVngxUjQzbExyNXJCbGxTL1I4NHM2S0QvY2hzMldlU3drPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQ3OTExNDAwCWZpbGU6UGFrZVBsdXNfMC41LjI5X2FybTY0X2VuLVVTLm1zaQpEckpQTHdCY2JUTnlkZktNRkk1WUpMcmt3bFhIMEZpcGEzUStwM0taQlFXc3ZrTXA4cFlUeVZ6OXRKTXllYUdGbzdSbWFrYXJiNXZQTXdicHBwOHdBdz09Cg==",
+        "url": "https://gh-proxy.com/github.com/Sjj1024/PakePlus/releases/latest/download/PakePlus_0.5.29_arm64_en-US.msi"
       }
     }
   }
