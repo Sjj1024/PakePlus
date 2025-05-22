@@ -23,12 +23,12 @@
             <div class="rightContent">
                 <h1 class="title">MacOS</h1>
                 <div class="item">
-                    <a :href="proxyGithub(macArm.browser_download_url)">
+                    <a :href="ghProxy(macArm.name)">
                         ARM(M芯片)版本
                     </a>
                 </div>
                 <div class="item">
-                    <a :href="proxyGithub(macX64.browser_download_url)">
+                    <a :href="ghProxy(macX64.name)">
                         Intel芯片 版本
                     </a>
                 </div>
@@ -62,12 +62,12 @@
             <div class="rightContent">
                 <h1 class="title">Windows</h1>
                 <div class="item">
-                    <a :href="proxyGithub(windowsX64.browser_download_url)">
+                    <a :href="ghProxy(windowsX64.name)">
                         X64 版本
                     </a>
                 </div>
                 <div class="item">
-                    <a :href="proxyGithub(windowsArm64.browser_download_url)">
+                    <a :href="ghProxy(windowsArm64.name)">
                         ARM64 版本
                     </a>
                 </div>
@@ -100,17 +100,17 @@
             <div class="rightContent">
                 <h1 class="title">Linux</h1>
                 <div class="item">
-                    <a :href="proxyGithub(linuxDeb.browser_download_url)">
+                    <a :href="ghProxy(linuxDeb.name)">
                         deb 版本
                     </a>
                 </div>
                 <div class="item">
-                    <a :href="proxyGithub(linuxRpm.browser_download_url)">
+                    <a :href="ghProxy(linuxRpm.name)">
                         rpm 版本
                     </a>
                 </div>
                 <div class="item">
-                    <a :href="proxyGithub(linuxImage.browser_download_url)">
+                    <a :href="ghProxy(linuxImage.name)">
                         AppImage 版本
                     </a>
                 </div>
@@ -390,6 +390,11 @@ const proxyGithub = (url) => {
     const newURL = url.replace('github.com', 'github.pakeplus.com/gh')
     console.log('newURL', newURL)
     return newURL
+}
+
+// use gh_proxy
+const ghProxy = (name) => {
+    return `https://gh-proxy.com/github.com/Sjj1024/PakePlus/releases/latest/download/${name}`
 }
 
 const isMobile = () => {
