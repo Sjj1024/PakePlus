@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+	</head>
+<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style>	
+	<body bgcolor="#D5D0B2">
+<p><strong><h1>1.6	IPv6 in HQ</h1></strong>
+‪‪‪‫‫‭‮‬‬‬‬‪‬‬‬‬‪ <div style="border-bottom:2px solid #989898"></div>  <br>
+
+Implement IPv6 on sw101 and sw102 for switch virtual interfaces (SVIs) Vlan2000 and Vlan 2001 according to these requirements:<br>
+	<br>
+
+<p>SW101</p>
+		<div style="text-indent:7em">Interface Vlan2000: 2001:db8:1:100::1/64</div>
+		<div style="text-indent:7em">Interface Vlan2001: 2001:db8:1:101::1/64</div>
+<p>SW102</p>
+		<div style="text-indent:7em">Interface Vlan2000: 2001:db8:1:100::2/64</div>
+		<div style="text-indent:7em">Interface Vlan2001: 2001:db8:1:101::2/64</div>
+		
+	<p>The configuration must enable hosts in these VLANs to obtain their IPv6 configuration via SLAAC and keep a stable connectivity with other IPv6 networks.</p>
+	<p>Use native IPv6 means to provide gateway redundancy, with sw101 being the preferred gateway in VLAN 2000 and sw102 being the preferred gateway in VLAN 2001. The role must be determined by an explicit configuration solely on the intended preferred gateway.</p>
+<p>	Hosts must be able to detect the failure of the preferred gateway in as little as 3 seconds.
+</p><p align="right"><strong>1 points</strong></p>
+
+</p>
+</body>
+</html>
