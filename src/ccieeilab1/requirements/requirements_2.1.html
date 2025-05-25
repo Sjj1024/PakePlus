@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>introduced</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style>	<link href="../exam_content.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+		<body bgcolor="#D5D0B2">
+<p><strong><h1>2.1	Correcting the IP Addresses of Managed Switches in DNA Center</h1></strong>
+
+			<div style="border-bottom:2px solid #989898"></div>  <br> 
+<p1>After Cisco DNA Center first achieves IP connectivity with the managed switches in Branches #1 and #2, it will place them into Maintenance mode due to their serial number being different from the one DNA Center remembers. In addition, their management IP addresses in DNA Center will be automatically changed by appending them with the “.dummy.com” string. As a result, after an initial contact, DN Center will lose connectivity with the switches unless their management IP addresses are corrected in the DNA Center settings.Correct the IP addressed of of managed switches in the DNA Center according to the following requirements:</p1>
+			
+	<p>Use any host, such as host11, to access the DNA Center GUI websites at https: //203.0.113.11 URL.</p>
+<p>	Execute the Provision – Devices – Inventory – Global – Actions – Inventory – Resync Device action in DNA Center on all switches before proceeding further.</p>
+	<p>DNA Center API reference and sandbox is available at https: //203.0.113.11/dna/apitester URL.</p>
+	<p>The /network/device/update-maintenance-device-ip-address API call description and sandbox are available in the Inventory section of the API reference.</p>
+	<p>Use the /network/device/update-maintenance-device-ip-address API call to correct the IP addresses of the switches in Branches #1 and #2 by removing the appended text.</p>
+
+<p1>Note: These IP addresses cannot be changed from DNA Center GUI directly because they will become automatically invalidated again. This is a built-in DNA Center behavior.</p1>
+
+<p align="right"><strong>3 points</strong></p>
+
+</p>
+</body>
+</html>
