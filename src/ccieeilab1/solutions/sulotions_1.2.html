@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.2 solution</title>
+	<style>
+p { 
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+		<body bgcolor="#D5D0B2">
+		<p>1.2	Layer2 Technologies in HQ</p>
+		<p>SW101  <br>
+		interface range g1/0-1 <br>
+		channel-group 3 mode active <br> <br>
+		  interface range g1/2-3<br>
+	    channel-group 1 mode on <br><br>
+		interface port-channel 1<br>
+		  spanning-tree link-type point-to-point<br>
+		  interface port-channel 3<br>
+		  spanning-tree link-type point-to-point<br><br>
+		spanning-tree mode rapid-pvst<br>
+		  spanning-tree pathcost method long<br>
+		  spanning-tree vlan 2000 priority 0<br>
+		<br>SW102<br>
+		interface range g1/0-1<br>
+		channel-group 3 mode active<br>
+		  interface range g1/2-3<br>
+		  switchport mode trunk<br>
+		  channel-group 2 mode active<br>
+		interface port-channel 2<br>
+		  spanning-tree link-type point-to-point<br>
+		  interface port-channel 3<br>
+		  spanning-tree link-type point-to-point<br><br>
+		spanning-tree mode rapid-pvst<br>
+		  spanning-tree pathcost method long<br>
+		  spanning-tree vlan 2001 priority 0<br>
+		<br>SW110<br>
+			interface range g1/2-3<br>
+			channel-group 2 mode active<br><br>
+		  interface port-channel 1<br>
+		  spanning-tree link-type point-to-point<br>
+		  interface port-channel 2<br>
+		  spanning-tree link-type point-to-point<br>
+		  <br>
+		spanning-tree mode rapid-pvst<br>
+		  spanning-tree pathcost method long<br>
+		  spanning-tree portfast edge default<br><br>
+		  interface port-channel 1<br>
+		  shutdown   <br>
+		  no shutdown  <br><br>
+			验证：<br>
+		  show etherchannel summary<br>
+		  show spanning-tree summary<br>
+	    </p>
+			
+ </body>
+</html>
