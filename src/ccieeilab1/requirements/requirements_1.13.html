@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+	<body bgcolor="#D5D0B2">
+<p><strong><h1>1.13	IPv4 Networks on Legacy Branches</h1></strong>
+‪‪‪‫‫‭‮‬‬‬‬‪ <div style="border-bottom:2px solid #989898"></div>  <br>
+
+
+On sw211 in DC, complete the DHCP server configuration according to these requirements:<br><br>
+
+	<p>Create IPv4 DHCP pools named br3_v2000 and br3_v2001 for Branch #3 VLANs 2000 (10.6.100.0/24) and 2001 (10.6.101.0/24), respectively.</p>
+	<p>Create IPv4 DHCP pools named br4_v1 for the subnet 10.7.1.0/24 on Branch #4.</p>
+	<p>In each subnet, assign addresses from .101 up to .254 inclusively, and the appropriate gateway to clients.</p>
+‪‪‪‫‫‭‮‬‬‬‬‪ <div style="border-bottom:2px solid #989898"></div>  <br>
+
+
+On Branch #3, complete and correct the configuration on switches sw601, sw602 and sw610to allow HSRP and DHCP Relay operation in VLANs 2000 and 2001 according to these requirements:<br><br>
+
+	<p>HSRP must implicitly use the vMAC address range of 0000.0c9f.f000 through 0000.0c9f.ffff</p>
+	<p>The group number must be 100 for VLAN 2000 and 101 for VLAN 2001</p>
+<p>sw601 must be the Active gateway for VLAN 2000 with a priority of 110; the active role ownership must be deterministic</p>
+<p>sw602 must be the Active gateway for VLAN 2001 with a priority of 110; the active role ownership must be deterministic</p>
+	<p>Each Active switch must track its uplink interfaces ge0/1 and ge0/2. If either of these interfaces goes down, the Active switch must allow the other switch to become Active. However, it is not allowed for the tracking to modify the HSRP priority to accomplish this requirement.</p>
+	<p>Both sw601 and sw602 must be configured as DHCP relay agents in both VLANs 2000 and 2001, pointing toward the DHCP server 10.2.255.211 at sw211. However, at any time, only the Active router in the particular VLAN should relay the DHCP messages.</p>
+	<p>Place host61 and host62 into VLANs 2000 and 2001, respectively, and make sure they are assigned their correct IPv4 configuration.
+	It is not permitted to use any kind of scripting to complete this task.</p>
+‪‪‪‫‫‭‮‬‬‬‬‪ <div style="border-bottom:2px solid #989898"></div>  <br>
+
+
+On Branch #4, complete the configuration of the router r70 according to these requirements:<br><br>
+
+	<p>Assign IP address 10.7.1.1/24 to gi0/2</p>
+	<p>Enable DHCP relay on this interface and point it to the DHCP server 10.2.255.211 at sw211</p>
+	<p>It is allowed to add one additional missing command to the r70 configuration to allow DHCP clients connected to gi0/2 obtain their IPv4 configuration.</p>
+	<p>Make sure that host71 and host72 are assigned their correct IPv4 configuration.</p>
+<p align="right"><strong>2 points</strong></p>
+
+</p>
+</body>
+</html>
