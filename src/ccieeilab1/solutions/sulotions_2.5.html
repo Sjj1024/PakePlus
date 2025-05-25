@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>2.5 solution</title>
+	<style>
+p { 
+
+line-height:1.5em
+}
+</style>	<link href="../exam_content.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../main.js"></script>
+
+
+</head>
+
+		<body bgcolor="#D5D0B2"><br>
+ <div style="border-bottom:2px solid #989898"></div>  
+
+       
+<p>R23、R24 <br>
+vrf definition Guest<br>
+ rd  65002:199<br>
+ address-family ipv4<br>
+</p>
+<p>R23# <br>
+  interface Loopback1<br>
+  vrf  forwarding Guest<br>
+  ip  address 10.2.255.211 255.255.255.255<br>
+  interface GigabitEthernet4<br>
+  vrf  forwarding Guest  <br>
+  ip  nat inside  <br>
+  ip address 10.2.123.1 255.255.255.0<br>
+  exit
+  <br>
+  ip route vrf Guest 0.0.0.0 0.0.0.0  GigabitEthernet1 200.99.23.1 global  </p>
+<p>router bgp 65002<br>
+  address-family ipv4 vrf Guest<br>
+  network 0.0.0.0<br>
+  network 10.2.255.211 mask 255.255.255.255<br>
+  neighbor 10.2.123.2 remote-as 65002<br>
+  neighbor 10.2.123.2 activate<br>
+  neighbor 10.2.123.2 next-hop-self</p>
+<p>ip nat inside source list NAT interface  GigabitEthernet1 vrf Guest overload</p>
+<p>ip dhcp excluded-address vrf Guest 10.4.199.1  10.4.199.100<br>
+  ip dhcp excluded-address vrf Guest 10.5.199.1  10.5.199.100<br>
+  ip dhcp use vrf remote<br>
+  ip dhcp pool br1_guest<br>
+  vrf  Guest<br>
+  network 10.4.199.0 255.255.255.0<br>
+  default-router 10.4.199.1 <br>
+  ip dhcp pool br2_guest<br>
+  vrf  Guest<br>
+  network 10.5.199.0 255.255.255.0<br>
+  default-router 10.5.199.1</p>
+<p>R24 <br>
+  interface GigabitEthernet4<br>
+  vrf  forwarding Guest <br>
+ip  nat inside  <br>
+  ip  address 10.2.224.1 255.255.255.0<br>
+  exit
+  <br>
+  ip route vrf Guest 0.0.0.0 0.0.0.0  GigabitEthernet1 200.99.24.1 global   <br>
+</p>
+<p>router bgp 65002<br>
+  address-family ipv4 vrf Guest<br>
+  network 0.0.0.0<br>
+  neighbor 10.2.224.2 remote-as 65002<br>
+  neighbor 10.2.224.2 activate<br>
+  neighbor 10.2.224.2 next-hop-self</p>
+<p>ip nat inside source list NAT interface  GigabitEthernet1 vrf Guest overload</p>
+<p>vmanage操作 <br>
+  创建DC BGP模板，设置重分布OMP、设置ASN 65002、添加邻居<br>
+  创建vpn接口模板【ge0/2】<br>
+编辑 DC vedge 设备模板：添加guest vpn（199）模板，添加BGP模板，添加接口模板<br>
+应用设备模板并填写对应参数 </p><br><br><div>
+<img src="../../image/ccieeilab1_image/2_5_sulotions/001.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/002.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/003.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/004.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/005.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/006.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/007.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/008.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/009.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/010.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/011.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/012.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/013.png" width="1024" height="768" alt=""/><br><br><img src="../../image/ccieeilab1_image/2_5_sulotions/014.png" width="1024" height="768" alt=""/><br><br>	
+		</div>			
+<p>DNA Center 操作 <br>
+  将host42&amp;host52入网 guest VN  【实际上考场环境已经预先做好了，看一下确认一下即可】 <br>
+  测试所有主机ping通 8.8.8.8  并有转换项</p>
+<p>&nbsp;</p>
+</body>
+</html>
