@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>2.2 solution</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style>
+	<link href="../exam_content.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+		<body><br>
+			
+ <div style="border-bottom:2px solid #989898"></div>  
+
+<div>
+<p>SW211 配置 DHCP<br>
+	ip dhcp excluded-address 10.4.198.1 10.4.198.100<br>
+ip dhcp excluded-address 10.4.200.1 10.4.200.100<br>
+ip dhcp excluded-address 10.5.198.1 10.5.198.100<br>
+ip dhcp excluded-address 10.5.200.1 10.5.200.100<br>
+
+ip dhcp pool br1_iot<br>
+network 10.4.198.0 255.255.255.0<br><br>
+ default-router 10.4.198.1 
+
+ip dhcp pool br2_iot<br>
+ network 10.5.198.0 255.255.255.0<br>
+ default-router 10.5.198.1 <br>
+
+ip dhcp pool br1_emp<br>
+ network 10.4.200.0 255.255.255.0<br>
+ default-router 10.4.200.1 <br>
+
+ip dhcp pool br2_emp<br>
+ network 10.5.200.0 255.255.255.0<br>
+ default-router 10.5.200.1<br>
+
+</p>			
+			</div><br>
+<div>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/001.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/002.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/003.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/004.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/005.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/006.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/007.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/008.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/009.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/010.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/011.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/012.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/013.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/014.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/015.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/016.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/017.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/018.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/019.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/020.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/021.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/022.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/023.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/024.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/025.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/026.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/027.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/028.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/029.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/030.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/031.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/032.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/033.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/034.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/035.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/036.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/037.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/038.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/039.jpg" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_2_sulotions/040.jpg" width="1024" height="768" alt=""/><br><br>
+
+</div>		
+<br><br><br><br><br><br><br>
+			
+</body>
+</html>
