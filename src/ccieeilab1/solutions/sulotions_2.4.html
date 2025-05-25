@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>2.4 solution</title>
+	<style>
+
+</style>	
+	<link href="../exam_content.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../main.js"></script>
+</head>
+		<body><br>
+ <div style="border-bottom:2px solid #989898"></div>     
+<p>部署提要：<br> <br>本地策略 —— <br>
+	创建本地路由策略 <br>
+  创建本地策略集<br>
+  修改设备模板，将本地策略集部署到 Branch 设备<br>
+  修改 Branch VPN 999 OSPF 模板，重发布时调用策略<br><br>
+
+	中心策略——<br>
+	创建VPN列表 <br>
+  创建站点列表<br>
+  创建自建拓扑:<br> 五个策略序号 ——<br>
+1、DC出来的、VPN999的、10.4.0.0/15范围的，拒绝<br>
+2、DC出来的、VPN999的、导入到 198、200 <br>
+3、VPN198 的路由，导入到 999 、设置 omp tag 198<br>
+4、VPN200 的路由，导入到 999 、设置 omp tag 200<br>
+5、默认放行<br><br>
+创建中心策略，导入自建拓扑，针对 vsmart入方向应用<br>
+  创建 vsmart CLI 模板，加上通告备份路径的指令<br>
+  激活中心策略<br>
+修改 VPN 999 模板，OMP 通告 OSPF 外部路由<br>
+			</p><br><br>
+<div>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/001.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/002.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/003.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/004.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/005.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/006.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/007.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/008.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/009.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/010.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/011.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/012.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/013.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/014.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/015.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/016.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/017.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/018.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/019.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/020.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/021.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/022.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/023.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/024.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/025.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/026.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/027.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/028.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/029.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/030.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/031.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/032.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/033.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/034.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/035.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/036.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/037.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/038.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/039.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/040.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/041.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/042.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/043.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/044.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/045.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/046.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/047.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/048.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/048-1.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/049.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/050.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/051.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/052.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/053.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/054.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/055.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/056.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/057.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/058.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/059.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/060.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/061.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/062.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/063.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/064.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/065.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/066.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/067.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/068.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/069.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/070.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/071.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/072.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/073.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/074.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/075.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/076.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/077.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/078.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/079.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/080.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/081.png" width="1024" height="768" alt=""/><br><br>
+ <img src="../../image/ccieeilab1_image/2_4_sulotions/082.png" width="1024" height="768" alt=""/><br><br>
+			
+			</div><br><br>
+<p>
+测试：<br>
+练习环境，在 sw400 和 sw510 的 G1/0/5接口配置 ip address dhcp、no shutdown<br>
+考场环境直接使用 host vm 测试<br>
+</p>			
+</body>
+</html>
