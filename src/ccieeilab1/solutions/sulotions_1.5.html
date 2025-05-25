@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.5 solution</title>
+	<style>
+p { 
+
+line-height:2em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+		<body bgcolor="#D5D0B2">
+			
+		<p>1.5	DHCP IPv4 Service for HQ</p>
+		<p>SW211<br>
+		  ip dhcp excluded-address 10.1.100.1 10.1.100.100<br>
+		  ip dhcp excluded-address 10.1.101.1 10.1.101.100<br><br>
+			ip dhcp pool hq_v2000<br>
+		  network 10.1.100.0 255.255.255.0<br>
+		  default-router 10.1.100.1 <br>
+		  ip dhcp pool hq_v2001<br>
+		  network 10.1.101.0 255.255.255.0<br>
+		  default-router 10.1.101.1</p>
+		<p>SW101、SW102<br>
+		  interface vlan 2000<br>
+		  ip helper-address 10.2.255.211<br>
+		  ip dhcp relay information trusted <br>
+		  interface vlan 2001<br>
+		  ip helper-address 10.2.255.211<br>
+		  ip dhcp relay information trusted </p>
+		<p>SW110<br>
+		  ip dhcp snooping<br>
+		  ip dhcp snooping vlan 2000-2001<br>
+		  interface range port-channel 1-2<br>
+		  ip dhcp snooping trust<br>
+		  interface g0/0<br>
+		  switchport mode access <br>
+		  switchport access vlan 2000<br>
+		  interface g0/1<br>
+		  switchport mode access <br>
+		  switchport access vlan 2001</p>
+		<p>验证<br>
+ 考场的测试主机可能需要刷新一下网卡配置，敬请注意，以 host11 为例</p><br>
+<div>
+	<img src="../../image/ccieeilab1_image/1_5_01_sulotions.jpg" width="934" height="698"><br>
+	<img src="../../image/ccieeilab1_image/1_5_02_sulotions.jpg" width="934" height="698"><br>
+	<img src="../../image/ccieeilab1_image/1_5_03_sulotions.jpg" width="934" height="698"><br>
+	<img src="../../image/ccieeilab1_image/1_5_04_sulotions.jpg" width="934" height="698"><br>
+</div>		
+</body>
+</html>
