@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+      <style>
+p { text-indent:50px;
+	line-height:2em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+	<body bgcolor="#D5D0B2">
+<p><strong><h1>1.3	First Hop Redundancy Protocol in HQ</h1>
+</strong>
+ <div style="border-bottom:2px solid #989898"></div>  
+<br>
+	‪‪‪‫‫‭‮‬‬‬‬‪For IPv4, implement an FHRP mechanism on sw101 and sw102 for VLANs 2000 and 2001 according to these requirements:<br>
+
+		<p>Use group number 100 for VLAN 2000 and group number 101 for VLAN 2001.</p>
+	<p>Use the first available IPv4 address in the subnet for the address of the virtual router.</p>
+	<p>For VLAN 2000, sw101 must be the preferred gateway; for VLAN 2001, sw102 must be the preferred gateway. Do not rely on the IPv4 addresses of the switches as role tiebreakers. The role must be determined by an explicit configuration solely on the intended preferred gateway.</p>
+	<p>Each preferred gateway must monitor the reachability of both routers r11 and r12 using the loopback IPv4 addresses of the routers by an ICMP Echo. The reachability is to be verified every 5 seconds with a timeout of 400 msec. A router must be declared unreachable as soon as it does not respond to three probes in a row. If both r11 and r12 are declared unreachable from a preferred gateway, the other switch must be allowed to assume the gateway role.</p>
+	<p>Use the FHRP protocol that allows the virtual IPv4 address to match the IPv4 address of a member router.</p>
+
+<p align="right"><strong>2 points</strong></p>
+
+</p>
+</body>
+</html>
