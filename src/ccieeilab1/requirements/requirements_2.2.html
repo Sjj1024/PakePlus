@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>introduced</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style>	<link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+
+	</head>
+
+		<body bgcolor="#D5D0B2">
+<p><strong><h1>2.2	Completing VN Configuration in DNA Center</h1></strong>
+
+ <div style="border-bottom:2px solid #989898"></div>  <br>
+<p1>Using the DNA Center GUI, perform configuration tasks according to these requirements: </p1>
+			
+<p>	Add new virtual Network named IoT for the internet-of-things network on the Branches #1 and #2.</p>	
+<p>Create new address pools for the IoT VN named Branch1-ForIoT and Branch2-ForIoT on the global level, and Branch1-IoT and Branch2-IoT on the branch level.</p>
+	<p>For branch #1 IoT VN, allocate the subnet 10.4.198.0/24 and the gateway IP address 10.4.198.1.</p>
+	<p>For branch #2 IoT VN, allocate the subnet 10.5.198.0/24 and the gateway IP address 10.5.198.1.</p>
+	<p>Associate the Branch1-IoT and Branch2-IoT pools with the IoT VN on the respective branches.</p>
+	<p>Complete the configuration of the address pools for the Guest VN in the VN in the DNA Center so that Branch #1 and Branch #2 can accommodate guest connections. If a new address pool needs to be created and an address range allocated to it, follow the established addressing plan.</p>
+	<p>Correct the addressing information currently defined for the Branch2-ForEmployees and Branch2-Employees address pool.</p>
+	<p>For all address pools, use the DHCP server 10.2.255.211 to allocate addresses to clients.</p>
+ <div style="border-bottom:2px solid #989898"></div> <br>
+<p1>On sw211, complete the DHCP server configuration according to these requirements:</p1><br>
+	
+	<p>Create four new DHCP pools for the IoT and Employees VNs on respective branches</p>
+			<div style="text-indent:7em">Pool named br1_iot for Branch #1 IoT VN</div>
+		<div style="text-indent:7em">Pool named br1_emp for Branch #1 Employees VN</div>
+		<div style="text-indent:7em">Pool named br2_iot for Branch #2 IoT VN</div>
+		<div style="text-indent:7em">Pool named br2_emp for Branch #2 Employees VN</div>
+<p>	In each subnet, assign addresses from .101 up to .254 inclusively, and the appropriate gateway to clients.
+</p><p align="right"><strong>3 points</strong></p>
+
+			</p>
+</body>
+</html>
