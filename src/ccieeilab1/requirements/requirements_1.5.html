@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style>	<link href="../exam_content.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+	<body bgcolor="#D5D0B2">
+<p><strong><h1>1.5	DHCP IPv4 Service for HQ</h1></strong>‪‪‪‫‫‭‮‬‬‬‬‪
+‬‬‬‬‪ <div style="border-bottom:2px solid #989898"></div>  
+<br>
+Enable hosts in HQ VLAN 2000 and VLAN 2001 to obtain their IP configuration via DHCP according to these requirements:<br>
+<br>
+	<p>On sw211, create IPv4 DHCP pools named hq_v2000 and hq_v2001 for HQ VLANs 2000 and 2001, respectively. In each subnet, assign addresses from .101 up to .254 inclusively, and the appropriate gateway to clients.</p>
+	<p>Enable DHCP Snooping on sw110 in VLANs 2000 and 2001 to protect against DHCP related attacks.</p>
+	<p>Place host11 into VLAN 2000.</p>
+	<p>Place host 12 into VLAN 2001.</p>
+	<p>Perform the necessary configuration on switches sw101, sw102, sw110 to enable hosts in VLANs 2000 and 2001 to obtain IPv4 configuration through DHCP. The DHCP server running at sw211 in the DC must be referred to by its loopback IPv4 address 10.2.255.211. Do not disable the Option 82 insertion, and do not enable DHCP Snooping on other switches.</p>
+	<p>Verify that host11 and host12 have IP connectivity to the Cisco DNA Center, vManage and ISE running in the DC using their internal (In Band Connectivity) addresses.</p>
+<p align="right"><strong>2 points</strong></p>
+
+</p>
+</body>
+</html>
