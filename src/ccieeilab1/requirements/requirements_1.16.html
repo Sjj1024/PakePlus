@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+	<body bgcolor="#D5D0B2">
+	<h1>1.16	Enabling Internet Access for FABD2<br></h1>
+ <div style="border-bottom:2px solid #989898"></div>  <br><br>
+	  Enable highly available internet access for the FABD2 company network according to these requirements:<br><br>
+	 <p>On routers r12, r23 and r24, bring up IPv4 BGP peerings with the ISP. Make sure that a default route is received over these peerings.</p>
+	  <p>On routers r12 and r23, inject default route into OSPF if it is present in the routing table from a different routing source than the OSPFv2 process 1. On each router, this requirement must be completed using the minimum possible number of commands.</p>
+	  <p>On router r24, inject default route into OSPF if and only if it is learned from ISP over BGP. To accomplish this requirement, it is allowed to use a route-map that references both a prefix-list and a tag. This requirement must be completed using the minimum possible number of commands.</p>
+	  <p>Router r12 may be used as an internet exit for the FABD2 company network only if neither r23 nor r24 are advertising the default route in OSPF. This requirement must be accomplished exclusively in “router ospf” mode on router r12 without changing the default parameters on routers r23 and r24.</p>
+	  <p>On routers r12, r23 and r24, configure PAT and translate the entire FABD2 internal network 10.0.0.0/8 to the router address on the link toward the ISP. Create a standard ACL named NAT for this purpose. Do not use NAT pools.</p>
+	  <p>Ensure that the internet connectivity of the FABD2 company network makes use of the high availability provided by r12, r23 and r24.</p>
+	  <p align="right"><strong>1 points</strong></p>
+
+</body>
+</html>
