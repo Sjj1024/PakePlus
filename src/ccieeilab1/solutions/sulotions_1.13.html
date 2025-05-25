@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.13 solution</title>
+	<style>
+p { 
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+	</head>
+
+		<body bgcolor="#D5D0B2">
+		<p>1.13	IPv4 Networks on Legacy Branches<br>
+		  SW211<br>
+		  ip dhcp excluded-address 10.6.100.1 10.6.100.100<br>
+		  ip dhcp excluded-address 10.6.101.1 10.6.101.100</p>
+		<p>ip dhcp pool br3_v2000<br>
+		  network 10.6.100.0 255.255.255.0<br>
+		  default-router 10.6.100.1 </p>
+		<p>ip dhcp pool br3_v2001<br>
+		  network 10.6.101.0 255.255.255.0<br>
+		  default-router 10.6.101.1 </p>
+		<p>ip dhcp excluded-address 10.7.1.1 10.7.1.100<br>
+		  ip dhcp pool br4_v1<br>
+		  network 10.7.1.0 255.255.255.0<br>
+		  default-router 10.7.1.1</p>
+		<p>SW601<br>
+		  track 1 interface GigabitEthernet0/1 line-protocol<br>
+		  track 2 interface GigabitEthernet0/2 line-protocol<br>
+		  track 3 list boolean and <br>
+			object 1<br>
+			object 2<br>
+			</p>
+		<p>interface Vlan2000<br>
+		  ip address 10.6.100.2 255.255.255.0<br>
+		  ip helper-address 10.2.255.211 redundancy V2000<br>
+		  standby version 2<br>
+		  standby 100 ip 10.6.100.1<br>
+		  standby 100 priority 110<br>
+		  standby 100 preempt<br>
+		  standby 100 name V2000<br>
+		  standby 100 track 3 shutdown</p>
+		<p>interface Vlan2001<br>
+		  ip address 10.6.101.2 255.255.255.0<br>
+		  ip helper-address 10.2.255.211 redundancy V2001<br>
+		  standby version 2<br>
+		  standby 101 ip 10.6.101.1<br>
+		  standby 101 name V2001</p>
+		<p>SW602<br>
+		  track 1 interface GigabitEthernet0/1 line-protocol<br>
+		  track 2 interface GigabitEthernet0/2 line-protocol<br>
+		  track 3 list boolean and <br>
+			object 1<br>
+			object 2<br>
+			</p>
+		<p>interface Vlan2000<br>
+		  ip address 10.6.100.3 255.255.255.0<br>
+		  ip helper-address 10.2.255.211 redundancy V2000<br>
+		  standby version 2<br>
+		  standby 100 ip 10.6.100.1<br>
+		  standby 100 name V2000</p>
+		<p>interface Vlan2001<br>
+		  ip address 10.6.101.3 255.255.255.0<br>
+		  ip helper-address 10.2.255.211 redundancy V2001<br>
+		  standby version 2<br>
+		  standby 101 ip 10.6.101.1<br>
+		  standby 101 priority 110<br>
+		  standby 101 preempt<br>
+		  standby 101 name V2001<br>
+		  standby 101 track 3 shutdown</p>
+		<p>SW610<br>
+		  vlan 2000<br>
+		  exit<br>
+		  interface range GigabitEthernet2/0-1<br>
+		  switchport trunk allowed vlan add 1,2000,2001</p>
+		<p>interface GigabitEthernet0/0<br>
+		  switchport mode accesss<br>
+		  witchport access vlan 2000</p>
+		<p>interface GigabitEthernet0/1<br>
+		 switchport mode access <br>
+		 switchport access vlan 2001 </p>
+		<p>R70<br>
+		  interface GigabitEthernet0/2<br>
+		  ip address 10.7.1.1 255.255.255.0<br>
+		  ip helper-address 10.2.255.211</p>
+		<p>router eigrp ccie<br>
+		  address-family ipv4 unicast autonomous-system 65006<br>
+		  network 10.7.1.0 0.0.0.255</p>
+		<p>验证：<br>
+		  host61 / host62<br>
+		  show ip interface brief<br>
+		  ping vrf host61 10.1.255.12<br>
+		  traceroute vrf host61 10.1.255.11 numeric</p>
+		<p>host71 / host72<br>
+		  show ip interface brief<br>
+		  ping vrf host71 10.1.255.12<br>
+		  traceroute vrf host71 10.1.255.11 numeric</p>
+</body>
+</html>
