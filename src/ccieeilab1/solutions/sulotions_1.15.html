@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.15 solution</title>
+	<style>
+p { 
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+		<body bgcolor="#D5D0B2">
+		<p>1.15	Extending Connectivity to IaaS Site</p>
+		<p>R11<br>
+		  route-map V6NH permit 10<br>
+		  set ipv6 next-hop 2001:2710:311::1</p>
+		<p>interface g0/0<br>
+		  ipv6 add 2001:2710:311::2/64</p>
+		<p>router eigrp ccie<br>
+		  address-family ipv6 unicast autonomous-system 65001<br>
+		  topology base<br>
+		  redistribute bgp 65001 metric 1000000 10 255 1 1500</p>
+		<p>router bgp 65001<br>
+		  address-family ipv6<br>
+		  neighbor 100.3.11.1 activate<br>
+		  neighbor 100.3.11.1 route-map V6NH in<br>
+		  redistribute eigrp 65001 include-connected</p>
+		<p>R3 <br>
+		  vrf definition fabd2<br>
+		  address-family ipv6<br>
+		  route-target 10000:3681</p>
+		<p>interface g1<br>
+		  ipv6 address 2001:2710:311::1/64</p>
+		<p>route-map V6NH permit 10 <br>
+		  set ipv6 next-hop 2001:2710:311::2</p>
+		<p>router bgp 10000<br>
+		  address-family ipv6 vrf fabd2<br>
+		  neighbor 100.3.11.2 remote-as 65001<br>
+		  neighbor 100.3.11.2 activate<br>
+		  neighbor 100.3.11.2 route-map V6NH in</p>
+		<p>R4<br>
+		  vrf definition giosk<br>
+		  address-family ipv6<br>
+		  route-target 10000:3681</p>
+			<p>验证</p>
+	<div>
+    <img src="../../image/ccieeilab1_image/1_15_01_sulotions.jpg" width="965" height="698"></div>	
+			<br><br><br><br>
+</body>
+</html>
