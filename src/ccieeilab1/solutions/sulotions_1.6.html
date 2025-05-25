@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.6 solution</title>
+	<style>
+p { 
+
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+		<body bgcolor="#D5D0B2">
+		<p>1.6	IPv6 in HQ<br>
+		  SW101<br>
+		  interface vlan2000<br>
+			ipv6 enable<br>
+		  ipv6 address 2001:db8:1:100::1/64<br>
+		  ipv6 nd router-preference High<br>
+			ipv6 nd reachable-time 3000</p>
+		<p>interface vlan2001<br>
+			ipv6 enable<br>
+		  ipv6 address 2001:db8:1:101::1/64<br>
+		  ipv6 nd reachable-time 3000</p>
+		<p>SW102 <br>
+		  interface vlan2000<br>
+			ipv6 enable<br>
+		  ipv6 address 2001:db8:1:100::2/64<br>
+		  ipv6 nd reachable-time 3000</p>
+		<p>interface vlan2001<br>
+			ipv6 enable<br>
+		  ipv6 address 2001:db8:1:101::2/64<br>
+		  ipv6 nd router-preference High<br>
+		  ipv6 nd reachable-time 3000</p><br>
+		<p>验证<br>
+		</p>
+<div><img src="../../image/ccieeilab1_image/1_6_01_sulotions.jpg" width="1024" height="765"></div>
+</body>
+</html>
