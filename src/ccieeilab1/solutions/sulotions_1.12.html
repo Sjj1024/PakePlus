@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.12 solution</title>
+	<style>
+p { 
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+	</head>
+
+		<body bgcolor="#D5D0B2">
+		<p>1.12	Tuning EIGRP on DMVPN and DMVPN enabled Sites<br>
+		  R24<br>
+router eigrp ccie<br>
+address-family ipv4 unicast autonomous-system 65006<br>
+  af-interface Tunnel0<br>
+   no passive-interface<br>
+   summary-address 0.0.0.0/0<br>
+  topology base<br>
+   summary-metric 0.0.0.0/0 distance 125  【Configuration management distance is greater than 110】<br>
+  exit-af-topology<br><br>
+
+clear ip route *   // refresh the R24 routing table to ensure that the summarized default route distance is 125 //<br>
+show ip route 0.0.0.0<br><br>
+
+R70<br>
+router eigrp ccie   <br>
+address-family ipv4 unicast autonomous-system 65006<br>
+  af-interface Tunnel0<br>
+	no passive-interface<br><br>				
+			
+SW601、SW602<br>
+ip prefix-list DEFAULT permit 0.0.0.0/0<br><br>
+
+route-map LEAK permit 10<br>
+ match ip address prefix-list DEFAULT<br>
+match interface g0/0<br><br>
+
+route-map DISTR deny 10<br>
+ match ip address prefix-list DEFAULT<br>
+route-map DISTR permit 20<br><br>
+
+router eigrp ccie<br>
+address-family ipv4 unicast autonomous-system 65006<br>
+  af-interface Vlan2000<br>
+   passive-interface<br>
+  af-interface Vlan2001<br>
+   passive-interface<br>
+  exit<br>
+  network 10.0.0.0<br>
+  eigrp stub connected leak-map LEAK<br>
+  topology base<br>
+   distribute-list route-map DISTR out GigabitEthernet0/1<br>
+   distribute-list route-map DISTR out GigabitEthernet0/2<br>
+
+			</p>
+		<p>验证<br>
+		  在R61、R62、SW601和SW602应该可以看到EIGRP默认路由；</p>
+			
+</body>
+</html>
