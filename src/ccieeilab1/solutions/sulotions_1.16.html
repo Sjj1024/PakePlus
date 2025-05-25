@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.16 solution</title>
+	<style>
+p { 
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+		<body bgcolor="#D5D0B2">
+			
+		<p>1.16	Enabling Internet Access for FABD2</p>
+		<p>R12<br>
+		  router bgp 65001<br>
+		  neighbor 200.99.12.1 remote-as 19999<br>
+		  address-family ipv4<br>
+		  neighbor 200.99.12.1 activate<br><br>
+		router ospf 1<br>
+		  default-information originate metric 6666<br><br>
+		R23<br>
+		  router bgp 65002<br>
+		  neighbor 200.99.23.1 remote-as 19999<br>
+		  address-family ipv4<br>
+		  neighbor 200.99.23.1 activate<br><br>
+		router ospf 1<br>
+		  default-information originate<br><br>
+		R24<br>
+		  ip prefix-list DEF permit 0.0.0.0/0<br><br>
+		route-map DEF permit 10 <br>
+		  match ip address prefix-list DEF<br>
+		  match tag 19999<br><br>
+		router bgp 65002<br>
+		  neighbor 200.99.24.1 remote-as 19999<br>
+			address-family ipv4<br>
+neighbor 200.99.24.1 activate<br><br>
+		router ospf 1<br>
+		  default-information originate route-map DEF<br><br>
+		R12、R23、R24<br>
+		  ip access-list standard NAT<br>
+		  permit 10.0.0.0 0.255.255.255<br><br>
+R12<br>
+interface g0/0<br>
+ip nat outside<br><br>
+interface range g0/1-3<br>
+ip nat inside    <br><br>
+interface loopback 0<br>
+ip nat inside<br><br>
+
+ip nat inside source list NAT interface g0/0 overload<br><br>
+
+R24<br>
+interface tunnel 0<br>
+ip nat inside<br><br>
+
+R23/R24<br>
+interface g1<br>
+ip nat outside<br><br>
+interface range g2-4<br>
+ip nat inside    <br><br>
+interface loopback 0<br>
+ip nat inside<br><br>
+
+ip nat inside source list NAT interface g1 overload<br>
+	    </p>
+		<p>验证：<br>
+		show ip nat trans<br>
+	    </p><br><br><br><br>
+</body>
+</html>
