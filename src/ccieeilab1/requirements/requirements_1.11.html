@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+	<body bgcolor="#D5D0B2">
+<p><strong><h1>1.11	Fixing broken DMVPN between DC and Branch #3 and #4</h1></strong>
+‪‪‪‫‫‭‮‬‬‬‬‪ <div style="border-bottom:2px solid #989898"></div>  <br>
+
+Correct the configuration issues resulting in broken DMVPN tunnel connectivity between DC, Branch3 and Branch4 according to these requirements:<br><br>
+
+	<p>The DMVPN must operate in Ipsec-protected Phase 3 mode.</p>
+	<p>Using the FVRF approach, safeguard the DMVPN operation against any potential recursive routing issues involving the tunnel.</p>
+	<p>Do not create any new VRFs.</p>
+	<p>Do not change the tunnel source commands on Tunnel interfaces.</p>
+	<p>On spokes, do not add new BGP neighbors; reuse those that are currently up while changing their VRF membership as needed.</p>
+	<p>It is not allowed to modify configuration on DC r24 to complete this entire task.</p>
+<p align="right"><strong>3 points</strong></p>
+
+</p>
+</body>
+</html>
