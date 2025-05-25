@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>introduced</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style>	<link href="../exam_content.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+		<body bgcolor="#D5D0B2">
+			<p><strong><h1>2.5	Handling Guest Traffic</h1></strong>
+				
+ <div style="border-bottom:2px solid #989898"></div>  	<br>
+       
+<p1>The Guest VN/VPN on Branches #1 and #2 must remain isolated from the rest of the company network. It is only allowed to reach internet through r23 and r24 in the DC.Enable internet connectivity for the Guest VPN according to these requirements:</p1><br>
+
+	<p>On vedge21 and vedge22, place the ge0/2 interfaces into the Guest VPN 199.</p>
+	<p>On r23 and r24, create a new VRF named Guest using the RD of 65002:199, and place the ge4 interfaces into this VRF.</p>
+	<p>Assign addresses to these interfaces:</p>
+			<div style="text-indent:7em">r23 gi4: 10.2.123.1/24</div>
+		<div style="text-indent:7em">r24 gi4: 10.2.224.1/24</div>
+		<div style="text-indent:7em">vedge21 ge0/2: 10.2.123.2/24</div>
+		<div style="text-indent:7em">vedge22 ge0/2: 10.2.224.2/24</div>
+	<p>Peer r23 and vedge21 in the Guest VRF/VPN using iBGP.</p>
+	<p>Peer r24 and vedge22 in the Guest VRF/VPN using iBGP.</p>
+	<p>Ensure that r23 and r24 learn the routes in the Guest VRF/VPN over iBGP.</p>
+	<p>On r23 and r24, configure a static default route in the Guest VRF and point it to the ISP’s IP address 200.99.23.1 or 200.99.24.1 as appropriate. Advertise this default route in iBGP to vedge21 and vedge22.</p>
+	<p>On r23 and r24, configure PAT to allow the Guest VPN to access internet by translating it to the router address on the link toward the ISP. Reuse the NAT ACL already created on the router. Do not use NAT pools.</p>
+ <div style="border-bottom:2px solid #989898"></div> <br>
+<p1>Configure r23 as the DHCP server for Guest VPN according to these requirements:</p1><br>
+
+	<p>Create Looopback1 interface on r23 associated with the Guest VRF and having the IP address 10.2.255.211/32</p>
+	<p>Advertise this prefix in BGP toward vedge21.</p>
+	<p>Create DHCP pool named br1_guest for branch #1 Guest subnet.</p>
+	<p>Create DHCP pool named br2_guest for branch #2 Guest subnet.</p>
+	<p>Explicitly associate both DHCP pools with the VRF Guest.</p>
+	<p>In each subnet, assign address from .101 up to .254 inclusively, and the appropriate gateway to clients.</p>
+	<p>Associate host42 and host52 with the Guest VN in DNAC, and make sure that both hosts receive the appropriate address.</p>
+	<p>Make sure that host42 and host52 can ping 8.8.8.8 in the ISP cloud.</p>
+
+			</p><p align="right"><strong>4 points</strong></p>
+
+</body>
+</html>
