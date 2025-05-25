@@ -76,6 +76,26 @@ jobs:
                   sudo apt-get update
                   sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
+            - name: Verify WixTools Installation
+              if: matrix.platform == 'windows-latest'
+              run: |
+                if not exist "C:\\Users\\runneradmin\\AppData\\Local\\tauri\\WixTools314\\light.exe" (
+                      echo "WixTools is not correctly installed or missing."
+                      exit 1
+                                        )
+
+            - name: Install Windows Dependencies
+              if: matrix.platform == 'windows-latest'
+              run: |
+                choco install wix -y
+                choco install nuget -y
+
+            - name: Update Tauri CLI and Dependencies
+              run: pnpm tauri-cli update
+
+            - name: Enable Verbose Logging for Tauri Build
+              run: pnpm tauri build --verbose
+
             - uses: Sjj1024/tauri-zhaction@tauri-zhaciton
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
