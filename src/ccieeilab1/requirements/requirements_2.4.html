@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>introduced</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style>	<link href="../exam_content.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+		<body bgcolor="#D5D0B2">
+	<p><strong><h1>2.4	Configuring SD-WAN VPN Route Leaking</h1></strong>
+		
+			
+ <div style="border-bottom:2px solid #989898"></div>  <br>
+<p1>To allow the traditional parts of the FABD2 network to communicate with the Employees and IoT VPNs/VNs, configure route leaking in SD-WAN according to these requirements:</p1><br>
+
+	<p>Prefixes in the IoT VPN 198 must be imported into the existing SDA Underlay VPN 999 and tagged with the tag value of 198</p>
+	<p>Prefixes in the Employees VPN 200 must be imported into the existing SDA Underlay VPN 999 and tagged with the tag value of 200</p>
+	<p>Prefixes in the SDA Underlay VPN 999 advertised from the DC that are within the 10.4.0.0/15 range must be rejected. Other prefixes in the SDA Underlay VPN 999 advertised from the DC must be accepted and also imported into IoT VPN 198 and Employees VPN 200.</p>
+	<p>Redistribution from OMP into OSPF on Branches #1 and #2 in VPN 999 must exclude vRoutes tagged with values 198 or 200.</p>
+	<p>Place host41 into Employees VN. Place host51 into IoT VN. Make sure both hosts receive their IP settings from DHCP.</p>
+	<p>Ensure that the IoT and Employees VPNs on Branches #1 and #2 have reachability to Branches #3 and #4. It is allowed to modify the VPN 999 OMP settings to accomplish this requirement.</p>
+			</p><p align="right"><strong>3 points</strong></p>
+
+
+</body>
+</html>
