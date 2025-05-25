@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style>	<link href="../exam_content.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+	<body bgcolor="#D5D0B2">
+<p><strong><h1>1.9	BGP between HQ/DC and Service Providers</h1></strong>
+‪‪‪‫‫‭‮‬‬‬‬‪‬‬‬‬‪ <div style="border-bottom:2px solid #989898"></div>  <br>
+
+Configure the BGP peerings between HQ/DC and Global SP #1 and Global SP #2 according to these requirements:<br><br>
+
+	<p>Bring up the BGP peering between HQ r11 and SP#1 r3.</p>
+	<p>Bring up the BGP peering between DC r21 and SP#1 r3.</p>
+	<p>Bring up the BGP peering between DC r22 and SP#2.</p>
+	<p>Ensure that the routes learned over eBGP sessions and further advertised in iBGP will be considered reachable even if the networks on inter-AS link are not advertised in OSPF. The configuration of this requirement must be completed exclusively within the “router bgp” context.</p>
+	<p>On r11, r21 and r22, perform mutual redistribution between OSPFv2 and BGP. However, prevent routes that were injected into OSPF from BGP to be reinjected back into BGP. This requirement must be solved on r11, R21 and r22 using only a single route-map on each of the routers and without any reference to ACLs, prefix lists, or route types.</p>
+	<p>Prevent HQ and DC from ever communicating through SP #1 r3. All communication between HQ and DC must occur only over the direct sw101/sw201 and sw102/sw202 interconnections. Any other communication must remain unaffected. This requirement must be solved on r21 and r22 by route filtering based on a well-known mandatory attribute without the use of route maps.</p>
+	<p>No command may be removed from the configuration on r11 to accomplish this entire task.</p>
+	<p>It is allowed to modify existing configuration commands on r21 and r22 to accomplish this entire task.</p>
+<p align="right"><strong>3 points</strong></p>
+</p>
+</body>
+</html>
