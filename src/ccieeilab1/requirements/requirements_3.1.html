@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>introduced</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style>	<link href="../exam_content.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+		<body bgcolor="#D5D0B2">
+<p><strong><h1>3.1 Enabling CLI Access to r30</h1></strong></p>
+
+			<div style="border-bottom:2px solid #989898"></div>
+<p><span style="border-bottom:2px solid #989898"></span></p>
+	
+<div>There is no direct console access  provided to the router r30. Moreover, r30 does not accept any remote  connections because its VTY lines are configured with transport input none.  Using RESTCONF enable remote access to r30 for all remote access protocols,  according to the following requirements:<br></div>
+<br>
+<div style="text-indent:5em">You can use host31 to access router r30 using  IP address 10.3.11.1</div>
+  <div style="text-indent:5em">You can use any method of accessing the  RESTCONF API on r30 from host31, including curl, Python, or Postman</div>
+  <div style="text-indent:5em">You must change the input transport protocol  on all configurable VTY lines.</div>
+<div style="text-indent:5em">The input transport protocol value setting  must be changed from none to all </div>
+<br>
+<div><strong>Important parameters:</strong></div><br>
+<div style="text-indent:2em">  Username/Password for HTTP authentication</div>
+<div style="text-indent:4em"> admin/admin</div>
+<div style="text-indent:2em">  URL</div>
+<div style="text-indent:4em">  https://10.3.11.1:443/restconf/data/Cisco-IOS-XE-native:native/line/vty</div>
+<div style="text-indent:2em"> HTTP method to retrieve the configuration</div>
+<div style="text-indent:4em">GET</div>
+<div style="text-indent:2em"> HTTP method to modify the configuration</div>
+<div style="text-indent:4em">PATCH</div>
+<div style="text-indent:2em"> HTTP headers</div>
+<div style="text-indent:4em">Content-Type:  application/yang-data+json</div>
+<div style="text-indent:4em">Accept: application/yang-data+json</div>
+<div style="text-indent:2em"> Recommended curl switches</div>
+<div style="text-indent:4em">&nbsp;-I, -k, -X, -H, -u, -d</div>
+        <br> 
+<p>&nbsp;</p>
+
+<p align="right"><strong>2 points</strong></p>
+
+</body>
+</html>
