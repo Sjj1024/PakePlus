@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.7 solution</title>
+	<style>
+p { 
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+		<body bgcolor="#D5D0B2">
+		<p>1.7	IPv6 EIGRP in HQ<br><br>
+		  
+SW101/SW102<br>
+router eigrp ccie<br>
+address-family ipv6 unicast autonomous-system 65001<br>
+  af-interface default<br>
+   shutdown<br>
+passive-interface<br>
+  exit-af-interface<br>
+  af-interface GigabitEthernet0/0<br>
+   no shutdown<br>
+no passive-interface<br>
+  af-interface GigabitEthernet0/1<br>
+   no shutdown<br>
+no passive-interface<br>
+  af-interface Vlan2000<br>
+   no shutdown<br>
+  af-interface Vlan2001<br>
+   no shutdown<br><br>
+
+R11/R12<br>
+ipv6 unicast-routing<br>
+router eigrp ccie<br>
+address-family ipv6 unicast autonomous-system 65001<br>
+  af-interface default<br>
+   shutdown<br>
+   passive-interface<br>
+  af-interface GigabitEthernet0/1<br>
+   no shutdown<br>
+no passive-interface<br>
+  af-interface GigabitEthernet0/2<br>
+   no shutdown<br>
+no passive-interface<br>
+  af-interface GigabitEthernet0/3<br>
+   no shutdown<br>
+no passive-interface<br>
+  af-interface Loopback0<br>
+   no shutdown<br><br>
+
+验证<br>
+show ipv6 eigrp neighbor<br>
+show ipv6 route<br>
+
+	    </p>
+<div><img src="../../image/ccieeilab1_image/1_7_01_sulotions.jpg" width="934" height="698"></div>			
+</body>
+</html>
