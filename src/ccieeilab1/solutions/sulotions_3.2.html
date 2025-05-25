@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>3.2 solution</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+		<body bgcolor="#D5D0B2"><br>
+ <div style="border-bottom:2px solid #989898"></div>  
+
+<p><br>
+1、使用telnet登录R30<br>
+在host31上打开terminal，输入 telnet 10.3.11.1 回车，给用户名密码 <br><br>
+2、配置guestshell<br>
+configure terminal<br>
+iox    //敲完要等待ioxman ready才能开启guestshell<br><br>
+interface VirtualPortGroup0<br>
+ip address 192.168.255.1 255.255.255.0<br>
+exit<br>
+app-hosting appid guestshell<br>
+app-vnic gateway0 virtualportgroup 0  guest-interface 0<br>
+guest-ipaddress 192.168.255.10 netmask 255.255.255.0<br>
+app-default-gateway 192.168.255.1  guest-interface 0<br>
+exit<br>
+guestshell enable    【特权模式命令，敲完要等会儿】 <br>
+guestshell    【进入guestshell】 <br><br>
+3、编辑python脚本<br>
+使用vi编辑器写脚本，vi编辑器关键操作：<br>
+按 insert 键进入编辑模式，按esc可以退出编辑模式：<br>
+脚本编辑完毕，按crtl+冒号进入末行模式；在末行模式输入wq然后回车即保存退出；<br>
+  vi ribdump.py </p>
+<div style="width:800px;"><pre style="background-color:#2b2b2b;color:#a9b7c6;font-family:'JetBrains Mono',monospace;font-size:16pt;line-height:1.2;"><span style="color:#cc7832; ">from&#32;</span>cli&#32;<span style="color:#cc7832;">import&#32;</span>*<br>vrfinfo&#32;=&#32;execute(<span style="color:#6a8759; ">"show&#32;vrf&#32;brief&#32;|&#32;include&#32;ipv"</span>).split(<span style="color:#6a8759; ">"</span><span style="color:#cc7832; ">\n</span><span style="color:#6a8759; ">"</span>)<br>vrfinfolist&#32;=&#32;[]<br><span style="color:#cc7832; ">for&#32;</span>line&#32;<span style="color:#cc7832; ">in&#32;</span>vrfinfo:<br>&#32;&#32;&#32;&#32;vrf_name&#32;=&#32;line.split()[<span style="color:#6897bb; ">0</span>]<br>&#32;&#32;&#32;&#32;vrf_fa&#32;=&#32;line.split()[<span style="color:#6897bb; ">2</span>]<br>&#32;&#32;&#32;&#32;<span style="color:#cc7832; ">if&#32;</span><span style="color:#6a8759; ">'ipv4'&#32;</span><span style="color:#cc7832; ">in&#32;</span>vrf_fa:<br>&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;vrf_fa&#32;=&#32;vrf_fa.replace(<span style="color:#6a8759; ">'ipv4'</span><span style="color:#cc7832; ">,</span><span style="color:#6a8759; ">'ip'</span>)<br>&#32;&#32;&#32;&#32;vrfinfolist.append([vrf_name<span style="color:#cc7832; ">,</span>vrf_fa.split(<span style="color:#6a8759; ">','</span>)])<br><span style="color:#cc7832; ">for&#32;</span>info&#32;<span style="color:#cc7832; ">in&#32;</span>vrfinfolist:<br>&#32;&#32;&#32;&#32;<span style="color:#cc7832; ">for&#32;</span>family&#32;<span style="color:#cc7832; ">in&#32;</span>info[<span style="color:#6897bb; ">1</span>]:<br>&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;executep(<span style="color:#6a8759; ">'show&#32;%s&#32;route&#32;vrf&#32;%s'</span>%(family<span style="color:#cc7832; ">,</span>info[<span style="color:#6897bb; ">0</span>]))</pre></div>
+<br><br><br>
+
+</body>
+</html>
