@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.10 solution</title>
+	<style>
+p { 
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+		<body bgcolor="#D5D0B2">
+		<p>1.10	Bringing up VPNv4/VPNv6 in SP#1<br><br>
+		  R4<br>
+		  Interface loopback0<br>
+		  ip address 100.255.254.4 255.255.255.255<br>
+			exit<br>
+			mpls ldp router-id lo0 force<br>
+			</p>
+		<p>R3456 [except it self]<br>
+		  ipv6 unicast-routing<br>
+		  no mpls ip propagate-ttl forwarded <br>
+		mpls label mode all-vrfs protocol all-afs per-vrf</p>
+		<p>router bgp 10000<br>
+		  neighbor 100.255.254.3 remote-as 10000<br>
+		  neighbor 100.255.254.3 update-source Loopback0<br>
+		  neighbor 100.255.254.4 remote-as 10000<br>
+		  neighbor 100.255.254.4 update-source Loopback0<br>
+		  neighbor 100.255.254.5 remote-as 10000<br>
+		  neighbor 100.255.254.5 update-source Loopback0<br>
+		  neighbor 100.255.254.6 remote-as 10000<br>
+		  neighbor 100.255.254.6 update-source Loopback0<br>
+		  address-family vpnv4<br>
+		  neighbor 100.255.254.3 activate<br>
+		  neighbor 100.255.254.4 activate <br>
+		  neighbor 100.255.254.5 activate <br>
+		  neighbor 100.255.254.6 activate<br>
+		  address-family vpnv6<br>
+		  neighbor 100.255.254.3 activate<br>
+		  neighbor 100.255.254.4 activate <br>
+		  neighbor 100.255.254.5 activate <br>
+		  neighbor 100.255.254.6 activate</p>
+		
+		<p>验证<br>
+		  show bgp vpnv4 unicast all summary <br>
+		  show bgp vpnv6 unicast all summary</p>
+		<p><img src="../../image/ccieeilab1_image/1.10_verify1.jpg" width="926" height="496"></p>
+		<p><img src="../../image/ccieeilab1_image/1.10_verify2.jpg" width="918" height="548"><br>
+	    </p>
+</body>
+</html>
