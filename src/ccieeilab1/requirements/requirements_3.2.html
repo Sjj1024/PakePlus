@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>introduced</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style>
+	<link href="../exam_content.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+		<body bgcolor="#D5D0B2">
+<p><strong><h1>3.2 Using Guest Shell and Python on r30
+</h1></strong></p>
+
+			<div style="border-bottom:2px solid #989898"></div>  <br>
+<p1>On  r30, enable guestshell and create a Python script named &ldquo;ribdump.py&rdquo; in the guestshell according to the following requirements:</p1><br><br>
+<div style="text-indent:3em">If an additional  IP network is necessary to start guestshell, you are allowed to use addresses  from the range 192.168.255.0/24. This range must not be advertised in any  routing protocol.</div><br>
+<div style="text-indent:3em"> The Python script  must be saved under the name ribdump.py in the home directory of the guestshell  user.</div><br>
+<div style="text-indent:3em"> The purpose of  the script is to display the complete contents of all routing tables in  no-default VRFs created on the router.</div><br>
+<div style="text-indent:3em">The script must  execute the show ip route vrf….. or show ipv6 vrf….. command for every nondefault VRF created on the router depending  on what address families are enabled in that VRF</div><br>
+<div style="text-indent:3em">The script must  determine the list of created VRFs and enabled address families dynamically  every time it is run using, for example, show vrf brief | include ipv  </div><br>
+<div style="text-indent:3em">The script must  not attempt to display the VRF routing table for an address family that is not  in the VRF</div><br>
+<div style="text-indent:3em">It must be  possible to run script using the guestshell run python ribdump.py command from  privileged EXEC mode</div>
+          
+		<p align="right"><strong>3 points</strong></p>
+</body>
+</html>
