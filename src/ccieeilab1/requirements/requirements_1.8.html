@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style>	<link href="../exam_content.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+	<body bgcolor="#D5D0B2">
+<p><strong><h1>1.8	OSPFv2 in DC</h1></strong>
+‪‪‪‫‫‭‮‬‬‬‬‪‬‬‬‬‪ <div style="border-bottom:2px solid #989898"></div>  <br>
+
+Configure devices in the DC according to these requirements:<br><br>
+
+	<p>Switches sw201 and sw202 must establish a stable OSPF adjacency in the FULL state with vedge21 and vedge22 on interface Vlan3999. Any configuration changes and corrections necessary to meet this requirement may be performed only on the switches, and any mismatched parameters causing the issue must be changed to exactly match the configuration of the vEdges.</p>
+	<p>All OSPF speakers in the DC running Cisco IOS and IOS-XE software must be configured to keep the number of advertised internal routes to an absolute minimum while not impacting the reachability of the services. This includes the reachability of ISE, DNA Center, vManage, vBond and vSmart on their internal (In Band Connectivity) addresses, as well as any existing and future devices in VLAN4000 on sw201 and sw202. The configuration of this requirement must be completed exclusively within the “router ospf” and “interface Vlan” contexts without causing any impact to existing OSPF adjacencies.</p>
+	<p>Router r24 must advertise two prefixes, 10.6.0.0/15 and 10.200.0.0/24, as Type-5 LSAs in OSPFv2 to provide HQ and DC with the reachability to the DMVPN tunnel and Branches #3 and #4. The configuration of this requirement must be completed exclusively within the “router ospf” context.</p>
+	<p>Any route from the 10.2.0.0/16 range that keeps being advertised in OSPF must continue being advertised as an intra-area route.
+	It is not allowed to modify existing areas to accomplish this entire task.</p>
+<p align="right"><strong>4 points</strong></p>
+
+</p>
+</body>
+</html>
