@@ -1,0 +1,106 @@
+@charset "utf-8";
+@media (max-width: 1440px){
+}
+
+.wrapper{
+    width: 270px;
+}
+.harf{
+    margin-bottom: 1px;
+}
+.tab{
+    position: relative;
+    margin-bottom: 1px;
+    width: 100%;
+    color: #fff;
+    overflow: hidden;
+}
+input{
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+label{
+    position: relative;
+    display: block;
+    padding: 0 0 0 1em;
+    background: #0E5079;
+
+    line-height: 2;
+    cursor: pointer;
+}
+label1{
+    position: relative;
+    display: block;
+    padding: 0 0 0 1em;
+    background: #ffffff;
+    line-height: 2;
+    cursor: pointer;
+	border-collapse:collapse; 
+	border:1px solid #D7D1B9;
+}
+
+.blue label{
+    background: #2980B9;
+}
+.tab-content{
+    max-height: 0em;
+    overflow: hidden;
+    background: #ffffff;
+	    color: #000;
+    -webkit-transition: max-height .35s;
+    transition: max-height .35s;
+
+}
+.tab-content p{
+    margin: 1em;
+}
+input:checked ~ .tab-content{
+    max-height: 100em;
+}
+label::after{
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 3em;
+    height: 2em;
+    line-height: 2em;
+    text-align: center;
+    -webkit-transition: all .35s;
+    transition: all .35s;
+}
+input[type=checkbox] + label:after{
+    content: "+";
+}
+input[type=checkbox]:checked + label:after{
+    -webkit-transform:rotate(315deg) ;
+}
+input[type=radio] + label::after {
+     content: "\25BC";
+}
+input[type=radio]:checked + label::after{
+     -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+}
+
+a {
+color:#000000;
+text-decoration:none; 
+}
+
+a:hover {
+color:#000000;
+text-decoration:none;
+
+}
+
+body{
+    -moz-user-select:none; 
+    -webkit-user-select:none; 
+    -ms-user-select:none; 
+    -khtml-user-select:none; 
+    user-select:none;
+	width:1440px;
+}
+
