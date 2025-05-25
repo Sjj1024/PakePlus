@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+
+	</head>
+
+	<body bgcolor="#D5D0B2">
+	<h1><strong>1.15	Extending Connectivity to IaaS Site</strong><br></h1>
+ <div style="border-bottom:2px solid #989898"></div>  <br><br>
+    Extend the IPv6 connectivity from HQ through the SP into the giosk VRF on the IaaS site according to these requirements:<br><br>
+	 <p>Set up global IPv6 addressing on the link between r11 and r3</p>
+	<div style="text-indent:7em">On r11, assign 2001:2710:311::2/64 to g0/0</div>
+	<div style="text-indent:7em">On r3, assign 2001:2710:311::1/64 to g1</div>
+	  <p>Enable the existing IPv4 BGP session between r11 and r3 to also advertise IPv6 prefixes. Do not configure a standalone IPv6 BGP session between these two routers.</p>
+	  <p>Perform bidirectional route redistribution between the IPv6 EIGRP and BGP processes on r11.</p>
+	  <p>Ensure that all current and future IPv6 prefixes advertised between r11 and r3 will be installed into the RIB of these routers with the next hop address set to the proper global unicast address on their interconnection. Any policy that accomplishes this requirement must be applied in the inbound direction.</p>
+	  <p>The giosk VRF on r4 that extends the IPv6 connectivity from r4 to r30 on the IaaS site is a separate VRF independent of fabd2 VRF. Any route leaking from fabd2 VRF into giosk VRF must be done on a per-site basis and only for those FABD2 sites that need connectivity with the IaaS site.</p>
+	  <p>By configuring r3 and r4 only, ensure that the HQ FABD2 site will have mutual visibility with the IaaS site while preventing</p>
+	  <div style="text-indent:7em">Any other FABD2 site from possibly learning about the routes on the IaaS site</div>
+	  <div style="text-indent:7em">The IaaS site from possibly learning about the routes on any other FABD2 site</div>
+	  <p>Use the minimum amount of commands necessary to accomplish this requirement. Do not remove any existing configuration. If necessary, you are allowed to use an additional route target with the value of 10000:3681.</p>
+    <p>Verify that host 11 and host 12 can ping 2001:db8:14::1 located at the IaaS site. It is permitted to modify one existing configuration command on one of the SP routers to meet this requirement.</p>
+	<p align="right"><strong>3 points</strong>
+<br>
+    </p>
+	</body>
+</html>
