@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.9 solution</title>
+	<style>
+p { 
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+		<body bgcolor="#D5D0B2">
+		<p>1.9	BGP between HQ/DC and Service Providers<br><br>
+		 R11<br>
+route-map O2B_TAG deny 10<br>
+ match tag 123<br>
+route-map O2B_TAG permit 20<br><br>
+
+router bgp 65001<br>
+ neighbor 100.3.11.1 remote-as 10000<br>
+address-family ipv4<br>
+  neighbor 100.3.11.1 activate<br>
+  redistribute ospf 1 match internal external route-map O2B_TAG<br><br>
+
+router ospf 1<br>
+ redistribute bgp 65001 subnets tag 123<br><br>
+
+R21<br>
+route-map O2B_TAG deny 10<br>
+ match tag 123<br>
+route-map O2B_TAG permit 20<br><br>
+no router bgp 65002<br><br>
+router bgp 65001<br>
+bgp router-id 10.2.255.21<br>
+network 10.2.255.21 mask 255.255.255.255<br>
+ neighbor 10.2.255.22 remote-as 65002<br>
+ neighbor 10.2.255.22 update-source Loopback0<br>
+neighbor 10.2.255.22 local-as 65002 <br>
+neighbor 10.2.255.22 next-hop-self<br>
+ neighbor 100.3.21.1 remote-as 10000<br>
+neighbor 100.3.21.1 local-as 65002<br>
+redistribute ospf 1 match internal external route-map O2B_TAG<br><br>
+
+router ospf 1<br>
+redistribute bgp 65001 subnets tag 123<br><br>
+
+R22<br>
+route-map O2B_TAG deny 10<br>
+ match tag 123<br>
+route-map O2B_TAG permit 20<br><br>
+no router bgp 65002<br><br>
+router bgp 65001<br>
+bgp router-id 10.2.255.22<br>
+network 10.2.255.22 mask 255.255.255.255<br>
+ neighbor 10.2.255.21 remote-as 65002<br>
+ neighbor 10.2.255.21 update-source Loopback0<br>
+ neighbor 10.2.255.21 local-as 65002<br>
+neighbor 10.2.255.21 next-hop-self<br>
+ neighbor 101.22.0.1 remote-as 10001<br>
+ neighbor 101.22.0.1 local-as 65002<br>
+redistribute ospf 1 match internal external route-map O2B_TAG<br><br>
+
+router ospf 1<br>
+redistribute bgp 65001 subnets tag 123<br><br>
+	    </p>
+</body>
+</html>
