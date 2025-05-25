@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.4 solution</title>
+	<style>
+p { 
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+		<body bgcolor="#D5D0B2">
+		<p>1.4	OSPFv2 between HQ and DC</p>
+		<p>SW201\202<br>
+		  router ospf 1<br>
+		  no passive-interface g1/2</p>
+		<p>SW101\102\201\202<br>
+		  key chain ccie<br>
+		  key 1<br>
+		  key-string cci3  【注意密钥必须和需求上写的一毛一样】<br>
+		  cryptographic-algorithm hmac-sha-384</p>
+		<p>SW101\102 <br>
+Interface g0/2<br>
+ip ospf authentication key-chain ccie<br>
+bfd interval 100 min_rx 100 multiplier 3<br>
+ip ospf bfd</p>
+        <p>SW201\202 <br>
+          Interface g1/2<br>
+          ip ospf authentication key-chain ccie<br>
+          bfd interval 100 min_rx 100 multiplier 3<br>
+          ip ospf bfd</p>
+<p>验证<br>
+		  show ip ospf neighbor<br>
+		  show bfd neighbors<br>
+	    </p>
+			
+</body>
+</html>
