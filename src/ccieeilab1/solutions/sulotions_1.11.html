@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.11 solution</title>
+	<style>
+p { 
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+		<body bgcolor="#D5D0B2">
+		<p>1.11	Fixing broken DMVPN between DC and Branch #3 and #4</p>
+		<p>
+			R61\R62\R70  <br>
+crypto keyring KR vrf WAN  【R70 has the right keyring config, just copy it to R61\r62】<br>
+  pre-shared-key address 0.0.0.0 0.0.0.0 key cisco<br><br>
+crypto isakmp policy 10  <br>
+no hash md5<br>
+ authentication pre-share<br>
+ group 2<br><br>
+
+R61<br>
+interface GigabitEthernet0/0<br>
+  vrf forwarding WAN<br>
+ ip address 100.5.61.2 255.255.255.252<br>
+interface Loopback0<br>
+  vrf forwarding WAN<br>
+ ip address 10.6.255.61 255.255.255.255<br><br>
+
+router bgp 65006<br>
+ address-family ipv4 vrf WAN<br>
+  network 10.6.255.61 mask 255.255.255.255<br>
+  neighbor 100.5.61.1 remote-as 10000<br>
+  neighbor 100.5.61.1 activate<br><br>
+
+interface Tunnel0    【Check and fix the configuration of the tunnel interface 0 to make it the same as shown below】<br>
+ ip address 10.200.0.61 255.255.255.0<br>
+ ip mtu 1440<br>
+no ip nhrp map 10.2.255.24 10.200.0.1 <br>
+ip nhrp map 10.200.0.1 10.2.255.24<br>
+ip nhrp map multicast 10.2.255.24<br>
+ip nhrp network-id 1010<br>
+ ip nhrp nhs 10.200.0.1<br>
+no ip nhrp redirect<br>
+ip nhrp shortcut   【this config will not shown but you need to do it】<br>
+ tunnel source Loopback0<br>
+ tunnel mode gre multipoint<br>
+ tunnel vrf WAN<br>
+ tunnel protection ipsec profile prof<br><br>
+
+R62<br>
+interface GigabitEthernet0/0<br>
+ vrf forwarding WAN<br>
+ ip address 100.6.62.2 255.255.255.252<br>
+interface Loopback0<br>
+  vrf forwarding WAN<br>
+ ip address 10.6.255.62 255.255.255.255<br><br>
+
+router bgp 65006<br>
+address-family ipv4 vrf WAN<br>
+  network 10.6.255.62 mask 255.255.255.255<br>
+  neighbor 100.6.62.1 remote-as 10000<br>
+  neighbor 100.6.62.1 activate<br><br>
+
+interface Tunnel0  【Check and fix the configuration of the tunnel interface 0 to make it the same as shown below】<br>
+ ip address 10.200.0.62 255.255.255.0<br>
+ ip mtu 1440<br>
+ip nhrp map 10.200.0.1 10.2.255.24<br>
+ip nhrp map multicast 10.2.255.24<br>
+ip nhrp network-id 1010<br>
+ ip nhrp nhs 10.200.0.1<br>
+no ip nhrp redirect<br>
+ip nhrp shortcut<br>
+ tunnel source Loopback0<br>
+ tunnel mode gre multipoint<br>
+ tunnel vrf WAN<br>
+ tunnel protection ipsec profile prof<br><br>
+
+R70<br>
+router bgp 65007<br>
+address-family ipv4 vrf WAN<br>
+  network 10.7.255.70 mask 255.255.255.255<br><br>
+
+interface Tunnel0   【Check and fix the configuration of the tunnel interface 0 to make it the same as shown below】<br>
+ip mtu 1440<br>
+ip nhrp map 10.200.0.1 10.2.255.24<br>
+ip nhrp map multicast 10.2.255.24<br>
+ip nhrp network-id 1010<br>
+ ip nhrp nhs 10.200.0.1<br>
+no ip nhrp redirect<br>
+ip nhrp shortcut<br>
+ tunnel source Loopback0<br>
+ tunnel mode gre multipoint<br>
+ tunnel vrf WAN<br>
+ tunnel protection ipsec profile prof<br><br>
+
+router eigrp ccie     [this part is 1.12 solution]<br>
+address-family ipv4 unicast autonomous-system 65006<br>
+  af-interface Tunnel0<br>
+	no passive-interface<br>
+			</p>	
+			
+		<p>验证：<br>
+		  R24#show dmvpn <br>
+		  Legend: Attrb --&gt; S - Static, D - Dynamic, I - Incomplete<br>
+		  N - NATed, L - Local, X - No Socket<br>
+		  T1 - Route Installed, T2 - Nexthop-override<br>
+		  C - CTS Capable, I2 - Temporary<br>
+		  # Ent --&gt; Number of NHRP entries with same NBMA peer<br>
+		  NHS Status: E --&gt; Expecting Replies, R --&gt; Responding, W --&gt; Waiting<br>
+		  UpDn Time --&gt; Up or Down Time for a Tunnel<br>
+		  ==========================================================================</p>
+		<p>Interface: Tunnel0, IPv4 NHRP Details <br>
+		  Type:Hub, NHRP Peers:3, </p>
+		<p> # Ent  Peer NBMA Addr Peer Tunnel Add State  UpDn Tm Attrb<br>
+		  ----- --------------- --------------- ----- -------- -----<br>
+		  1 10.6.255.61         10.200.0.61    UP 00:02:27     D<br>
+		  1 10.6.255.62         10.200.0.62    UP 00:02:22     D<br>
+		  1 10.7.255.70         10.200.0.70    UP 00:02:21     D<br>
+	    </p>
+</body>
+</html>
