@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+	<style>
+p { 
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+		<body bgcolor="#D5D0B2">
+		<p>1.3	First Hop Redundancy Protocol in HQ</p>
+		<p>SW101<br>
+		  ip sla 11<br>
+icmp-echo 10.1.255.11 source-interface vlan2000<br>
+threshold 400<br>
+timeout 400<br>
+frequency 5<br>
+ip sla 12<br>
+icmp-echo 10.1.255.12 source-interface vlan2000<br>
+threshold 400<br>
+timeout 400<br>
+frequency 5</p>
+		<p>ip sla schedule 11 start-time now life forever<br>
+			ip sla schedule 12 start-time now life forever</p>
+		<p>track 1 ip sla 11 reachability<br>
+		  delay down 10<br>
+		  track 2 ip sla 12 reachability<br>
+		  delay down 10<br>
+			track 10 list boolean or<br>
+			object 1<br>
+			object 2<br>
+			</p>
+		<p>SW102<br>
+		  ip sla 11<br>
+		  icmp-echo 10.1.255.11 source-interface vlan2001<br>
+		  threshold 400<br>
+		  timeout 400<br>
+		  frequency 5<br>
+		  ip sla 12<br>
+		  icmp-echo 10.1.255.12 source-interface vlan2001<br>
+		  threshold 400<br>
+		  timeout 400<br>
+		  frequency 5</p>
+		<p>ip sla schedule 11 start-time now life forever<br>
+		ip sla schedule 12 start-time now life forever</p>
+		<p>track 1 ip sla 11 reachability<br>
+		  delay down 10<br>
+		  track 2 ip sla 12 reachability<br>
+		  delay down 10<br>
+		track 10 list boolean or<br>
+			object 1<br>
+			object 2<br>
+			</p>
+		<p>SW101<br>
+		  router ospf 1<br>
+		  passive-interface vlan 2000 <br>
+		  passive-interface vlan 2001</p>
+		<p>interface Vlan2000<br>
+		  ip ospf 1 area 0<br>
+		  vrrp 100 ip 10.1.100.1<br>
+		  vrrp 100 priority 105<br>
+		  vrrp 100 track 10<br>
+		</p>
+		<p>interface Vlan2001<br>
+		  ip ospf 1 area 0<br>
+		  vrrp 101 ip 10.1.101.1</p>
+		<p>SW102<br>
+		  router ospf 1<br>
+		  passive-interface vlan 2000 <br>
+		  passive-interface vlan 2001</p>
+		<p>interface Vlan2001<br>
+		  ip ospf 1 area 0<br>
+		  vrrp 101 ip 10.1.101.1<br>
+		  vrrp 101 priority 105<br>
+		  vrrp 101 track 10</p>
+		<p>interface Vlan2000<br>
+		  ip ospf 1 area 0<br>
+		  vrrp 100 ip 10.1.100.1<br>
+	    </p>
+		<p>验证：<br>
+		  show vrrp brief <br>
+		  Interface          Grp Pri Time  Own Pre State   Master addr     Group addr<br>
+		  Vl2000             100 110 3570       Y  Master  10.1.101.2      10.1.101.1 <br>
+		  Vl2001             101 100 3609       Y  Backup  10.1.102.3      10.1.102.1 </p>
+		<p>show track<br>
+		  show track 1<br>
+		  show ip sla statistics</p>
+		<p><br>
+	    </p>
+			
+		</body>
+</html>
