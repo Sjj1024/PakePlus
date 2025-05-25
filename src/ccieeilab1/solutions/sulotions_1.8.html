@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.8 solution</title>
+	<style>
+p { 
+
+line-height:1.5em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+</head>
+
+		<body bgcolor="#D5D0B2">
+		<p>1.8	OSPFv2 in DC</p>
+		<p>
+		  SW201、SW202<br>
+		  router ospf 1<br>
+		  prefix-suppression</p>
+		<p>interface Vlan3999<br>
+		  ip mtu 1496<br>
+		  interface Vlan4000<br>
+	    ip ospf prefix-suppression disable</p>
+		<p>SW211<br>
+		  router ospf 1<br>
+		  prefix-suppression<br>
+		  passive-interface GigabitEthernet1/1<br>
+		  passive-interface GigabitEthernet1/2<br>
+		  passive-interface GigabitEthernet1/3</p>
+		<p>SW212<br>
+		  router ospf 1<br>
+		  prefix-suppression<br>
+		  passive-interface GigabitEthernet1/1<br>
+		  passive-interface GigabitEthernet1/2</p>
+		<p>R21、R22、R23<br>
+		  router ospf 1<br>
+		  prefix-suppression</p>
+		<p>R24<br>
+		  router ospf 1<br>
+		  prefix-suppression<br>
+		  summary-address 10.6.0.0 255.254.0.0 <br>
+		  redistribute eigrp 65006 subnets </p>
+			
+</body>
+</html>
