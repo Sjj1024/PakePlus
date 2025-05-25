@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>3.3 Automated Configuration Backup Script</title>
+<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+p1 { 
+text-indent:50px;
+}	
+body{
+	-webkit-touch-callout: none;
+    -moz-user-select:none; 
+    -webkit-user-select:none; 
+    -ms-user-select:none; 
+    -khtml-user-select:none; 
+    user-select:none;
+}
+</style>
+
+	<script type="text/javascript" src="../../main.js"></script>
+	<script type="text/javascript" src="../../tuotu.js"></script>
+
+</head>
+
+		<body bgcolor="#D5D0B2">
+
+<p><strong><h1>3.3 Automated Configuration Backup Script</h1></strong>
+
+			<div style="border-bottom:2px solid #989898"></div>  <br>
+		<p1>This item consist of multiple  questions. You may need to scroll down to be able to see all questions.<br>
+You are tasked with writing a  Python script to back-up the configuration of a number of IOS-XE devices  through RESTCONF, and store the configuration in the text files. The starting  section of this script has already written and contains the following line:</p1><br><br>
+<p1>#1/usr/bin/python3<br>
+  import requests<br>
+  Credentials = [ (&ldquo;192.168.1.1&rdquo;,  &ldquo;admin&rdquo;, &ldquo;s3cr3t&rdquo;,),<br>
+  (&ldquo;192.168.1.2&rdquo;, &ldquo;netadmin:,  &ldquo;0th3rs3cr3t&rdquo;) ]<br>
+  Headers = { &ldquo;Content-Type&rdquo; :  &ldquo;application/yang-data+json&rdquo;,<br>
+  &ldquo;Accept&rdquo; :  &ldquo;application/yang-data+json&rdquo; }</p1><br><br>
+<p1>This script needs to be completed  by dragging the individual command lines below into their correct order to  allow the script to correctly accomplish its purpose. Indicate the ends of the  for block and of the while block by properly placing the &ldquo;..End of for&rdquo; and  &ldquo;..End of while&rdquo; symbols.<br>
+  Drag the lines into their correct  order to complete the script as required. Make sure to also properly place the  &ldquo;..End of for&rdquo; and &ldquo;..End of with&rdquo; symbols to indicate the end of the  respective blocks in code. </p1><br>
+  <br>
+
+<table width="910" border="1 solid #000">
+  <tbody>
+    <tr>
+      <td ondrop="drop(event)" ondragover="allowDrop(event)" id="test">
+<img alt="good1" id="drag1" src="../../image/ccieeilab1_image/3_3_endfor.png" draggable="true" ondragstart="drag(event)"/></td>
+      <td style="border:1px solid #000;width:420px;height:50px;font-size:36px" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+    </tr>
+    <tr>
+      <td ondrop="drop(event)" ondragover="allowDrop(event)">
+<img alt="good1" id="drag2" src="../../image/ccieeilab1_image/3_3_withopen.png" draggable="true" ondragstart="drag(event)" /></td>
+      <td style="border:1px solid #000;width:420px;height:50px;font-size:36px" id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"  ></td>
+    </tr>
+    <tr>
+      <td ondrop="drop(event)" ondragover="allowDrop(event)">
+<img alt="good1" id="drag3" src="../../image/ccieeilab1_image/3_3_endwith.png" draggable="true" ondragstart="drag(event)" /></td>
+      <td style="border:1px solid #000;width:420px;height:50px;font-size:36px" id="div3" ondrop="drop(event)" ondragover="allowDrop(event)"  ></td>
+    </tr>
+    <tr>
+      <td ondrop="drop(event)" ondragover="allowDrop(event)">
+<img alt="good1" id="drag4" src="../../image/ccieeilab1_image/3_3_file_write.png" draggable="true" ondragstart="drag(event)" /></td>
+      <td style="border:1px solid #000;width:420px;height:50px;font-size:36px" id="div4" ondrop="drop(event)" ondragover="allowDrop(event)"  ></td>
+    </tr>
+    <tr>
+      <td ondrop="drop(event)" ondragover="allowDrop(event)">
+<img alt="good1" id="drag5" src="../../image/ccieeilab1_image/3_3_for.png" draggable="true" ondragstart="drag(event)" /></td>
+      <td style="border:1px solid #000;width:420px;height:50px;font-size:36px" id="div5" ondrop="drop(event)" ondragover="allowDrop(event)"  ></td>
+    </tr>
+    <tr>
+      <td ondrop="drop(event)" ondragover="allowDrop(event)">
+<img alt="good1" id="drag6" src="../../image/ccieeilab1_image/3_3_URL.png" draggable="true" ondragstart="drag(event)" /></td>
+      <td style="border:1px solid #000;width:420px;height:50px;font-size:36px" id="div6" ondrop="drop(event)" ondragover="allowDrop(event)"  ></td>
+    </tr>
+    <tr>
+      <td ondrop="drop(event)" ondragover="allowDrop(event)">
+<img alt="good1" id="drag7" src="../../image/ccieeilab1_image/3_3_response.png" draggable="true" ondragstart="drag(event)" /></td>
+      <td style="border:1px solid #000;width:420px;height:50px;font-size:36px" id="div7" ondrop="drop(event)" ondragover="allowDrop(event)"  ></td>
+    </tr>
+  </tbody>
+</table>
+			
+<br><p1>There  are plans to extent  the script to display a list of known IOS-XE devices by their IP addresses and  allow the administration to select which devices to backup. Aside from other  necessary changes in the script, which of the following storage options for the  credentials would allow for the most straight-forward implementation?</p1><br><br>
+	
+<form>
+<input type="radio" name = "cisco">Credentials =  &quot;192.168.1.1,admin,s3cr3t,&quot; \
+<div  style="text-indent:8em">  192.168.1.2,netadmin,0th3rs3crt&quot;</div>
+<input type="radio" name = "cisco">Credentials =  [&quot;192.168.1.1,admin,s3cr3t&quot;,
+<div  style="text-indent:8em">  &quot;192.168.1.2,netadmin,0th3rs3crt&quot;]</div>
+<input type="radio" name = "cisco">Credentials = {&quot;192.168.1.1&quot; : (&quot;admin&quot;,  &quot;s3cr3t&quot;),
+<div  style="text-indent:8em">  &quot;192.168.1.2&quot;, : (&quot;netadmin&quot;,  &quot;0th3rs3crt&quot;)}</div>
+<input type="radio" name = "cisco">Credentials = [(&quot;192.168.1.1&quot;, &quot;admin&quot;,  &quot;s3cr3t&quot;),
+<div  style="text-indent:8em">  (&quot;192.168.1.2&quot;, &quot;netadmin&quot;,  &quot;0th3rs3crt&quot;)]</div>
+			</form>
+<p align="right"><strong>2 points</strong></p>
+
+</p>
+</body>
+</html>
