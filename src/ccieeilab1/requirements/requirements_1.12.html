@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+	<style>
+p { 
+text-indent:50px;
+line-height:2em
+}
+</style><link href="../exam_content.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../main.js"></script>
+
+</head>
+
+	<body bgcolor="#D5D0B2">
+<p><strong><h1>1.12	Tuning EIGRP on DMVPN and DMVPN enabled Sites</h1></strong>
+‪‪‪‫‫‭‮‬‬‬‬‪‪‪‪‫‫‭‮‬‬‬‬‪ <div style="border-bottom:2px solid #989898"></div>  <br>
+
+Optimize the DMVPN operation according to these requirements:<br><br>
+
+	<p>Ensure that Branch #3 and #4 receive only a default route over EIGRP in DMVPN.</p>
+	<p>The default route origination must be done on DC r24 without the use of any static routes, redistribution, or route filtering.</p>
+	<p>It is not allowed to modify the configuration of r61 and r62 in Branch #3 to accomplish this task.</p>
+	<p>It is allowed to add commands to the configuration of r70 in Branch #4 to accomplish this task; none of the existing configuration on r70 may be removed to accomplish this task.</p>
+‪‪‪‫‫‭‮‬‬‬‬‪ <div style="border-bottom:2px solid #989898"></div>  <br>
+
+Configure sw601 and sw602 at Branch#3 according to these requirements:<br><br>
+
+	<p>Routers r61 and r62 must not send EIGRP queries to sw601 and sw602.</p>
+	<p>Switches sw601 and sw602 must allow advertising any current or future directly connected network to r61 and r62 after the network is added to EIGRP.</p>
+	<p>Switches sw601 and sw602 must continue to propagate the default route received from r61 and r62 to each other. To select the default route, use a prefix list with a “permit”-type entry only.</p>
+	<p>Switches sw601 and sw602 must not propagate the default route back to r61 and r62.</p>
+	<p>If the prefix list that allows the propagation of selected EIGRP-learned networks between sw601 and sw602 is modified in the future, the same set of networks must be disallowed from being advertised back to t61 and r62 automatically, without any additional configuration.</p>
+<p align="right"><strong>3 points</strong></p>
+</p>
+</body>
+</html>
