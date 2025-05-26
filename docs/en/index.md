@@ -12,13 +12,13 @@ hero:
     actions:
         - theme: brand
           text: Download
-          link: /download/
+          link: /en/download/
         - theme: brand
           text: WebBeta
           link: https://pakeplus.netlify.app/
         - theme: alt
           text: Guide
-          link: /guide/
+          link: /en/guide/
 
 features:
     - title: Open Source
