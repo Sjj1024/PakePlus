@@ -1,4 +1,4 @@
-import http from '@/utils/axios'
+import http from '@/utils/request'
 // import http from '@/utils/http'
 
 export default {

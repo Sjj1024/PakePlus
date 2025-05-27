@@ -36,6 +36,7 @@
         "@tauri-apps/plugin-window-state": "^2.2.1",
         "axios": "^1.7.9",
         "codemirror": "^6.0.1",
+        "crypto-js": "^4.2.0",
         "element-plus": "^2.8.2",
         "js-base64": "^3.7.7",
         "pinia": "^2.2.2",

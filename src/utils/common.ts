@@ -6,6 +6,7 @@ import { readDir } from '@tauri-apps/plugin-fs'
 import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 import { join } from '@tauri-apps/api/path'
 import { ElMessage } from 'element-plus'
+import CryptoJS from 'crypto-js'
 
 // upstream repo info
 export const upstreamUser = 'Sjj1024'
@@ -1147,4 +1148,25 @@ export const isNow = (v1: string, v2: string) => {
         }
     }
     return false
+}
+
+// get pay sign
+export const getPaySign = (data: any) => {
+    const key = import.meta.env.VITE_PAY_SIGN_KEY
+    // 过滤空值
+    const filtered = Object.fromEntries(
+        Object.entries(data).filter(([_, v]) => v !== '')
+    )
+
+    // 排序并拼接
+    const sortedKeys = Object.keys(filtered).sort()
+    const queryString = sortedKeys
+        .map(
+            (k) =>
+                `${encodeURIComponent(k)}=${encodeURIComponent(
+                    filtered[k] as string
+                )}`
+        )
+        .join('&')
+    return CryptoJS.MD5(`${queryString}&key=${key}`).toString().toUpperCase()
 }

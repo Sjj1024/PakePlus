@@ -3,10 +3,10 @@ import i18n from '@/lang'
 import { ElMessage } from 'element-plus'
 
 // base url
-const baseURL = `https://api.github.com`
+const baseURL = import.meta.env.VITE_GITHUB_DOMAIN
 
 const commonOptions = {
-    timeout: 60,
+    timeout: 60 * 1000,
 }
 
 const isAbsoluteURL = (url: string): boolean => {

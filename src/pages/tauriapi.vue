@@ -91,9 +91,10 @@
                         <el-menu-item index="3-12">{{
                             t('injectJq')
                         }}</el-menu-item>
-                        <el-menu-item index="3-13">{{
-                            t('disableCors')
-                        }}</el-menu-item>
+                        <el-menu-item index="3-13">
+                            {{ t('disableCors') }}
+                        </el-menu-item>
+                        <el-menu-item index="3-14">支付测试</el-menu-item>
                     </el-sub-menu>
                     <el-menu-item index="4">
                         <span>{{ t('aboutUs') }}</span>
@@ -515,6 +516,10 @@
                 <div v-else-if="menuIndex === '4'" class="cardContent">
                     <About />
                 </div>
+                <!-- 支付测试 -->
+                <div v-else-if="menuIndex === '3-14'" class="cardContent">
+                    <el-button @click="getPayCode"> 获取支付二维码 </el-button>
+                </div>
                 <!-- 待开发 -->
                 <div v-else class="waitContent">
                     <h1 class="cardTitle">{{ t('waitDev') }}</h1>
@@ -527,7 +532,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { oneMessage } from '@/utils/common'
+import { getPaySign, oneMessage } from '@/utils/common'
 import About from '@/pages/about.vue'
 import ppIcon from '@/assets/images/pakeplus.png'
 import { ArrowLeft } from '@element-plus/icons-vue'
@@ -608,6 +613,8 @@ import {
 } from '@tauri-apps/api/webview'
 import { Window } from '@tauri-apps/api/window'
 import { useI18n } from 'vue-i18n'
+import payApi from '@/apis/pay'
+import { fetch } from '@tauri-apps/plugin-http'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -713,6 +720,41 @@ const unlistenEvent = async () => {
 // window:窗口
 const openWindow = async () => {
     console.log('window')
+}
+
+// get pay code
+const getPayCode = async () => {
+    let data: any = {
+        body: 'payjs收款测试',
+        out_trade_no: '1699601458',
+        total_fee: '10',
+        mchid: import.meta.env.VITE_PAY_MCHID,
+    }
+    const sign = getPaySign(data)
+    data.sign = sign
+    console.log('data sign', data)
+    // const res = await payApi.getPayCode(data)
+    // console.log('pay res', res)
+
+    // const res = await payApi.getPayCode(data)
+    // console.log('pay res', res)
+
+    const myHeaders = new Headers()
+    myHeaders.append('content-type', 'application/x-www-form-urlencoded')
+
+    const urlencoded = new URLSearchParams()
+    urlencoded.append('body', 'payjs收款测试')
+    urlencoded.append('out_trade_no', '1699601458')
+    urlencoded.append('total_fee', '10')
+    urlencoded.append('mchid', '1593541201')
+    urlencoded.append('sign', 'F6987C896F199229D40D0DE521427F5D')
+
+    const res = await fetch('https://api.github.com/user/repos', {
+        method: 'POST',
+        headers: myHeaders,
+        body: urlencoded,
+    })
+    console.log('res---', res.json())
 }
 
 // 页面初始化
