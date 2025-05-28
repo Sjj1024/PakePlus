@@ -48,4 +48,6 @@ sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
 在更多配置中，开启 fullscreen 即可
 
 
-# 
+# dispatch错误: 404
+
+确认token权限是否配置正确，然后重新填入token试试，往往是token权限配置错误导致的。  
