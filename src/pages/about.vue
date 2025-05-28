@@ -16,7 +16,24 @@
                 <span class="pakeplus">PakePlus</span>
             </div>
             <div class="description">
-                <p>{{ t('aboutGuide') }}：1024xiaoshen@gmail.com</p>
+                <p>
+                    {{ t('aboutGuide') }}：1024xiaoshen@gmail.com。
+                    或加入我们的群聊：
+                    <el-popover
+                        popper-class="popoverBox"
+                        :width="180"
+                        placement="top"
+                    >
+                        <template #reference>
+                            <span class="iconfont group"> &#xe64b; </span>
+                        </template>
+                        <img
+                            src="https://gh-proxy.com/github.com/Sjj1024/PakePlus/blob/main/docs/static/imgs/wxcode.png"
+                            alt=""
+                            class="groupCode"
+                        />
+                    </el-popover>
+                </p>
             </div>
             <div class="tools">
                 <p>
@@ -470,6 +487,15 @@ const goBack = () => {
             color: #999;
         }
     }
+}
+
+.group {
+    cursor: pointer;
+}
+
+.groupCode {
+    width: 160px;
+    height: 220px;
 }
 
 .codeBox {
