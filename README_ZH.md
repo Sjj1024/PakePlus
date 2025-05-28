@@ -54,7 +54,7 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 ## 热门包
 
 <img src=https://sjj1024.github.io/PakePlus/static/imgs/preview.webp  width=1920/>
-PakePLus支持arm和inter架构的安装包，流行的程序安装包仅仅包含了mac的arm和windows的inter架构，如果需要更多架构的安装包，请使用PakePlus单独编译自己需要的安装包。
+PakePLus支持arm和x64架构的安装包，流行的程序安装包仅仅包含了mac的arm和windows的x64架构，如果需要更多架构的安装包，请使用PakePlus单独编译自己需要的安装包。
 
 <table>
     <tr>

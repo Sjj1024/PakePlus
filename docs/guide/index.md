@@ -48,7 +48,7 @@ PakePlus 是一个基于 Tauri2 和 Github 的打包工具，你也可以叫我 
 
 <img src="../static/imgs/preview.webp"  width=1920/>
 
-PakePLus 支持 arm 和 inter 架构的安装包，流行的程序安装包仅仅包含了 mac 的 arm(M 芯片)版本 和 windows 的 Inter（x64）版本 和 Linux 的 x64 版本，如果需要更多架构的安装包，请使用 PakePlus 单独编译自己需要的安装包。
+PakePLus 支持 arm 和 x64 架构的安装包，流行的程序安装包仅仅包含了 mac 的 arm(M 芯片)版本 和 windows 的 x64 和 Linux 的 x64 版本，如果需要更多架构的安装包，请使用 PakePlus 单独编译自己需要的安装包。
 
 <Popular />
 
