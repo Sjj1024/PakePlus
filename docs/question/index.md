@@ -51,3 +51,8 @@ sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
 # dispatch错误: 404
 
 确认token权限是否配置正确，然后重新填入token试试，往往是token权限配置错误导致的。  
+
+
+# Cannot read properties of undefined XXX
+
+用最新版本的PakePlus，然后填入token试试，能解决99%的问题。
