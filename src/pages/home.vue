@@ -508,10 +508,16 @@ const testToken = async (tips: boolean = true) => {
             if (res.status === 200) {
                 localStorage.setItem('token', store.token)
                 store.setUser(res.data)
-                if (res.data.login !== 'Sjj1024') {
-                    await forkStartShas(tips)
-                } else {
-                    await commitShas(tips)
+                try {
+                    if (res.data.login !== 'Sjj1024') {
+                        await forkStartShas(tips)
+                    } else {
+                        await commitShas(tips)
+                    }
+                } catch (error) {
+                    oneMessage.error(t('tokenError'))
+                    localStorage.clear()
+                    store.setUser({ login: '' })
                 }
             } else {
                 localStorage.clear()
@@ -617,7 +623,7 @@ const forkStartShas = async (tips: boolean = true) => {
     }
     await supportPP()
     // sync all branch
-    // await syncAllBranch()
+    await syncAllBranch()
     // get commit sha
     await commitShas(tips)
 }
@@ -631,7 +637,7 @@ const forkPakePlus = async (repo: string = 'PakePlus') => {
     if (forkRes.status === 202) {
         console.log('forkPakePlus', forkRes)
         return true
-    } else if (forkRes.status === 403) {
+    } else if (forkRes.status === 403 || forkRes.status === 404) {
         // maybe account has locked
         store.setUser({ login: '' })
         testLoading.value = false
