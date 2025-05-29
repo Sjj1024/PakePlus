@@ -1154,19 +1154,43 @@ export const isNow = (v1: string, v2: string) => {
 export const getPaySign = (data: any) => {
     const key = import.meta.env.VITE_PAY_SIGN_KEY
     // 过滤空值
-    const filtered = Object.fromEntries(
+    // const filtered = Object.fromEntries(
+    //     Object.entries(data).filter(([_, v]) => v !== '')
+    // )
+    // // 排序并拼接
+    // const sortedKeys = Object.keys(filtered).sort()
+    // const queryString = sortedKeys
+    //     .map(
+    //         (k) =>
+    //             `${encodeURIComponent(k)}=${encodeURIComponent(
+    //                 filtered[k] as string
+    //             )}`
+    //     )
+    //     .join('&')
+    // // 8328AFD38217B953BC8D0D5A138DAC3F
+    // // 8328AFD38217B953BC8D0D5A138DAC3F
+    // const md5Str = `${queryString}&key=${key}`
+    // console.log('md5Str', md5Str)
+    // return CryptoJS.MD5(`${queryString}&key=${key}`).toString().toUpperCase()
+
+    const filteredAttrs = Object.fromEntries(
         Object.entries(data).filter(([_, v]) => v !== '')
     )
 
-    // 排序并拼接
-    const sortedKeys = Object.keys(filtered).sort()
-    const queryString = sortedKeys
-        .map(
-            (k) =>
-                `${encodeURIComponent(k)}=${encodeURIComponent(
-                    filtered[k] as string
-                )}`
-        )
-        .join('&')
-    return CryptoJS.MD5(`${queryString}&key=${key}`).toString().toUpperCase()
+    // 2. 按键名ASCII排序
+    const sortedKeys = Object.keys(filteredAttrs).sort()
+
+    // 3. 构建查询字符串（含编码）
+    const queryParts = []
+    for (const key of sortedKeys) {
+        const encodedKey = encodeURIComponent(key)
+        const encodedValue = encodeURIComponent(filteredAttrs[key] as string)
+        queryParts.push(`${encodedKey}=${encodedValue}`)
+    }
+
+    // 4. 添加密钥并解码（模拟Python的unquote）
+    const signString = decodeURIComponent(queryParts.join('&') + `&key=${key}`)
+
+    // 5. 计算MD5（Node.js环境）
+    return CryptoJS.MD5(signString).toString().toUpperCase()
 }
