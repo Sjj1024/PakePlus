@@ -519,9 +519,15 @@
                 <!-- 支付测试 -->
                 <div v-else-if="menuIndex === '3-14'" class="cardContent">
                     <el-button @click="getPayCode"> 微信支付 </el-button>
-                    <el-button @click="getPayCode('alipay')"> 支付宝支付 </el-button>
-                    <div class="qrCodeBox">
-                        <img :src="qrCodeData" alt="QR Code" class="qrCode" />
+                    <el-button @click="getPayCode('alipay')">
+                        支付宝支付
+                    </el-button>
+                    <div v-if="qrCodeData" class="qrCodeBox">
+                        <img
+                            :src="qrCodeData"
+                            alt="支付二维码"
+                            class="qrCode"
+                        />
                     </div>
                 </div>
                 <!-- 待开发 -->
@@ -731,10 +737,22 @@ const qrCodeData = ref('')
 
 // get pay code
 const getPayCode = async (type: string = '') => {
+    // 请输入支付金额(单位:元)
+    let money = 10
+    try {
+        money = parseInt(textarea.value)
+        if (isNaN(money)) {
+            oneMessage.error('请输入正确的支付金额')
+            return
+        }
+    } catch (error) {
+        oneMessage.error('请输入正确的支付金额')
+        return
+    }
     const order: any = {
         mchid: import.meta.env.VITE_PAY_MCHID,
         body: '支付测试订单',
-        total_fee: 100,
+        total_fee: money,
         out_trade_no: 'payjs_jspay_demo_2323923',
         auto: 1,
         hide: 1,
