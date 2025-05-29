@@ -477,8 +477,8 @@ const showBranchDialog = () => {
     } else {
         getMainSha('PakePlus')
         getWebSha('PakePlus')
-        // getMainSha('PakePlus-iOS')
-        // getWebSha('PakePlus-iOS')
+        getMainSha('PakePlus-iOS')
+        getWebSha('PakePlus-iOS')
         getMainSha('PakePlus-Android')
         getWebSha('PakePlus-Android')
     }
@@ -605,22 +605,19 @@ const commitShas = async (tips: boolean = true) => {
 // fork and start
 const forkStartShas = async (tips: boolean = true) => {
     // fork action is async
-    const forkRes: any = Promise.all([
+    const forkRes: any = await Promise.all([
         forkPakePlus('PakePlus'),
         forkPakePlus('PakePlus-iOS'),
         forkPakePlus('PakePlus-Android'),
-    ]).then((res) => {
-        console.log('forkRes', res)
-        return res.every((item) => item)
-    })
-    if (forkRes) {
+    ])
+    if (forkRes.every((item: any) => item)) {
         console.log('forkRes', forkRes)
     } else {
         console.error('fork error', forkRes)
     }
     await supportPP()
     // sync all branch
-    await syncAllBranch()
+    // await syncAllBranch()
     // get commit sha
     await commitShas(tips)
 }
