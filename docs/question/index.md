@@ -33,11 +33,10 @@ sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
 解决办法  
 在更多配置中，关闭 dragDropEnabled 选项即可
 
-
 # 打包后白屏或报错
 
 打一个测试包，然后右键检查元素看一下是否有报错，有报错根据报错信息解决即可。
-如果看不懂报错信息或无法解决，可以进群交流。推荐可以试试deepseek是否可以帮你解决问题。
+如果看不懂报错信息或无法解决，可以进群交流。推荐可以试试 deepseek 是否可以帮你解决问题。
 
 # 窗口置顶
 
@@ -47,12 +46,15 @@ sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
 
 在更多配置中，开启 fullscreen 即可
 
+# dispatch 错误: 404
 
-# dispatch错误: 404
-
-确认token权限是否配置正确，然后重新填入token试试，往往是token权限配置错误导致的。  
-
+确认 token 权限是否配置正确，然后重新填入 token 试试，往往是 token 权限配置错误导致的。
 
 # Cannot read properties of undefined XXX
 
-用最新版本的PakePlus，然后填入token试试，能解决99%的问题。
+用最新版本的 PakePlus，然后填入 token 试试，能解决 99%的问题。
+
+# 网络请求失败，请检查网络再试!
+
+当你遇到这个问题的时候，在浏览器中输入：https://api.github.com，如果有返回一段json说明你的网络是没有问题的。
+如果报错 403/443 等或者打不开，那就是你的网络服务商把 github 的接口地址屏蔽了，请科学上网或者换一个网络服务商。
