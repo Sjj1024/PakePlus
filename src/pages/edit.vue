@@ -1456,6 +1456,8 @@ const publishWeb = async () => {
         oneMessage.error(t('limitProject'))
         return
     }
+    const now = new Date()
+    localStorage.setItem('lastClickTime', now.toISOString())
     centerDialogVisible.value = false
     buildLoading.value = true
     loadingText(t('preCheck') + '...')
@@ -1607,8 +1609,6 @@ const checkBuildStatus = async () => {
     console.log('checkBuildStatus', build_runs)
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
         if (status === 'completed' && conclusion === 'success') {
-            const now = new Date()
-            localStorage.setItem('lastClickTime', now.toISOString())
             createIssue(
                 store.currentProject.name,
                 store.currentProject.showName,
