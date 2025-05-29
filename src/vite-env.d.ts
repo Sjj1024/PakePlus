@@ -15,3 +15,8 @@ declare module 'crypto-js' {
     const content: any
     export default content
 }
+
+declare module 'qrcodejs2-fix' {
+    const content: any
+    export default content
+}

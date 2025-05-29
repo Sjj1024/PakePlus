@@ -19,12 +19,19 @@
             </tr>
         </tbody>
     </table>
-    <div class="updateTime">最后更新时间：2025-04-19 12:00:00</div>
+    <div class="updateTime">最后更新时间：2025-05-29 12:00:00</div>
 </template>
 
 <script setup lang="ts">
 // import { ref, reactive } from 'vue'
 const friends = [
+    {
+        name: '67626d',
+        time: '2025-05-29',
+        amount: '10',
+        way: '微信',
+        remark: '使用pakaplus很好用。感谢群主',
+    },
     {
         name: '阿崔cxr',
         time: '2025-05-26',

@@ -519,6 +519,7 @@
                 <!-- 支付测试 -->
                 <div v-else-if="menuIndex === '3-14'" class="cardContent">
                     <el-button @click="getPayCode"> 获取支付二维码 </el-button>
+                    <img :src="payCode" alt="QR Code" />
                 </div>
                 <!-- 待开发 -->
                 <div v-else class="waitContent">
@@ -721,6 +722,8 @@ const unlistenEvent = async () => {
 const openWindow = async () => {
     console.log('window')
 }
+
+const payCode = ref('')
 
 // get pay code
 const getPayCode = async () => {
