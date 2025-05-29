@@ -732,9 +732,9 @@ const qrCodeData = ref('')
 // get pay code
 const getPayCode = async (type: string = '') => {
     const order: any = {
-        mchid: '1593541201',
+        mchid: import.meta.env.VITE_PAY_MCHID,
         body: '支付测试订单',
-        total_fee: 1000,
+        total_fee: 100,
         out_trade_no: 'payjs_jspay_demo_2323923',
         auto: 1,
         hide: 1,
