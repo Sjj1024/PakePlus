@@ -518,7 +518,9 @@
                 </div>
                 <!-- 支付测试 -->
                 <div v-else-if="menuIndex === '3-14'" class="cardContent">
-                    <el-button @click="getPayCode"> 微信支付 </el-button>
+                    <el-button @click="getPayCode('weixin')">
+                        微信支付
+                    </el-button>
                     <el-button @click="getPayCode('alipay')">
                         支付宝支付
                     </el-button>
@@ -528,6 +530,20 @@
                             alt="支付二维码"
                             class="qrCode"
                         />
+                        <!-- logo -->
+                        <!-- <img :src="ppIcon" alt="logo" class="qrlogo" /> -->
+                        <!-- wx or alipay -->
+                        <div class="qrlogo">
+                            <span
+                                v-if="payType === 'weixin'"
+                                class="iconfont weixin qrlogo"
+                            >
+                                &#xe64b;
+                            </span>
+                            <span v-else class="iconfont zhifubao qrlogo">
+                                &#xe654;
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <!-- 待开发 -->
@@ -645,7 +661,6 @@ const goBack = () => {
 }
 
 // defaultWindowIcon
-
 const defaultWindowIconApi = async () => {
     const icon = await defaultWindowIcon()
     if (!icon) return
@@ -734,10 +749,11 @@ const openWindow = async () => {
 }
 
 const qrCodeData = ref('')
-
+const payType = ref('')
 // get pay code
-const getPayCode = async (type: string = '') => {
+const getPayCode = async (payMathod: string = 'weixin') => {
     // 请输入支付金额(单位:元)
+    payType.value = payMathod
     let money = 10
     try {
         money = parseInt(textarea.value)
@@ -756,7 +772,7 @@ const getPayCode = async (type: string = '') => {
         out_trade_no: 'payjs_jspay_demo_2323923',
         auto: 1,
         hide: 1,
-        type: type,
+        type: payMathod === 'weixin' ? null : 'alipay',
     }
     order.sign = getPaySign(order)
     console.log('order----', order)
@@ -899,6 +915,40 @@ onMounted(() => {
 
         .qrCodeBox {
             margin-top: 10px;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+
+            .qrlogo {
+                width: 28px;
+                height: 28px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                margin: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .zhifubao {
+                font-size: 30px;
+                color: #009fe8;
+                position: absolute;
+                background-color: #fff;
+            }
+
+            .weixin {
+                font-size: 30px;
+                color: #3daf34;
+                position: absolute;
+                background-color: #fff;
+            }
         }
 
         .qrCode {
