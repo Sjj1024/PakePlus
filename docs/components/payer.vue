@@ -26,11 +26,11 @@
 // import { ref, reactive } from 'vue'
 const friends = [
     {
-        name: '67626d',
+        name: '要求匿名～',
         time: '2025-05-29',
-        amount: '10',
+        amount: '100',
         way: '微信',
-        remark: '使用pakaplus很好用。感谢群主',
+        remark: '使用pakaplus很好用。能遇到个好工具不易',
     },
     {
         name: '阿崔cxr',
