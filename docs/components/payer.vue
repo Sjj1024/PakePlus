@@ -28,9 +28,16 @@ const friends = [
     {
         name: '黄俊博@软件工程',
         time: '2025-05-30',
+        amount: '66.66',
+        way: '微信',
+        remark: '感谢大佬(追加的赞助)',
+    },
+    {
+        name: '黄俊博@软件工程',
+        time: '2025-05-30',
         amount: '10',
         way: '支付宝',
-        remark: '抖音上另投了2块钱抖加',
+        remark: '感谢大佬',
     },
     {
         name: '金楚轩',
@@ -38,6 +45,13 @@ const friends = [
         amount: '20',
         way: '微信',
         remark: '谢谢老师',
+    },
+    {
+        name: '易经养生杜異田',
+        time: '2025-05-29',
+        amount: '10',
+        way: '微信',
+        remark: '感谢帮助',
     },
     {
         name: '要求匿名～',
