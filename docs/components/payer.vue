@@ -26,6 +26,20 @@
 // import { ref, reactive } from 'vue'
 const friends = [
     {
+        name: '黄俊博@软件工程',
+        time: '2025-05-30',
+        amount: '10',
+        way: '支付宝',
+        remark: '抖音上另投了2块钱抖加',
+    },
+    {
+        name: '金楚轩',
+        time: '2025-05-30',
+        amount: '20',
+        way: '微信',
+        remark: '谢谢老师',
+    },
+    {
         name: '要求匿名～',
         time: '2025-05-29',
         amount: '100',
