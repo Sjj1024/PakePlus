@@ -287,8 +287,8 @@
 
 <script setup lang="ts">
 import pakePlusIcon from '@/assets/images/pakeplus.png'
-import weixin from '@/assets/images/weixin.png'
-import zhifubao from '@/assets/images/zhifubao.png'
+import weixin from '@/assets/images/weixin.webp'
+import zhifubao from '@/assets/images/zhifubao.webp'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import {

@@ -171,9 +171,8 @@ pnpm run build
 
 1. PakePlus があなたの生活に楽しみをもたらしたなら、サポートしていただけると嬉しいです。
  <p align="center">
-         <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs//pay.png" />
+         <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/pay.webp" />
  </p>
-
 
 ## Star History
 
