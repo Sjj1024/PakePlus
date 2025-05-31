@@ -106,6 +106,15 @@
             "fontSize": 16,
             "fontWeight": "bold",
             "tabBarItem": []
+        },
+        "webview": {
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+            "javaScriptEnabled": true,
+            "domStorageEnabled": true,
+            "allowFileAccess": true,
+            "loadWithOverviewMode": true,
+            "setSupportZoom": true,
+            "clearCache": true
         }
     },
     "ios": {

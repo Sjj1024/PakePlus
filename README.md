@@ -177,7 +177,7 @@ pnpm run build
  <p align="center" style="display:flex; justify-content: flex-start;" >
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/mywx.png" width=300/>
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/wxcode.png" width=300/>
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/qq.png" width=300/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/qq.jpg" width=300/>
  </p>
 
 1. 💖If PakePlus has brought joy to your life, feel free to support it.

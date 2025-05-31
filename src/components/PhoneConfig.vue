@@ -14,7 +14,7 @@
         <el-collapse v-else v-model="activeName" accordion>
             <el-collapse-item name="1">
                 <template #title>
-                    Windows
+                    AppSettings
                     <el-icon
                         class="infoLink"
                         @click.stop="openUrl(urlMap.windowsConfig)"
@@ -23,7 +23,7 @@
                     </el-icon>
                 </template>
                 <div class="windowsConfig">
-                    <el-form
+                    <!-- <el-form
                         :model="store.currentProject.more"
                         label-width="auto"
                         class="configForm"
@@ -346,10 +346,10 @@
                                 placeholder="tabbingIdentifier"
                             />
                         </el-form-item>
-                    </el-form>
+                    </el-form> -->
                     <el-form-item
-                        label="additionalBrowserArgs"
-                        prop="additionalBrowserArgs"
+                        label="userAgent"
+                        prop="userAgent"
                         class="formItem"
                     >
                         <el-input
@@ -361,12 +361,12 @@
                             autoCapitalize="off"
                             autoCorrect="off"
                             spellCheck="false"
-                            placeholder="additionalBrowserArgs"
+                            placeholder="默认手机自带"
                         />
                     </el-form-item>
                 </div>
             </el-collapse-item>
-            <el-collapse-item title="cli" name="2" disabled>
+            <el-collapse-item title="UiFragment" name="2" disabled>
                 <div>
                     Operation feedback: enable the users to clearly perceive
                     their operations by style updates and interactive effects;
@@ -376,7 +376,7 @@
                     rearranging elements of the page.
                 </div>
             </el-collapse-item>
-            <el-collapse-item title="bundle" name="3" disabled>
+            <el-collapse-item title="Permissions" name="3" disabled>
                 <div>
                     Simplify the process: keep operating process simple and
                     intuitive;

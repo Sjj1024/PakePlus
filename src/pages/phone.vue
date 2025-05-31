@@ -751,7 +751,7 @@
                     </h4>
                 </div>
             </template>
-            <TauriConfig ref="tauriConfigRef" :isJson="isJson" />
+            <PhoneConfig ref="tauriConfigRef" :isJson="isJson" />
         </el-dialog>
         <!-- js code edit -->
         <el-dialog
@@ -845,7 +845,7 @@ import {
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
-import TauriConfig from '@/components/TauriConfig.vue'
+import PhoneConfig from '@/components/PhoneConfig.vue'
 import ImgPreview from '@/components/ImgPreview.vue'
 import Building from '@/components/Building.vue'
 
@@ -1455,7 +1455,8 @@ const toHistory = () => {
 
 // more phone config
 const morePhoneConfig = () => {
-    oneMessage.success(t('morePhoneConfig'))
+    // oneMessage.success(t('morePhoneConfig'))
+    configDialogVisible.value = true
 }
 
 // save js file content to appDataDir
