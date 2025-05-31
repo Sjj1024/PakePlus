@@ -108,7 +108,7 @@
             "tabBarItem": []
         },
         "webview": {
-            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+            "userAgent": "",
             "javaScriptEnabled": true,
             "domStorageEnabled": true,
             "allowFileAccess": true,
@@ -124,7 +124,7 @@
         "webUrl": "https://juejin.cn/",
         "id": "com.xiaoshen.pakeplus.ios",
         "icon": "./app-icon.png",
-        "desc": "PakePlus Project by 1024xiaoshen",
+        "desc": "PakePlus Project",
         "pubBody": "PakePlus ios build body",
         "isHtml": false,
         "debug": false
@@ -141,7 +141,7 @@
         "rounded": true,
         "copyTo": "./app/src/main/res",
         "androidResDir": "./app/src/main/res",
-        "desc": "PakePlus Project by 1024xiaoshen",
+        "desc": "PakePlus Project",
         "pubBody": "PakePlus android build body",
         "isHtml": false,
         "debug": false
@@ -151,7 +151,7 @@
         "showName": "xiaoshen",
         "version": "0.0.2",
         "id": "com.xiaoshen.app",
-        "desc": "PakePlus Project by 1024xiaoshen",
+        "desc": "PakePlus Project",
         "webUrl": "https://juejin.cn/",
         "iconPath": "../app-icon.png",
         "inputPath": "../app-icon.png",
