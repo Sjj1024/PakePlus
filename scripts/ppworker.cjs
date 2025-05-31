@@ -244,8 +244,12 @@ const main = async () => {
 }
 
 // run main
-try {
-    main()
-} catch (error) {
-    console.error('Error in main:', error)
-}
+;(async () => {
+    try {
+        console.log('🚀 worker start')
+        await main()
+        console.log('🚀 worker end')
+    } catch (error) {
+        console.error('❌ Worker Error:', error)
+    }
+})()
