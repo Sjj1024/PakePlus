@@ -354,8 +354,7 @@
                     >
                         <el-input
                             v-model="
-                                store.currentProject.more.windows
-                                    .additionalBrowserArgs
+                                store.currentProject.phone.webview.userAgent
                             "
                             autocomplete="off"
                             autoCapitalize="off"
