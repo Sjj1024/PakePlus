@@ -108,6 +108,19 @@ export default defineConfig({
                 },
                 // 社交链接
                 socialLinks: [
+                    { icon: 'x', link: 'https://x.com/1024xiaoshen' },
+                    {
+                        icon: 'youtube',
+                        link: 'https://www.youtube.com/@1024xiaoshen',
+                    },
+                    {
+                        icon: 'bilibili',
+                        link: 'https://space.bilibili.com/405719127',
+                    },
+                    // {
+                    //     icon: 'tiktok',
+                    //     link: 'https://space.bilibili.com/405719127',
+                    // },
                     {
                         icon: 'github',
                         link: 'https://github.com/Sjj1024/PakePlus',
