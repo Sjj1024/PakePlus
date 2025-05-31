@@ -14,7 +14,7 @@
     <div class="sponsorBox">
         <img
             class="wxCode"
-            src="../static/imgs/pay.webp"
+            src="../static/imgs/sponsor.webp"
             alt="微信二维码"
             @error="imageError"
         />

@@ -2,6 +2,7 @@
     <div class="qunBox">
         <img class="wxCode" src="../static/imgs/wxcode.png" alt="微信二维码" />
         <img class="wxCode" src="../static/imgs/mywx.png" alt="我的微信" />
+        <img class="wxCode" src="../static/imgs/qq.jpg" alt="QQ二维码" />
     </div>
 </template>
 
@@ -19,7 +20,7 @@
     align-items: center;
 
     .wxCode {
-        width: 40%;
+        width: 30%;
     }
 }
 </style>
