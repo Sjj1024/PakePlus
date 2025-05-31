@@ -3,8 +3,8 @@
         <iframe
             width="560"
             height="315"
-            src="//player.bilibili.com/player.html?isOutside=true&aid=114585499602898&bvid=BV1WCjzz5Eao&cid=30198203272&p=1"
-            title="YouTube video player"
+            :src="src"
+            title="BiliBili video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
@@ -13,7 +13,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+const _ = defineProps({
+    src: {
+        type: String,
+        default:
+            '//player.bilibili.com/player.html?isOutside=true&aid=114585499602898&bvid=BV1WCjzz5Eao&cid=30198203272&p=1',
+        required: false,
+    },
+})
 </script>
 
 <style scoped>
