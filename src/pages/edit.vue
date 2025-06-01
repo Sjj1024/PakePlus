@@ -1507,6 +1507,10 @@ const dispatchAction = async () => {
         'PakePlus',
         {
             ref: store.currentProject.name,
+            inputs: {
+                name: store.currentProject.showName,
+                home: store.currentProject.url,
+            },
         }
     )
     if (dispatchRes.status !== 204) {
