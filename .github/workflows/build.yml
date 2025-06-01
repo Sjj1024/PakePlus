@@ -44,64 +44,79 @@ jobs:
                     - platform: 'macos-latest'
                       target: 'aarch64-apple-darwin'
                       args: '--target aarch64-apple-darwin'
+                      enabled: ${{ github.event.inputs.build_macos_aarch64 == 'true' }}
                     - platform: 'macos-latest'
                       target: 'x86_64-apple-darwin'
                       args: '--target x86_64-apple-darwin'
+                      enabled: ${{ github.event.inputs.build_macos_x86_64 == 'true' }}
 
                     - platform: 'ubuntu-22.04'
                       target: 'x86_64-unknown-linux-gnu'
                       args: ''
+                      enabled: ${{ github.event.inputs.build_linux_x86_64 == 'true' }}
                     - platform: 'ubuntu-22.04'
                       target: 'aarch64-unknown-linux-gnu'
                       args: ''
+                      enabled: ${{ github.event.inputs.build_linux_aarch64 == 'true' }}
 
                     - platform: 'windows-latest'
                       target: 'x86_64-pc-windows-msvc'
                       args: ''
+                      enabled: ${{ github.event.inputs.build_windows_x86_64 == 'true' }}
                     - platform: 'windows-latest'
                       target: 'aarch64-pc-windows-msvc'
                       args: '--target aarch64-pc-windows-msvc'
+                      enabled: ${{ github.event.inputs.build_windows_aarch64 == 'true' }}
 
         runs-on: ${{ matrix.platform }}
         timeout-minutes: 60
         steps:
             - name: Checkout Repository
+              if: ${{ matrix.enabled }}
               uses: actions/checkout@v4
 
             - name: Install rust target
+              if: ${{ matrix.enabled }}
               run: rustup target add ${{ matrix.target }}
 
             - uses: pnpm/action-setup@v3
+              if: ${{ matrix.enabled }}
               with:
                   version: latest
 
             - name: Sync node version and setup cache
+              if: ${{ matrix.enabled }}
               uses: actions/setup-node@v4
               with:
                   node-version: 20
                   cache: pnpm
 
             - name: Install frontend dependencies
+              if: ${{ matrix.enabled }}
               run: pnpm install
 
             - name: install Rust stable
+              if: ${{ matrix.enabled }}
               uses: dtolnay/rust-toolchain@stable
               with:
                   targets: ${{ matrix.target }}
 
             - name: Regenerate Icons
+              if: ${{ matrix.enabled }}
               run: pnpm tauri icon
 
             - name: Init Project Config
+              if: ${{ matrix.enabled }}
               run: node ./scripts/ppworker.cjs
 
             - name: install dependencies (ubuntu only)
-              if: matrix.platform == 'ubuntu-22.04'
+              if: ${{ matrix.enabled && matrix.platform == 'ubuntu-22.04'}}
               run: |
                   sudo apt-get update
                   sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
             - uses: Sjj1024/tauri-zhaction@tauri-zhaciton
+              if: ${{ matrix.enabled }}
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NAME: ${{ env.NAME }}
