@@ -115,8 +115,9 @@ jobs:
                   sudo apt-get update
                   sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
-            - uses: Sjj1024/tauri-zhaction@tauri-zhaciton
+            - name: tauri release
               if: ${{ matrix.enabled }}
+              uses: Sjj1024/tauri-zhaction@tauri-zhaciton
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NAME: ${{ env.NAME }}
