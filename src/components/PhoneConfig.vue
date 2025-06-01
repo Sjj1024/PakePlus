@@ -15,12 +15,12 @@
             <el-collapse-item name="1">
                 <template #title>
                     AppSettings
-                    <el-icon
+                    <!-- <el-icon
                         class="infoLink"
                         @click.stop="openUrl(urlMap.windowsConfig)"
                     >
                         <InfoFilled />
-                    </el-icon>
+                    </el-icon> -->
                 </template>
                 <div class="windowsConfig">
                     <!-- <el-form

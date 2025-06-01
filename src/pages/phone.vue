@@ -745,9 +745,9 @@
                 <div class="configHeader">
                     <h4 :id="titleId" :class="titleClass" class="titleLine">
                         <span class="titleText">{{ t('moreConfig') }}</span>
-                        <el-icon class="switchIcon" @click="switchTauriConfig">
+                        <!-- <el-icon class="switchIcon" @click="switchTauriConfig">
                             <Switch />
-                        </el-icon>
+                        </el-icon> -->
                     </h4>
                 </div>
             </template>
