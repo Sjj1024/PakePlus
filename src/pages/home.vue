@@ -623,7 +623,7 @@ const forkStartShas = async (tips: boolean = true) => {
     }
     await supportPP()
     // sync all branch
-    await syncAllBranch()
+    await syncAllBranch(true)
     // get commit sha
     await commitShas(tips)
 }
@@ -950,8 +950,9 @@ const mergeBranch = async (repo: string, branch: string) => {
 }
 
 // sync upstrame all branch
-const syncAllBranch = async () => {
-    if (store.token) {
+const syncAllBranch = async (init: boolean = false) => {
+    if (store.token || init) {
+        console.log('syncAllBranch', init)
         for (const repo of ppRepo) {
             console.log('syncAllBranch', repo)
             const upRes: any = await githubApi.getAllBranchs(upstreamUser, repo)
