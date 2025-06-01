@@ -79,8 +79,9 @@ jobs:
               if: ${{ matrix.enabled }}
               run: rustup target add ${{ matrix.target }}
 
-            - uses: pnpm/action-setup@v3
+            - name: Setup pnpm
               if: ${{ matrix.enabled }}
+              uses: pnpm/action-setup@v3
               with:
                   version: latest
 
