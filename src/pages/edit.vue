@@ -654,7 +654,6 @@ const isJson = ref(false)
 const tauriConfigRef = ref<any>(null)
 
 // 发布编译选项
-const value = ref()
 const platData = [
     {
         value: '1',
@@ -698,16 +697,16 @@ const platData = [
             },
         ],
     },
-    {
-        value: '4',
-        label: 'Android',
-        disabled: true,
-    },
-    {
-        value: '5',
-        label: 'iOS',
-        disabled: true,
-    },
+    // {
+    //     value: '4',
+    //     label: 'Android',
+    //     disabled: true,
+    // },
+    // {
+    //     value: '5',
+    //     label: 'iOS',
+    //     disabled: true,
+    // },
 ]
 
 // change app name
@@ -1502,15 +1501,13 @@ const dispatchAction = async () => {
     loadingText(t('preCompile') + 'workflow...')
     // wait file sync
     await new Promise((resolve) => setTimeout(resolve, 3000))
+    // ["1-1", "1-2", "2-1", "2-2", "3-1", "3-2"]
     const dispatchRes: any = await githubApi.dispatchWorkflow(
         store.userInfo.login,
         'PakePlus',
         {
             ref: store.currentProject.name,
-            inputs: {
-                name: store.currentProject.showName,
-                home: store.currentProject.url,
-            },
+            inputs: store.isBuild,
         }
     )
     if (dispatchRes.status !== 204) {
