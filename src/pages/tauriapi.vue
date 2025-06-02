@@ -649,7 +649,7 @@ const router = useRouter()
 const textarea = ref('')
 const image = ref()
 const defaultMenu = ref('1-1')
-const menuIndex = ref('3-14')
+const menuIndex = ref('1-1')
 
 const handleMenu = (index: string) => {
     console.log('handleMenu', index)
