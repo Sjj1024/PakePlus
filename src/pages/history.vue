@@ -20,7 +20,7 @@
                 </div>
                 <div class="toolTips">
                     <div class="tipsBody">
-                        {{ t('releaseNotes') }}
+                        <!-- {{ t('releaseNotes') }} -->
                         {{ store.currentRelease?.body || t('releaseBody') }}
                     </div>
                 </div>
@@ -33,7 +33,7 @@
         </div>
         <!-- only get latest version by tag name -->
         <el-table :data="store.currentRelease?.assets" style="width: 100%">
-            <el-table-column :label="t('assetName')" width="460">
+            <el-table-column :label="t('assetName')">
                 <template #default="scope">
                     <div style="display: flex; align-items: center">
                         <span @click="copyDownlink(scope.row)" class="fileLink">
@@ -51,6 +51,26 @@
                             {{ t('download') }}
                         </span>
                     </div>
+                </template>
+            </el-table-column>
+            <!-- url code -->
+            <el-table-column :label="t('urlCode')" width="140" align="center">
+                <template #default="scope">
+                    <el-popover
+                        popper-class="popoverBox"
+                        :width="100"
+                        placement="top"
+                    >
+                        <template #reference>
+                            <span class="iconfont downCode"> &#xe76e; </span>
+                        </template>
+                        <img
+                            :src="scope.row.qrcode"
+                            alt="下载二维码"
+                            class="downloadQrcode"
+                            style="width: 120px; height: 120px"
+                        />
+                    </el-popover>
                 </template>
             </el-table-column>
             <!-- asset type -->
@@ -75,7 +95,11 @@
                 </template>
             </el-table-column>
             <!-- publish time -->
-            <el-table-column prop="updated_at" :label="t('releaseDate')" />
+            <el-table-column
+                prop="updated_at"
+                width="160"
+                :label="t('releaseDate')"
+            />
         </el-table>
         <!-- share and push bug -->
         <div class="shareBox">
@@ -139,19 +163,19 @@ const delLoading = ref(false)
 // asset type
 const typeFunc = (name: string) => {
     if (name.includes('.dmg')) {
-        return 'macOS'
+        return name.includes('aarch64') ? 'macOS arm' : 'macOS x64'
     } else if (
         name.includes('.deb') ||
         name.includes('.AppImage') ||
         name.includes('.rpm')
     ) {
-        return 'Linux'
+        return name.includes('amd64') ? 'Linux amd64' : 'Linux x64'
     } else if (name.includes('.exe') || name.includes('.msi')) {
-        return 'Windows'
+        return name.includes('arm64') ? 'Windows arm' : 'Windows x64'
     } else if (name.includes('.apk')) {
-        return 'Android'
+        return 'Android 7.0+'
     } else if (name.includes('.ipa')) {
-        return 'iOS'
+        return 'iOS 15.6+'
     } else if (name.includes('.pwa')) {
         return 'PWA'
     } else if (name.includes('.gz')) {
@@ -320,5 +344,9 @@ onMounted(async () => {
         color: #1163c1;
         font-weight: bold;
     }
+}
+
+.downCode {
+    cursor: pointer;
 }
 </style>

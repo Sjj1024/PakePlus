@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4685520 */
-  src: url('iconfont.woff2?t=1745032534164') format('woff2'),
-       url('iconfont.woff?t=1745032534164') format('woff'),
-       url('iconfont.ttf?t=1745032534164') format('truetype');
+  src: url('iconfont.woff2?t=1748835557371') format('woff2'),
+       url('iconfont.woff?t=1748835557371') format('woff'),
+       url('iconfont.ttf?t=1748835557371') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,22 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-qr2:before {
+  content: "\e6a5";
+}
+
+.icon-qrcode:before {
+  content: "\e76e";
+}
+
+.icon-qunliao:before {
+  content: "\e6f4";
+}
+
+.icon-qunliao1:before {
+  content: "\e67a";
 }
 
 .icon-bitcoin:before {

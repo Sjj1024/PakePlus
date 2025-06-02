@@ -1,4 +1,4 @@
-import { convertToLocalTime, getPpconfig } from '@/utils/common'
+import { convertToLocalTime, getPpconfig, getQrcode } from '@/utils/common'
 import { defineStore } from 'pinia'
 import githubApi from '@/apis/github'
 import ppconfig from '@root/scripts/ppconfig.json'
@@ -343,18 +343,22 @@ export const usePPStore = defineStore('pakeplus', {
                             )
                         }
                     )
+                    const newAssets = []
                     const releaseData = {
                         ...releaseRes.data,
-                        assets: assets.map((asset: any) => {
-                            return {
+                        assets: await Promise.all(
+                            assets.map(async (asset: any) => ({
                                 ...asset,
                                 updated_at: convertToLocalTime(
                                     asset.updated_at
                                 ),
-                            }
-                        }),
+                                qrcode: await getQrcode(
+                                    asset.browser_download_url
+                                ),
+                            }))
+                        ),
                     }
-                    console.log('releaseData', repo, releaseData)
+                    console.log('releaseData----', repo, releaseData)
                     this.setRelease(this.currentProject.name, releaseData)
                     return releaseData
                 }

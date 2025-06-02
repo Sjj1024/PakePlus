@@ -693,7 +693,12 @@ const platData = [
             },
             {
                 value: '3-2',
+                label: 'Amd64',
+            },
+            {
+                value: '3-3',
                 label: 'Arm64',
+                disabled: true,
             },
         ],
     },

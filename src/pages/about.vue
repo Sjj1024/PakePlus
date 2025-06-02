@@ -17,9 +17,9 @@
             </div>
             <div class="description">
                 <p>
-                    {{ t('aboutGuide') }}：1024xiaoshen@gmail.com。
-                    或加入我们的群聊：
-                    <el-popover
+                    {{ t('aboutGuide') }}
+                    <!-- 或加入我们的群聊： -->
+                    <!-- <el-popover
                         popper-class="popoverBox"
                         :width="180"
                         placement="top"
@@ -32,7 +32,7 @@
                             alt=""
                             class="groupCode"
                         />
-                    </el-popover>
+                    </el-popover> -->
                 </p>
             </div>
             <div class="tools">

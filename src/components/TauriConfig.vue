@@ -322,6 +322,38 @@
                             </el-form-item>
                         </div>
                         <el-form-item
+                            label="proxyUrl"
+                            prop="proxyUrl"
+                            class="formItem"
+                        >
+                            <el-input
+                                v-model="
+                                    store.currentProject.more.windows.proxyUrl
+                                "
+                                autocomplete="off"
+                                autoCapitalize="off"
+                                autoCorrect="off"
+                                spellCheck="false"
+                                placeholder="proxyUrl"
+                            />
+                        </el-form-item>
+                        <el-form-item
+                            label="userAgent"
+                            prop="userAgent"
+                            class="formItem"
+                        >
+                            <el-input
+                                v-model="
+                                    store.currentProject.more.windows.userAgent
+                                "
+                                autocomplete="off"
+                                autoCapitalize="off"
+                                autoCorrect="off"
+                                spellCheck="false"
+                                placeholder="userAgent"
+                            />
+                        </el-form-item>
+                        <el-form-item
                             label="tabbingIdentifier"
                             prop="tabbingIdentifier"
                             class="formItem"
@@ -338,24 +370,24 @@
                                 placeholder="tabbingIdentifier"
                             />
                         </el-form-item>
+                        <el-form-item
+                            label="additionalBrowserArgs"
+                            prop="additionalBrowserArgs"
+                            class="formItem"
+                        >
+                            <el-input
+                                v-model="
+                                    store.currentProject.more.windows
+                                        .additionalBrowserArgs
+                                "
+                                autocomplete="off"
+                                autoCapitalize="off"
+                                autoCorrect="off"
+                                spellCheck="false"
+                                placeholder="additionalBrowserArgs"
+                            />
+                        </el-form-item>
                     </el-form>
-                    <el-form-item
-                        label="additionalBrowserArgs"
-                        prop="additionalBrowserArgs"
-                        class="formItem"
-                    >
-                        <el-input
-                            v-model="
-                                store.currentProject.more.windows
-                                    .additionalBrowserArgs
-                            "
-                            autocomplete="off"
-                            autoCapitalize="off"
-                            autoCorrect="off"
-                            spellCheck="false"
-                            placeholder="additionalBrowserArgs"
-                        />
-                    </el-form-item>
                 </div>
             </el-collapse-item>
             <el-collapse-item title="cli" name="2" disabled>

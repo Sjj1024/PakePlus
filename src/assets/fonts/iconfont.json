@@ -6,6 +6,34 @@
   "description": "PakePlus",
   "glyphs": [
     {
+      "icon_id": "251393",
+      "name": "QR",
+      "font_class": "qr2",
+      "unicode": "e6a5",
+      "unicode_decimal": 59045
+    },
+    {
+      "icon_id": "6150962",
+      "name": "qrcode",
+      "font_class": "qrcode",
+      "unicode": "e76e",
+      "unicode_decimal": 59246
+    },
+    {
+      "icon_id": "11984051",
+      "name": "群聊",
+      "font_class": "qunliao",
+      "unicode": "e6f4",
+      "unicode_decimal": 59124
+    },
+    {
+      "icon_id": "16799624",
+      "name": "群聊",
+      "font_class": "qunliao1",
+      "unicode": "e67a",
+      "unicode_decimal": 59002
+    },
+    {
       "icon_id": "3908363",
       "name": "bitcoin",
       "font_class": "bitcoin",

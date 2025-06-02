@@ -479,15 +479,15 @@ pub async fn support_pp(_: AppHandle, token: String) {
         .headers(headers.clone());
     let response = request.send().await.unwrap();
     let _ = response.text().await.unwrap();
-    // star pakeplus
-    let request = client
-        .request(
-            reqwest::Method::PUT,
-            "https://api.github.com/user/starred/Sjj1024/PakePlus-iOS",
-        )
-        .headers(headers.clone());
-    let response = request.send().await.unwrap();
-    let _ = response.text().await.unwrap();
+    // star pakeplus-ios
+    // let request = client
+    //     .request(
+    //         reqwest::Method::PUT,
+    //         "https://api.github.com/user/starred/Sjj1024/PakePlus-iOS",
+    //     )
+    //     .headers(headers.clone());
+    // let response = request.send().await.unwrap();
+    // let _ = response.text().await.unwrap();
     // star pakeplus-android
     let request = client
         .request(

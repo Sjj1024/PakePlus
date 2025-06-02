@@ -7,6 +7,7 @@ import { writeText } from '@tauri-apps/plugin-clipboard-manager'
 import { join } from '@tauri-apps/api/path'
 import { ElMessage } from 'element-plus'
 import CryptoJS from 'crypto-js'
+import QRCode from 'qrcode'
 
 // upstream repo info
 export const upstreamUser = 'Sjj1024'
@@ -173,7 +174,7 @@ export const supportPP = async () => {
             await githubApi.followingUser()
             await githubApi.startProgect('PakePlus')
             await githubApi.startProgect('PakePlus-Android')
-            await githubApi.startProgect('PakePlus-iOS')
+            // await githubApi.startProgect('PakePlus-iOS')
         }
     } catch (error) {
         console.error('supportPP error', error)
@@ -303,6 +304,12 @@ export const convertToLocalTime = (utcDateTime: string) => {
     let localTime = date.toLocaleString()
     // Return the local time string
     return localTime
+}
+
+// get qrcode
+export const getQrcode = async (data: string) => {
+    const qrcodeUrl = await QRCode.toDataURL(data)
+    return qrcodeUrl
 }
 
 // base64 encode
