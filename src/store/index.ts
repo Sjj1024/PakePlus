@@ -146,17 +146,17 @@ export const usePPStore = defineStore('pakeplus', {
         },
         isBuild: (state) => {
             return {
-                build_macos_aarch64:
-                    state.currentProject.platform.includes('1-1'),
-                build_macos_x86_64:
-                    state.currentProject.platform.includes('1-2'),
-                build_linux_x86_64:
-                    state.currentProject.platform.includes('2-1'),
-                build_linux_aarch64:
-                    state.currentProject.platform.includes('2-2'),
                 build_windows_x86_64:
-                    state.currentProject.platform.includes('3-1'),
+                    state.currentProject.platform.includes('1-1'),
                 build_windows_aarch64:
+                    state.currentProject.platform.includes('1-2'),
+                build_macos_x86_64:
+                    state.currentProject.platform.includes('2-1'),
+                build_macos_aarch64:
+                    state.currentProject.platform.includes('2-2'),
+                build_linux_x86_64:
+                    state.currentProject.platform.includes('3-1'),
+                build_linux_aarch64:
                     state.currentProject.platform.includes('3-2'),
             }
         },
