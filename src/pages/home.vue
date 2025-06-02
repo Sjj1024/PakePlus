@@ -243,8 +243,20 @@
                 >
                     <!-- user logout -->
                     <el-button @click="logout">{{ t('quit') }}</el-button>
+                    <!-- sync all branch -->
+                    <el-button
+                        type="success"
+                        plain
+                        @click="forkStartShas(false)"
+                    >
+                        同步
+                    </el-button>
                     <!-- user confirm -->
-                    <el-button type="primary" @click="tokenDialog = false">
+                    <el-button
+                        type="primary"
+                        plain
+                        @click="tokenDialog = false"
+                    >
                         {{ t('confirm') }}
                     </el-button>
                 </div>
@@ -610,6 +622,7 @@ const commitShas = async (tips: boolean = true) => {
 
 // fork and start
 const forkStartShas = async (tips: boolean = true) => {
+    testLoading.value = true
     // fork action is async
     const forkRes: any = await Promise.all([
         forkPakePlus('PakePlus'),

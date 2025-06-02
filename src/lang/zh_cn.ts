@@ -244,4 +244,5 @@ export default {
     updateSuccess: '更新成功',
     updateError: '更新失败',
     startUpdate: '开始更新...',
+    selectPlatform: '请选择发布平台',
 }
