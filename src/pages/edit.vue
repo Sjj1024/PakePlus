@@ -1512,14 +1512,7 @@ const dispatchAction = async () => {
         'PakePlus',
         {
             ref: store.currentProject.name,
-            inputs: {
-                build_macos_aarch64: 'false',
-                build_macos_x86_64: 'false',
-                build_linux_x86_64: 'false',
-                build_linux_aarch64: 'false',
-                build_windows_x86_64: 'false',
-                build_windows_aarch64: 'false',
-            },
+            inputs: store.isBuild,
         }
     )
     if (dispatchRes.status !== 204) {
