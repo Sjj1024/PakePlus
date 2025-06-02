@@ -54,27 +54,27 @@ jobs:
                     - platform: 'macos-latest'
                       target: 'aarch64-apple-darwin'
                       args: '--target aarch64-apple-darwin'
-                      enabled: ${{ github.event.inputs.build_macos_aarch64 == 'true' }}
+                      enabled: ${{ github.event.inputs.build_macos_aarch64 }}
                     - platform: 'macos-latest'
                       target: 'x86_64-apple-darwin'
                       args: '--target x86_64-apple-darwin'
-                      enabled: ${{ github.event.inputs.build_macos_x86_64 == 'true' }}
+                      enabled: ${{ github.event.inputs.build_macos_x86_64 }}
                     - platform: 'ubuntu-22.04'
                       target: 'x86_64-unknown-linux-gnu'
                       args: ''
-                      enabled: ${{ github.event.inputs.build_linux_x86_64 == 'true' }}
+                      enabled: ${{ github.event.inputs.build_linux_x86_64 }}
                     - platform: 'ubuntu-22.04'
                       target: 'aarch64-unknown-linux-gnu'
                       args: ''
-                      enabled: ${{ github.event.inputs.build_linux_aarch64 == 'true' }}
+                      enabled: ${{ github.event.inputs.build_linux_aarch64 }}
                     - platform: 'windows-latest'
                       target: 'x86_64-pc-windows-msvc'
                       args: ''
-                      enabled: ${{ github.event.inputs.build_windows_x86_64 == 'true' }}
+                      enabled: ${{ github.event.inputs.build_windows_x86_64 }}
                     - platform: 'windows-latest'
                       target: 'aarch64-pc-windows-msvc'
                       args: '--target aarch64-pc-windows-msvc'
-                      enabled: ${{ github.event.inputs.build_windows_aarch64 == 'true' }}
+                      enabled: ${{ github.event.inputs.build_windows_aarch64 }}
 
         runs-on: ${{ matrix.platform }}
         timeout-minutes: 60
