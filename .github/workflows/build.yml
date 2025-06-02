@@ -7,32 +7,32 @@ on:
                 description: 'Build for macOS aarch64'
                 required: false
                 type: boolean
-                default: true
+                default: false
             build_macos_x86_64:
                 description: 'Build for macOS x86_64'
                 required: false
                 type: boolean
-                default: true
+                default: false
             build_linux_x86_64:
                 description: 'Build for Linux x86_64'
                 required: false
                 type: boolean
-                default: true
+                default: false
             build_linux_aarch64:
                 description: 'Build for Linux aarch64'
                 required: false
                 type: boolean
-                default: true
+                default: false
             build_windows_x86_64:
                 description: 'Build for Windows x86_64'
                 required: false
                 type: boolean
-                default: true
+                default: false
             build_windows_aarch64:
                 description: 'Build for Windows aarch64'
                 required: false
                 type: boolean
-                default: true
+                default: false
     push:
         tags:
             - 'v*'
