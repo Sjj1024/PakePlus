@@ -249,7 +249,7 @@
                         plain
                         @click="forkStartShas(false)"
                     >
-                        同步
+                        {{ t('sync') }}
                     </el-button>
                     <!-- user confirm -->
                     <el-button
@@ -742,12 +742,20 @@ const creatProject = async () => {
         creatLoading.value = false
         branchDialog.value = false
         return
-    }
-    if (branchName.value === 'ppdev') {
+    } else if (branchName.value === 'ppdev') {
         router.push('/tauriapi')
         branchName.value = ''
         creatLoading.value = false
         branchDialog.value = false
+        return
+    } else if (
+        branchName.value === 'PakePlus' ||
+        branchName.value === 'web2' ||
+        branchName.value === 'web3'
+    ) {
+        oneMessage.error(t('banned'))
+        branchName.value = ''
+        creatLoading.value = false
         return
     }
     // token.value && (await uploadBuildYml())

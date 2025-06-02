@@ -247,4 +247,7 @@ export default {
     updateSuccess: '업데이트 성공',
     updateError: '업데이트 실패',
     startUpdate: '업데이트 시작...',
+    selectPlatform: '플랫폼을 선택하세요',
+    urlCode: 'QR 코드',
+    banned: '금지',
 }

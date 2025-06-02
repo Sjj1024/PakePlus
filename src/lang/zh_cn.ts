@@ -245,4 +245,6 @@ export default {
     updateError: '更新失败',
     startUpdate: '开始更新...',
     selectPlatform: '请选择发布平台',
+    urlCode: '二维码',
+    banned: '禁止',
 }

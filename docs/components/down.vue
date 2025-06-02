@@ -23,14 +23,10 @@
             <div class="rightContent">
                 <h1 class="title">MacOS</h1>
                 <div class="item">
-                    <a :href="ghProxy(macArm.name)">
-                        ARM(M芯片)版本
-                    </a>
+                    <a :href="ghProxy(macArm.name)"> ARM(M芯片) </a>
                 </div>
                 <div class="item">
-                    <a :href="ghProxy(macX64.name)">
-                        Intel芯片 版本
-                    </a>
+                    <a :href="ghProxy(macX64.name)"> Intel芯片 </a>
                 </div>
             </div>
         </div>
@@ -62,14 +58,10 @@
             <div class="rightContent">
                 <h1 class="title">Windows</h1>
                 <div class="item">
-                    <a :href="ghProxy(windowsX64.name)">
-                        X64 版本
-                    </a>
+                    <a :href="ghProxy(windowsX64.name)"> X64 </a>
                 </div>
                 <div class="item">
-                    <a :href="ghProxy(windowsArm64.name)">
-                        ARM64 版本
-                    </a>
+                    <a :href="ghProxy(windowsArm64.name)"> ARM64 </a>
                 </div>
             </div>
         </div>
@@ -100,19 +92,13 @@
             <div class="rightContent">
                 <h1 class="title">Linux</h1>
                 <div class="item">
-                    <a :href="ghProxy(linuxDeb.name)">
-                        deb 版本
-                    </a>
+                    <a :href="ghProxy(linuxDeb.name)"> deb </a>
                 </div>
                 <div class="item">
-                    <a :href="ghProxy(linuxRpm.name)">
-                        rpm 版本
-                    </a>
+                    <a :href="ghProxy(linuxRpm.name)"> rpm </a>
                 </div>
                 <div class="item">
-                    <a :href="ghProxy(linuxImage.name)">
-                        AppImage 版本
-                    </a>
+                    <a :href="ghProxy(linuxImage.name)"> AppImage </a>
                 </div>
             </div>
         </div>

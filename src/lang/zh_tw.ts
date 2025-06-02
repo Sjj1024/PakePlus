@@ -241,4 +241,7 @@ export default {
     updateSuccess: '更新成功',
     updateError: '更新失敗',
     startUpdate: '開始更新...',
+    selectPlatform: '請選擇發佈平台',
+    urlCode: '二維碼',
+    banned: '禁止',
 }

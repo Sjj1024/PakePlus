@@ -1,13 +1,17 @@
 # APP 配置
 
+手机 APP 暂时只支持 Android 和 iOS 系统，后面可能会迭代开发支持更多系统。
+
 <BiliBili src="//player.bilibili.com/player.html?isOutside=true&aid=114591589731347&bvid=BV1wb75zrEBh&cid=30216618986&p=1"/>
 
 点击软件配置界面右上角的手机图标，即可进入移动端配置界面。
+
 ![](../static/imgs/phone1.webp)
 
 移动端配置与桌面端配置类似，后续会支持更多平台。
 以界面上展示的配置为准，因为正在开发移动端的配置，所以会有一些配置项还没有完善。
 移动端暂只支持打包 web 网站，不支持静态文件，后续会慢慢支持静态文件。
+
 ![](../static/imgs/phone2.webp)
 
 激动人心的等待时刻：(当然也是最容易出错的时刻)

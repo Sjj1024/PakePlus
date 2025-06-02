@@ -249,4 +249,7 @@ export default {
     updateSuccess: '更新成功',
     updateError: '更新失敗',
     startUpdate: '更新を開始...',
+    selectPlatform: 'プラットフォームを選択してください',
+    urlCode: 'QRコード',
+    banned: '禁止',
 }
