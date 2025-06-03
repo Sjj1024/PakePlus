@@ -47,7 +47,7 @@ sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
 
 在更多配置中，开启 fullscreen 即可
 
-# dispatch 错误: 404
+# dispatch 错误: 404/422/403等等错误
 
 确认 token 权限是否配置正确，然后重新填入 token 试试，往往是 token 权限配置错误导致的。或者点击首页头像然后同步一下试试。
 
