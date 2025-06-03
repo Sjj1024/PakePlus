@@ -836,7 +836,7 @@ const creatProject = async () => {
                 creatLoading.value = false
                 console.error('branchInfo error', res)
                 oneMessage.error(
-                    `${t('creatProjectError')}: ${res.data.message}`
+                    `${t('creatProjectError')}: ${res?.data?.message || 'unknown error'}`
                 )
             }
         } else {
