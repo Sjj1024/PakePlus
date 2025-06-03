@@ -82,4 +82,4 @@ Workflows：用来编译打包你的软件
 -   github 生成的 token 只有一次机会查看，请妥善保管。
 -   PakePlus 填入的 token 只会仅存储在你电脑本地，请妥善保管。
 -   生成的 token 只能在有效期内使用(如果你设置的是有效期模式)，过期后需要重新生成。
--   当你填入 token 并验证成功后，会在右上角展示你的 github 头像，点击头像可以查看你的 github 昵称和 token，点击头像会跳转到你的 github 个人主页，点击 token 会将 token 复制到你的粘贴板。如果在使用过程中有遇到问题，可以将你的 token 私法给我，我会尽可能帮助你解决问题。
+-   当你填入 token 并验证成功后，会在右上角展示你的 github 头像，点击头像可以查看你的 github 昵称和 token，点击头像会跳转到你的 github 个人主页，点击 token 会将 token 复制到你的粘贴板。如果在使用过程中有遇到问题，[可以进交流群咨询](../exchange/index.md)。
