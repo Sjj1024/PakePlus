@@ -54,7 +54,7 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 ## 热门包
 
 <img src=https://sjj1024.github.io/PakePlus/static/imgs/preview.webp  width=1920/>
-PakePLus支持arm和x64架构的安装包，流行的程序安装包仅仅包含了mac的arm和windows的x64架构，如果需要更多架构的安装包，请使用PakePlus单独编译自己需要的安装包。
+PakePlus支持arm和x64架构的安装包，流行的程序安装包仅仅包含了mac的arm和windows的x64架构，如果需要更多架构的安装包，请使用PakePlus单独编译自己需要的安装包。
 
 <table>
     <tr>
@@ -149,7 +149,7 @@ sudo xattr -r -d com.apple.quarantine /Applications/YourAppName.app
 
 3. **如果您在使用该程序时遇到任何问题，请下载最新版本。** 2025 年之前开发的版本基于 Tauri v1.0，而在 2025 年，Tauri 已升级至 v2.0。如果最新版本仍然存在问题，请提交 Issue 并附上详细信息，以便我们能够更快地更新和解决问题。
 
-4. 当你添加 Github Token 之后，PakePLus 会 Fork 一个 PakePlus 仓库到你的仓库中，以后你的所有项目都会依赖这个仓库创建和编译，请勿删除你的 PakePlus 仓库。
+4. 当你添加 Github Token 之后，PakePlus 会 Fork 一个 PakePlus 仓库到你的仓库中，以后你的所有项目都会依赖这个仓库创建和编译，请勿删除你的 PakePlus 仓库。
 
 ## 开发 PakePlus
 
@@ -181,7 +181,7 @@ pnpm run build
 2. 群里讨论，会将大家遇到的问题汇总，如果别人同样遇到了，就会帮助更多的人。
 3. 如果群里没有人能解决你的问题，可以艾特@我，我看到了就会回复你。
 4. 群二维码过期或者群人数过多了，可以加我微信，我会拉你进群聊。
-5. 如果有问题需要单独咨询服务，请先赞助 PakePLus，然后再咨询问题。
+5. 如果有问题需要单独咨询服务，请先赞助 PakePlus，然后再咨询问题。
 6. 如果不方便加微信，也可以在 github 上提 issue，我会尽快回复。
 7. 由于我一个人时间精力有限，所以请务必按照上述流程咨询。
 8. 群内仅限讨论技术问题，不要发广告、发垃圾信息、发其他无关的信息。

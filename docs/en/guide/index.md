@@ -2,9 +2,9 @@
 layout: doc
 ---
 
-# PakePLus Guide
+# PakePlus Guide
 
-PakePlus is a packaging tool based on Tauri2 and GitHub. You can also call me PP or 2P🫣. With just a GitHub Token, you can package any website/Vue/React project's static `dist` files into a cross-platform desktop application. It’s compact (less than 5M) and high-performance, while PakePlus itself is only about 8M. <span style="color:red">in order to avoid excessive pressure on Github servers caused by excessive use, PakePLus has implemented restrictions: only one project can be created and published one hourly!</span>
+PakePlus is a packaging tool based on Tauri2 and GitHub. You can also call me PP or 2P🫣. With just a GitHub Token, you can package any website/Vue/React project's static `dist` files into a cross-platform desktop application. It’s compact (less than 5M) and high-performance, while PakePlus itself is only about 8M. <span style="color:red">in order to avoid excessive pressure on Github servers caused by excessive use, PakePlus has implemented restrictions: only one project can be created and published one hourly!</span>
 
 Compared to Pake, the advantages are:
 

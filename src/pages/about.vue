@@ -37,7 +37,7 @@
             </div>
             <div class="tools">
                 <p>
-                    <span>PakePLus：</span>
+                    <span>PakePlus：</span>
                     <span class="link" @click="openUrl(urlMap.pakeplus)">
                         {{ urlMap.pakeplus }}
                     </span>

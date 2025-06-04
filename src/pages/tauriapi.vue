@@ -10,7 +10,7 @@
                 >
                     <div class="menuTitle" @click="goBack">
                         <img :src="ppIcon" alt="logo" class="menuIcon" />
-                        <div class="menuTitleText">PakePLus</div>
+                        <div class="menuTitleText">PakePlus</div>
                     </div>
                     <el-sub-menu index="1">
                         <template #title>Tauri2Api</template>
@@ -734,7 +734,7 @@ const listenEvent = async () => {
 
 // event:发送事件
 const sendEvent = async () => {
-    await emit('my-event', { message: 'Hello, PakePLus!' })
+    await emit('my-event', { message: 'Hello, PakePlus!' })
 }
 
 // event:取消监听

@@ -61,7 +61,7 @@ Workflows：用来编译打包你的软件
 
     ![](../static/imgs/token8.png)
 
-    然后把 Token 复制到 PakePLus 里，就可以使用了：
+    然后把 Token 复制到 PakePlus 里，就可以使用了：
 
     ![](../static/imgs/token9.png)
 

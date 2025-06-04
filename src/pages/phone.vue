@@ -780,9 +780,9 @@
         </ImgPreview>
         <Building
             v-model:visible="buildLoading"
-            :desktopTime="buildTimeText.PakePLus"
-            :desktopStatus="buildStatus['PakePLus']"
-            :desktopRate="buildRates['PakePLus']"
+            :desktopTime="buildTimeText.PakePlus"
+            :desktopStatus="buildStatus['PakePlus']"
+            :desktopRate="buildRates['PakePlus']"
             :androidTime="buildTimeText['PakePlus-Android']"
             :androidStatus="buildStatus['PakePlus-Android']"
             :androidRate="buildRates['PakePlus-Android']"
@@ -881,28 +881,28 @@ const pubForm = reactive({
 const buildLoading = ref(false)
 // check dispatch workflow timer
 let buildTime = reactive<any>({
-    PakePLus: 0,
+    PakePlus: 0,
     'PakePlus-Android': 0,
     'PakePlus-iOS': 0,
     PWA: 0,
 })
 
 let buildTimeText = reactive<any>({
-    PakePLus: '',
+    PakePlus: '',
     'PakePlus-Android': '',
     'PakePlus-iOS': '',
     PWA: '',
 })
 
 let buildStatus = reactive<any>({
-    PakePLus: '',
+    PakePlus: '',
     'PakePlus-Android': '',
     'PakePlus-iOS': '',
     PWA: '',
 })
 
 let buildRates = reactive<any>({
-    PakePLus: 0,
+    PakePlus: 0,
     'PakePlus-Android': 0,
     'PakePlus-iOS': 0,
     PWA: 0,
@@ -910,7 +910,7 @@ let buildRates = reactive<any>({
 
 // 编译时间计时器
 let buildTimer = reactive<any>({
-    PakePLus: null,
+    PakePlus: null,
     'PakePlus-Android': null,
     'PakePlus-iOS': null,
     PWA: null,
@@ -918,7 +918,7 @@ let buildTimer = reactive<any>({
 
 // 检查dispatch workflow timer
 let checkDispatchTimer = reactive<any>({
-    PakePLus: null,
+    PakePlus: null,
     'PakePlus-Android': null,
     'PakePlus-iOS': null,
     PWA: null,
@@ -1810,7 +1810,7 @@ const dispatchAction = async (repo: string) => {
 
 // rerun fails jobs
 let rerunCounts: any = {
-    PakePLus: 0,
+    PakePlus: 0,
     'PakePlus-Android': 0,
     'PakePlus-iOS': 0,
     PWA: 0,
@@ -1963,7 +1963,7 @@ onUnmounted(() => {
 onMounted(async () => {
     window.addEventListener('keydown', handleKeydown)
     // 重制编译时间
-    buildTime.PakePLus = 0
+    buildTime.PakePlus = 0
     buildTime['PakePlus-Android'] = 0
     buildTime['PakePlus-iOS'] = 0
     buildTime['PWA'] = 0
