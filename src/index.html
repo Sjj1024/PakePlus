@@ -1,22 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="styles.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus App</title>
-        <script type="module" src="/main.js" defer></script>
-    </head>
 
-    <body>
-        <main class="container">
-            <h1>Welcome to PakePlus</h1>
+<!--html:c:\Users\刘浩楠\OneDrive\桌面\新建文件夹\rsa\2.html-->
+<!-- 声明HTML文档，设置语言为中文 -->
+<html lang="zh">
+<!-- 页面头部信息 -->
+<head>
+    <!-- 设置字符编码为UTF-8 -->
+    <meta charset="UTF-8">
+    <!-- 页面标题，当前为空 -->
+    <title></title>
 
-            <form class="row" id="greet-form">
-                <input id="greet-input" placeholder="Enter a name..." />
-                <button type="submit">Greet</button>
-            </form>
-            <p id="greet-msg"></p>
-        </main>
-    </body>
+    <!-- 引入jQuery库 -->
+    <script src="jquery-1.8.3.min.js"></script>
+    <!-- 引入jsencrypt加密库 -->
+    <script type="text/javascript" charset="utf-8" src="jsencrypt.min.js"></script>
+    <!-- 页面内的JavaScript代码 -->
+    <script>
+        // 页面加载时执行的函数，打印当前时间和时间戳
+        function loadFunc(){
+            // 打印当前日期对象
+            console.log(new Date());
+            // 打印当前时间的时间戳，四舍五入取整
+            console.log(Math.round(new Date()));
+        }
+        // 单点登录处理函数
+        function onePoint(){
+            // 创建一个日期对象
+            var date = new Date();
+            // 获取当前年份
+            var fullYear = date.getFullYear();
+            // 获取当前月份，并补零处理
+            var month = (date.getMonth() + 1) < 10 ? ("0" + (date.getMonth() + 1)) : (date.getMonth() + 1);
+            // 获取当前日期，并补零处理
+            var day = date.getDate() < 10 ? ("0" + date.getDate()) : date.getDate();
+            // 获取当前小时数，并补零处理
+            var hour = date.getHours() < 10 ? ("0" + date.getHours()) : date.getHours();
+            // 获取当前分钟数，并补零处理
+            var minute = date.getMinutes() < 10 ? ("0" + date.getMinutes()) : date.getMinutes();
+            // 组合时间戳字符串
+            var timestamp = fullYear + "" + month + "" + day + "" + hour + "" + minute;
+            // 获取输入框中的用户名
+            var staffCode = document.getElementById("staffCode").value;
+            // 获取下拉框中选择的系统ID
+            var systemId = document.getElementById("system").value;
+            // 声明加密对象
+            var encrypt;
+            // 创建加密对象实例
+            encrypt = new JSEncrypt();
+            // 设置公钥
+            encrypt.setPublicKey("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIMJ5GIBjA3oJs+e5HVcfEx312GWrVtE6q6caMkI8M4Q7PnuiAEeomp9xQwe7MzGe8ihOX0iyPmjg5gJhfN/loTDA1oBu1g6Z7tyxgH3Q0MsPhYvMLKAl9W0kN3uYLnc+loyOPAIlSyAngvQv/9H1GG08E8XNtVsvavNaPZDbzvQIDAQAB");
+            // 对加密后的用户名和时间戳进行编码，并替换加号，然后更新页面元素内容
+            $("#drawDiv").html(encodeURI(encrypt.encrypt(staffCode + "_" + timestamp)).replace(/\+/g, '%2B'));
+
+
+
+            /**/
+            // 根据选择的系统ID跳转到不同的登录页面
+            if(systemId == 51){
+                // 新-政企沙盘-xc系统登录跳转
+                location.href = "http://136.96.228.9:8091/rsa/rsaLogin?AppKey="+encodeURI(encrypt.encrypt(staffCode + "_" + timestamp)).replace(/\+/g, '%2B');
+            }else if(systemId == 201){
+                // 新-划小承包-XC系统登录跳转
+                location.href = "http://136.96.228.9:7080/ODSMSPortal/login!onePointLoginAuth.action?AppKey="+encodeURI(encrypt.encrypt(staffCode + "_" + timestamp)).replace(/\+/g, '%2B');
+            }else if(systemId == 10){
+                // 旧-划小承包系统登录跳转
+                location.href = "http://136.96.228.9:8091/ODSMSPortal/login!onePointLoginAuth.action?AppKey="+encodeURI(encrypt.encrypt(staffCode + "_" + timestamp)).replace(/\+/g, '%2B');
+            }else if(systemId == 5){
+                // 旧-政企沙盘系统登录跳转
+                location.href = "http://136.96.134.45:8091/rsa/rsaLogin?AppKey="+encodeURI(encrypt.encrypt(staffCode + "_" + timestamp)).replace(/\+/g, '%2B');
+            }
+
+        }
+    </script>
+</head>
+<!-- 页面主体内容 -->
+<body onload="loadFunc()">
+<!-- 用户名输入框，默认值为datagl -->
+用户名:<input type="text" id="staffCode" value="datagl" />
+<!-- 系统选择下拉框 -->
+<select id="system">
+    <!--    <option value="10">旧-划小承包</option>-->
+    <!-- 新-划小承包-XC系统选项 -->
+    <option value="201">新-划小承包-XC</option>
+    <!--    <option value="5">旧-政企沙盘</option>-->
+    <!-- 新-政企沙盘-xc系统选项 -->
+    <option value="51">新-政企沙盘-xc</option>
+</select>
+<!-- 点击按钮触发单点登录处理函数 -->
+<button onclick="onePoint()">登陆</button>
+<!-- 用于显示加密结果的div元素 -->
+<div id="drawDiv" style="width:800px"></div>
+</body>
 </html>
