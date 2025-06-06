@@ -56,7 +56,8 @@ PakePlus 支持 arm 和 x64 架构的安装包，流行的程序安装包仅仅�
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Sjj1024/PakePlus&type=Date)](https://www.star-history.com/#Sjj1024/PakePlus&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Sjj1024/PakePlus,Sjj1024/PakePlus-iOS,Sjj1024/PakePlus-Android&type=Date)](https://www.star-history.com/#Sjj1024/PakePlus&Sjj1024/PakePlus-iOS&Sjj1024/PakePlus-Android&Date)
+
 
 <script setup>
 import Popular from '../components/popular.vue'
