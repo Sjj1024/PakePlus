@@ -2,7 +2,7 @@
     <div class="homeBox" :class="{ isWeb: !isTauri }">
         <div class="homeHeader">
             <div>
-                <div class="headerTitle" @click="delPakePlus">
+                <div class="headerTitle" @click="isDev && delPakePlus">
                     <span>{{ t('projectTitle') }}</span>
                 </div>
                 <div class="toolTips">
@@ -362,6 +362,7 @@ import {
     oneMessage,
     upstreamUser,
     ppRepo,
+    isDev
 } from '@/utils/common'
 import ppconfig from '@root/scripts/ppconfig.json'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
@@ -836,7 +837,9 @@ const creatProject = async () => {
                 creatLoading.value = false
                 console.error('branchInfo error', res)
                 oneMessage.error(
-                    `${t('creatProjectError')}: ${res.data.message}`
+                    `${t('creatProjectError')}: ${
+                        res?.data?.message || 'unknown error'
+                    }`
                 )
             }
         } else {

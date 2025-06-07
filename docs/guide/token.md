@@ -33,37 +33,53 @@ Workflows：用来编译打包你的软件
    [Fine-grained personal access tokens](https://github.com/settings/personal-access-tokens) 。
 7. Personal access tokens (classic) 获取操作：  
    只需要勾选下面三个权限就可以了：<font color="red">repo 和 workflow 和 user</font>
-   ![](../static/imgs/token11.png)
-   ![](../static/imgs/token12.webp)  
-   然后将得到的 token 复制到 PakePlus 就可以了：
-   ![](../static/imgs/token12.png)
+
+    ![](../static/imgs/token11.png)
+    ![](../static/imgs/token12.webp)  
+    然后将得到的 token 复制到 PakePlus 就可以了：
+
+    ![](../static/imgs/token12.png)
 
 8. <font color="red">(如果你通过第 7 步已经拿到了 token 就不用操作这个步骤了，直接看第 9 步)</font>
    Fine-grained personal access tokens 获取操作：
-   ![](../static/imgs/token1.png)  
-   Generate new token：添写一个 token 的名字，然后选择过期时间为不过期，描述随便写，然后选择 All
-   repositories
-   ![](../static/imgs/token2.png)  
+
+    ![](../static/imgs/token1.png)  
+    Generate new token：添写一个 token 的名字，然后选择过期时间为不过期，描述随便写，然后选择 All
+    repositories
+
+    ![](../static/imgs/token2.png)
+
     配置权限：赋予红框标注的权限，Access 选择:&nbsp;&nbsp;Read
-   and write&nbsp;
-   ![](../static/imgs/token3.png)
-   ![](../static/imgs/token4.png)
-   ![](../static/imgs/token5.png)
-   ![](../static/imgs/token7.png)  
+    and write&nbsp;
+
+    ![](../static/imgs/token3.png)
+    ![](../static/imgs/token4.png)
+    ![](../static/imgs/token5.png)
+    ![](../static/imgs/token7.png)
+
     然后点击最底部的 Generate token 就可以拿到 token 了：
-   ![](../static/imgs/token8.png)
-   然后把 Token 复制到 PakePLus 里，就可以使用了：
-   ![](../static/imgs/token9.png)
 
-9. 测试 Token
-   打开 PakePlus，点击首页右上角的设置按钮，把第 7 步或者第 8 步得到的 token 复制进去，点击测试，提示 Token 可用说明成功了：
-   ![](../static/imgs/token13.png)  
+    ![](../static/imgs/token8.png)
 
+    然后把 Token 复制到 PakePlus 里，就可以使用了：
+
+    ![](../static/imgs/token9.png)
+
+9. 测试 Token 是否正确  
+   打开 PakePlus，点击首页右上角的设置按钮，把第 7 步或者第 8 步得到的 token 复制进去，点击测试，会校验 token 是否正确并初始化，网络好的话转20秒左右就好了:
+
+    ![](../static/imgs/token16.webp)
+
+    如果提示 Token 可用，说明成功了，并会展示 github 信息：
+
+    ![](../static/imgs/token15.webp)
+
+    如果提示 Token 不可用或一直在转圈圈，可能 token 不正确或网络不好，需要重新获取 token，然后再试。
 
 
 ## 注意事项
 
--   github生成的 token 只有一次机会查看，请妥善保管。
--   PakePlus填入的 token 只会仅存储在你电脑本地，请妥善保管。
+-   github 生成的 token 只有一次机会查看，请妥善保管。
+-   PakePlus 填入的 token 只会仅存储在你电脑本地，请妥善保管。
 -   生成的 token 只能在有效期内使用(如果你设置的是有效期模式)，过期后需要重新生成。
--   当你填入token并验证成功后，会在右上角展示你的github头像，点击头像可以查看你的github昵称和token，点击头像会跳转到你的github个人主页，点击token会将token复制到你的粘贴板。如果在使用过程中有遇到问题，可以将你的token私法给我，我会尽可能帮助你解决问题。
+-   当你填入 token 并验证成功后，会在右上角展示你的 github 头像，点击头像可以查看你的 github 昵称和 token，点击头像会跳转到你的 github 个人主页，点击 token 会将 token 复制到你的粘贴板。如果在使用过程中有遇到问题，[可以进交流群咨询](../exchange/index.md)。

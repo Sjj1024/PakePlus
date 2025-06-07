@@ -26,11 +26,25 @@
 // import { ref, reactive } from 'vue'
 const friends = [
     {
+        name: '？',
+        time: '2025-06-03',
+        amount: '50',
+        way: '微信',
+        remark: '感谢老哥哈！',
+    },
+    {
+        name: ': )',
+        time: '2025-06-01',
+        amount: '5',
+        way: '微信',
+        remark: '感谢帮助',
+    },
+    {
         name: 'Celia',
         time: '2025-05-30',
         amount: '200',
         way: '微信',
-        remark: '正好找到你一个',
+        remark: '正好找到你这个',
     },
     {
         name: '黄俊博@软件工程',

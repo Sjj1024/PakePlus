@@ -1,12 +1,12 @@
 # 高级玩法
 
-如果你是程序员，你想调试你的前端项目，或者因为你的 dist 目录特别大文件特别多，但是 PakePLus 因为 github api 的原因限制了文件大小和数量，那么你可以使用高级玩法来实现同步你的 dist 目录到 github 仓库中，然后实现编译发布。
+如果你是程序员，你想调试你的前端项目，或者因为你的 dist 目录特别大文件特别多，但是 PakePlus 因为 github api 的原因限制了文件大小和数量，那么你可以使用高级玩法来实现同步你的 dist 目录到 github 仓库中，然后实现编译发布。
 
-1.先在 PakePLus 上创建一个项目，比如这个项目名称叫：deepseek
+1.先在 PakePlus 上创建一个项目，比如这个项目名称叫：deepseek
 
 2.然后 clone 你的 PakePlus 仓库到本地
 每个人在 PakePlus 填写验证 token 后，都会自动 fork PakePlus/PakePlus-Android/PakePlus-iOS 仓库到你的 github 账号下，你可以在你的 github 账号下找到你的 PakePlus 仓库，然后 clone 到本地。
-注意：如果你想编译桌面端，你就 clone PakePLus，如果你想编译移动端，你就 clone PakePlus-Android/PakePlus-iOS。
+注意：如果你想编译桌面端，你就 clone PakePlus，如果你想编译移动端，你就 clone PakePlus-Android/PakePlus-iOS。
 
 3.使用 git 命令，拉取你仓库的所有分支，其中肯定有一个叫：deepseek 的分支
 切到 deepseek 分支后，将你的 dist 文件夹内容复制到 src 目录下，然后提交到你的仓库中。
@@ -38,4 +38,4 @@
 4.修改完之后，将这个分支推送到你的仓库中，然后到 github action 中触发编译
 触发的时候，记得选择分支为 deepseek，然后点击运行工作流，等待编译完成即可。
 
-5.发布完成后，到 PakePLus 的 release 页面，就可以下载你的软件了。
+5.发布完成后，到 PakePlus 的 release 页面，就可以下载你的软件了。

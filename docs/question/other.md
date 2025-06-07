@@ -1,6 +1,6 @@
 # 其他问题
 
-一个功能性问题，可能 PakePLus 还没有完善，需要你提新的需求，后面会慢慢完善
+一个功能性问题，可能 PakePlus 还没有完善，需要你提新的需求，后面会慢慢完善
 
 # 支持的平台
 - Windows：支持win7及以上版本，要想在win7上运行，需要先自行安装微软webview2，下载地址：https://developer.microsoft.com/zh-cn/microsoft-edge/webview2

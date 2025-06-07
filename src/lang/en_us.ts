@@ -201,7 +201,7 @@ export default {
     copyAddress: 'Copy Address',
     sponsor: 'Sponsor',
     sponsorTips:
-        'If you also like our PakePLus project, welcome to sponsor us, we will continue to develop and maintain it. Your support is our driving force. Please fill in the message when sponsoring, so that we can record it in the sponsor list, thank you for your support and encouragement!',
+        'If you also like our PakePlus project, welcome to sponsor us, we will continue to develop and maintain it. Your support is our driving force. Please fill in the message when sponsoring, so that we can record it in the sponsor list, thank you for your support and encouragement!',
     sponsorList: 'Sponsor List',
     sponsorListTips: 'Thank you for your support and encouragement!',
     buildTips: 'Please do not do any operations during building...',

@@ -2,17 +2,17 @@
 layout: doc
 ---
 
-# PakePLus 简介
+# PakePlus 简介
 
-PakePlus 是一个基于 Tauri2 和 Github 的打包工具，你也可以叫我 PP 或者 2P🫣，只需要一个 Github Token 就可以将任意网站/Vue/React 等项目的 dist 静态文件打包为跨平台桌面软件和手机软件，体积小巧(小于 5M)并且性能还高，而且 PakePlus 本身也才仅仅 8M 左右。<span style="color:red">现阶段避免大量使用导致 Github 服务器压力过大，PakePLus 已做限制：仅可创建 1 个项目，每小时可发布一次！详细原因请看：[PakePLus 为什么要做限制？](https://juejin.cn/post/7504461472237404214)</span>
+PakePlus 是一个基于 Tauri2 和 Github 的打包工具，你也可以叫我 PP 或者 2P🫣，只需要一个 Github Token 就可以将任意网站/Vue/React 等项目的 dist 静态文件打包为跨平台桌面软件和手机软件，体积小巧(小于 5M)并且性能还高，而且 PakePlus 本身也才仅仅 8M 左右。<span style="color:red">现阶段避免大量使用导致 Github 服务器压力过大，PakePlus 已做限制：仅可创建 1 个项目，每小时可发布一次！详细原因请看：[PakePlus 为什么要做限制？](https://juejin.cn/post/7504461472237404214)</span>
 
 <BiliBili />
 
 相比 Pake 优势在于：
 
 1. Pake 需要在本地安装复杂臃肿的 rust 和 node 依赖环境，动辄几个 G 的电脑存储就没有了，我的电脑硬盘根本不够用啊...
-2. 不需要懂命令行和各种复杂配置，PakePLus 界面化操作只需要点点点即可完成打包任务，小学生来了都可以轻松上手 😌
-3. 我也尝试了 tauri2 的移动端，但我很难接受 tauri2 移动端的臃肿，所以使用原生 Android 和 iOS 框架打包编译，还可以在移动端发布 debug 版本，方便开发调试
+2. 不需要懂命令行和各种复杂配置，PakePlus 界面化操作只需要点点点即可完成打包任务，而且软件名称支持中文，小学生来了都可以轻松上手 😌
+3. 我也尝试了 tauri2 的移动端，但我很难接受 tauri2 移动端的臃肿（打包30M左右），所以使用原生 Android 和 iOS 框架打包编译，结果仅5M不到，还可以在移动端发布 debug 版本，方便开发调试
 
 <!-- <video src="//player.bilibili.com/player.html?isOutside=true&aid=114585499602898&bvid=BV1WCjzz5Eao&cid=30198203272&p=1" controls="controls" width="100%"></video> -->
 
@@ -50,13 +50,14 @@ PakePlus 是一个基于 Tauri2 和 Github 的打包工具，你也可以叫我 
 
 <img src="../static/imgs/preview.webp"  width=1920/>
 
-PakePLus 支持 arm 和 x64 架构的安装包，流行的程序安装包仅仅包含了 mac 的 arm(M 芯片)版本 和 windows 的 x64 和 Linux 的 x64 版本，如果需要更多架构的安装包，请使用 PakePlus 单独编译自己需要的安装包。
+PakePlus 支持 arm 和 x64 架构的安装包，流行的程序安装包仅仅包含了 mac 的 arm(M 芯片)版本 和 windows 的 x64 和 Linux 的 x64 版本，如果需要更多架构的安装包，请使用 PakePlus 单独编译自己需要的安装包。
 
 <Popular />
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Sjj1024/PakePlus&type=Date)](https://www.star-history.com/#Sjj1024/PakePlus&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Sjj1024/PakePlus,Sjj1024/PakePlus-iOS,Sjj1024/PakePlus-Android&type=Date)](https://www.star-history.com/#Sjj1024/PakePlus&Sjj1024/PakePlus-iOS&Sjj1024/PakePlus-Android&Date)
+
 
 <script setup>
 import Popular from '../components/popular.vue'
