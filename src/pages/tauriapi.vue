@@ -8,12 +8,23 @@
                     @select="handleMenu"
                     unique-opened
                 >
-                    <div class="menuTitle" @click="goBack">
-                        <img :src="ppIcon" alt="logo" class="menuIcon" />
-                        <div class="menuTitleText">PakePlus</div>
-                    </div>
+                    <el-sub-menu index="0">
+                        <template #title>
+                            <el-icon><Setting /></el-icon>
+                            <span>基本设置</span>
+                        </template>
+                        <el-menu-item index="0-1">我的信息</el-menu-item>
+                        <el-menu-item index="0-2">项目设置</el-menu-item>
+                    </el-sub-menu>
                     <el-sub-menu index="1">
-                        <template #title>Tauri2Api</template>
+                        <template #title>
+                            <el-icon>
+                                <span class="iconfont tauriIcon"
+                                    >&#xe63c;
+                                </span>
+                            </el-icon>
+                            <span>Tauri2Api</span>
+                        </template>
                         <el-menu-item index="1-1">apps</el-menu-item>
                         <el-menu-item index="1-2">core</el-menu-item>
                         <el-menu-item index="1-3">dpi</el-menu-item>
@@ -27,7 +38,12 @@
                         <el-menu-item index="1-11">webviewWindow</el-menu-item>
                     </el-sub-menu>
                     <el-sub-menu index="2">
-                        <template #title>PluginApi</template>
+                        <template #title>
+                            <el-icon>
+                                <span class="iconfont tauriIcon">&#xe621;</span>
+                            </el-icon>
+                            <span>PluginApi</span>
+                        </template>
                         <el-menu-item index="2-1">scanner</el-menu-item>
                         <el-menu-item index="2-2">biometric</el-menu-item>
                         <el-menu-item index="2-3">cli</el-menu-item>
@@ -54,7 +70,12 @@
                         <el-menu-item index="2-24">window-state</el-menu-item>
                     </el-sub-menu>
                     <el-sub-menu index="3">
-                        <template #title>PakePlusApi</template>
+                        <template #title>
+                            <el-icon>
+                                <span class="iconfont tauriIcon">&#xe6a4;</span>
+                            </el-icon>
+                            <span>PakePlusApi</span>
+                        </template>
                         <el-menu-item index="3-1">{{
                             t('linkTo')
                         }}</el-menu-item>
@@ -97,7 +118,14 @@
                         <el-menu-item index="3-14">支付测试</el-menu-item>
                     </el-sub-menu>
                     <el-menu-item index="4">
+                        <el-icon>
+                            <span class="iconfont tauriIcon">&#xe655;</span>
+                        </el-icon>
                         <span>{{ t('aboutUs') }}</span>
+                    </el-menu-item>
+                    <el-menu-item index="100">
+                        <el-icon><ArrowLeft /></el-icon>
+                        <span @click="goBack">返回首页</span>
                     </el-menu-item>
                 </el-menu>
             </el-scrollbar>
@@ -105,7 +133,7 @@
         <!-- 主内容 -->
         <el-container>
             <!-- 头部 -->
-            <el-header class="headerBox">
+            <el-header v-if="menuIndex !== '4'" class="headerBox">
                 <div v-if="menuIndex !== '4'" class="backBtn" @click="goBack">
                     <el-icon><ArrowLeft /></el-icon>
                     <span>{{ t('back') }}</span>
@@ -560,7 +588,12 @@ import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getPaySign, oneMessage } from '@/utils/common'
 import About from '@/pages/about.vue'
-import ppIcon from '@/assets/images/pakeplus.png'
+import {
+    InfoFilled,
+    Menu as IconMenu,
+    Location,
+    Setting,
+} from '@element-plus/icons-vue'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import {
@@ -808,6 +841,12 @@ onMounted(() => {
 <style lang="scss">
 .el-button {
     margin: 0;
+}
+
+.tauriIcon {
+    width: 20px;
+    height: 20px;
+    font-size: 18px !important;
 }
 
 .layoutBox {

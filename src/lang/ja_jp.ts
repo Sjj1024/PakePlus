@@ -112,7 +112,7 @@ export default {
     copySuccess: 'コピー成功',
     delSuccess: '削除成功',
     aboutGuide:
-        'PakePlusはオープンソースで無料です。Webページをパッケージしてクロスプラットフォームアプリを作成するには、Githubトークンが1つだけ必要です。Windows、macOS、Linuxシステムをサポートし、Android、iOSモバイル端末もサポートします。質問がある場合は、私のWeChatに連絡してください：lanxingme（注：PakePlus）、または私にメールを送信してください：1024xiaoshen@gmail.com',
+        'PakePlusはオープンソースで無料です。Webページをパッケージしてクロスプラットフォームアプリを作成するには、Githubトークンが1つだけ必要です。Windows、macOS、Linuxシステムをサポートし、Android、iOSモバイル端末もサポートします。質問がある場合は、私のWeChatに連絡してください：lanxingme（注：PakePlus）、または私にメールを送信してください：{email}',
     moreConfig: 'より多くの設定',
     superpower: '能力',
     scriptFile: 'スクリプトファイル',

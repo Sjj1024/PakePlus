@@ -109,7 +109,7 @@ export default {
     copySuccess: '복사 성공',
     delSuccess: '삭제 성공',
     aboutGuide:
-        'PakePlus는 오픈 소스이며 무료입니다. Github Token 하나만 있으면 웹 페이지를 패키징하여 크로스 플랫폼 앱을 만들 수 있습니다. Windows, macOS, Linux 시스템을 지원하며, 미래에는 Android, iOS 등 모바일 플랫폼도 지원할 것입니다. 문제가 있으시면 저의 WeChat에 추가하세요: lanxingme (참고: PakePlus), 또는 제 이메일을 보내세요: 1024xiaoshen@gmail.com',
+        'PakePlus는 오픈 소스이며 무료입니다. Github Token 하나만 있으면 웹 페이지를 패키징하여 크로스 플랫폼 앱을 만들 수 있습니다. Windows, macOS, Linux 시스템을 지원하며, 미래에는 Android, iOS 등 모바일 플랫폼도 지원할 것입니다. 문제가 있으시면 저의 WeChat에 추가하세요: lanxingme (참고: PakePlus), 또는 제 이메일을 보내세요: {email}',
     followme: '關注小神',
     moreConfig: '더 많은 설정',
     superpower: '능력',

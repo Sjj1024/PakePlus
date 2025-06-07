@@ -214,6 +214,8 @@
                     spellCheck="false"
                     placeholder="github token"
                     class="tokenInput"
+                    type="password"
+                    show-password
                     :disabled="testLoading"
                     @keyup.enter="testToken(true)"
                 />
@@ -362,7 +364,7 @@ import {
     oneMessage,
     upstreamUser,
     ppRepo,
-    isDev
+    isDev,
 } from '@/utils/common'
 import ppconfig from '@root/scripts/ppconfig.json'
 import pakePlusIcon from '@/assets/images/pakeplus.png'

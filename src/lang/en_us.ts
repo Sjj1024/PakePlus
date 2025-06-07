@@ -109,7 +109,7 @@ export default {
     copySuccess: 'Copy successful',
     delSuccess: 'Delete successful',
     aboutGuide:
-        'PakePlus is open-source and free. It allows you to package web pages or projects like Vue/React into cross-platform apps with just a GitHub Token. It supports standalone executables for Windows, macOS, and Linux, as well as mobile platforms like Android and iOS. If you have any questions, feel free to add me on WeChat: lanxingme (note: PakePlus) or email me at：1024xiaoshen@gmail.com',
+        'PakePlus is open-source and free. It allows you to package web pages or projects like Vue/React into cross-platform apps with just a GitHub Token. It supports standalone executables for Windows, macOS, and Linux, as well as mobile platforms like Android and iOS. If you have any questions, feel free to add me on WeChat: lanxingme (note: PakePlus) or email me at：{email}',
     followme: 'Follow me',
     moreConfig: 'More Config',
     superpower: 'Superpower',

@@ -6,6 +6,62 @@
   "description": "PakePlus",
   "glyphs": [
     {
+      "icon_id": "5634867",
+      "name": "superpowers",
+      "font_class": "superpowers",
+      "unicode": "f243",
+      "unicode_decimal": 62019
+    },
+    {
+      "icon_id": "7155296",
+      "name": "关于我们",
+      "font_class": "guanyuwomen",
+      "unicode": "e655",
+      "unicode_decimal": 58965
+    },
+    {
+      "icon_id": "10158428",
+      "name": "流行",
+      "font_class": "liuhang",
+      "unicode": "e8f4",
+      "unicode_decimal": 59636
+    },
+    {
+      "icon_id": "16577062",
+      "name": "plugin",
+      "font_class": "plugin",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "27413148",
+      "name": "tauri",
+      "font_class": "tauri",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "34900221",
+      "name": "plugin",
+      "font_class": "plugin1",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "41286779",
+      "name": "power",
+      "font_class": "power",
+      "unicode": "e6a4",
+      "unicode_decimal": 59044
+    },
+    {
+      "icon_id": "42481097",
+      "name": "popular",
+      "font_class": "popular",
+      "unicode": "e69e",
+      "unicode_decimal": 59038
+    },
+    {
       "icon_id": "251393",
       "name": "QR",
       "font_class": "qr2",

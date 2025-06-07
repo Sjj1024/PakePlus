@@ -108,7 +108,7 @@ export default {
     copySuccess: '複製成功',
     delSuccess: '刪除成功',
     aboutGuide:
-        'PakePlus開源免費，僅僅只需要一個Github Token，就可以將你的網頁或Vue/React等項目打包成一個獨立可執行程序，支持Windows,macOS, Linux系統，還支持Android,iOS移動端。有問題可以加我微信：lanxingme，備註：PakePlus，或者給我發送郵件：1024xiaoshen@gmail.com',
+        'PakePlus開源免費，僅僅只需要一個Github Token，就可以將你的網頁或Vue/React等項目打包成一個獨立可執行程序，支持Windows,macOS, Linux系統，還支持Android,iOS移動端。有問題可以加我微信：lanxingme，備註：PakePlus，或者給我發送郵件：{email}',
     moreConfig: '更多配置',
     superpower: '能力演示',
     scriptFile: '腳本文件',
