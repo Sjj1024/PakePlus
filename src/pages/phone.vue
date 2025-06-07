@@ -878,7 +878,7 @@ const pubForm = reactive({
     desc: '',
 })
 
-const buildLoading = ref(false)
+const buildLoading = ref(true)
 // check dispatch workflow timer
 let buildTime = reactive<any>({
     PakePlus: 0,

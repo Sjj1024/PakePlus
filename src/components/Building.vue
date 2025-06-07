@@ -4,11 +4,11 @@
         fullscreen
         :show-close="false"
         center
-        body-class="buildBody"
+        class="buildDialog"
     >
         <template #header="{ close, titleId, titleClass }">
             <div class="buildHeader">
-                <h4 :id="titleId" :class="titleClass">
+                <h4 :id="titleId" :class="titleClass" style="color: #fff">
                     {{ t('buildTips') }}
                 </h4>
             </div>
@@ -270,6 +270,10 @@ watch(props, (newVal) => {
 </script>
 
 <style lang="scss" scoped>
+.buildHeader {
+    color: #fff !important;
+}
+
 .buildingBox {
     padding: 0 20px;
     display: flex;
