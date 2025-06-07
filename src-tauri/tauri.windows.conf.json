@@ -1,0 +1,14 @@
+{
+    "identifier": "com.pakeplus.app",
+    "bundle": {
+        "windows": {
+            "nsis": {
+                "displayLanguageSelector": true,
+                "installMode": "perMachine"
+            },
+            "webviewInstallMode": {
+                "type": "embedBootstrapper"
+            }
+        }
+    }
+}

@@ -28,7 +28,7 @@
                         label-width="auto"
                         class="configForm"
                     >
-                        <div class="inLine">
+                        <div class="lineBool">
                             <el-form-item label="minWidth" prop="minWidth">
                                 <el-input
                                     type="number"
@@ -69,8 +69,6 @@
                                     style="width: 80px"
                                 />
                             </el-form-item>
-                        </div>
-                        <div class="lineBool">
                             <el-form-item
                                 label="dragDropEnabled"
                                 prop="dragDropEnabled"
@@ -165,8 +163,6 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                        </div>
-                        <div class="lineBool">
                             <el-form-item
                                 label="decorations"
                                 prop="decorations"
@@ -258,8 +254,6 @@
                                 >
                                 </el-checkbox>
                             </el-form-item>
-                        </div>
-                        <div class="inLine flexLeft">
                             <el-form-item
                                 label="hiddenTitle"
                                 prop="hiddenTitle"
@@ -272,6 +266,18 @@
                                     name="type"
                                 >
                                 </el-checkbox>
+                            </el-form-item>
+                            <el-form-item
+                                label="TauriApi"
+                                prop="tauriApi"
+                                class="formItem"
+                            >
+                                <el-checkbox
+                                    v-model="
+                                        store.currentProject.desktop.tauriApi
+                                    "
+                                    label=""
+                                />
                             </el-form-item>
                             <el-form-item label="theme:">
                                 <el-select
@@ -307,18 +313,6 @@
                                         value="Overlay"
                                     />
                                 </el-select>
-                            </el-form-item>
-                            <el-form-item
-                                label="TauriApi"
-                                prop="tauriApi"
-                                class="formItem"
-                            >
-                                <el-checkbox
-                                    v-model="
-                                        store.currentProject.desktop.tauriApi
-                                    "
-                                    label=""
-                                />
                             </el-form-item>
                         </div>
                         <el-form-item
@@ -529,10 +523,6 @@ defineExpose({
                 :deep(.el-form-item__label) {
                     padding: 0px 2px 0px 0px !important;
                 }
-
-                .themeSel {
-                    width: 100px;
-                }
             }
 
             .flexLeft {
@@ -553,6 +543,7 @@ defineExpose({
                 width: 100%;
                 display: flex;
                 flex-direction: row;
+                flex-wrap: wrap;
                 justify-content: flex-start;
                 align-items: center;
 
@@ -570,5 +561,9 @@ defineExpose({
             }
         }
     }
+}
+
+.themeSel {
+    width: 100px;
 }
 </style>
