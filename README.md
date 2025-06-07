@@ -110,6 +110,8 @@ PakePlus supports installation packages for both ARM and Intel architectures. Mo
     </tr>
 </table>
 
+[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com 'Powered by DartNode - Free VPS for Open Source')
+
 ## Getting Started
 
 1. Download the app from the release page：https://github.com/Sjj1024/PakePlus/releases,  
