@@ -16,6 +16,7 @@ export default {
     configToken: '먼저 토큰을 설정하세요',
     tokenOk: '토큰이 유효합니다',
     tokenError: '토큰이 유효하지 않습니다, 다시 설정해주세요',
+    userPrivate: '계정이 Github에서 비활성화되었습니다',
     projectExist: '프로젝트가 이미 존재합니다',
     creatProjectError: '프로젝트 생성 실패',
     englishName: '영어 프로젝트 이름을 입력하세요',

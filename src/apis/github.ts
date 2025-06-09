@@ -20,6 +20,12 @@ export default {
             },
         })
     },
+    // get github user tags
+    gitUserTags(url: string) {
+        return http(url, {
+            method: 'get',
+        })
+    },
     // start repository
     startProgect(repo: string) {
         return http(`/user/starred/Sjj1024/${repo}`, {

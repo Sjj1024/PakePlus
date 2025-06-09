@@ -16,6 +16,7 @@ export default {
     configToken: '請先配置Token',
     tokenOk: 'Token可用',
     tokenError: 'Token權限不足，請重新配置',
+    userPrivate: '賬號疑似被Github標記為不可用',
     projectExist: '項目已存在',
     creatProjectError: '創建項目失敗',
     englishName: '請輸入純英文項目名稱',

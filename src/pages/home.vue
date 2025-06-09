@@ -300,6 +300,7 @@
                     spellCheck="false"
                     :placeholder="t('projectNamePlaceholder')"
                     class="tokenInput"
+                    @change="proExist = false"
                     @keyup.enter="creatProject()"
                 />
             </div>
@@ -376,7 +377,6 @@ import { emit } from '@tauri-apps/api/event'
 const router = useRouter()
 const store = usePPStore()
 const { t, locale } = useI18n()
-const version = ref(packageJson.version)
 const tokenDialog = ref(false)
 const branchDialog = ref(false)
 const branchName = ref('')
@@ -386,9 +386,9 @@ const creatLoading = ref(false)
 // proExist
 const proExist = ref(false)
 
-watch(branchName, (newVal) => {
-    proExist.value = false
-})
+// watch(branchName, (newVal) => {
+//     proExist.value = false
+// })
 
 const chageTheme = async (theme: string) => {
     if (theme === 'light') {
@@ -515,16 +515,27 @@ const cancelToken = () => {
 // check token and confirm token is ok
 const testToken = async (tips: boolean = true) => {
     if (localStorage.getItem('token') !== store.token || tips) {
-        console.log('test token tips')
         testLoading.value = true
         try {
-            const res: any = await githubApi.gitUserInfo(store.token)
-            console.log('testToken', res)
-            if (res.status === 200) {
+            const userInfo: any = await githubApi.gitUserInfo(store.token)
+            console.log('testToken userInfo', userInfo)
+            if (userInfo.status === 200) {
+                // check user was tags
+                const tagsRes: any = await githubApi.gitUserTags(
+                    userInfo.data.url
+                )
+                console.log('testToken tagsRes', tagsRes)
+                if (tagsRes.status === 404) {
+                    localStorage.clear()
+                    store.setUser({ login: '' })
+                    oneMessage.error(t('userPrivate'))
+                    testLoading.value = false
+                    return
+                }
                 localStorage.setItem('token', store.token)
-                store.setUser(res.data)
+                store.setUser(userInfo.data)
                 try {
-                    if (res.data.login !== 'Sjj1024') {
+                    if (userInfo.data.login !== 'Sjj1024') {
                         await forkStartShas(tips)
                     } else {
                         await commitShas(tips)

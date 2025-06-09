@@ -20,6 +20,7 @@ export default {
     configToken: 'まずトークンを設定してください',
     tokenOk: 'トークンが有効です',
     tokenError: 'トークンが無効です、再設定してください',
+    userPrivate: 'Githubによってアカウントが無効になっていると疑われます',
     projectExist: 'プロジェクトはすでに存在します',
     creatProjectError: 'プロジェクトの作成に失敗しました',
     englishName: '純粋な英語のプロジェクト名を入力してください',

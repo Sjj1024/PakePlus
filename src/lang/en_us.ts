@@ -16,6 +16,7 @@ export default {
     configToken: 'Please configure the token first',
     tokenOk: 'The token is available',
     tokenError: 'The token is not available, please reconfigure',
+    userPrivate: 'The account is suspected of being marked as unavailable by Github',
     projectExist: 'The project already exists.',
     creatProjectError: 'Create project failed',
     englishName: 'Please enter a pure English project name.',
