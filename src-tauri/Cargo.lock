@@ -7,6 +7,7 @@ name = "PakePlus"
 version = "0.1.0"
 dependencies = [
  "base64 0.22.1",
+ "machine-uid",
  "open",
  "serde",
  "serde_json",
@@ -2325,6 +2326,16 @@ name = "mac"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c41e0c4fef86961ac6d6f8a82609f55f31b05e4fce149ac5710e439df7619ba4"
+
+[[package]]
+name = "machine-uid"
+version = "0.5.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0c4506fa0abb0a2ea93f5862f55973da0a662d2ad0e98f337a1c5aac657f0892"
+dependencies = [
+ "libc",
+ "winreg",
+]
 
 [[package]]
 name = "markup5ever"
