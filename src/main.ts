@@ -18,7 +18,6 @@ app.use(router)
 app.use(pinia)
 app.use(i18n)
 createGtag({
-    tagId: 'G-7ZK1NBKC95',
+    tagId: import.meta.env.VITE_GTAG_ID,
 })
-
 app.mount('#app')

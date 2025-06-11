@@ -10,15 +10,16 @@ import CryptoJS from 'crypto-js'
 import QRCode from 'qrcode'
 
 // upstream repo info
-export const upstreamUser = 'Sjj1024'
+export const upstreamUser = import.meta.env.VITE_UPSTREAM_USER
 export const ppRepo: string[] = ['PakePlus', 'PakePlus-Android', 'PakePlus-iOS']
 
-export const mainBranch = 'main'
-export const webBranch = 'web3'
-export const devBranch = 'dev'
+export const mainBranch = import.meta.env.VITE_MAIN_BRANCH
+export const webBranch = import.meta.env.VITE_WEB_BRANCH
+export const devBranch = import.meta.env.VITE_DEV_BRANCH
 
 // global file size limit
-export const fileSizeLimit = 1024 * 1024 * 10
+export const fileSizeLimit = import.meta.env.VITE_FILE_LIMIT_SIZE
+export const fileLimitNumber = import.meta.env.VITE_FILE_LIMIT_NUMBER
 
 // urlMap
 export const urlMap = {
