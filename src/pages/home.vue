@@ -2,7 +2,7 @@
     <div class="homeBox" :class="{ isWeb: !isTauri }">
         <div class="homeHeader">
             <div>
-                <div class="headerTitle" @click="isDev && delPakePlus">
+                <div class="headerTitle" @click="delPakePlus">
                     <span>{{ t('projectTitle') }}</span>
                 </div>
                 <div class="toolTips">
@@ -419,13 +419,17 @@ const logout = async () => {
 
 // del pakeplus!
 const delPakePlus = async () => {
-    await githubApi.deleteProgect(store.userInfo.login, 'PakePlus')
-    await githubApi.deleteProgect(store.userInfo.login, 'PakePlus-iOS')
-    await githubApi.deleteProgect(store.userInfo.login, 'PakePlus-Android')
-    localStorage.removeItem('projectList')
-    localStorage.removeItem('releases')
-    store.$reset()
-    console.log('reset success')
+    if (isDev) {
+        await githubApi.deleteProgect(store.userInfo.login, 'PakePlus')
+        await githubApi.deleteProgect(store.userInfo.login, 'PakePlus-iOS')
+        await githubApi.deleteProgect(store.userInfo.login, 'PakePlus-Android')
+        localStorage.removeItem('projectList')
+        localStorage.removeItem('releases')
+        store.$reset()
+        console.log('reset success')
+    } else {
+        console.log('isDev false')
+    }
 }
 
 // go project detail
