@@ -245,4 +245,5 @@ export default {
     selectPlatform: '請選擇發佈平台',
     urlCode: '二維碼',
     banned: '禁止',
+    fileLimitNumber: '超過文件數量限制{number}個',
 }

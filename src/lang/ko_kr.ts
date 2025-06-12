@@ -251,4 +251,5 @@ export default {
     selectPlatform: '플랫폼을 선택하세요',
     urlCode: 'QR 코드',
     banned: '금지',
+    fileLimitNumber: '파일 수량 제한 초과 {number}개',
 }

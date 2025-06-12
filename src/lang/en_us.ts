@@ -251,4 +251,5 @@ export default {
     selectPlatform: 'Please select the release platform',
     urlCode: 'QR Code',
     banned: 'Banned',
+    fileLimitNumber: 'File number limit exceeded {number} files',
 }

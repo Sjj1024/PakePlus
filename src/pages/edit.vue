@@ -515,6 +515,7 @@ import {
     oneMessage,
     createIssue,
     checkLastPublish,
+    fileLimitNumber,
 } from '@/utils/common'
 import { platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -826,6 +827,12 @@ const loadHtml = async () => {
         const isExists = await exists(indexHtml)
         if (isExists) {
             const files = await readDirRecursively(selected)
+            if (files.length >= fileLimitNumber) {
+                oneMessage.error(
+                    t('fileLimitNumber', { number: fileLimitNumber })
+                )
+                return
+            }
             const configUrl = `index.html (${t('moreAssets')}+${files.length})`
             store.currentProject.url = configUrl
             store.currentProject.htmlPath = selected
@@ -844,6 +851,11 @@ const tauriHtmlUpload = async () => {
         loadingText(t('syncFileStart') + '...')
         let total = files.length
         let count = 0
+        console.log('total--', total, fileLimitNumber)
+        if (total >= fileLimitNumber) {
+            oneMessage.error(t('fileLimitNumber', { number: fileLimitNumber }))
+            return
+        }
         // 读取文件内容，并替换rootPath
         for (const file of files) {
             count++
@@ -996,6 +1008,10 @@ const uploadFiles = async (files: any) => {
     const configUrl = `index.html (${t('moreAssets')}+${total})`
     store.currentProject.url = configUrl
     store.currentProject.more.windows.url = configUrl
+    if (total >= fileLimitNumber) {
+        oneMessage.error(t('fileLimitNumber', { number: fileLimitNumber }))
+        return
+    }
     for (const file of files) {
         count++
         const loadingState = `<div>${count}/${total}</div>

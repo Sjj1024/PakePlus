@@ -248,4 +248,5 @@ export default {
     selectPlatform: '请选择发布平台',
     urlCode: '二维码',
     banned: '禁止',
+    fileLimitNumber: '超过文件数量限制{number}个',
 }

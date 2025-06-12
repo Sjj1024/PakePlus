@@ -253,4 +253,5 @@ export default {
     selectPlatform: 'プラットフォームを選択してください',
     urlCode: 'QRコード',
     banned: '禁止',
+    fileLimitNumber: 'ファイル数の制限を超えました{number}個',
 }
