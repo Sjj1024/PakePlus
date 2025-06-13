@@ -1,3 +1,19 @@
 {
-    "identifier": "com.pakeplus.app"
+    "identifier": "com.pakeplus.app",
+    "bundle": {
+        "linux": {
+            "appimage": {
+                "bundleMediaFramework": false,
+                "files": {}
+            },
+            "deb": {
+                "files": {}
+            },
+            "rpm": {
+                "epoch": 0,
+                "files": {},
+                "release": "1"
+            }
+        }
+    }
 }
