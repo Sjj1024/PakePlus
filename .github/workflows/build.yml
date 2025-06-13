@@ -124,6 +124,20 @@ jobs:
               if: ${{ matrix.enabled }}
               run: pnpm install
 
+            - uses: apple-actions/import-codesign-certs@v3
+              if: matrix.platform == 'macos-latest'
+              with:
+                  p12-file-base64: ${{ secrets.APPLE_CERTIFICATE }}
+                  p12-password: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+
+            - name: Verify Certificate
+              if: matrix.platform == 'macos-latest'
+              run: |
+                  CERT_INFO=$(security find-identity -v -p codesigning signing_temp.keychain | grep "Developer ID Application")
+                  APPLE_SIGNING_IDENTITY=$(echo "$CERT_INFO" | awk -F'"' '{print $2}')
+                  echo "APPLE_SIGNING_IDENTITY=$APPLE_SIGNING_IDENTITY" >> $GITHUB_ENV
+                  echo "Certificate imported."
+
             - uses: tauri-apps/tauri-action@v0
               if: ${{ matrix.enabled }}
               env:
@@ -134,6 +148,12 @@ jobs:
                   VITE_PAY_DOMAIN: ${{ secrets.VITE_PAY_DOMAIN }}
                   VITE_PAY_MCHID: ${{ secrets.VITE_PAY_MCHID }}
                   VITE_PAY_SIGN_KEY: ${{ secrets.VITE_PAY_SIGN_KEY }}
+                  APPLE_ID: ${{ secrets.APPLE_ID }}
+                  APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+                  APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+                  APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+                  APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+                  APPLE_SIGNING_IDENTITY: ${{ env.CERT_ID }}
               with:
                   tagName: 'PakePlus-v__VERSION__'
                   releaseName: 'PakePlus v__VERSION__'
