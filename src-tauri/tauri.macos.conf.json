@@ -2,7 +2,7 @@
     "identifier": "com.pakeplus.app",
     "bundle": {
         "macOS": {
-            "signingIdentity": "C559E878F0CF9DE60EF6ABF4F53E1897F20C2EEE"
+            "signingIdentity": "Developer ID Application: jiangjiang song (3AM8N433R2)"
         }
     }
 }
