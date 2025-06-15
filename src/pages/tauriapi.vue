@@ -546,11 +546,16 @@
                 </div>
                 <!-- 支付测试 -->
                 <div v-else-if="menuIndex === '3-14'" class="cardContent">
+                    <h1 class="cardTitle">pay method</h1>
+                    <p>provide pay method</p>
                     <el-button @click="getPayCode('weixin')">
-                        微信支付
+                        weixin pay
                     </el-button>
                     <el-button @click="getPayCode('alipay')">
-                        支付宝支付
+                        ali pay
+                    </el-button>
+                    <el-button @click="getPayCode('alipay')">
+                        paypal
                     </el-button>
                     <div v-if="qrCodeData" class="qrCodeBox">
                         <img
@@ -572,6 +577,86 @@
                                 &#xe654;
                             </span>
                         </div>
+                    </div>
+                </div>
+                <!-- plugin-os api -->
+                <div v-else-if="menuIndex === '2-14'" class="cardContent">
+                    <h1 class="cardTitle">plugin-os</h1>
+                    <p>
+                        Provides operating system-related utility methods and
+                        properties.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Returns the current operating system architecture."
+                            placement="bottom"
+                        >
+                            <el-button @click="osApis('arch')"
+                                >arch()</el-button
+                            >
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Returns the operating system-specific end-of-line marker."
+                            placement="bottom"
+                        >
+                            <el-button @click="osApis('eol')">eol()</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Returns the file extension, if any, used for executable binaries on this platform"
+                            placement="bottom"
+                        >
+                            <el-button @click="osApis('exeExtension')">
+                                exeExtension()
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Returns the current operating system family."
+                            placement="bottom"
+                        >
+                            <el-button @click="osApis('family')">
+                                family()
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Returns the host name of the operating system."
+                            placement="bottom"
+                        >
+                            <el-button @click="osApis('hostname')">
+                                hostname()
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Returns a String with a BCP-47 language tag inside"
+                            placement="bottom"
+                        >
+                            <el-button @click="osApis('locale')">
+                                locale()
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Returns a string describing the specific operating system in use"
+                            placement="bottom"
+                        >
+                            <el-button @click="osApis('platform')">
+                                platform()
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Returns the current operating system type"
+                            placement="bottom"
+                        >
+                            <el-button @click="osApis('type')">
+                                type()
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Returns the current operating system version."
+                            placement="bottom"
+                        >
+                            <el-button @click="osApis('version')">
+                                version()
+                            </el-button>
+                        </el-tooltip>
                     </div>
                 </div>
                 <!-- 待开发 -->
@@ -675,6 +760,17 @@ import { useI18n } from 'vue-i18n'
 import payApi from '@/apis/pay'
 import { fetch } from '@tauri-apps/plugin-http'
 import QRCode from 'qrcode'
+import {
+    arch,
+    eol,
+    exeExtension,
+    family,
+    hostname,
+    locale,
+    platform,
+    type,
+    version,
+} from '@tauri-apps/plugin-os'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -779,6 +875,49 @@ const unlistenEvent = async () => {
 // window:窗口
 const openWindow = async () => {
     console.log('window')
+}
+
+// os function
+const osApis = async (func: string) => {
+    switch (func) {
+        case 'arch':
+            const archName = arch()
+            textarea.value = 'arch:' + archName
+            break
+        case 'eol':
+            textarea.value = 'eol:' + eol()
+            break
+        case 'exeExtension':
+            const exeExt = exeExtension()
+            textarea.value = 'exeExtension:' + exeExt
+            break
+        case 'family':
+            const familyName = family()
+            textarea.value = 'family:' + familyName
+            break
+        case 'hostname':
+            const hostName = await hostname()
+            textarea.value = 'hostname:' + hostName
+            break
+        case 'locale':
+            const localeName = await locale()
+            textarea.value = 'locale:' + localeName
+            break
+        case 'platform':
+            const platformName = platform()
+            textarea.value = 'platform:' + platformName
+            break
+        case 'type':
+            const typeName = type()
+            textarea.value = 'type:' + typeName
+            break
+        case 'version':
+            const versionName = version()
+            textarea.value = 'version:' + versionName
+            break
+        default:
+            break
+    }
 }
 
 const qrCodeData = ref('')

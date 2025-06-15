@@ -48,6 +48,7 @@
         "http:allow-fetch-send",
         "dialog:allow-open",
         "os:allow-locale",
+        "os:allow-hostname",
         "clipboard-manager:allow-write-text",
         {
             "identifier": "http:default",
