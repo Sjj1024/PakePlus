@@ -345,7 +345,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import githubApi from '@/apis/github'
 import { usePPStore } from '@/store'

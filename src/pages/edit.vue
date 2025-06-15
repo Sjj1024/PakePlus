@@ -321,6 +321,7 @@
                         autoCapitalize="off"
                         autoCorrect="off"
                         spellCheck="false"
+                        disabled
                         :rows="3"
                         :placeholder="t('desTips')"
                     />
@@ -353,11 +354,30 @@
                 label-width="auto"
                 style="max-width: 600px"
             >
+                <!-- debug -->
+                <el-form-item label="打包方式">
+                    <el-select
+                        v-model="store.currentProject.desktop.buildMethod"
+                        placeholder="请选择打包方式"
+                        @change="methodChange"
+                    >
+                        <el-option
+                            v-for="item in methodOptions"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value"
+                            :disabled="item.disabled"
+                        />
+                    </el-select>
+                </el-form-item>
                 <!-- platform select -->
                 <el-form-item :label="t('pubPlatform')">
                     <el-tree-select
                         v-model="store.currentProject.platform"
                         :data="platData"
+                        :disabled="
+                            store.currentProject.desktop.buildMethod === 'local'
+                        "
                         multiple
                         collapse-tags
                         collapse-tags-tooltip
@@ -517,7 +537,7 @@ import {
     checkLastPublish,
     fileLimitNumber,
 } from '@/utils/common'
-import { platform } from '@tauri-apps/plugin-os'
+import { arch, platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import TauriConfig from '@/components/TauriConfig.vue'
 import ImgPreview from '@/components/ImgPreview.vue'
@@ -544,6 +564,8 @@ const configDialogVisible = ref(false)
 const codeDialogVisible = ref(false)
 const imgPreviewVisible = ref(false)
 const warning = ref('')
+const platformName = platform()
+const archName = arch()
 
 const appRules = reactive<FormRules>({
     showName: [
@@ -654,7 +676,48 @@ const showWarning = () => {
 const isJson = ref(false)
 const tauriConfigRef = ref<any>(null)
 
-// 发布编译选项
+// build method
+const methodOptions = [
+    {
+        value: 'local',
+        label: '本地打包（仅支持本机系统，大概3分钟）',
+    },
+    {
+        value: 'cloud',
+        label: '云端打包（支持所有主流系统，大概9分钟）',
+    },
+    {
+        value: 'localFast',
+        label: '本地极速（仅支持本机系统，大概1分钟）',
+        disabled: true,
+    },
+    {
+        value: 'cloudFast',
+        label: '云端极速（支持所有主流系统，大概3分钟）',
+        disabled: true,
+    },
+]
+const platformMap: any = {
+    macosaarch64: ['2-2'],
+    macosx86_64: ['2-1'],
+    windowsaarch64: ['1-2'],
+    windowsx86_64: ['1-1'],
+    linuxaarch64: ['3-3'],
+    linuxx86_64: ['3-1', '3-2'],
+}
+
+// method change
+const methodChange = (value: string) => {
+    console.log('methodChange', value, platformName, archName)
+    if (value === 'local') {
+        // 判断本机型号，然后给store.currentProject.platform复制
+        store.currentProject.platform = platformMap[platformName + archName]
+    } else {
+        store.currentProject.platform = ['1-1', '1-2', '2-1', '2-2']
+    }
+}
+
+// build platform
 const platData = [
     {
         value: '1',
@@ -1222,7 +1285,6 @@ const preview = async (resize: boolean) => {
         } catch (error) {
             console.error('Failed to start server:', error)
         }
-        const platformName = platform()
         // get platform
         if (
             platformName === 'windows' &&

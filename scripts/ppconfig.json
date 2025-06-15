@@ -163,6 +163,7 @@
         "state": true,
         "injectJq": false,
         "tauriApi": false,
+        "buildMethod": "local",
         "debug": false
     }
 }

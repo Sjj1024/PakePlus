@@ -96,8 +96,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                     }),
                 );
             }
-        }
-        if let WindowEvent::Moved(position) = event {
+        } else if let WindowEvent::Moved(position) = event {
             // println!("window_position: {:?}", position);
             if position.x > 0 && position.y > 0 {
                 let _ = store.set(
@@ -105,6 +104,8 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                     json!({ "x": position.x, "y": position.y }),
                 );
             }
+        } else if let WindowEvent::DragDrop(drag_drop) = event {
+            println!("drag_drop: {:?}", drag_drop);
         }
     });
 
