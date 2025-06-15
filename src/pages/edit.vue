@@ -739,7 +739,7 @@ const platData = [
         children: [
             {
                 value: '2-1',
-                label: 'Intel x64',
+                label: 'Intel X64',
             },
             {
                 value: '2-2',
@@ -776,6 +776,28 @@ const platData = [
     //     label: 'iOS',
     //     disabled: true,
     // },
+    {
+        value: '6',
+        label: 'WebPage',
+        disabled: true,
+        children: [
+            {
+                value: '6-1',
+                label: 'GitHub Pages',
+                disabled: true,
+            },
+            {
+                value: '6-2',
+                label: 'Netlify Pages',
+                disabled: true,
+            },
+            {
+                value: '6-3',
+                label: 'Cloudflare Pages',
+                disabled: true,
+            },
+        ],
+    },
 ]
 
 // change app name
