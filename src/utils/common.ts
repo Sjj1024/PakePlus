@@ -262,6 +262,7 @@ export const isTauri = (window as any).__TAURI__ ? true : false
 
 // 打开url
 export const openUrl = async (url: string) => {
+    console.log('url', url)
     if (isTauri) {
         await invoke('open_url', { url })
     } else {

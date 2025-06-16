@@ -44,18 +44,39 @@
                                     : scope.row.name
                             }}
                         </span>
-                        <span class="copyLink" @click="downAssets(scope.row)">
+                        <el-progress
+                            v-if="
+                                downProcess[`${scope.row.id}`] &&
+                                downProcess[`${scope.row.id}`] < 100
+                            "
+                            :percentage="downProcess[`${scope.row.id}`]"
+                        />
+                        <el-icon
+                            class="folderOpen"
+                            @click="openUrl(selectedDir)"
+                            v-else-if="
+                                downProcess[`${scope.row.id}`] &&
+                                downProcess[`${scope.row.id}`] === 100
+                            "
+                        >
+                            <Folder />
+                        </el-icon>
+                        <span
+                            v-else
+                            class="copyLink"
+                            @click="downAssets(scope.row)"
+                        >
                             {{ t('download') }}
                         </span>
                     </div>
                 </template>
             </el-table-column>
             <!-- download progress -->
-            <el-table-column label="下载进度" width="120">
+            <!-- <el-table-column label="下载进度" width="120">
                 <template #default="scope">
                     <el-progress :percentage="downProcess[`${scope.row.id}`]" />
                 </template>
-            </el-table-column>
+            </el-table-column> -->
             <!-- url code -->
             <el-table-column :label="t('urlCode')" width="140" align="center">
                 <template #default="scope">
@@ -149,7 +170,7 @@
 import { ref, onMounted, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePPStore } from '@/store'
-import { ArrowLeft, Delete } from '@element-plus/icons-vue'
+import { ArrowLeft, Delete, Folder } from '@element-plus/icons-vue'
 import githubApi from '@/apis/github'
 import {
     openUrl,
@@ -232,17 +253,18 @@ listen('download_progress', (event: any) => {
 })
 
 // download file
+let selectedDir: any = ref('')
 const downAssets = async (asset: any) => {
-    const selectedDir = await openSelect(true, [])
-    if (!selectedDir) {
+    selectedDir.value = await openSelect(true, [])
+    if (!selectedDir.value) {
         return
     }
     const fileId = `${asset.id}`
     const url = asset.browser_download_url
     const fileName = await basename(url)
-    const savePath = await join(selectedDir, fileName)
+    const savePath = await join(selectedDir.value, fileName)
     console.log('fileName, savePath', fileName, savePath)
-    downProcess[fileId] = 0
+    downProcess[fileId] = 0.01
     invoke('download_file', {
         url,
         savePath,
@@ -373,6 +395,15 @@ onMounted(async () => {
         text-decoration: underline;
         text-decoration-color: #0969da;
         text-underline-offset: 1px;
+    }
+}
+
+.folderOpen {
+    margin-left: 10px;
+    cursor: pointer;
+    &:hover {
+        color: #1163c1;
+        font-weight: bold;
     }
 }
 
