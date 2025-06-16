@@ -19,14 +19,16 @@ tauri-build = { version = "2", features = [] }
 
 [dependencies]
 tauri = { version = "2", features = ["protocol-asset"] }
-tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 open = "5.3.2"
 base64 = "0.22.1"
 tokio = { version = "1", features = ["full"] }
 warp = "0.3"
+zip = "4.1.0"
+walkdir = "2.5.0"
 machine-uid = "0.5.3"
+tauri-plugin-opener = "2"
 tauri-plugin-os = "2.0.0"
 tauri-plugin-fs = "2.0.0"
 tauri-plugin-dialog = "2.0.0"
