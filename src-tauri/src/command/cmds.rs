@@ -514,7 +514,8 @@ pub fn get_machine_uid() -> String {
 fn zip_folder(src_path: &str, dst_path: &str) -> std::io::Result<()> {
     let file = File::create(dst_path)?;
     let mut zip = ZipWriter::new(file);
-
+    print!("src_path = {src_path}");
+    print!("dst_path = {dst_path}");
     let options: FileOptions<()> =
         FileOptions::default().compression_method(zip::CompressionMethod::Deflated);
 
@@ -566,6 +567,8 @@ fn unzip_file(src_path: &str, dst_path: &str) -> std::io::Result<()> {
 
 #[tauri::command]
 pub async fn compress_folder(source: String, destination: String) -> Result<(), String> {
+    println!("source = {source}");
+    println!("destination = {destination}");
     zip_folder(&source, &destination).map_err(|e| e.to_string())
 }
 

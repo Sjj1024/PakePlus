@@ -1159,7 +1159,7 @@ const fileToBase64 = (file: any) => {
 const loadHtml = async () => {
     console.log('loadHtml')
     store.currentProject.isHtml = true
-    const selected = await openSelect([])
+    const selected = await openSelect(true, [])
     console.log('selected', selected)
     if (selected) {
         const indexHtml = await join(selected, 'index.html')

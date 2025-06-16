@@ -116,6 +116,7 @@
                             {{ t('disableCors') }}
                         </el-menu-item>
                         <el-menu-item index="3-14">支付测试</el-menu-item>
+                        <el-menu-item index="3-15">文件压缩</el-menu-item>
                     </el-sub-menu>
                     <el-menu-item index="4">
                         <el-icon>
@@ -522,24 +523,6 @@
                         </el-tooltip>
                     </div>
                 </div>
-                <!-- api/template -->
-                <div v-else-if="menuIndex === '1-111'" class="cardContent">
-                    <h1 class="cardTitle">menu</h1>
-                    <p>
-                        The menu system allows you to create and manage menus
-                        for your application. This package is also accessible
-                        with window.__TAURI__.menu when app.withGlobalTauri in
-                        tauri.conf.json is set to true.
-                    </p>
-                    <div class="cardBox">
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
-                            <el-button>{{ t('waitDev') }}</el-button>
-                        </el-tooltip>
-                    </div>
-                </div>
                 <!-- 关于 -->
                 <div v-else-if="menuIndex === '4'" class="cardContent">
                     <About />
@@ -659,6 +642,55 @@
                         </el-tooltip>
                     </div>
                 </div>
+                <!-- api/文件解压缩 -->
+                <div v-else-if="menuIndex === '3-15'" class="cardContent">
+                    <h1 class="cardTitle">文件解压缩</h1>
+                    <p>对文件或文件夹进行压缩或者解压缩处理</p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="selectFolder"
+                                >输出目录</el-button
+                            >
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="compressFile"
+                                >压缩文件</el-button
+                            >
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="decompressFile"
+                                >解压文件</el-button
+                            >
+                        </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/template -->
+                <div v-else-if="menuIndex === '1-111'" class="cardContent">
+                    <h1 class="cardTitle">menu</h1>
+                    <p>
+                        The menu system allows you to create and manage menus
+                        for your application. This package is also accessible
+                        with window.__TAURI__.menu when app.withGlobalTauri in
+                        tauri.conf.json is set to true.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button>{{ t('waitDev') }}</el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
                 <!-- 待开发 -->
                 <div v-else class="waitContent">
                     <h1 class="cardTitle">{{ t('waitDev') }}</h1>
@@ -671,7 +703,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getPaySign, oneMessage } from '@/utils/common'
+import { getPaySign, oneMessage, openSelect } from '@/utils/common'
 import About from '@/pages/about.vue'
 import {
     InfoFilled,
@@ -960,6 +992,48 @@ const getPayCode = async (payMathod: string = 'weixin') => {
     const url = await QRCode.toDataURL(payUrl)
     console.log('url', url)
     qrCodeData.value = url
+}
+
+// 选择文件夹
+const selectFolder = async () => {
+    const selected = await openSelect(true, [])
+    console.log('selected', selected)
+    textarea.value = selected || ''
+}
+
+// 压缩文件
+const compressFile = async () => {
+    console.log('compressFile')
+    const selected = await openSelect(true, [])
+    console.log('selected', selected)
+    const destinationFile = await join(textarea.value, 'compressed.zip')
+    if (selected && textarea.value) {
+        const files = await invoke('compress_folder', {
+            source: selected,
+            destination: destinationFile,
+        })
+        console.log('compress_folder', files)
+        oneMessage.success('压缩文件成功')
+    } else {
+        oneMessage.error('请选择压缩文件或输出文件夹')
+    }
+}
+
+// 解压文件
+const decompressFile = async () => {
+    console.log('decompressFile')
+    const selected = await openSelect(false, [])
+    console.log('selected', selected)
+    if (selected && textarea.value) {
+        const files = await invoke('decompress_file', {
+            source: selected,
+            destination: textarea.value,
+        })
+        console.log('decompress_file', files)
+        oneMessage.success('解压文件成功')
+    } else {
+        oneMessage.error('请选择解压文件或输出文件夹')
+    }
 }
 
 // 页面初始化
