@@ -10,3 +10,10 @@ pub fn find_port() -> std::io::Result<u16> {
     let port = listener.local_addr()?.port();
     Ok(port)
 }
+
+#[derive(serde::Serialize)]
+pub struct ProgressPayload {
+    pub file_id: String,
+    pub downloaded: u64,
+    pub total: Option<u64>,
+}

@@ -1,12 +1,18 @@
 use crate::command::model::find_port;
 use crate::command::model::ServerState;
 use base64::prelude::*;
+use futures::StreamExt;
+use reqwest::Client;
+use serde::Serialize;
 use std::fs::File;
 use std::io::Read;
+use std::io::Write;
 use std::path::Path;
 use std::sync::{Arc, Mutex};
 use std::time::Instant;
-use tauri::{path::BaseDirectory, utils::config::WindowConfig, AppHandle, LogicalSize, Manager};
+use tauri::{
+    path::BaseDirectory, utils::config::WindowConfig, AppHandle, Emitter, LogicalSize, Manager,
+};
 use tauri_plugin_http::reqwest;
 use walkdir::WalkDir;
 use warp::Filter;
@@ -575,4 +581,44 @@ pub async fn compress_folder(source: String, destination: String) -> Result<(), 
 #[tauri::command]
 pub async fn decompress_file(source: String, destination: String) -> Result<(), String> {
     unzip_file(&source, &destination).map_err(|e| e.to_string())
+}
+
+#[derive(Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+struct DownloadProgress {
+    file_id: String,
+    downloaded: u64,
+    total: u64,
+}
+
+#[tauri::command]
+pub async fn download_file(
+    app: AppHandle,
+    url: String,
+    save_path: String,
+    file_id: String,
+) -> Result<(), String> {
+    let client = Client::new();
+    let resp = client.get(&url).send().await.map_err(|e| e.to_string())?;
+
+    let total_size = resp.content_length();
+    let mut stream = resp.bytes_stream();
+    let mut file = File::create(&save_path).map_err(|e| e.to_string())?;
+    let mut downloaded: u64 = 0;
+
+    while let Some(chunk) = stream.next().await {
+        let chunk = chunk.map_err(|e| e.to_string())?;
+        file.write_all(&chunk).map_err(|e| e.to_string())?;
+        downloaded += chunk.len() as u64;
+        app.emit(
+            "download_progress",
+            DownloadProgress {
+                file_id: file_id.clone(),
+                downloaded,
+                total: total_size.unwrap_or(0),
+            },
+        )
+        .unwrap();
+    }
+    Ok(())
 }

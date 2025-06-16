@@ -117,6 +117,7 @@
                         </el-menu-item>
                         <el-menu-item index="3-14">支付测试</el-menu-item>
                         <el-menu-item index="3-15">文件压缩</el-menu-item>
+                        <el-menu-item index="3-16">下载资源</el-menu-item>
                     </el-sub-menu>
                     <el-menu-item index="4">
                         <el-icon>
@@ -651,26 +652,53 @@
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button @click="selectFolder"
-                                >输出目录</el-button
-                            >
+                            <el-button @click="selectFolder">
+                                输出目录
+                            </el-button>
                         </el-tooltip>
                         <el-tooltip
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button @click="compressFile"
-                                >压缩文件</el-button
-                            >
+                            <el-button @click="compressFile">
+                                压缩文件
+                            </el-button>
                         </el-tooltip>
                         <el-tooltip
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button @click="decompressFile"
-                                >解压文件</el-button
-                            >
+                            <el-button @click="decompressFile">
+                                解压文件
+                            </el-button>
                         </el-tooltip>
+                    </div>
+                </div>
+                <!-- api/下载文件 -->
+                <div v-else-if="menuIndex === '3-16'" class="cardContent">
+                    <h1 class="cardTitle">下载文件</h1>
+                    <p>
+                        下载网络链接文件到本地，支持多文件下载，以及下载进度回调
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="selectDownloadFolder">
+                                选择文件夹
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="downFile">下载文件</el-button>
+                        </el-tooltip>
+                        <el-progress
+                            type="circle"
+                            :percentage="downloadProgress"
+                        />
                     </div>
                 </div>
                 <!-- api/template -->
@@ -807,10 +835,12 @@ import {
 const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
+
 const textarea = ref('')
 const image = ref()
 const defaultMenu = ref('1-1')
 const menuIndex = ref('1-1')
+let selectedDir = ''
 
 const handleMenu = (index: string) => {
     console.log('handleMenu', index)
@@ -1035,6 +1065,49 @@ const decompressFile = async () => {
         oneMessage.error('请选择解压文件或输出文件夹')
     }
 }
+
+// 选择下载文件夹
+const selectDownloadFolder = async () => {
+    const selected = await openSelect(true, [])
+    console.log('selected', selected)
+    selectedDir = selected || ''
+}
+
+// 下载文件
+const downloadProgress = ref(0)
+const downFile = async () => {
+    console.log('downFile')
+    if (!textarea.value || !selectedDir) {
+        oneMessage.error('请输入下载地址或选择下载文件夹')
+        return
+    }
+    const url = textarea.value
+    const fileName = await basename(url)
+    const fileId = fileName.split('.')[0]
+    const savePath = await join(selectedDir, fileName)
+    console.log(
+        'url, fileName, fileId, savePath',
+        url,
+        fileName,
+        fileId,
+        savePath
+    )
+    const download = await invoke('download_file', {
+        url,
+        savePath,
+        fileId,
+    })
+    console.log('download', download)
+}
+
+listen('download_progress', (event: any) => {
+    console.log(`downloading fileId--- ${event.payload.fileId}`)
+    console.log(`downloading downloaded--- ${event.payload.downloaded}`)
+    console.log(`downloading total--- ${event.payload.total}`)
+    downloadProgress.value = Number(
+        ((event.payload.downloaded / event.payload.total) * 100).toFixed(2)
+    )
+})
 
 // 页面初始化
 onMounted(() => {
