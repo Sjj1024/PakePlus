@@ -979,9 +979,9 @@ const activeDistInput = async () => {
     if (isTauri) {
         try {
             const res = await invoke('stop_server')
-            console.log('stopServer', res)
+            console.log('activeDistInput stopServer', res)
         } catch (error) {
-            console.error('Failed to stop server:', error)
+            console.error('activeDistInput Failed to stop server:', error)
         }
         loadHtml()
     } else {
@@ -998,11 +998,15 @@ const activeDistInput = async () => {
 const stopServer = async () => {
     if (isTauri) {
         try {
-            const res = await invoke('stop_server')
-            console.log('stopServer', res)
             const cacheDir = await appCacheDir()
-            await remove(cacheDir, { recursive: true })
-            console.log('cacheDir', cacheDir)
+            const cacheExist = await exists(cacheDir)
+            cacheExist && (await remove(cacheDir, { recursive: true }))
+        } catch (error) {
+            console.error('Failed to remove cache:', error)
+        }
+        try {
+            const res = await invoke('stop_server')
+            console.log('stop server', res)
         } catch (error) {
             console.error('Failed to stop server:', error)
         }
