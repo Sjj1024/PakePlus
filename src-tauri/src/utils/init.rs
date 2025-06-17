@@ -1,7 +1,20 @@
 use base64::{prelude::BASE64_STANDARD, Engine};
+use serde::{Deserialize, Serialize};
 use serde_json::{json, Error, Value};
-use tauri::{utils::config::WindowConfig, App, WindowEvent};
+use tauri::{utils::config::WindowConfig, App, Url, WebviewUrl, WindowEvent};
 use tauri_plugin_store::StoreExt;
+
+use crate::command::cmds::{get_exe_dir, get_www_dir, load_man};
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Man {
+    pub name: String,
+    pub version: String,
+    pub description: String,
+    pub author: String,
+    pub license: String,
+    pub window: WindowConfig,
+}
 
 pub fn append_param(original_url: &str, value: &str) -> String {
     let separator = if original_url.contains('?') { "&" } else { "?" };
@@ -42,7 +55,23 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
             }
         }
     }
-    let config: WindowConfig = serde_json::from_value(json_value).unwrap();
+    let mut config: WindowConfig = serde_json::from_value(json_value).unwrap();
+    // load man
+    let startup_dir = get_exe_dir();
+    let man = load_man(&startup_dir);
+    let man_content = man.unwrap();
+    if man_content.len() > 0 {
+        let mut man_config: Man = serde_json::from_str(&man_content).unwrap();
+        println!("man: {:?}", man_config);
+        let www_dir = get_www_dir(&startup_dir);
+        let www_dir_str = www_dir.unwrap();
+        if www_dir_str.len() > 0 {
+            println!("www_dir: {}", www_dir_str);
+            man_config.window.url = WebviewUrl::External(Url::parse(&www_dir_str).unwrap());
+        }
+        config = man_config.window;
+    }
+    // init window
     let window = tauri::WebviewWindowBuilder::from_config(app_handle, &config)
         .unwrap()
         .build()

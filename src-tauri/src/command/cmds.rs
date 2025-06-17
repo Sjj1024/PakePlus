@@ -4,10 +4,14 @@ use base64::prelude::*;
 use futures::StreamExt;
 use reqwest::Client;
 use serde::Serialize;
+use std::env;
+use std::fs;
 use std::fs::File;
+use std::io;
 use std::io::Read;
 use std::io::Write;
 use std::path::Path;
+use std::path::PathBuf;
 use std::sync::{Arc, Mutex};
 use std::time::Instant;
 use tauri::WindowEvent;
@@ -656,4 +660,47 @@ pub fn notification(app: AppHandle, params: NotificationParams) -> Result<(), St
         .show()
         .unwrap();
     Ok(())
+}
+
+#[tauri::command]
+pub fn get_exe_dir() -> String {
+    // 获取当前可执行文件路径
+    let exe_path = env::current_exe().unwrap();
+    let exe_dir = exe_path.parent().unwrap();
+    exe_dir.to_str().unwrap().to_string()
+}
+
+// load man.json
+pub fn load_man(base_dir: &str) -> Result<String, io::Error> {
+    let mut man_path = PathBuf::from(base_dir);
+    man_path.push("config");
+    man_path.push("man.json");
+    match fs::read_to_string(&man_path) {
+        Ok(man_json) => Ok(man_json),
+        Err(e) if e.kind() == io::ErrorKind::NotFound => Ok(String::new()),
+        Err(e) => Err(e),
+    }
+}
+
+// server config www dir
+#[tauri::command]
+pub fn get_www_dir(base_dir: &str) -> Result<String, io::Error> {
+    let mut www_dir = PathBuf::from(base_dir);
+    www_dir.push("config");
+    www_dir.push("www");
+    // 判断文件夹是否存在并是否为空
+    if fs::metadata(&www_dir).is_ok() {
+        let files = fs::read_dir(&www_dir)?;
+        if files.count() > 0 {
+            let port = find_port().unwrap();
+            let route = warp::fs::dir(www_dir);
+            tokio::spawn(async move {
+                warp::serve(route).run(([127, 0, 0, 1], port)).await;
+            });
+            return Ok(format!("http://127.0.0.1:{}", port));
+        } else {
+            return Ok(String::new());
+        }
+    }
+    Ok(String::new())
 }
