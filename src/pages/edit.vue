@@ -903,7 +903,6 @@ const fileToBase64 = (file: any) => {
 
 // loadHtml
 const loadHtml = async () => {
-    console.log('loadHtml')
     store.currentProject.isHtml = true
     const selected = await openSelect(true, [])
     console.log('selected', selected)

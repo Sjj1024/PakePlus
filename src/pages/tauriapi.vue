@@ -1131,19 +1131,11 @@ const downFile = async (selPath: boolean = true) => {
     } else {
         console.log('download dir')
     }
-    console.log(
-        'url, fileName, fileId, savePath',
-        url,
-        fileName,
-        fileId,
-        savePath
-    )
-    const download = await invoke('download_file', {
+    await invoke('download_file', {
         url,
         savePath,
         fileId,
     })
-    console.log('download', download)
 }
 
 listen('download_progress', (event: any) => {
