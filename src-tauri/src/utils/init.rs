@@ -1,29 +1,55 @@
-use serde_json::{json, Error};
+use base64::{prelude::BASE64_STANDARD, Engine};
+use serde_json::{json, Error, Value};
 use tauri::{utils::config::WindowConfig, App, AppHandle, Manager, WindowEvent};
 use tauri_plugin_store::StoreExt;
+
+pub fn append_param(original_url: &str, value: &str) -> String {
+    let separator = if original_url.contains('?') { "&" } else { "?" };
+    format!("{}{}args={}", original_url, separator, url_encode(value))
+}
+
+pub fn url_encode(input: &str) -> String {
+    input
+        .bytes()
+        .map(|b| match b {
+            b'-' | b'_' | b'.' | b'~' | b'a'..=b'z' | b'A'..=b'Z' | b'0'..=b'9' => {
+                (b as char).to_string()
+            }
+            _ => format!("%{:02X}", b),
+        })
+        .collect()
+}
 
 // handle something when start app
 pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     let args: Vec<String> = std::env::args().collect();
-    println!("Application started with arguments: {:?}", args);
+    let args_str = args[1..].join("|");
+    let args_base64 = BASE64_STANDARD.encode(args_str.as_bytes());
     let app_handle = app.handle();
     let window_json = r#"
         {
             "title": "PakePlus",
-            "visible": false
+            "visible": false,
+            "url": "index.html"
         }
     "#;
-    let config: WindowConfig = serde_json::from_str(window_json).unwrap();
+    let mut json_value: Value = serde_json::from_str(window_json)?;
+    if !args_base64.is_empty() {
+        if let Some(url) = json_value.get_mut("url") {
+            if let Some(original_url) = url.as_str() {
+                let new_url = append_param(original_url, args_base64.as_str());
+                *url = Value::String(new_url);
+            }
+        }
+    }
+    let config: WindowConfig = serde_json::from_value(json_value).unwrap();
     let window = tauri::WebviewWindowBuilder::from_config(app_handle, &config)
         .unwrap()
         .build()
         .unwrap();
-
     let store = app.store("app_data.json").unwrap();
-
     let window_fullscreen: Option<serde_json::Value> = store.get("window_fullscreen");
     // println!("windows_fullscreen: {:?}", window_fullscreen);
-
     let window_size: Option<serde_json::Value> = store.get("window_size");
     // println!("windows_size: {:?}", window_size);
     let mut width = 960.0;
