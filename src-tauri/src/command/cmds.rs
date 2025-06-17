@@ -664,7 +664,6 @@ pub fn notification(app: AppHandle, params: NotificationParams) -> Result<(), St
 
 #[tauri::command]
 pub fn get_exe_dir() -> String {
-    // 获取当前可执行文件路径
     let exe_path = env::current_exe().unwrap();
     let exe_dir = exe_path.parent().unwrap();
     exe_dir.to_str().unwrap().to_string()
@@ -694,7 +693,6 @@ pub fn get_www_dir(base_dir: &str) -> Result<String, io::Error> {
     let mut www_dir = PathBuf::from(base_dir);
     www_dir.push("config");
     www_dir.push("www");
-    // 判断文件夹是否存在并是否为空
     if fs::metadata(&www_dir).is_ok() {
         let files = fs::read_dir(&www_dir)?;
         if files.count() > 0 {

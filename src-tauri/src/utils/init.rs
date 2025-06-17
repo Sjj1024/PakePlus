@@ -61,11 +61,9 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     let man_content = man.unwrap();
     if man_content.len() > 0 {
         let mut man_config: Man = serde_json::from_str(&man_content).unwrap();
-        println!("man: {:?}", man_config);
         let www_dir = get_www_dir(&startup_dir);
         let www_dir_str = www_dir.unwrap();
         if www_dir_str.len() > 0 {
-            println!("www_dir: {}", www_dir_str);
             man_config.window.url = WebviewUrl::External(Url::parse(&www_dir_str).unwrap());
         }
         config = man_config.window;
