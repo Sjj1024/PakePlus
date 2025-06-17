@@ -1,10 +1,9 @@
+use crate::command::cmds::{get_exe_dir, get_www_dir, load_man};
 use base64::{prelude::BASE64_STANDARD, Engine};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Error, Value};
 use tauri::{utils::config::WindowConfig, App, Url, WebviewUrl, WindowEvent};
 use tauri_plugin_store::StoreExt;
-
-use crate::command::cmds::{get_exe_dir, get_www_dir, load_man};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Man {
@@ -78,17 +77,13 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         .unwrap();
     let store = app.store("app_data.json").unwrap();
     let window_fullscreen: Option<serde_json::Value> = store.get("window_fullscreen");
-    // println!("windows_fullscreen: {:?}", window_fullscreen);
     let window_size: Option<serde_json::Value> = store.get("window_size");
-    // println!("windows_size: {:?}", window_size);
     let mut width = 960.0;
     let mut height = 720.0;
     if let Some(window_size) = window_size {
         let size = window_size.as_object().unwrap();
         width = size["width"].as_f64().unwrap();
         height = size["height"].as_f64().unwrap();
-        // println!("width: {:?}", width);
-        // println!("height: {:?}", height);
     }
 
     let window_position: Option<serde_json::Value> = store.get("window_position");
@@ -99,8 +94,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         let position = window_position.as_object().unwrap();
         x = position["x"].as_f64().unwrap();
         y = position["y"].as_f64().unwrap();
-        // println!("x: {:?}", x);
-        // println!("y: {:?}", y);
     }
 
     if let Some(window_fullscreen) = window_fullscreen {
