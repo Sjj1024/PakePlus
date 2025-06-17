@@ -1,6 +1,6 @@
 use base64::{prelude::BASE64_STANDARD, Engine};
 use serde_json::{json, Error, Value};
-use tauri::{utils::config::WindowConfig, App, AppHandle, Manager, WindowEvent};
+use tauri::{utils::config::WindowConfig, App, WindowEvent};
 use tauri_plugin_store::StoreExt;
 
 pub fn append_param(original_url: &str, value: &str) -> String {
