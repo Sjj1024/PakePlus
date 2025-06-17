@@ -15,6 +15,7 @@
     },
     "permissions": [
         "core:default",
+        "notification:default",
         "core:app:allow-default-window-icon",
         "core:app:allow-app-hide",
         "core:app:allow-app-show",

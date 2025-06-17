@@ -701,6 +701,24 @@
                         />
                     </div>
                 </div>
+                <!-- api/notification -->
+                <div v-else-if="menuIndex === '2-12'" class="cardContent">
+                    <h1 class="cardTitle">notification</h1>
+                    <p>
+                        Send native notifications to your user using the
+                        notification plugin.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="sendNotification">
+                                发送消息通知
+                            </el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
                 <!-- api/template -->
                 <div v-else-if="menuIndex === '1-111'" class="cardContent">
                     <h1 class="cardTitle">menu</h1>
@@ -1071,6 +1089,21 @@ const selectDownloadFolder = async () => {
     const selected = await openSelect(true, [])
     console.log('selected', selected)
     selectedDir = selected || ''
+}
+
+// Send native notifications to your user using the notification plugin.
+const sendNotification = async () => {
+    if (!textarea.value) {
+        oneMessage.error('请输入通知内容')
+        return
+    }
+    invoke('notification', {
+        params: {
+            title: 'PakePlus通知API',
+            body: textarea.value,
+            icon: '',
+        },
+    })
 }
 
 // 下载文件

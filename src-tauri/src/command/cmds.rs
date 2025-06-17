@@ -14,6 +14,7 @@ use tauri::{
     path::BaseDirectory, utils::config::WindowConfig, AppHandle, Emitter, LogicalSize, Manager,
 };
 use tauri_plugin_http::reqwest;
+use tauri_plugin_notification::NotificationExt;
 use walkdir::WalkDir;
 use warp::Filter;
 use zip::write::FileOptions;
@@ -600,7 +601,16 @@ pub async fn download_file(
 ) -> Result<(), String> {
     let client = Client::new();
     let resp = client.get(&url).send().await.map_err(|e| e.to_string())?;
-
+    // if save path is empty
+    let mut save_path = save_path;
+    let file_name = url.split('/').last().unwrap();
+    if save_path.is_empty() {
+        let file_path = app
+            .path()
+            .resolve(file_name, BaseDirectory::Download)
+            .expect("failed to resolve resource");
+        save_path = file_path.to_str().unwrap().to_string();
+    }
     let total_size = resp.content_length();
     let mut stream = resp.bytes_stream();
     let mut file = File::create(&save_path).map_err(|e| e.to_string())?;
@@ -620,5 +630,24 @@ pub async fn download_file(
         )
         .unwrap();
     }
+    Ok(())
+}
+
+#[derive(serde::Deserialize)]
+pub struct NotificationParams {
+    title: String,
+    body: String,
+    icon: String,
+}
+
+#[tauri::command]
+pub fn notification(app: AppHandle, params: NotificationParams) -> Result<(), String> {
+    app.notification()
+        .builder()
+        .title(&params.title)
+        .body(&params.body)
+        .icon(&params.icon)
+        .show()
+        .unwrap();
     Ok(())
 }
