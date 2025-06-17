@@ -38,6 +38,4 @@ tauri-plugin-clipboard-manager = "2.0.0"
 tauri-plugin-store = "2.0.0"
 tauri-plugin-process = "2"
 tauri-plugin-notification = "2.0.0"
-[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
-tauri-plugin-single-instance = "2"
 tauri-plugin-updater = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v2" }
