@@ -4,6 +4,8 @@ use tauri_plugin_store::StoreExt;
 
 // handle something when start app
 pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
+    let args: Vec<String> = std::env::args().collect();
+    println!("Application started with arguments: {:?}", args);
     let app_handle = app.handle();
     let window_json = r#"
         {

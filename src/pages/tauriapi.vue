@@ -695,6 +695,14 @@
                         >
                             <el-button @click="downFile">下载文件</el-button>
                         </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="downFile(false)">
+                                默认下载到Download目录
+                            </el-button>
+                        </el-tooltip>
                         <el-progress
                             type="circle"
                             :percentage="downloadProgress"
@@ -1108,16 +1116,21 @@ const sendNotification = async () => {
 
 // 下载文件
 const downloadProgress = ref(0)
-const downFile = async () => {
-    console.log('downFile')
-    if (!textarea.value || !selectedDir) {
+const downFile = async (selPath: boolean = true) => {
+    downloadProgress.value = 0
+    if (!textarea.value) {
         oneMessage.error('请输入下载地址或选择下载文件夹')
         return
     }
     const url = textarea.value
     const fileName = await basename(url)
     const fileId = fileName.split('.')[0]
-    const savePath = await join(selectedDir, fileName)
+    let savePath = ''
+    if (selPath) {
+        savePath = await join(selectedDir, fileName)
+    } else {
+        console.log('download dir')
+    }
     console.log(
         'url, fileName, fileId, savePath',
         url,
