@@ -10,6 +10,7 @@ use std::io::Write;
 use std::path::Path;
 use std::sync::{Arc, Mutex};
 use std::time::Instant;
+use tauri::WindowEvent;
 use tauri::{
     path::BaseDirectory, utils::config::WindowConfig, AppHandle, Emitter, LogicalSize, Manager,
 };
@@ -32,7 +33,7 @@ pub async fn start_server(
     }
     let path_clone = path.clone();
     let port = find_port().unwrap();
-    println!("port: {}", port);
+    // println!("port: {}", port);
     let server_handle = tokio::spawn(async move {
         let route = warp::fs::dir(path_clone)
             .map(|reply| {
@@ -157,11 +158,16 @@ pub async fn preview_from_config(
     // custom js
     contents += js_content.as_str();
     if !resize {
-        let _window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
+        let pre_window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
             .unwrap()
             .initialization_script(contents.as_str())
             .build()
             .unwrap();
+        pre_window.on_window_event(move |event| {
+            if let WindowEvent::Destroyed = event {
+                handle.emit("stop_server", "0").unwrap();
+            }
+        });
     }
 }
 

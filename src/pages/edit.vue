@@ -541,6 +541,7 @@ import { arch, platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import TauriConfig from '@/components/TauriConfig.vue'
 import ImgPreview from '@/components/ImgPreview.vue'
+import { listen } from '@tauri-apps/api/event'
 
 const route = useRoute()
 const router = useRouter()
@@ -1292,6 +1293,12 @@ const getInitializationScript = () => {
     }
     return initJsScript
 }
+
+// close preview window and stop server
+listen('stop_server', async () => {
+    const res = await invoke('stop_server')
+    console.log('stopServer----', res)
+})
 
 const preview = async (resize: boolean) => {
     if (isTauri) {
