@@ -136,11 +136,8 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
             println!("drag_drop: {:?}", drag_drop);
         }
     });
-
     window.show().unwrap();
-
     window.set_focus().unwrap();
-
     Ok(())
 }
 
