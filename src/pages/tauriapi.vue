@@ -1101,7 +1101,7 @@ const sendNotification = async () => {
         params: {
             title: 'PakePlus通知API',
             body: textarea.value,
-            icon: '',
+            icon: 'face-smile',
         },
     })
 }
