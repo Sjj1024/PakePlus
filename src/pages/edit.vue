@@ -418,7 +418,7 @@
                     <el-button @click="centerDialogVisible = false">
                         {{ t('cancel') }}
                     </el-button>
-                    <el-button type="primary" @click="publishWeb">
+                    <el-button type="primary" @click="publishCheck">
                         {{ t('confirm') }}
                     </el-button>
                 </div>
@@ -1560,15 +1560,18 @@ const updateTauriConfig = async () => {
     }
 }
 
+// local publish
+const localPublish = async () => {
+    // select save path
+    // download zip
+    // unzip
+    // copy to dist
+    // update config
+    // publish web
+}
+
 // new publish version
 const publishWeb = async () => {
-    if (store.token === '') {
-        oneMessage.error(t('configToken'))
-        return
-    } else if (checkLastPublish()) {
-        oneMessage.error(t('limitProject'))
-        return
-    }
     //  else if (store.currentProject.platform.length === 0) {
     //     oneMessage.error(t('selectPlatform'))
     //     return
@@ -1611,6 +1614,21 @@ const publishWeb = async () => {
             'build error',
             'PakePlus'
         )
+    }
+}
+
+// publish check
+const publishCheck = async () => {
+    if (store.currentProject.desktop.buildMethod === 'local') {
+        localPublish()
+    } else if (store.token === '') {
+        oneMessage.error(t('configToken'))
+        return
+    } else if (checkLastPublish()) {
+        oneMessage.error(t('limitProject'))
+        return
+    } else {
+        publishWeb()
     }
 }
 
