@@ -449,12 +449,100 @@
                         and security.
                     </p>
                     <div class="cardBox">
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
-                            <el-button>{{ t('waitDev') }}</el-button>
-                        </el-tooltip>
+                        <el-button @click="openFolder('appCacheDir')">
+                            appCacheDir
+                        </el-button>
+                        <el-button @click="openFolder('appConfigDir')">
+                            appConfigDir
+                        </el-button>
+                        <el-button @click="openFolder('appDataDir')">
+                            appDataDir
+                        </el-button>
+                        <el-button @click="openFolder('appLocalDataDir')">
+                            appLocalDataDir
+                        </el-button>
+                        <el-button @click="openFolder('appLogDir')">
+                            appLogDir
+                        </el-button>
+                        <el-button @click="openFolder('audioDir')">
+                            audioDir
+                        </el-button>
+                        <el-button @click="openFolder('cacheDir')">
+                            cacheDir
+                        </el-button>
+                        <el-button @click="openFolder('configDir')">
+                            configDir
+                        </el-button>
+                        <el-button @click="openFolder('dataDir')">
+                            dataDir
+                        </el-button>
+                        <el-button @click="openFolder('delimiter')">
+                            delimiter
+                        </el-button>
+                        <el-button @click="openFolder('desktopDir')">
+                            desktopDir
+                        </el-button>
+                        <el-button @click="openFolder('dirname')">
+                            dirname
+                        </el-button>
+                        <el-button @click="openFolder('documentDir')">
+                            documentDir
+                        </el-button>
+                        <el-button @click="openFolder('downloadDir')">
+                            downloadDir
+                        </el-button>
+                        <el-button @click="openFolder('executableDir')">
+                            executableDir
+                        </el-button>
+                        <el-button @click="openFolder('extname')">
+                            extname
+                        </el-button>
+                        <el-button @click="openFolder('fontDir')">
+                            fontDir
+                        </el-button>
+                        <el-button @click="openFolder('homeDir')">
+                            homeDir
+                        </el-button>
+                        <el-button @click="openFolder('isAbsolute')">
+                            isAbsolute
+                        </el-button>
+                        <el-button @click="openFolder('join')">
+                            join
+                        </el-button>
+                        <el-button @click="openFolder('localDataDir')">
+                            localDataDir
+                        </el-button>
+                        <el-button @click="openFolder('normalize')">
+                            normalize
+                        </el-button>
+                        <el-button @click="openFolder('pictureDir')">
+                            pictureDir
+                        </el-button>
+                        <el-button @click="openFolder('publicDir')">
+                            publicDir
+                        </el-button>
+                        <el-button @click="openFolder('resolve')">
+                            resolve
+                        </el-button>
+                        <el-button @click="openFolder('resolveResource')">
+                            resolveResource
+                        </el-button>
+                        <el-button @click="openFolder('resourceDir')">
+                            resourceDir
+                        </el-button>
+                        <el-button @click="openFolder('runtimeDir')">
+                            runtimeDir
+                        </el-button>
+                        <el-button @click="openFolder('sep')"> sep </el-button>
+                        <el-button @click="openFolder('tempDir')">
+                            tempDir
+                        </el-button>
+                        <el-button @click="openFolder('templateDir')">
+                            templateDir
+                        </el-button>
+                        <el-button @click="openFolder('videoDir')">
+                            videoDir
+                        </el-button>
                     </div>
                 </div>
                 <!-- api/tray -->
@@ -757,7 +845,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getPaySign, oneMessage, openSelect } from '@/utils/common'
+import { getPaySign, oneMessage, openSelect, openUrl } from '@/utils/common'
 import About from '@/pages/about.vue'
 import {
     InfoFilled,
@@ -833,7 +921,10 @@ import {
     join, // 拼接多个路径片段
     normalize, // 规范化路径（解析 `.` 和 `..`）
     resolve, // 解析绝对路径（基于当前工作目录）
-    isAbsolute, // 检查路径是否为绝对路径
+    isAbsolute,
+    localDataDir,
+    resolveResource,
+    tempDir, // 检查路径是否为绝对路径
 } from '@tauri-apps/api/path'
 import { TrayIcon } from '@tauri-apps/api/tray'
 import {
@@ -1111,6 +1202,158 @@ const sendNotification = async () => {
             body: textarea.value,
             icon: 'face-smile',
         },
+    })
+}
+
+// 打开默认文件夹
+const openFolder = async (dirType: string) => {
+    switch (dirType) {
+        case 'appCacheDir':
+            const appCacheDirPath = await appCacheDir()
+            console.log('appCacheDirPath', appCacheDirPath)
+            await openUrl(appCacheDirPath)
+            break
+        case 'appConfigDir':
+            const appConfigDirPath = await appConfigDir()
+            await openUrl(appConfigDirPath)
+            break
+        case 'appDataDir':
+            const appDataDirPath = await appDataDir()
+            await openUrl(appDataDirPath)
+            break
+        case 'appLocalDataDir':
+            const appLocalDataDirPath = await appLocalDataDir()
+            await openUrl(appLocalDataDirPath)
+            break
+        case 'appLogDir':
+            const appLogDirPath = await appLogDir()
+            await openUrl(appLogDirPath)
+            break
+        case 'audioDir':
+            const audioDirPath = await audioDir()
+            await openUrl(audioDirPath)
+            break
+        case 'cacheDir':
+            const cacheDirPath = await cacheDir()
+            await openUrl(cacheDirPath)
+            break
+        case 'configDir':
+            const configDirPath = await configDir()
+            await openUrl(configDirPath)
+            break
+        case 'dataDir':
+            const dataDirPath = await dataDir()
+            await openUrl(dataDirPath)
+            break
+        case 'delimiter':
+            const delimiterPath = await delimiter()
+            textarea.value = 'delimiter: ' + delimiterPath
+            break
+        case 'desktopDir':
+            const desktopDirPath = await desktopDir()
+            await openUrl(desktopDirPath)
+            break
+        case 'dirname':
+            const dirnamePath = await dirname(textarea.value)
+            await openUrl(dirnamePath)
+            break
+        case 'documentDir':
+            const documentsDirPath = await documentDir()
+            await openUrl(documentsDirPath)
+            break
+        case 'downloadDir':
+            const downloadDirPath = await downloadDir()
+            await openUrl(downloadDirPath)
+            break
+        case 'executableDir':
+            const executableDirPath = await executableDir()
+            await openUrl(executableDirPath)
+            break
+        case 'extname':
+            const extnamePath = await extname(textarea.value)
+            await openUrl(extnamePath)
+            break
+        case 'fontDir':
+            const fontDirPath = await fontDir()
+            await openUrl(fontDirPath)
+            break
+        case 'homeDir':
+            const homeDirPath = await homeDir()
+            await openUrl(homeDirPath)
+            break
+        case 'isAbsolute':
+            const isAbsolutePath = await isAbsolute(textarea.value)
+            textarea.value = 'isAbsolute: ' + isAbsolutePath
+            break
+        case 'join':
+            const joinPath = await join(textarea.value, 'test.txt')
+            await openUrl(joinPath)
+            break
+        case 'localDataDir':
+            const localDataDirPath = await localDataDir()
+            await openUrl(localDataDirPath)
+            break
+        case 'normalize':
+            const normalizePath = await normalize(textarea.value)
+            await openUrl(normalizePath)
+            break
+        case 'pictureDir':
+            const pictureDirPath = await pictureDir()
+            await openUrl(pictureDirPath)
+            break
+        case 'publicDir':
+            const publicDirPath = await publicDir()
+            await openUrl(publicDirPath)
+            break
+        case 'resolve':
+            const resolvePath = await resolve(textarea.value)
+            await openUrl(resolvePath)
+            break
+        case 'resolveResource':
+            const resolveResourcePath = await resolveResource(textarea.value)
+            await openUrl(resolveResourcePath)
+            break
+        case 'resourceDir':
+            const resourceDirPath = await resourceDir()
+            await openUrl(resourceDirPath)
+            break
+        case 'runtimeDir':
+            const runtimeDirPath = await runtimeDir()
+            await openUrl(runtimeDirPath)
+            break
+        case 'sep':
+            const sepPath = sep()
+            textarea.value = 'sep: ' + sepPath
+            break
+        case 'tempDir':
+            const tempDirPath = await tempDir()
+            await openUrl(tempDirPath)
+            break
+        case 'templateDir':
+            const tmpDirPath = await templateDir()
+            await openUrl(tmpDirPath)
+            break
+        case 'videoDir':
+            const videoDirPath = await videoDir()
+            await openUrl(videoDirPath)
+            break
+        default:
+            textarea.value = '检查出错'
+            break
+    }
+}
+
+// 下载到appdata目录
+const downAppData = async () => {
+    const url = textarea.value
+    const fileName = await basename(url)
+    const fileId = fileName.split('.')[0]
+    const appDataDirPath = await appDataDir()
+    const savePath = await join(appDataDirPath, fileName)
+    await invoke('download_file', {
+        url,
+        savePath,
+        fileId,
     })
 }
 
