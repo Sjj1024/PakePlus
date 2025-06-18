@@ -4,6 +4,7 @@ import { locale as osLocale } from '@tauri-apps/plugin-os'
 import { useI18n } from 'vue-i18n'
 import { isTauri, isMobile, buildTime } from './utils/common'
 import Updater from './components/Updater.vue'
+import { setTheme } from '@tauri-apps/api/app'
 
 const { locale } = useI18n()
 
@@ -42,7 +43,7 @@ const disableRightClick = () => {
     }
 }
 
-const chageTheme = (theme: string) => {
+const chageTheme = async (theme: string) => {
     if (theme === 'light') {
         document.documentElement.setAttribute('theme', 'light')
         document.querySelector('html')?.classList.remove('dark')
@@ -53,6 +54,9 @@ const chageTheme = (theme: string) => {
         document.querySelector('html')?.classList.add('dark')
     }
     localStorage.setItem('theme', theme)
+    if (isTauri) {
+        await setTheme(theme === 'light' ? 'light' : 'dark')
+    }
 }
 
 const initEnv = async () => {
@@ -62,9 +66,8 @@ const initEnv = async () => {
         const listener = (e: any) => {
             const newTheme = e.matches ? 'dark' : 'light'
             console.log('theme change', newTheme)
-            chageTheme(newTheme) // 确保 chageTheme 函数已定义
+            chageTheme(newTheme)
         }
-        // 优先使用 addEventListener，否则回退到 addListener
         if (mediaQuery.addEventListener) {
             mediaQuery.addEventListener('change', listener)
         } else if (mediaQuery.addListener) {
