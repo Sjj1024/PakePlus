@@ -260,7 +260,7 @@ export const buildTime = import.meta.env.BUILD_TIME
 // 是否为tauri环境
 export const isTauri = (window as any).__TAURI__ ? true : false
 
-// 打开url
+// open url or file or path
 export const openUrl = async (url: string) => {
     console.log('url', url)
     if (isTauri) {

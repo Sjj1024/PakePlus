@@ -402,6 +402,7 @@
                     <el-input
                         v-model="store.currentProject.desktop.pubBody"
                         type="textarea"
+                        disabled
                         autocomplete="off"
                         autoCapitalize="off"
                         autoCorrect="off"

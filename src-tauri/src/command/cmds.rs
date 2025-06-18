@@ -1,4 +1,3 @@
-use crate::command::model::find_port;
 use crate::command::model::ServerState;
 use base64::prelude::*;
 use futures::StreamExt;
@@ -10,6 +9,7 @@ use std::fs::File;
 use std::io;
 use std::io::Read;
 use std::io::Write;
+use std::net::TcpListener;
 use std::path::Path;
 use std::path::PathBuf;
 use std::sync::{Arc, Mutex};
@@ -434,27 +434,47 @@ pub async fn update_init_rs(
     return encoded_contents;
 }
 
-// #[tauri::command]
-// pub async fn download_file_by_binary(
-//     app: AppHandle,
-//     params: BinaryDownloadParams,
-// ) -> Result<(), String> {
-//     let window: Window = app.get_window("pake").unwrap();
-//     show_toast(&window, &get_download_message(MessageType::Start));
-//     let output_path = api::path::download_dir().unwrap().join(params.filename);
-//     let file_path = check_file_or_append(output_path.to_str().unwrap());
-//     let download_file_result = fs::write(file_path, &params.binary);
-//     match download_file_result {
-//         Ok(_) => {
-//             show_toast(&window, &get_download_message(MessageType::Success));
-//             Ok(())
-//         }
-//         Err(e) => {
-//             show_toast(&window, &get_download_message(MessageType::Failure));
-//             Err(e.to_string())
-//         }
-//     }
-// }
+#[tauri::command]
+pub async fn run_command(command: String) -> Result<String, String> {
+    #[cfg(target_os = "windows")]
+    let output = tokio::process::Command::new("powershell")
+        .arg("-Command")
+        .arg(&command)
+        .creation_flags(0x08000000)
+        .output()
+        .await
+        .map_err(|e| e.to_string())?;
+
+    #[cfg(not(target_os = "windows"))]
+    let output = tokio::process::Command::new("sh")
+        .arg("-c")
+        .arg(&command)
+        .output()
+        .await
+        .map_err(|e| e.to_string())?;
+
+    if output.status.success() {
+        #[cfg(target_os = "windows")]
+        {
+            let (decoded, _, _) = GBK.decode(&output.stdout);
+            Ok(decoded.into_owned())
+        }
+        #[cfg(not(target_os = "windows"))]
+        {
+            Ok(String::from_utf8_lossy(&output.stdout).to_string())
+        }
+    } else {
+        #[cfg(target_os = "windows")]
+        {
+            let (decoded, _, _) = GBK.decode(&output.stderr);
+            Err(decoded.into_owned())
+        }
+        #[cfg(not(target_os = "windows"))]
+        {
+            Err(String::from_utf8_lossy(&output.stderr).to_string())
+        }
+    }
+}
 
 // following user
 #[tauri::command]
@@ -707,4 +727,16 @@ pub fn get_www_dir(base_dir: &str) -> Result<String, io::Error> {
         }
     }
     Ok(String::new())
+}
+
+#[tauri::command]
+pub fn get_env_var(name: String) -> Result<String, String> {
+    std::env::var(name).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+pub fn find_port() -> Result<u16, String> {
+    let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+    let port = listener.local_addr().unwrap().port();
+    Ok(port)
 }

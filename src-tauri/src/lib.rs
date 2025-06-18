@@ -65,6 +65,9 @@ pub fn run() {
             command::cmds::decompress_file,
             command::cmds::download_file,
             command::cmds::notification,
+            command::cmds::run_command,
+            command::cmds::get_env_var,
+            command::cmds::find_port
         ])
         .setup(|app| {
             tauri::async_runtime::block_on(async move {

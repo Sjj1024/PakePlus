@@ -19,8 +19,8 @@
                     <el-sub-menu index="1">
                         <template #title>
                             <el-icon>
-                                <span class="iconfont tauriIcon"
-                                    >&#xe63c;
+                                <span class="iconfont tauriIcon">
+                                    &#xe63c;
                                 </span>
                             </el-icon>
                             <span>Tauri2Api</span>
@@ -151,7 +151,7 @@
                 <!-- 图片 -->
                 <img
                     v-if="menuIndex !== '4'"
-                    :src="image"
+                    :src="image || ppIcon"
                     alt="image"
                     class="image"
                 />
@@ -844,6 +844,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
+import ppIcon from '@/assets/images/pakeplus.png'
 import { useRoute, useRouter } from 'vue-router'
 import { getPaySign, oneMessage, openSelect, openUrl } from '@/utils/common'
 import About from '@/pages/about.vue'
@@ -1450,10 +1451,10 @@ onMounted(() => {
             font-size: 14px;
         }
 
-        // .image {
-        //     width: 40px;
-        //     height: 40px;
-        // }
+        .image {
+            width: 40px;
+            height: 40px;
+        }
 
         .backBtn {
             width: 60px;
