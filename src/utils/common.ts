@@ -8,6 +8,7 @@ import { join } from '@tauri-apps/api/path'
 import { ElMessage } from 'element-plus'
 import CryptoJS from 'crypto-js'
 import QRCode from 'qrcode'
+import { setTheme } from '@tauri-apps/api/app'
 
 // upstream repo info
 export const upstreamUser = import.meta.env.VITE_UPSTREAM_USER
@@ -160,6 +161,23 @@ export const initRelease = {
         zipball_url: '',
         body: '',
     },
+}
+
+// change theme
+export const chageTheme = async (theme: string) => {
+    if (theme === 'light') {
+        document.documentElement.setAttribute('theme', 'light')
+        document.querySelector('html')?.classList.remove('dark')
+        document.querySelector('html')?.classList.add('light')
+    } else {
+        document.documentElement.setAttribute('theme', 'dark')
+        document.querySelector('html')?.classList.remove('light')
+        document.querySelector('html')?.classList.add('dark')
+    }
+    localStorage.setItem('theme', theme)
+    if (isTauri) {
+        await setTheme(theme === 'light' ? 'light' : 'dark')
+    }
 }
 
 // support pakeplus

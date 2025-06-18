@@ -354,6 +354,7 @@ import { Plus, Check } from '@element-plus/icons-vue'
 import {
     urlMap,
     openUrl,
+    chageTheme,
     isTauri,
     platforms,
     createBranch,
@@ -385,25 +386,6 @@ const testLoading = ref(false)
 const creatLoading = ref(false)
 // proExist
 const proExist = ref(false)
-
-// watch(branchName, (newVal) => {
-//     proExist.value = false
-// })
-
-const chageTheme = async (theme: string) => {
-    if (theme === 'light') {
-        document.documentElement.setAttribute('theme', 'light')
-        document.querySelector('html')?.classList.remove('dark')
-        document.querySelector('html')?.classList.add('light')
-        // await setTheme('light')
-    } else {
-        document.documentElement.setAttribute('theme', 'dark')
-        document.querySelector('html')?.classList.remove('light')
-        document.querySelector('html')?.classList.add('dark')
-        // await setTheme('dark')
-    }
-    localStorage.setItem('theme', theme)
-}
 
 // copy token
 const copyToken = () => {

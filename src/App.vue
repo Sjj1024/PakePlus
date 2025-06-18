@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { locale as osLocale } from '@tauri-apps/plugin-os'
 import { useI18n } from 'vue-i18n'
-import { isTauri, isMobile, buildTime } from './utils/common'
+import { isTauri, isMobile, chageTheme } from './utils/common'
 import Updater from './components/Updater.vue'
 import { setTheme } from '@tauri-apps/api/app'
 
@@ -40,22 +40,6 @@ const disableRightClick = () => {
         } catch (e) {
             return false
         }
-    }
-}
-
-const chageTheme = async (theme: string) => {
-    if (theme === 'light') {
-        document.documentElement.setAttribute('theme', 'light')
-        document.querySelector('html')?.classList.remove('dark')
-        document.querySelector('html')?.classList.add('light')
-    } else {
-        document.documentElement.setAttribute('theme', 'dark')
-        document.querySelector('html')?.classList.remove('light')
-        document.querySelector('html')?.classList.add('dark')
-    }
-    localStorage.setItem('theme', theme)
-    if (isTauri) {
-        await setTheme(theme === 'light' ? 'light' : 'dark')
     }
 }
 
