@@ -1,6 +1,5 @@
 use crate::command::model::ServerState;
 use base64::prelude::*;
-use encoding_rs::GBK;
 use futures::StreamExt;
 use reqwest::Client;
 use serde::Serialize;
@@ -457,6 +456,7 @@ pub async fn run_command(command: String) -> Result<String, String> {
     if output.status.success() {
         #[cfg(target_os = "windows")]
         {
+            use encoding_rs::GBK;
             let (decoded, _, _) = GBK.decode(&output.stdout);
             Ok(decoded.into_owned())
         }
@@ -467,6 +467,7 @@ pub async fn run_command(command: String) -> Result<String, String> {
     } else {
         #[cfg(target_os = "windows")]
         {
+            use encoding_rs::GBK;
             let (decoded, _, _) = GBK.decode(&output.stderr);
             Err(decoded.into_owned())
         }
