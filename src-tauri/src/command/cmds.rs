@@ -1,5 +1,6 @@
 use crate::command::model::ServerState;
 use base64::prelude::*;
+use encoding_rs::GBK;
 use futures::StreamExt;
 use reqwest::Client;
 use serde::Serialize;
