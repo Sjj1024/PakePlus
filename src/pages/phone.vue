@@ -768,7 +768,12 @@
                     </h4>
                 </div>
             </template>
-            <CodeEdit ref="codeEditRef" lang="javascript" />
+            <CodeEdit
+                ref="codeEditRef"
+                lang="javascript"
+                height="400px"
+                :code="store.currentProject.customJs"
+            />
         </el-dialog>
         <!-- img preview -->
         <ImgPreview

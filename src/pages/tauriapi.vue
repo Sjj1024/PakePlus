@@ -815,6 +815,63 @@
                         </el-tooltip>
                     </div>
                 </div>
+                <!-- api/opener -->
+                <div v-else-if="menuIndex === '2-13'" class="cardContent">
+                    <h1 class="cardTitle">opener</h1>
+                    <p>
+                        This plugin allows you to open files and URLs in a
+                        specified, or the default, application. It also supports
+                        “revealing” files in the system’s file explorer.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="openUrlWindow">
+                                打开URL(本窗口)
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="openUrl(textarea)">
+                                打开URL(默认浏览器)
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="openUrl(textarea)">
+                                打开文件夹
+                            </el-button>
+                        </el-tooltip>
+                    </div>
+                    <div class="codeDemo">
+                        <h2>默认浏览器</h2>
+                        <p class="description">
+                            在脚本中添加以下代码，即可实现打开URL(默认浏览器)
+                        </p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.openUrlBrowser"
+                            :disabled="true"
+                        />
+                    </div>
+                    <div class="codeDemo">
+                        <h2>本窗口打开</h2>
+                        <p class="description">
+                            在脚本中添加以下代码，即可实现打开URL(本窗口)
+                        </p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.openUrlCurrent"
+                            :disabled="true"
+                        />
+                    </div>
+                </div>
                 <!-- api/template -->
                 <div v-else-if="menuIndex === '1-111'" class="cardContent">
                     <h1 class="cardTitle">menu</h1>
@@ -844,8 +901,10 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
+import CodeEdit from '@/components/CodeEdit.vue'
 import ppIcon from '@/assets/images/pakeplus.png'
 import { useRoute, useRouter } from 'vue-router'
+import Codes from '@/utils/codes'
 import { getPaySign, oneMessage, openSelect, openUrl } from '@/utils/common'
 import About from '@/pages/about.vue'
 import {
@@ -1191,6 +1250,14 @@ const selectDownloadFolder = async () => {
     selectedDir = selected || ''
 }
 
+// 打开URL(本窗口)
+const openUrlWindow = async () => {
+    const url = textarea.value
+    if (url) {
+        window.location.href = url
+    }
+}
+
 // Send native notifications to your user using the notification plugin.
 const sendNotification = async () => {
     if (!textarea.value) {
@@ -1513,10 +1580,17 @@ onMounted(() => {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 10px;
+            margin: 10px 0;
 
             .el-button {
                 margin: 0;
+            }
+        }
+
+        .codeDemo {
+            margin-bottom: 10px;
+            .description {
+                margin-bottom: 10px;
             }
         }
 

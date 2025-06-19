@@ -1,10 +1,11 @@
 <template>
     <div class="codebox">
         <Codemirror
-            v-model="store.currentProject.customJs"
+            v-model="code"
             :options="cmOptions"
             :extensions="localTheme === 'dark' ? extensions : []"
             :style="{ height: '100%' }"
+            :disabled="disabled"
             @change="codeChange"
         >
         </Codemirror>
@@ -24,10 +25,22 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
+    height: {
+        type: String,
+        default: '',
+    },
+    codeType: {
+        type: String,
+        default: 'demo',
+    },
 })
 
 const store = usePPStore()
-
+const code = defineModel<string>('code')
 const localTheme = localStorage.getItem('theme') || 'dark'
 
 // extensions
@@ -42,11 +55,12 @@ const cmOptions = ref({
 
 const codeChange = (code: string) => {
     console.log('codeChange!', code)
+    store.currentProject.customJs = code
 }
 </script>
 
 <style scoped lang="scss">
 .codebox {
-    height: 400px;
+    height: v-bind(height);
 }
 </style>
