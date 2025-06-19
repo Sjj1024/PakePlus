@@ -15,13 +15,6 @@
                     >
                         &#xe709;
                     </span>
-                    <a
-                        href="https://www.pakeplus.com"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        2222
-                    </a>
                 </div>
             </div>
             <!-- set button -->

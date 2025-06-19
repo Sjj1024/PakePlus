@@ -4,7 +4,6 @@ import { locale as osLocale } from '@tauri-apps/plugin-os'
 import { useI18n } from 'vue-i18n'
 import { isTauri, isMobile, chageTheme } from './utils/common'
 import Updater from './components/Updater.vue'
-import { setTheme } from '@tauri-apps/api/app'
 
 const { locale } = useI18n()
 
