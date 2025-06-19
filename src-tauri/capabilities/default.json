@@ -5,12 +5,12 @@
     "windows": ["main", "PreView"],
     "remote": {
         "urls": [
-            "https://**",
-            "file://**",
-            "http://**",
-            "asset://localhost/**",
-            "https://api.github.com/**",
-            "https://payjs.cn/**"
+            "https://*",
+            "file://*",
+            "http://*",
+            "asset://localhost/*",
+            "https://api.github.com/*",
+            "https://payjs.cn/*"
         ]
     },
     "permissions": [
@@ -41,7 +41,6 @@
         "process:default",
         "process:allow-restart",
         "process:allow-exit",
-        "opener:default",
         "http:allow-fetch",
         "http:default",
         "http:allow-fetch-cancel",
