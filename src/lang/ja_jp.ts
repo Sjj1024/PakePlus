@@ -69,7 +69,7 @@ export default {
     releaseNotes: 'リリースノート',
     inputRelNotes: 'リリースノートを入力してください',
     pubNotesTips:
-        '注：モバイル端末の設定とビルドと公開には約9分かかりますので、しばらくお待ちください……',
+        '注：モバイル端末の設定とビルドと公開には約9分かかりますので、しばらくお待ちください、詳細文書はクリック',
     inputWebPlaceholder: 'Webサイトアドレスを入力してください',
     inputAppNamePlaceholder: 'アプリ名を入力してください',
     inputAppIdPlaceholder: 'アプリIDを入力してください',

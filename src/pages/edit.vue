@@ -441,7 +441,9 @@
             </el-form>
             <span class="pubNotesTips">
                 <span>{{ t('pubNotesTips') }}</span>
-                <el-icon class="readIcon"><ReadingLamp /></el-icon>
+                <el-icon @click="openUrl(urlMap.builddoc)" class="readIcon">
+                    <ReadingLamp />
+                </el-icon>
             </span>
             <template #footer>
                 <div class="dialog-footer">

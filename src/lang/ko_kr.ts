@@ -66,7 +66,7 @@ export default {
     releaseNotes: '릴리스 노트',
     inputRelNotes: '릴리스 노트를 입력하세요',
     pubNotesTips:
-        '참고: 모바일 설정과 빌드 및 게시에는 약 9분 정도 소요되며, 잠시만 기다려 주세요......',
+        '참고: 모바일 설정과 빌드 및 게시에는 약 9분 정도 소요되며, 잠시만 기다려 주세요, 자세한 문서는 클릭',
     inputWebPlaceholder: '웹 사이트 주소를 입력하세요',
     inputAppNamePlaceholder: '앱 이름을 입력하세요',
     inputAppIdPlaceholder: '앱 ID를 입력하세요',

@@ -16,7 +16,8 @@ export default {
     configToken: 'Please configure the token first',
     tokenOk: 'The token is available',
     tokenError: 'The token is not available, please reconfigure',
-    userPrivate: 'The account is suspected of being marked as unavailable by Github',
+    userPrivate:
+        'The account is suspected of being marked as unavailable by Github',
     projectExist: 'The project already exists.',
     creatProjectError: 'Create project failed',
     englishName: 'Please enter a pure English project name.',
@@ -66,7 +67,7 @@ export default {
     releaseNotes: 'Notes',
     inputRelNotes: 'Please enter the release notes',
     pubNotesTips:
-        'Note: The Phone config in the upper right corner, The build and publish process usually takes about 9 minutes......',
+        'Note: The Phone config in the upper right corner, The build and publish process usually takes about 9 minutes, Detailed documentation please click',
     inputWebPlaceholder: 'Please enter the website address.',
     inputAppNamePlaceholder: 'Please enter the APP name.',
     inputAppIdPlaceholder: 'Please enter the APPID',
