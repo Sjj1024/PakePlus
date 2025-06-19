@@ -380,8 +380,8 @@
                         autoCapitalize="off"
                         autoCorrect="off"
                         spellCheck="false"
+                        placeholder="点击选择，默认保存到下载目录"
                         @click="savePathHandle('select')"
-                        @blur="savePathHandle('input')"
                     >
                         <template #append>
                             <el-tooltip
@@ -768,13 +768,15 @@ const methodChange = (value: string) => {
 // save path
 const savePath = ref('')
 const savePathHandle = async (handle: string) => {
-    if (handle === 'open') {
-        openUrl(savePath.value)
-    } else if (handle === 'select') {
-        const selected: any = await openSelect(true, [])
-        console.log('selected', selected)
-        if (selected) {
-            savePath.value = selected
+    if (handle) {
+        if (savePath.value && handle === 'open') {
+            openUrl(savePath.value)
+        } else {
+            const selected: any = await openSelect(true, [])
+            console.log('selected', selected)
+            if (selected) {
+                savePath.value = selected
+            }
         }
     } else {
         // check path
@@ -1687,7 +1689,7 @@ const publishWeb = async () => {
 // publish check
 const publishCheck = async () => {
     if (store.currentProject.desktop.buildMethod === 'local') {
-        savePath.value && (await easyLocal())
+        await easyLocal()
     } else if (store.token === '') {
         oneMessage.error(t('configToken'))
         return
@@ -1917,7 +1919,6 @@ onMounted(async () => {
         confirmIcon(store.currentProject.icon)
     }
     if (isTauri) {
-        savePath.value = await downloadDir()
         // initJsFileContents()
         const window = getCurrentWindow()
         window.setTitle(`${store.currentProject.name}`)

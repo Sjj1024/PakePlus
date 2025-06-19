@@ -69,6 +69,7 @@ export default defineConfig({
                                 { text: '简单配置', link: '/guide/config' },
                                 { text: 'APP配置', link: '/guide/phone' },
                                 { text: '编译发布', link: '/guide/build' },
+                                { text: '发布成功', link: '/guide/success' },
                             ],
                         },
                         {
