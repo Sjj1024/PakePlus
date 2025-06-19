@@ -9,7 +9,7 @@
 5. 网络问题请检查是否使用了代理或者云电脑等，可以尝试切换网络试试。
 6. 如果某些功能没有支持，可以通过赞助 PP 快速优先开发解决。
 
-# mac 应用已随坏
+# mac 提示 应用已随坏
 
 ![](../static/imgs/macerror.png)
 这是因为没有给苹果给钱，所以苹果会拒绝你的应用。
@@ -28,11 +28,27 @@ sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
 sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
 ```
 
+# windows 提示无法在你电脑上运行
+
+![](../static/imgs/windowsError.jpg)
+这是因为你下载错版本了，你的电脑是 x64 位的就不要下载 arm 版本的，反之亦然。查看自己电脑是什么版本的可以查看电脑属性，也可以在电脑左下角搜索“系统”，然后点击“关于”，可以看到电脑的系统信息，百度一下就知道了。
+
+x64 位的下载下面两个结尾的文件：
+
+-   x64-setup.exe
+-   x64-setup.exe.sig
+
+arm64 位下载下面两个结尾的文件：
+
+-   \_arm64-setup.exe
+-   \_arm64-setup.exe.sig
+
 # 无法拖拽文件或元素拖动
 
 原因：[https://v2.tauri.app/reference/config/#dragdropenabled](https://v2.tauri.app/reference/config/#dragdropenabled)  
-解决办法  
-在更多配置中，关闭 dragDropEnabled 选项即可
+解决办法：  
+mac平台: 在更多配置中，关闭 dragDropEnabled 选项，然后重新打包。
+windows平台: 在更多配置中，开启 dragDropEnabled 选项，然后重新打包。
 
 # 打包后白屏或报错
 
@@ -47,7 +63,7 @@ sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
 
 在更多配置中，开启 fullscreen 即可
 
-# dispatch 错误: 404/422/403等等错误
+# dispatch 错误: 404/422/403 等等错误
 
 确认 token 权限是否配置正确，然后重新填入 token 试试，往往是 token 权限配置错误导致的。或者点击首页头像然后同步一下试试。
 

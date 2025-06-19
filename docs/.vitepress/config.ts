@@ -27,7 +27,7 @@ export default defineConfig({
             themeConfig: {
                 // 基础配置
                 logo: {
-                    src: './app.svg',
+                    src: './app.webp',
                     alt: 'PakePlus',
                 },
                 // 导航栏
@@ -45,7 +45,7 @@ export default defineConfig({
                         activeMatch: '/question/',
                     },
                     {
-                        text: '社区交流',
+                        text: '商业社群',
                         link: '/exchange/',
                         activeMatch: '/exchange/',
                     },
@@ -99,11 +99,13 @@ export default defineConfig({
                     ],
                     '/exchange/': [
                         { text: '加入群聊', link: '/exchange/' },
+                        // { text: '商业支持', link: '/exchange/business' },
                         { text: 'Github讨论', link: '/exchange/github' },
                     ],
                     '/sponsor/': [
                         { text: '赞助我们', link: '/sponsor/' },
                         { text: '赞助名单', link: '/sponsor/list' },
+                        { text: '公司名单', link: '/sponsor/company' },
                     ],
                 },
                 // 社交链接
@@ -124,7 +126,7 @@ export default defineConfig({
                     //     link: 'https://www.youtube.com/@1024xiaoshen',
                     // },
                     {
-                        icon: "bilibili",
+                        icon: 'bilibili',
                         link: 'https://space.bilibili.com/405719127',
                     },
                     // {

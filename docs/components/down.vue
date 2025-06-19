@@ -23,10 +23,12 @@
             <div class="rightContent">
                 <h1 class="title">MacOS</h1>
                 <div class="item">
-                    <a :href="ghProxy(macArm.name)"> ARM(M芯片) </a>
+                    <a :href="ghProxy(macArm.name)"> ARM(M加速) </a>
+                    <a :href="macArm.browser_download_url"> Github链接 </a>
                 </div>
                 <div class="item">
-                    <a :href="ghProxy(macX64.name)"> Intel芯片 </a>
+                    <a :href="ghProxy(macX64.name)"> Intel(加速) </a>
+                    <a :href="macX64.browser_download_url"> Github链接 </a>
                 </div>
             </div>
         </div>
@@ -58,10 +60,12 @@
             <div class="rightContent">
                 <h1 class="title">Windows</h1>
                 <div class="item">
-                    <a :href="ghProxy(windowsX64.name)"> X64 </a>
+                    <a :href="ghProxy(windowsX64.name)"> X64(加速) </a>
+                    <a :href="windowsX64.browser_download_url"> Github链接 </a>
                 </div>
                 <div class="item">
-                    <a :href="ghProxy(windowsArm64.name)"> ARM64 </a>
+                    <a :href="ghProxy(windowsArm64.name)"> ARM64(加速) </a>
+                    <a :href="windowsArm64.browser_download_url"> Github链接 </a>
                 </div>
             </div>
         </div>
@@ -92,13 +96,16 @@
             <div class="rightContent">
                 <h1 class="title">Linux</h1>
                 <div class="item">
-                    <a :href="ghProxy(linuxDeb.name)"> deb </a>
+                    <a :href="ghProxy(linuxDeb.name)"> deb(加速) </a>
+                    <a :href="linuxDeb.browser_download_url"> Github链接 </a>
                 </div>
                 <div class="item">
-                    <a :href="ghProxy(linuxRpm.name)"> rpm </a>
+                    <a :href="ghProxy(linuxRpm.name)"> rpm(加速) </a>
+                    <a :href="linuxRpm.browser_download_url"> Github链接 </a>
                 </div>
                 <div class="item">
                     <a :href="ghProxy(linuxImage.name)"> AppImage </a>
+                    <a :href="linuxImage.browser_download_url"> Github链接 </a>
                 </div>
             </div>
         </div>

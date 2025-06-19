@@ -606,8 +606,6 @@ fn unzip_file(src_path: &str, dst_path: &str) -> std::io::Result<()> {
 
 #[tauri::command]
 pub async fn compress_folder(source: String, destination: String) -> Result<(), String> {
-    println!("source = {source}");
-    println!("destination = {destination}");
     zip_folder(&source, &destination).map_err(|e| e.to_string())
 }
 

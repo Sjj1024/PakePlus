@@ -66,7 +66,8 @@ pub fn run() {
             command::cmds::notification,
             command::cmds::run_command,
             command::cmds::get_env_var,
-            command::cmds::find_port
+            command::cmds::find_port,
+            command::cmds::get_exe_dir,
         ])
         .setup(|app| {
             tauri::async_runtime::block_on(async move {
