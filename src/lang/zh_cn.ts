@@ -65,7 +65,7 @@ export default {
     releaseNotes: '发布说明',
     inputRelNotes: '请输入发布说明',
     pubNotesTips:
-        '注：移动端配置和打包请从右上角手机图标进入，桌面端打包大概需要9分钟左右，打包过程中不要做任何操作，请耐心等待...',
+        '注：移动端配置和打包请从右上角手机图标进入，桌面端打包大概需要9分钟左右，打包过程中不要做任何操作，详细文档请点击',
     inputWebPlaceholder: '请输入网站地址',
     inputAppNamePlaceholder: '请输入APP名称',
     inputAppIdPlaceholder: '请输入APPID',

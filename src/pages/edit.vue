@@ -439,8 +439,9 @@
                     />
                 </el-form-item>
             </el-form>
-            <span style="color: #aaa">
-                {{ t('pubNotesTips') }}
+            <span class="pubNotesTips">
+                <span>{{ t('pubNotesTips') }}</span>
+                <el-icon class="readIcon"><ReadingLamp /></el-icon>
             </span>
             <template #footer>
                 <div class="dialog-footer">
@@ -548,6 +549,7 @@ import {
     Document,
     Cellphone,
     FolderOpened,
+    ReadingLamp,
 } from '@element-plus/icons-vue'
 import CutterImg from '@/components/CutterImg.vue'
 import CodeEdit from '@/components/CodeEdit.vue'
@@ -2208,6 +2210,21 @@ onMounted(async () => {
     align-items: center;
     font-size: 18px;
     font-weight: bold;
+    // margin-right: 4px;
+}
+
+.pubNotesTips {
+    color: #aaa;
+
+    .readIcon {
+        cursor: pointer;
+        margin-left: 2px;
+        vertical-align: middle;
+        margin-bottom: 2px;
+        &:hover {
+            color: var(--text-color);
+        }
+    }
 }
 </style>
 
