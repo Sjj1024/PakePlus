@@ -1,5 +1,5 @@
 <template>
-    <div class="codebox">
+    <el-scrollbar class="codebox">
         <Codemirror
             v-model="code"
             :options="cmOptions"
@@ -9,7 +9,7 @@
             @change="codeChange"
         >
         </Codemirror>
-    </div>
+    </el-scrollbar>
 </template>
 
 <script setup lang="ts">
