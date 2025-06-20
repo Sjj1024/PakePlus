@@ -30,6 +30,7 @@ export const urlMap = {
     configdoc: 'https://ppofficial.pages.dev/guide/config.html',
     phonedoc: 'https://www.pakeplus.com/guide/phone.html',
     builddoc: 'https://www.pakeplus.com/guide/build.html',
+    questiondoc: 'https://pakeplus.com/question/',
     pakeplusdev: 'https://pakeplus.pages.dev/',
     weixin: 'https://github.com/Sjj1024/PakePlus',
     qq: '',

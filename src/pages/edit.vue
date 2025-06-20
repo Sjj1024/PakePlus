@@ -522,7 +522,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
-import { ElMessageBox } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { usePPStore } from '@/store'
 import {
     readFile,
@@ -1722,7 +1722,7 @@ const dispatchAction = async () => {
             ? dispatchRes.data.message
             : dispatchRes.status
         warning.value = t('dispatchError') + ': ' + message
-        oneMessage.error(warning.value)
+        // oneMessage.error(warning.value)
         createIssue(
             store.currentProject.name,
             store.currentProject.showName,
@@ -1733,6 +1733,17 @@ const dispatchAction = async () => {
             'PakePlus'
         )
         buildLoading.value = false
+        ElMessageBox.confirm('跳转到常见问题查看解决办法', '发布失败', {
+            confirmButtonText: 'OK',
+            type: 'warning',
+            center: true,
+        })
+            .then(() => {
+                openUrl(urlMap.questiondoc)
+            })
+            .catch(() => {
+                openUrl(urlMap.questiondoc)
+            })
         return
     } else {
         buildSecondTimer = setInterval(() => {
