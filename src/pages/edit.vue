@@ -522,7 +522,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { invoke } from '@tauri-apps/api/core'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 import githubApi from '@/apis/github'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessageBox } from 'element-plus'
 import { usePPStore } from '@/store'
 import {
     readFile,
@@ -1632,11 +1632,13 @@ const updateTauriConfig = async () => {
 // local publish
 const easyLocal = async () => {
     console.log('easyLocal')
-    // copy pp to save path
-    const exe_dir = await invoke('get_exe_dir')
-    console.log('exe_dir', exe_dir)
-    // update pp config
-    // publish local client
+    const targetDir = savePath.value || (await downloadDir())
+    // build local
+    invoke('build_local', {
+        targetDir: targetDir,
+        exeName: store.currentProject.showName,
+        config: store.currentProject.more.windows,
+    })
 }
 
 // new publish version
@@ -1683,6 +1685,13 @@ const publishWeb = async () => {
             'build error',
             'PakePlus'
         )
+        ElMessageBox.confirm('跳转到常见问题查看解决办法', '发布失败', {
+            confirmButtonText: 'OK',
+            type: 'warning',
+            center: true,
+        }).finally(() => {
+            openUrl(urlMap.questiondoc)
+        })
     }
 }
 
@@ -1733,18 +1742,7 @@ const dispatchAction = async () => {
             'PakePlus'
         )
         buildLoading.value = false
-        ElMessageBox.confirm('跳转到常见问题查看解决办法', '发布失败', {
-            confirmButtonText: 'OK',
-            type: 'warning',
-            center: true,
-        })
-            .then(() => {
-                openUrl(urlMap.questiondoc)
-            })
-            .catch(() => {
-                openUrl(urlMap.questiondoc)
-            })
-        return
+        throw new Error(t('dispatchError') + ': ' + message)
     } else {
         buildSecondTimer = setInterval(() => {
             buildTime += 1
@@ -1933,6 +1931,7 @@ onMounted(async () => {
         // initJsFileContents()
         const window = getCurrentWindow()
         window.setTitle(`${store.currentProject.name}`)
+        methodChange('local')
     }
     console.log('route.query', route.query)
     const delrelease = route.query.delrelease

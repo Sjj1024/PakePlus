@@ -740,3 +740,99 @@ pub fn find_port() -> Result<u16, String> {
     let port = listener.local_addr().unwrap().port();
     Ok(port)
 }
+
+#[tauri::command]
+pub fn windows_build(base_dir: &str, exe_name: &str, config: String) -> Result<(), String> {
+    Ok(())
+}
+
+#[tauri::command]
+pub fn macos_build(base_dir: &str, exe_name: &str, config: String) -> Result<(), String> {
+    println!("macos_build");
+    let base_path = Path::new(base_dir).join(exe_name);
+    let app_dir = base_path.join("Contents");
+    if !app_dir.exists() {
+        fs::create_dir_all(&app_dir).map_err(|e| e.to_string())?;
+    }
+    // 直接从 base_path 构造
+    let macos_dir = base_path.join("Contents/MacOS");
+    let config_dir = base_path.join("Contents/MacOS/config");
+    let resources_dir = base_path.join("Contents/Resources");
+    if !macos_dir.exists() {
+        fs::create_dir_all(&macos_dir).map_err(|e| e.to_string())?;
+    }
+    if !config_dir.exists() {
+        fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
+    }
+    if !resources_dir.exists() {
+        fs::create_dir_all(&resources_dir).map_err(|e| e.to_string())?;
+    }
+    // 拷贝Info.plist文件
+    let exe_path = env::current_exe().unwrap();
+    let exe_dir = exe_path.parent().unwrap();
+    let exe_parent_dir = exe_dir.parent().unwrap();
+    let info_plist_source = exe_parent_dir.join("Contents/Info.plist");
+    let info_plist_target = base_path.join("Contents/Info.plist");
+    println!(
+        "info_plist_source = {}",
+        info_plist_source.to_str().unwrap()
+    );
+    println!(
+        "info_plist_target = {}",
+        info_plist_target.to_str().unwrap()
+    );
+    fs::copy(&info_plist_source, &info_plist_target).map_err(|e| e.to_string())?;
+    // 拷贝PakePlus
+    let pakeplus_app_source = exe_dir.join("PakePlus");
+    let pakeplus_app_target = base_path.join("Contents/MacOS/PakePlus");
+    println!(
+        "pakeplus_app_source = {}",
+        pakeplus_app_source.to_str().unwrap()
+    );
+    println!(
+        "pakeplus_app_target = {}",
+        pakeplus_app_target.to_str().unwrap()
+    );
+    fs::copy(&pakeplus_app_source, &pakeplus_app_target).map_err(|e| e.to_string())?;
+    // 将config写入MacOS/config/man中
+    let man_path = base_path.join("Contents/MacOS/config/man");
+    fs::write(man_path, config).map_err(|e| e.to_string())?;
+    Ok(())
+}
+
+#[tauri::command]
+pub fn linux_build(base_dir: &str, exe_name: &str, config: String) -> Result<(), String> {
+    Ok(())
+}
+
+#[tauri::command]
+pub fn build_local(
+    handle: AppHandle,
+    target_dir: &str,
+    exe_name: &str,
+    config: WindowConfig,
+) -> Result<(), String> {
+    // 读取man.json配置文件，合并config，并用base64编码
+    let resource_path = handle
+        .path()
+        .resolve("data/man.json", BaseDirectory::Resource)
+        .expect("failed to resolve resource");
+    let man_json = fs::read_to_string(&resource_path).map_err(|e| e.to_string())?;
+    let mut man_json =
+        serde_json::from_str::<serde_json::Value>(&man_json).map_err(|e| e.to_string())?;
+    man_json["window"] = serde_json::to_value(config).unwrap();
+    let man_json_base64 = BASE64_STANDARD.encode(man_json.to_string());
+    #[cfg(target_os = "windows")]
+    {
+        windows_build(target_dir, exe_name, man_json_base64).map_err(|e| e.to_string())?;
+    }
+    #[cfg(target_os = "macos")]
+    {
+        macos_build(target_dir, exe_name, man_json_base64).map_err(|e| e.to_string())?;
+    }
+    #[cfg(target_os = "linux")]
+    {
+        linux_build(target_dir, exe_name, man_json_base64).map_err(|e| e.to_string())?;
+    }
+    Ok(())
+}
