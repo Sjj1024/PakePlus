@@ -1,15 +1,16 @@
 <template>
     <div class="tauriConfig">
         <!-- json config -->
-        <div v-if="isJson" class="jsonInput">
+        <el-scrollbar v-if="isJson" class="jsonInput">
             <Codemirror
                 v-model="uiCode"
                 :options="cmOptions"
                 :extensions="localTheme === 'dark' ? extensions : []"
                 :style="{ height: '100%' }"
+                class="codebox"
                 @change="codeChange"
             ></Codemirror>
-        </div>
+        </el-scrollbar>
         <!-- ui config -->
         <el-collapse v-else v-model="activeName" accordion>
             <el-collapse-item name="1">
@@ -494,6 +495,11 @@ defineExpose({
     .jsonInput {
         width: 100%;
         height: 400px;
+        overflow-x: hidden;
+
+        .codebox {
+            overflow-x: hidden;
+        }
     }
 
     .infoLink {

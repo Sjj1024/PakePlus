@@ -426,18 +426,20 @@
                         <el-radio :value="true">{{ t('openDebug') }}</el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <el-form-item :label="t('releaseNotes')">
-                    <el-input
-                        v-model="store.currentProject.desktop.pubBody"
-                        type="textarea"
-                        disabled
-                        autocomplete="off"
-                        autoCapitalize="off"
-                        autoCorrect="off"
-                        spellCheck="false"
-                        :placeholder="t('inputRelNotes')"
-                    />
-                </el-form-item>
+                <el-scrollbar>
+                    <el-form-item :label="t('releaseNotes')">
+                        <el-input
+                            v-model="store.currentProject.desktop.pubBody"
+                            type="textarea"
+                            disabled
+                            autocomplete="off"
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            spellCheck="false"
+                            :placeholder="t('inputRelNotes')"
+                        />
+                    </el-form-item>
+                </el-scrollbar>
             </el-form>
             <span class="pubNotesTips">
                 <span>{{ t('pubNotesTips') }}</span>
