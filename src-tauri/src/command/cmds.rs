@@ -21,6 +21,7 @@ use tauri::{
 };
 use tauri_plugin_http::reqwest;
 use tauri_plugin_notification::NotificationExt;
+use tokio::time::{sleep, Duration};
 use walkdir::WalkDir;
 use warp::Filter;
 use zip::write::FileOptions;
@@ -743,7 +744,7 @@ pub fn find_port() -> Result<u16, String> {
 }
 
 #[tauri::command]
-pub fn windows_build(base_dir: &str, exe_name: &str, config: String) -> Result<(), String> {
+pub async fn windows_build(base_dir: &str, exe_name: &str, config: String) -> Result<(), String> {
     let base_path = Path::new(base_dir).join(exe_name);
     if !base_path.exists() {
         fs::create_dir_all(&base_path).map_err(|e| e.to_string())?;
@@ -761,12 +762,13 @@ pub fn windows_build(base_dir: &str, exe_name: &str, config: String) -> Result<(
 }
 
 #[tauri::command]
-pub fn macos_build(
+pub async fn macos_build(
     base_dir: &str,
     exe_name: &str,
     config: String,
     base64_png: String,
 ) -> Result<(), String> {
+    sleep(Duration::from_secs(15)).await;
     // if dev, need create Info.plist file in target dir
     let base_path = Path::new(base_dir).join(exe_name);
     let app_dir = base_path.join("Contents");
@@ -808,12 +810,12 @@ pub fn macos_build(
 }
 
 #[tauri::command]
-pub fn linux_build(base_dir: &str, exe_name: &str, config: String) -> Result<(), String> {
+pub async fn linux_build(base_dir: &str, exe_name: &str, config: String) -> Result<(), String> {
     Ok(())
 }
 
 #[tauri::command]
-pub fn build_local(
+pub async fn build_local(
     handle: AppHandle,
     target_dir: &str,
     exe_name: &str,
@@ -830,18 +832,13 @@ pub fn build_local(
     man_json["window"] = serde_json::to_value(config).unwrap();
     let man_json_base64 = BASE64_STANDARD.encode(man_json.to_string());
     #[cfg(target_os = "windows")]
-    {
-        windows_build(target_dir, exe_name, man_json_base64).map_err(|e| e.to_string())?;
-    }
+    windows_build(target_dir, exe_name, man_json_base64).await?;
+
     #[cfg(target_os = "macos")]
-    {
-        macos_build(target_dir, exe_name, man_json_base64, base64_png)
-            .map_err(|e| e.to_string())?;
-    }
+    macos_build(target_dir, exe_name, man_json_base64, base64_png).await?;
+
     #[cfg(target_os = "linux")]
-    {
-        linux_build(target_dir, exe_name, man_json_base64).map_err(|e| e.to_string())?;
-    }
+    linux_build(target_dir, exe_name, man_json_base64).await?;
     Ok(())
 }
 
