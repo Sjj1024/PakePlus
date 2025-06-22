@@ -12,6 +12,7 @@ use std::io::Write;
 use std::net::TcpListener;
 use std::path::Path;
 use std::path::PathBuf;
+use std::process::Command;
 use std::sync::{Arc, Mutex};
 use std::time::Instant;
 use tauri::WindowEvent;
@@ -760,7 +761,12 @@ pub fn windows_build(base_dir: &str, exe_name: &str, config: String) -> Result<(
 }
 
 #[tauri::command]
-pub fn macos_build(base_dir: &str, exe_name: &str, config: String) -> Result<(), String> {
+pub fn macos_build(
+    base_dir: &str,
+    exe_name: &str,
+    config: String,
+    base64_png: String,
+) -> Result<(), String> {
     // if dev, need create Info.plist file in target dir
     let base_path = Path::new(base_dir).join(exe_name);
     let app_dir = base_path.join("Contents");
@@ -790,8 +796,15 @@ pub fn macos_build(base_dir: &str, exe_name: &str, config: String) -> Result<(),
     fs::copy(&pakeplus_app_source, &pakeplus_app_target).map_err(|e| "copy pakeplus app failed")?;
     let man_path = base_path.join("Contents/MacOS/config/man");
     fs::write(man_path, config).map_err(|e| "write man failed")?;
-    let base_app = Path::new(base_dir).join(format!("{}.app", exe_name));
-    fs::rename(base_path, base_app).map_err(|e| "rename app failed")?;
+    // creat icns
+    println!("base_path =");
+    let icns_path = png_to_icns(
+        base64_png.replace("data:image/png;base64,", ""),
+        resources_dir.to_str().unwrap().to_string(),
+    )
+    .map_err(|e| e.to_string())?;
+    // let base_app = Path::new(base_dir).join(format!("{}.app", exe_name));
+    // fs::rename(base_path, base_app).map_err(|e| "rename app failed")?;
     Ok(())
 }
 
@@ -806,6 +819,7 @@ pub fn build_local(
     target_dir: &str,
     exe_name: &str,
     config: WindowConfig,
+    base64_png: String,
 ) -> Result<(), String> {
     let resource_path = handle
         .path()
@@ -822,11 +836,81 @@ pub fn build_local(
     }
     #[cfg(target_os = "macos")]
     {
-        macos_build(target_dir, exe_name, man_json_base64).map_err(|e| e.to_string())?;
+        macos_build(target_dir, exe_name, man_json_base64, base64_png)
+            .map_err(|e| e.to_string())?;
     }
     #[cfg(target_os = "linux")]
     {
         linux_build(target_dir, exe_name, man_json_base64).map_err(|e| e.to_string())?;
     }
+    Ok(())
+}
+
+#[tauri::command]
+pub fn png_to_icns(base64_png: String, output_dir: String) -> Result<(), String> {
+    println!("output_dir png to icns");
+    // 创建临时iconset目录
+    let iconset_path = format!("{}/temp.iconset", output_dir);
+    if Path::new(&iconset_path).exists() {
+        fs::remove_dir_all(&iconset_path).map_err(|e| format!("删除旧目录失败: {}", e))?;
+    }
+    fs::create_dir_all(&iconset_path).map_err(|e| format!("创建iconset目录失败: {}", e))?;
+    // 解码base64 PNG
+    let png_data = BASE64_STANDARD
+        .decode(&base64_png)
+        .map_err(|e| format!("Base64解码失败: {}", e))?;
+    let input_png_path = format!("{}/icon.png", output_dir);
+    println!("input_png_path: {input_png_path}");
+    let mut png_file = File::create(&input_png_path).map_err(|e| format!("写入PNG失败: {}", e))?;
+    png_file
+        .write_all(&png_data)
+        .map_err(|e| format!("写入PNG内容失败: {}", e))?;
+    // 用sips生成多尺寸图片
+    let sizes = vec![16, 32, 128, 256, 512];
+    for size in sizes {
+        let double = size * 2;
+        let filename = format!("{}/icon_{}x{}.png", iconset_path, size, size);
+        let filename2x = format!("{}/icon_{}x{}@2x.png", iconset_path, size, size);
+        let status1 = Command::new("sips")
+            .args([
+                "-z",
+                &size.to_string(),
+                &size.to_string(),
+                &input_png_path,
+                "--out",
+                &filename,
+            ])
+            .status()
+            .map_err(|e| format!("执行sips失败: {}", e))?;
+        let status2 = Command::new("sips")
+            .args([
+                "-z",
+                &double.to_string(),
+                &double.to_string(),
+                &input_png_path,
+                "--out",
+                &filename2x,
+            ])
+            .status()
+            .map_err(|e| format!("执行sips 2x失败: {}", e))?;
+
+        if !status1.success() || !status2.success() {
+            return Err("sips 转换失败".into());
+        }
+    }
+    // 生成icns
+    let icns_path = format!("{}/icon.icns", output_dir);
+    print!("icns_path = {icns_path}");
+    let status = Command::new("iconutil")
+        .args(["-c", "icns", &iconset_path, "-o", &icns_path])
+        .status()
+        .map_err(|e| format!("执行iconutil失败: {}", e))?;
+    print!("status = {status}");
+    if !status.success() {
+        return Err("iconutil 转换失败".into());
+    }
+    // 清理中间文件
+    let _ = fs::remove_file(&input_png_path);
+    let _ = fs::remove_dir_all(&iconset_path);
     Ok(())
 }

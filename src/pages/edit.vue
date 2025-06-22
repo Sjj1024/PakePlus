@@ -1651,6 +1651,7 @@ const easyLocal = async () => {
         targetDir: targetDir,
         exeName: store.currentProject.showName,
         config: store.currentProject.more.windows,
+        base64Png: store.currentProject.icon,
     })
         .then((res) => {
             console.log('build_local1 res', res)
