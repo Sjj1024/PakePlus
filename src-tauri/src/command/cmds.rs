@@ -761,6 +761,7 @@ pub fn windows_build(base_dir: &str, exe_name: &str, config: String) -> Result<(
 
 #[tauri::command]
 pub fn macos_build(base_dir: &str, exe_name: &str, config: String) -> Result<(), String> {
+    // if dev, need create Info.plist file in target dir
     let base_path = Path::new(base_dir).join(exe_name);
     let app_dir = base_path.join("Contents");
     if !app_dir.exists() {
@@ -781,14 +782,16 @@ pub fn macos_build(base_dir: &str, exe_name: &str, config: String) -> Result<(),
     let exe_path = env::current_exe().unwrap();
     let exe_dir = exe_path.parent().unwrap();
     let exe_parent_dir = exe_dir.parent().unwrap();
-    let info_plist_source = exe_parent_dir.join("Contents/Info.plist");
+    let info_plist_source = exe_parent_dir.join("Info.plist");
     let info_plist_target = base_path.join("Contents/Info.plist");
-    fs::copy(&info_plist_source, &info_plist_target).map_err(|e| e.to_string())?;
+    fs::copy(&info_plist_source, &info_plist_target).map_err(|e| "copy info.plist failed")?;
     let pakeplus_app_source = exe_dir.join("PakePlus");
     let pakeplus_app_target = base_path.join("Contents/MacOS/PakePlus");
-    fs::copy(&pakeplus_app_source, &pakeplus_app_target).map_err(|e| e.to_string())?;
+    fs::copy(&pakeplus_app_source, &pakeplus_app_target).map_err(|e| "copy pakeplus app failed")?;
     let man_path = base_path.join("Contents/MacOS/config/man");
-    fs::write(man_path, config).map_err(|e| e.to_string())?;
+    fs::write(man_path, config).map_err(|e| "write man failed")?;
+    let base_app = Path::new(base_dir).join(format!("{}.app", exe_name));
+    fs::rename(base_path, base_app).map_err(|e| "rename app failed")?;
     Ok(())
 }
 

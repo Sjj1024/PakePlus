@@ -1652,6 +1652,14 @@ const easyLocal = async () => {
         exeName: store.currentProject.showName,
         config: store.currentProject.more.windows,
     })
+        .then((res) => {
+            console.log('build_local1 res', res)
+            oneMessage.success('本地打包成功')
+        })
+        .catch((error) => {
+            console.error('build_local2 error', error)
+            oneMessage.error(error)
+        })
 }
 
 // new publish version
