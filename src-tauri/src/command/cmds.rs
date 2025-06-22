@@ -797,14 +797,13 @@ pub fn macos_build(
     let man_path = base_path.join("Contents/MacOS/config/man");
     fs::write(man_path, config).map_err(|e| "write man failed")?;
     // creat icns
-    println!("base_path =");
-    let icns_path = png_to_icns(
+    let _ = png_to_icns(
         base64_png.replace("data:image/png;base64,", ""),
         resources_dir.to_str().unwrap().to_string(),
     )
     .map_err(|e| e.to_string())?;
-    // let base_app = Path::new(base_dir).join(format!("{}.app", exe_name));
-    // fs::rename(base_path, base_app).map_err(|e| "rename app failed")?;
+    let base_app = Path::new(base_dir).join(format!("{}.app", exe_name));
+    fs::rename(base_path, base_app).map_err(|e| "rename app failed")?;
     Ok(())
 }
 
@@ -848,7 +847,6 @@ pub fn build_local(
 
 #[tauri::command]
 pub fn png_to_icns(base64_png: String, output_dir: String) -> Result<(), String> {
-    println!("output_dir png to icns");
     // 创建临时iconset目录
     let iconset_path = format!("{}/temp.iconset", output_dir);
     if Path::new(&iconset_path).exists() {
@@ -860,7 +858,6 @@ pub fn png_to_icns(base64_png: String, output_dir: String) -> Result<(), String>
         .decode(&base64_png)
         .map_err(|e| format!("Base64解码失败: {}", e))?;
     let input_png_path = format!("{}/icon.png", output_dir);
-    println!("input_png_path: {input_png_path}");
     let mut png_file = File::create(&input_png_path).map_err(|e| format!("写入PNG失败: {}", e))?;
     png_file
         .write_all(&png_data)
@@ -893,19 +890,16 @@ pub fn png_to_icns(base64_png: String, output_dir: String) -> Result<(), String>
             ])
             .status()
             .map_err(|e| format!("执行sips 2x失败: {}", e))?;
-
         if !status1.success() || !status2.success() {
             return Err("sips 转换失败".into());
         }
     }
     // 生成icns
     let icns_path = format!("{}/icon.icns", output_dir);
-    print!("icns_path = {icns_path}");
     let status = Command::new("iconutil")
         .args(["-c", "icns", &iconset_path, "-o", &icns_path])
         .status()
         .map_err(|e| format!("执行iconutil失败: {}", e))?;
-    print!("status = {status}");
     if !status.success() {
         return Err("iconutil 转换失败".into());
     }

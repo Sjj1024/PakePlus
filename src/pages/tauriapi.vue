@@ -663,9 +663,9 @@
                             content="Returns the current operating system architecture."
                             placement="bottom"
                         >
-                            <el-button @click="osApis('arch')"
-                                >arch()</el-button
-                            >
+                            <el-button @click="osApis('arch')">
+                                arch()
+                            </el-button>
                         </el-tooltip>
                         <el-tooltip
                             content="Returns the operating system-specific end-of-line marker."

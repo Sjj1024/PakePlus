@@ -935,7 +935,7 @@ const confirmIcon = (base64Data: string) => {
     const image = new Image()
     image.src = base64Data
     image.onload = () => {
-        roundIcon.value = cropImageToRound(image)
+        roundIcon.value = cropImageToRound(image, 40)
     }
 }
 
@@ -1651,7 +1651,12 @@ const easyLocal = async () => {
         targetDir: targetDir,
         exeName: store.currentProject.showName,
         config: store.currentProject.more.windows,
-        base64Png: store.currentProject.icon,
+        base64Png:
+            platformName === 'macos'
+                ? store.currentProject.iconRound
+                    ? roundIcon.value
+                    : store.currentProject.icon
+                : store.currentProject.icon,
     })
         .then((res) => {
             console.log('build_local1 res', res)
