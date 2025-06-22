@@ -47,8 +47,8 @@ arm64 位下载下面两个结尾的文件：
 
 原因：[https://v2.tauri.app/reference/config/#dragdropenabled](https://v2.tauri.app/reference/config/#dragdropenabled)  
 解决办法：  
-mac平台: 在更多配置中，关闭 dragDropEnabled 选项，然后重新打包。
-windows平台: 在更多配置中，开启 dragDropEnabled 选项，然后重新打包。
+mac 平台: 在更多配置中，关闭 dragDropEnabled 选项，然后重新打包。
+windows 平台: 在更多配置中，开启 dragDropEnabled 选项，然后重新打包。
 
 # 打包后白屏或报错
 
@@ -68,6 +68,8 @@ windows平台: 在更多配置中，开启 dragDropEnabled 选项，然后重新
 确认 token 权限是否配置正确，然后重新填入 token 试试，往往是 token 权限配置错误导致的。或者点击首页头像然后同步一下试试。
 
 # Cannot read properties of undefined XXX
+
+> PakePlus publish action error undefined 等等问题
 
 用最新版本的 PakePlus，然后填入 token 试试，能解决 99%的问题。或者点击首页头像然后同步一下试试。
 

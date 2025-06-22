@@ -301,7 +301,7 @@
                         &#xe66b;
                     </span>
                 </el-form-item>
-                <el-form-item :label="t('filterElements')" prop="desc">
+                <el-form-item :label="t('filterElements')" prop="filterCss">
                     <el-input
                         v-model="store.currentProject.filterCss"
                         type="textarea"
@@ -321,9 +321,10 @@
                         autoCapitalize="off"
                         autoCorrect="off"
                         spellCheck="false"
-                        disabled
+                        :disabled="!isDev"
                         :rows="3"
                         :placeholder="t('desTips')"
+                        @input="validateNoNewlines"
                     />
                 </el-form-item>
             </el-form>
@@ -431,7 +432,7 @@
                         <el-input
                             v-model="store.currentProject.desktop.pubBody"
                             type="textarea"
-                            disabled
+                            :disabled="!isDev"
                             autocomplete="off"
                             autoCapitalize="off"
                             autoCorrect="off"
@@ -583,6 +584,7 @@ import {
     createIssue,
     checkLastPublish,
     fileLimitNumber,
+    isDev,
 } from '@/utils/common'
 import { arch, platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -1320,6 +1322,15 @@ const saveFormInput = async () => {
     }
 }
 
+// validate no newlines
+const validateNoNewlines = () => {
+    const desc = store.currentProject.desktop.desc
+    if (desc && (desc.includes('\n') || desc.includes('\r'))) {
+        oneMessage.error('描述不能包含换行符')
+        store.currentProject.desktop.desc = desc.replace(/[\n\r]/g, '')
+    }
+}
+
 // save project
 const saveProject = async (tips: boolean = true) => {
     // await emit('handlepay', { loggedIn: true, token: 'authToken' })
@@ -1933,7 +1944,7 @@ onMounted(async () => {
         // initJsFileContents()
         const window = getCurrentWindow()
         window.setTitle(`${store.currentProject.name}`)
-        methodChange('local')
+        methodChange(store.currentProject.desktop.buildMethod)
     }
     console.log('route.query', route.query)
     const delrelease = route.query.delrelease
