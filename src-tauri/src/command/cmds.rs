@@ -807,6 +807,10 @@ pub async fn macos_build(
     )
     .expect("convert png to icns failed");
     let base_app = Path::new(base_dir).join(format!("{}.app", exe_name));
+    // if base_app exists, delete it
+    if base_app.exists() {
+        fs::remove_dir_all(&base_app).expect("delete old app failed");
+    }
     fs::rename(base_path, base_app).expect("rename app failed");
     Ok(())
 }
@@ -824,23 +828,28 @@ pub async fn build_local(
     config: WindowConfig,
     base64_png: String,
 ) -> Result<(), String> {
+    handle.emit("local-progress", "10").unwrap();
     let resource_path = handle
         .path()
         .resolve("data/man.json", BaseDirectory::Resource)
         .expect("failed to resolve resource");
-    let man_json = fs::read_to_string(&resource_path).map_err(|e| e.to_string())?;
+    handle.emit("local-progress", "20").unwrap();
+    let man_json = fs::read_to_string(&resource_path).expect("read man.json failed");
+    handle.emit("local-progress", "30").unwrap();
     let mut man_json =
-        serde_json::from_str::<serde_json::Value>(&man_json).map_err(|e| e.to_string())?;
+        serde_json::from_str::<serde_json::Value>(&man_json).expect("parse man.json failed");
     man_json["window"] = serde_json::to_value(config).unwrap();
     let man_json_base64 = BASE64_STANDARD.encode(man_json.to_string());
+    handle.emit("local-progress", "40").unwrap();
     #[cfg(target_os = "windows")]
     windows_build(target_dir, exe_name, man_json_base64).await?;
-
+    handle.emit("local-progress", "60").unwrap();
     #[cfg(target_os = "macos")]
     macos_build(target_dir, exe_name, man_json_base64, base64_png).await?;
-
+    handle.emit("local-progress", "80").unwrap();
     #[cfg(target_os = "linux")]
     linux_build(target_dir, exe_name, man_json_base64).await?;
+    handle.emit("local-progress", "100").unwrap();
     Ok(())
 }
 
