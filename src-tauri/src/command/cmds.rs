@@ -768,44 +768,46 @@ pub async fn macos_build(
     config: String,
     base64_png: String,
 ) -> Result<(), String> {
-    sleep(Duration::from_secs(15)).await;
     // if dev, need create Info.plist file in target dir
     let base_path = Path::new(base_dir).join(exe_name);
     let app_dir = base_path.join("Contents");
     if !app_dir.exists() {
-        fs::create_dir_all(&app_dir).map_err(|e| e.to_string())?;
+        fs::create_dir_all(&app_dir).expect("create app dir failed");
     }
+    sleep(Duration::from_secs(10)).await;
     let macos_dir = base_path.join("Contents/MacOS");
     let config_dir = base_path.join("Contents/MacOS/config");
     let resources_dir = base_path.join("Contents/Resources");
     if !macos_dir.exists() {
-        fs::create_dir_all(&macos_dir).map_err(|e| e.to_string())?;
+        fs::create_dir_all(&macos_dir).expect("create macos dir failed");
     }
     if !config_dir.exists() {
-        fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
+        fs::create_dir_all(&config_dir).expect("create config dir failed");
     }
     if !resources_dir.exists() {
-        fs::create_dir_all(&resources_dir).map_err(|e| e.to_string())?;
+        fs::create_dir_all(&resources_dir).expect("create resources dir failed");
     }
+    sleep(Duration::from_secs(10)).await;
     let exe_path = env::current_exe().unwrap();
     let exe_dir = exe_path.parent().unwrap();
     let exe_parent_dir = exe_dir.parent().unwrap();
     let info_plist_source = exe_parent_dir.join("Info.plist");
     let info_plist_target = base_path.join("Contents/Info.plist");
-    fs::copy(&info_plist_source, &info_plist_target).map_err(|e| "copy info.plist failed")?;
+    fs::copy(&info_plist_source, &info_plist_target).expect("copy info.plist failed");
     let pakeplus_app_source = exe_dir.join("PakePlus");
     let pakeplus_app_target = base_path.join("Contents/MacOS/PakePlus");
-    fs::copy(&pakeplus_app_source, &pakeplus_app_target).map_err(|e| "copy pakeplus app failed")?;
+    fs::copy(&pakeplus_app_source, &pakeplus_app_target).expect("copy pakeplus app failed");
+    sleep(Duration::from_secs(10)).await;
     let man_path = base_path.join("Contents/MacOS/config/man");
-    fs::write(man_path, config).map_err(|e| "write man failed")?;
+    fs::write(man_path, config).expect("write man failed");
     // creat icns
     let _ = png_to_icns(
         base64_png.replace("data:image/png;base64,", ""),
         resources_dir.to_str().unwrap().to_string(),
     )
-    .map_err(|e| e.to_string())?;
+    .expect("convert png to icns failed");
     let base_app = Path::new(base_dir).join(format!("{}.app", exe_name));
-    fs::rename(base_path, base_app).map_err(|e| "rename app failed")?;
+    fs::rename(base_path, base_app).expect("rename app failed");
     Ok(())
 }
 
@@ -844,22 +846,21 @@ pub async fn build_local(
 
 #[tauri::command]
 pub fn png_to_icns(base64_png: String, output_dir: String) -> Result<(), String> {
-    // 创建临时iconset目录
     let iconset_path = format!("{}/temp.iconset", output_dir);
     if Path::new(&iconset_path).exists() {
-        fs::remove_dir_all(&iconset_path).map_err(|e| format!("删除旧目录失败: {}", e))?;
+        fs::remove_dir_all(&iconset_path)
+            .map_err(|e| format!("delete old iconset dir failed: {}", e))?;
     }
-    fs::create_dir_all(&iconset_path).map_err(|e| format!("创建iconset目录失败: {}", e))?;
-    // 解码base64 PNG
+    fs::create_dir_all(&iconset_path).map_err(|e| format!("create iconset dir failed: {}", e))?;
     let png_data = BASE64_STANDARD
         .decode(&base64_png)
-        .map_err(|e| format!("Base64解码失败: {}", e))?;
+        .map_err(|e| format!("decode base64 png failed: {}", e))?;
     let input_png_path = format!("{}/icon.png", output_dir);
-    let mut png_file = File::create(&input_png_path).map_err(|e| format!("写入PNG失败: {}", e))?;
+    let mut png_file =
+        File::create(&input_png_path).map_err(|e| format!("write png failed: {}", e))?;
     png_file
         .write_all(&png_data)
-        .map_err(|e| format!("写入PNG内容失败: {}", e))?;
-    // 用sips生成多尺寸图片
+        .map_err(|e| format!("write png content failed: {}", e))?;
     let sizes = vec![16, 32, 128, 256, 512];
     for size in sizes {
         let double = size * 2;
@@ -875,7 +876,7 @@ pub fn png_to_icns(base64_png: String, output_dir: String) -> Result<(), String>
                 &filename,
             ])
             .status()
-            .map_err(|e| format!("执行sips失败: {}", e))?;
+            .map_err(|e| format!("execute sips failed: {}", e))?;
         let status2 = Command::new("sips")
             .args([
                 "-z",
@@ -886,21 +887,19 @@ pub fn png_to_icns(base64_png: String, output_dir: String) -> Result<(), String>
                 &filename2x,
             ])
             .status()
-            .map_err(|e| format!("执行sips 2x失败: {}", e))?;
+            .map_err(|e| format!("execute sips 2x failed: {}", e))?;
         if !status1.success() || !status2.success() {
-            return Err("sips 转换失败".into());
+            return Err("sips convert failed".into());
         }
     }
-    // 生成icns
     let icns_path = format!("{}/icon.icns", output_dir);
     let status = Command::new("iconutil")
         .args(["-c", "icns", &iconset_path, "-o", &icns_path])
         .status()
-        .map_err(|e| format!("执行iconutil失败: {}", e))?;
+        .map_err(|e| format!("execute iconutil failed: {}", e))?;
     if !status.success() {
-        return Err("iconutil 转换失败".into());
+        return Err("iconutil convert failed".into());
     }
-    // 清理中间文件
     let _ = fs::remove_file(&input_png_path);
     let _ = fs::remove_dir_all(&iconset_path);
     Ok(())
