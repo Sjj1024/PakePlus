@@ -1602,7 +1602,7 @@ const easyLocal = async () => {
                 : store.currentProject.icon,
         debug: store.currentProject.desktop.debug,
         customJs: await getInitializationScript(true),
-        htmlPath: store.currentProject.htmlPath
+        htmlPath: store.currentProject.htmlPath,
     })
         .then((res) => {
             console.log('build_local1 res', res)
@@ -1622,12 +1622,6 @@ const easyLocal = async () => {
 
 // new publish version
 const publishWeb = async () => {
-    //  else if (store.currentProject.platform.length === 0) {
-    //     oneMessage.error(t('selectPlatform'))
-    //     return
-    // }
-    const now = new Date()
-    localStorage.setItem('lastClickTime', now.toISOString())
     try {
         // delete release
         store.isRelease && (await store.deleteRelease())
@@ -1652,6 +1646,9 @@ const publishWeb = async () => {
         buildTime = 0
         loadingText(t('failure'))
         buildLoading.value = false
+        const now = new Date()
+        const futureTime = new Date(now.getTime() + 50 * 60 * 1000)
+        localStorage.setItem('lastClickTime', futureTime.toISOString())
         createIssue(
             store.currentProject.name,
             store.currentProject.showName,
@@ -1818,6 +1815,8 @@ const checkBuildStatus = async () => {
                 'build success',
                 'PakePlus'
             )
+            const now = new Date()
+            localStorage.setItem('lastClickTime', now.toISOString())
             await new Promise((resolve) => setTimeout(resolve, 3000))
             store.setCurrentRelease()
             loadingText(t('buildSuccess'))
