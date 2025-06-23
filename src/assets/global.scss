@@ -70,34 +70,14 @@ body {
 }
 
 
-/* Element Plus风格的滚动条样式 - 仅在聚焦时显示 */
-* {
-    scrollbar-width: none; /* Firefox隐藏滚动条但保留功能 */
-  }
-  
-  *::-webkit-scrollbar {
-    display: none; /* 初始隐藏Chrome/Safari/Edge的滚动条 */
-  }
-  
-  /* 当元素被聚焦或鼠标悬停时显示滚动条 */
-  *:focus-within::-webkit-scrollbar,
-  *:hover::-webkit-scrollbar {
-    display: block;
-  }
-  
-  *:focus-within,
-  *:hover {
-    scrollbar-width: thin;
-  }
-  
-  /* 滚动条样式 */
-  ::-webkit-scrollbar {
+/* Element Plus风格的滚动条样式 */
+::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: transparent; /* 轨道背景改为透明 */
     border-radius: 3px;
   }
   
@@ -111,10 +91,10 @@ body {
   }
   
   ::-webkit-scrollbar-corner {
-    background: transparent;
+    background: transparent; /* 边角背景也改为透明 */
   }
   
-  /* 暗色主题支持 */
+  /* 为暗色主题添加的样式 */
   .dark ::-webkit-scrollbar-track {
     background: transparent;
   }
