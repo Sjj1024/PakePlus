@@ -759,18 +759,27 @@ pub fn find_port() -> Result<u16, String> {
 }
 
 #[tauri::command]
-pub async fn windows_build(base_dir: &str, exe_name: &str, config: String) -> Result<(), String> {
+pub async fn windows_build(
+    base_dir: &str,
+    exe_name: &str,
+    config: String,
+    base64_png: String,
+    custom_js: String,
+) -> Result<(), String> {
     let base_path = Path::new(base_dir).join(exe_name);
     if !base_path.exists() {
         fs::create_dir_all(&base_path).map_err(|e| e.to_string())?;
     }
-    let target_exe_path = base_path.join(format!("{}.exe", exe_name));
-    let exe_path = env::current_exe().unwrap();
-    fs::copy(exe_path, target_exe_path).map_err(|e| e.to_string())?;
-    let config_dir = base_path.join("config");
+    // config_dir
+    let config_dir = base_path.join("config").join("inject");
     if !config_dir.exists() {
         fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
     }
+    let custom_js_path = config_dir.join("custom.js");
+    fs::write(custom_js_path, custom_js).map_err(|e| e.to_string())?;
+    let target_exe_path = base_path.join(format!("{}.exe", exe_name));
+    let exe_path = env::current_exe().unwrap();
+    fs::copy(exe_path, target_exe_path).map_err(|e| e.to_string())?;
     let man_path = config_dir.join("man");
     fs::write(man_path, config).map_err(|e| e.to_string())?;
     Ok(())
