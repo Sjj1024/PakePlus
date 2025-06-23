@@ -69,41 +69,40 @@ body {
     background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
-/* 默认：明亮模式 */
+
+/* Element Plus风格的滚动条样式 */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: rgba(144, 147, 153, 0.3); /* 明亮模式下的灰色 */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f0f2f5;
     border-radius: 3px;
-    transition: background-color 0.3s;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(144, 147, 153, 0.5);
-}
-
-/* 暗黑模式（假设 HTML 或 body 上有类 .dark） */
-.dark ::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.35);
-}
-
-/* Firefox 兼容样式 */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(144, 147, 153, 0.3) transparent;
-}
-
-.dark * {
-    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-}
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #c0c4cc;
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #909399;
+  }
+  
+  ::-webkit-scrollbar-corner {
+    background: #f0f2f5;
+  }
+  
+  /* 为暗色主题添加的样式 */
+  .dark ::-webkit-scrollbar-track {
+    background: #1e1e20;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb {
+    background: #4e4e52;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #6d6d70;
+  }    
