@@ -780,7 +780,7 @@ pub async fn windows_build(
     let target_exe_path = base_path.join(format!("{}.exe", exe_name));
     let exe_path = env::current_exe().unwrap();
     fs::copy(exe_path, target_exe_path).map_err(|e| e.to_string())?;
-    let man_path = base_path.join("man");
+    let man_path = base_path.join("config").join("man");
     fs::write(man_path, config).map_err(|e| e.to_string())?;
     Ok(())
 }
