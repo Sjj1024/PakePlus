@@ -681,7 +681,7 @@ const drawAppleStylePath = (
     const effectiveWidth = width - 2 * padding
     const effectiveHeight = height - 2 * padding
     // 调整圆角半径为宽高的25%（与Sharp版本中的250/1024≈24.4%接近）
-    const radius = Math.min(effectiveWidth, effectiveHeight) * 0.2
+    const radius = Math.min(effectiveWidth, effectiveHeight) * 0.24
 
     // 使用标准的90度圆弧（控制点偏移量为半径的0.55228475）
     const controlOffset = radius * 0.55228475
