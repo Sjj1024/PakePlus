@@ -731,6 +731,21 @@ pub fn get_www_dir(base_dir: &str) -> Result<String, io::Error> {
     Ok(String::new())
 }
 
+// get config custom js
+#[tauri::command]
+pub fn get_config_js(base_dir: &str) -> Result<String, io::Error> {
+    let mut config_dir = PathBuf::from(base_dir);
+    config_dir.push("config");
+    config_dir.push("inject");
+    config_dir.push("custom.js");
+    if fs::metadata(&config_dir).is_ok() {
+        let content = fs::read_to_string(&config_dir)?;
+        Ok(content)
+    } else {
+        Ok(String::new())
+    }
+}
+
 #[tauri::command]
 pub fn get_env_var(name: String) -> Result<String, String> {
     std::env::var(name).map_err(|e| e.to_string())
@@ -767,6 +782,7 @@ pub async fn macos_build(
     exe_name: &str,
     config: String,
     base64_png: String,
+    custom_js: String,
 ) -> Result<(), String> {
     // if dev, need create Info.plist file in target dir
     let base_path = Path::new(base_dir).join(exe_name);
@@ -775,12 +791,8 @@ pub async fn macos_build(
         fs::create_dir_all(&app_dir).expect("create app dir failed");
     }
     sleep(Duration::from_secs(10)).await;
-    let macos_dir = base_path.join("Contents/MacOS");
-    let config_dir = base_path.join("Contents/MacOS/config");
+    let config_dir = base_path.join("Contents/MacOS/config/inject");
     let resources_dir = base_path.join("Contents/Resources");
-    if !macos_dir.exists() {
-        fs::create_dir_all(&macos_dir).expect("create macos dir failed");
-    }
     if !config_dir.exists() {
         fs::create_dir_all(&config_dir).expect("create config dir failed");
     }
@@ -788,6 +800,9 @@ pub async fn macos_build(
         fs::create_dir_all(&resources_dir).expect("create resources dir failed");
     }
     sleep(Duration::from_secs(10)).await;
+    // custom js
+    let custom_js_path = config_dir.join("custom.js");
+    fs::write(custom_js_path, custom_js).expect("write custom.js failed");
     let exe_path = env::current_exe().unwrap();
     let exe_dir = exe_path.parent().unwrap();
     let exe_parent_dir = exe_dir.parent().unwrap();
@@ -827,6 +842,8 @@ pub async fn build_local(
     exe_name: &str,
     config: WindowConfig,
     base64_png: String,
+    debug: bool,
+    custom_js: String,
 ) -> Result<(), String> {
     handle.emit("local-progress", "10").unwrap();
     let resource_path = handle
@@ -839,13 +856,14 @@ pub async fn build_local(
     let mut man_json =
         serde_json::from_str::<serde_json::Value>(&man_json).expect("parse man.json failed");
     man_json["window"] = serde_json::to_value(config).unwrap();
+    man_json["debug"] = serde_json::to_value(debug).unwrap();
     let man_json_base64 = BASE64_STANDARD.encode(man_json.to_string());
     handle.emit("local-progress", "40").unwrap();
     #[cfg(target_os = "windows")]
     windows_build(target_dir, exe_name, man_json_base64).await?;
     handle.emit("local-progress", "60").unwrap();
     #[cfg(target_os = "macos")]
-    macos_build(target_dir, exe_name, man_json_base64, base64_png).await?;
+    macos_build(target_dir, exe_name, man_json_base64, base64_png, custom_js).await?;
     handle.emit("local-progress", "80").unwrap();
     #[cfg(target_os = "linux")]
     linux_build(target_dir, exe_name, man_json_base64).await?;

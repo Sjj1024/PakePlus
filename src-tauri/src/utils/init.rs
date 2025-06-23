@@ -1,4 +1,4 @@
-use crate::command::cmds::{get_exe_dir, get_www_dir, load_man};
+use crate::command::cmds::{get_config_js, get_exe_dir, get_www_dir, load_man};
 use base64::{prelude::BASE64_STANDARD, Engine};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Error, Value};
@@ -13,6 +13,7 @@ pub struct Man {
     pub author: String,
     pub license: String,
     pub window: WindowConfig,
+    pub debug: bool,
 }
 
 pub fn append_param(original_url: &str, value: &str) -> String {
@@ -59,6 +60,8 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     let startup_dir = get_exe_dir();
     let man = load_man(&startup_dir);
     let man_content = man.unwrap();
+    // custom js
+    let mut contents = String::new();
     if man_content.len() > 0 {
         let mut man_config: Man = serde_json::from_str(&man_content).unwrap();
         let www_dir = get_www_dir(&startup_dir);
@@ -67,10 +70,20 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
             man_config.window.url = WebviewUrl::External(Url::parse(&www_dir_str).unwrap());
         }
         config = man_config.window;
+        // custom js
+        let custom_js = get_config_js(&startup_dir);
+        if custom_js.is_ok() {
+            contents = custom_js.unwrap();
+        }
+        // debug
+        if man_config.debug {
+            contents += "var vConsole = new window.VConsole();";
+        }
     }
     // init window
     let window = tauri::WebviewWindowBuilder::from_config(app_handle, &config)
         .unwrap()
+        .initialization_script(contents.as_str())
         .build()
         .unwrap();
     let store = app.store("app_data.json").unwrap();

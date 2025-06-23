@@ -349,7 +349,6 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import githubApi from '@/apis/github'
 import { usePPStore } from '@/store'
-import VConsole from 'vconsole'
 import { Plus, Check } from '@element-plus/icons-vue'
 import {
     urlMap,
@@ -465,7 +464,7 @@ const goAbout = () => {
 
 // new barnch config
 const showBranchDialog = () => {
-    if (store.projectList.length !== 0) {
+    if (store.projectList.length !== 0 && !isDev) {
         oneMessage.error(t('limitProject'))
         return
     }
@@ -711,8 +710,8 @@ const getWebSha = async (repo: string = 'PakePlus') => {
 
 // open vconsole
 const openDebug = () => {
-    const theme: any = localStorage.getItem('theme') || 'light'
-    const _ = new VConsole({ theme: theme })
+    console.log('openDebug')
+    var _ = new window.VConsole()
 }
 
 // delete project confirm

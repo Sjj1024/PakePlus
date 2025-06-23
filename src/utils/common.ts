@@ -347,15 +347,15 @@ export const base64Decode = (str: string) => {
 }
 
 // read file
-export const readFile = async (fileName: string) => {
+export const readStaticFile = async (fileName: string) => {
     try {
         const response = await fetch(`/${fileName}`)
         if (!response.ok) {
-            throw new Error('readFile error')
+            throw new Error('readStaticFile error')
         }
         return response.text()
     } catch (error) {
-        console.error('readFile error', error)
+        console.error('readStaticFile error', error)
         return 'error'
     }
 }
@@ -366,7 +366,7 @@ export const updateBuildFile = async (data: any) => {
         const content = await invoke('update_build_file', data)
         return content
     } else {
-        let content = await readFile('build.yml')
+        let content = await readStaticFile('build.yml')
         if (content === 'error') {
             return 'error'
         }
@@ -394,7 +394,7 @@ export const getCustomJs = async () => {
         const content = await invoke('get_custom_js')
         return content
     } else {
-        let content = await readFile('custom.js')
+        let content = await readStaticFile('custom.js')
         if (content === 'error') {
             return 'error'
         }
@@ -404,7 +404,7 @@ export const getCustomJs = async () => {
 
 // get custom js
 export const getCustomJsFetch = async () => {
-    let content = await readFile('custom.js')
+    let content = await readStaticFile('custom.js')
     if (content === 'error') {
         return 'error'
     }
@@ -417,7 +417,7 @@ export const getBuildYml = async (params: any) => {
         const content = await invoke('update_build_file', params)
         return content
     } else {
-        let content = await readFile('build.yml')
+        let content = await readStaticFile('build.yml')
         if (content === 'error') {
             return 'error'
         }
@@ -431,7 +431,7 @@ export const getBuildYml = async (params: any) => {
 
 // get ppconfig.json file content
 export const getPpconfig = async (params: any) => {
-    let content = await readFile('ppconfig.json')
+    let content = await readStaticFile('ppconfig.json')
     if (content === 'error') {
         return 'error'
     }
@@ -440,7 +440,7 @@ export const getPpconfig = async (params: any) => {
 // get build.yml file content
 export const getBuildYmlFetch = async (params: any) => {
     // 因为工作流文件不用更新，所以这里直接读取build.yml
-    let content = await readFile('build.yml')
+    let content = await readStaticFile('build.yml')
     if (content === 'error') {
         return 'error'
     }
@@ -457,7 +457,7 @@ export const getCargoToml = async (params: any) => {
         const content = await invoke('update_cargo_file', params)
         return content
     } else {
-        let content = await readFile('cargo.txt')
+        let content = await readStaticFile('cargo.txt')
         if (content === 'error') {
             return 'error'
         }
@@ -478,7 +478,7 @@ export const getCargoToml = async (params: any) => {
 
 // get Cargo.toml file content
 export const getCargoTomlFetch = async (params: any) => {
-    let content = await readFile('cargo.txt')
+    let content = await readStaticFile('cargo.txt')
     if (content === 'error') {
         return 'error'
     }
@@ -510,7 +510,7 @@ export const getTauriConf = async (params: any) => {
         const content = await invoke('update_config_file', params)
         return content
     } else {
-        let content = await readFile('config.json')
+        let content = await readStaticFile('config.json')
         if (content === 'error') {
             return 'error'
         }
@@ -535,7 +535,7 @@ export const getTauriConf = async (params: any) => {
 
 // get tauri.conf.json file content
 export const getTauriConfFetch = async (params: any) => {
-    let content = await readFile('config.json')
+    let content = await readStaticFile('config.json')
     if (content === 'error') {
         return 'error'
     }
@@ -575,7 +575,7 @@ export const getInitRust = async (params: any) => {
         const content = await invoke('update_init_rs', params)
         return content
     } else {
-        let content = await readFile('init.txt')
+        let content = await readStaticFile('init.txt')
         if (content === 'error') {
             return 'error'
         }
@@ -598,7 +598,7 @@ export const getInitRust = async (params: any) => {
 
 // get init.rs file content
 export const getLibRsFetch = async (params: any) => {
-    let content = await readFile('lib.txt')
+    let content = await readStaticFile('lib.txt')
     if (content === 'error') {
         return 'error'
     }
@@ -627,7 +627,7 @@ export const getInitRustFetch = async (params: any) => {
     }
     console.log('getInitRust params', params.config)
     params.config = JSON.stringify(params.config)
-    let content = await readFile('init.txt')
+    let content = await readStaticFile('init.txt')
     if (content === 'error') {
         return 'error'
     }
@@ -932,7 +932,7 @@ export const createBranch = async (
 // creat build yml
 // const uploadBuildYml = async (_: string = 'main') => {
 //     // get build.yml file content
-//     // const content = await readFile('build.yml')
+//     // const content = await readStaticFile('build.yml')
 //     const content = await updateBuildFile({
 //         name: 'PakePlus',
 //         body: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.',
