@@ -68,3 +68,42 @@ body {
 .buildDialog {
     background-color: rgba(0, 0, 0, 0.8) !important;
 }
+
+/* 默认：明亮模式 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(144, 147, 153, 0.3); /* 明亮模式下的灰色 */
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(144, 147, 153, 0.5);
+}
+
+/* 暗黑模式（假设 HTML 或 body 上有类 .dark） */
+.dark ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Firefox 兼容样式 */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(144, 147, 153, 0.3) transparent;
+}
+
+.dark * {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
