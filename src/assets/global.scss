@@ -77,7 +77,7 @@ body {
   }
   
   ::-webkit-scrollbar-track {
-    background: transparent; /* 轨道背景改为透明 */
+    background: transparent;
     border-radius: 3px;
   }
   
@@ -91,10 +91,9 @@ body {
   }
   
   ::-webkit-scrollbar-corner {
-    background: transparent; /* 边角背景也改为透明 */
+    background: transparent;
   }
   
-  /* 为暗色主题添加的样式 */
   .dark ::-webkit-scrollbar-track {
     background: transparent;
   }
