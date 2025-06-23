@@ -795,6 +795,15 @@ pub async fn windows_build(
     if !config_dir.exists() {
         fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
     }
+    // www dir
+    let www_dir = base_path.join("config").join("www");
+    if !html_path.is_empty() {
+        let html_dir = Path::new(&html_path);
+        if html_dir.exists() {
+            copy_dir(html_dir, &www_dir).expect("copy html dir failed");
+        }
+    }
+    // custom js
     let custom_js_path = config_dir.join("custom.js");
     fs::write(custom_js_path, custom_js).map_err(|e| e.to_string())?;
     let target_exe_path = base_path.join(format!("{}.exe", exe_name));
