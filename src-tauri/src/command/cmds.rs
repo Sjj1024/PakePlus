@@ -780,7 +780,7 @@ pub async fn windows_build(
     let target_exe_path = base_path.join(format!("{}.exe", exe_name));
     let exe_path = env::current_exe().unwrap();
     fs::copy(exe_path, target_exe_path).map_err(|e| e.to_string())?;
-    let man_path = config_dir.join("man");
+    let man_path = base_path.join("man");
     fs::write(man_path, config).map_err(|e| e.to_string())?;
     Ok(())
 }
@@ -840,7 +840,13 @@ pub async fn macos_build(
 }
 
 #[tauri::command]
-pub async fn linux_build(base_dir: &str, exe_name: &str, config: String) -> Result<(), String> {
+pub async fn linux_build(
+    base_dir: &str,
+    exe_name: &str,
+    config: String,
+    base64_png: String,
+    custom_js: String,
+) -> Result<(), String> {
     Ok(())
 }
 
@@ -869,13 +875,13 @@ pub async fn build_local(
     let man_json_base64 = BASE64_STANDARD.encode(man_json.to_string());
     handle.emit("local-progress", "40").unwrap();
     #[cfg(target_os = "windows")]
-    windows_build(target_dir, exe_name, man_json_base64).await?;
+    windows_build(target_dir, exe_name, man_json_base64, base64_png, custom_js).await?;
     handle.emit("local-progress", "60").unwrap();
     #[cfg(target_os = "macos")]
     macos_build(target_dir, exe_name, man_json_base64, base64_png, custom_js).await?;
     handle.emit("local-progress", "80").unwrap();
     #[cfg(target_os = "linux")]
-    linux_build(target_dir, exe_name, man_json_base64).await?;
+    linux_build(target_dir, exe_name, man_json_base64, base64_png, custom_js).await?;
     handle.emit("local-progress", "100").unwrap();
     Ok(())
 }
