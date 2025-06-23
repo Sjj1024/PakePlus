@@ -1434,12 +1434,12 @@ const preview = async (resize: boolean) => {
         }
         store.setPreviewPath(store.currentProject.htmlPath)
         // if platform is macos, then use tauri preview
-        appFormRef.value?.validate((valid, fields) => {
+        appFormRef.value?.validate(async (valid, fields) => {
             if (valid) {
                 console.log('submit!', store.currentProject.more.windows)
                 saveProject(false)
                 // initialization_script
-                const initJsScript = getInitializationScript()
+                const initJsScript = await getInitializationScript()
                 console.log('initCssScript', initJsScript)
                 invoke('preview_from_config', {
                     resize,
@@ -1589,6 +1589,7 @@ const easyLocal = async () => {
         loadingText(loadingState)
     }, 1000)
     // build local
+    // store.currentProject.isHtml && store.currentProject.htmlPath
     invoke('build_local', {
         targetDir: targetDir,
         exeName: store.currentProject.showName,
@@ -1601,6 +1602,7 @@ const easyLocal = async () => {
                 : store.currentProject.icon,
         debug: store.currentProject.desktop.debug,
         customJs: await getInitializationScript(true),
+        htmlPath: store.currentProject.htmlPath
     })
         .then((res) => {
             console.log('build_local1 res', res)

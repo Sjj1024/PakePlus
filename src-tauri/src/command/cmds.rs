@@ -758,6 +758,25 @@ pub fn find_port() -> Result<u16, String> {
     Ok(port)
 }
 
+// copy dir all
+#[tauri::command]
+pub fn copy_dir(src: &Path, dst: &Path) -> Result<(), String> {
+    if !dst.exists() {
+        fs::create_dir_all(dst).expect("create dst dir failed");
+    }
+    for entry in fs::read_dir(src).expect("read src dir failed") {
+        let entry = entry.expect("read src dir entry failed");
+        let ty = entry.file_type().expect("read src dir entry file type failed");
+        if ty.is_dir() {
+            copy_dir(&entry.path(), &dst.join(entry.file_name()))?;
+        } else {
+            fs::copy(entry.path(), dst.join(entry.file_name()))
+                .expect("copy file failed");
+        }
+    }
+    Ok(())
+}
+
 #[tauri::command]
 pub async fn windows_build(
     base_dir: &str,
@@ -765,6 +784,7 @@ pub async fn windows_build(
     config: String,
     base64_png: String,
     custom_js: String,
+    html_path: String,
 ) -> Result<(), String> {
     let base_path = Path::new(base_dir).join(exe_name);
     if !base_path.exists() {
@@ -792,6 +812,7 @@ pub async fn macos_build(
     config: String,
     base64_png: String,
     custom_js: String,
+    html_path: String,
 ) -> Result<(), String> {
     // if dev, need create Info.plist file in target dir
     let base_path = Path::new(base_dir).join(exe_name);
@@ -807,6 +828,14 @@ pub async fn macos_build(
     }
     if !resources_dir.exists() {
         fs::create_dir_all(&resources_dir).expect("create resources dir failed");
+    }
+    // copy html
+    let www_dir = base_path.join("Contents/MacOS/config/www");
+    if !html_path.is_empty() {
+        let html_dir = Path::new(&html_path);
+        if html_dir.exists() {
+            copy_dir(html_dir, &www_dir).expect("copy html dir failed");
+        }
     }
     sleep(Duration::from_secs(10)).await;
     // custom js
@@ -846,6 +875,7 @@ pub async fn linux_build(
     config: String,
     base64_png: String,
     custom_js: String,
+    html_path: String,
 ) -> Result<(), String> {
     Ok(())
 }
@@ -859,6 +889,7 @@ pub async fn build_local(
     base64_png: String,
     debug: bool,
     custom_js: String,
+    html_path: String,
 ) -> Result<(), String> {
     handle.emit("local-progress", "10").unwrap();
     let resource_path = handle
@@ -875,13 +906,37 @@ pub async fn build_local(
     let man_json_base64 = BASE64_STANDARD.encode(man_json.to_string());
     handle.emit("local-progress", "40").unwrap();
     #[cfg(target_os = "windows")]
-    windows_build(target_dir, exe_name, man_json_base64, base64_png, custom_js).await?;
+    windows_build(
+        target_dir,
+        exe_name,
+        man_json_base64,
+        base64_png,
+        custom_js,
+        html_path,
+    )
+    .await?;
     handle.emit("local-progress", "60").unwrap();
     #[cfg(target_os = "macos")]
-    macos_build(target_dir, exe_name, man_json_base64, base64_png, custom_js).await?;
+    macos_build(
+        target_dir,
+        exe_name,
+        man_json_base64,
+        base64_png,
+        custom_js,
+        html_path,
+    )
+    .await?;
     handle.emit("local-progress", "80").unwrap();
     #[cfg(target_os = "linux")]
-    linux_build(target_dir, exe_name, man_json_base64, base64_png, custom_js).await?;
+    linux_build(
+        target_dir,
+        exe_name,
+        man_json_base64,
+        base64_png,
+        custom_js,
+        html_path,
+    )
+    .await?;
     handle.emit("local-progress", "100").unwrap();
     Ok(())
 }
