@@ -155,9 +155,9 @@ jobs:
                   TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
                   TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
                   VITE_GITHUB_DOMAIN: ${{ secrets.VITE_GITHUB_DOMAIN }}
-                  VITE_PAY_DOMAIN: ${{ secrets.VITE_PAY_DOMAIN }}
-                  VITE_PAY_MCHID: ${{ secrets.VITE_PAY_MCHID }}
-                  VITE_PAY_SIGN_KEY: ${{ secrets.VITE_PAY_SIGN_KEY }}
+                  VITE_PAYJS_DOMAIN: ${{ secrets.VITE_PAYJS_DOMAIN }}
+                  VITE_PAYJS_MCHID: ${{ secrets.VITE_PAYJS_MCHID }}
+                  VITE_PAYJS_SIGN_KEY: ${{ secrets.VITE_PAYJS_SIGN_KEY }}
                   APPLE_ID: ${{ secrets.APPLE_ID }}
                   APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
                   APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}

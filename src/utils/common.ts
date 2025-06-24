@@ -1213,7 +1213,7 @@ export const isNow = (v1: string, v2: string) => {
 
 // get pay sign
 export const getPaySign = (data: any) => {
-    const key = import.meta.env.VITE_PAY_SIGN_KEY
+    const key = import.meta.env.VITE_PAYJS_SIGN_KEY
     const filteredAttrs = Object.fromEntries(
         Object.entries(data).filter(([_, v]) => v !== '')
     )

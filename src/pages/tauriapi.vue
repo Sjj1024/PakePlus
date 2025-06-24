@@ -1177,7 +1177,7 @@ const getPayCode = async (payMathod: string = 'weixin') => {
         return
     }
     const order: any = {
-        mchid: import.meta.env.VITE_PAY_MCHID,
+        mchid: import.meta.env.VITE_PAYJS_MCHID,
         body: '支付测试订单',
         total_fee: money,
         out_trade_no: 'payjs_jspay_demo_2323923',

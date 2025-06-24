@@ -1,6 +1,6 @@
 import http from '@/utils/request'
 
-const baseURL = import.meta.env.VITE_PAY_DOMAIN
+const baseURL = import.meta.env.VITE_PAYJS_DOMAIN
 
 export default {
     // get pay code
