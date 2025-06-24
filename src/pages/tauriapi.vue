@@ -620,14 +620,20 @@
                 <div v-else-if="menuIndex === '3-14'" class="cardContent">
                     <h1 class="cardTitle">pay method</h1>
                     <p>provide pay method</p>
-                    <el-button @click="getPayCode('weixin')">
-                        weixin pay
+                    <el-button @click="getPayJsCode('weixin')">
+                        wxpay
                     </el-button>
-                    <el-button @click="getPayCode('alipay')">
-                        ali pay
+                    <el-button @click="getPayJsCode('alipay')">
+                        alipay
                     </el-button>
-                    <el-button @click="getPayCode('alipay')">
+                    <el-button @click="getPayJsCode('alipay')">
                         paypal
+                    </el-button>
+                    <el-button @click="getYunPayCode('weixin')">
+                        yun pay weixin
+                    </el-button>
+                    <el-button @click="getYunPayCode('alipay')">
+                        yun pay alipay
                     </el-button>
                     <div v-if="qrCodeData" class="qrCodeBox">
                         <img
@@ -905,7 +911,18 @@ import CodeEdit from '@/components/CodeEdit.vue'
 import ppIcon from '@/assets/images/pakeplus.png'
 import { useRoute, useRouter } from 'vue-router'
 import Codes from '@/utils/codes'
-import { getPaySign, oneMessage, openSelect, openUrl } from '@/utils/common'
+import {
+    basePAYJSURL,
+    baseYUNPAYURL,
+    getPaySign,
+    oneMessage,
+    openSelect,
+    openUrl,
+    payJsMchid,
+    payJsSignKey,
+    yunPayMchid,
+    yunPaySignKey,
+} from '@/utils/common'
 import About from '@/pages/about.vue'
 import {
     InfoFilled,
@@ -1162,7 +1179,7 @@ const osApis = async (func: string) => {
 const qrCodeData = ref('')
 const payType = ref('')
 // get pay code
-const getPayCode = async (payMathod: string = 'weixin') => {
+const getPayJsCode = async (payMathod: string = 'weixin') => {
     // 请输入支付金额(单位:元)
     payType.value = payMathod
     let money = 10
@@ -1177,15 +1194,16 @@ const getPayCode = async (payMathod: string = 'weixin') => {
         return
     }
     const order: any = {
-        mchid: import.meta.env.VITE_PAYJS_MCHID,
+        mchid: payJsMchid,
         body: '支付测试订单',
         total_fee: money,
-        out_trade_no: 'payjs_jspay_demo_2323923',
+        out_trade_no: 'payjs_demo_' + Date.now(),
         auto: 1,
         hide: 1,
         type: payMathod === 'weixin' ? null : 'alipay',
     }
-    order.sign = getPaySign(order)
+    // get pay sign
+    order.sign = getPaySign(order, payJsSignKey)
     console.log('order----', order)
     const queryString = Object.keys(order)
         .map(
@@ -1193,12 +1211,41 @@ const getPayCode = async (payMathod: string = 'weixin') => {
                 `${encodeURIComponent(key)}=${encodeURIComponent(order[key])}`
         )
         .join('&')
-    const payUrl = 'https://payjs.cn/api/cashier?' + queryString
+    const payUrl = basePAYJSURL + '/api/cashier?' + queryString
     console.log('payUrl', payUrl)
-
     const url = await QRCode.toDataURL(payUrl)
     console.log('url', url)
     qrCodeData.value = url
+}
+
+// get yun pay code
+const getYunPayCode = async (payMathod: string = 'weixin') => {
+    console.log('getYunPayCode')
+    let money = 10
+    // try {
+    //     money = parseInt(textarea.value)
+    //     if (isNaN(money)) {
+    //         oneMessage.error('请输入正确的支付金额')
+    //         return
+    //     }
+    // } catch (error) {
+    //     oneMessage.error('请输入正确的支付金额')
+    //     return
+    // }
+    const order: any = {
+        body: 'YUN支付订单',
+        out_trade_no: 'yunpay_demo_' + Date.now(),
+        total_fee: 10,
+        mch_id: yunPayMchid,
+    }
+    // get pay sign
+    order.sign = getPaySign(order, yunPaySignKey)
+    console.log('order----', order)
+    const res = await fetch(baseYUNPAYURL + '/api/pay/wxpay/nativePay', {
+        method: 'post',
+        body: order,
+    })
+    console.log('res----', res)
 }
 
 // 选择文件夹

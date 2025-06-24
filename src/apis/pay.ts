@@ -1,15 +1,20 @@
+import { basePAYJSURL, baseYUNPAYURL } from '@/utils/common'
 import http from '@/utils/request'
-
-const baseURL = import.meta.env.VITE_PAYJS_DOMAIN
 
 export default {
     // get pay code
-    getPayCode(params: any) {
-        return http(`${baseURL}/api/native`, {
+    getPayJsCode(params: any) {
+        return http(`${basePAYJSURL}/api/native`, {
             method: 'post',
             headers: {
                 'content-type': 'multipart/form-data',
             },
+            data: params,
+        })
+    },
+    getYunPayCode(params: any) {
+        return http(`${baseYUNPAYURL}/api/pay/wxpay/nativePay`, {
+            method: 'post',
             data: params,
         })
     },

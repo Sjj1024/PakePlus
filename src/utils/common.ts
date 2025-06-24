@@ -22,6 +22,14 @@ export const devBranch = import.meta.env.VITE_DEV_BRANCH
 export const fileSizeLimit = import.meta.env.VITE_FILE_LIMIT_SIZE
 export const fileLimitNumber = import.meta.env.VITE_FILE_LIMIT_NUMBER
 
+// pay info
+export const basePAYJSURL = import.meta.env.VITE_PAYJS_DOMAIN
+export const payJsMchid = import.meta.env.VITE_PAYJS_MCHID
+export const payJsSignKey = import.meta.env.VITE_PAYJS_SIGN_KEY
+export const baseYUNPAYURL = import.meta.env.VITE_YUNPAY_DOMAIN
+export const yunPayMchid = import.meta.env.VITE_YUNPAY_MCHID
+export const yunPaySignKey = import.meta.env.VITE_YUNPAY_SIGN_KEY
+
 // urlMap
 export const urlMap = {
     pakeplus: 'https://www.pakeplus.com/',
@@ -1212,8 +1220,7 @@ export const isNow = (v1: string, v2: string) => {
 }
 
 // get pay sign
-export const getPaySign = (data: any) => {
-    const key = import.meta.env.VITE_PAYJS_SIGN_KEY
+export const getPaySign = (data: any, signKey: string) => {
     const filteredAttrs = Object.fromEntries(
         Object.entries(data).filter(([_, v]) => v !== '')
     )
@@ -1224,6 +1231,6 @@ export const getPaySign = (data: any) => {
         const encodedValue = encodeURIComponent(filteredAttrs[key] as string)
         queryParts.push(`${encodedKey}=${encodedValue}`)
     }
-    const signString = decodeURIComponent(queryParts.join('&') + `&key=${key}`)
+    const signString = decodeURIComponent(queryParts.join('&') + `&key=${signKey}`)
     return CryptoJS.MD5(signString).toString().toUpperCase()
 }
