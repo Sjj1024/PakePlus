@@ -16,6 +16,9 @@ export default {
         return http(`${baseYUNPAYURL}/api/pay/wxpay/nativePay`, {
             method: 'post',
             data: params,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
         })
     },
 }

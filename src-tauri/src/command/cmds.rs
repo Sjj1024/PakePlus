@@ -3,6 +3,8 @@ use base64::prelude::*;
 use futures::StreamExt;
 use reqwest::Client;
 use serde::Serialize;
+use serde_json::json;
+use std::collections::HashMap;
 use std::env;
 use std::fs;
 use std::fs::File;
@@ -766,12 +768,13 @@ pub fn copy_dir(src: &Path, dst: &Path) -> Result<(), String> {
     }
     for entry in fs::read_dir(src).expect("read src dir failed") {
         let entry = entry.expect("read src dir entry failed");
-        let ty = entry.file_type().expect("read src dir entry file type failed");
+        let ty = entry
+            .file_type()
+            .expect("read src dir entry file type failed");
         if ty.is_dir() {
             copy_dir(&entry.path(), &dst.join(entry.file_name()))?;
         } else {
-            fs::copy(entry.path(), dst.join(entry.file_name()))
-                .expect("copy file failed");
+            fs::copy(entry.path(), dst.join(entry.file_name())).expect("copy file failed");
         }
     }
     Ok(())

@@ -1025,6 +1025,7 @@ import {
     type,
     version,
 } from '@tauri-apps/plugin-os'
+import http from '@/utils/http'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -1222,30 +1223,24 @@ const getPayJsCode = async (payMathod: string = 'weixin') => {
 const getYunPayCode = async (payMathod: string = 'weixin') => {
     console.log('getYunPayCode')
     let money = 10
-    // try {
-    //     money = parseInt(textarea.value)
-    //     if (isNaN(money)) {
-    //         oneMessage.error('请输入正确的支付金额')
-    //         return
-    //     }
-    // } catch (error) {
-    //     oneMessage.error('请输入正确的支付金额')
-    //     return
-    // }
     const order: any = {
         body: 'YUN支付订单',
-        out_trade_no: 'yunpay_demo_' + Date.now(),
-        total_fee: 10,
+        out_trade_no: 'timestamp_' + Date.now(),
+        total_fee: money,
         mch_id: yunPayMchid,
     }
     // get pay sign
     order.sign = getPaySign(order, yunPaySignKey)
     console.log('order----', order)
-    const res = await fetch(baseYUNPAYURL + '/api/pay/wxpay/nativePay', {
-        method: 'post',
-        body: order,
-    })
-    console.log('res----', res)
+    const response = await payApi.getYunPayCode(order)
+    console.log('response----', response)
+    if (response.status === 200 && response.data.code === 0) {
+        const url = await QRCode.toDataURL(response.data.data)
+        console.log('url', url)
+        qrCodeData.value = url
+    } else {
+        oneMessage.error('获取支付码失败')
+    }
 }
 
 // 选择文件夹
