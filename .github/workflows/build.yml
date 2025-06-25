@@ -158,6 +158,9 @@ jobs:
                   VITE_PAYJS_DOMAIN: ${{ secrets.VITE_PAYJS_DOMAIN }}
                   VITE_PAYJS_MCHID: ${{ secrets.VITE_PAYJS_MCHID }}
                   VITE_PAYJS_SIGN_KEY: ${{ secrets.VITE_PAYJS_SIGN_KEY }}
+                  VITE_YUNPAY_DOMAIN: ${{ secrets.VITE_YUNPAY_DOMAIN }}
+                  VITE_YUNPAY_MCHID: ${{ secrets.VITE_YUNPAY_MCHID }}
+                  VITE_YUNPAY_SIGN_KEY: ${{ secrets.VITE_YUNPAY_SIGN_KEY }}
                   APPLE_ID: ${{ secrets.APPLE_ID }}
                   APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
                   APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
