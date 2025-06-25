@@ -635,27 +635,6 @@
                     <el-button @click="getYunPayCode('alipay')">
                         yun pay alipay
                     </el-button>
-                    <div v-if="qrCodeData" class="qrCodeBox">
-                        <img
-                            :src="qrCodeData"
-                            alt="支付二维码"
-                            class="qrCode"
-                        />
-                        <!-- logo -->
-                        <!-- <img :src="ppIcon" alt="logo" class="qrlogo" /> -->
-                        <!-- wx or alipay -->
-                        <div class="qrlogo">
-                            <span
-                                v-if="payType === 'weixin'"
-                                class="iconfont weixin qrlogo"
-                            >
-                                &#xe64b;
-                            </span>
-                            <span v-else class="iconfont zhifubao qrlogo">
-                                &#xe654;
-                            </span>
-                        </div>
-                    </div>
                 </div>
                 <!-- plugin-os api -->
                 <div v-else-if="menuIndex === '2-14'" class="cardContent">
@@ -902,6 +881,59 @@
                 </div>
             </el-main>
         </el-container>
+        <!-- dialog -->
+        <el-dialog
+            v-model="dialogVisible"
+            :title="dialogTitle"
+            width="500"
+            center
+            :close-on-click-modal="false"
+            :close-on-press-escape="false"
+            :show-close="false"
+            @close="checkYunPayStatus"
+        >
+            <div class="dialogContent">
+                <div v-if="qrCodeData" class="qrCodeBox">
+                    <img :src="qrCodeData" alt="支付二维码" class="qrCode" />
+                    <!-- logo -->
+                    <!-- <img :src="ppIcon" alt="logo" class="qrlogo" /> -->
+                    <!-- wx or alipay -->
+                    <div class="qrlogo">
+                        <div
+                            v-if="payType === 'weixin'"
+                            class="iconfont weixin qrlogo"
+                        >
+                            &#xe64b;
+                        </div>
+                        <div v-else class="iconfont zhifubao qrlogo">
+                            &#xe654;
+                        </div>
+                    </div>
+                </div>
+                <div class="payTip">
+                    请使用
+                    {{ payType === 'weixin' ? '微信' : '支付宝' }}
+                    扫码支付
+                </div>
+            </div>
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button
+                        :disabled="payTime > 0"
+                        @click="dialogVisible = false"
+                    >
+                        {{ payTime > 0 ? `未支付(${payTime}s)` : '未支付' }}
+                    </el-button>
+                    <el-button
+                        :disabled="payTime > 0"
+                        type="primary"
+                        @click="dialogVisible = false"
+                    >
+                        {{ payTime > 0 ? `已支付(${payTime}s)` : '已支付' }}
+                    </el-button>
+                </div>
+            </template>
+        </el-dialog>
     </el-container>
 </template>
 
@@ -1035,6 +1067,11 @@ const textarea = ref('')
 const image = ref()
 const defaultMenu = ref('1-1')
 const menuIndex = ref('1-1')
+
+// dialog
+const dialogTitle = ref('支付测试')
+const dialogVisible = ref(false)
+
 let selectedDir = ''
 
 const handleMenu = (index: string) => {
@@ -1177,8 +1214,25 @@ const osApis = async (func: string) => {
     }
 }
 
-const qrCodeData = ref('')
-const payType = ref('')
+const payTimer: any = ref(null)
+const payTime = ref(0)
+const qrCodeData = ref('111')
+const payType = ref('weixin')
+const payOrderNo = ref('')
+
+const startPayTime = () => {
+    payTime.value = 5
+    payTimer.value && clearInterval(payTimer.value)
+    payTimer.value = setInterval(() => {
+        if (payTime.value <= 0) {
+            clearInterval(payTimer.value)
+            payTimer.value = null
+            return
+        }
+        payTime.value--
+    }, 1000)
+}
+
 // get pay code
 const getPayJsCode = async (payMathod: string = 'weixin') => {
     // 请输入支付金额(单位:元)
@@ -1216,16 +1270,29 @@ const getPayJsCode = async (payMathod: string = 'weixin') => {
     console.log('payUrl', payUrl)
     const url = await QRCode.toDataURL(payUrl)
     console.log('url', url)
+    dialogVisible.value = true
     qrCodeData.value = url
 }
 
 // get yun pay code
 const getYunPayCode = async (payMathod: string = 'weixin') => {
     console.log('getYunPayCode')
+    payType.value = payMathod
     let money = 10
+    try {
+        money = parseFloat(textarea.value)
+        if (isNaN(money)) {
+            oneMessage.error('请输入正确的支付金额')
+            return
+        }
+    } catch (error) {
+        oneMessage.error('请输入正确的支付金额')
+        return
+    }
+    payOrderNo.value = 'yunpay_' + Date.now()
     const order: any = {
         body: 'YUN支付订单',
-        out_trade_no: 'timestamp_' + Date.now(),
+        out_trade_no: payOrderNo.value,
         total_fee: money,
         mch_id: yunPayMchid,
     }
@@ -1235,11 +1302,38 @@ const getYunPayCode = async (payMathod: string = 'weixin') => {
     const response = await payApi.getYunPayCode(order)
     console.log('response----', response)
     if (response.status === 200 && response.data.code === 0) {
+        dialogVisible.value = true
+        startPayTime()
         const url = await QRCode.toDataURL(response.data.data)
         console.log('url', url)
         qrCodeData.value = url
     } else {
         oneMessage.error('获取支付码失败')
+    }
+}
+
+// check yun pay status
+const checkYunPayStatus = async () => {
+    if (!payOrderNo.value) {
+        return
+    }
+    const order: any = {
+        mch_id: yunPayMchid,
+        out_trade_no: payOrderNo.value,
+    }
+    order.sign = getPaySign(order, yunPaySignKey)
+    console.log('order----', order)
+    const response = await payApi.checkYunPayStatus(order)
+    console.log('response----', response)
+    if (response.status === 200 && response.data.code === 0) {
+        const { payStatus } = response.data.data
+        if (payStatus === 1) {
+            oneMessage.success('支付成功')
+        } else {
+            oneMessage.error('支付失败')
+        }
+    } else {
+        oneMessage.error('获取支付状态失败')
     }
 }
 
@@ -1526,6 +1620,67 @@ onMounted(() => {
     font-size: 18px !important;
 }
 
+.dialogContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .qrCodeBox {
+        margin-top: 10px;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        .qrlogo {
+            width: 26px;
+            height: 26px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .zhifubao {
+            font-size: 32px;
+            color: #009fe8;
+            position: absolute;
+            background-color: #fff;
+        }
+
+        .weixin {
+            font-size: 32px;
+            color: #3daf34;
+            position: absolute;
+            background-color: #fff;
+            // background-size: 100% 100%;
+        }
+    }
+
+    .payTip {
+        margin: 4px 0;
+        font-size: 14px;
+        color: #999;
+        font-weight: 600;
+    }
+
+    .qrCode {
+        width: 200px;
+        height: 200px;
+    }
+}
+
 .layoutBox {
     width: 100%;
     height: 100%;
@@ -1634,49 +1789,6 @@ onMounted(() => {
             .description {
                 margin-bottom: 10px;
             }
-        }
-
-        .qrCodeBox {
-            margin-top: 10px;
-            width: 200px;
-            height: 200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-
-            .qrlogo {
-                width: 28px;
-                height: 28px;
-                position: absolute;
-                top: 0;
-                left: 0;
-                bottom: 0;
-                right: 0;
-                margin: auto;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .zhifubao {
-                font-size: 30px;
-                color: #009fe8;
-                position: absolute;
-                background-color: #fff;
-            }
-
-            .weixin {
-                font-size: 30px;
-                color: #3daf34;
-                position: absolute;
-                background-color: #fff;
-            }
-        }
-
-        .qrCode {
-            width: 200px;
-            height: 200px;
         }
     }
 }

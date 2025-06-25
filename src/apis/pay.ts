@@ -17,8 +17,14 @@ export default {
             method: 'post',
             data: params,
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
+        })
+    },
+    checkYunPayStatus(params: any) {
+        return http(`${baseYUNPAYURL}/api/system/order/getPayOrderInfo`, {
+            method: 'GET',
+            params,
         })
     },
 }
