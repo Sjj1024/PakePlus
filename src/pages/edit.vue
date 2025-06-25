@@ -561,14 +561,11 @@ import CodeEdit from '@/components/CodeEdit.vue'
 import { useI18n } from 'vue-i18n'
 import {
     CSSFILTER,
-    isAlphanumeric,
     openUrl,
     isTauri,
     platforms,
     arrayBufferToBase64,
     cropImageToRound,
-    getBuildYmlFetch,
-    getTauriConfFetch,
     base64Encode,
     loadingText,
     includeHtm,
@@ -731,7 +728,7 @@ const tauriConfigRef = ref<any>(null)
 const methodOptions = [
     {
         value: 'local',
-        label: '本地打包（仅支持本机系统，大概3分钟）',
+        label: '本地打包（仅支持本机系统，大概36秒）',
     },
     {
         value: 'cloud',
@@ -739,7 +736,7 @@ const methodOptions = [
     },
     {
         value: 'localFast',
-        label: '本地极速（仅支持本机系统，大概1分钟）',
+        label: '本地极速（仅支持本机系统，大概2秒）',
         disabled: true,
     },
     {
