@@ -1231,6 +1231,108 @@ export const getPaySign = (data: any, signKey: string) => {
         const encodedValue = encodeURIComponent(filteredAttrs[key] as string)
         queryParts.push(`${encodedKey}=${encodedValue}`)
     }
-    const signString = decodeURIComponent(queryParts.join('&') + `&key=${signKey}`)
+    const signString = decodeURIComponent(
+        queryParts.join('&') + `&key=${signKey}`
+    )
     return CryptoJS.MD5(signString).toString().toUpperCase()
+}
+
+// base64 png to ico
+/**
+ * 将 base64 PNG 转换为多尺寸 ICO 文件 Blob
+ * @param {string} base64 - base64 编码的 PNG 图片
+ * @param {Object} options - 配置项
+ * @param {number[]} [options.sizes=[16,32,48,64,128,256]] - ICO 图标尺寸数组
+ * @returns {Promise<Uint8Array>} - 返回 ICO 文件的 Blob 对象
+ */
+export const base64PngToIco = async (base64: string, options: any = {}) => {
+    const sizes = options.sizes || [16, 32, 48, 64, 128, 256]
+    const img = await loadImage(base64)
+    const iconEntries = []
+    const iconDataList = []
+    let offset = 6 + sizes.length * 16
+    for (const size of sizes) {
+        const canvas = document.createElement('canvas')
+        canvas.width = canvas.height = size
+        const ctx = canvas.getContext('2d')
+        ctx?.drawImage(img as any, 0, 0, size, size)
+        const imageData = ctx?.getImageData(0, 0, size, size)
+        const bmpData = buildBMP(imageData)
+        iconEntries.push(buildIconDirEntry(size, bmpData.length, offset))
+        iconDataList.push(bmpData)
+        offset += bmpData.length
+    }
+    const header = new Uint8Array([0, 0, 1, 0, sizes.length, 0])
+    const totalSize =
+        header.length +
+        iconEntries.length * 16 +
+        iconDataList.reduce((sum, b) => sum + b.length, 0)
+    const icoData = new Uint8Array(totalSize)
+    let pos = 0
+    icoData.set(header, pos)
+    pos += header.length
+    iconEntries.forEach((entry) => {
+        icoData.set(entry, pos)
+        pos += 16
+    })
+    iconDataList.forEach((data) => {
+        icoData.set(data, pos)
+        pos += data.length
+    })
+    return icoData
+}
+
+// 加载 base64 PNG 为 Image 对象
+const loadImage = (base64: string) => {
+    return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.onload = () => resolve(img)
+        img.onerror = reject
+        img.src = base64
+    })
+}
+
+// 构建 ICO 的 ICONDIRENTRY
+const buildIconDirEntry = (size: number, dataLength: number, offset: number) => {
+    const entry = new Uint8Array(16)
+    entry[0] = size === 256 ? 0 : size
+    entry[1] = size === 256 ? 0 : size
+    entry[4] = 1
+    entry[5] = 0 // planes
+    entry[6] = 32
+    entry[7] = 0 // bit count
+    new DataView(entry.buffer).setUint32(8, dataLength, true)
+    new DataView(entry.buffer).setUint32(12, offset, true)
+    return entry
+}
+
+// 构建 BMP 格式图像（用于 ICO）
+const buildBMP = (imageData: any) => {
+    const { width, height, data } = imageData
+    const headerSize = 40
+    const bytesPerPixel = 4
+    const andMaskSize = Math.ceil(width / 32) * 4 * height
+
+    const header = new Uint8Array(headerSize)
+    const dv = new DataView(header.buffer)
+    dv.setUint32(0, headerSize, true)
+    dv.setInt32(4, width, true)
+    dv.setInt32(8, height * 2, true)
+    dv.setUint16(12, 1, true)
+    dv.setUint16(14, 32, true)
+    const pixelData = new Uint8Array(width * height * bytesPerPixel)
+    for (let y = 0; y < height; y++) {
+        const srcRow = y
+        const dstRow = height - 1 - y
+        for (let x = 0; x < width; x++) {
+            const i = (srcRow * width + x) * 4
+            const j = (dstRow * width + x) * 4
+            pixelData[j] = data[i + 2] // B
+            pixelData[j + 1] = data[i + 1] // G
+            pixelData[j + 2] = data[i] // R
+            pixelData[j + 3] = data[i + 3] // A
+        }
+    }
+    const andMask = new Uint8Array(andMaskSize) // 全0 表示不透明
+    return new Uint8Array([...header, ...pixelData, ...andMask])
 }

@@ -589,7 +589,17 @@
                             content="Set the window icon."
                             placement="bottom"
                         >
-                            <el-button @click="setWindowIcon">setIcon</el-button>
+                            <el-button @click="setWindowIcon">
+                                setIcon
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Set the window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="base64ToIco">
+                                base64ToIco
+                            </el-button>
                         </el-tooltip>
                     </div>
                 </div>
@@ -944,6 +954,8 @@ import ppIcon from '@/assets/images/pakeplus.png'
 import { useRoute, useRouter } from 'vue-router'
 import Codes from '@/utils/codes'
 import {
+    arrayBufferToBase64,
+    base64PngToIco,
     basePAYJSURL,
     baseYUNPAYURL,
     getPaySign,
@@ -1058,6 +1070,7 @@ import {
     version,
 } from '@tauri-apps/plugin-os'
 import http from '@/utils/http'
+import { readFile, writeFile } from '@tauri-apps/plugin-fs'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -1214,7 +1227,6 @@ const osApis = async (func: string) => {
     }
 }
 
-
 // seticon
 const setWindowIcon = async () => {
     const selected: any = await openSelect(false, [])
@@ -1225,6 +1237,28 @@ const setWindowIcon = async () => {
     } else {
         oneMessage.error('请选择窗口图标')
     }
+}
+
+// base64ToIco
+const base64ToIco = async () => {
+    console.log('base64')
+    const selectedFilePath: any = await openSelect(false, [])
+    if (!selectedFilePath) {
+        return null
+    }
+    const binaryData = await readFile(selectedFilePath)
+    console.log('binaryData', binaryData)
+    const base64Data: any = arrayBufferToBase64(binaryData)
+    const base64String = 'data:image/jpg;base64,' + base64Data
+    const icoBlob = await base64PngToIco(base64String)
+    console.log('ico', icoBlob)
+    const savePath: any = await openSelect(true, [])
+    if (!savePath) {
+        return
+    }
+    const icoPath = await join(savePath, 'favicon.ico')
+    await writeFile(icoPath, icoBlob)
+    oneMessage.success('保存成功')
 }
 
 const payTimer: any = ref(null)
