@@ -1627,7 +1627,7 @@ const publishWeb = async () => {
         store.isRelease && (await store.deleteRelease())
         // publish web or dist
         loadingText(t('syncConfig') + '...')
-        if (isTauri) {
+        if (isTauri && store.currentProject.isHtml) {
             const res = await tauriHtmlUpload()
             if (res === 'stop') {
                 return
@@ -1646,9 +1646,9 @@ const publishWeb = async () => {
         buildTime = 0
         loadingText(t('failure'))
         buildLoading.value = false
-        const now = new Date()
-        const futureTime = new Date(now.getTime() + 50 * 60 * 1000)
-        localStorage.setItem('lastClickTime', futureTime.toISOString())
+        // const now = new Date()
+        // const futureTime = new Date(now.getTime() + 50 * 60 * 1000)
+        // localStorage.setItem('lastClickTime', futureTime.toISOString())
         createIssue(
             store.currentProject.name,
             store.currentProject.showName,
@@ -1685,8 +1685,12 @@ const publishCheck = async () => {
         if (checkLastPublish()) {
             oneMessage.error(t('limitProject'))
             return
-        } else {
+        } else if (store.currentProject.platform.length > 0) {
             publishWeb()
+        } else {
+            oneMessage.error('请选择平台')
+            buildLoading.value = false
+            centerDialogVisible.value = true
         }
     }
 }
