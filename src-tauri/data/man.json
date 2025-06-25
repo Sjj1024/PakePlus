@@ -14,5 +14,6 @@
         "maximized": false
     },
     "langs": {},
-    "debug": false
+    "debug": false,
+    "icon": ""
 }
