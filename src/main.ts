@@ -12,10 +12,10 @@ import '@/assets/theme.css'
 import '@/assets/global.scss'
 import 'vue-cropper/dist/index.css'
 
-const app = createApp(App)
 const pinia = createPinia()
-app.use(router)
+const app = createApp(App)
 app.use(pinia)
+app.use(router)
 app.use(i18n)
 createGtag({
     tagId: import.meta.env.VITE_GTAG_ID,
