@@ -34,6 +34,7 @@
         "core:window:allow-start-dragging",
         "core:window:allow-close",
         "core:window:allow-internal-toggle-maximize",
+        "core:window:allow-set-icon",
         "updater:allow-check",
         "updater:allow-download",
         "updater:allow-install",

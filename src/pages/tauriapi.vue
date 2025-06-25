@@ -586,10 +586,10 @@
                     </p>
                     <div class="cardBox">
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="Set the window icon."
                             placement="bottom"
                         >
-                            <el-button>{{ t('waitDev') }}</el-button>
+                            <el-button @click="setWindowIcon">setIcon</el-button>
                         </el-tooltip>
                     </div>
                 </div>
@@ -1211,6 +1211,19 @@ const osApis = async (func: string) => {
             break
         default:
             break
+    }
+}
+
+
+// seticon
+const setWindowIcon = async () => {
+    const selected: any = await openSelect(false, [])
+    console.log('selected', selected)
+    if (selected) {
+        await getCurrentWindow().setIcon(selected)
+        oneMessage.success('设置窗口图标成功')
+    } else {
+        oneMessage.error('请选择窗口图标')
     }
 }
 
