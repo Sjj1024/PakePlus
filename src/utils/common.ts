@@ -29,6 +29,7 @@ export const payJsSignKey = import.meta.env.VITE_PAYJS_SIGN_KEY
 export const baseYUNPAYURL = import.meta.env.VITE_YUNPAY_DOMAIN
 export const yunPayMchid = import.meta.env.VITE_YUNPAY_MCHID
 export const yunPaySignKey = import.meta.env.VITE_YUNPAY_SIGN_KEY
+export const rhExeUrl = import.meta.env.VITE_RH_EXE_URL
 
 // urlMap
 export const urlMap = {
