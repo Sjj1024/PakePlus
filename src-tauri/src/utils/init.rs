@@ -108,8 +108,10 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     }
 
     #[cfg(target_os = "windows")]
-    {
-        window.set_icon(icon_bytes);
+    if icon_bytes.len() > 0 {
+        use tauri::image::Image;
+        let pngImage = Image::from_bytes(&icon_bytes).unwrap();
+        window.set_icon(pngImage).unwrap();
     }
 
     let window_position: Option<serde_json::Value> = store.get("window_position");

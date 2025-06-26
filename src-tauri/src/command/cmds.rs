@@ -916,7 +916,7 @@ pub async fn build_local(
     man_json["debug"] = serde_json::to_value(debug).unwrap();
     #[cfg(target_os = "windows")]
     {
-        man_json["icon"] = serde_json::to_value(base64_png).unwrap();
+        man_json["icon"] = serde_json::to_value(base64_png.replace("data:image/png;base64,", "")).unwrap();
     }
     let man_json_base64 = BASE64_STANDARD.encode(man_json.to_string());
     handle.emit("local-progress", "40").unwrap();
