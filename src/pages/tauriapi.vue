@@ -176,8 +176,35 @@
             </el-header>
             <!-- 主内容 -->
             <el-main>
+                <!-- my info -->
+                <!-- api/template -->
+                <div v-if="menuIndex === '0-1'" class="cardContent">
+                    <h1 class="cardTitle">my info</h1>
+                    <p>Get Github information.</p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Github discount amount"
+                            placement="bottom"
+                        >
+                            <el-button>
+                                {{ discountAmount.toFixed(2) }}/16 $
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Github Api Limit"
+                            placement="bottom"
+                        >
+                            <el-button>
+                                {{ githubApiLimit.used }}
+                                /
+                                {{ githubApiLimit.limit }}
+                                Api
+                            </el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
                 <!-- api/app -->
-                <div v-if="menuIndex === '1-1'" class="cardContent">
+                <div v-else-if="menuIndex === '1-1'" class="cardContent">
                     <h2>app</h2>
                     <p>
                         @Tauri apps/app is provided by Tauri
@@ -1056,6 +1083,7 @@ import {
 import { Window } from '@tauri-apps/api/window'
 import { useI18n } from 'vue-i18n'
 import payApi from '@/apis/pay'
+import githubApi from '@/apis/github'
 import { fetch } from '@tauri-apps/plugin-http'
 import QRCode from 'qrcode'
 import {
@@ -1071,10 +1099,23 @@ import {
 } from '@tauri-apps/plugin-os'
 import http from '@/utils/http'
 import { readFile, writeFile } from '@tauri-apps/plugin-fs'
+import { usePPStore } from '@/store'
 
 const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
+const store = usePPStore()
+
+const now = new Date()
+const currentMonth = now.getMonth() + 1
+const githubBilling = ref({})
+const discountAmount = ref(0)
+const githubApiLimit = ref({
+    limit: 0,
+    remaining: 0,
+    reset: 0,
+    used: 0,
+})
 
 const textarea = ref('')
 const image = ref()
@@ -1087,9 +1128,39 @@ const dialogVisible = ref(false)
 
 let selectedDir = ''
 
+const getGithubBilling = async () => {
+    discountAmount.value = 0
+    const response = await githubApi.getBilibiliInfo(
+        store.userInfo.login,
+        currentMonth
+    )
+    console.log('response----', response)
+    if (response.status === 200) {
+        const rateLimit = {
+            limit: response.headers['x-ratelimit-limit'],
+            remaining: response.headers['x-ratelimit-remaining'],
+            reset: response.headers['x-ratelimit-reset'],
+            used: response.headers['x-ratelimit-used'],
+        }
+        githubApiLimit.value = rateLimit
+        githubBilling.value = response.data
+        response.data.usageItems.forEach((item: any) => {
+            discountAmount.value += item.discountAmount
+        })
+        console.log('githubApiLimit----', githubApiLimit.value)
+        console.log('githubBilling----', githubBilling.value)
+        console.log('discountAmount----', discountAmount.value)
+    } else {
+        oneMessage.error('获取Github信息失败')
+    }
+}
+
 const handleMenu = (index: string) => {
     console.log('handleMenu', index)
     menuIndex.value = index
+    if (index === '0-1') {
+        getGithubBilling()
+    }
 }
 
 const goBack = () => {

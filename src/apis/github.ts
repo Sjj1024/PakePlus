@@ -273,7 +273,7 @@ export default {
         })
     },
     // get bilibili info
-    getBilibiliInfo(user: string, month: string) {
+    getBilibiliInfo(user: string, month: number) {
         return http(`/users/${user}/settings/billing/usage?month=${month}`, {
             method: 'get',
         })
