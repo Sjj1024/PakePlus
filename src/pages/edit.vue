@@ -533,6 +533,7 @@ import {
     writeTextFile,
     exists,
     remove,
+    writeFile,
 } from '@tauri-apps/plugin-fs'
 import {
     appCacheDir,
@@ -584,6 +585,7 @@ import {
     isDev,
     readStaticFile,
     rhExeUrl,
+    base64PngToIco,
 } from '@/utils/common'
 import { arch, platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -1597,6 +1599,13 @@ const easyLocal = async () => {
         })
         console.log('downRhExe----', downRhExe)
         // ico save to local
+        const base64String = store.currentProject.iconRound
+            ? roundIcon.value
+            : iconBase64.value
+        const icoBlob = await base64PngToIco(base64String)
+        console.log('ico', icoBlob)
+        const icoPath = await join(ppExeDir, 'data', 'app.ico')
+        await writeFile(icoPath, icoBlob)
     }
     // build local
     // store.currentProject.isHtml && store.currentProject.htmlPath
@@ -1608,8 +1617,8 @@ const easyLocal = async () => {
             platformName === 'macos'
                 ? store.currentProject.iconRound
                     ? roundIcon.value
-                    : store.currentProject.icon
-                : store.currentProject.icon,
+                    : iconBase64.value
+                : iconBase64.value,
         debug: store.currentProject.desktop.debug,
         customJs: await getInitializationScript(true),
         htmlPath: store.currentProject.htmlPath,
