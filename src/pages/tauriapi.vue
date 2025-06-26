@@ -658,19 +658,19 @@
                     <h1 class="cardTitle">pay method</h1>
                     <p>provide pay method</p>
                     <el-button @click="getPayJsCode('weixin')">
-                        wxpay
+                        wxpay pay1
                     </el-button>
                     <el-button @click="getPayJsCode('alipay')">
-                        alipay
+                        alipay pay1
+                    </el-button>
+                    <el-button @click="getYunPayCode('weixin')">
+                        weixin pay2
+                    </el-button>
+                    <el-button @click="getZPayCode('alipay')">
+                        alipay pay2
                     </el-button>
                     <el-button @click="getPayJsCode('alipay')">
                         paypal
-                    </el-button>
-                    <el-button @click="getYunPayCode('weixin')">
-                        yun pay weixin
-                    </el-button>
-                    <el-button @click="getYunPayCode('alipay')">
-                        yun pay alipay
                     </el-button>
                 </div>
                 <!-- plugin-os api -->
@@ -927,7 +927,7 @@
             :close-on-click-modal="false"
             :close-on-press-escape="false"
             :show-close="false"
-            @close="checkYunPayStatus"
+            @close="checkPayStatus"
         >
             <div class="dialogContent">
                 <div v-if="qrCodeData" class="qrCodeBox">
@@ -993,6 +993,8 @@ import {
     payJsSignKey,
     yunPayMchid,
     yunPaySignKey,
+    zPayMchId,
+    zPaySignKey,
 } from '@/utils/common'
 import About from '@/pages/about.vue'
 import {
@@ -1336,6 +1338,7 @@ const payTimer: any = ref(null)
 const payTime = ref(0)
 const qrCodeData = ref('111')
 const payType = ref('weixin')
+const payMethod = ref('yun')
 const payOrderNo = ref('')
 
 const startPayTime = () => {
@@ -1355,6 +1358,7 @@ const startPayTime = () => {
 const getPayJsCode = async (payMathod: string = 'weixin') => {
     // 请输入支付金额(单位:元)
     payType.value = payMathod
+    payMethod.value = 'payjs'
     let money = 10
     try {
         money = parseInt(textarea.value)
@@ -1396,6 +1400,7 @@ const getPayJsCode = async (payMathod: string = 'weixin') => {
 const getYunPayCode = async (payMathod: string = 'weixin') => {
     console.log('getYunPayCode')
     payType.value = payMathod
+    payMethod.value = 'yun'
     let money = 10
     try {
         money = parseFloat(textarea.value)
@@ -1430,6 +1435,79 @@ const getYunPayCode = async (payMathod: string = 'weixin') => {
     }
 }
 
+// get z pay code
+const getZPayCode = async (payMathod: string = 'alipay') => {
+    console.log('getZPayCode')
+    payType.value = payMathod
+    payMethod.value = 'zpay'
+    let money = 10
+    try {
+        money = parseFloat(textarea.value)
+        if (isNaN(money)) {
+            oneMessage.error('请输入正确的支付金额')
+            return
+        }
+    } catch (error) {
+        oneMessage.error('请输入正确的支付金额')
+        return
+    }
+    payOrderNo.value = 'zpay_' + Date.now()
+    const order: any = {
+        pid: zPayMchId,
+        type: payMathod,
+        out_trade_no: payOrderNo.value,
+        notify_url: 'https://juejin.cn/',
+        name: 'VIP会员',
+        money: money,
+        clientip: '192.168.1.100',
+        sign_type: 'MD5',
+    }
+    // get pay sign
+    order.sign = getPaySign(order, zPaySignKey)
+    console.log('order----', order)
+    const response: any = await payApi.getZPayCode(order)
+    console.log('response----', response)
+    if (response.status === 200 && response.data.code === 1) {
+        dialogVisible.value = true
+        startPayTime()
+        const url = await QRCode.toDataURL(response.data.payurl)
+        console.log('url', url)
+        qrCodeData.value = url
+    } else {
+        oneMessage.error('获取支付码失败')
+    }
+}
+
+// check z pay status
+const checkZPayStatus = async () => {
+    if (!payOrderNo.value) {
+        return
+    }
+    const order = {
+        act: 'order',
+        pid: zPayMchId,
+        key: zPaySignKey,
+        out_trade_no: payOrderNo.value,
+    }
+    const response: any = await payApi.checkZPayStatus(order)
+    console.log('response----', response)
+    if (response.status === 200 && response.data.code === 1) {
+        const { status } = response.data.data
+        if (status === 1) {
+            oneMessage.success('支付成功')
+        } else {
+            oneMessage.error('支付失败')
+        }
+    }
+}
+
+// check pay js status
+const checkPayJsStatus = async () => {
+    if (!payOrderNo.value) {
+        return
+    }
+}
+
 // check yun pay status
 const checkYunPayStatus = async () => {
     if (!payOrderNo.value) {
@@ -1454,6 +1532,18 @@ const checkYunPayStatus = async () => {
         oneMessage.error('获取支付状态失败')
     }
 }
+
+// check pay status
+const checkPayStatus = async () => {
+    if (payMethod.value === 'payjs') {
+        await checkPayJsStatus()
+    } else if (payMethod.value === 'yun') {
+        await checkYunPayStatus()
+    } else if (payMethod.value === 'zpay') {
+        await checkZPayStatus()
+    }
+}
+
 
 // 选择文件夹
 const selectFolder = async () => {

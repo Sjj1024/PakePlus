@@ -34,9 +34,6 @@ const http = async (url: string, options: any = {}) => {
         }
     if (options?.data) {
         options.body = JSON.stringify(options.data)
-        // if (options.body.type === BODY_TYPE.Form) {
-        //     options.headers['Content-Type'] = 'multipart/form-data'
-        // }
     }
     // get params
     if (options?.params) {

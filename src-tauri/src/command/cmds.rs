@@ -785,7 +785,6 @@ pub async fn windows_build(
     base_dir: &str,
     exe_name: &str,
     config: String,
-    base64_png: String,
     custom_js: String,
     html_path: String,
 ) -> Result<(), String> {
@@ -926,7 +925,6 @@ pub async fn build_local(
         target_dir,
         exe_name,
         man_json_base64,
-        base64_png,
         custom_js,
         html_path,
     )

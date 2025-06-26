@@ -1596,6 +1596,7 @@ const easyLocal = async () => {
             fileId: 'rh.exe',
         })
         console.log('downRhExe----', downRhExe)
+        // ico save to local
     }
     // build local
     // store.currentProject.isHtml && store.currentProject.htmlPath

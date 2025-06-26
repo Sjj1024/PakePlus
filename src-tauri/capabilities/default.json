@@ -10,7 +10,8 @@
             "http://*",
             "asset://localhost/*",
             "https://api.github.com/*",
-            "https://payjs.cn/*"
+            "https://payjs.cn/*",
+            "https://zpayz.cn/*"
         ]
     },
     "permissions": [
@@ -71,6 +72,9 @@
                 },
                 {
                     "url": "https://payjs.cn/**"
+                },
+                {
+                    "url": "https://zpayz.cn/**"
                 }
             ]
         },
