@@ -14,6 +14,7 @@ pub struct Man {
     pub license: String,
     pub window: WindowConfig,
     pub debug: bool,
+    pub icon: String,
 }
 
 pub fn append_param(original_url: &str, value: &str) -> String {
@@ -62,6 +63,8 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     let man_content = man.unwrap();
     // custom js
     let mut contents = String::new();
+    let mut icon_bytes: Vec<u8> = Vec::new();
+    // let mut ico_byte =
     if man_content.len() > 0 {
         let mut man_config: Man = serde_json::from_str(&man_content).unwrap();
         let www_dir = get_www_dir(&startup_dir);
@@ -80,6 +83,12 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         if man_config.debug {
             contents += "var vConsole = new window.VConsole();";
         }
+        // icon
+        #[cfg(target_os = "windows")]
+        if man_config.icon.len() > 0 {
+            let icon_base64 = BASE64_STANDARD.decode(man_config.icon.trim());
+            icon_bytes = icon_base64.unwrap();
+        }
     }
     // init window
     let window = tauri::WebviewWindowBuilder::from_config(app_handle, &config)
@@ -96,6 +105,11 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         let size = window_size.as_object().unwrap();
         width = size["width"].as_f64().unwrap();
         height = size["height"].as_f64().unwrap();
+    }
+
+    #[cfg(target_os = "windows")]
+    {
+        window.set_icon(icon_bytes);
     }
 
     let window_position: Option<serde_json::Value> = store.get("window_position");
