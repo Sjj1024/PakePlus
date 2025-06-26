@@ -34,10 +34,16 @@ export default {
             params: params,
         })
     },
+    getZPayCode2(params: any) {
+        return http(`${zPayDomain}/mapi.php`, {
+            method: 'post',
+            body: params,
+        })
+    },
     checkZPayStatus(params: any) {
         return http(`${zPayDomain}/api.php`, {
             method: 'get',
-            data: params,
+            params: params,
         })
     },
 }
