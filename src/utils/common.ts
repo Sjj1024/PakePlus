@@ -1250,7 +1250,7 @@ export const getPaySign = (data: any, signKey: string) => {
  * @returns {Promise<Uint8Array>} - 返回 ICO 文件的 Blob 对象
  */
 export const base64PngToIco = async (base64: string, options: any = {}) => {
-    const sizes = options.sizes || [16, 32, 48, 64, 128, 256]
+    const sizes = options.sizes || [16, 24, 32, 48, 64, 128, 256]
     const img = await loadImage(base64)
     const iconEntries = []
     const iconDataList = []
@@ -1297,7 +1297,11 @@ const loadImage = (base64: string) => {
 }
 
 // 构建 ICO 的 ICONDIRENTRY
-const buildIconDirEntry = (size: number, dataLength: number, offset: number) => {
+const buildIconDirEntry = (
+    size: number,
+    dataLength: number,
+    offset: number
+) => {
     const entry = new Uint8Array(16)
     entry[0] = size === 256 ? 0 : size
     entry[1] = size === 256 ? 0 : size
