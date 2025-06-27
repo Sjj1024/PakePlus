@@ -1,6 +1,6 @@
 {
     "version": "0.5.30",
-    "show": true,
+    "show": false,
     "pub_date": "2025-06-02T09:00:33.251Z",
     "zh": "优化初始化操作，添加下载二维码等",
     "en": "Optimize the initialization operation, add the download QR code, etc.",
