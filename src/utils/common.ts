@@ -39,6 +39,7 @@ export const urlMap = {
     pakeplus: 'https://www.pakeplus.com/',
     github: 'https://github.com/Sjj1024/PakePlus',
     ppofficial: 'https://ppofficial.pages.dev/',
+    ppnotes: 'https://pakeplus.com/ppnotes.json',
     configdoc: 'https://ppofficial.pages.dev/guide/config.html',
     phonedoc: 'https://www.pakeplus.com/guide/phone.html',
     builddoc: 'https://www.pakeplus.com/guide/build.html',

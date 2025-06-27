@@ -10,7 +10,9 @@
     >
         <template #header>
             <div class="diaHeader">
-                <span>{{ t('updateTips') }}</span>
+                <span>
+                    {{ ppnotes.show ? '公告' : t('updateTips') }}
+                </span>
             </div>
         </template>
         <div class="diaContent" v-html="notes"></div>
@@ -28,24 +30,65 @@
 </template>
 
 <script setup lang="ts">
-import { isTauri, loadingText, oneMessage, isNew } from '@/utils/common'
+import {
+    isTauri,
+    loadingText,
+    oneMessage,
+    isNew,
+    openUrl,
+} from '@/utils/common'
 import { ref, onMounted } from 'vue'
 import { usePPStore } from '@/store'
 import packageJson from '@root/package.json'
-import ppupdate from '@root/scripts/ppupdate.json'
 import { check } from '@tauri-apps/plugin-updater'
 import { useI18n } from 'vue-i18n'
 import { ElLoading } from 'element-plus'
 import { listen } from '@tauri-apps/api/event'
 import { relaunch } from '@tauri-apps/plugin-process'
+import commApi from '@/apis/comm'
 
 const { t } = useI18n()
 const store = usePPStore()
 
 const versionDialog = ref(false)
-const rawJson = ref<any>(ppupdate)
+const rawJson = ref<any>({
+    version: '0.5.30',
+    notes: '',
+    pub_date: '2025-06-02T09:00:33.251Z',
+    force: true,
+    zh: '',
+    en: '',
+    ja: '',
+    ko: '',
+    zhTw: '',
+    platforms: {},
+})
+
 const notes = ref<any>('')
 let update: any = null
+
+const ppnotes = ref<any>({
+    version: '0.5.30',
+    show: false,
+    pub_date: '2025-06-02T09:00:33.251Z',
+    zh: '',
+    en: '',
+    ja: '',
+    ko: '',
+    zhTw: '',
+    openUrl: '',
+})
+
+// get ppnotes
+const getPPNotes = async () => {
+    const res: any = await commApi.getPPNotes()
+    ppnotes.value = res.data
+    console.log('ppnotes', ppnotes.value)
+    if (ppnotes.value.show) {
+        versionDialog.value = true
+        notes.value = ppnotes.value[localStorage.getItem('lang') || 'zh'] || ''
+    }
+}
 
 const checkUpdate = async (tips: boolean = false) => {
     let loading = null
@@ -57,7 +100,6 @@ const checkUpdate = async (tips: boolean = false) => {
         })
     }
     update = await check()
-    console.log('update', update)
     if (update && isNew(update.version, packageJson.version)) {
         store.isUpdate = true
         rawJson.value = update.rawJson as any
@@ -66,44 +108,62 @@ const checkUpdate = async (tips: boolean = false) => {
             'There is a new version available(有新版本更新)'
         versionDialog.value = true
     } else {
-        tips && oneMessage.success(t('versionTips'))
+        if (tips) {
+            oneMessage.success(t('versionTips'))
+        } else {
+            getPPNotes()
+        }
     }
     loading && loading.close()
 }
 
 const confirmUpdate = async () => {
     // await update.value.downloadAndInstall()
-    versionDialog.value = false
-    let downloaded = 0
-    let contentLength = 0
-    const loading = ElLoading.service({
-        lock: true,
-        text: t('startUpdate'),
-        background: 'rgba(0, 0, 0, 0.7)',
-    })
-    try {
-        await update.downloadAndInstall((event: any) => {
-            loadingText(
-                `${t('updateProgress')}
-                ${((downloaded / contentLength) * 100).toFixed(2)}%`
-            )
-            switch (event.event) {
-                case 'Started':
-                    contentLength = event.data.contentLength
-                    break
-                case 'Progress':
-                    downloaded += event.data.chunkLength
-                    break
-                case 'Finished':
-                    console.log('download finished')
-                    break
-            }
+    console.log(
+        'ppnotes.value.openUrl',
+        ppnotes.value.show,
+        ppnotes.value.openUrl
+    )
+    if (ppnotes.value.show && ppnotes.value.openUrl) {
+        openUrl(ppnotes.value.openUrl)
+        return
+    } else if (update) {
+        console.log('no openUrl')
+        // update process
+        versionDialog.value = false
+        let downloaded = 0
+        let contentLength = 0
+        const loading = ElLoading.service({
+            lock: true,
+            text: t('startUpdate'),
+            background: 'rgba(0, 0, 0, 0.7)',
         })
-        await relaunch()
-    } catch (error: any) {
-        console.log('error', error)
-        oneMessage.error(error || t('updateError'))
-        loading.close()
+        try {
+            await update.downloadAndInstall((event: any) => {
+                loadingText(
+                    `${t('updateProgress')}
+                ${((downloaded / contentLength) * 100).toFixed(2)}%`
+                )
+                switch (event.event) {
+                    case 'Started':
+                        contentLength = event.data.contentLength
+                        break
+                    case 'Progress':
+                        downloaded += event.data.chunkLength
+                        break
+                    case 'Finished':
+                        console.log('download finished')
+                        break
+                }
+            })
+            await relaunch()
+        } catch (error: any) {
+            console.log('error', error)
+            oneMessage.error(error || t('updateError'))
+            loading.close()
+        }
+    } else {
+        versionDialog.value = false
     }
 }
 
