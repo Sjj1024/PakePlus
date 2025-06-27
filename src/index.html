@@ -1,22 +1,370 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="styles.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus App</title>
-        <script type="module" src="/main.js" defer></script>
-    </head>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>subi的专属网站 - 3D相册</title>
+    <style>
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0c1a25, #1a252c);
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            perspective: 1000px;
+        }
+        
+        /* 网站标题 */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            z-index: 100;
+            position: relative;
+            animation: titleGlow 3s infinite alternate;
+        }
+        
+        .header h1 {
+            font-size: 4.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6ec4, #7873f5, #64c8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(100, 200, 255, 0.3);
+            letter-spacing: 3px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-top: 10px;
+            animation: subtitlePulse 4s infinite;
+        }
+        
+        /* 主容器 */
+        .main-container {
+            position: relative;
+            width: 90%;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        /* 相册容器 */
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            background: rgba(10, 20, 30, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+        }
+        
+        /* 相册内部容器 */
+        .container {
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            transform-style: preserve-3d;
+            gap: 15px;
+            padding: 0 80px;
+            transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        /* 图片盒子 */
+        .container .box {
+            width: 250px;
+            height: 300px;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            flex-shrink: 0;
+            /* 倒影效果 */
+            -webkit-box-reflect: below 5px linear-gradient(transparent, transparent, #0005);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(100, 200, 255, 0.2);
+        }
+        
+        .container .box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        /* 悬停效果 - 当前盒子 */
+        .container .box:hover {
+            transform: perspective(500px) rotateY(0deg) scale(1.25);
+            z-index: 1000;
+            box-shadow: 0 20px 40px rgba(100, 150, 255, 0.4);
+        }
+        
+        .container .box:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* 悬停效果 - 其他盒子 */
+        .container:hover > :not(:hover) {
+            margin: 0 -15px;
+            filter: 
+                drop-shadow(0 0 10px #000) 
+                drop-shadow(0 0 20px #000);
+            transform: perspective(500px) rotateY(45deg) scale(0.9);
+        }
+        
+        /* 悬停后右侧盒子特殊处理 */
+        .container .box:hover ~ .box {
+            transform: perspective(500px) rotateY(-45deg) scale(0.9);
+        }
+        
+        /* 导航按钮 */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(20, 30, 50, 0.7);
+            border: 2px solid rgba(100, 200, 255, 0.6);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 25px rgba(0, 100, 255, 0.4);
+        }
+        
+        .nav-btn:hover {
+            background: rgba(50, 100, 150, 0.9);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 35px rgba(0, 150, 255, 0.7);
+        }
+        
+        .nav-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-top: 4px solid #64c8ff;
+            border-right: 4px solid #64c8ff;
+        }
+        
+        .prev-btn {
+            left: 30px;
+        }
+        
+        .prev-btn::before {
+            transform: rotate(-135deg);
+            margin-left: 7px;
+        }
+        
+        .next-btn {
+            right: 30px;
+        }
+        
+        .next-btn::before {
+            transform: rotate(45deg);
+            margin-right: 7px;
+        }
+        
+        /* 页脚 */
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        
+        /* 动画效果 */
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 10px rgba(255, 110, 196, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(120, 115, 245, 0.8), 0 0 30px rgba(100, 200, 255, 0.6); }
+            100% { text-shadow: 0 0 15px rgba(100, 200, 255, 0.7); }
+        }
+        
+        @keyframes subtitlePulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        /* 背景装饰 */
+        .bg-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(100, 200, 255, 0.2), transparent);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .container .box {
+                width: 200px;
+                height: 250px;
+            }
+            
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .nav-btn::before {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景装饰元素 -->
+    <div class="bg-elements" id="bgElements"></div>
+    
+    <div class="header">
+        <h1>subi的专属网站</h1>
+        <p>悬停查看3D效果 • 使用左右按钮浏览照片</p>
+    </div>
+    
+    <div class="main-container">
+        <div class="gallery-container">
+            <button class="nav-btn prev-btn" id="prevBtn"></button>
+<div class="container" id="galleryContainer">
+    <div class="box"><img src="img/1.jpg" alt=""></div>
+    <div class="box"><img src="img/2.jpg" alt=""></div>
+    <div class="box"><img src="img/3.jpg" alt=""></div>
+    <div class="box"><img src="img/4.jpg" alt=""></div>
+    <div class="box"><img src="img/5.jpg" alt=""></div>
+    <div class="box"><img src="img/6.jpg" alt=""></div>
+    <div class="box"><img src="img/7.jpg" alt=""></div>
+    <div class="box"><img src="img/8.jpg" alt=""></div>
+    <div class="box"><img src="img/9.jpg" alt=""></div>
+    <div class="box"><img src="img/10.jpg" alt=""></div>
+    <div class="box"><img src="img/11.jpg" alt=""></div>
+    <div class="box"><img src="img/12.jpg" alt=""></div>
+    <div class="box"><img src="img/13.jpg" alt=""></div>
+    <div class="box"><img src="img/14.jpg" alt=""></div>
+    <div class="box"><img src="img/15.jpg" alt=""></div>
+    <div class="box"><img src="img/16.jpg" alt=""></div>
+    <div class="box"><img src="img/17.jpg" alt=""></div>
+    <div class="box"><img src="img/18.jpg" alt=""></div>
+    <div class="box"><img src="img/19.jpg" alt=""></div>
+    <div class="box"><img src="img/20.jpg" alt=""></div>
+    <div class="box"><img src="img/21.jpg" alt=""></div>
+    <div class="box"><img src="img/22.jpg" alt=""></div>
+    <div class="box"><img src="img/23.jpg" alt=""></div>
+    <div class="box"><img src="img/24.jpg" alt=""></div>
+    <div class="box"><img src="img/25.jpg" alt=""></div>
+    <div class="box"><img src="img/26.jpg" alt=""></div>
+    <div class="box"><img src="img/27.jpg" alt=""></div>
+</div>
+            <button class="nav-btn next-btn" id="nextBtn"></button>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>subi的专属相册 • 3D悬停效果与左右滑动</p>
+    </div>
 
-    <body>
-        <main class="container">
-            <h1>Welcome to PakePlus</h1>
-
-            <form class="row" id="greet-form">
-                <input id="greet-input" placeholder="Enter a name..." />
-                <button type="submit">Greet</button>
-            </form>
-            <p id="greet-msg"></p>
-        </main>
-    </body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryContainer = document.getElementById('galleryContainer');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            // 当前滚动位置
+            let scrollPosition = 0;
+            // 每次滚动的距离（5张图片的宽度）
+            const scrollStep = 5 * (250 + 15);
+            
+            // 上一页按钮事件
+            prevBtn.addEventListener('click', function() {
+                // 计算新的滚动位置（不能小于0）
+                scrollPosition = Math.max(0, scrollPosition - scrollStep);
+                galleryContainer.style.transform = `translateX(-${scrollPosition}px)`;
+            });
+            
+            // 下一页按钮事件
+            nextBtn.addEventListener('click', function() {
+                // 计算最大可滚动距离
+                const maxScroll = galleryContainer.scrollWidth - galleryContainer.parentElement.offsetWidth;
+                // 计算新的滚动位置（不能超过最大滚动距离）
+                scrollPosition = Math.min(maxScroll, scrollPosition + scrollStep);
+                galleryContainer.style.transform = `translateX(-${scrollPosition}px)`;
+            });
+            
+            // 添加键盘导航支持
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    prevBtn.click();
+                } else if (e.key === 'ArrowRight') {
+                    nextBtn.click();
+                }
+            });
+            
+            // 创建背景装饰元素
+            const bgContainer = document.getElementById('bgElements');
+            for (let i = 0; i < 20; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                
+                // 随机大小
+                const size = Math.random() * 150 + 50;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // 随机位置
+                bubble.style.left = `${Math.random() * 100}%`;
+                
+                // 随机动画延迟
+                bubble.style.animationDelay = `${Math.random() * 15}s`;
+                
+                // 随机动画持续时间
+                bubble.style.animationDuration = `${15 + Math.random() * 20}s`;
+                
+                bgContainer.appendChild(bubble);
+            }
+        });
+    </script>
+</body>
 </html>
