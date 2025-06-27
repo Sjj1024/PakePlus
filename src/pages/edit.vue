@@ -1592,12 +1592,17 @@ const easyLocal = async () => {
     if (platformName === 'windows') {
         const ppExeDir: string = await invoke('get_exe_dir')
         const rhExePath = await join(ppExeDir, 'data', 'rh.exe')
-        const downRhExe = await invoke('download_file', {
-            url: rhExeUrl,
-            savePath: rhExePath,
-            fileId: 'rh.exe',
-        })
-        console.log('downRhExe----', downRhExe)
+        // exists
+        if (await exists(rhExePath)) {
+            console.log('rh.exe exists')
+        } else {
+            console.log('rh.exe not exists')
+            await invoke('download_file', {
+                url: rhExeUrl,
+                savePath: rhExePath,
+                fileId: 'rh.exe',
+            })
+        }
         // ico save to local
         const base64String = store.currentProject.iconRound
             ? roundIcon.value
