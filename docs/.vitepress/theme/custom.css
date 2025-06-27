@@ -14,3 +14,37 @@
     filter: drop-shadow(0 0 2em var(--vp-c-brand-1));
     transition: all 0.5s ease;
 }
+
+.modalContent {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    color: #000;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modalButtons button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #409eff;
+    color: #fff;
+    border: none;
+    margin-top: 20px;
+}
