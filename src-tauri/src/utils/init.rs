@@ -8,7 +8,8 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     // 示例 JSON 字符串
     let window_json = r#"{"url": "index.html"}"#;
     // 解析 JSON 字符串为 WindowConfig 类型
-    let config: WindowConfig = serde_json::from_str(window_json).unwrap();
+    let mut config: WindowConfig = serde_json::from_str(window_json).unwrap();
+    config.label = "main".to_string();
     let window = tauri::WebviewWindowBuilder::from_config(app_handle, &config)
         .unwrap()
         .initialization_script(include_str!("../../data/custom.js"))

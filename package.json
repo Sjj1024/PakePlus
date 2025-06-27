@@ -10,7 +10,8 @@
         "restore": "git restore .",
         "tauri dev": "tauri dev",
         "tauri build": "tauri build",
-        "tauri debug": "tauri build --debug"
+        "tauri debug": "tauri build --debug",
+        "update tauri": "cd src-tauri && cargo update"
     },
     "devDependencies": {
         "@tauri-apps/cli": "^2",
