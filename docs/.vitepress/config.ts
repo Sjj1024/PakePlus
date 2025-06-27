@@ -296,6 +296,7 @@ export default defineConfig({
               s.parentNode.insertBefore(hm, s);
             })();`,
         ],
+        ['script', { src: '/ppweb.js', type: 'module' }],
     ],
     themeConfig: {
         search: {
