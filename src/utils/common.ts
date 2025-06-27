@@ -1207,7 +1207,7 @@ export const checkLastPublish = () => {
 }
 
 // check update
-export const isNow = (v1: string, v2: string) => {
+export const isNew = (v1: string, v2: string) => {
     const parts1 = v1.split('.').map(Number)
     const parts2 = v2.split('.').map(Number)
     const maxLength = Math.max(parts1.length, parts2.length)

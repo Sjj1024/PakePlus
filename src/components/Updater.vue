@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { isTauri, loadingText, oneMessage, isNow } from '@/utils/common'
+import { isTauri, loadingText, oneMessage, isNew } from '@/utils/common'
 import { ref, onMounted } from 'vue'
 import { usePPStore } from '@/store'
 import packageJson from '@root/package.json'
@@ -58,7 +58,7 @@ const checkUpdate = async (tips: boolean = false) => {
     }
     update = await check()
     console.log('update', update)
-    if (update && isNow(update.version, packageJson.version)) {
+    if (update && isNew(update.version, packageJson.version)) {
         store.isUpdate = true
         rawJson.value = update.rawJson as any
         notes.value =
