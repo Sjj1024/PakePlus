@@ -63,6 +63,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     let man_content = man.unwrap();
     // custom js
     let mut contents = String::new();
+    #[cfg(target_os = "windows")]
     let mut icon_bytes: Vec<u8> = Vec::new();
     // let mut ico_byte =
     if man_content.len() > 0 {
