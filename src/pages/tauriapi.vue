@@ -1503,13 +1503,10 @@ const checkZPayStatus = async () => {
     }
     const response: any = await payApi.checkZPayStatus(order)
     console.log('response----', response)
-    if (response.status === 200 && response.data.code === 1) {
-        const { status } = response.data.data
-        if (status === '1') {
-            oneMessage.success('支付成功')
-        } else {
-            oneMessage.error('支付失败')
-        }
+    if (response.status === 200 && response.data.status === 1) {
+        oneMessage.success('支付成功')
+    } else {
+        oneMessage.error('支付失败')
     }
 }
 
