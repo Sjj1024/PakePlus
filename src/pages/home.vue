@@ -300,7 +300,7 @@
                     spellCheck="false"
                     :placeholder="t('projectNamePlaceholder')"
                     class="tokenInput"
-                    @change="proExist = false"
+                    @input="proExist = false"
                     @keyup.enter="creatProject()"
                 />
             </div>
@@ -720,7 +720,8 @@ const delProject = () => {
         branchName.value === 'main' ||
         branchName.value === 'dev' ||
         branchName.value === 'web' ||
-        branchName.value === 'web2'
+        branchName.value === 'web2' ||
+        branchName.value === webBranch
     ) {
         oneMessage.error(t('cantDelete'))
         return
@@ -729,6 +730,7 @@ const delProject = () => {
         branchName.value = ''
         oneMessage.success(t('deleteSuccess'))
     }
+    proExist.value = false
 }
 
 // creat project branch,
@@ -771,7 +773,11 @@ const creatProject = async () => {
             const include = store.projectList.some(
                 (item: Project) => item.name === branchName.value
             )
-            if (res.status === 404 && !include) {
+            if (
+                (res.status === 404 && !include) ||
+                (res.status === 200 &&
+                    res.data.ref != `refs/heads/${branchName.value}`)
+            ) {
                 const branchInfo: Project = {
                     ...res.data,
                     ...ppconfig,
@@ -823,7 +829,10 @@ const creatProject = async () => {
                     oneMessage.error(t('createBranchError'))
                     creatLoading.value = false
                 }
-            } else if (res.status === 200) {
+            } else if (
+                res.status === 200 &&
+                res.data.ref === `refs/heads/${branchName.value}`
+            ) {
                 creatLoading.value = false
                 proExist.value = true
                 oneMessage.success(t('projectExist'))
