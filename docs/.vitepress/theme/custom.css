@@ -15,16 +15,37 @@
     transition: all 0.5s ease;
 }
 
+.modalBox {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 150px;
+}
+
 .modalContent {
     background: white;
     padding: 20px;
     border-radius: 5px;
     color: #000;
-    width: 500px;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .modalContent {
+        width: 80%;
+    }
 }
 
 .modalTitle {
@@ -40,11 +61,19 @@
 }
 
 .modalButtons button {
-    padding: 10px 20px;
+    padding: 8px 20px;
     border-radius: 10px;
     cursor: pointer;
     background-color: #409eff;
     color: #fff;
     border: none;
     margin-top: 20px;
+}
+
+.modalButtons button:hover {
+    background-color: #3688fa;
+}
+
+.modalButtons button:active {
+    background-color: #3688fa;
 }
