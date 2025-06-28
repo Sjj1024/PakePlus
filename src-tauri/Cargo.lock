@@ -6,6 +6,7 @@ version = 3
 name = "PakePLus"
 version = "0.0.1"
 dependencies = [
+ "encoding_rs",
  "futures",
  "open",
  "reqwest",
