@@ -814,7 +814,12 @@ pub async fn windows_build(
     let exe_path = env::current_exe().unwrap();
     let exe_dir = exe_path.parent().unwrap();
     let rhexe_dir = exe_dir.join("data").join("rh.exe");
-    let rh_command = format!("{} -script rhscript.txt", rhexe_dir.to_str().unwrap());
+    let script_path = exe_dir.join("data").join("rhscript.txt");
+    let rh_command = format!(
+        "{} -script {}",
+        rhexe_dir.to_str().unwrap(),
+        script_path.to_str().unwrap()
+    );
     run_command(rh_command).await?;
     Ok(())
 }

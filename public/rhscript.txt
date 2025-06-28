@@ -11,4 +11,4 @@ Log=    rh.log
 -delete ICON,5,0
 -delete ICON,6,0
 -delete ICON,7,0
--addoverwrite app.ico, ICONGROUP,1,1033
+-addoverwrite app.ico, ICONGROUP,1
