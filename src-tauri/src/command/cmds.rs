@@ -792,6 +792,8 @@ pub async fn windows_build(
     if !base_path.exists() {
         fs::create_dir_all(&base_path).map_err(|e| e.to_string())?;
     }
+    #[cfg(not(debug_assertions))]
+    sleep(Duration::from_secs(10)).await;
     // config_dir
     let config_dir = base_path.join("config").join("inject");
     if !config_dir.exists() {
@@ -805,6 +807,8 @@ pub async fn windows_build(
             copy_dir(html_dir, &www_dir).expect("copy html dir failed");
         }
     }
+    #[cfg(not(debug_assertions))]
+    sleep(Duration::from_secs(10)).await;
     // custom js
     let custom_js_path = config_dir.join("custom.js");
     fs::write(custom_js_path, custom_js).map_err(|e| e.to_string())?;
@@ -820,6 +824,8 @@ pub async fn windows_build(
         rhexe_dir.to_str().unwrap(),
         script_path.to_str().unwrap()
     );
+    #[cfg(not(debug_assertions))]
+    sleep(Duration::from_secs(10)).await;
     run_command(rh_command).await?;
     Ok(())
 }

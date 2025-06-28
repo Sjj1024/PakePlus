@@ -1592,7 +1592,7 @@ const easyLocal = async () => {
     }, 1000)
     // if windows, down rh.exe
     // exe name
-    const targetName = isAlphanumeric(store.currentProject.showName)
+    let targetName = isAlphanumeric(store.currentProject.showName)
         ? store.currentProject.showName
         : store.currentProject.name
     const targetExe = await join(targetDir, targetName, `${targetName}.exe`)
@@ -1623,12 +1623,14 @@ const easyLocal = async () => {
         const rhtarget = rhscript.replace('Target.exe', targetExe)
         const rhscriptPath = await join(ppExeDir, 'data', 'rhscript.txt')
         await writeTextFile(rhscriptPath, rhtarget)
+    } else {
+        targetName = store.currentProject.showName
     }
     // build local
     // store.currentProject.isHtml && store.currentProject.htmlPath
     invoke('build_local', {
         targetDir: targetDir,
-        exeName: store.currentProject.showName,
+        exeName: targetName,
         config: store.currentProject.more.windows,
         base64Png:
             platformName === 'macos'
@@ -1650,6 +1652,9 @@ const easyLocal = async () => {
                     targetName,
                     `${store.currentProject.showName}.exe`
                 )
+                console.log('targetExe', targetExe)
+                console.log('chinaExeName', chinaExeName)
+
                 await rename(targetExe, chinaExeName)
             }
             oneMessage.success('本地打包成功')
