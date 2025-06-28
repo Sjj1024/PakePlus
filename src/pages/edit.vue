@@ -534,6 +534,7 @@ import {
     exists,
     remove,
     writeFile,
+    rename,
 } from '@tauri-apps/plugin-fs'
 import {
     appCacheDir,
@@ -586,6 +587,7 @@ import {
     readStaticFile,
     rhExeUrl,
     base64PngToIco,
+    isAlphanumeric,
 } from '@/utils/common'
 import { arch, platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -1589,6 +1591,11 @@ const easyLocal = async () => {
         loadingText(loadingState)
     }, 1000)
     // if windows, down rh.exe
+    // exe name
+    const targetName = isAlphanumeric(store.currentProject.showName)
+        ? store.currentProject.showName
+        : store.currentProject.name
+    const targetExe = await join(targetDir, targetName, `${targetName}.exe`)
     if (platformName === 'windows') {
         const ppExeDir: string = await invoke('get_exe_dir')
         const rhExePath = await join(ppExeDir, 'data', 'rh.exe')
@@ -1613,14 +1620,7 @@ const easyLocal = async () => {
         await writeFile(icoPath, icoBlob)
         // save rhscript.txt
         const rhscript = await readStaticFile('rhscript.txt')
-        const rhtarget = rhscript.replace(
-            'Target.exe',
-            await join(
-                targetDir,
-                store.currentProject.showName,
-                `${store.currentProject.showName}.exe`
-            )
-        )
+        const rhtarget = rhscript.replace('Target.exe', targetExe)
         const rhscriptPath = await join(ppExeDir, 'data', 'rhscript.txt')
         await writeTextFile(rhscriptPath, rhtarget)
     }
@@ -1640,9 +1640,18 @@ const easyLocal = async () => {
         customJs: await getInitializationScript(true),
         htmlPath: store.currentProject.htmlPath,
     })
-        .then((res) => {
+        .then(async (res) => {
             console.log('build_local1 res', res)
             loadingText(t('buildSuccess'))
+            // isAlphanumeric(store.currentProject.showName)
+            if (!isAlphanumeric(store.currentProject.showName)) {
+                const chinaExeName = await join(
+                    targetDir,
+                    targetName,
+                    `${store.currentProject.showName}.exe`
+                )
+                await rename(targetExe, chinaExeName)
+            }
             oneMessage.success('本地打包成功')
             buildLoading.value = false
         })
