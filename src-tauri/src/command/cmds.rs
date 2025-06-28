@@ -814,6 +814,14 @@ pub async fn windows_build(
     fs::write(custom_js_path, custom_js).map_err(|e| e.to_string())?;
     let man_path = base_path.join("config").join("man");
     fs::write(man_path, config).map_err(|e| e.to_string())?;
+    // copy html
+    let www_dir = base_path.join("config").join("www");
+    if !html_path.is_empty() {
+        let html_dir = Path::new(&html_path);
+        if html_dir.exists() {
+            copy_dir(html_dir, &www_dir).expect("copy html dir failed");
+        }
+    }
     // exe
     let exe_path = env::current_exe().unwrap();
     let exe_dir = exe_path.parent().unwrap();
