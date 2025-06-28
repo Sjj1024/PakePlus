@@ -1632,12 +1632,9 @@ const easyLocal = async () => {
         targetDir: targetDir,
         exeName: targetName,
         config: store.currentProject.more.windows,
-        base64Png:
-            platformName === 'macos'
-                ? store.currentProject.iconRound
-                    ? roundIcon.value
-                    : iconBase64.value
-                : iconBase64.value,
+        base64Png: store.currentProject.iconRound
+            ? roundIcon.value
+            : iconBase64.value,
         debug: store.currentProject.desktop.debug,
         customJs: await getInitializationScript(true),
         htmlPath: store.currentProject.htmlPath,
