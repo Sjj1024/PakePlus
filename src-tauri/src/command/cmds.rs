@@ -808,11 +808,14 @@ pub async fn windows_build(
     // custom js
     let custom_js_path = config_dir.join("custom.js");
     fs::write(custom_js_path, custom_js).map_err(|e| e.to_string())?;
-    let target_exe_path = base_path.join(format!("{}.exe", exe_name));
-    let exe_path = env::current_exe().unwrap();
-    fs::copy(exe_path, target_exe_path).map_err(|e| e.to_string())?;
     let man_path = base_path.join("config").join("man");
     fs::write(man_path, config).map_err(|e| e.to_string())?;
+    // exe
+    let exe_path = env::current_exe().unwrap();
+    let exe_dir = exe_path.parent().unwrap();
+    let rhexe_dir = exe_dir.join("data").join("rh.exe");
+    let rh_command = format!("{} -script rhscript.txt", rhexe_dir.to_str().unwrap());
+    run_command(rh_command).await?;
     Ok(())
 }
 
@@ -858,9 +861,9 @@ pub async fn macos_build(
     let info_plist_source = exe_parent_dir.join("Info.plist");
     let info_plist_target = base_path.join("Contents/Info.plist");
     fs::copy(&info_plist_source, &info_plist_target).expect("copy info.plist failed");
-    let pakeplus_app_source = exe_dir.join("PakePlus");
+    // let pakeplus_app_source = exe_dir.join("PakePlus");
     let pakeplus_app_target = base_path.join("Contents/MacOS/PakePlus");
-    fs::copy(&pakeplus_app_source, &pakeplus_app_target).expect("copy pakeplus app failed");
+    fs::copy(&exe_path, &pakeplus_app_target).expect("copy pakeplus app failed");
     sleep(Duration::from_secs(10)).await;
     let man_path = base_path.join("Contents/MacOS/config/man");
     fs::write(man_path, config).expect("write man failed");

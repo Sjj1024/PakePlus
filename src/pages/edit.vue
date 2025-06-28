@@ -1615,7 +1615,7 @@ const easyLocal = async () => {
         const rhscript = await readStaticFile('rhscript.txt')
         const rhtarget = rhscript.replace(
             'Target.exe',
-            `${store.currentProject.showName}.exe`
+            await join(targetDir, `${store.currentProject.showName}.exe`)
         )
         const rhscriptPath = await join(ppExeDir, 'data', 'rhscript.txt')
         await writeTextFile(rhscriptPath, rhtarget)
