@@ -1603,7 +1603,6 @@ const easyLocal = async () => {
         if (await exists(rhExePath)) {
             console.log('rh.exe exists')
         } else {
-            console.log('rh.exe not exists')
             await invoke('download_file', {
                 url: rhExeUrl,
                 savePath: rhExePath,
@@ -1615,7 +1614,6 @@ const easyLocal = async () => {
             ? roundIcon.value
             : iconBase64.value
         const icoBlob = await base64PngToIco(base64String)
-        console.log('ico', icoBlob)
         const icoPath = await join(ppExeDir, 'data', 'app.ico')
         await writeFile(icoPath, icoBlob)
         // save rhscript.txt
@@ -1640,7 +1638,6 @@ const easyLocal = async () => {
         htmlPath: store.currentProject.htmlPath,
     })
         .then(async (res) => {
-            console.log('build_local1 res', res)
             loadingText(t('buildSuccess'))
             // isAlphanumeric(store.currentProject.showName)
             if (
@@ -1652,9 +1649,6 @@ const easyLocal = async () => {
                     targetName,
                     `${store.currentProject.showName}.exe`
                 )
-                console.log('targetExe', targetExe)
-                console.log('chinaExeName', chinaExeName)
-
                 await rename(targetExe, chinaExeName)
             }
             oneMessage.success('本地打包成功')
