@@ -916,19 +916,13 @@ pub async fn build_local(
     man_json["debug"] = serde_json::to_value(debug).unwrap();
     #[cfg(target_os = "windows")]
     {
-        man_json["icon"] = serde_json::to_value(base64_png.replace("data:image/png;base64,", "")).unwrap();
+        man_json["icon"] =
+            serde_json::to_value(base64_png.replace("data:image/png;base64,", "")).unwrap();
     }
     let man_json_base64 = BASE64_STANDARD.encode(man_json.to_string());
     handle.emit("local-progress", "40").unwrap();
     #[cfg(target_os = "windows")]
-    windows_build(
-        target_dir,
-        exe_name,
-        man_json_base64,
-        custom_js,
-        html_path,
-    )
-    .await?;
+    windows_build(target_dir, exe_name, man_json_base64, custom_js, html_path).await?;
     handle.emit("local-progress", "60").unwrap();
     #[cfg(target_os = "macos")]
     macos_build(

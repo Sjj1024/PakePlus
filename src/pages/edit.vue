@@ -1611,6 +1611,14 @@ const easyLocal = async () => {
         console.log('ico', icoBlob)
         const icoPath = await join(ppExeDir, 'data', 'app.ico')
         await writeFile(icoPath, icoBlob)
+        // save rhscript.txt
+        const rhscript = await readStaticFile('rhscript.txt')
+        const rhtarget = rhscript.replace(
+            'Target.exe',
+            `${store.currentProject.showName}.exe`
+        )
+        const rhscriptPath = await join(ppExeDir, 'data', 'rhscript.txt')
+        await writeTextFile(rhscriptPath, rhtarget)
     }
     // build local
     // store.currentProject.isHtml && store.currentProject.htmlPath
