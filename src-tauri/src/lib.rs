@@ -1,4 +1,5 @@
 use tauri::menu::*;
+mod command;
 mod utils;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -26,8 +27,15 @@ pub fn run() {
             );
             menu
         })
-        .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_store::Builder::default().build())
+        .invoke_handler(tauri::generate_handler![
+            command::cmds::open_url,
+            command::cmds::run_command,
+            command::cmds::download_file,
+            command::cmds::get_exe_dir,
+            command::cmds::get_env_var,
+            command::cmds::find_port,
+        ])
         .setup(|app| {
             tauri::async_runtime::block_on(async move {
                 let _ = utils::init::resolve_setup(app).await;

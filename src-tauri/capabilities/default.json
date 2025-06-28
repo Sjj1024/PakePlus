@@ -1,10 +1,37 @@
 {
-  "$schema": "../gen/schemas/desktop-schema.json",
-  "identifier": "default",
-  "description": "Capability for the main window",
-  "windows": ["main"],
-  "permissions": [
-    "core:default",
-    "opener:default"
-  ]
+    "$schema": "../gen/schemas/desktop-schema.json",
+    "identifier": "default",
+    "description": "Capability for the main window",
+    "windows": ["main"],
+    "remote": {
+        "urls": [
+            "https://*",
+            "file://*",
+            "http://*",
+            "asset://localhost/*",
+            "https://api.github.com/*",
+            "https://payjs.cn/*",
+            "https://zpayz.cn/*"
+        ]
+    },
+    "permissions": [
+        "core:default",
+        "core:app:allow-default-window-icon",
+        "core:app:allow-app-hide",
+        "core:app:allow-app-show",
+        "core:app:allow-set-app-theme",
+        "core:app:allow-name",
+        "core:window:allow-unminimize",
+        "core:window:allow-set-title",
+        "core:window:allow-set-focus",
+        "core:window:allow-show",
+        "core:window:allow-unmaximize",
+        "core:window:allow-minimize",
+        "core:window:allow-set-size",
+        "core:window:allow-toggle-maximize",
+        "core:window:allow-start-dragging",
+        "core:window:allow-close",
+        "core:window:allow-internal-toggle-maximize",
+        "core:window:allow-set-icon"
+    ]
 }
