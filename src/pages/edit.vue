@@ -617,8 +617,8 @@ const configDialogVisible = ref(false)
 const codeDialogVisible = ref(false)
 const imgPreviewVisible = ref(false)
 const warning = ref('')
-const platformName = platform()
-const archName = arch()
+const platformName = isTauri ? platform() : 'web'
+const archName = isTauri ? arch() : 'web'
 
 const appRules = reactive<FormRules>({
     showName: [
@@ -1089,7 +1089,7 @@ const stopServer = async () => {
     }
 }
 // close preview window and stop server
-listen('stop_server', stopServer)
+isTauri && listen('stop_server', stopServer)
 
 // handle file change
 const handleFileChange = async (event: any) => {
@@ -1567,9 +1567,10 @@ const updateCustomJs = async () => {
     }
 }
 
-listen('local-progress', (event: any) => {
-    buildRate.value = parseInt(event.payload)
-})
+isTauri &&
+    listen('local-progress', (event: any) => {
+        buildRate.value = parseInt(event.payload)
+    })
 
 // local publish
 const easyLocal = async () => {

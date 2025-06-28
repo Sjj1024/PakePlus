@@ -171,13 +171,14 @@ onMounted(async () => {
     // TODO check action is over
     // check version
     isTauri && checkUpdate()
-    await listen('update-event', (event: any) => {
-        if (event.payload.type === 'update-now') {
-            confirmUpdate()
-        } else if (event.payload.type === 'update-check') {
-            checkUpdate(true)
-        }
-    })
+    isTauri &&
+        (await listen('update-event', (event: any) => {
+            if (event.payload.type === 'update-now') {
+                confirmUpdate()
+            } else if (event.payload.type === 'update-check') {
+                checkUpdate(true)
+            }
+        }))
 })
 </script>
 
