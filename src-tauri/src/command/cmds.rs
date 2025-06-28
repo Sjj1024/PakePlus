@@ -834,6 +834,7 @@ pub async fn macos_build(
     if !app_dir.exists() {
         fs::create_dir_all(&app_dir).expect("create app dir failed");
     }
+    #[cfg(not(debug_assertions))]
     sleep(Duration::from_secs(10)).await;
     let config_dir = base_path.join("Contents/MacOS/config/inject");
     let resources_dir = base_path.join("Contents/Resources");
@@ -851,6 +852,7 @@ pub async fn macos_build(
             copy_dir(html_dir, &www_dir).expect("copy html dir failed");
         }
     }
+    #[cfg(not(debug_assertions))]
     sleep(Duration::from_secs(10)).await;
     // custom js
     let custom_js_path = config_dir.join("custom.js");
@@ -864,6 +866,7 @@ pub async fn macos_build(
     // let pakeplus_app_source = exe_dir.join("PakePlus");
     let pakeplus_app_target = base_path.join("Contents/MacOS/PakePlus");
     fs::copy(&exe_path, &pakeplus_app_target).expect("copy pakeplus app failed");
+    #[cfg(not(debug_assertions))]
     sleep(Duration::from_secs(10)).await;
     let man_path = base_path.join("Contents/MacOS/config/man");
     fs::write(man_path, config).expect("write man failed");
