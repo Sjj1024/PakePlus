@@ -991,12 +991,17 @@ const syncAllBranch = async (init: boolean = false) => {
             console.log('syncAllBranch', repo)
             const upRes: any = await githubApi.getAllBranchs(upstreamUser, repo)
             console.log('up branchs Res', upRes)
-            const upBranchs = upRes.data?.map((item: any) => {
-                return {
-                    name: item.name,
-                    sha: item.commit.sha,
-                }
-            })
+            const upBranchs = upRes.data
+                ?.map((item: any) => {
+                    return {
+                        name: item.name,
+                        sha: item.commit.sha,
+                    }
+                })
+                .filter(
+                    (item: any) =>
+                        item.name === 'main' || item.name === webBranch
+                )
             console.log('upBranchs', upBranchs)
             const userRes: any = await githubApi.getAllBranchs(
                 store.userName,
@@ -1009,12 +1014,12 @@ const syncAllBranch = async (init: boolean = false) => {
                     sha: item.commit.sha,
                 }
             })
-            console.log('userBranchs', userBranchs)
             for (const branch of upBranchs) {
                 // check branch is exist in userBranchs and sha is same
                 const userBranch = userBranchs.find(
                     (item: any) => item.name === branch.name
                 )
+                console.log('userBranchs---', userBranch)
                 if (userBranch && userBranch.sha !== branch.sha) {
                     // merge branch and commit(allways use upstream branch)
                     await mergeBranch(repo, branch.name)
@@ -1035,7 +1040,7 @@ onMounted(() => {
         oneMessage.error(t('webNotStable'))
     }
     // getPakePlusInfo()
-    // syncAllBranch()
+    syncAllBranch()
 })
 </script>
 
