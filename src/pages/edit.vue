@@ -734,6 +734,7 @@ const methodOptions = [
     {
         value: 'local',
         label: '本地打包（仅支持本机系统，大概36秒）',
+        disabled: !isTauri,
     },
     {
         value: 'cloud',
@@ -763,7 +764,6 @@ const platformMap: any = {
 
 // method change
 const methodChange = (value: string) => {
-    console.log('methodChange', value, platformName, archName)
     if (value === 'local') {
         // 判断本机型号，然后给store.currentProject.platform复制
         store.currentProject.platform = platformMap[platformName + archName]
@@ -1964,6 +1964,9 @@ onMounted(async () => {
         const window = getCurrentWindow()
         window.setTitle(`${store.currentProject.name}`)
         methodChange(store.currentProject.desktop.buildMethod)
+    } else {
+        store.currentProject.desktop.buildMethod = 'cloud'
+        methodChange('cloud')
     }
     console.log('route.query', route.query)
     const delrelease = route.query.delrelease

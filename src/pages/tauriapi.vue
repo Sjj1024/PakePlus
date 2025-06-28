@@ -813,10 +813,7 @@
                                 默认下载到Download目录
                             </el-button>
                         </el-tooltip>
-                        <el-progress
-                            type="circle"
-                            :percentage="downloadProgress"
-                        />
+                        <el-progress :percentage="downloadProgress" />
                     </div>
                 </div>
                 <!-- api/notification -->
