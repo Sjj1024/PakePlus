@@ -1,6 +1,6 @@
 [FILENAMES]
-Exe=    pakeplus.exe
-SaveAs= target.exe
+Exe=    PakePlus.exe
+SaveAs= Target.exe
 Log=    rh.log
 
 [COMMANDS]
