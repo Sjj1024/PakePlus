@@ -1778,7 +1778,7 @@ const dispatchAction = async () => {
             buildTime += 1
             const minute = Math.floor(buildTime / 60)
             const second = buildTime % 60
-            const buildRate = Math.floor((buildTime / (60 * 15)) * 100)
+            const buildRate = Math.floor((buildTime / (60 * 10)) * 100)
             // loadingText.value = `${buildStatus}...${minute}分${second}秒`
             const loadingState = `<div>${minute}${t('minute')}${second}${t(
                 'second'
