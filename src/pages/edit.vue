@@ -1646,7 +1646,10 @@ const easyLocal = async () => {
             console.log('build_local1 res', res)
             loadingText(t('buildSuccess'))
             // isAlphanumeric(store.currentProject.showName)
-            if (!isAlphanumeric(store.currentProject.showName)) {
+            if (
+                platformName === 'windows' &&
+                !isAlphanumeric(store.currentProject.showName)
+            ) {
                 const chinaExeName = await join(
                     targetDir,
                     targetName,
