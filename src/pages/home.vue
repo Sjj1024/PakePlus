@@ -145,19 +145,22 @@
                 <el-dropdown-menu class="updateMenu">
                     <el-dropdown-item
                         class="updateBtn"
-                        v-if="store.isUpdate"
+                        v-if="isTauri && store.isUpdate"
                         @click="sendUpdateEvent('update-now')"
                     >
                         {{ t('updateNow') }}
                     </el-dropdown-item>
                     <el-dropdown-item
-                        v-else-if="isTauri"
+                        v-if="isTauri"
                         @click="sendUpdateEvent('update-check')"
                     >
                         {{ t('checkUpdate') }}
                     </el-dropdown-item>
-                    <el-dropdown-item @click="goAbout">
+                    <el-dropdown-item v-if="isTauri" @click="goAbout">
                         {{ t('superpower') }}
+                    </el-dropdown-item>
+                    <el-dropdown-item v-else @click="goAbout">
+                        {{ t('aboutUs') }}
                     </el-dropdown-item>
                 </el-dropdown-menu>
             </template>
