@@ -1,4 +1,5 @@
 const { invoke } = window.__TAURI__.core
+const { WebviewWindow } = window.__TAURI__.webviewWindow
 
 let inputValue
 let resultElement
@@ -72,4 +73,25 @@ window.addEventListener('DOMContentLoaded', () => {
         console.log('result', result)
         resultElement.textContent = result
     })
+    // open url new
+    document
+        .querySelector('#openUrlNew')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('open url new')
+            const webview = new WebviewWindow('my-label', {
+                url: inputValue ? inputValue : 'https://pakeplus.com/',
+                center: true,
+                width: 800,
+                height: 400,
+                focus: true,
+                title: 'PakePlus Window',
+            })
+            webview.once('tauri://created', function () {
+                console.log('new webview created')
+            })
+            webview.once('tauri://error', function (e) {
+                console.log('new webview error', e)
+            })
+        })
 })

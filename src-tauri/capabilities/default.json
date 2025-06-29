@@ -32,6 +32,13 @@
         "core:window:allow-start-dragging",
         "core:window:allow-close",
         "core:window:allow-internal-toggle-maximize",
-        "core:window:allow-set-icon"
+        "core:window:allow-set-icon",
+        "core:window:allow-set-always-on-top",
+        "core:window:allow-create",
+        "core:webview:allow-create-webview",
+        "core:webview:allow-create-webview-window",
+        "core:webview:allow-clear-all-browsing-data",
+        "core:webview:allow-get-all-webviews",
+        "core:webview:allow-internal-toggle-devtools"
     ]
 }
