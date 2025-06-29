@@ -37,13 +37,13 @@
             </div>
             <div class="tools">
                 <p>
-                    <span>官方网站：</span>
+                    <span>{{ t('official') }}：</span>
                     <span class="link" @click="openUrl(urlMap.pakeplus)">
                         {{ urlMap.pakeplus }}
                     </span>
                 </p>
                 <p>
-                    <span>商业社群：</span>
+                    <span>{{ t('business') }}：</span>
                     <span class="link" @click="openUrl(urlMap.exchange)">
                         {{ urlMap.exchange }}
                     </span>

@@ -90,7 +90,7 @@
                         </template>
                         <img
                             :src="scope.row.qrcode"
-                            alt="下载二维码"
+                            alt="download qr"
                             class="downloadQrcode"
                             style="width: 120px; height: 120px"
                         />

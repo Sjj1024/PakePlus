@@ -1,6 +1,5 @@
 <template>
     <el-container class="layoutBox" :class="{ isWeb: !isTauri() }">
-        <!-- 侧边栏 -->
         <el-aside width="170px">
             <el-scrollbar>
                 <el-menu
@@ -11,10 +10,14 @@
                     <el-sub-menu index="0">
                         <template #title>
                             <el-icon><Setting /></el-icon>
-                            <span>基本设置</span>
+                            <span>{{ t('baseSetting') }}</span>
                         </template>
-                        <el-menu-item index="0-1">我的信息</el-menu-item>
-                        <el-menu-item index="0-2">项目设置</el-menu-item>
+                        <el-menu-item index="0-1">
+                            {{ t('profile') }}
+                        </el-menu-item>
+                        <el-menu-item index="0-2">
+                            {{ t('projectSetting') }}
+                        </el-menu-item>
                     </el-sub-menu>
                     <el-sub-menu index="1">
                         <template #title>
@@ -82,7 +85,9 @@
                         <!-- <el-menu-item index="3-2">{{
                             t('filterAd')
                         }}</el-menu-item> -->
-                        <el-menu-item index="3-2">网站调整</el-menu-item>
+                        <el-menu-item index="3-2">{{
+                            t('websiteAdjust')
+                        }}</el-menu-item>
                         <el-menu-item index="3-3">{{
                             t('listenData')
                         }}</el-menu-item>
@@ -101,9 +106,15 @@
                         <el-menu-item index="3-13">
                             {{ t('disableCors') }}
                         </el-menu-item>
-                        <el-menu-item index="3-14">支付测试</el-menu-item>
-                        <el-menu-item index="3-15">文件压缩</el-menu-item>
-                        <el-menu-item index="3-16">下载资源</el-menu-item>
+                        <el-menu-item index="3-14">{{
+                            t('paymentTest')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-15">{{
+                            t('fileCompression')
+                        }}</el-menu-item>
+                        <el-menu-item index="3-16">{{
+                            t('downloadResource')
+                        }}</el-menu-item>
                     </el-sub-menu>
                     <el-menu-item v-if="isTauri()" index="4">
                         <el-icon>
@@ -113,20 +124,20 @@
                     </el-menu-item>
                     <el-menu-item index="100">
                         <el-icon><ArrowLeft /></el-icon>
-                        <span @click="goBack">返回首页</span>
+                        <span @click="goBack">{{ t('backToHome') }}</span>
                     </el-menu-item>
                 </el-menu>
             </el-scrollbar>
         </el-aside>
-        <!-- 主内容 -->
+        <!-- mainContent -->
         <el-container>
-            <!-- 头部 -->
+            <!-- header -->
             <el-header v-if="menuIndex !== '4'" class="headerBox">
                 <div v-if="menuIndex !== '4'" class="backBtn" @click="goBack">
                     <el-icon><ArrowLeft /></el-icon>
                     <span>{{ t('back') }}</span>
                 </div>
-                <!-- 输出 -->
+                <!-- output -->
                 <el-input
                     v-if="menuIndex !== '4'"
                     v-model="textarea"
@@ -134,7 +145,7 @@
                     type="textarea"
                     class="searchInput"
                 />
-                <!-- 图片 -->
+                <!-- image -->
                 <img
                     v-if="menuIndex !== '4'"
                     :src="image || ppIcon"
@@ -161,7 +172,7 @@
                     <span></span>
                 </div> -->
             </el-header>
-            <!-- 主内容 -->
+            <!-- mainContent -->
             <el-main>
                 <!-- my info -->
                 <!-- api/template -->
