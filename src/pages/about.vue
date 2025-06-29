@@ -56,26 +56,26 @@
                 </p>
                 <p>
                     <span>{{ t('followme') }}：</span>
+                    <span class="link" @click="openUrl(urlMap.github)">
+                        Github
+                    </span>
+                    <span class="link" @click="openUrl(urlMap.bilibili)">
+                        Bilibili
+                    </span>
+                    <span class="link" @click="openUrl(urlMap.twitter)">
+                        Twitter(X)
+                    </span>
+                    <span class="link" @click="openUrl(urlMap.youtube)">
+                        Youtube
+                    </span>
                     <span class="link" @click="openUrl(urlMap.csdn)">
                         CSDN
                     </span>
                     <span class="link" @click="openUrl(urlMap.juejin)">
                         掘金
                     </span>
-                    <span class="link" @click="openUrl(urlMap.github)">
-                        Github
-                    </span>
                     <span class="link" @click="openUrl(urlMap.gitee)">
                         Gitee
-                    </span>
-                    <span class="link" @click="openUrl(urlMap.bilibili)">
-                        Bilibili
-                    </span>
-                    <span class="link" @click="openUrl(urlMap.twitter)">
-                        Twitter
-                    </span>
-                    <span class="link" @click="openUrl(urlMap.youtube)">
-                        Youtube
                     </span>
                 </p>
             </div>

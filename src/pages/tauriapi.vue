@@ -154,6 +154,7 @@
                     :src="image || ppIcon"
                     alt="image"
                     class="image"
+                    @click="openUrl(urlMap.ppofficial)"
                 />
                 <!-- <div v-else>
                     <el-button>留言</el-button>
@@ -1017,6 +1018,7 @@ import {
     openUrl,
     payJsMchid,
     payJsSignKey,
+    urlMap,
     yunPayMchid,
     yunPaySignKey,
     zPayMchId,
