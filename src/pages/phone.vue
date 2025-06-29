@@ -1801,7 +1801,7 @@ const dispatchAction = async (repo: string) => {
             buildTimeText[repo] = `${minute}${t('minute')}${second}${t(
                 'second'
             )}`
-            const buildRate = Math.floor((buildTime[repo] / (60 * 15)) * 100)
+            const buildRate = Math.floor((buildTime[repo] / (60 * 10)) * 100)
             buildRates[repo] = buildRate > 99 ? 99 : buildRate
         }, 1000)
         // check build status
