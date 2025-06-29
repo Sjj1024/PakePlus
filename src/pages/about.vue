@@ -37,9 +37,15 @@
             </div>
             <div class="tools">
                 <p>
-                    <span>PakePlus：</span>
+                    <span>官方网站：</span>
                     <span class="link" @click="openUrl(urlMap.pakeplus)">
                         {{ urlMap.pakeplus }}
+                    </span>
+                </p>
+                <p>
+                    <span>商业社群：</span>
+                    <span class="link" @click="openUrl(urlMap.exchange)">
+                        {{ urlMap.exchange }}
                     </span>
                 </p>
                 <p>
