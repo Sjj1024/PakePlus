@@ -19,7 +19,7 @@ export const webBranch = import.meta.env.VITE_WEB_BRANCH
 export const devBranch = import.meta.env.VITE_DEV_BRANCH
 
 // global file size limit
-export const fileSizeLimit = import.meta.env.VITE_FILE_LIMIT_SIZE
+export const fileSizeLimit = import.meta.env.VITE_FILE_LIMIT_SIZE * 1024 * 1024
 export const fileLimitNumber = import.meta.env.VITE_FILE_LIMIT_NUMBER
 
 // pay info
