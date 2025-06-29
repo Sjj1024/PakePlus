@@ -3,8 +3,6 @@ use base64::prelude::*;
 use futures::StreamExt;
 use reqwest::Client;
 use serde::Serialize;
-use serde_json::json;
-use std::collections::HashMap;
 use std::env;
 use std::fs;
 use std::fs::File;

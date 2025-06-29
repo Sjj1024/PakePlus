@@ -42,4 +42,21 @@ if ('__TAURI__' in window) {
     invoke('run_command', { command: 'ls -l' })
 }
     `,
+    downloadFile: `
+const { invoke } = window.__TAURI__.core
+
+if ('__TAURI__' in window) {
+    await invoke('download_file', {
+        url: 'https://www.baidu.com/img/flexible/logo/pc/result.png',
+        savePath: 'test.png',
+        fileId: 'test',
+    })
+}`,
+    downProgress: `
+listen('download_progress', (event: any) => {
+    downloadProgress.value = Number(
+        ((event.payload.downloaded / event.payload.total) * 100).toFixed(2)
+    )
+})
+    `,
 }

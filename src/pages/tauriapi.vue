@@ -793,28 +793,55 @@
                     </p>
                     <div class="cardBox">
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="选择下载目录文件夹"
                             placement="bottom"
                         >
                             <el-button @click="selectDownloadFolder">
                                 选择文件夹
                             </el-button>
                         </el-tooltip>
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
+                        <el-tooltip content="下载文件" placement="bottom">
                             <el-button @click="downFile">下载文件</el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="默认下载到Download目录"
                             placement="bottom"
                         >
                             <el-button @click="downFile(false)">
                                 默认下载到Download目录
                             </el-button>
                         </el-tooltip>
-                        <el-progress :percentage="downloadProgress" />
+                        <el-tooltip
+                            content="下载进度回调展示"
+                            placement="bottom"
+                        >
+                            <div class="downProgress">
+                                <span>下载进度：</span>
+                                <el-progress :percentage="downloadProgress" />
+                            </div>
+                        </el-tooltip>
+                    </div>
+                    <div class="codeDemo">
+                        <h2>下载文件</h2>
+                        <p class="description">
+                            在脚本中添加以下代码，即可实现下载文件
+                        </p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.downloadFile"
+                            :disabled="true"
+                        />
+                    </div>
+                    <div class="codeDemo">
+                        <h2>下载进度</h2>
+                        <p class="description">
+                            在脚本中添加以下代码，即可监听下载进度回调
+                        </p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.downProgress"
+                            :disabled="true"
+                        />
                     </div>
                 </div>
                 <!-- api/notification -->
@@ -2047,5 +2074,12 @@ onMounted(() => {
             }
         }
     }
+}
+
+.downProgress {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 </style>
