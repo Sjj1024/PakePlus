@@ -1,5 +1,5 @@
 <template>
-    <el-container class="layoutBox">
+    <el-container class="layoutBox" :class="{ isWeb: !isTauri() }">
         <!-- 侧边栏 -->
         <el-aside width="170px">
             <el-scrollbar>
@@ -25,7 +25,7 @@
                             </el-icon>
                             <span>Tauri2Api</span>
                         </template>
-                        <el-menu-item index="1-1">apps</el-menu-item>
+                        <el-menu-item index="1-1"> apps </el-menu-item>
                         <el-menu-item index="1-2">core</el-menu-item>
                         <el-menu-item index="1-3">dpi</el-menu-item>
                         <el-menu-item index="1-4">event</el-menu-item>
@@ -105,7 +105,7 @@
                         <el-menu-item index="3-15">文件压缩</el-menu-item>
                         <el-menu-item index="3-16">下载资源</el-menu-item>
                     </el-sub-menu>
-                    <el-menu-item index="4">
+                    <el-menu-item v-if="isTauri()" index="4">
                         <el-icon>
                             <span class="iconfont tauriIcon">&#xe655;</span>
                         </el-icon>
@@ -1244,8 +1244,8 @@ const githubApiLimit = ref({
 
 const textarea = ref('')
 const image = ref()
-const defaultMenu = ref('1-1')
-const menuIndex = ref('1-1')
+const defaultMenu = ref('0-1')
+const menuIndex = ref('0-1')
 
 // dialog
 const dialogTitle = ref('支付测试')
@@ -1281,10 +1281,18 @@ const getGithubBilling = async () => {
 }
 
 const handleMenu = (index: string) => {
-    console.log('handleMenu', index)
-    menuIndex.value = index
-    if (index === '0-1') {
-        getGithubBilling()
+    if (isTauri()) {
+        menuIndex.value = index
+        console.log('isTauri')
+    } else {
+        if (index === '0-1') {
+            menuIndex.value = index
+            store.token && getGithubBilling()
+        } else if (index === '4') {
+            router.push('/about')
+        } else {
+            oneMessage.error('此API不支持PakePlus网页端')
+        }
     }
 }
 

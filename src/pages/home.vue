@@ -137,7 +137,7 @@
             <div
                 class="version"
                 :class="{ isUpdate: store.isUpdate }"
-                @click="goAbout"
+                @click="goAbout('about')"
             >
                 v{{ packageJson.version }}
             </div>
@@ -156,10 +156,10 @@
                     >
                         {{ t('checkUpdate') }}
                     </el-dropdown-item>
-                    <el-dropdown-item v-if="isTauri" @click="goAbout">
+                    <el-dropdown-item @click="goAbout('superpower')">
                         {{ t('superpower') }}
                     </el-dropdown-item>
-                    <el-dropdown-item v-else @click="goAbout">
+                    <el-dropdown-item @click="goAbout('about')">
                         {{ t('aboutUs') }}
                     </el-dropdown-item>
                 </el-dropdown-menu>
@@ -457,8 +457,10 @@ const goProject = async (pro: Project) => {
 }
 
 // go about
-const goAbout = () => {
-    if (isTauri) {
+const goAbout = (route: string = 'about') => {
+    if (route !== 'about') {
+        router.push('/tauriapi')
+    } else if (isTauri) {
         router.push('/tauriapi?about=true')
     } else {
         router.push('/about')
