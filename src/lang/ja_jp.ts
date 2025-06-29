@@ -254,4 +254,17 @@ export default {
     urlCode: 'QRコード',
     banned: '禁止',
     fileLimitNumber: 'ファイル数の制限を超えました{number}個',
+    buildMethod: 'ビルド方法',
+    buildMethodTips: 'ビルド方法を選択してください',
+    localBuild: 'ローカルビルド（本機システムのみサポート、約36秒）',
+    cloudBuild: 'クラウドビルド（すべての主流システムをサポート、約9分）',
+    localFastBuild: 'ローカル高速ビルド（本機システムのみサポート、約2秒）',
+    cloudFastBuild:
+        'クラウド高速ビルド（すべての主流システムをサポート、約3分）',
+    pathNotExist: 'パスが存在しません',
+    descNoNewlines: '説明には改行文字を含めないでください',
+    localSuccess: 'ローカルビルド成功',
+    localError: 'ローカルビルド失敗',
+    publishError: '公開失敗',
+    publishErrorTips: 'よくある問題を参照して解決策を見つけてください',
 }

@@ -755,9 +755,9 @@ const creatProject = async () => {
         branchDialog.value = false
         return
     } else if (
-        branchName.value === 'PakePlus' ||
+        branchName.value === 'main' ||
         branchName.value === 'web2' ||
-        branchName.value === 'web3'
+        branchName.value === webBranch
     ) {
         oneMessage.error(t('banned'))
         branchName.value = ''

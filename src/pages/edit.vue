@@ -356,10 +356,10 @@
                 style="max-width: 600px"
             >
                 <!-- debug -->
-                <el-form-item label="打包方式">
+                <el-form-item :label="t('buildMethod')">
                     <el-select
                         v-model="store.currentProject.desktop.buildMethod"
-                        placeholder="请选择打包方式"
+                        :placeholder="t('selectBuildMethod')"
                         @change="methodChange"
                     >
                         <el-option
@@ -373,7 +373,7 @@
                 </el-form-item>
                 <el-form-item
                     v-if="store.currentProject.desktop.buildMethod === 'local'"
-                    label="保存路径"
+                    :label="t('savePath')"
                 >
                     <el-input
                         v-model.trim="savePath"
@@ -381,7 +381,7 @@
                         autoCapitalize="off"
                         autoCorrect="off"
                         spellCheck="false"
-                        placeholder="点击选择，默认保存到下载目录"
+                        :placeholder="t('savePathTips')"
                         @click="savePathHandle('select')"
                     >
                         <template #append>
@@ -733,21 +733,21 @@ const tauriConfigRef = ref<any>(null)
 const methodOptions = [
     {
         value: 'local',
-        label: '本地打包（仅支持本机系统，大概36秒）',
+        label: t('localBuild'),
         disabled: !isTauri,
     },
     {
         value: 'cloud',
-        label: '云端打包（支持所有主流系统，大概9分钟）',
+        label: t('cloudBuild'),
     },
     {
         value: 'localFast',
-        label: '本地极速（仅支持本机系统，大概2秒）',
+        label: t('localFastBuild'),
         disabled: true,
     },
     {
         value: 'cloudFast',
-        label: '云端极速（支持所有主流系统，大概3分钟）',
+        label: t('cloudFastBuild'),
         disabled: true,
     },
 ]
@@ -789,7 +789,7 @@ const savePathHandle = async (handle: string) => {
         // check path
         const isExists = await exists(savePath.value)
         if (!isExists) {
-            oneMessage.error('路径不存在')
+            oneMessage.error(t('pathNotExist'))
             return
         }
     }
@@ -1329,7 +1329,7 @@ const saveFormInput = async () => {
 const validateNoNewlines = () => {
     const desc = store.currentProject.desktop.desc
     if (desc && (desc.includes('\n') || desc.includes('\r'))) {
-        oneMessage.error('描述不能包含换行符')
+        oneMessage.error(t('descNoNewlines'))
         store.currentProject.desktop.desc = desc.replace(/[\n\r]/g, '')
     }
 }
@@ -1652,13 +1652,13 @@ const easyLocal = async () => {
                 )
                 await rename(targetExe, chinaExeName)
             }
-            oneMessage.success('本地打包成功')
+            oneMessage.success(t('localSuccess'))
             buildLoading.value = false
         })
         .catch((error) => {
             console.error('build_local2 error', error)
             oneMessage.error(error)
-            warning.value = '本地打包失败' + ': ' + error
+            warning.value = t('localError') + ': ' + error
         })
         .finally(() => {
             buildSecondTimer && clearInterval(buildSecondTimer)
@@ -1703,8 +1703,8 @@ const publishWeb = async () => {
             'build error',
             'PakePlus'
         )
-        ElMessageBox.confirm('跳转到常见问题查看解决办法', '发布失败', {
-            confirmButtonText: 'OK',
+        ElMessageBox.confirm(t('publishErrorTips'), t('publishError'), {
+            confirmButtonText: t('confirm'),
             type: 'warning',
             center: true,
         }).finally(() => {
@@ -1733,7 +1733,7 @@ const publishCheck = async () => {
         } else if (store.currentProject.platform.length > 0) {
             publishWeb()
         } else {
-            oneMessage.error('请选择平台')
+            oneMessage.error(t('selectPlatform'))
             buildLoading.value = false
             centerDialogVisible.value = true
         }
@@ -1914,26 +1914,6 @@ const checkBuildStatus = async () => {
             await new Promise((resolve) => setTimeout(resolve, 3000))
         }
     }
-}
-
-// init jsFileContents from jsFile
-const initJsFileContents = async () => {
-    // read js file content from appDataDir assets dir
-    const appDataPath = await appDataDir()
-    const targetDir = await join(appDataPath, 'assets')
-    const jsFilePath = await join(targetDir, `${store.currentProject.name}.js`)
-    // if file not exist, return
-    if (await exists(jsFilePath)) {
-        const jsFileContent = await readTextFile(jsFilePath)
-        jsFileContents.value = jsFileContent
-        console.log('initJsFileContents', jsFileContent)
-    }
-    jsSelOptions.value = store.currentProject.jsFile?.map((item: any) => {
-        return {
-            label: item,
-            value: item,
-        }
-    })
 }
 
 const handleKeydown = (event: KeyboardEvent) => {
