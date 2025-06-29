@@ -35,4 +35,11 @@ const hookClick = (e) => {
  
 document.addEventListener('click', hookClick, { capture: true })
     `,
+    runShell: `
+const { invoke } = window.__TAURI__.core
+
+if ('__TAURI__' in window) {
+    invoke('run_command', { command: 'ls -l' })
+}
+    `,
 }

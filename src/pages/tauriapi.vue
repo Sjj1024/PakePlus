@@ -891,6 +891,35 @@
                         />
                     </div>
                 </div>
+                <!-- shell -->
+                <div v-else-if="menuIndex === '2-17'" class="cardContent">
+                    <h1 class="cardTitle">PakePlus shell</h1>
+                    <p>
+                        Access the system shell. Allows you to spawn child
+                        processes.
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="runShell">
+                                运行任意命令
+                            </el-button>
+                        </el-tooltip>
+                    </div>
+                    <div class="codeDemo">
+                        <h2>运行</h2>
+                        <p class="description">
+                            在脚本中添加以下代码，即可实现运行命令
+                        </p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.runShell"
+                            :disabled="true"
+                        />
+                    </div>
+                </div>
                 <!-- api/template -->
                 <div v-else-if="menuIndex === '1-111'" class="cardContent">
                     <h1 class="cardTitle">menu</h1>
@@ -1772,6 +1801,18 @@ const downAppData = async () => {
         savePath,
         fileId,
     })
+}
+
+// run shell
+const runShell = async () => {
+    if (isTauri() && textarea.value) {
+        const result = await invoke('run_command', {
+            command: textarea.value,
+        })
+        console.log('result', result)
+    } else {
+        oneMessage.error('请输入命令')
+    }
 }
 
 // 下载文件
