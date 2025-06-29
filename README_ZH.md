@@ -186,9 +186,10 @@ pnpm run build
 7. 由于我一个人时间精力有限，所以请务必按照上述流程咨询。
 8. 群内仅限讨论技术问题，不要发广告、发垃圾信息、发其他无关的信息。
 9. 群内禁止发任何涉及政治、宗教、暴力、色情、恐怖主义等内容的信息。
- <p align="center" style="display:flex" >
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/mywx.png" width=300/>
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/wxcode.png" width=300/>
+ <p align="center" style="display:flex; justify-content: flex-start;" >
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/mywx.png" width=200/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/wxcode.png" width=200/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/qqpp3.jpg" width=200/>
  </p>
 
 ## Star History

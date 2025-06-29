@@ -181,7 +181,7 @@ Please ensure that you have maintained at least one tauri project for at least o
  <p align="center" style="display:flex; justify-content: flex-start;" >
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/mywx.png" width=200/>
     <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/wxcode.png" width=200/>
-    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/qq.jpg" width=200/>
+    <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/qqpp3.jpg" width=200/>
  </p>
 
 2. 💖If PakePlus has brought joy to your life, feel free to support it.
