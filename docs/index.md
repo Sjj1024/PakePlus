@@ -48,6 +48,15 @@ features:
     - title: 支持静态文件
       details: 支持将静态html文件或Vue/React等项目编译后的dist打包发布
       icon: 🍀
+    - title: 本地打包
+      details: 支持本地打包，而且不需要安装任何依赖环境，本地打包仅需30秒
+      icon: 🍔
+    - title: 无需Token
+      details: 没有Github Token没关系，本地打包即简单又方便，还不需要Token
+      icon: 🥥
+    - title: API支持
+      details: 支持在JS脚本中调用系统级API，例如下载文件/执行命令/打开新窗口等
+      icon: ⚔️
     - title: 支持调试
       details: 支持debug调试模式，无论是预览阶段还是发布阶段，都可以找到bug并消灭bug
       icon: 🐞
