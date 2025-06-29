@@ -39,7 +39,7 @@ document.addEventListener('click', hookClick, { capture: true })
 const { WebviewWindow } = window.__TAURI__.webviewWindow
 
 const webview = new WebviewWindow('my-label', {
-    url: url,
+    url: 'https://pakeplus.com/',
     x: 500,
     y: 500,
     width: 800,
@@ -84,5 +84,17 @@ listen('download_progress', (event: any) => {
         ((event.payload.downloaded / event.payload.total) * 100).toFixed(2)
     )
 })
+    `,
+    removeEle: `
+document.querySelector("#juejin > div.container.index-container > div > header > div > a > img.logo-img").style.display = "none"
+    `,
+    addEle: `
+const modal = document.createElement('div')
+modal.className = 'modalBox'
+modal.innerHTML = '<p class="modalNotes">your content</p>'
+document.body.appendChild(modal)
+    `,
+    modifyEle: `
+document.querySelector("#juejin > div.container.index-container > div > header > div > a > img.logo-img").src = "https://pakeplus.com/app.svg"
     `,
 }

@@ -79,38 +79,24 @@
                         <el-menu-item index="3-1">{{
                             t('linkTo')
                         }}</el-menu-item>
-                        <el-menu-item index="3-2">{{
+                        <!-- <el-menu-item index="3-2">{{
                             t('filterAd')
-                        }}</el-menu-item>
+                        }}</el-menu-item> -->
+                        <el-menu-item index="3-2">网站调整</el-menu-item>
                         <el-menu-item index="3-3">{{
-                            t('removeElement')
-                        }}</el-menu-item>
-                        <el-menu-item index="3-4">{{
-                            t('addElement')
-                        }}</el-menu-item>
-                        <el-menu-item index="3-5">{{
                             t('listenData')
                         }}</el-menu-item>
-                        <el-menu-item index="3-6">{{
+                        <el-menu-item index="3-4">{{
                             t('dataStatistics')
                         }}</el-menu-item>
                         <el-menu-item index="3-7">{{
                             t('generateIcon')
-                        }}</el-menu-item>
-                        <el-menu-item index="3-8">{{
-                            t('websiteStyle')
                         }}</el-menu-item>
                         <el-menu-item index="3-9">{{
                             t('addFlag')
                         }}</el-menu-item>
                         <el-menu-item index="3-10">{{
                             t('startParams')
-                        }}</el-menu-item>
-                        <el-menu-item index="3-11">{{
-                            t('debugMode')
-                        }}</el-menu-item>
-                        <el-menu-item index="3-12">{{
-                            t('injectJq')
                         }}</el-menu-item>
                         <el-menu-item index="3-13">
                             {{ t('disableCors') }}
@@ -276,111 +262,81 @@
                         app.withGlobalTauri in tauri.conf.json is set to true.
                     </p>
                     <div class="cardBox">
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
-                            <el-button @click="defaultWindowIconApi">
-                                addPluginListener
-                            </el-button>
+                        <el-tooltip content="convertFileSrc" placement="bottom">
+                            <el-button>{{ t('convertFileSrc') }}</el-button>
+                        </el-tooltip>
+                        <el-tooltip content="invoke" placement="bottom">
+                            <el-button>{{ t('invoke') }}</el-button>
+                        </el-tooltip>
+                        <el-tooltip content="isTauri" placement="bottom">
+                            <el-button>{{ t('isTauri') }}</el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="Gets the application name."
+                            content="requestPermissions"
                             placement="bottom"
                         >
-                            <el-button @click="getNameApi"
-                                >checkPermissions</el-button
-                            >
+                            <el-button>{{ t('requestPermissions') }}</el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="Gets the Tauri version."
+                            content="transformCallback"
                             placement="bottom"
                         >
-                            <el-button @click="getTauriVersionApi">
-                                convertFileSrc
-                            </el-button>
+                            <el-button>{{ t('transformCallback') }}</el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="Gets the application version."
+                            content="checkPermissions"
                             placement="bottom"
                         >
-                            <el-button @click="getVersionApi">
-                                invoke
-                            </el-button>
+                            <el-button>{{ t('checkPermissions') }}</el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="PermissionState"
                             placement="bottom"
                         >
-                            <el-button @click="hideApi">isTauri</el-button>
+                            <el-button>{{ t('PermissionState') }}</el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="addPluginListener"
                             placement="bottom"
                         >
-                            <el-button @click="setThemeApi">
-                                requestPermissions
-                            </el-button>
+                            <el-button>{{ t('addPluginListener') }}</el-button>
                         </el-tooltip>
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
-                            <el-button @click="showApi">
-                                transformCallback
-                            </el-button>
+                        <el-tooltip content="PluginListener" placement="bottom">
+                            <el-button>{{ t('PluginListener') }}</el-button>
+                        </el-tooltip>
+                        <el-tooltip content="Channel" placement="bottom">
+                            <el-button>{{ t('Channel') }}</el-button>
                         </el-tooltip>
                     </div>
                 </div>
                 <!-- api/dpi -->
-                <!-- api/core -->
                 <div v-else-if="menuIndex === '1-3'" class="cardContent">
                     <h2>dpi</h2>
                     <p>A position represented in logical pixels.</p>
                     <div class="cardBox">
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="LogicalPosition"
                             placement="bottom"
                         >
-                            <el-button @click="defaultWindowIconApi">
-                                LogicalPosition
-                            </el-button>
+                            <el-button>{{ t('LogicalPosition') }}</el-button>
+                        </el-tooltip>
+                        <el-tooltip content="LogicalSize" placement="bottom">
+                            <el-button>{{ t('LogicalSize') }}</el-button>
+                        </el-tooltip>
+                        <el-tooltip content="Size" placement="bottom">
+                            <el-button>{{ t('Size') }}</el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="Gets the application name."
+                            content="PhysicalPosition"
                             placement="bottom"
                         >
-                            <el-button @click="getNameApi"
-                                >PhysicalPosition</el-button
-                            >
+                            <el-button>{{ t('PhysicalPosition') }}</el-button>
                         </el-tooltip>
-                        <el-tooltip
-                            content="Gets the Tauri version."
-                            placement="bottom"
-                        >
-                            <el-button @click="getTauriVersionApi">
-                                Position
-                            </el-button>
+                        <el-tooltip content="PhysicalSize" placement="bottom">
+                            <el-button>{{ t('PhysicalSize') }}</el-button>
                         </el-tooltip>
-                        <el-tooltip
-                            content="Gets the application version."
-                            placement="bottom"
-                        >
-                            <el-button @click="getVersionApi">
-                                LogicalSize
-                            </el-button>
-                        </el-tooltip>
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
-                            <el-button @click="hideApi">PhysicalSize</el-button>
-                        </el-tooltip>
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
-                            <el-button @click="setThemeApi">Size</el-button>
+                        <el-tooltip content="Position" placement="bottom">
+                            <el-button>{{ t('Position') }}</el-button>
                         </el-tooltip>
                     </div>
                 </div>
@@ -394,31 +350,19 @@
                         app.withGlobalTauri in tauri.conf.json is set to true.
                     </p>
                     <div class="cardBox">
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
+                        <el-tooltip content="listen" placement="bottom">
                             <el-button @click="listenEvent">listen</el-button>
                         </el-tooltip>
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
+                        <el-tooltip content="emit" placement="bottom">
                             <el-button @click="sendEvent">emit</el-button>
                         </el-tooltip>
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
+                        <el-tooltip content="emit to" placement="bottom">
                             <el-button @click="sendEvent">emitTo</el-button>
                         </el-tooltip>
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
-                            <el-button @click="unlistenEvent"
-                                >unlisten</el-button
-                            >
+                        <el-tooltip content="unlisten event" placement="bottom">
+                            <el-button @click="unlistenEvent">
+                                unlisten
+                            </el-button>
                         </el-tooltip>
                         <el-tooltip
                             content="Get the default window icon."
@@ -581,10 +525,7 @@
                         system tray. This package is also accessible
                     </p>
                     <div class="cardBox">
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
+                        <el-tooltip content="create tray" placement="bottom">
                             <el-button>{{ t('waitDev') }}</el-button>
                         </el-tooltip>
                     </div>
@@ -598,10 +539,16 @@
                     </p>
                     <div class="cardBox">
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="getCurrentWebview"
                             placement="bottom"
                         >
-                            <el-button>{{ t('waitDev') }}</el-button>
+                            <el-button>{{ t('getCurrentWebview') }}</el-button>
+                        </el-tooltip>
+                        <el-tooltip content="Webview" placement="bottom">
+                            <el-button>{{ t('Webview') }}</el-button>
+                        </el-tooltip>
+                        <el-tooltip content="getAllWebviews" placement="bottom">
+                            <el-button>{{ t('getAllWebviews') }}</el-button>
                         </el-tooltip>
                     </div>
                 </div>
@@ -621,10 +568,7 @@
                                 setIcon
                             </el-button>
                         </el-tooltip>
-                        <el-tooltip
-                            content="Set the window icon."
-                            placement="bottom"
-                        >
+                        <el-tooltip content="base64 to ico" placement="bottom">
                             <el-button @click="base64ToIco">
                                 base64ToIco
                             </el-button>
@@ -642,11 +586,24 @@
                         following special characters -, /, : and _.
                     </p>
                     <div class="cardBox">
+                        <el-tooltip content="WebviewWindow" placement="bottom">
+                            <el-button>{{ t('WebviewWindow') }}</el-button>
+                        </el-tooltip>
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="getCurrentWebviewWindow"
                             placement="bottom"
                         >
-                            <el-button>{{ t('waitDev') }}</el-button>
+                            <el-button>
+                                {{ t('getCurrentWebviewWindow') }}
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="getAllWebviewWindows"
+                            placement="bottom"
+                        >
+                            <el-button>
+                                {{ t('getAllWebviewWindows') }}
+                            </el-button>
                         </el-tooltip>
                     </div>
                 </div>
@@ -760,23 +717,20 @@
                     <p>对文件或文件夹进行压缩或者解压缩处理</p>
                     <div class="cardBox">
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="output directory"
                             placement="bottom"
                         >
                             <el-button @click="selectFolder">
                                 输出目录
                             </el-button>
                         </el-tooltip>
-                        <el-tooltip
-                            content="Get the default window icon."
-                            placement="bottom"
-                        >
+                        <el-tooltip content="compress file" placement="bottom">
                             <el-button @click="compressFile">
                                 压缩文件
                             </el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="decompress file"
                             placement="bottom"
                         >
                             <el-button @click="decompressFile">
@@ -793,7 +747,7 @@
                     </p>
                     <div class="cardBox">
                         <el-tooltip
-                            content="选择下载目录文件夹"
+                            content="select download folder"
                             placement="bottom"
                         >
                             <el-button @click="selectDownloadFolder">
@@ -804,7 +758,7 @@
                             <el-button @click="downFile">下载文件</el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="默认下载到Download目录"
+                            content="default download to Download directory"
                             placement="bottom"
                         >
                             <el-button @click="downFile(false)">
@@ -812,7 +766,7 @@
                             </el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="下载进度回调展示"
+                            content="download progress"
                             placement="bottom"
                         >
                             <div class="downProgress">
@@ -876,7 +830,7 @@
                     </p>
                     <div class="cardBox">
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="open url in current window"
                             placement="bottom"
                         >
                             <el-button @click="openUrlWindow('current')">
@@ -884,7 +838,7 @@
                             </el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="open url in new window"
                             placement="bottom"
                         >
                             <el-button @click="openUrlWindow('new')">
@@ -892,7 +846,7 @@
                             </el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="open url in default browser"
                             placement="bottom"
                         >
                             <el-button @click="openUrl(textarea)">
@@ -900,7 +854,7 @@
                             </el-button>
                         </el-tooltip>
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="open url in current folder"
                             placement="bottom"
                         >
                             <el-button @click="openUrl(textarea)">
@@ -951,7 +905,7 @@
                     </p>
                     <div class="cardBox">
                         <el-tooltip
-                            content="Get the default window icon."
+                            content="run any command"
                             placement="bottom"
                         >
                             <el-button @click="runShell">
@@ -969,6 +923,96 @@
                             :code="Codes.runShell"
                             :disabled="true"
                         />
+                    </div>
+                </div>
+                <!-- api/template -->
+                <div v-else-if="menuIndex === '3-2'" class="cardContent">
+                    <h1 class="cardTitle">网站调整</h1>
+                    <p>
+                        可以移除网页上不想要的元素或者广告等内容，也可以添加想要的内容，又或者是修改某些页面内容或样式，完全自定义实现
+                    </p>
+                    <div class="cardBox">
+                        <el-tooltip
+                            content="remove web element"
+                            placement="bottom"
+                        >
+                            <el-button>移除元素</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="add web element"
+                            placement="bottom"
+                        >
+                            <el-button>添加元素</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="modify web element"
+                            placement="bottom"
+                        >
+                            <el-button>修改元素</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="change web skin"
+                            placement="bottom"
+                        >
+                            <el-button>网站换肤</el-button>
+                        </el-tooltip>
+                        <el-tooltip content="remove web ad" placement="bottom">
+                            <el-button>移除广告</el-button>
+                        </el-tooltip>
+                        <el-tooltip content="auto operation" placement="bottom">
+                            <el-button>自动化操作</el-button>
+                        </el-tooltip>
+                    </div>
+                    <div class="codeDemo">
+                        <h2>移除元素</h2>
+                        <p class="description">
+                            在脚本中添加以下代码，即可移除元素
+                        </p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.removeEle"
+                            :disabled="true"
+                        />
+                    </div>
+                    <div class="codeDemo">
+                        <h2>添加元素</h2>
+                        <p class="description">
+                            在脚本中添加以下代码，即可添加元素
+                        </p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.addEle"
+                            :disabled="true"
+                        />
+                    </div>
+                    <div class="codeDemo">
+                        <h2>修改元素</h2>
+                        <p class="description">
+                            在脚本中添加以下代码，即可修改元素
+                        </p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.modifyEle"
+                            :disabled="true"
+                        />
+                    </div>
+                    <div class="codeDemo">
+                        <h2>网站换肤</h2>
+                        <p class="description">
+                            本质还是修改网站元素，通过给网站某些元素调整颜色等属性，实现换肤
+                        </p>
+                    </div>
+                    <div class="codeDemo">
+                        <h2>移除广告</h2>
+                        <p class="description">
+                            还是通过移除元素实现，先找到广告元素的特征，然后移除
+                        </p>
+                    </div>
+                    <div class="codeDemo">
+                        <h2>自动化操作</h2>
+                        <p class="description">
+                            通过自定义js脚本逻辑，实现网站自动化操作，例如自动翻页，自动刷视频，自动回复等
+                        </p>
                     </div>
                 </div>
                 <!-- api/template -->
