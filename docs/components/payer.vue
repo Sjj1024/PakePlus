@@ -19,12 +19,26 @@
             </tr>
         </tbody>
     </table>
-    <div class="updateTime">最后更新时间：2025-05-29 12:00:00</div>
+    <div class="updateTime">最后更新时间：2025-06-29 19:12:00</div>
 </template>
 
 <script setup lang="ts">
 // import { ref, reactive } from 'vue'
 const friends = [
+    {
+        name: '汤姆',
+        time: '2025-06-18',
+        amount: '99',
+        way: '微信',
+        remark: '小小意思，不成敬意',
+    },
+    {
+        name: '🌱',
+        time: '2025-06-16',
+        amount: '10',
+        way: '微信',
+        remark: '赞助一下',
+    },
     {
         name: '？',
         time: '2025-06-03',
