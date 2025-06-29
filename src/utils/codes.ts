@@ -35,6 +35,32 @@ const hookClick = (e) => {
  
 document.addEventListener('click', hookClick, { capture: true })
     `,
+    openUrlNew: `
+const { WebviewWindow } = window.__TAURI__.webviewWindow
+
+const webview = new WebviewWindow('my-label', {
+    url: url,
+    x: 500,
+    y: 500,
+    width: 800,
+    height: 400,
+    focus: true,
+    title: 'PakePlus Window',
+    alwaysOnTop: true,
+    center: true,
+    resizable: true,
+    transparent: false,
+    visible: true,
+})
+webview.once('tauri://created', function () {
+    // webview successfully created
+    console.log('new webview created')
+})
+webview.once('tauri://error', function (e) {
+    // an error happened creating the webview
+    console.log('new webview error', e)
+})
+    `,
     runShell: `
 const { invoke } = window.__TAURI__.core
 

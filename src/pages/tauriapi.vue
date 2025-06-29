@@ -863,20 +863,32 @@
                     </div>
                 </div>
                 <!-- api/opener -->
-                <div v-else-if="menuIndex === '2-13'" class="cardContent">
+                <div
+                    v-else-if="menuIndex === '2-13' || menuIndex === '3-1'"
+                    class="cardContent"
+                >
                     <h1 class="cardTitle">opener</h1>
                     <p>
                         This plugin allows you to open files and URLs in a
                         specified, or the default, application. It also supports
-                        “revealing” files in the system’s file explorer.
+                        “revealing” files in the system’s file explorer. you can
+                        open any url or path
                     </p>
                     <div class="cardBox">
                         <el-tooltip
                             content="Get the default window icon."
                             placement="bottom"
                         >
-                            <el-button @click="openUrlWindow">
+                            <el-button @click="openUrlWindow('current')">
                                 打开URL(本窗口)
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Get the default window icon."
+                            placement="bottom"
+                        >
+                            <el-button @click="openUrlWindow('new')">
+                                打开URL(新窗口)
                             </el-button>
                         </el-tooltip>
                         <el-tooltip
@@ -897,17 +909,6 @@
                         </el-tooltip>
                     </div>
                     <div class="codeDemo">
-                        <h2>默认浏览器</h2>
-                        <p class="description">
-                            在脚本中添加以下代码，即可实现打开URL(默认浏览器)
-                        </p>
-                        <CodeEdit
-                            lang="javascript"
-                            :code="Codes.openUrlBrowser"
-                            :disabled="true"
-                        />
-                    </div>
-                    <div class="codeDemo">
                         <h2>本窗口打开</h2>
                         <p class="description">
                             在脚本中添加以下代码，即可实现打开URL(本窗口)
@@ -915,6 +916,28 @@
                         <CodeEdit
                             lang="javascript"
                             :code="Codes.openUrlCurrent"
+                            :disabled="true"
+                        />
+                    </div>
+                    <div class="codeDemo">
+                        <h2>新窗口打开</h2>
+                        <p class="description">
+                            在脚本中添加以下代码，即可实现打开URL(新窗口)
+                        </p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.openUrlNew"
+                            :disabled="true"
+                        />
+                    </div>
+                    <div class="codeDemo">
+                        <h2>默认浏览器</h2>
+                        <p class="description">
+                            在脚本中添加以下代码，即可实现打开URL(默认浏览器)
+                        </p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.openUrlBrowser"
                             :disabled="true"
                         />
                     </div>
@@ -1137,6 +1160,7 @@ import {
     Webview,
     getAllWebviews,
 } from '@tauri-apps/api/webview'
+import { WebviewWindow } from '@tauri-apps/api/webviewWindow'
 import { Window } from '@tauri-apps/api/window'
 import { useI18n } from 'vue-i18n'
 import payApi from '@/apis/pay'
@@ -1657,11 +1681,39 @@ const selectDownloadFolder = async () => {
     selectedDir = selected || ''
 }
 
-// 打开URL(本窗口)
-const openUrlWindow = async () => {
+// 打开URL(本窗口/新窗口)
+const openUrlWindow = async (type: string = 'current') => {
     const url = textarea.value
     if (url) {
-        window.location.href = url
+        if (type === 'current') {
+            window.location.href = url
+        } else {
+            console.log('new webview window')
+            const webview = new WebviewWindow('my-label', {
+                url: url,
+                x: 500,
+                y: 500,
+                width: 800,
+                height: 400,
+                focus: true,
+                title: 'PakePlus Window',
+                alwaysOnTop: true,
+                center: true,
+                resizable: true,
+                transparent: false,
+                visible: true,
+            })
+            webview.once('tauri://created', function () {
+                // webview successfully created
+                console.log('new webview created')
+            })
+            webview.once('tauri://error', function (e) {
+                // an error happened creating the webview
+                console.log('new webview error', e)
+            })
+        }
+    } else {
+        oneMessage.error('请输入URL')
     }
 }
 
