@@ -275,4 +275,109 @@ export default {
     backToHome: 'BackHome',
     official: 'Official',
     business: 'Business',
+    fileCompressionDesc: 'Compress or decompress files or folders',
+    outputDirectory: 'Output directory',
+    compressFile: 'Compress file',
+    decompressFile: 'Decompress file',
+    downloadFile: 'Download file',
+    downloadFileDesc:
+        'Download files from web links to local, supports multi-file download and download progress callback',
+    selectDownloadFolder: 'Select folder',
+    defaultDownloadToDownloadDirectory:
+        'Default download to Download directory',
+    downloadProgress: 'Download progress',
+    downloadProgressDesc:
+        'Add the following code to the script to listen to download progress callback',
+    sendMessageNotification: 'Send message notification',
+    openUrlCurrent: 'Open URL (current window)',
+    openUrlNew: 'Open URL (new window)',
+    openUrlBrowser: 'Open URL (default browser)',
+    openFolder: 'Open folder',
+    openUrlCurrentDesc:
+        'Add the following code to the script to open URL (current window)',
+    openUrlNewDesc:
+        'Add the following code to the script to open URL (new window)',
+    openUrlBrowserDesc:
+        'Add the following code to the script to open URL (default browser)',
+    runAnyCommand: 'Run any command',
+    runAnyCommandDesc: 'Add the following code to the script to run commands',
+    websiteAdjustDesc:
+        'Remove unwanted elements or ads from web pages, add desired content, or modify page content or styles, fully customizable',
+    removeWebElement: 'Remove element',
+    addWebElement: 'Add element',
+    modifyWebElement: 'Modify element',
+    removeWebAd: 'Remove ads',
+    changeWebSkin: 'Change website skin',
+    autoOperation: 'Automated operation',
+    removeWebElementDesc:
+        'Add the following code to the script to remove elements',
+    addWebElementDesc: 'Add the following code to the script to add elements',
+    modifyWebElementDesc:
+        'Add the following code to the script to modify elements',
+    removeWebAdDesc: 'Add the following code to the script to remove ads',
+    changeWebSkinDesc:
+        'Add the following code to the script to change website skin',
+    autoOperationDesc:
+        'Add the following code to the script to perform automated operations',
+    payTip: 'Please use',
+    payTipDesc: 'Scan to pay',
+    notPay: 'Not paid',
+    paid: 'Paid',
+    payTest: 'Payment test',
+    githubInfoError: 'Failed to get Github information',
+    apiLimitClient: 'This API does not support PakePlus web access',
+    hideSuccess: 'Hide app successfully',
+    setThemeSuccess: 'Theme set successfully, restart app to take effect',
+    listenEvent: 'Event received',
+    unlistenEvent: 'Unlisten',
+    selectWindowIcon: 'Please select window icon',
+    setWindowIconSuccess: 'Window icon set successfully',
+    payAmountError: 'Please enter the correct payment amount',
+    payTestOrder: 'Payment test order',
+    getPayCodeError: 'Failed to get payment code',
+    payYun: 'YUN payment',
+    paySuccess: 'Payment successful',
+    payFail: 'Payment failed',
+    getPayStatusError: 'Failed to get payment status',
+    selectFileOrOutputFolder:
+        'Please select a compressed file or output folder',
+    compressFileSuccess: 'File compressed successfully',
+    decompressFileSuccess: 'File decompressed successfully',
+    downloadFileSuccess: 'File downloaded successfully',
+    downloadFileError: 'File download failed',
+    downloadFileProgress: 'Download progress',
+    downloadFileProgressDesc:
+        'Add the following code to the script to listen to download progress callback',
+    runCommandSuccess: 'Command executed successfully',
+    runCommandError: 'Command execution failed',
+    runCommandProgress: 'Command execution progress',
+    runCommandProgressDesc:
+        'Add the following code to the script to listen to command execution progress callback',
+    inputUrl: 'Please enter URL',
+    inputUrlDesc: 'Add the following code to the script to open URL',
+    inputUrlCurrentDesc:
+        'Add the following code to the script to open URL (current window)',
+    inputUrlNewDesc:
+        'Add the following code to the script to open URL (new window)',
+    inputUrlBrowserDesc:
+        'Add the following code to the script to open URL (default browser)',
+    inputUrlCurrent: 'Open URL (current window)',
+    inputUrlNew: 'Open URL (new window)',
+    inputNotificationContent: 'Please enter notification content',
+    notificationTitle: 'PakePlus Notification API',
+    inputNotificationTitle: 'Please enter notification title',
+    inputNotificationTitleDesc:
+        'Add the following code to the script to send notification',
+    inputNotificationContentDesc:
+        'Add the following code to the script to send notification',
+    openDefaultFolder: 'Open default folder',
+    openDefaultFolderDesc:
+        'Add the following code to the script to open default folder',
+    checkError: 'Check error',
+    downloadToAppData: 'Download to appdata directory',
+    downloadToAppDataDesc:
+        'Add the following code to the script to download to appdata directory',
+    inputCommand: 'Please enter command',
+    inputCommandDesc: 'Add the following code to the script to run command',
+    inputDownloadPath: 'Please enter download URL or select download folder',
 }

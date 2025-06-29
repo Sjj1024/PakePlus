@@ -274,4 +274,112 @@ export default {
     backToHome: '홈으로 돌아가기',
     official: '공식 웹사이트',
     business: '비즈니스 커뮤니티',
+    fileCompressionDesc: '파일 또는 폴더를 압축하거나 압축 해제',
+    outputDirectory: '출력 디렉토리',
+    compressFile: '파일 압축',
+    decompressFile: '파일 압축 해제',
+    downloadFile: '파일 다운로드',
+    downloadFileDesc:
+        '웹 링크에서 로컬로 파일 다운로드, 다중 파일 다운로드 및 다운로드 진행 콜백 지원',
+    selectDownloadFolder: '폴더 선택',
+    defaultDownloadToDownloadDirectory:
+        '기본적으로 Download 디렉토리에 다운로드',
+    downloadProgress: '다운로드 진행률',
+    downloadProgressDesc:
+        '스크립트에 다음 코드를 추가하여 다운로드 진행 콜백을 모니터링할 수 있습니다',
+    sendMessageNotification: '메시지 알림 보내기',
+    openUrlCurrent: 'URL 열기 (현재 창)',
+    openUrlNew: 'URL 열기 (새 창)',
+    openUrlBrowser: 'URL 열기 (기본 브라우저)',
+    openFolder: '폴더 열기',
+    openUrlCurrentDesc:
+        '스크립트에 다음 코드를 추가하여 URL 열기 (현재 창)을 구현할 수 있습니다',
+    openUrlNewDesc:
+        '스크립트에 다음 코드를 추가하여 URL 열기 (새 창)을 구현할 수 있습니다',
+    openUrlBrowserDesc:
+        '스크립트에 다음 코드를 추가하여 URL 열기 (기본 브라우저)을 구현할 수 있습니다',
+    runAnyCommand: '임의의 명령 실행',
+    runAnyCommandDesc:
+        '스크립트에 다음 코드를 추가하여 명령을 실행할 수 있습니다',
+    websiteAdjustDesc:
+        '웹 페이지에서 원하지 않는 요소 또는 광고를 제거하거나 원하는 콘텐츠를 추가하거나 페이지 내용 또는 스타일을 수정, 완전히 사용자 정의 가능',
+    removeWebElement: '요소 제거',
+    addWebElement: '요소 추가',
+    modifyWebElement: '요소 수정',
+    removeWebAd: '광고 제거',
+    changeWebSkin: '웹사이트 스킨 변경',
+    autoOperation: '자동화 작업',
+    removeWebElementDesc:
+        '스크립트에 다음 코드를 추가하여 요소를 제거할 수 있습니다',
+    addWebElementDesc:
+        '스크립트에 다음 코드를 추가하여 요소를 추가할 수 있습니다',
+    modifyWebElementDesc:
+        '스크립트에 다음 코드를 추가하여 요소를 수정할 수 있습니다',
+    removeWebAdDesc:
+        '스크립트에 다음 코드를 추가하여 광고를 제거할 수 있습니다',
+    changeWebSkinDesc:
+        '스크립트에 다음 코드를 추가하여 웹사이트 스킨 변경을 구현할 수 있습니다',
+    autoOperationDesc:
+        '스크립트에 다음 코드를 추가하여 자동화 작업을 구현할 수 있습니다',
+    payTip: '사용하세요',
+    payTipDesc: 'QR 코드로 결제',
+    notPay: '미결제',
+    paid: '결제 완료',
+    payTest: '결제 테스트',
+    githubInfoError: 'Github 정보 가져오기 실패',
+    apiLimitClient: '이 API는 PakePlus 웹 액세스를 지원하지 않습니다',
+    hideSuccess: '앱 숨기기 성공',
+    setThemeSuccess: '테마 설정 성공, 앱 재시작 필요',
+    listenEvent: '이벤트 수신',
+    unlistenEvent: '리스닝 해제',
+    selectWindowIcon: '창 아이콘 선택',
+    setWindowIconSuccess: '창 아이콘 설정 성공',
+    payAmountError: '올바른 결제 금액을 입력하세요',
+    payTestOrder: '결제 테스트 주문',
+    getPayCodeError: '결제 코드 가져오기 실패',
+    payYun: 'YUN 결제',
+    paySuccess: '결제 성공',
+    payFail: '결제 실패',
+    getPayStatusError: '결제 상태 가져오기 실패',
+    selectFileOrOutputFolder: '압축 파일 또는 출력 폴더 선택',
+    compressFileSuccess: '파일 압축 성공',
+    decompressFileSuccess: '파일 압축 해제 성공',
+    downloadFileSuccess: '파일 다운로드 성공',
+    downloadFileError: '파일 다운로드 실패',
+    downloadFileProgress: '다운로드 진행률',
+    downloadFileProgressDesc:
+        '스크립트에 다음 코드를 추가하여 다운로드 진행 콜백을 모니터링할 수 있습니다',
+    runCommandSuccess: '명령 실행 성공',
+    runCommandError: '명령 실행 실패',
+    runCommandProgress: '명령 실행 진행률',
+    runCommandProgressDesc:
+        '스크립트에 다음 코드를 추가하여 명령 실행 진행 콜백을 모니터링할 수 있습니다',
+    inputUrl: 'URL 입력',
+    inputUrlDesc: '스크립트에 다음 코드를 추가하여 URL을 열 수 있습니다',
+    inputUrlCurrentDesc:
+        '스크립트에 다음 코드를 추가하여 URL 열기 (현재 창)을 구현할 수 있습니다',
+    inputUrlNewDesc:
+        '스크립트에 다음 코드를 추가하여 URL 열기 (새 창)을 구현할 수 있습니다',
+    inputUrlBrowserDesc:
+        '스크립트에 다음 코드를 추가하여 URL 열기 (기본 브라우저)을 구현할 수 있습니다',
+    inputUrlCurrent: 'URL 열기 (현재 창)',
+    inputUrlNew: 'URL 열기 (새 창)',
+    inputNotificationContent: '알림 내용 입력',
+    notificationTitle: 'PakePlus 알림 API',
+    inputNotificationTitle: '알림 제목 입력',
+    inputNotificationTitleDesc:
+        '스크립트에 다음 코드를 추가하여 알림을 보낼 수 있습니다',
+    inputNotificationContentDesc:
+        '스크립트에 다음 코드를 추가하여 알림을 보낼 수 있습니다',
+    openDefaultFolder: '기본 폴더 열기',
+    openDefaultFolderDesc:
+        '스크립트에 다음 코드를 추가하여 기본 폴더를 열 수 있습니다',
+    checkError: '오류 확인',
+    downloadToAppData: 'appdata 디렉토리에 다운로드',
+    downloadToAppDataDesc:
+        '스크립트에 다음 코드를 추가하여 appdata 디렉토리에 다운로드할 수 있습니다',
+    inputCommand: '명령 입력',
+    inputCommandDesc:
+        '스크립트에 다음 코드를 추가하여 명령을 실행할 수 있습니다',
+    inputDownloadPath: '다운로드 URL을 입력하거나 다운로드 폴더를 선택하세요',
 }

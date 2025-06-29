@@ -277,4 +277,114 @@ export default {
     backToHome: 'ホームに戻る',
     official: '公式サイト',
     business: '商業コミュニティ',
+    fileCompressionDesc: 'ファイルまたはフォルダを圧縮または解凍する',
+    outputDirectory: '出力ディレクトリ',
+    compressFile: 'ファイルを圧縮',
+    decompressFile: 'ファイルを解凍',
+    downloadFile: 'ファイルをダウンロード',
+    downloadFileDesc:
+        'ウェブリンクからローカルにファイルをダウンロード、複数ファイルダウンロードおよびダウンロード進捗コールバックをサポート',
+    selectDownloadFolder: 'フォルダを選択',
+    defaultDownloadToDownloadDirectory:
+        'デフォルトでDownloadディレクトリにダウンロード',
+    downloadProgress: 'ダウンロード進捗',
+    downloadProgressDesc:
+        'スクリプトに以下のコードを追加すると、ダウンロード進捗コールバックを監視できます',
+    sendMessageNotification: 'メッセージ通知を送信',
+    openUrlCurrent: 'URLを開く（現在のウィンドウ）',
+    openUrlNew: 'URLを開く（新しいウィンドウ）',
+    openUrlBrowser: 'URLを開く（デフォルトブラウザ）',
+    openFolder: 'フォルダを開く',
+    openUrlCurrentDesc:
+        'スクリプトに以下のコードを追加すると、URLを開く（現在のウィンドウ）を実現できます',
+    openUrlNewDesc:
+        'スクリプトに以下のコードを追加すると、URLを開く（新しいウィンドウ）を実現できます',
+    openUrlBrowserDesc:
+        'スクリプトに以下のコードを追加すると、URLを開く（デフォルトブラウザ）を実現できます',
+    runAnyCommand: '任意のコマンドを実行',
+    runAnyCommandDesc:
+        'スクリプトに以下のコードを追加すると、コマンドを実行できます',
+    websiteAdjustDesc:
+        'ウェブページから不要な要素や広告を削除、必要なコンテンツを追加、またはページの内容やスタイルを変更、完全にカスタマイズ可能',
+    removeWebElement: '要素を削除',
+    addWebElement: '要素を追加',
+    modifyWebElement: '要素を変更',
+    removeWebAd: '広告を削除',
+    changeWebSkin: 'ウェブサイトのスキンを変更',
+    autoOperation: '自動化操作',
+    removeWebElementDesc:
+        'スクリプトに以下のコードを追加すると、要素を削除できます',
+    addWebElementDesc:
+        'スクリプトに以下のコードを追加すると、要素を追加できます',
+    modifyWebElementDesc:
+        'スクリプトに以下のコードを追加すると、要素を変更できます',
+    removeWebAdDesc: 'スクリプトに以下のコードを追加すると、広告を削除できます',
+    changeWebSkinDesc:
+        'スクリプトに以下のコードを追加すると、ウェブサイトのスキンを変更できます',
+    autoOperationDesc:
+        'スクリプトに以下のコードを追加すると、自動化操作を実現できます',
+    payTip: 'ご利用ください',
+    payTipDesc: 'QRコードで支払い',
+    notPay: '未支払い',
+    paid: '支払い済み',
+    payTest: '支払いテスト',
+    githubInfoError: 'Github情報の取得に失敗しました',
+    apiLimitClient: 'このAPIはPakePlusウェブアクセスをサポートしていません',
+    hideSuccess: 'アプリを非表示にしました',
+    setThemeSuccess: 'テーマを設定しました、アプリを再起動してください',
+    listenEvent: 'イベントを受信',
+    unlistenEvent: '監視を解除',
+    selectWindowIcon: 'ウィンドウアイコンを選択してください',
+    setWindowIconSuccess: 'ウィンドウアイコンを設定しました',
+    payAmountError: '正しい支払い金額を入力してください',
+    payTestOrder: '支払いテスト注文',
+    getPayCodeError: '支払いコードの取得に失敗しました',
+    payYun: 'YUN支払い',
+    paySuccess: '支払い成功',
+    payFail: '支払い失敗',
+    getPayStatusError: '支払い状態の取得に失敗しました',
+    selectFileOrOutputFolder:
+        '圧縮ファイルまたは出力フォルダを選択してください',
+    compressFileSuccess: 'ファイルを圧縮しました',
+    decompressFileSuccess: 'ファイルを解凍しました',
+    downloadFileSuccess: 'ファイルをダウンロードしました',
+    downloadFileError: 'ファイルのダウンロードに失敗しました',
+    downloadFileProgress: 'ダウンロード進捗',
+    downloadFileProgressDesc:
+        'スクリプトに以下のコードを追加すると、ダウンロード進捗コールバックを監視できます',
+    runCommandSuccess: 'コマンドを実行しました',
+    runCommandError: 'コマンドの実行に失敗しました',
+    runCommandProgress: 'コマンド実行進捗',
+    runCommandProgressDesc:
+        'スクリプトに以下のコードを追加すると、コマンド実行進捗コールバックを監視できます',
+    inputUrl: 'URLを入力してください',
+    inputUrlDesc:
+        'スクリプトに以下のコードを追加すると、URLを開くことができます',
+    inputUrlCurrentDesc:
+        'スクリプトに以下のコードを追加すると、URLを開く（現在のウィンドウ）を実現できます',
+    inputUrlNewDesc:
+        'スクリプトに以下のコードを追加すると、URLを開く（新しいウィンドウ）を実現できます',
+    inputUrlBrowserDesc:
+        'スクリプトに以下のコードを追加すると、URLを開く（デフォルトブラウザ）を実現できます',
+    inputUrlCurrent: 'URLを開く（現在のウィンドウ）',
+    inputUrlNew: 'URLを開く（新しいウィンドウ）',
+    inputNotificationContent: '通知内容を入力してください',
+    notificationTitle: 'PakePlus通知API',
+    inputNotificationTitle: '通知タイトルを入力してください',
+    inputNotificationTitleDesc:
+        'スクリプトに以下のコードを追加すると、通知を送信できます',
+    inputNotificationContentDesc:
+        'スクリプトに以下のコードを追加すると、通知を送信できます',
+    openDefaultFolder: 'デフォルトフォルダを開く',
+    openDefaultFolderDesc:
+        'スクリプトに以下のコードを追加すると、デフォルトフォルダを開くことができます',
+    checkError: 'エラーをチェック',
+    downloadToAppData: 'appdataディレクトリにダウンロード',
+    downloadToAppDataDesc:
+        'スクリプトに以下のコードを追加すると、appdataディレクトリにダウンロードできます',
+    inputCommand: 'コマンドを入力してください',
+    inputCommandDesc:
+        'スクリプトに以下のコードを追加すると、コマンドを実行できます',
+    inputDownloadPath:
+        'ダウンロードURLを入力するか、ダウンロードフォルダを選択してください',
 }

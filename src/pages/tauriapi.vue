@@ -724,20 +724,20 @@
                 </div>
                 <!-- api/文件解压缩 -->
                 <div v-else-if="menuIndex === '3-15'" class="cardContent">
-                    <h1 class="cardTitle">文件解压缩</h1>
-                    <p>对文件或文件夹进行压缩或者解压缩处理</p>
+                    <h1 class="cardTitle">{{ t('fileCompression') }}</h1>
+                    <p>{{ t('fileCompressionDesc') }}</p>
                     <div class="cardBox">
                         <el-tooltip
                             content="output directory"
                             placement="bottom"
                         >
                             <el-button @click="selectFolder">
-                                输出目录
+                                {{ t('outputDirectory') }}
                             </el-button>
                         </el-tooltip>
                         <el-tooltip content="compress file" placement="bottom">
                             <el-button @click="compressFile">
-                                压缩文件
+                                {{ t('compressFile') }}
                             </el-button>
                         </el-tooltip>
                         <el-tooltip
@@ -745,16 +745,16 @@
                             placement="bottom"
                         >
                             <el-button @click="decompressFile">
-                                解压文件
+                                {{ t('decompressFile') }}
                             </el-button>
                         </el-tooltip>
                     </div>
                 </div>
                 <!-- api/下载文件 -->
                 <div v-else-if="menuIndex === '3-16'" class="cardContent">
-                    <h1 class="cardTitle">下载文件</h1>
+                    <h1 class="cardTitle">{{ t('downloadFile') }}</h1>
                     <p>
-                        下载网络链接文件到本地，支持多文件下载，以及下载进度回调
+                        {{ t('downloadFileDesc') }}
                     </p>
                     <div class="cardBox">
                         <el-tooltip
@@ -762,18 +762,20 @@
                             placement="bottom"
                         >
                             <el-button @click="selectDownloadFolder">
-                                选择文件夹
+                                {{ t('selectDownloadFolder') }}
                             </el-button>
                         </el-tooltip>
                         <el-tooltip content="下载文件" placement="bottom">
-                            <el-button @click="downFile">下载文件</el-button>
+                            <el-button @click="downFile">
+                                {{ t('downloadFile') }}
+                            </el-button>
                         </el-tooltip>
                         <el-tooltip
                             content="default download to Download directory"
                             placement="bottom"
                         >
                             <el-button @click="downFile(false)">
-                                默认下载到Download目录
+                                {{ t('defaultDownloadToDownloadDirectory') }}
                             </el-button>
                         </el-tooltip>
                         <el-tooltip
@@ -781,15 +783,15 @@
                             placement="bottom"
                         >
                             <div class="downProgress">
-                                <span>下载进度：</span>
+                                <span>{{ t('downloadProgress') }}</span>
                                 <el-progress :percentage="downloadProgress" />
                             </div>
                         </el-tooltip>
                     </div>
                     <div class="codeDemo">
-                        <h2>下载文件</h2>
+                        <h2>{{ t('downloadFile') }}</h2>
                         <p class="description">
-                            在脚本中添加以下代码，即可实现下载文件
+                            {{ t('downloadFileDesc') }}
                         </p>
                         <CodeEdit
                             lang="javascript"
@@ -798,9 +800,9 @@
                         />
                     </div>
                     <div class="codeDemo">
-                        <h2>下载进度</h2>
+                        <h2>{{ t('downloadProgress') }}</h2>
                         <p class="description">
-                            在脚本中添加以下代码，即可监听下载进度回调
+                            {{ t('downloadProgressDesc') }}
                         </p>
                         <CodeEdit
                             lang="javascript"
@@ -822,7 +824,7 @@
                             placement="bottom"
                         >
                             <el-button @click="sendNotification">
-                                发送消息通知
+                                {{ t('sendMessageNotification') }}
                             </el-button>
                         </el-tooltip>
                     </div>
@@ -845,7 +847,7 @@
                             placement="bottom"
                         >
                             <el-button @click="openUrlWindow('current')">
-                                打开URL(本窗口)
+                                {{ t('openUrlCurrent') }}
                             </el-button>
                         </el-tooltip>
                         <el-tooltip
@@ -853,7 +855,7 @@
                             placement="bottom"
                         >
                             <el-button @click="openUrlWindow('new')">
-                                打开URL(新窗口)
+                                {{ t('openUrlNew') }}
                             </el-button>
                         </el-tooltip>
                         <el-tooltip
@@ -861,7 +863,7 @@
                             placement="bottom"
                         >
                             <el-button @click="openUrl(textarea)">
-                                打开URL(默认浏览器)
+                                {{ t('openUrlBrowser') }}
                             </el-button>
                         </el-tooltip>
                         <el-tooltip
@@ -869,14 +871,14 @@
                             placement="bottom"
                         >
                             <el-button @click="openUrl(textarea)">
-                                打开文件夹
+                                {{ t('openFolder') }}
                             </el-button>
                         </el-tooltip>
                     </div>
                     <div class="codeDemo">
-                        <h2>本窗口打开</h2>
+                        <h2>{{ t('openUrlCurrent') }}</h2>
                         <p class="description">
-                            在脚本中添加以下代码，即可实现打开URL(本窗口)
+                            {{ t('openUrlCurrentDesc') }}
                         </p>
                         <CodeEdit
                             lang="javascript"
@@ -885,9 +887,9 @@
                         />
                     </div>
                     <div class="codeDemo">
-                        <h2>新窗口打开</h2>
+                        <h2>{{ t('openUrlNew') }}</h2>
                         <p class="description">
-                            在脚本中添加以下代码，即可实现打开URL(新窗口)
+                            {{ t('openUrlNewDesc') }}
                         </p>
                         <CodeEdit
                             lang="javascript"
@@ -896,9 +898,9 @@
                         />
                     </div>
                     <div class="codeDemo">
-                        <h2>默认浏览器</h2>
+                        <h2>{{ t('openUrlBrowser') }}</h2>
                         <p class="description">
-                            在脚本中添加以下代码，即可实现打开URL(默认浏览器)
+                            {{ t('openUrlBrowserDesc') }}
                         </p>
                         <CodeEdit
                             lang="javascript"
@@ -920,14 +922,14 @@
                             placement="bottom"
                         >
                             <el-button @click="runShell">
-                                运行任意命令
+                                {{ t('runAnyCommand') }}
                             </el-button>
                         </el-tooltip>
                     </div>
                     <div class="codeDemo">
-                        <h2>运行</h2>
+                        <h2>{{ t('runAnyCommand') }}</h2>
                         <p class="description">
-                            在脚本中添加以下代码，即可实现运行命令
+                            {{ t('runAnyCommandDesc') }}
                         </p>
                         <CodeEdit
                             lang="javascript"
@@ -938,46 +940,46 @@
                 </div>
                 <!-- api/template -->
                 <div v-else-if="menuIndex === '3-2'" class="cardContent">
-                    <h1 class="cardTitle">网站调整</h1>
+                    <h1 class="cardTitle">{{ t('websiteAdjust') }}</h1>
                     <p>
-                        可以移除网页上不想要的元素或者广告等内容，也可以添加想要的内容，又或者是修改某些页面内容或样式，完全自定义实现
+                        {{ t('websiteAdjustDesc') }}
                     </p>
                     <div class="cardBox">
                         <el-tooltip
                             content="remove web element"
                             placement="bottom"
                         >
-                            <el-button>移除元素</el-button>
+                            <el-button>{{ t('removeWebElement') }}</el-button>
                         </el-tooltip>
                         <el-tooltip
                             content="add web element"
                             placement="bottom"
                         >
-                            <el-button>添加元素</el-button>
+                            <el-button>{{ t('addWebElement') }}</el-button>
                         </el-tooltip>
                         <el-tooltip
                             content="modify web element"
                             placement="bottom"
                         >
-                            <el-button>修改元素</el-button>
+                            <el-button>{{ t('modifyWebElement') }}</el-button>
                         </el-tooltip>
                         <el-tooltip
                             content="change web skin"
                             placement="bottom"
                         >
-                            <el-button>网站换肤</el-button>
+                            <el-button>{{ t('changeWebSkin') }}</el-button>
                         </el-tooltip>
                         <el-tooltip content="remove web ad" placement="bottom">
-                            <el-button>移除广告</el-button>
+                            <el-button>{{ t('removeWebAd') }}</el-button>
                         </el-tooltip>
                         <el-tooltip content="auto operation" placement="bottom">
-                            <el-button>自动化操作</el-button>
+                            <el-button>{{ t('autoOperation') }}</el-button>
                         </el-tooltip>
                     </div>
                     <div class="codeDemo">
-                        <h2>移除元素</h2>
+                        <h2>{{ t('removeWebElement') }}</h2>
                         <p class="description">
-                            在脚本中添加以下代码，即可移除元素
+                            {{ t('removeWebElementDesc') }}
                         </p>
                         <CodeEdit
                             lang="javascript"
@@ -986,9 +988,9 @@
                         />
                     </div>
                     <div class="codeDemo">
-                        <h2>添加元素</h2>
+                        <h2>{{ t('addWebElement') }}</h2>
                         <p class="description">
-                            在脚本中添加以下代码，即可添加元素
+                            {{ t('addWebElementDesc') }}
                         </p>
                         <CodeEdit
                             lang="javascript"
@@ -997,9 +999,9 @@
                         />
                     </div>
                     <div class="codeDemo">
-                        <h2>修改元素</h2>
+                        <h2>{{ t('modifyWebElement') }}</h2>
                         <p class="description">
-                            在脚本中添加以下代码，即可修改元素
+                            {{ t('modifyWebElementDesc') }}
                         </p>
                         <CodeEdit
                             lang="javascript"
@@ -1008,21 +1010,21 @@
                         />
                     </div>
                     <div class="codeDemo">
-                        <h2>网站换肤</h2>
+                        <h2>{{ t('changeWebSkin') }}</h2>
                         <p class="description">
-                            本质还是修改网站元素，通过给网站某些元素调整颜色等属性，实现换肤
+                            {{ t('changeWebSkinDesc') }}
                         </p>
                     </div>
                     <div class="codeDemo">
-                        <h2>移除广告</h2>
+                        <h2>{{ t('removeWebAd') }}</h2>
                         <p class="description">
-                            还是通过移除元素实现，先找到广告元素的特征，然后移除
+                            {{ t('removeWebAdDesc') }}
                         </p>
                     </div>
                     <div class="codeDemo">
-                        <h2>自动化操作</h2>
+                        <h2>{{ t('autoOperation') }}</h2>
                         <p class="description">
-                            通过自定义js脚本逻辑，实现网站自动化操作，例如自动翻页，自动刷视频，自动回复等
+                            {{ t('autoOperationDesc') }}
                         </p>
                     </div>
                 </div>
@@ -1063,7 +1065,7 @@
         >
             <div class="dialogContent">
                 <div v-if="qrCodeData" class="qrCodeBox">
-                    <img :src="qrCodeData" alt="支付二维码" class="qrCode" />
+                    <img :src="qrCodeData" alt="pay qrcode" class="qrCode" />
                     <!-- logo -->
                     <!-- <img :src="ppIcon" alt="logo" class="qrlogo" /> -->
                     <!-- wx or alipay -->
@@ -1080,9 +1082,9 @@
                     </div>
                 </div>
                 <div class="payTip">
-                    请使用
+                    {{ t('payTip') }}
                     {{ payType === 'weixin' ? '微信' : '支付宝' }}
-                    扫码支付
+                    {{ t('payTipDesc') }}
                 </div>
             </div>
             <template #footer>
@@ -1091,14 +1093,22 @@
                         :disabled="payTime > 0"
                         @click="dialogVisible = false"
                     >
-                        {{ payTime > 0 ? `未支付(${payTime}s)` : '未支付' }}
+                        {{
+                            payTime > 0
+                                ? `${t('notPay')}(${payTime}s)`
+                                : t('notPay')
+                        }}
                     </el-button>
                     <el-button
                         :disabled="payTime > 0"
                         type="primary"
                         @click="dialogVisible = false"
                     >
-                        {{ payTime > 0 ? `已支付(${payTime}s)` : '已支付' }}
+                        {{
+                            payTime > 0
+                                ? `${t('paid')}(${payTime}s)`
+                                : t('paid')
+                        }}
                     </el-button>
                 </div>
             </template>
@@ -1259,7 +1269,7 @@ const defaultMenu = ref('0-1')
 const menuIndex = ref('0-1')
 
 // dialog
-const dialogTitle = ref('支付测试')
+const dialogTitle = ref(t('payTest'))
 const dialogVisible = ref(false)
 
 let selectedDir = ''
@@ -1287,7 +1297,7 @@ const getGithubBilling = async () => {
         console.log('githubBilling----', githubBilling.value)
         console.log('discountAmount----', discountAmount.value)
     } else {
-        oneMessage.error('获取Github信息失败')
+        oneMessage.error(t('githubInfoError'))
     }
 }
 
@@ -1302,7 +1312,7 @@ const handleMenu = (index: string) => {
         } else if (index === '4') {
             router.push('/about')
         } else {
-            oneMessage.error('此API不支持PakePlus网页端')
+            oneMessage.error('apiLimitClient')
         }
     }
 }
@@ -1358,7 +1368,7 @@ const getVersionApi = async () => {
 
 const hideApi = async () => {
     await hide()
-    oneMessage.success('隐藏应用成功')
+    oneMessage.success(t('hideSuccess'))
 }
 
 const setThemeApi = async () => {
@@ -1366,7 +1376,7 @@ const setThemeApi = async () => {
     pptheme = pptheme === 'light' ? 'dark' : 'light'
     await setTheme(pptheme)
     localStorage.setItem('theme', pptheme)
-    oneMessage.success('设置主题成功，重启应用生效')
+    oneMessage.success(t('setThemeSuccess'))
 }
 
 const showApi = async () => {
@@ -1378,9 +1388,9 @@ let unlisten: any = null
 const listenEvent = async () => {
     unlisten = await listen('my-event', (event: any) => {
         console.log('收到事件:', event.payload)
-        textarea.value = 'event:收到事件:' + event.payload.message
+        textarea.value = 'event:' + t('listenEvent') + event.payload.message
     })
-    textarea.value = 'event:开启监听'
+    textarea.value = 'event:' + t('listenEvent')
 }
 
 // event:发送事件
@@ -1391,7 +1401,7 @@ const sendEvent = async () => {
 // event:取消监听
 const unlistenEvent = async () => {
     unlisten && unlisten()
-    textarea.value = 'event:取消监听'
+    textarea.value = 'event:' + t('unlistenEvent')
 }
 
 // window:窗口
@@ -1448,9 +1458,9 @@ const setWindowIcon = async () => {
     console.log('selected', selected)
     if (selected) {
         await getCurrentWindow().setIcon(selected)
-        oneMessage.success('设置窗口图标成功')
+        oneMessage.success(t('setWindowIconSuccess'))
     } else {
-        oneMessage.error('请选择窗口图标')
+        oneMessage.error(t('selectWindowIcon'))
     }
 }
 
@@ -1473,7 +1483,7 @@ const base64ToIco = async () => {
     }
     const icoPath = await join(savePath, 'favicon.ico')
     await writeFile(icoPath, icoBlob)
-    oneMessage.success('保存成功')
+    oneMessage.success(t('saveSuccess'))
 }
 
 const payTimer: any = ref(null)
@@ -1505,16 +1515,16 @@ const getPayJsCode = async (payMathod: string = 'weixin') => {
     try {
         money = parseInt(textarea.value)
         if (isNaN(money)) {
-            oneMessage.error('请输入正确的支付金额')
+            oneMessage.error(t('payAmountError'))
             return
         }
     } catch (error) {
-        oneMessage.error('请输入正确的支付金额')
+        oneMessage.error(t('payAmountError'))
         return
     }
     const order: any = {
         mchid: payJsMchid,
-        body: '支付测试订单',
+        body: t('payTestOrder'),
         total_fee: money,
         out_trade_no: 'payjs_demo_' + Date.now(),
         auto: 1,
@@ -1547,16 +1557,16 @@ const getYunPayCode = async (payMathod: string = 'weixin') => {
     try {
         money = parseFloat(textarea.value)
         if (isNaN(money)) {
-            oneMessage.error('请输入正确的支付金额')
+            oneMessage.error(t('payAmountError'))
             return
         }
     } catch (error) {
-        oneMessage.error('请输入正确的支付金额')
+        oneMessage.error(t('payAmountError'))
         return
     }
     payOrderNo.value = 'yunpay_' + Date.now()
     const order: any = {
-        body: 'YUN支付订单',
+        body: t('payTestOrder'),
         out_trade_no: payOrderNo.value,
         total_fee: money,
         mch_id: yunPayMchid,
@@ -1573,7 +1583,7 @@ const getYunPayCode = async (payMathod: string = 'weixin') => {
         console.log('url', url)
         qrCodeData.value = url
     } else {
-        oneMessage.error('获取支付码失败')
+        oneMessage.error(t('getPayCodeError'))
     }
 }
 
@@ -1586,11 +1596,11 @@ const getZPayCode = async (payMathod: string = 'alipay') => {
     try {
         money = parseFloat(textarea.value)
         if (isNaN(money)) {
-            oneMessage.error('请输入正确的支付金额')
+            oneMessage.error(t('payAmountError'))
             return
         }
     } catch (error) {
-        oneMessage.error('请输入正确的支付金额')
+        oneMessage.error(t('payAmountError'))
         return
     }
     payOrderNo.value = 'zpay_' + Date.now()
@@ -1599,7 +1609,7 @@ const getZPayCode = async (payMathod: string = 'alipay') => {
         type: payMathod,
         out_trade_no: payOrderNo.value,
         notify_url: 'https://juejin.cn/',
-        name: 'VIP会员',
+        name: t('payTestOrder'),
         money: money,
         clientip: '192.168.1.100',
         sign_type: 'MD5',
@@ -1628,7 +1638,7 @@ const getZPayCode = async (payMathod: string = 'alipay') => {
         console.log('url', url)
         qrCodeData.value = url
     } else {
-        oneMessage.error('获取支付码失败')
+        oneMessage.error(t('getPayCodeError'))
     }
 }
 
@@ -1646,9 +1656,9 @@ const checkZPayStatus = async () => {
     const response: any = await payApi.checkZPayStatus(order)
     console.log('response----', response)
     if (response.status === 200 && response.data.status === 1) {
-        oneMessage.success('支付成功')
+        oneMessage.success(t('paySuccess'))
     } else {
-        oneMessage.error('支付失败')
+        oneMessage.error(t('payFail'))
     }
 }
 
@@ -1675,12 +1685,12 @@ const checkYunPayStatus = async () => {
     if (response.status === 200 && response.data.code === 0) {
         const { payStatus } = response.data.data
         if (payStatus === 1) {
-            oneMessage.success('支付成功')
+            oneMessage.success(t('paySuccess'))
         } else {
-            oneMessage.error('支付失败')
+            oneMessage.error(t('payFail'))
         }
     } else {
-        oneMessage.error('获取支付状态失败')
+        oneMessage.error(t('getPayStatusError'))
     }
 }
 
@@ -1695,14 +1705,12 @@ const checkPayStatus = async () => {
     }
 }
 
-// 选择文件夹
 const selectFolder = async () => {
     const selected = await openSelect(true, [])
     console.log('selected', selected)
     textarea.value = selected || ''
 }
 
-// 压缩文件
 const compressFile = async () => {
     console.log('compressFile')
     const selected = await openSelect(true, [])
@@ -1714,9 +1722,9 @@ const compressFile = async () => {
             destination: destinationFile,
         })
         console.log('compress_folder', files)
-        oneMessage.success('压缩文件成功')
+        oneMessage.success(t('compressFileSuccess'))
     } else {
-        oneMessage.error('请选择压缩文件或输出文件夹')
+        oneMessage.error(t('selectFileOrOutputFolder'))
     }
 }
 
@@ -1731,20 +1739,18 @@ const decompressFile = async () => {
             destination: textarea.value,
         })
         console.log('decompress_file', files)
-        oneMessage.success('解压文件成功')
+        oneMessage.success(t('decompressFileSuccess'))
     } else {
-        oneMessage.error('请选择解压文件或输出文件夹')
+        oneMessage.error(t('selectFileOrOutputFolder'))
     }
 }
 
-// 选择下载文件夹
 const selectDownloadFolder = async () => {
     const selected = await openSelect(true, [])
     console.log('selected', selected)
     selectedDir = selected || ''
 }
 
-// 打开URL(本窗口/新窗口)
 const openUrlWindow = async (type: string = 'current') => {
     const url = textarea.value
     if (url) {
@@ -1776,26 +1782,25 @@ const openUrlWindow = async (type: string = 'current') => {
             })
         }
     } else {
-        oneMessage.error('请输入URL')
+        oneMessage.error(t('inputUrl'))
     }
 }
 
 // Send native notifications to your user using the notification plugin.
 const sendNotification = async () => {
     if (!textarea.value) {
-        oneMessage.error('请输入通知内容')
+        oneMessage.error(t('inputNotificationContent'))
         return
     }
     invoke('notification', {
         params: {
-            title: 'PakePlus通知API',
+            title: t('notificationTitle'),
             body: textarea.value,
             icon: 'face-smile',
         },
     })
 }
 
-// 打开默认文件夹
 const openFolder = async (dirType: string) => {
     switch (dirType) {
         case 'appCacheDir':
@@ -1928,12 +1933,11 @@ const openFolder = async (dirType: string) => {
             await openUrl(videoDirPath)
             break
         default:
-            textarea.value = '检查出错'
+            textarea.value = t('checkError')
             break
     }
 }
 
-// 下载到appdata目录
 const downAppData = async () => {
     const url = textarea.value
     const fileName = await basename(url)
@@ -1955,16 +1959,15 @@ const runShell = async () => {
         })
         console.log('result', result)
     } else {
-        oneMessage.error('请输入命令')
+        oneMessage.error(t('inputCommand'))
     }
 }
 
-// 下载文件
 const downloadProgress = ref(0)
 const downFile = async (selPath: boolean = true) => {
     downloadProgress.value = 0
     if (!textarea.value) {
-        oneMessage.error('请输入下载地址或选择下载文件夹')
+        oneMessage.error(t('inputDownloadPath'))
         return
     }
     const url = textarea.value
@@ -1992,7 +1995,6 @@ listen('download_progress', (event: any) => {
     )
 })
 
-// 页面初始化
 onMounted(() => {
     if (isTauri()) {
         const window = getCurrentWindow()
