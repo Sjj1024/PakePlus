@@ -2,9 +2,8 @@
 
 ppupdate.json in docs public
 
-download github release latest.json file and then
+download github release latest.json file and then edit latest.json to ppupdate.json and upload to github release 
 
-replace latest.json 
 ```bash
 https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.28
 
