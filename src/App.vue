@@ -2,10 +2,12 @@
 import { onMounted } from 'vue'
 import { locale as osLocale } from '@tauri-apps/plugin-os'
 import { useI18n } from 'vue-i18n'
-import { isTauri, isMobile, chageTheme } from './utils/common'
+import { isTauri, isMobile, chageTheme, syncAllBranch } from './utils/common'
 import Updater from './components/Updater.vue'
+import { usePPStore } from './store'
 
 const { locale } = useI18n()
+const store = usePPStore()
 
 const disableRightClick = () => {
     //禁止F12
@@ -101,8 +103,10 @@ const initEnv = async () => {
 onMounted(() => {
     try {
         initEnv()
+        // sync all branch
+        store.token && syncAllBranch(store.token, store.userInfo.login, true)
     } catch (error) {
-        console.error('initEnv error:', error)
+        console.error('initEnv or syncAllBranch error:', error)
     }
 })
 </script>

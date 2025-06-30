@@ -369,6 +369,7 @@ import {
     upstreamUser,
     ppRepo,
     isDev,
+    syncAllBranch,
 } from '@/utils/common'
 import ppconfig from '@root/scripts/ppconfig.json'
 import pakePlusIcon from '@/assets/images/pakeplus.png'
@@ -640,7 +641,7 @@ const forkStartShas = async (tips: boolean = true) => {
     }
     await supportPP()
     // sync all branch
-    await syncAllBranch(true)
+    await syncAllBranch(store.token, store.userInfo.login, true)
     // get commit sha
     await commitShas(tips)
 }
@@ -944,96 +945,6 @@ const sendUpdateEvent = async (type: string) => {
     await emit('update-event', { type: type })
 }
 
-// creat branch by upstream branch
-const creatBranchByUpstream = async (repo: string, branch: string) => {
-    console.log('creatBranchByUpstream', repo, branch)
-    const upRes: any = await githubApi.getUpstreamCommit(
-        upstreamUser,
-        repo,
-        branch
-    )
-    console.log('upRes', upRes)
-    const upBranchSha = upRes.data.object.sha
-    // create branch
-    const createRes: any = await githubApi.createBranch(store.userName, repo, {
-        ref: `refs/heads/${branch}`,
-        sha: upBranchSha,
-    })
-    console.log('createRes', createRes)
-    if (createRes.status === 201) {
-        console.log('createBranchByUpstream success', branch)
-    } else {
-        console.error('createBranchByUpstream error', createRes)
-    }
-}
-
-// merge branch and commit(allways use upstream branch)
-const mergeBranch = async (repo: string, branch: string) => {
-    console.log('mergeBranch', repo, branch)
-    const mergeRes: any = await githubApi.mergeUpdateRep(
-        store.userName,
-        repo,
-        branch
-    )
-    console.log('mergeRes', mergeRes)
-    if (mergeRes.status === 200) {
-        console.log('mergeBranch success', branch)
-    } else if (mergeRes.status === 204) {
-        console.log('branch status is up to date', branch)
-    } else {
-        console.error('mergeBranch error', mergeRes)
-    }
-}
-
-// sync upstrame all branch
-const syncAllBranch = async (init: boolean = false) => {
-    if (store.token || init) {
-        console.log('syncAllBranch', init)
-        for (const repo of ppRepo) {
-            console.log('syncAllBranch', repo)
-            const upRes: any = await githubApi.getAllBranchs(upstreamUser, repo)
-            console.log('up branchs Res', upRes)
-            const upBranchs = upRes.data
-                ?.map((item: any) => {
-                    return {
-                        name: item.name,
-                        sha: item.commit.sha,
-                    }
-                })
-                .filter(
-                    (item: any) =>
-                        item.name === 'main' || item.name === webBranch
-                )
-            console.log('upBranchs', upBranchs)
-            const userRes: any = await githubApi.getAllBranchs(
-                store.userName,
-                repo
-            )
-            console.log('user branchs Res', userRes)
-            const userBranchs = userRes.data?.map((item: any) => {
-                return {
-                    name: item.name,
-                    sha: item.commit.sha,
-                }
-            })
-            for (const branch of upBranchs) {
-                // check branch is exist in userBranchs and sha is same
-                const userBranch = userBranchs.find(
-                    (item: any) => item.name === branch.name
-                )
-                console.log('userBranchs---', userBranch)
-                if (userBranch && userBranch.sha !== branch.sha) {
-                    // merge branch and commit(allways use upstream branch)
-                    await mergeBranch(repo, branch.name)
-                } else if (userBranch === undefined) {
-                    // create branch by upstream branch
-                    await creatBranchByUpstream(repo, branch.name)
-                }
-            }
-        }
-    }
-}
-
 onMounted(() => {
     if (isTauri) {
         const window = getCurrentWindow()
@@ -1041,8 +952,6 @@ onMounted(() => {
     } else {
         oneMessage.error(t('webNotStable'))
     }
-    // getPakePlusInfo()
-    syncAllBranch()
 })
 </script>
 

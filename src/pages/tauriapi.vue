@@ -124,7 +124,7 @@
                     </el-menu-item>
                     <el-menu-item index="100">
                         <el-icon><ArrowLeft /></el-icon>
-                        <span @click="goBack">{{ t('backToHome') }}</span>
+                        <span>{{ t('backToHome') }}</span>
                     </el-menu-item>
                 </el-menu>
             </el-scrollbar>
@@ -133,7 +133,11 @@
         <el-container>
             <!-- header -->
             <el-header v-if="menuIndex !== '4'" class="headerBox">
-                <div v-if="menuIndex !== '4'" class="backBtn" @click="goBack">
+                <div
+                    v-if="menuIndex !== '4'"
+                    class="backBtn"
+                    @click="router.back()"
+                >
                     <el-icon><ArrowLeft /></el-icon>
                     <span>{{ t('back') }}</span>
                 </div>
@@ -1257,7 +1261,7 @@ const currentMonth = now.getMonth() + 1
 const githubBilling = ref({})
 const discountAmount = ref(0)
 const githubApiLimit = ref({
-    limit: 0,
+    limit: 5000,
     remaining: 0,
     reset: 0,
     used: 0,
@@ -1306,19 +1310,19 @@ const handleMenu = (index: string) => {
         menuIndex.value = index
         console.log('isTauri')
     } else {
-        if (index === '0-1') {
-            menuIndex.value = index
-            store.token && getGithubBilling()
-        } else if (index === '4') {
+        if (index === '4') {
             router.push('/about')
         } else {
             oneMessage.error(t('apiLimitClient'))
         }
     }
-}
-
-const goBack = () => {
-    router.back()
+    // ppclient and web
+    if (index === '0-1') {
+        menuIndex.value = index
+        store.token && getGithubBilling()
+    } else if (index === '100') {
+        router.push('/')
+    }
 }
 
 // defaultWindowIcon
