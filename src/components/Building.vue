@@ -8,7 +8,7 @@
     >
         <template #header="{ close, titleId, titleClass }">
             <div class="buildHeader">
-                <h4 :id="titleId" :class="titleClass" style="color: #fff">
+                <h4 :id="titleId" :class="titleClass">
                     {{ t('buildTips') }}
                 </h4>
             </div>
@@ -270,10 +270,6 @@ watch(props, (newVal) => {
 </script>
 
 <style lang="scss" scoped>
-.buildHeader {
-    color: #fff !important;
-}
-
 .buildingBox {
     padding: 0 20px;
     display: flex;

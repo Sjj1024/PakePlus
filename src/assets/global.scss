@@ -65,43 +65,38 @@ body {
     }
 }
 
-.buildDialog {
-    background-color: rgba(0, 0, 0, 0.8) !important;
-}
-
-
 /* Element Plus风格的滚动条样式 */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
-  }
-  
-  ::-webkit-scrollbar-track {
+}
+
+::-webkit-scrollbar-track {
     background: transparent;
     border-radius: 3px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
+}
+
+::-webkit-scrollbar-thumb {
     background: #c0c4cc;
     border-radius: 3px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
+}
+
+::-webkit-scrollbar-thumb:hover {
     background: #909399;
-  }
-  
-  ::-webkit-scrollbar-corner {
+}
+
+::-webkit-scrollbar-corner {
     background: transparent;
-  }
-  
-  .dark ::-webkit-scrollbar-track {
+}
+
+.dark ::-webkit-scrollbar-track {
     background: transparent;
-  }
-  
-  .dark ::-webkit-scrollbar-thumb {
+}
+
+.dark ::-webkit-scrollbar-thumb {
     background: #4e4e52;
-  }
-  
-  .dark ::-webkit-scrollbar-thumb:hover {
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
     background: #6d6d70;
-  }    
+}

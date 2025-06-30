@@ -1708,6 +1708,7 @@ const publishWeb = async () => {
             confirmButtonText: t('confirm'),
             type: 'warning',
             center: true,
+            showCancelButton: false,
         }).finally(() => {
             openUrl(urlMap.questiondoc)
         })
