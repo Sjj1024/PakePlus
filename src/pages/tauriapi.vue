@@ -2036,6 +2036,8 @@ onMounted(() => {
     if (about) {
         defaultMenu.value = '4'
         menuIndex.value = '4'
+    } else {
+        handleMenu(menuIndex.value)
     }
 })
 </script>
