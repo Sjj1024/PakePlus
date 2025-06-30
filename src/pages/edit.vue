@@ -1726,6 +1726,7 @@ const publishCheck = async () => {
         await easyLocal()
     } else if (store.token === '') {
         oneMessage.error(t('configToken'))
+        buildLoading.value = false
         return
     } else {
         if (checkLastPublish()) {
