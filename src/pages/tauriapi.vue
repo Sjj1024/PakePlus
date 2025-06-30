@@ -1387,7 +1387,7 @@ const showApi = async () => {
     await show()
 }
 
-// event:监听事件
+// event:listen event
 let unlisten: any = null
 const listenEvent = async () => {
     unlisten = await listen('my-event', (event: any) => {
@@ -1397,18 +1397,18 @@ const listenEvent = async () => {
     textarea.value = 'event:' + t('listenEvent')
 }
 
-// event:发送事件
+// event:send event
 const sendEvent = async () => {
     await emit('my-event', { message: 'Hello, PakePlus!' })
 }
 
-// event:取消监听
+// event:unlisten event
 const unlistenEvent = async () => {
     unlisten && unlisten()
     textarea.value = 'event:' + t('unlistenEvent')
 }
 
-// window:窗口
+// window:open window
 const openWindow = async () => {
     console.log('window')
 }
@@ -1512,7 +1512,7 @@ const startPayTime = () => {
 
 // get pay code
 const getPayJsCode = async (payMathod: string = 'weixin') => {
-    // 请输入支付金额(单位:元)
+    // input pay amount(unit:yuan)
     payType.value = payMathod
     payMethod.value = 'payjs'
     let money = 10
@@ -1732,7 +1732,7 @@ const compressFile = async () => {
     }
 }
 
-// 解压文件
+// decompress file
 const decompressFile = async () => {
     console.log('decompressFile')
     const selected = await openSelect(false, [])
