@@ -7,7 +7,7 @@
                 "installMode": "perMachine"
             },
             "webviewInstallMode": {
-                "type": "offlineInstaller"
+                "type": "embedBootstrapper"
             }
         }
     }
