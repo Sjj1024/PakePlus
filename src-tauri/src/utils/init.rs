@@ -44,7 +44,9 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         {
             "title": "PakePlus",
             "visible": false,
-            "url": "index.html"
+            "url": "index.html",
+            "width": 1024,
+            "height": 768
         }
     "#;
     let mut json_value: Value = serde_json::from_str(window_json)?;
