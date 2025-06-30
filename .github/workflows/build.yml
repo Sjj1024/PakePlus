@@ -152,6 +152,12 @@ jobs:
               if: ${{ matrix.enabled }}
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  APPLE_ID: ${{ secrets.APPLE_ID }}
+                  APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+                  APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+                  APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+                  APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+                  APPLE_SIGNING_IDENTITY: ${{ env.CERT_ID }}
                   TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
                   TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
                   VITE_GITHUB_DOMAIN: ${{ secrets.VITE_GITHUB_DOMAIN }}
@@ -161,12 +167,17 @@ jobs:
                   VITE_YUNPAY_DOMAIN: ${{ secrets.VITE_YUNPAY_DOMAIN }}
                   VITE_YUNPAY_MCHID: ${{ secrets.VITE_YUNPAY_MCHID }}
                   VITE_YUNPAY_SIGN_KEY: ${{ secrets.VITE_YUNPAY_SIGN_KEY }}
-                  APPLE_ID: ${{ secrets.APPLE_ID }}
-                  APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
-                  APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-                  APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
-                  APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
-                  APPLE_SIGNING_IDENTITY: ${{ env.CERT_ID }}
+                  VITE_ZPAY_DOMAIN: ${{ secrets.VITE_ZPAY_DOMAIN }}
+                  VITE_ZPAY_MCHID: ${{ secrets.VITE_ZPAY_MCHID }}
+                  VITE_ZPAY_SIGN_KEY: ${{ secrets.VITE_ZPAY_SIGN_KEY }}
+                  VITE_GTAG_ID: ${{ secrets.VITE_GTAG_ID }}
+                  VITE_UPSTREAM_USER: ${{ secrets.VITE_UPSTREAM_USER }}
+                  VITE_WEB_BRANCH: ${{ secrets.VITE_WEB_BRANCH }}
+                  VITE_DEV_BRANCH: ${{ secrets.VITE_DEV_BRANCH }}
+                  VITE_MAIN_BRANCH: ${{ secrets.VITE_MAIN_BRANCH }}
+                  VITE_FILE_LIMIT_SIZE: ${{ secrets.VITE_FILE_LIMIT_SIZE }}
+                  VITE_FILE_LIMIT_NUMBER: ${{ secrets.VITE_FILE_LIMIT_NUMBER }}
+                  VITE_LOCAL_RHEXE: ${{ secrets.VITE_LOCAL_RHEXE }}
               with:
                   tagName: 'PakePlus-v__VERSION__'
                   releaseName: 'PakePlus v__VERSION__'
