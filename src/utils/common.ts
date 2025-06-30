@@ -1398,7 +1398,7 @@ export const syncAllBranch = async (
     userName: string,
     init: boolean = false
 ) => {
-    if (token || init) {
+    if (token && init) {
         console.log('syncAllBranch', init)
         for (const repo of ppRepo) {
             console.log('syncAllBranch', repo)
