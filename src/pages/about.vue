@@ -43,6 +43,12 @@
                     </span>
                 </p>
                 <p>
+                    <span>{{ t('navigation') }}：</span>
+                    <span class="link" @click="openUrl(urlMap.ppofficial)">
+                        {{ urlMap.ppofficial }}
+                    </span>
+                </p>
+                <p>
                     <span>{{ t('business') }}：</span>
                     <span class="link" @click="openUrl(urlMap.exchange)">
                         {{ urlMap.exchange }}
@@ -52,12 +58,6 @@
                     <span>{{ t('githubRepo') }}：</span>
                     <span class="link" @click="openUrl(urlMap.github)">
                         {{ urlMap.github }}
-                    </span>
-                </p>
-                <p>
-                    <span>{{ t('navigation') }}：</span>
-                    <span class="link" @click="openUrl(urlMap.ppofficial)">
-                        {{ urlMap.ppofficial }}
                     </span>
                 </p>
                 <p>

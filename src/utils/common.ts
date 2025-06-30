@@ -38,7 +38,7 @@ export const zPaySignKey = import.meta.env.VITE_ZPAY_SIGN_KEY
 export const urlMap = {
     pakeplus: 'https://www.pakeplus.com',
     github: 'https://github.com/Sjj1024/PakePlus',
-    ppofficial: 'https://www.ppofficial.pages.dev',
+    ppofficial: 'https://ppofficial.netlify.app',
     ppnotes: 'https://pakeplus.com/ppnotes.json',
     configdoc: 'https://ppofficial.pages.dev/guide/config.html',
     phonedoc: 'https://www.pakeplus.com/guide/phone.html',
