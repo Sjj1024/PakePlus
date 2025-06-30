@@ -599,13 +599,6 @@ export const getInitRust = async (params: any) => {
         if (!params.state) {
             content = content.replaceAll('if true {', 'if false {')
         }
-        if (params.injectjq) {
-            // 替换INJECTJQ
-            content = content.replaceAll(
-                '.initialization_script(include_str!("../../data/custom.js"))',
-                `.initialization_script(include_str!("../../data/jquery.min.js"))\r.initialization_script(include_str!("../../data/custom.js"))`
-            )
-        }
         return base64Encode(content)
     }
 }
@@ -650,13 +643,6 @@ export const getInitRustFetch = async (params: any) => {
     // 替换STATE
     if (!params.state) {
         content = content.replaceAll('if true {', 'if false {')
-    }
-    if (params.injectjq) {
-        // 替换INJECTJQ
-        content = content.replaceAll(
-            '.initialization_script(include_str!("../../data/custom.js"))',
-            `.initialization_script(include_str!("../../data/jquery.min.js"))\r.initialization_script(include_str!("../../data/custom.js"))`
-        )
     }
     return base64Encode(content)
 }

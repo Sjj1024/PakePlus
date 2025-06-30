@@ -424,13 +424,6 @@ pub async fn update_init_rs(
     } else {
         contents = contents.replace("if true {", "if false {");
     }
-    // 替换injectjq
-    if injectjq {
-        contents = contents.replace(
-            r#".initialization_script(include_str!("../../data/custom.js"))"#,
-            r#".initialization_script(include_str!("../../data/jquery.min.js")).initialization_script(include_str!("../../data/custom.js"))"#,
-        );
-    }
     // The new file content, using Base64 encoding
     let encoded_contents = BASE64_STANDARD.encode(contents);
     return encoded_contents;
