@@ -11,7 +11,8 @@
             "asset://localhost/*",
             "https://api.github.com/*",
             "https://payjs.cn/*",
-            "https://zpayz.cn/*"
+            "https://zpayz.cn/*",
+            "https://api.pay.yungouos.com/*"
         ]
     },
     "permissions": [
@@ -82,6 +83,9 @@
                 },
                 {
                     "url": "https://zpayz.cn/**"
+                },
+                {
+                    "url": "https://api.pay.yungouos.com/**"
                 }
             ]
         },
