@@ -938,7 +938,7 @@ const confirmIcon = (base64Data: string) => {
     const image = new Image()
     image.src = base64Data
     image.onload = () => {
-        roundIcon.value = cropImageToRound(image, 50)
+        roundIcon.value = cropImageToRound(image)
     }
 }
 
