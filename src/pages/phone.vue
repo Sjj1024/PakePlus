@@ -705,6 +705,7 @@
                     <el-input
                         v-model="store.currentProject.android.pubBody"
                         type="textarea"
+                        :disabled="!isDev"
                         autocomplete="off"
                         autoCapitalize="off"
                         autoCorrect="off"
@@ -831,6 +832,7 @@ import {
     CSSFILTER,
     openUrl,
     isTauri,
+    isDev,
     arrayBufferToBase64,
     cropImageToRound,
     base64Encode,

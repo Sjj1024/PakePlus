@@ -58,6 +58,9 @@
                                 <el-dropdown-item @click="changeLang('ja')">
                                     日本語
                                 </el-dropdown-item>
+                                <el-dropdown-item @click="changeLang('ko')">
+                                    한국어
+                                </el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>

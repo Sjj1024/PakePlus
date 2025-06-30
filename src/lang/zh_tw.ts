@@ -352,4 +352,5 @@ export default {
     inputCommand: '請輸入命令',
     inputCommandDesc: '在腳本中添加以下代碼，即可實現運行命令',
     inputDownloadPath: '請輸入下載地址或選擇下載文件夾',
+    userAgentTips: '默認系統瀏覽器UA',
 }

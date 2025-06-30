@@ -360,7 +360,7 @@
                             autoCapitalize="off"
                             autoCorrect="off"
                             spellCheck="false"
-                            placeholder="默认手机自带"
+                            :placeholder="t('userAgentTips')"
                         />
                     </el-form-item>
                 </div>

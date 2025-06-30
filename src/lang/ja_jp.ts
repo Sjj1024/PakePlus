@@ -387,4 +387,5 @@ export default {
         'スクリプトに以下のコードを追加すると、コマンドを実行できます',
     inputDownloadPath:
         'ダウンロードURLを入力するか、ダウンロードフォルダを選択してください',
+    userAgentTips: 'デフォルトシステムブラウザUA',
 }

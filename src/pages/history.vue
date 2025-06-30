@@ -36,7 +36,7 @@
             <el-table-column :label="t('assetName')">
                 <template #default="scope">
                     <div style="display: flex; align-items: center">
-                        <span class="fileLink">
+                        <span @click="copyDownlink(scope.row)" class="fileLink">
                             {{
                                 scope.row.name.startsWith('_')
                                     ? store.currentProject.showName +
