@@ -131,7 +131,7 @@ const updateTauriConfig = (showName, version, id, tauriApi) => {
 }
 
 // update init.rs
-const updateInitRs = (isHtml, winState, injectJq, winConfig) => {
+const updateInitRs = (isHtml, winState, winConfig) => {
     console.log('updateInitRs......')
     const initRsPath = path.join(__dirname, '../src-tauri/src/utils/init.rs')
     const initRs = fs.readFileSync(initRsPath, 'utf-8')
@@ -213,7 +213,6 @@ const main = async () => {
         isHtml,
         single,
         state,
-        injectJq,
     } = ppconfig.desktop
     const winConfig = ppconfig.more.windows
     console.log('iconPath, tempPath, icnsPath', iconPath, tempPath, icnsPath)
@@ -230,7 +229,7 @@ const main = async () => {
     // 更新 tauri.conf.json
     updateTauriConfig(showName, version, id, tauriApi)
     // 更新 init.rs
-    updateInitRs(isHtml, state, injectJq, winConfig)
+    updateInitRs(isHtml, state, winConfig)
     // 更新 lib.rs
     updateLibRs(single)
     // set github env
