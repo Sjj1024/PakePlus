@@ -1312,7 +1312,7 @@ const handleMenu = (index: string) => {
         } else if (index === '4') {
             router.push('/about')
         } else {
-            oneMessage.error('apiLimitClient')
+            oneMessage.error(t('apiLimitClient'))
         }
     }
 }
