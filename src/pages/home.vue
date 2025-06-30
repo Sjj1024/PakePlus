@@ -529,7 +529,7 @@ const testToken = async (tips: boolean = true) => {
                 localStorage.setItem('token', store.token)
                 store.setUser(userInfo.data)
                 try {
-                    if (userInfo.data.login !== 'Sjj1024') {
+                    if (userInfo.data.login !== upstreamUser) {
                         await forkStartShas(tips)
                     } else {
                         await commitShas(tips)

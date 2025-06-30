@@ -209,7 +209,7 @@ export const supportPP = async () => {
             await githubApi.followingUser()
             await githubApi.startProgect('PakePlus')
             await githubApi.startProgect('PakePlus-Android')
-            // await githubApi.startProgect('PakePlus-iOS')
+            await githubApi.startProgect('PakePlus-iOS')
         }
     } catch (error) {
         console.error('supportPP error', error)
