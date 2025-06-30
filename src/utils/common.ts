@@ -685,7 +685,7 @@ export const arrayBufferToBase64 = (buffer: Uint8Array) => {
     return btoa(binary)
 }
 
-// 绘制标准圆角路径（类似Sharp的效果）
+// draw standard round path (similar to Sharp effect)
 const drawAppleStylePath = (
     ctx: any,
     width: number,
@@ -694,15 +694,15 @@ const drawAppleStylePath = (
 ) => {
     const effectiveWidth = width - 2 * padding
     const effectiveHeight = height - 2 * padding
-    // 调整圆角半径为宽高的25%（与Sharp版本中的250/1024≈24.4%接近）
+    // adjust radius to 25% of width and height (similar to Sharp version)
     const radius = Math.min(effectiveWidth, effectiveHeight) * 0.24
 
-    // 使用标准的90度圆弧（控制点偏移量为半径的0.55228475）
+    // use standard 90 degree arc (control point offset is 0.55228475 of radius)
     const controlOffset = radius * 0.55228475
 
     ctx.beginPath()
 
-    // 左上角
+    // top left corner
     ctx.moveTo(padding + radius, padding)
     ctx.bezierCurveTo(
         padding + controlOffset,
@@ -713,7 +713,7 @@ const drawAppleStylePath = (
         padding + radius
     )
 
-    // 左下角
+    // bottom left corner
     ctx.lineTo(padding, padding + effectiveHeight - radius)
     ctx.bezierCurveTo(
         padding,
@@ -724,7 +724,7 @@ const drawAppleStylePath = (
         padding + effectiveHeight
     )
 
-    // 右下角
+    // bottom right corner
     ctx.lineTo(padding + effectiveWidth - radius, padding + effectiveHeight)
     ctx.bezierCurveTo(
         padding + effectiveWidth - controlOffset,
@@ -735,7 +735,7 @@ const drawAppleStylePath = (
         padding + effectiveHeight - radius
     )
 
-    // 右上角
+    // top right corner
     ctx.lineTo(padding + effectiveWidth, padding + radius)
     ctx.bezierCurveTo(
         padding + effectiveWidth,
@@ -749,23 +749,23 @@ const drawAppleStylePath = (
     ctx.closePath()
 }
 
-// 使用 Canvas 裁剪图片为圆角
+// use canvas to crop image to round
 export const cropImageToRound = (image: any, padding: number = 0) => {
     const canvas = document.createElement('canvas')
     const ctx: any = canvas.getContext('2d')
 
-    // 设置画布大小与图片一致
+    // set canvas size to image size
     canvas.width = image.width
     canvas.height = image.height
 
-    // 透明背景
+    // transparent background
     ctx.fillStyle = 'rgba(0, 0, 0, 0)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    // 绘制圆角路径
+    // draw round path
     drawAppleStylePath(ctx, canvas.width, canvas.height, padding)
 
-    // 裁剪图片
+    // crop image
     ctx.save()
     ctx.clip()
     ctx.drawImage(
@@ -777,7 +777,7 @@ export const cropImageToRound = (image: any, padding: number = 0) => {
     )
     ctx.restore()
 
-    // 将裁剪后的图片转换为 Base64
+    // convert cropped image to Base64
     return canvas.toDataURL('image/png')
 }
 
