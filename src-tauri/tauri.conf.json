@@ -55,8 +55,8 @@
         "updater": {
             "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEI0MkI3NDVCOUM2NDE1QTgKUldTb0ZXU2NXM1FydEsrN29Edjg2c0kxZmk1YWpRa3ZUMjE1S2NLeGVFRkJRWW1SSnhXQ2F3S0EK",
             "endpoints": [
-                "https://gh-proxy.com/github.com/Sjj1024/PakePlus/releases/latest/download/ppupdate.json",
-                "https://files.pakeplus.com/ppupdate.json"
+                "https://files.pakeplus.com/ppupdate.json",
+                "https://gh-proxy.com/github.com/Sjj1024/PakePlus/releases/latest/download/ppupdate.json"
             ],
             "windows": {
                 "installMode": "passive"
