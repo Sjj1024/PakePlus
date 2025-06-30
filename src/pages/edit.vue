@@ -930,16 +930,12 @@ const switchTauriConfig = () => {
 }
 
 // icon confirm
-const confirmIcon = (base64Data: string) => {
+const confirmIcon = async (base64Data: string) => {
     cutVisible.value = false
     iconBase64.value = base64Data
     store.currentProject.icon = base64Data
-    const image = new Image()
-    image.src = base64Data
-    image.onload = () => {
-        // if local build, then set padding 50
-        roundIcon.value = cropImageToRound(image)
-    }
+    // if local build, then set padding 50
+    roundIcon.value = await cropImageToRound(base64Data)
 }
 
 // platform change
@@ -1631,9 +1627,14 @@ const easyLocal = async () => {
         targetDir: targetDir,
         exeName: targetName,
         config: store.currentProject.more.windows,
-        base64Png: store.currentProject.iconRound
-            ? roundIcon.value
-            : iconBase64.value,
+        base64Png:
+            platformName === 'windows'
+                ? store.currentProject.iconRound
+                    ? roundIcon.value
+                    : iconBase64.value
+                : store.currentProject.iconRound
+                ? await cropImageToRound(roundIcon.value, 50)
+                : iconBase64.value,
         debug: store.currentProject.desktop.debug,
         customJs: await getInitializationScript(true),
         htmlPath: store.currentProject.htmlPath,

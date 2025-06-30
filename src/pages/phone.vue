@@ -1130,22 +1130,12 @@ const closeJsCodeEditDialog = () => {
     codeDialogVisible.value = false
 }
 
-// switch tauri config json or code
-const switchTauriConfig = () => {
-    isJson.value = !isJson.value
-    tauriConfigRef.value?.updateCode()
-}
-
 // icon confirm
-const confirmIcon = (base64Data: string) => {
+const confirmIcon = async (base64Data: string) => {
     cutVisible.value = false
     iconBase64.value = base64Data
     store.currentProject.icon = base64Data
-    const image = new Image()
-    image.src = base64Data
-    image.onload = () => {
-        roundIcon.value = cropImageToRound(image)
-    }
+    roundIcon.value = await cropImageToRound(base64Data)
 }
 
 // web upload icon
