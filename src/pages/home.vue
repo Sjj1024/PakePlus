@@ -717,12 +717,6 @@ const getWebSha = async (repo: string = 'PakePlus') => {
     }
 }
 
-// open vconsole
-const openDebug = () => {
-    console.log('openDebug')
-    var _ = new window.VConsole()
-}
-
 // delete project confirm
 const delProject = () => {
     if (
@@ -747,7 +741,7 @@ const creatProject = async () => {
     creatLoading.value = true
     proExist.value = false
     if (branchName.value === 'ppdebug') {
-        openDebug()
+        var _ = new window.VConsole()
         branchName.value = ''
         creatLoading.value = false
         branchDialog.value = false

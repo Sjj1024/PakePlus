@@ -1032,6 +1032,23 @@
                         </p>
                     </div>
                 </div>
+                <!-- api/listenData -->
+                <div v-else-if="menuIndex === '3-3'" class="cardContent">
+                    <h1 class="cardTitle">listenData</h1>
+                    <p>Listen web data</p>
+                    <div class="cardBox">
+                        <el-tooltip content="open debug" placement="bottom">
+                            <el-button @click="debugHandler('open')">
+                                开启调试
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip content="close debug" placement="bottom">
+                            <el-button @click="debugHandler('close')">
+                                关闭调试
+                            </el-button>
+                        </el-tooltip>
+                    </div>
+                </div>
                 <!-- api/template -->
                 <div v-else-if="menuIndex === '1-111'" class="cardContent">
                     <h1 class="cardTitle">menu</h1>
@@ -1988,6 +2005,16 @@ const downFile = async (selPath: boolean = true) => {
         savePath,
         fileId,
     })
+}
+
+// open vconsole
+let vConsole: any = null
+const debugHandler = (type: string = 'open') => {
+    if (type === 'open') {
+        vConsole = new window.VConsole()
+    } else {
+        vConsole.destroy()
+    }
 }
 
 listen('download_progress', (event: any) => {
