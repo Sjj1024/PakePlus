@@ -529,7 +529,6 @@ import { ElMessageBox } from 'element-plus'
 import { usePPStore } from '@/store'
 import {
     readFile,
-    readTextFile,
     writeTextFile,
     exists,
     remove,
@@ -938,6 +937,7 @@ const confirmIcon = (base64Data: string) => {
     const image = new Image()
     image.src = base64Data
     image.onload = () => {
+        // if local build, then set padding 50
         roundIcon.value = cropImageToRound(image)
     }
 }
@@ -1140,7 +1140,7 @@ const handleFileChange = async (event: any) => {
     }
 }
 
-// 仓库是否已经存在该文件并获取sha, 不存在则创建
+// check if file exists in repo and get sha, if not, create it
 const upSrcFile = async (filePath: string, base64Content: string) => {
     const resSha = await githubApi.getFileSha(
         store.userInfo.login,
@@ -1160,7 +1160,7 @@ const upSrcFile = async (filePath: string, base64Content: string) => {
     } else {
         delete params.sha
     }
-    // 更新文件
+    // update file
     const updateRes: any = await githubApi.updateFileContent(
         store.userInfo.login,
         'PakePlus',

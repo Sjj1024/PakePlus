@@ -29,6 +29,11 @@ sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
 sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
 ```
 
+3. 或到系统设置 > 隐私与安全 > 安全性 > 仍要打开，就可以了
+
+![](../static/imgs/macallow.jpg)
+
+
 # windows 提示无法在你电脑上运行
 
 ![](../static/imgs/windowsError.jpg)
