@@ -677,10 +677,13 @@ pub fn notification(app: AppHandle, params: NotificationParams) -> Result<(), St
 }
 
 #[tauri::command]
-pub fn get_exe_dir() -> String {
-    let exe_path = env::current_exe().unwrap();
-    let exe_dir = exe_path.parent().unwrap();
-    exe_dir.to_str().unwrap().to_string()
+pub fn get_exe_dir(parent: bool) -> String {
+    let exe_dir = env::current_exe().unwrap();
+    if parent {
+        exe_dir.parent().unwrap().to_str().unwrap().to_string()
+    } else {
+        exe_dir.to_str().unwrap().to_string()
+    }
 }
 
 // load man.json

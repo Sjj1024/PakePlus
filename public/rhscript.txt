@@ -1,5 +1,5 @@
 [FILENAMES]
-Exe=    ..\PakePlus.exe
+Exe=    "PakePlus.exe"
 SaveAs= "Target.exe"
 Log=    rh.log
 

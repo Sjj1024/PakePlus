@@ -60,7 +60,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     }
     let mut config: WindowConfig = serde_json::from_value(json_value).unwrap();
     // load man
-    let startup_dir = get_exe_dir();
+    let startup_dir = get_exe_dir(true);
     let man = load_man(&startup_dir);
     let man_content = man.unwrap();
     // custom js
