@@ -156,7 +156,7 @@ export default defineConfig({
                     ],
                     '/exchange/': [
                         { text: '加入群聊', link: '/exchange/' },
-                        // { text: '商业支持', link: '/exchange/business' },
+                        { text: '商业支持', link: '/exchange/business' },
                         { text: 'Github讨论', link: '/exchange/github' },
                     ],
                     '/sponsor/': [
