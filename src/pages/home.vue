@@ -154,7 +154,7 @@
                         {{ t('updateNow') }}
                     </el-dropdown-item>
                     <el-dropdown-item
-                        v-if="isTauri"
+                        v-else-if="isTauri"
                         @click="sendUpdateEvent('update-check')"
                     >
                         {{ t('checkUpdate') }}
