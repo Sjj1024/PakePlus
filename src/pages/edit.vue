@@ -985,12 +985,6 @@ const loadHtml = async () => {
         const isExists = await exists(indexHtml)
         if (isExists) {
             const files = await readDirRecursively(selected)
-            if (files.length >= fileLimitNumber) {
-                oneMessage.error(
-                    t('fileLimitNumber', { number: fileLimitNumber })
-                )
-                return
-            }
             const configUrl = `index.html (${t('moreAssets')}+${files.length})`
             store.currentProject.url = configUrl
             store.currentProject.htmlPath = selected
