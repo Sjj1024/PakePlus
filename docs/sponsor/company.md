@@ -17,7 +17,7 @@ const members = [
     title: '让你上瘾的 英语学习工具',
     links: [
       { icon: 'github', link: 'https://github.com/cuixueshe/earthworm' },
-      { icon: 'twitter', link: 'https://twitter.com/youyuxi' }
+      { icon: 'twitter', link: 'https://x.com/cuixr1314' }
     ]
   }
 ]
