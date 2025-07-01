@@ -102,17 +102,57 @@ export default defineConfig({
                         },
                     ],
                     '/question/': [
-                        { text: '常见问题', link: '/question/' },
-                        { text: '使用限制', link: '/question/limit' },
-                        { text: 'Token无效', link: '/question/invalid' },
-                        { text: '项目已存在', link: '/question/exist' },
-                        { text: '编译失败', link: '/question/build' },
-                        { text: '打包html项目', link: '/question/html' },
-                        { text: '打包Vue等项目', link: '/question/vue' },
-                        { text: 'ipa/apk安装', link: '/question/phone' },
-                        { text: '窗口跳转', link: '/question/jump' },
-                        { text: '其他问题', link: '/question/other' },
-                        { text: 'Issue', link: '/question/issue' },
+                        {
+                            text: '汇总问题',
+                            collapsed: false,
+                            items: [
+                                { text: '常见问题', link: '/question/' },
+                                { text: '使用限制', link: '/question/limit' },
+                                {
+                                    text: 'Token无效',
+                                    link: '/question/invalid',
+                                },
+                                { text: '项目已存在', link: '/question/exist' },
+                                { text: '编译失败', link: '/question/build' },
+                                {
+                                    text: '打包html项目',
+                                    link: '/question/html',
+                                },
+                                {
+                                    text: '打包Vue等项目',
+                                    link: '/question/vue',
+                                },
+                                { text: '窗口跳转', link: '/question/jump' },
+                            ],
+                        },
+                        {
+                            text: '桌面端问题',
+                            collapsed: false,
+                            items: [
+                                {
+                                    text: '开启调试',
+                                    link: '/question/debug',
+                                },
+                            ],
+                        },
+                        {
+                            text: '移动端问题',
+                            collapsed: false,
+                            items: [
+                                {
+                                    text: 'ipa/apk安装',
+                                    link: '/question/phone',
+                                },
+                            ],
+                        },
+                        {
+                            text: '其他问题',
+                            collapsed: false,
+                            items: [
+                                { text: '其他问题', link: '/question/other' },
+                                { text: 'Issue', link: '/question/issue' },
+                            ],
+                        },
                     ],
                     '/exchange/': [
                         { text: '加入群聊', link: '/exchange/' },
