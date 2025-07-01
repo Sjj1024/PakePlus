@@ -579,30 +579,6 @@ export const getTauriConfFetch = async (params: any) => {
     return base64Encode(content)
 }
 
-// get init.txt file content
-export const getInitRust = async (params: any) => {
-    // 将visible: true 替换为 visible: false
-    params.config = JSON.parse(params.config)
-    params.config.visible = false
-    params.config = JSON.stringify(params.config)
-    if (isTauri) {
-        const content = await invoke('update_init_rs', params)
-        return content
-    } else {
-        let content = await readStaticFile('init.txt')
-        if (content === 'error') {
-            return 'error'
-        }
-        // 替换WINDOWCONFIG
-        content = content.replaceAll('WINDOWCONFIG', params.config)
-        // 替换STATE
-        if (!params.state) {
-            content = content.replaceAll('if true {', 'if false {')
-        }
-        return base64Encode(content)
-    }
-}
-
 // get init.rs file content
 export const getLibRsFetch = async (params: any) => {
     let content = await readStaticFile('lib.txt')

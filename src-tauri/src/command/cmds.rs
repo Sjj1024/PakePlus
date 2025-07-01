@@ -408,7 +408,6 @@ pub async fn update_init_rs(
     handle: tauri::AppHandle,
     config: String,
     state: bool,
-    injectjq: bool,
 ) -> String {
     let resource_path = handle
         .path()
