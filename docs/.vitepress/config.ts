@@ -75,13 +75,21 @@ export default defineConfig({
                         {
                             text: '进阶配置',
                             collapsed: false,
-                            items: [{ text: '进阶配置', link: '/guide/tauri' }],
+                            items: [
+                                { text: '桌面端配置', link: '/guide/tauri' },
+                                {
+                                    text: '移动端配置',
+                                    link: '/guide/appconfig',
+                                },
+                            ],
                         },
                         {
                             text: '高级玩法',
                             collapsed: false,
                             items: [
-                                { text: '高级玩法', link: '/guide/superman' },
+                                { text: '桌面端API', link: '/guide/desktopapi' },
+                                { text: '移动端API', link: '/guide/phoneapi' },
+                                { text: '自定义打包', link: '/guide/custompack' },
                             ],
                         },
                     ],

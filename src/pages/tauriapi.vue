@@ -799,7 +799,7 @@
                         </p>
                         <CodeEdit
                             lang="javascript"
-                            :code="Codes.downloadFile"
+                            :code="Codes.downloadFile.trim()"
                             :disabled="true"
                         />
                     </div>
@@ -810,7 +810,7 @@
                         </p>
                         <CodeEdit
                             lang="javascript"
-                            :code="Codes.downProgress"
+                            :code="Codes.downProgress.trim()"
                             :disabled="true"
                         />
                     </div>
@@ -886,7 +886,7 @@
                         </p>
                         <CodeEdit
                             lang="javascript"
-                            :code="Codes.openUrlCurrent"
+                            :code="Codes.openUrlCurrent.trim()"
                             :disabled="true"
                         />
                     </div>
@@ -897,7 +897,7 @@
                         </p>
                         <CodeEdit
                             lang="javascript"
-                            :code="Codes.openUrlNew"
+                            :code="Codes.openUrlNew.trim()"
                             :disabled="true"
                         />
                     </div>
@@ -908,7 +908,7 @@
                         </p>
                         <CodeEdit
                             lang="javascript"
-                            :code="Codes.openUrlBrowser"
+                            :code="Codes.openUrlBrowser.trim()"
                             :disabled="true"
                         />
                     </div>
@@ -937,7 +937,7 @@
                         </p>
                         <CodeEdit
                             lang="javascript"
-                            :code="Codes.runShell"
+                            :code="Codes.runShell.trim()"
                             :disabled="true"
                         />
                     </div>
@@ -987,7 +987,7 @@
                         </p>
                         <CodeEdit
                             lang="javascript"
-                            :code="Codes.removeEle"
+                            :code="Codes.removeEle.trim()"
                             :disabled="true"
                         />
                     </div>
@@ -998,7 +998,7 @@
                         </p>
                         <CodeEdit
                             lang="javascript"
-                            :code="Codes.addEle"
+                            :code="Codes.addEle.trim()"
                             :disabled="true"
                         />
                     </div>
@@ -1009,7 +1009,7 @@
                         </p>
                         <CodeEdit
                             lang="javascript"
-                            :code="Codes.modifyEle"
+                            :code="Codes.modifyEle.trim()"
                             :disabled="true"
                         />
                     </div>
