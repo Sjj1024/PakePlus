@@ -1,7 +1,7 @@
 [FILENAMES]
 Exe=    "PakePlus.exe"
 SaveAs= "Target.exe"
-Log=    rh.log
+Log=    "rh.log"
 
 [COMMANDS]
 -delete ICON,1,0
@@ -11,4 +11,4 @@ Log=    rh.log
 -delete ICON,5,0
 -delete ICON,6,0
 -delete ICON,7,0
--addoverwrite app.ico, ICONGROUP,1
+-addoverwrite "app.ico", ICONGROUP,1
