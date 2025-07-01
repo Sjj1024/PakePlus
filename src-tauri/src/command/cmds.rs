@@ -816,7 +816,7 @@ pub async fn windows_build(
     let rhexe_dir = exe_dir.join("data").join("rh.exe");
     let script_path = exe_dir.join("data").join("rhscript.txt");
     let rh_command = format!(
-        "{} -script {}",
+        "& \"{}\" -script \"{}\"",
         rhexe_dir.to_str().unwrap(),
         script_path.to_str().unwrap()
     );
