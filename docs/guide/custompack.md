@@ -1,14 +1,17 @@
 # 自定义打包
 
-<br>
-
+::: info 自定义打包优点
 <Badge type="tip" text="不限制项目数量" />
 <Badge type="tip" text="不限制打包频率" />
 <Badge type="tip" text="不限制文件数量" />
 <Badge type="tip" text="文件大小放宽25M" />
 <Badge type="tip" text="更多自定义打包" />
+:::
+
 
 如果你是程序员，你想调试你的前端项目，或者因为你的 dist 目录特别大文件特别多，但是 PakePlus 因为 github api 的原因限制了文件大小和数量，那么你可以使用高级玩法来实现同步你的 dist 目录到 github 仓库中，然后实现编译发布。
+
+## 操作步骤
 
 1.先在 PakePlus 上创建一个项目，比如这个项目名称叫：deepseek
 

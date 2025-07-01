@@ -30,6 +30,8 @@ export default defineConfig({
                     src: 'https://pakeplus.com/app.webp',
                     alt: 'PakePlus',
                 },
+                aside: true,
+                outlineTitle: '页面导航',
                 // 导航栏
                 nav: [
                     { text: '首页', link: '/' },
@@ -87,9 +89,15 @@ export default defineConfig({
                             text: '高级玩法',
                             collapsed: false,
                             items: [
-                                { text: '桌面端API', link: '/guide/desktopapi' },
+                                {
+                                    text: '桌面端API',
+                                    link: '/guide/desktopapi',
+                                },
                                 { text: '移动端API', link: '/guide/phoneapi' },
-                                { text: '自定义打包', link: '/guide/custompack' },
+                                {
+                                    text: '自定义打包',
+                                    link: '/guide/custompack',
+                                },
                             ],
                         },
                     ],

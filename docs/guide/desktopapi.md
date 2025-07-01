@@ -1,9 +1,13 @@
-# 桌面端 API <Badge type="tip" text="0.6.1后支持" />
+# 桌面端 API
 
+::: danger 注意
 使用桌面端 API 的前提是在更多配置中，开启全局 TauriApi，然后才可以打包发布使用！  
-JS 脚本中使用：
+:::
+桌面端API主要是集成了tauri2的所有api接口，还有PakePlus自定义的一些api接口，一定要开启全局TauriApi，然后才可以打包发布使用，否则不生效的。开发过程中，可以通过 window.__TAURI__ 来查看有哪些api接口，并可以查看接口类型。
 
-```JavaScript
+## JS 脚本中使用
+
+```js
 // core
 const {
     addPluginListener,
@@ -105,9 +109,9 @@ const { WebviewWindow } = window.__TAURI__.webviewWindow
 // 等等接口，请参考Tauri2官方文档：https://v2.tauri.app/reference/javascript/api/#vanilla-js-api
 ```
 
-Vue/React/Next/Vite 等项目使用：
+## Vue/React/Next/等使用
 
-```JavaScript
+```js
 // 安装依赖，就可以支持类型提示等
 // core api
 pnpm install @tauri-apps/api
@@ -124,21 +128,23 @@ pnpm install @tauri-apps/plugin-os
 // 等等接口，请参考Tauri2官方文档：https://v2.tauri.app/reference/javascript/api/#vanilla-js-api
 ```
 
-# Tauri2Api
+## Tauri2Api
 
 文档待更新......
 
-# Tauri2PluginApi
+## Tauri2PluginApi
 
 文档待更新......
 
-# PakePlusApi
+## PakePlusApi
 
-### 打开 URL(本窗口)
+本章后面的API接口是PakePlus开发的一些rust后端接口，可以在js中直接调用使用，也仅仅只能在PakePlus项目中打包使用。请勿将此API用于原生的tauri项目。
+
+## 打开 URL(本窗口)
 
 在脚本中添加以下代码，即可实现打开 URL(本窗口)
 
-```JavaScript
+```js
 const hookClick = (e) => {
     const origin = e.target.closest('a')
     const isBaseTargetBlank = document.querySelector(
@@ -161,11 +167,11 @@ window.open = function (url, target, features) {
 document.addEventListener('click', hookClick, { capture: true })
 ```
 
-### 打开 URL(新窗口)
+## 打开 URL(新窗口)
 
 在脚本中添加以下代码，即可实现打开 URL(新窗口)
 
-```JavaScript
+```js
 const { WebviewWindow } = window.__TAURI__.webviewWindow
 
 const webview = new WebviewWindow('my-label', {
@@ -192,11 +198,11 @@ webview.once('tauri://error', function (e) {
 })
 ```
 
-### 打开 URL(默认浏览器)
+## 打开 URL(默认浏览器)
 
 在脚本中添加以下代码，即可实现打开 URL(默认浏览器)
 
-```JavaScript
+```js
 const { invoke } = window.__TAURI__.core
 
 if ('__TAURI__' in window) {
@@ -211,11 +217,11 @@ if ('__TAURI__' in window) {
 }
 ```
 
-### 下载文件
+## 下载文件
 
 下载网络链接文件到本地，支持多文件下载，以及下载进度回调
 
-```JavaScript
+```js
 const { invoke } = window.__TAURI__.core
 
 if ('__TAURI__' in window) {
@@ -227,11 +233,11 @@ if ('__TAURI__' in window) {
 }
 ```
 
-### 下载进度
+## 下载进度
 
 在脚本中添加以下代码，即可监听下载进度回调
 
-```JavaScript
+```js
 const { listen } = window.__TAURI__.event
 
 listen('download_progress', (event: any) => {
@@ -241,11 +247,11 @@ listen('download_progress', (event: any) => {
 })
 ```
 
-### 执行命令
+## 执行命令
 
 在脚本中添加以下代码，即可实现运行命令
 
-```JavaScript
+```js
 const { invoke } = window.__TAURI__.core
 
 if ('__TAURI__' in window) {
