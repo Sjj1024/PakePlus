@@ -27,7 +27,7 @@ export default defineConfig({
             themeConfig: {
                 // 基础配置
                 logo: {
-                    src: './app.webp',
+                    src: 'https://pakeplus.com/app.webp',
                     alt: 'PakePlus',
                 },
                 // 导航栏
