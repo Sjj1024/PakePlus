@@ -15,7 +15,8 @@
         "preview": "vite preview",
         "icon": "tauri icon",
         "tauri preview": "tauri preview",
-        "update tauri": "cd src-tauri && cargo update"
+        "update tauri": "cd src-tauri && cargo update",
+        "rm:cache": "rm -f ~/.cargo/.package-cache"
     },
     "dependencies": {
         "@codemirror/lang-javascript": "^6.2.3",

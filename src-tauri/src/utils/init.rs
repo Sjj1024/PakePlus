@@ -100,10 +100,10 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         .build()
         .unwrap();
     let store = app.store("app_data.json").unwrap();
-    let window_fullscreen: Option<serde_json::Value> = store.get("window_fullscreen");
+    // store.clear();
     let window_size: Option<serde_json::Value> = store.get("window_size");
-    let mut width = 960.0;
-    let mut height = 720.0;
+    let mut width = 0.0;
+    let mut height = 0.0;
     if let Some(window_size) = window_size {
         let size = window_size.as_object().unwrap();
         width = size["width"].as_f64().unwrap();
@@ -127,23 +127,25 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         y = position["y"].as_f64().unwrap();
     }
 
-    if let Some(window_fullscreen) = window_fullscreen {
-        let fullscreen = window_fullscreen.as_object().unwrap();
-        // println!("fullscreen: {:?}", fullscreen);
-        if config.fullscreen || fullscreen["fullscreen"].as_bool().unwrap() {
-            window.set_fullscreen(true).unwrap();
-            // println!("window fullscreen");
-        } else {
+    if config.fullscreen
+        || store
+            .get("window_fullscreen")
+            .is_some_and(|x| x.as_object().unwrap()["fullscreen"].as_bool().unwrap())
+    {
+        window.set_fullscreen(true).unwrap();
+    } else {
+        // println!("window_size: {:?}", width);
+        if width > 0.0 && height > 0.0 {
             window
                 .set_size(tauri::PhysicalSize::new(width, height))
                 .unwrap();
-            if config.center || (x == 0.0 && y == 0.0) {
-                window.center().unwrap();
-            } else {
-                window
-                    .set_position(tauri::PhysicalPosition::new(x, y))
-                    .unwrap();
-            }
+        }
+        if config.center || (x == 0.0 && y == 0.0) {
+            window.center().unwrap();
+        } else {
+            window
+                .set_position(tauri::PhysicalPosition::new(x, y))
+                .unwrap();
         }
     }
 
