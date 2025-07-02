@@ -16,18 +16,15 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
 
     if true {
         let store = app.store("app_data.json").unwrap();
-
-        let window_fullscreen: Option<serde_json::Value> = store.get("window_fullscreen");
-
+        // store.clear();
         let window_size: Option<serde_json::Value> = store.get("window_size");
-        let mut width = 800.0;
-        let mut height = 600.0;
+        let mut width = 0.0;
+        let mut height = 0.0;
         if let Some(window_size) = window_size {
             let size = window_size.as_object().unwrap();
             width = size["width"].as_f64().unwrap();
             height = size["height"].as_f64().unwrap();
         }
-
         let window_position: Option<serde_json::Value> = store.get("window_position");
         let mut x = 0.0;
         let mut y = 0.0;
@@ -36,27 +33,27 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
             x = position["x"].as_f64().unwrap();
             y = position["y"].as_f64().unwrap();
         }
-
-        if let Some(window_fullscreen) = window_fullscreen {
-            let fullscreen = window_fullscreen.as_object().unwrap();
-            if fullscreen["fullscreen"].as_bool().unwrap() {
-                window.set_fullscreen(true).unwrap();
-            } else {
-                window
-                    .set_size(tauri::PhysicalSize::new(width, height))
-                    .unwrap();
-                if x == 0.0 && y == 0.0 {
-                    window.center().unwrap();
-                } else {
-                    window
-                        .set_position(tauri::PhysicalPosition::new(x, y))
-                        .unwrap();
-                }
-            }
+        if config.fullscreen
+            || store
+                .get("window_fullscreen")
+                .is_some_and(|x| x.as_object().unwrap()["fullscreen"].as_bool().unwrap())
+        {
+            window.set_fullscreen(true).unwrap();
+        } else if width > 0.0 && height > 0.0 {
+            window
+                .set_size(tauri::PhysicalSize::new(width, height))
+                .unwrap();
+        }
+        // position
+        if config.center || (x == 0.0 && y == 0.0) {
+            window.center().unwrap();
+        } else {
+            window
+                .set_position(tauri::PhysicalPosition::new(x, y))
+                .unwrap();
         }
 
         let window_clone = window.clone();
-
         window.on_window_event(move |event| {
             if let WindowEvent::Resized(size) = event {
                 // println!("window_size: {:?}", size);
@@ -86,12 +83,10 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                 }
             }
             if let WindowEvent::Moved(position) = event {
-                if position.x > 0 && position.y > 0 {
-                    let _ = store.set(
-                        "window_position",
-                        json!({ "x": position.x, "y": position.y }),
-                    );
-                }
+                let _ = store.set(
+                    "window_position",
+                    json!({ "x": position.x, "y": position.y }),
+                );
             }
         });
     }
