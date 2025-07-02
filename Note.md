@@ -19,3 +19,10 @@
 -   Not recommended as it is a beta version.（不推荐，因为是 beta 版本）
 -   https://pakeplus.pages.dev
 -   https://pakeplus.netlify.app
+
+
+### Document(使用文档)
+
+- https://www.pakeplus.com/guide/
+- https://ppofficial.netlify.app/guide/
+- https://sjj1024.github.io/PakePlus/guide/
