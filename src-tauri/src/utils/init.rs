@@ -126,7 +126,14 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         x = position["x"].as_f64().unwrap();
         y = position["y"].as_f64().unwrap();
     }
-
+    // position
+    if config.center || (x == 0.0 && y == 0.0) {
+        window.center().unwrap();
+    } else {
+        window
+            .set_position(tauri::PhysicalPosition::new(x, y))
+            .unwrap();
+    }
     if config.fullscreen
         || store
             .get("window_fullscreen")
@@ -140,17 +147,8 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                 .set_size(tauri::PhysicalSize::new(width, height))
                 .unwrap();
         }
-        if config.center || (x == 0.0 && y == 0.0) {
-            window.center().unwrap();
-        } else {
-            window
-                .set_position(tauri::PhysicalPosition::new(x, y))
-                .unwrap();
-        }
     }
-
     let window_clone = window.clone();
-
     window.on_window_event(move |event| {
         if let WindowEvent::Resized(size) = event {
             // println!("window_size: {:?}", size);
