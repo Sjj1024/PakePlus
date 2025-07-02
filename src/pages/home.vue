@@ -1259,6 +1259,10 @@ onMounted(() => {
 
     .isUpdate {
         color: #e83737;
+
+        &:hover {
+            color: #e83737;
+        }
     }
 }
 
