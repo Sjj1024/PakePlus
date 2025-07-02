@@ -1197,7 +1197,6 @@ onMounted(() => {
                 }
 
                 .appDesc {
-                    max-width: 124px;
                     display: -webkit-box;
                     font-size: 12px;
                     color: gray;

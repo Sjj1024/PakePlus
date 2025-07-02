@@ -126,6 +126,17 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         x = position["x"].as_f64().unwrap();
         y = position["y"].as_f64().unwrap();
     }
+    if config.fullscreen
+        || store
+            .get("window_fullscreen")
+            .is_some_and(|x| x.as_object().unwrap()["fullscreen"].as_bool().unwrap())
+    {
+        window.set_fullscreen(true).unwrap();
+    } else if width > 0.0 && height > 0.0 {
+        window
+            .set_size(tauri::PhysicalSize::new(width, height))
+            .unwrap();
+    }
     // position
     if config.center || (x == 0.0 && y == 0.0) {
         window.center().unwrap();
@@ -133,20 +144,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         window
             .set_position(tauri::PhysicalPosition::new(x, y))
             .unwrap();
-    }
-    if config.fullscreen
-        || store
-            .get("window_fullscreen")
-            .is_some_and(|x| x.as_object().unwrap()["fullscreen"].as_bool().unwrap())
-    {
-        window.set_fullscreen(true).unwrap();
-    } else {
-        // println!("window_size: {:?}", width);
-        if width > 0.0 && height > 0.0 {
-            window
-                .set_size(tauri::PhysicalSize::new(width, height))
-                .unwrap();
-        }
     }
     let window_clone = window.clone();
     window.on_window_event(move |event| {
@@ -179,12 +176,10 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
             }
         } else if let WindowEvent::Moved(position) = event {
             // println!("window_position: {:?}", position);
-            if position.x > 0 && position.y > 0 {
-                let _ = store.set(
-                    "window_position",
-                    json!({ "x": position.x, "y": position.y }),
-                );
-            }
+            let _ = store.set(
+                "window_position",
+                json!({ "x": position.x, "y": position.y }),
+            );
         } else if let WindowEvent::DragDrop(drag_drop) = event {
             println!("drag_drop: {:?}", drag_drop);
         } else if let WindowEvent::Destroyed = event {
