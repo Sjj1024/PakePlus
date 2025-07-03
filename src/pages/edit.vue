@@ -1588,39 +1588,27 @@ const easyLocal = async () => {
         : store.currentProject.name
     const targetExe = await join(targetDir, targetName, `${targetName}.exe`)
     if (platformName === 'windows') {
-        const appDataDirPath = await appDataDir();
-        const ppExeDir: string = await invoke('get_exe_dir', { parent: true })
-        const rhExePath = await join(ppExeDir, 'data', 'rh.exe')
-        // exists
-        if (await exists(rhExePath)) {
-            console.log('rh.exe exists')
-        } else {
-            await invoke('download_file', {
-                url: rhExeUrl,
-                savePath: rhExePath,
-                fileId: 'rh.exe',
-            })
-        }
+        const appDataDirPath = await appDataDir()
         // ico save to local
         const base64String = store.currentProject.iconRound
             ? roundIcon.value
             : iconBase64.value
         const icoBlob = await base64PngToIco(base64String)
-        const icoPath = await join(appDataDirPath, 'data', 'app.ico')
+        const icoPath = await join(appDataDirPath, 'app.ico')
         await writeFile(icoPath, icoBlob)
         // save rhscript.txt
         const rhscript = await readStaticFile('rhscript.txt')
         // replace ppexe path
         const ppexePath: string = await invoke('get_exe_dir', { parent: false })
         // log path
-        const logPath: string = await join(appDataDirPath, 'data', 'rh.log')
+        const logPath: string = await join(appDataDirPath, 'rh.log')
         console.log('ppexePath', ppexePath)
         const rhtarget = rhscript
             .replace('PakePlus.exe', ppexePath)
             .replace('Target.exe', targetExe)
             .replace('rh.log', logPath)
             .replace('app.ico', icoPath)
-        const rhscriptPath = await join(appDataDirPath, 'data', 'rhscript.txt')
+        const rhscriptPath = await join(appDataDirPath, 'rhscript.txt')
         await writeTextFile(rhscriptPath, rhtarget)
     } else {
         targetName = store.currentProject.showName
