@@ -148,13 +148,15 @@
                 <el-dropdown-menu class="updateMenu">
                     <el-dropdown-item
                         class="updateBtn"
-                        v-if="isTauri && store.isUpdate"
+                        v-if="
+                            isTauri && store.isUpdate && store.ppnotes.overall
+                        "
                         @click="sendUpdateEvent('update-now')"
                     >
                         {{ t('updateNow') }}
                     </el-dropdown-item>
                     <el-dropdown-item
-                        v-else-if="isTauri"
+                        v-else-if="isTauri && store.ppnotes.overall"
                         @click="sendUpdateEvent('update-check')"
                     >
                         {{ t('checkUpdate') }}
@@ -370,7 +372,6 @@ import {
     getBuildYmlFetch,
     oneMessage,
     upstreamUser,
-    ppRepo,
     isDev,
     syncAllBranch,
 } from '@/utils/common'

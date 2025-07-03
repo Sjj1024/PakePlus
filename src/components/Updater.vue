@@ -11,7 +11,7 @@
         <template #header>
             <div class="diaHeader">
                 <span>
-                    {{ ppnotes.show ? '公告' : t('updateTips') }}
+                    {{ store.ppnotes.show ? '公告' : t('updateTips') }}
                 </span>
             </div>
         </template>
@@ -67,26 +67,15 @@ const rawJson = ref<any>({
 const notes = ref<any>('')
 let update: any = null
 
-const ppnotes = ref<any>({
-    version: '0.5.30',
-    show: false,
-    pub_date: '2025-06-02T09:00:33.251Z',
-    zh: '',
-    en: '',
-    ja: '',
-    ko: '',
-    zhTw: '',
-    openUrl: '',
-})
-
 // get ppnotes
 const getPPNotes = async () => {
     const res: any = await commApi.getPPNotes()
-    ppnotes.value = res.data
-    console.log('ppnotes', ppnotes.value)
-    if (ppnotes.value.show) {
+    store.ppnotes = res.data
+    console.log('ppnotes', store.ppnotes)
+    if (store.ppnotes.show) {
         versionDialog.value = true
-        notes.value = ppnotes.value[localStorage.getItem('lang') || 'zh'] || ''
+        const lang = localStorage.getItem('lang') || 'zh'
+        notes.value = store.ppnotes[lang as keyof typeof store.ppnotes] || ''
     }
 }
 
@@ -119,13 +108,8 @@ const checkUpdate = async (tips: boolean = false) => {
 
 const confirmUpdate = async () => {
     // await update.value.downloadAndInstall()
-    console.log(
-        'ppnotes.value.openUrl',
-        ppnotes.value.show,
-        ppnotes.value.openUrl
-    )
-    if (ppnotes.value.show && ppnotes.value.openUrl) {
-        openUrl(ppnotes.value.openUrl)
+    if (store.ppnotes.show && store.ppnotes.openUrl) {
+        openUrl(store.ppnotes.openUrl)
         return
     } else if (update) {
         console.log('no openUrl')

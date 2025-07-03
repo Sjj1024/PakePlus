@@ -111,6 +111,23 @@ export const usePPStore = defineStore('pakeplus', {
                   } as { [key: string]: any }),
             //  token
             token: localStorage.getItem('token') || '',
+            // ppnotes
+            ppnotes: {
+                version: '0.5.30',
+                show: false,
+                pub_date: '2025-06-02T09:00:33.251Z',
+                zh: '优化初始化操作，添加下载二维码等优化初始化操作',
+                en: 'Optimize the initialization operation, add the download QR code, etc.',
+                ja: '初期化操作を最適化し、ダウンロードQRコードを追加しました',
+                ko: '초기화 작업을 최적화하고 다운로드 QR 코드를 추가했습니다.',
+                zhTw: '優化初始化操作，添加下載二維碼等',
+                openUrl: '',
+                overall: false,
+                projectPrice: 9.9,
+                buildPrice: 9.9,
+                monthPrice: 9.9,
+                yearPrice: 9.9,
+            },
             //  review second
             previewSecond: 60,
             // preview html path
