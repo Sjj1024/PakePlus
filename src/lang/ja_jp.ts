@@ -388,4 +388,5 @@ export default {
     inputDownloadPath:
         'ダウンロードURLを入力するか、ダウンロードフォルダを選択してください',
     userAgentTips: 'デフォルトシステムブラウザUA',
+    selectBuildMethod: 'ビルド方法を選択してください',
 }

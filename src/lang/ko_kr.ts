@@ -383,4 +383,5 @@ export default {
         '스크립트에 다음 코드를 추가하여 명령을 실행할 수 있습니다',
     inputDownloadPath: '다운로드 URL을 입력하거나 다운로드 폴더를 선택하세요',
     userAgentTips: '기본 시스템 브라우저 UA',
+    selectBuildMethod: '빌드 방법 선택',
 }
