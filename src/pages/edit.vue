@@ -1602,7 +1602,6 @@ const easyLocal = async () => {
         const ppexePath: string = await invoke('get_exe_dir', { parent: false })
         // log path
         const logPath: string = await join(appDataDirPath, 'rh.log')
-        console.log('ppexePath', ppexePath)
         const rhtarget = rhscript
             .replace('PakePlus.exe', ppexePath)
             .replace('Target.exe', targetExe)

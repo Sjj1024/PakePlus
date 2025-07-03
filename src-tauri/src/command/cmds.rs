@@ -811,7 +811,6 @@ pub async fn windows_build(
     let exe_path = env::current_exe().unwrap();
     let exe_dir = exe_path.parent().unwrap();
     let rhexe_dir = exe_dir.join("data").join("rh.exe");
-    // let script_path = exe_dir.join("data").join("rhscript.txt");
     let rh_command = format!(
         "& \"{}\" -script \"{}\"",
         rhexe_dir.to_str().unwrap(),
@@ -929,7 +928,7 @@ pub async fn build_local(
     {
         let script_path = handle
             .path()
-            .resolve("data/rhscript.txt", BaseDirectory::AppData)
+            .resolve("rhscript.txt", BaseDirectory::AppData)
             .expect("failed to resolve resource");
         windows_build(
             target_dir,
