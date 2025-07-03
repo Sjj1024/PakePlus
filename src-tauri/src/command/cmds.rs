@@ -404,11 +404,7 @@ pub async fn open_devtools(handle: AppHandle) {
 }
 
 #[tauri::command]
-pub async fn update_init_rs(
-    handle: tauri::AppHandle,
-    config: String,
-    state: bool,
-) -> String {
+pub async fn update_init_rs(handle: tauri::AppHandle, config: String, state: bool) -> String {
     let resource_path = handle
         .path()
         .resolve("data/init.rs", BaseDirectory::Resource)
@@ -780,6 +776,7 @@ pub async fn windows_build(
     config: String,
     custom_js: String,
     html_path: String,
+    script_path: String,
 ) -> Result<(), String> {
     let base_path = Path::new(base_dir).join(exe_name);
     if !base_path.exists() {
@@ -814,11 +811,11 @@ pub async fn windows_build(
     let exe_path = env::current_exe().unwrap();
     let exe_dir = exe_path.parent().unwrap();
     let rhexe_dir = exe_dir.join("data").join("rh.exe");
-    let script_path = exe_dir.join("data").join("rhscript.txt");
+    // let script_path = exe_dir.join("data").join("rhscript.txt");
     let rh_command = format!(
         "& \"{}\" -script \"{}\"",
         rhexe_dir.to_str().unwrap(),
-        script_path.to_str().unwrap()
+        script_path
     );
     #[cfg(not(debug_assertions))]
     sleep(Duration::from_secs(10)).await;
@@ -929,7 +926,21 @@ pub async fn build_local(
     let man_json_base64 = BASE64_STANDARD.encode(man_json.to_string());
     handle.emit("local-progress", "40").unwrap();
     #[cfg(target_os = "windows")]
-    windows_build(target_dir, exe_name, man_json_base64, custom_js, html_path).await?;
+    {
+        let script_path = handle
+            .path()
+            .resolve("data/rhscript.txt", BaseDirectory::AppData)
+            .expect("failed to resolve resource");
+        windows_build(
+            target_dir,
+            exe_name,
+            man_json_base64,
+            custom_js,
+            html_path,
+            script_path.to_str().unwrap().to_string(),
+        )
+        .await?;
+    }
     handle.emit("local-progress", "60").unwrap();
     #[cfg(target_os = "macos")]
     macos_build(
