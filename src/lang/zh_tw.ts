@@ -354,4 +354,6 @@ export default {
     inputDownloadPath: '請輸入下載地址或選擇下載文件夾',
     userAgentTips: '默認系統瀏覽器UA',
     selectBuildMethod: '請選擇打包方式',
+    savePath: '保存路徑',
+    savePathTips: '點擊選擇，默認保存到下載目錄',
 }

@@ -389,4 +389,6 @@ export default {
         'ダウンロードURLを入力するか、ダウンロードフォルダを選択してください',
     userAgentTips: 'デフォルトシステムブラウザUA',
     selectBuildMethod: 'ビルド方法を選択してください',
+    savePath: '保存パス',
+    savePathTips: 'クリックして選択し、デフォルトでダウンロードディレクトリに保存します',
 }

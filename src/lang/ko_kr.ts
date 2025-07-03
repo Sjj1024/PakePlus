@@ -384,4 +384,6 @@ export default {
     inputDownloadPath: '다운로드 URL을 입력하거나 다운로드 폴더를 선택하세요',
     userAgentTips: '기본 시스템 브라우저 UA',
     selectBuildMethod: '빌드 방법 선택',
+    savePath: '저장 경로',
+    savePathTips: '클릭하여 선택하고 기본적으로 다운로드 디렉토리에 저장합니다',
 }
