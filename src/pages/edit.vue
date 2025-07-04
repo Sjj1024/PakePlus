@@ -1619,9 +1619,11 @@ const easyLocal = async () => {
         targetName = store.currentProject.showName
     }
     // build local
+    console.log('store.currentProject.more.windows', store.currentProject.name)
     // store.currentProject.isHtml && store.currentProject.htmlPath
     invoke('build_local', {
         targetDir: targetDir,
+        projectName: store.currentProject.name,
         exeName: targetName,
         config: store.currentProject.more.windows,
         base64Png:

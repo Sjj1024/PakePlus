@@ -58,6 +58,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
             }
         }
     }
+    let mut store_name = "app_data.json".to_string();
     let mut config: WindowConfig = serde_json::from_value(json_value).unwrap();
     // load man
     let startup_dir = get_exe_dir(true);
@@ -74,6 +75,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         let www_dir_str = www_dir.unwrap();
         man_config.window.label = "main".to_string();
         man_config.window.visible = false;
+        store_name = format!("{}.json", man_config.name.as_str());
         if www_dir_str.len() > 0 {
             man_config.window.url = WebviewUrl::External(Url::parse(&www_dir_str).unwrap());
         }
@@ -100,7 +102,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         .initialization_script(contents.as_str())
         .build()
         .unwrap();
-    let store = app.store("app_data.json").unwrap();
+    let store = app.store(store_name).unwrap();
     // store.clear();
     let window_size: Option<serde_json::Value> = store.get("window_size");
     let mut width = 0.0;

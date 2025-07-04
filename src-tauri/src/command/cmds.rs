@@ -898,6 +898,7 @@ pub async fn linux_build(
 pub async fn build_local(
     handle: AppHandle,
     target_dir: &str,
+    project_name: &str,
     exe_name: &str,
     config: WindowConfig,
     base64_png: String,
@@ -917,6 +918,7 @@ pub async fn build_local(
         serde_json::from_str::<serde_json::Value>(&man_json).expect("parse man.json failed");
     man_json["window"] = serde_json::to_value(config).unwrap();
     man_json["debug"] = serde_json::to_value(debug).unwrap();
+    man_json["name"] = serde_json::to_value(project_name).unwrap();
     #[cfg(target_os = "windows")]
     {
         man_json["icon"] =
