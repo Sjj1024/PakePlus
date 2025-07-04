@@ -73,6 +73,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         let www_dir = get_www_dir(&startup_dir);
         let www_dir_str = www_dir.unwrap();
         man_config.window.label = "main".to_string();
+        man_config.window.visible = false;
         if www_dir_str.len() > 0 {
             man_config.window.url = WebviewUrl::External(Url::parse(&www_dir_str).unwrap());
         }
