@@ -869,11 +869,13 @@ pub async fn macos_build(
     sleep(Duration::from_secs(10)).await;
     let man_path = base_path.join("Contents/MacOS/config/man");
     fs::write(man_path, config).expect("write man failed");
-    let _ = png_to_icns(
-        base64_png.replace("data:image/png;base64,", ""),
-        resources_dir.to_str().unwrap().to_string(),
-    )
-    .expect("convert png to icns failed");
+    if !base64_png.is_empty() {
+        let _ = png_to_icns(
+            base64_png.replace("data:image/png;base64,", ""),
+            resources_dir.to_str().unwrap().to_string(),
+        )
+        .expect("convert png to icns failed");
+    }
     let base_app = Path::new(base_dir).join(format!("{}.app", exe_name));
     if base_app.exists() {
         fs::remove_dir_all(&base_app).expect("delete old app failed");
@@ -921,8 +923,10 @@ pub async fn build_local(
     man_json["name"] = serde_json::to_value(project_name).unwrap();
     #[cfg(target_os = "windows")]
     {
-        man_json["icon"] =
-            serde_json::to_value(base64_png.replace("data:image/png;base64,", "")).unwrap();
+        if !base64_png.is_empty() {
+            man_json["icon"] =
+                serde_json::to_value(base64_png.replace("data:image/png;base64,", "")).unwrap();
+        }
     }
     let man_json_base64 = BASE64_STANDARD.encode(man_json.to_string());
     handle.emit("local-progress", "40").unwrap();
