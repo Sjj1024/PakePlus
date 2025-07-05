@@ -23,10 +23,11 @@ export const fileSizeLimit = import.meta.env.VITE_FILE_LIMIT_SIZE * 1024 * 1024
 export const fileLimitNumber = import.meta.env.VITE_FILE_LIMIT_NUMBER
 
 // pay info
-export const basePAYJSURL = import.meta.env.VITE_PAYJS_DOMAIN
+export const ppApisDomain = import.meta.env.VITE_PPAPI_DOMAIN
+export const basePayjsUrl = import.meta.env.VITE_PAYJS_DOMAIN
 export const payJsMchid = import.meta.env.VITE_PAYJS_MCHID
 export const payJsSignKey = import.meta.env.VITE_PAYJS_SIGN_KEY
-export const baseYUNPAYURL = import.meta.env.VITE_YUNPAY_DOMAIN
+export const baseYunPayUrl = import.meta.env.VITE_YUNPAY_DOMAIN
 export const yunPayMchid = import.meta.env.VITE_YUNPAY_MCHID
 export const yunPaySignKey = import.meta.env.VITE_YUNPAY_SIGN_KEY
 export const rhExeUrl = import.meta.env.VITE_LOCAL_RHEXE

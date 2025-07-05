@@ -12,7 +12,8 @@
             "https://api.github.com/*",
             "https://payjs.cn/*",
             "https://zpayz.cn/*",
-            "https://api.pay.yungouos.com/*"
+            "https://api.pay.yungouos.com/*",
+            "https://apis.pakeplus.com/*"
         ]
     },
     "permissions": [
@@ -86,6 +87,9 @@
                 },
                 {
                     "url": "https://api.pay.yungouos.com/**"
+                },
+                {
+                    "url": "https://apis.pakeplus.com/**"
                 }
             ]
         },

@@ -645,6 +645,7 @@
                     <el-button @click="getPayJsCode('alipay')">
                         paypal
                     </el-button>
+                    <el-button @click="getPpApis"> ppapis </el-button>
                 </div>
                 <!-- plugin-os api -->
                 <div v-else-if="menuIndex === '2-14'" class="cardContent">
@@ -1146,8 +1147,8 @@ import Codes from '@/utils/codes'
 import {
     arrayBufferToBase64,
     base64PngToIco,
-    basePAYJSURL,
-    baseYUNPAYURL,
+    basePayjsUrl,
+    baseYunPayUrl,
     getPaySign,
     oneMessage,
     openSelect,
@@ -1561,12 +1562,23 @@ const getPayJsCode = async (payMathod: string = 'weixin') => {
                 `${encodeURIComponent(key)}=${encodeURIComponent(order[key])}`
         )
         .join('&')
-    const payUrl = basePAYJSURL + '/api/cashier?' + queryString
+    const payUrl = basePayjsUrl + '/api/cashier?' + queryString
     console.log('payUrl', payUrl)
     const url = await QRCode.toDataURL(payUrl)
     console.log('url', url)
     dialogVisible.value = true
     qrCodeData.value = url
+}
+
+// get ppapi json
+const getPpApis = async () => {
+    const response = await payApi.getPpApis()
+    console.log('response----', response)
+    if (response.status === 200) {
+        console.log('data----', response.data)
+    } else {
+        oneMessage.error(t('getPpApisError'))
+    }
 }
 
 // get yun pay code
