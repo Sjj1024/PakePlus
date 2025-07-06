@@ -27,7 +27,7 @@ export default defineConfig({
             themeConfig: {
                 // 基础配置
                 logo: {
-                    src: 'https://pakeplus.com/app.webp',
+                    src: './app.webp',
                     alt: 'PakePlus',
                 },
                 aside: true,
