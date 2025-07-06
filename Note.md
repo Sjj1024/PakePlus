@@ -20,9 +20,9 @@
 -   https://pakeplus.pages.dev
 -   https://pakeplus.netlify.app
 
-
 ### Document(使用文档)
 
-- https://www.pakeplus.com/guide/
-- https://ppofficial.netlify.app/guide/
-- https://sjj1024.github.io/PakePlus/guide/
+-   https://ppofficial.netlify.app/guide/
+-   https://sjj1024.github.io/PakePlus/guide/
+-   https://www.pakeplus.com/guide/
+-   https://pakeplus.vercel.app/guide/
