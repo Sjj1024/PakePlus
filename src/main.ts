@@ -12,8 +12,8 @@ import '@/assets/theme.css'
 import '@/assets/global.scss'
 import 'vue-cropper/dist/index.css'
 
-const pinia = createPinia()
 const app = createApp(App)
+const pinia = createPinia()
 app.use(pinia)
 app.use(router)
 app.use(i18n)
