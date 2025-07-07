@@ -361,4 +361,5 @@ export default {
     inputDownloadPath: '请输入下载地址或选择下载文件夹',
     userAgentTips: '默认系统浏览器UA',
     selectBuildMethod: '请选择打包方式',
+    pubNotes: '公告',
 }

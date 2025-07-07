@@ -356,4 +356,5 @@ export default {
     selectBuildMethod: '請選擇打包方式',
     savePath: '保存路徑',
     savePathTips: '點擊選擇，默認保存到下載目錄',
+    pubNotes: '公告',
 }

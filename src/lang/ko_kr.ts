@@ -386,4 +386,5 @@ export default {
     selectBuildMethod: '빌드 방법 선택',
     savePath: '저장 경로',
     savePathTips: '클릭하여 선택하고 기본적으로 다운로드 디렉토리에 저장합니다',
+    pubNotes: '공지사항',
 }
