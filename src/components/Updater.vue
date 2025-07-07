@@ -11,7 +11,7 @@
         <template #header>
             <div class="diaHeader">
                 <span>
-                    {{ store.ppnotes.show ? '公告' : t('updateTips') }}
+                    {{ store.ppnotes.show ? t('pubNotes') : t('updateTips') }}
                 </span>
             </div>
         </template>
