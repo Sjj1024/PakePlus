@@ -287,12 +287,12 @@ export const readDirRecursively = async (path: string): Promise<string[]> => {
     return fileList
 }
 
-// 是否为开发环境
+// is dev
 export const isDev = import.meta.env.DEV
 
 export const buildTime = import.meta.env.BUILD_TIME
 
-// 是否为tauri环境
+// is tauri
 export const isTauri = (window as any).__TAURI__ ? true : false
 
 // open url or file or path
@@ -303,11 +303,11 @@ export const openUrl = async (url: string) => {
     } else if (url) {
         window.open(url, '_blank')
     } else {
-        ElMessage.error('URL或文件路径不能为空')
+        ElMessage.error('URL or file path cannot be empty')
     }
 }
 
-// 是否为字母数字
+// is alphanumeric
 export const isAlphanumeric = (str: string) => {
     const regex = /^[a-zA-Z0-9]+$/
     return regex.test(str)
