@@ -1040,12 +1040,12 @@
                     <div class="cardBox">
                         <el-tooltip content="open debug" placement="bottom">
                             <el-button @click="debugHandler('open')">
-                                开启调试
+                                {{ t('openDebug') }}
                             </el-button>
                         </el-tooltip>
                         <el-tooltip content="close debug" placement="bottom">
                             <el-button @click="debugHandler('close')">
-                                关闭调试
+                                {{ t('closeDebug') }}
                             </el-button>
                         </el-tooltip>
                     </div>
