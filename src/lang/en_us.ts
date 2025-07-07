@@ -384,4 +384,5 @@ export default {
     selectBuildMethod: 'Please select build method',
     savePath: 'Save path',
     savePathTips: 'Click to select, default to download directory',
+    pubNotes: 'Announcement',
 }
