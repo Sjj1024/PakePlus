@@ -147,6 +147,7 @@ const updateInitRs = (isHtml, winState, winConfig) => {
     fs.writeFileSync(initRsPath, newInitRs)
     console.log('updateInitRs success')
 }
+
 // update lib.rs
 const updateLibRs = (single) => {
     console.log('updateLibRs......')
@@ -157,8 +158,8 @@ const updateLibRs = (single) => {
     const libRsPath = path.join(__dirname, '../src-tauri/src/lib.rs')
     const libRs = fs.readFileSync(libRsPath, 'utf-8')
     const newLibRs = libRs.replace(
-        '.plugin(tauri_plugin_opener::init())',
-        `.plugin(tauri_plugin_opener::init())
+        '.plugin(tauri_plugin_store::Builder::default().build())',
+        `.plugin(tauri_plugin_store::Builder::default().build())
         .plugin(tauri_plugin_single_instance::init(|app, _, _| {
                 utils::init::show_window(app);
             }))
