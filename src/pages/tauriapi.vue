@@ -980,6 +980,24 @@
                         <el-tooltip content="auto operation" placement="bottom">
                             <el-button>{{ t('autoOperation') }}</el-button>
                         </el-tooltip>
+                        <el-tooltip
+                            content="disable right click"
+                            placement="bottom"
+                        >
+                            <el-button>全局禁止右键</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="allow some right click"
+                            placement="bottom"
+                        >
+                            <el-button>允许部分右键</el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="enable right click"
+                            placement="bottom"
+                        >
+                            <el-button>允许右键</el-button>
+                        </el-tooltip>
                     </div>
                     <div class="codeDemo">
                         <h2>{{ t('removeWebElement') }}</h2>

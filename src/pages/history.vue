@@ -64,7 +64,11 @@
                         <span
                             v-else
                             class="copyLink"
-                            @click="downAssets(scope.row)"
+                            @click="
+                                isTauri
+                                    ? downAssets(scope.row)
+                                    : openUrl(scope.row.browser_download_url)
+                            "
                         >
                             {{ t('download') }}
                         </span>

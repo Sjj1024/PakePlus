@@ -102,4 +102,14 @@ document.body.appendChild(modal)
     modifyEle: `
 document.querySelector("#juejin > div.container.index-container > div > header > div > a > img.logo-img").src = "https://pakeplus.com/app.svg"
     `,
+    disableRightClick: `
+document.addEventListener('contextmenu', function(e) {
+  const target = e.target;
+  const isInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
+  const isContentEditable = target.isContentEditable;
+  if (!isInput && !isContentEditable) {
+    e.preventDefault();
+  }
+});
+    `
 }
