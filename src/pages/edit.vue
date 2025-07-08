@@ -581,7 +581,6 @@ import {
     fileLimitNumber,
     isDev,
     readStaticFile,
-    rhExeUrl,
     base64PngToIco,
     isAlphanumeric,
 } from '@/utils/common'
