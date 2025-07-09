@@ -382,18 +382,14 @@
                         autoCorrect="off"
                         spellCheck="false"
                         :placeholder="t('savePathTips')"
-                        @click="savePathHandle('select')"
+                        @click="savePathHandle('open')"
                     >
                         <template #append>
-                            <el-tooltip
-                                class="box-item"
-                                :content="t('staticFile')"
-                                placement="bottom"
-                            >
+                            <el-tooltip class="box-item" placement="bottom">
                                 <el-button
                                     class="distUpload"
                                     :icon="FolderOpened"
-                                    @click="savePathHandle('open')"
+                                    @click="savePathHandle('select')"
                                 />
                             </el-tooltip>
                         </template>
@@ -585,7 +581,6 @@ import {
     fileLimitNumber,
     isDev,
     readStaticFile,
-    rhExeUrl,
     base64PngToIco,
     isAlphanumeric,
 } from '@/utils/common'
