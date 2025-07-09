@@ -1577,14 +1577,13 @@ const easyLocal = async () => {
         // console.log('loadingText---', loadingText)
         loadingText(loadingState)
     }, 1000)
-    // if windows, down rh.exe
     // exe name
     let targetName = isAlphanumeric(store.currentProject.showName)
         ? store.currentProject.showName
         : store.currentProject.name
-    const targetExe = await join(targetDir, targetName, `${targetName}.exe`)
+    const appDataDirPath = await appDataDir()
+    const targetExe = await join(appDataDirPath, `${targetName}.exe`)
     if (platformName === 'windows') {
-        const appDataDirPath = await appDataDir()
         if (await exists(appDataDirPath)) {
             console.log('appDataDirPath exists')
         } else {
@@ -1641,10 +1640,7 @@ const easyLocal = async () => {
         .then(async (res) => {
             loadingText(t('buildSuccess'))
             // isAlphanumeric(store.currentProject.showName)
-            if (
-                platformName === 'windows' &&
-                !isAlphanumeric(store.currentProject.showName)
-            ) {
+            if (platformName === 'windows') {
                 const chinaExeName = await join(
                     targetDir,
                     targetName,
