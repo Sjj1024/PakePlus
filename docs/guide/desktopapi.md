@@ -204,17 +204,25 @@ webview.once('tauri://error', function (e) {
 
 ```js
 const { invoke } = window.__TAURI__.core
-
-if ('__TAURI__' in window) {
-    const hookClick = (e) => {
-        const origin = e.target.closest('a')
-        const isBaseTargetBlank = document.querySelector(
-            'head base[target="_blank"]'
-        )
-        invoke('open_url', { url: origin.href })
-    }
-    document.addEventListener('click', hookClick, { capture: true })
+const hookClick = (e) => {
+const origin = e.target.closest('a')
+const isBaseTargetBlank = document.querySelector(
+    'head base[target="_blank"]'
+)
+if (
+    (origin && origin.href && origin.target === '_blank') ||
+    (origin && origin.href && isBaseTargetBlank)
+) {
+    e.preventDefault()
+    invoke('open_url', { url: origin.href })
 }
+}
+
+window.open = function (url, target, features) {
+invoke('open_url', { url: url })
+}
+
+document.addEventListener('click', hookClick, { capture: true })
 ```
 
 ## 下载文件
