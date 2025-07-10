@@ -1613,7 +1613,7 @@ const easyLocal = async () => {
             await writeFile(icoPath, icoBlob)
             rhtarget = rhtarget.replace('app.ico', icoPath)
         } else {
-            rhtarget = rhtarget.split('[COMMANDS]')[0]
+            await copyFile(ppexePath, targetExe)
         }
         const rhscriptPath = await join(appDataDirPath, 'rhscript.txt')
         await writeTextFile(rhscriptPath, rhtarget)
