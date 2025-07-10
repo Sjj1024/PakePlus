@@ -385,7 +385,11 @@
                         @click="savePathHandle('open')"
                     >
                         <template #append>
-                            <el-tooltip class="box-item" placement="bottom">
+                            <el-tooltip
+                                class="box-item"
+                                placement="bottom"
+                                :content="t('savePath')"
+                            >
                                 <el-button
                                     class="distUpload"
                                     :icon="FolderOpened"
@@ -529,8 +533,8 @@ import {
     exists,
     remove,
     writeFile,
-    rename,
     mkdir,
+    copyFile,
 } from '@tauri-apps/plugin-fs'
 import {
     appCacheDir,
@@ -1646,7 +1650,8 @@ const easyLocal = async () => {
                     targetName,
                     `${store.currentProject.showName}.exe`
                 )
-                await rename(targetExe, chinaExeName)
+                await copyFile(targetExe, chinaExeName)
+                await remove(targetExe)
             }
             oneMessage.success(t('localSuccess'))
             buildLoading.value = false
