@@ -558,6 +558,7 @@ import {
     FolderOpened,
     ReadingLamp,
 } from '@element-plus/icons-vue'
+import ppIcon from '@/assets/images/pakeplus.png'
 import CutterImg from '@/components/CutterImg.vue'
 import CodeEdit from '@/components/CodeEdit.vue'
 import { useI18n } from 'vue-i18n'
@@ -587,6 +588,7 @@ import {
     readStaticFile,
     base64PngToIco,
     isAlphanumeric,
+    imageToBase64,
 } from '@/utils/common'
 import { arch, platform } from '@tauri-apps/plugin-os'
 import { getCurrentWindow } from '@tauri-apps/api/window'
@@ -611,11 +613,12 @@ const file = ref<any>(null)
 
 const distInput = ref<any>(null)
 const jsFileContents = ref('')
-const jsSelOptions: any = ref<any>([])
+// const jsSelOptions: any = ref<any>([])
 const configDialogVisible = ref(false)
 const codeDialogVisible = ref(false)
 const imgPreviewVisible = ref(false)
 const warning = ref('')
+// platform name and arch name
 const platformName = isTauri ? platform() : 'web'
 const archName = isTauri ? arch() : 'web'
 
@@ -1636,6 +1639,10 @@ const easyLocal = async () => {
                 : store.currentProject.iconRound
                 ? await cropImageToRound(roundIcon.value, 50)
                 : iconBase64.value
+            : platformName === 'macos'
+            ? store.currentProject.iconRound
+                ? await cropImageToRound(await imageToBase64(ppIcon), 50)
+                : await imageToBase64(ppIcon)
             : '',
         debug: store.currentProject.desktop.debug,
         customJs: await getInitializationScript(true),
