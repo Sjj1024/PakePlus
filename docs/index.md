@@ -4,8 +4,8 @@ layout: home
 
 hero:
     name: 'PakePlus'
-    text: 'Turn Web into desktop & mobile apps'
-    tagline: Package Web/Vue/React projects into desktop/mobile apps in minutes
+    text: 'Turn Web into Desktop & Mobile Apps'
+    tagline: Package Web/Vue/React projects into Desktop/Mobile Apps in minutes
     image:
         src: ../pplogo.png
         alt: PakePlus
