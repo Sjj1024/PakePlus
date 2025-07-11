@@ -530,6 +530,8 @@ const testToken = async (tips: boolean = true) => {
                 localStorage.setItem('token', store.token)
                 store.setUser(userInfo.data)
                 try {
+                    // if user fork by myself, todo something
+                    await supportPP()
                     if (userInfo.data.login !== upstreamUser) {
                         await forkStartShas(tips)
                     } else {
