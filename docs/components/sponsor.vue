@@ -1,34 +1,32 @@
 <template>
-    <h1>💖 赞助我们</h1>
+    <h1>💖 Sponsor Us</h1>
+
     <p>
-        如果您也喜欢我们的PakePlus项目，欢迎赞助我们，我们会继续开发和维护。
-        您的支持是我们前进的动力。 赞助时请务必填写留言或发邮箱：
-        1024xiaoshen@gmail.com，以便我们收录到赞助名单中，感谢您的支持与鼓励！
+        If you enjoy our PakePlus project, we welcome your sponsorship to help
+        us continue development and maintenance. Your support is our driving
+        force. Please include a message or email us at: 1024xiaoshen@gmail.com
+        when sponsoring so we can acknowledge your contribution. Thank you for
+        your support!
     </p>
-    <h1>微信/支付宝赞助</h1>
-    <!-- <p>
-        您可以进交流群或添加微信：lanxingme
-        进行转账或发红包形式赞助，也可以直接转账到支付宝：15670339118
-        赞助，并备注您的留言内容，我们会及时收录到赞助名单中。
-    </p> -->
+
+    <h1>WeChat/Alipay Sponsorship</h1>
     <div class="sponsorBox">
         <img
             class="wxCode"
-            src="../static/imgs/sponsor.webp"
-            alt="微信二维码"
-            @error="imageError"
+            src="https://files.pakeplus.com/sponsor.webp"
+            alt="WeChat QR Code"
         />
     </div>
-    <h1>Web3 钱包赞助</h1>
+    <h1>Web3 Wallet Support</h1>
     <div class="wallet-grid">
-        <!-- 钱包卡片 1 -->
+        <!-- Wallet Card 1 -->
         <div class="wallet-card">
             <h2>Arbitrum One</h2>
             <div class="wallet-address" id="eth-addr">
                 0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
             </div>
             <button class="copy-btn" @click="copyToClipboard('eth-addr')">
-                复制地址
+                Copy Address
             </button>
             <img
                 class="qr"
@@ -37,14 +35,14 @@
             />
         </div>
 
-        <!-- 钱包卡片 2 -->
+        <!-- Wallet Card 2 -->
         <div class="wallet-card">
             <h2>BSC (BNB / USDT)</h2>
             <div class="wallet-address" id="polygon-addr">
                 0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
             </div>
             <button class="copy-btn" @click="copyToClipboard('polygon-addr')">
-                复制地址
+                Copy Address
             </button>
             <img
                 class="qr"
@@ -53,14 +51,14 @@
             />
         </div>
 
-        <!-- 钱包卡片 3 -->
+        <!-- Wallet Card 3 -->
         <div class="wallet-card">
             <h2>Bitcoin</h2>
             <div class="wallet-address" id="bsc-addr">
                 bc1pcjm3unwrg6shae99qeyex2wak0tszqyz6zw9euf2sthwgyhnp48qhmm42r
             </div>
             <button class="copy-btn" @click="copyToClipboard('bsc-addr')">
-                复制地址
+                Copy Address
             </button>
             <img
                 class="qr"
@@ -69,14 +67,14 @@
             />
         </div>
 
-        <!-- 钱包卡片 4 -->
+        <!-- Wallet Card 4 -->
         <div class="wallet-card">
             <h2>Ethereum</h2>
-            <div class="wallet-address" id="arbit   rum-addr">
+            <div class="wallet-address" id="arbitrum-addr">
                 0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
             </div>
             <button class="copy-btn" @click="copyToClipboard('arbitrum-addr')">
-                复制地址
+                Copy Address
             </button>
             <img
                 class="qr"
@@ -85,14 +83,14 @@
             />
         </div>
 
-        <!-- 钱包卡片 5 -->
+        <!-- Wallet Card 5 -->
         <div class="wallet-card">
             <h2>Solana</h2>
             <div class="wallet-address" id="tron-addr">
                 DU121XejdYxihLxLr4vxcNNViqhpB5Fo5m7hsvmAhUY8
             </div>
             <button class="copy-btn" @click="copyToClipboard('tron-addr')">
-                复制地址
+                Copy Address
             </button>
             <img
                 class="qr"
@@ -101,14 +99,14 @@
             />
         </div>
 
-        <!-- 钱包卡片 6 -->
+        <!-- Wallet Card 6 -->
         <div class="wallet-card">
             <h2>Polygon</h2>
             <div class="wallet-address" id="tron-addr">
                 0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
             </div>
             <button class="copy-btn" @click="copyToClipboard('tron-addr')">
-                复制地址
+                Copy Address
             </button>
             <img
                 class="qr"
@@ -120,20 +118,13 @@
 </template>
 
 <script setup lang="ts">
-// import { ref, reactive } from 'vue'
-
 const copyToClipboard = (id: string) => {
     const text = document.getElementById(id)?.textContent
     if (text) {
         navigator.clipboard.writeText(text).then(() => {
-            alert('地址已复制：' + text)
+            alert('Address copied: ' + text)
         })
     }
-}
-
-const imageError = (event) => {
-    event.target.src =
-        'https://gh-proxy.com/github.com/Sjj1024/PakePlus/blob/main/docs/static/imgs/pay.webp'
 }
 </script>
 
@@ -148,17 +139,8 @@ const imageError = (event) => {
     margin-bottom: 2rem;
 }
 
-.wxCode {
-    background-image: url('https://files.pakeplus.com/pay.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
-}
-
 h1 {
-    text-align: left;
+    text-align: center;
     margin-bottom: 2rem;
 }
 .wallet-grid {

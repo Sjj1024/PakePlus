@@ -1,7 +1,8 @@
-# 赞助者列表
+# List of Sponsors
 
-非常感谢大家的支持与鼓励！是你们的支持，才让开源更加美好。  
-赞助者名单并没统计完整...等后续手动更新
+Thank you very much for your support and encouragement! It is your support that makes open source even better.   
+The list of sponsors is not complete .. Wait for manual updates later
+
 
 <Payer />
 

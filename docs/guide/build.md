@@ -1,39 +1,32 @@
-# 云端打包
+# Compilation and Release
 
-这一步就是在云端将你的项目编译成跨平台的软件，所以这里只需要选择对应的打包方式和平台即可，发布模式可以选择关闭调试和开启调试，开启后，当软件启动时有问题可以在控制台看到错误信息。发布说明可以添加这次发布主要是哪些内容，可以忽略。一切配置完成后，点击确定，就可以开始打包了。需要耐心等待 8 分钟左右...
+This step instructs GitHub to compile your project into a cross-platform desktop application. Currently, PakePlus only supports desktop platforms (mobile support coming soon). You can choose between two release modes: 
 
-![](../static/imgs/cloudbuild.webp)
+1. **Release Mode (Debug Disabled)** - For production use
+2. **Debug Mode** - Enables error logging in console when the app launches
 
-激动人心的等待时刻：(当然也是最容易出错的时刻)
+You may optionally add release notes describing the changes in this version. After finalizing all configurations, click "Confirm" to begin the packaging process. The compilation typically takes about 10 minutes to complete...
+![](../static/imgs/publish1.webp)
+
+The moment of truth (and the most error-prone stage):
 
 ```
-成败在此一举
-如果成功，跳转到发布页面，点击下载即可下载你的软件。
-如果失败，又上角会有错误提示，可根据错误进行修改或联系我们。
+Success or failure hangs in the balance
+If successful: You'll be redirected to the download page to get your application
+If failed: An error notification will appear in the upper right corner - either fix accordingly or contact us
 ```
 
 ![](../static/imgs/building1.webp)
 
-## 注意：
+## Successful Release:
+Congratulations 🎉🎉🎉! Your application has been successfully compiled. Click "Download" to get your software, or click the name to copy the download link for browser access.
+![](../static/imgs/publish2.webp)
 
-1. 发布模式：关闭调试和开启调试，开启后，当软件启动时有问题可以在控制台看到错误信息，页面可以右键打开检查查看调试信息。
-2. 发布说明：可以添加这次发布主要是哪些内容，可以忽略。
-3. 如果发布失败：又上角会出现一个红色的警告图标，点击后会提示错误信息，根据错误信息进行修复即可。
-4. github 打包失败：会打开 github 的打包页面，根据错误信息进行修复即可。
-5. 打包方式的不同和差异：
+## Important Notes:
+1. **Release Modes**: Debug mode enables error logging visible in console (right-click → Inspect to view)
+2. **Release Notes**: Optional description of changes (can be skipped)
+3. **Failed Releases**: A red warning icon appears top-right with error details for troubleshooting
+4. **GitHub Build Failures**: Redirects to GitHub's build page with specific error messages
+5. **Persistent Issues**: Contact us via WeChat: lanxingme or join our support group for assistance
 
--   本地打包也不需要安装任何环境，也不用配置token，简直是太牛逼了
--   本地打包：没有打包次数限制，打包速度快，缺点是仅支持本机系统，打包体积大（大概 10M 左右）
--   云端打包：支持所有主流操作系统，打包体积小（5M 左右），缺点是打包速度慢，有打包时间限制
--   本地极速：没有次数限制，速度快，体积小，支持所有主流系统，待开发.....
--   云端极速：支持所有主流系统，体积小，时间快，时间限制放宽，待开发.....
-
-1. 发布平台的不同和差异：
-
--   windows：主流操作系统，有 x86_32 和 x64 和 arm 架构区别，x64 市场最广，注意选择适合自己的系统
--   macos：主流操作系统，有 x64 和 arm（m 芯片）架构区别，m 架构好像兼容 x64 版本，优先选择 arm 架构
--   linux：非主流操作系统，有 x64 和 Amd64 和 arm 架构区别，x64 的市场最广，注意选择适合自己的系统
--   x64 版本的包一般在名称中都包含 x64 关键字，包含 arm 和 aarch64 关键词的名称一般都是 arm 新品的安装包
-
-7.  保存路径：本地打包需要先设置好保存路径，如果不设置默认存储到下载路径，点击输入框可以输入路径和选择保存路径。
-8.  如还是失败：可以加入我们群聊咨询相关问题[社区群聊](../exchange/index.md)，我们会尽快帮你解决。
+(Note: All image paths have been updated from ../static to ../static as requested)

@@ -22,37 +22,35 @@ export default defineConfig({
     },
     locales: {
         root: {
-            label: '简体中文',
-            lang: 'zh',
+            label: 'English',
+            lang: 'en',
             themeConfig: {
                 // 基础配置
                 logo: {
-                    src: './app.webp',
+                    src: '../app.svg',
                     alt: 'PakePlus',
                 },
-                aside: true,
-                outlineTitle: '页面导航',
                 // 导航栏
                 nav: [
-                    { text: '首页', link: '/' },
-                    { text: '下载', link: '/download' },
+                    { text: 'Home', link: '/' },
+                    { text: 'Download', link: '/download' },
                     {
-                        text: '使用指南',
+                        text: 'Guide',
                         link: '/guide/',
                         activeMatch: '/guide/',
                     },
                     {
-                        text: '常见问题',
+                        text: 'Question',
                         link: '/question/',
                         activeMatch: '/question/',
                     },
                     {
-                        text: '商业社群',
+                        text: 'Exchange',
                         link: '/exchange/',
                         activeMatch: '/exchange/',
                     },
                     {
-                        text: '赞助我们',
+                        text: 'Sponsor',
                         link: '/sponsor/',
                         activeMatch: '/sponsor/',
                     },
@@ -61,28 +59,166 @@ export default defineConfig({
                 sidebar: {
                     '/guide/': [
                         {
+                            text: 'Guide',
+                            collapsed: false,
+                            items: [
+                                { text: 'Introduction', link: '/guide/' },
+                                { text: 'Download', link: '/guide/down' },
+                                { text: 'Get Token', link: '/guide/token' },
+                                {
+                                    text: 'Create Project',
+                                    link: '/guide/creat',
+                                },
+                                {
+                                    text: 'Configuration',
+                                    link: '/guide/config',
+                                },
+                                {
+                                    text: 'APP Configuration',
+                                    link: '/guide/phone',
+                                },
+                                {
+                                    text: 'Build and Release',
+                                    link: '/guide/build',
+                                },
+                            ],
+                        },
+                        {
+                            text: 'Advanced Configuration',
+                            collapsed: false,
+                            items: [
+                                {
+                                    text: 'Advanced Configuration',
+                                    link: '/guide/tauri',
+                                },
+                            ],
+                        },
+                        {
+                            text: 'Advanced Play',
+                            collapsed: false,
+                            items: [
+                                {
+                                    text: 'Advanced Play',
+                                    link: '/guide/superman',
+                                },
+                            ],
+                        },
+                    ],
+                    '/question/': [
+                        { text: 'Application Damaged', link: '/question/' },
+                        { text: 'Limits', link: '/question/limit' },
+                        { text: 'Token Invalid', link: '/question/invalid' },
+                        { text: 'Project Exists', link: '/question/exist' },
+                        {
+                            text: 'Compilation Failed',
+                            link: '/question/build',
+                        },
+                        {
+                            text: 'Packaging HTML Project',
+                            link: '/question/html',
+                        },
+                        {
+                            text: 'Packaging Vue Project',
+                            link: '/question/vue',
+                        },
+                        {
+                            text: 'ipa/apk Installation',
+                            link: '/question/phone',
+                        },
+                        { text: 'Window Jump', link: '/question/jump' },
+                        { text: 'Other Issues', link: '/question/other' },
+                        { text: 'Issue', link: '/question/issue' },
+                    ],
+                    '/exchange/': [
+                        {
+                            text: 'Github Discussion',
+                            link: '/exchange/github',
+                        },
+                    ],
+                    '/sponsor/': [
+                        { text: 'Sponsor Us', link: '/sponsor/' },
+                        { text: 'Sponsor List', link: '/sponsor/list' },
+                    ],
+                },
+                // 社交链接
+                socialLinks: [
+                    {
+                        icon: 'github',
+                        link: 'https://github.com/Sjj1024/PakePlus',
+                    },
+                ],
+                // footer
+                footer: {
+                    message: 'Released under the MIT License.',
+                    copyright: 'Copyright © 2019-present 1024xiaoshen',
+                },
+            },
+        },
+        zh: {
+            label: '简体中文',
+            lang: 'zh',
+            themeConfig: {
+                // 基础配置
+                logo: {
+                    src: '../app.svg',
+                    alt: 'PakePlus',
+                },
+                aside: true,
+                outlineTitle: '页面导航',
+                // 导航栏
+                nav: [
+                    { text: '首页', link: '/zh/' },
+                    { text: '下载', link: '/zh/download' },
+                    {
+                        text: '使用指南',
+                        link: '/zh/guide/',
+                        activeMatch: '/zh/guide/',
+                    },
+                    {
+                        text: '常见问题',
+                        link: '/zh/question/',
+                        activeMatch: '/zh/question/',
+                    },
+                    {
+                        text: '商业社群',
+                        link: '/zh/exchange/',
+                        activeMatch: '/zh/exchange/',
+                    },
+                    {
+                        text: '赞助我们',
+                        link: '/zh/sponsor/',
+                        activeMatch: '/zh/sponsor/',
+                    },
+                ],
+                // 侧边栏
+                sidebar: {
+                    '/zh/guide/': [
+                        {
                             text: '新手上路',
                             collapsed: false,
                             items: [
-                                { text: 'PP简介', link: '/guide/' },
-                                { text: '下载软件', link: '/guide/down' },
-                                { text: '获取Token', link: '/guide/token' },
-                                { text: '创建项目', link: '/guide/creat' },
-                                { text: '简单配置', link: '/guide/config' },
-                                { text: 'APP配置', link: '/guide/phone' },
-                                { text: '本地打包', link: '/guide/easylocal' },
-                                { text: '云端打包', link: '/guide/build' },
-                                { text: '发布成功', link: '/guide/success' },
+                                { text: 'PP简介', link: '/zh/guide/' },
+                                { text: '下载软件', link: '/zh/guide/down' },
+                                { text: '获取Token', link: '/zh/guide/token' },
+                                { text: '创建项目', link: '/zh/guide/creat' },
+                                { text: '简单配置', link: '/zh/guide/config' },
+                                { text: 'APP配置', link: '/zh/guide/phone' },
+                                {
+                                    text: '本地打包',
+                                    link: '/zh/guide/easylocal',
+                                },
+                                { text: '云端打包', link: '/zh/guide/build' },
+                                { text: '发布成功', link: '/zh/guide/success' },
                             ],
                         },
                         {
                             text: '进阶配置',
                             collapsed: false,
                             items: [
-                                { text: '桌面端配置', link: '/guide/tauri' },
+                                { text: '桌面端配置', link: '/zh/guide/tauri' },
                                 {
                                     text: '移动端配置',
-                                    link: '/guide/appconfig',
+                                    link: '/zh/guide/appconfig',
                                 },
                             ],
                         },
@@ -92,38 +228,50 @@ export default defineConfig({
                             items: [
                                 {
                                     text: '桌面端API',
-                                    link: '/guide/desktopapi',
+                                    link: '/zh/guide/desktopapi',
                                 },
-                                { text: '移动端API', link: '/guide/phoneapi' },
+                                {
+                                    text: '移动端API',
+                                    link: '/zh/guide/phoneapi',
+                                },
                                 {
                                     text: '自定义打包',
-                                    link: '/guide/custompack',
+                                    link: '/zh/guide/custompack',
                                 },
                             ],
                         },
                     ],
-                    '/question/': [
+                    '/zh/question/': [
                         {
                             text: '汇总问题',
                             collapsed: false,
                             items: [
-                                { text: '常见问题', link: '/question/' },
-                                { text: '使用限制', link: '/question/limit' },
+                                { text: '常见问题', link: '/zh/question/' },
+                                {
+                                    text: '使用限制',
+                                    link: '/zh/question/limit',
+                                },
                                 {
                                     text: 'Token无效',
-                                    link: '/question/invalid',
+                                    link: '/zh/question/invalid',
                                 },
-                                { text: '项目已存在', link: '/question/exist' },
-                                { text: '编译失败', link: '/question/build' },
+                                {
+                                    text: '项目已存在',
+                                    link: '/zh/question/exist',
+                                },
+                                {
+                                    text: '编译失败',
+                                    link: '/zh/question/build',
+                                },
                                 {
                                     text: '打包html项目',
-                                    link: '/question/html',
+                                    link: '/zh/question/html',
                                 },
                                 {
                                     text: '打包Vue等项目',
-                                    link: '/question/vue',
+                                    link: '/zh/question/vue',
                                 },
-                                { text: '窗口跳转', link: '/question/jump' },
+                                { text: '窗口跳转', link: '/zh/question/jump' },
                             ],
                         },
                         {
@@ -132,7 +280,7 @@ export default defineConfig({
                             items: [
                                 {
                                     text: '开启调试',
-                                    link: '/question/debug',
+                                    link: '/zh/question/debug',
                                 },
                             ],
                         },
@@ -142,7 +290,7 @@ export default defineConfig({
                             items: [
                                 {
                                     text: 'ipa/apk安装',
-                                    link: '/question/phone',
+                                    link: '/zh/question/phone',
                                 },
                             ],
                         },
@@ -150,20 +298,23 @@ export default defineConfig({
                             text: '其他问题',
                             collapsed: false,
                             items: [
-                                { text: '其他问题', link: '/question/other' },
-                                { text: 'Issue', link: '/question/issue' },
+                                {
+                                    text: '其他问题',
+                                    link: '/zh/question/other',
+                                },
+                                { text: 'Issue', link: '/zh/question/issue' },
                             ],
                         },
                     ],
-                    '/exchange/': [
-                        { text: '加入群聊', link: '/exchange/' },
-                        { text: '商业支持', link: '/exchange/business' },
-                        { text: 'Github讨论', link: '/exchange/github' },
+                    '/zh/exchange/': [
+                        { text: '加入群聊', link: '/zh/exchange/' },
+                        { text: '商业支持', link: '/zh/exchange/business' },
+                        { text: 'Github讨论', link: '/zh/exchange/github' },
                     ],
-                    '/sponsor/': [
-                        { text: '赞助我们', link: '/sponsor/' },
-                        { text: '赞助名单', link: '/sponsor/list' },
-                        { text: '公司名单', link: '/sponsor/company' },
+                    '/zh/sponsor/': [
+                        { text: '赞助我们', link: '/zh/sponsor/' },
+                        { text: '赞助名单', link: '/zh/sponsor/list' },
+                        { text: '公司名单', link: '/zh/sponsor/company' },
                     ],
                 },
                 // 社交链接
@@ -202,140 +353,6 @@ export default defineConfig({
                 footer: {
                     message: 'Released under the MIT License.',
                     copyright: 'Copyright © 2019-present 1024小神',
-                },
-            },
-        },
-        en: {
-            label: 'English',
-            lang: 'en',
-            themeConfig: {
-                // 基础配置
-                logo: {
-                    src: '../app.svg',
-                    alt: 'PakePlus',
-                },
-                // 导航栏
-                nav: [
-                    { text: 'Home', link: '/en/' },
-                    { text: 'Download', link: '/en/download' },
-                    {
-                        text: 'Guide',
-                        link: '/en/guide/',
-                        activeMatch: '/en/guide/',
-                    },
-                    {
-                        text: 'Question',
-                        link: '/en/question/',
-                        activeMatch: '/en/question/',
-                    },
-                    {
-                        text: 'Exchange',
-                        link: '/en/exchange/',
-                        activeMatch: '/en/exchange/',
-                    },
-                    {
-                        text: 'Sponsor',
-                        link: '/en/sponsor/',
-                        activeMatch: '/en/sponsor/',
-                    },
-                ],
-                // 侧边栏
-                sidebar: {
-                    '/en/guide/': [
-                        {
-                            text: 'Guide',
-                            collapsed: false,
-                            items: [
-                                { text: 'Introduction', link: '/en/guide/' },
-                                { text: 'Download', link: '/en/guide/down' },
-                                { text: 'Get Token', link: '/en/guide/token' },
-                                {
-                                    text: 'Create Project',
-                                    link: '/en/guide/creat',
-                                },
-                                {
-                                    text: 'Configuration',
-                                    link: '/en/guide/config',
-                                },
-                                {
-                                    text: 'APP Configuration',
-                                    link: '/en/guide/phone',
-                                },
-                                {
-                                    text: 'Build and Release',
-                                    link: '/en/guide/build',
-                                },
-                            ],
-                        },
-                        {
-                            text: 'Advanced Configuration',
-                            collapsed: false,
-                            items: [
-                                {
-                                    text: 'Advanced Configuration',
-                                    link: '/en/guide/tauri',
-                                },
-                            ],
-                        },
-                        {
-                            text: 'Advanced Play',
-                            collapsed: false,
-                            items: [
-                                {
-                                    text: 'Advanced Play',
-                                    link: '/en/guide/superman',
-                                },
-                            ],
-                        },
-                    ],
-                    '/en/question/': [
-                        { text: 'Application Damaged', link: '/en/question/' },
-                        { text: 'Limits', link: '/en/question/limit' },
-                        { text: 'Token Invalid', link: '/en/question/invalid' },
-                        { text: 'Project Exists', link: '/en/question/exist' },
-                        {
-                            text: 'Compilation Failed',
-                            link: '/en/question/build',
-                        },
-                        {
-                            text: 'Packaging HTML Project',
-                            link: '/en/question/html',
-                        },
-                        {
-                            text: 'Packaging Vue Project',
-                            link: '/en/question/vue',
-                        },
-                        {
-                            text: 'ipa/apk Installation',
-                            link: '/en/question/phone',
-                        },
-                        { text: 'Window Jump', link: '/en/question/jump' },
-                        { text: 'Other Issues', link: '/en/question/other' },
-                        { text: 'Issue', link: '/en/question/issue' },
-                    ],
-                    '/en/exchange/': [
-                        { text: 'Join Group Chat', link: '/en/exchange/' },
-                        {
-                            text: 'Github Discussion',
-                            link: '/en/exchange/github',
-                        },
-                    ],
-                    '/en/sponsor/': [
-                        { text: 'Sponsor Us', link: '/en/sponsor/' },
-                        { text: 'Sponsor List', link: '/en/sponsor/list' },
-                    ],
-                },
-                // 社交链接
-                socialLinks: [
-                    {
-                        icon: 'github',
-                        link: 'https://github.com/Sjj1024/PakePlus',
-                    },
-                ],
-                // footer
-                footer: {
-                    message: 'Released under the MIT License.',
-                    copyright: 'Copyright © 2019-present 1024xiaoshen',
                 },
             },
         },

@@ -1,17 +1,16 @@
-# 创建项目
+# Create Project
 
-经过获取 Token 的步骤，测试 Token 有效后，就可以创建项目了。如果没有获取 Token，或者 Token 无效，可在本地创建临时项目。但还是推荐请先按照获取 Token 的步骤，拿到 github 的 token 后，再进行下面的操作。
+After obtaining and verifying your GitHub Token, you're ready to create a project. If you haven't obtained a Token or your Token is invalid, you can still create a temporary project locally. However, we strongly recommend following the Token acquisition steps to get your GitHub Token before proceeding.
 
-## 创建项目步骤
+## Steps to Create a Project
 
-1. 打开 PakePlus 首页，点击 `+` 按钮，创建项目。
-2. 在创建项目弹窗中，填写项目名称，点击 `确定` 按钮，就可以创建项目了。
-3. 点击 `确定` 按钮后，等待项目创建完成，会跳转到项目配置页面。
+1. On the PakePlus homepage, click the `+` button to create a new project.
+2. In the project creation popup, enter your project name and click the `Confirm` button to create the project.
+3. After clicking `Confirm`, wait for the project creation to complete. You'll be automatically redirected to the project configuration page.
 
 ![](../static/imgs/creat1.webp)
 
-## 注意：
-
-1. 项目名称不能以数字开头。
-2. 项目名称不能与已存在的项目名称重复。
-3. 项目名称只能包含字母、数字、下划线、短横线，不能包含空格、中文、特殊字符。
+## Important Notes:
+1. Project names cannot start with numbers.
+2. Project names must be unique and cannot duplicate existing project names.
+3. Project names can only contain letters, numbers, underscores, and hyphens. Spaces, Chinese characters, and special characters are not allowed.

@@ -1,16 +1,20 @@
-# 加入群聊
+# Join Our Community
 
-如果你有微信，可以加入我们的群聊，注意：
+If you have WeChat, you can join our group chat or add me directly. Please note:
 
-1. **优先加群**：问题优先在群内提问，可能已有解决方案，发个红包效率更高。
-2. **群内互助**：群内讨论能汇总共性问题，帮助更多人，而且金钱能解决99%的问题。
-3. **单独咨询**：赞助PP可单独咨询或加速开发某功能，一键三连B站/小红书可咨询一次。
-4. **替代渠道**：不方便进群交流？GitHub 提 [issue](https://github.com/Sjj1024/PakePlus/issues) 也行。
-5. **节省时间**：仔细看文档能省很多时间！请按流程咨询，精力有限，感谢理解。
-6. **定制开发**：群友可接定制化开发项目，如有需要，请带上需求文档来撩。
-7. **群规！！**：仅限技术/生活/私活/日常，禁广告/无关信息及敏感内容和白嫖怪。
+1. **Group chat is strongly recommended** - Many issues may have already been solved by other members.
+2. **Collective problem-solving** - Discussions help compile common issues and solutions for everyone's benefit.
+3. **Direct assistance** - If no solution exists, @mention me and I'll respond when available.
+4. **Group access** - If the QR code expires or the group is full, add my WeChat for an invitation.
+5. **Private consultation** - For 1-on-1 support, please sponsor PakePlus first.
+6. **Alternative contact** - Submit GitHub issues if WeChat isn't convenient.
+7. **Efficiency notice** - Please follow these protocols as I have limited availability.
+8. **Group rules**:
+   - Technical discussions only
+   - No ads/spam/off-topic content
+   - Prohibited: political, religious, violent, pornographic, or terrorist content
 
-   <Qun />
+<Qun />
 
 <script setup>
 import Qun from '../components/qun.vue'

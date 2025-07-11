@@ -1,42 +1,15 @@
-# APP 配置
+# Mobile App Configuration
 
-手机 APP 暂时只支持 Android 和 iOS 系统，后面可能会迭代开发支持更多系统。
-
-<BiliBili src="//player.bilibili.com/player.html?isOutside=true&aid=114591589731347&bvid=BV1wb75zrEBh&cid=30216618986&p=1"/>
-
-点击软件配置界面右上角的手机图标，即可进入移动端配置界面。
-
+Click the phone icon in the upper right corner of the software configuration interface to enter the mobile configuration page.
 ![](../static/imgs/phone1.webp)
 
-移动端配置与桌面端配置类似，后续会支持更多平台。
-以界面上展示的配置为准，因为正在开发移动端的配置，所以会有一些配置项还没有完善。
-移动端暂只支持打包 web 网站，不支持静态文件，后续会慢慢支持静态文件。
-
+The mobile configuration is similar to the desktop configuration, with more platforms to be supported in the future.
+Please refer to the actual interface for configuration details, as some options may not be fully implemented yet due to ongoing mobile development.
 ![](../static/imgs/phone2.webp)
 
-激动人心的等待时刻：(当然也是最容易出错的时刻，需要耐心等待3分钟左右)
+# Compilation and Release
 
-```
-成败在此一举
-如果成功，跳转到发布页面，点击下载即可下载你的软件。
-如果失败，又上角会有错误提示，可根据错误进行修改或联系我们。
-```
-
-![](../static/imgs/build4.webp)
-
-## 发布成功：
-
-恭喜你 🎉🎉🎉，你的软件已经编译成功了，点击 apk 下载 android 版本，点击 ipa 下载 ios 版本。
-或者点击名称会复制下载链接，然后在浏览器打开即可下载。
-
-![](../static/imgs/publish3.webp)
-
-## 注意事项
-
--   ios 仅支持 15.6 版本以上系统
--   android 仅支持 7.0 版本以上系统
--   安装说明文档：[ipa/apk 安装说明](../question/phone.md)
-
-<script setup>
-import BiliBili from "../components/bilibili.vue"
-</script>
+To compile and release your mobile app, click the dedicated "Publish" button in the app interface. After completion, you'll be automatically redirected to the download page.
+Both mobile and desktop installation packages will appear in the same download list:
+- Files ending with `.apk` are Android installation packages
+- Files ending with `.ipa` are iOS installation packages

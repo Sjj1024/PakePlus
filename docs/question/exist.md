@@ -1,3 +1,3 @@
-# 项目已存在
+#The project already exists
 
-你已经创建过类似的项目，或者项目被 PakePlus 创建过。
+You have already created a similar project, or the project has been created by PakePlus.
