@@ -73,7 +73,7 @@ features:
 </div>
 
 <script setup>
-import { data } from './static/js/buildtime.data.ts'
+import { data } from '../static/js/buildtime.data.ts'
 </script>
 
 <style module>
