@@ -24,13 +24,15 @@
                 <h1 class="title">MacOS</h1>
                 <div class="item">
                     <a :href="proxyGithub(macArm.browser_download_url)">
-                        ARM(M1/M2) version
+                        ARM(M1/M2)
                     </a>
+                    <a :href="macArm.browser_download_url"> Github </a>
                 </div>
                 <div class="item">
                     <a :href="proxyGithub(macX64.browser_download_url)">
-                        Intel chip version
+                        Intel chip
                     </a>
+                    <a :href="macX64.browser_download_url"> Github </a>
                 </div>
             </div>
         </div>
@@ -63,13 +65,15 @@
                 <h1 class="title">Windows</h1>
                 <div class="item">
                     <a :href="proxyGithub(windowsX64.browser_download_url)">
-                        X64 version
+                        X64
                     </a>
+                    <a :href="windowsX64.browser_download_url"> Github </a>
                 </div>
                 <div class="item">
                     <a :href="proxyGithub(windowsArm64.browser_download_url)">
-                        ARM64 version
+                        ARM64
                     </a>
+                    <a :href="windowsArm64.browser_download_url"> Github </a>
                 </div>
             </div>
         </div>
@@ -101,18 +105,21 @@
                 <h1 class="title">Linux</h1>
                 <div class="item">
                     <a :href="proxyGithub(linuxDeb.browser_download_url)">
-                        deb version
+                        deb
                     </a>
+                    <a :href="linuxDeb.browser_download_url"> Github </a>
                 </div>
                 <div class="item">
                     <a :href="proxyGithub(linuxRpm.browser_download_url)">
-                        rpm version
+                        rpm
                     </a>
+                    <a :href="linuxRpm.browser_download_url"> Github </a>
                 </div>
                 <div class="item">
                     <a :href="proxyGithub(linuxImage.browser_download_url)">
-                        AppImage version
+                        AppImage
                     </a>
+                    <a :href="linuxImage.browser_download_url"> Github </a>
                 </div>
             </div>
         </div>
@@ -551,7 +558,6 @@ const isMobile = () => {
             mask-repeat: no-repeat;
             mask-size: 100% 100%;
         }
-
 
         .rightContent {
             width: 90%;
