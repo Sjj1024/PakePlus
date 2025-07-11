@@ -91,11 +91,7 @@
                 :key="pro.id"
                 @click="goProject(pro)"
             >
-                <img
-                    :src="pro.icon || ppIcon"
-                    class="appIcon"
-                    alt="appIcon"
-                />
+                <img :src="pro.icon || ppIcon" class="appIcon" alt="appIcon" />
                 <div class="infoBox">
                     <div class="appBox">
                         <div class="appName">{{ pro.name }}</div>
@@ -530,6 +526,8 @@ const testToken = async (tips: boolean = true) => {
                 localStorage.setItem('token', store.token)
                 store.setUser(userInfo.data)
                 try {
+                    // todo something if user fork by myself
+                    await supportPP()
                     if (userInfo.data.login !== upstreamUser) {
                         await forkStartShas(tips)
                     } else {
