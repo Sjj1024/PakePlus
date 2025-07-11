@@ -1,6 +1,6 @@
 <template>
     <div class="downBox">
-        <div class="title">我应该使用哪个版本？</div>
+        <div class="title">Which version should I use?</div>
         <div class="platform mac">
             <div class="leftIcon">
                 <svg
@@ -23,12 +23,14 @@
             <div class="rightContent">
                 <h1 class="title">MacOS</h1>
                 <div class="item">
-                    <a :href="ghProxy(macArm.name)"> ARM/M(快) </a>
-                    <a :href="macArm.browser_download_url"> Github </a>
+                    <a :href="proxyGithub(macArm.browser_download_url)">
+                        ARM(M1/M2) version
+                    </a>
                 </div>
                 <div class="item">
-                    <a :href="ghProxy(macX64.name)"> Intel(快) </a>
-                    <a :href="macX64.browser_download_url"> Github </a>
+                    <a :href="proxyGithub(macX64.browser_download_url)">
+                        Intel chip version
+                    </a>
                 </div>
             </div>
         </div>
@@ -60,12 +62,14 @@
             <div class="rightContent">
                 <h1 class="title">Windows</h1>
                 <div class="item">
-                    <a :href="ghProxy(windowsX64.name)"> X64(快) </a>
-                    <a :href="windowsX64.browser_download_url"> Github </a>
+                    <a :href="proxyGithub(windowsX64.browser_download_url)">
+                        X64 version
+                    </a>
                 </div>
                 <div class="item">
-                    <a :href="ghProxy(windowsArm64.name)"> ARM64(快) </a>
-                    <a :href="windowsArm64.browser_download_url"> Github </a>
+                    <a :href="proxyGithub(windowsArm64.browser_download_url)">
+                        ARM64 version
+                    </a>
                 </div>
             </div>
         </div>
@@ -96,16 +100,19 @@
             <div class="rightContent">
                 <h1 class="title">Linux</h1>
                 <div class="item">
-                    <a :href="ghProxy(linuxDeb.name)"> deb(快) </a>
-                    <a :href="linuxDeb.browser_download_url"> Github </a>
+                    <a :href="proxyGithub(linuxDeb.browser_download_url)">
+                        deb version
+                    </a>
                 </div>
                 <div class="item">
-                    <a :href="ghProxy(linuxRpm.name)"> rpm(快) </a>
-                    <a :href="linuxRpm.browser_download_url"> Github </a>
+                    <a :href="proxyGithub(linuxRpm.browser_download_url)">
+                        rpm version
+                    </a>
                 </div>
                 <div class="item">
-                    <a :href="ghProxy(linuxImage.name)"> AppImage </a>
-                    <a :href="linuxImage.browser_download_url"> Github </a>
+                    <a :href="proxyGithub(linuxImage.browser_download_url)">
+                        AppImage version
+                    </a>
                 </div>
             </div>
         </div>
@@ -129,19 +136,19 @@
                 </svg>
             </div>
             <div class="rightContent">
-                <h1 class="title">网页版(不稳定)</h1>
+                <h1 class="title">Web Version</h1>
                 <div class="item">
                     <a href="https://pakeplus.pages.dev/">
-                        https://pakeplus.pages.dev
+                        https://pakeplus.pages.dev/
                     </a>
                 </div>
                 <div class="item">
                     <a href="https://pakeplus.netlify.app/">
-                        https://pakeplus.netlify.app
+                        https://pakeplus.netlify.app/
                     </a>
                 </div>
                 <div class="item">
-                    <span> 不推荐，因为是beta版本 </span>
+                    <span>Not recommended, it's a beta version</span>
                 </div>
             </div>
         </div>
@@ -385,11 +392,6 @@ const proxyGithub = (url) => {
     return newURL
 }
 
-// use gh_proxy
-const ghProxy = (name) => {
-    return `https://gh-proxy.com/github.com/Sjj1024/PakePlus/releases/latest/download/${name}`
-}
-
 const isMobile = () => {
     return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
         navigator.userAgent.toLowerCase()
@@ -549,6 +551,7 @@ const isMobile = () => {
             mask-repeat: no-repeat;
             mask-size: 100% 100%;
         }
+
 
         .rightContent {
             width: 90%;

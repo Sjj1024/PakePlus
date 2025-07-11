@@ -1,26 +1,26 @@
-# Issue
+# Reporting Issues  
 
-如果有难以解决的问题，又不好意思联系我们，可以提交 issue，提交内容请尽量详细。
+If you encounter unresolved problems and prefer not to contact us directly, you may submit an issue. Please provide as much detail as possible.  
 
-提交 issue 时，请按照以下格式填写：
+### Issue Submission Format:  
 
-```md
-# 问题描述
+```markdown
+# Problem Description  
 
-请描述问题的详细情况，包括：
+Describe the issue in detail, including:  
+- Environment where the issue occurred  
+- Steps to reproduce the problem  
+- Screenshots (if applicable)  
+- Error logs  
 
--   问题发生的环境
--   问题发生的步骤
--   问题的截图
--   问题的日志
+# Solution (if available)  
 
-# 解决办法(如果有)
-
-请描述解决问题的办法，包括：
-
--   解决问题的步骤
--   解决问题的截图
--   解决问题的日志
+Describe how the problem was resolved, including:  
+- Steps taken to fix the issue  
+- Relevant screenshots  
+- Logs showing the resolution  
 ```
 
-issue 地址： [PakePlus Issue](https://github.com/Sjj1024/PakePlus/issues)
+Submit issues here: [PakePlus Issues](https://github.com/Sjj1024/PakePlus/issues)  
+
+> ℹ️ *Tip: Clear, detailed reports help us resolve issues faster.*

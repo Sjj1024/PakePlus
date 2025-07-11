@@ -1,4 +1,4 @@
-# 开发调试
+# Development Debugging
 
-如果你需要开发调试，可以勾选开发调试选项，然后点击预览，就可以在预览窗口右下角看到调试按钮，点击即可调试。
+If you need to debug your application, simply check the "Enable Debugging" option and click "Preview". A debug button will appear in the bottom-right corner of the preview window - click it to start debugging.
 ![](../static/imgs/debug.webp)

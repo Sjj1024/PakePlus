@@ -1,16 +1,24 @@
-# ipa 包怎么安装？
+# How to Install IPA Files?
 
-因为这是没签名的 ios 应用，所以需要手动安装。
-ipa 包安装方式有多种：
+Since these are unsigned iOS applications, manual installation is required. There are several methods to install IPA files:
 
-1. 越狱的手机通过巨魔商店就可以安装。
-2. 未越狱的手机，可以试试爱思助手安装 IPA：[https://www.i4.cn/news_detail_38195.html](https://www.i4.cn/news_detail_38195.html)  
-   需要自行导入签名文件，或者在淘宝几十块钱就可以买一个签名文件，有效期一年那种，安装好就可以使用一年。
+1. **For jailbroken devices**: Install through TrollStore (experienced users should be familiar with this method).
 
-# 不越狱长期安装 ipa
+2. **For non-jailbroken devices**:  
+   - Use tools like i4Tools (爱思助手): [https://www.i4.cn/news_detail_38195.html](https://www.i4.cn/news_detail_38195.html)  
+   - You'll need to import a signing certificate yourself, or purchase one from Taobao for about $5-10 (valid for one year).
 
-如果你想长期使用，并且手机不想越狱，可以使用签名工具，来给你这个应用签名，然后安装。当前签名工具需要收费，淘宝搜一下：ipa 签名，就可以找到。常见的万能签，全能签，轻松签等等，都可以。一年也就 20 元左右的费用，但是功能是相当强大的，可以签任何 ipa 包，然后安装到自己的手机上。按照人家的使用教程来，就可以了。
+# Long-term IPA Installation Without Jailbreaking
 
-# apk 包怎么安装？
+For permanent installation without jailbreaking:
+- Use paid signing services (search "IPA signing" on Taobao)
+- Popular options include WanNengSign, QuanNengSign, QingSongSign, etc.
+- Costs about $3/year
+- Can sign any IPA file for personal use
+- Follow the service provider's instructions
 
-安卓手机直接将 apk 包发送到手机上，应该就可以安装了
+# How to Install APK Files?
+
+For Android devices:
+1. Simply transfer the APK file to your phone
+2. Open and install it directly

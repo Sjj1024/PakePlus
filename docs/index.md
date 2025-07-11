@@ -1,74 +1,75 @@
 ---
+# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
     name: 'PakePlus'
-    text: '何必是网站，秒变桌面应用和手机应用'
-    tagline: 打包网页/Vue/React项目为桌面/手机应用只需几分钟
+    text: 'Turn web into desktop & mobile apps'
+    tagline: Package web/Vue/React projects into desktop/mobile apps in minutes
     image:
-        src: ./pplogo.png
+        src: ../pplogo.png
         alt: PakePlus
     actions:
         - theme: brand
-          text: 下载地址
+          text: Download
           link: /download/
         - theme: brand
           text: WebBeta
           link: https://pakeplus.netlify.app/
         - theme: brand
-          text: 使用指南
+          text: Guide
           link: /guide/
 
 features:
-    - title: 开源免费
-      details: PakePlus 是开源免费的，你可以在 GitHub 上找到它的源代码
+    - title: Open Source
+      details: PakePlus is open source and you can find its source code on GitHub
       icon: 🐙
-    - title: 跨平台
-      details: Windows/macOS/Linux/Android/iOS等常用操作系统全支持
+    - title: Cross Platform
+      details: Windows/macOS/Linux/Android/iOS are all supported
       icon: 💻
-    - title: 小体积
-      details: 体积比 Electron 包小约 20 倍（小于5M!），性能快 10 倍
+    - title: Small Size
+      details: The size is smaller than Electron package by about 20 times (less than 5M!)
       icon: 🚀
-    - title: 支持移动端
-      details: 使用原生框架打包 Android 和 iOS APP，比Tauri2体积更小更快
+    - title: Mobile Support
+      details: Use native framework to package Android and iOS APP, which is smaller and faster
       icon: 📲
-    - title: 简单易用
-      details: UI操作简单，不用在本地安装任何开发环境，省时省心省硬盘空间
+    - title: Easy to Use
+      details: UI is simple, no need to install any development environment, save time and save money
       icon: 📦
-    - title: 同时编译
-      details: 只需几分钟，一键同时编译多平台安装包，不再有环境和时间焦虑
+    - title: Simultaneous Compilation
+      details: Just minutes, one click to compile multiple platforms, no environment and time anxiety
       icon: 🧘‍♀️
-    - title: 国际化
-      details: 支持国际化，对全球用户都友好，并且会自动跟随你的电脑系统语言
+    - title: Internationalization
+      details: Support internationalization, friendly to global users
       icon: 🌍
-    - title: 支持自定义
-      details: 你可以自定义应用图标、应用名称(支持中文)，支持注入JavaScript代码
+    - title: Customization
+      details: You can customize the application icon, application name, and inject JavaScript code
       icon: 🎨
-    - title: 支持静态文件
-      details: 支持将静态html文件或Vue/React等项目编译后的dist打包发布
+    - title: Static File Support
+      details: Support packaging static html files or Vue/React projects compiled dist
       icon: 🍀
-    - title: 本地打包
-      details: 支持本地打包，而且不需要安装任何依赖环境，本地打包仅需30秒
+    - title: Local Build
+      details: Supports local packaging and does not require environments. only takes 30 seconds
       icon: 🍔
-    - title: 无需Token
-      details: 没有Github Token没关系，本地打包即简单又方便，还不需要Token
+    - title: Without Token
+      details: It's okay without Token, local packaging is simple, and no Token is needed
       icon: 🥥
-    - title: API支持
-      details: 支持在JS脚本中调用系统级API，例如下载文件/执行命令/打开新窗口等
+    - title: Support Apis
+      details: Support calling system Apis in JS scripts, such as downloading files, etc
       icon: ⚔️
-    - title: 支持调试
-      details: 支持debug调试模式，无论是预览阶段还是发布阶段，都可以找到bug并消灭bug
+    - title: Debug Support
+      details: Support debug mode, whether in preview or release, you can find bugs
       icon: 🐞
-    - title: 数据安全
-      details: PakePlus 不会上传你的任何数据，所有数据都保存在你的电脑上
+    - title: Data Security
+      details: PakePlus will not upload any data, all data is stored on your computer
       icon: 🔒
-    - title: 技术支持
-      details: 如果在你使用过程中遇到问题，随时可以加入我们的技术交流群咨询
+    - title: Technical Support
+      details: If you encounter any problems during use, you can chat with us
       icon: 💬
 ---
 
 <div :class="$style.buildInfo">
-    <span :class="$style.buildTime">构建时间：{{ data.buildTime }}</span>
+    <span :class="$style.buildTime">Built Time：{{ data.buildTime }}</span>
 </div>
 
 <script setup>

@@ -1,4 +1,3 @@
-# github 交流
+# github 
 
-交流地址；
 https://github.com/Sjj1024/PakePlus/discussions

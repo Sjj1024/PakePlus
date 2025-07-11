@@ -1,7 +1,15 @@
-# 窗口跳转
+# Window Redirection Issue
 
-可能会遇到编译后的软件，点击某个链接，单独打开了一个窗口，或者是使用默认浏览器打开了一个页面，这个问题是最常见的。
-所以我在默认的 js 脚本中已经加入了这个解决限制的代码，如果你没有删除里面的代码，那么不太可能出现这个问题。
-如果出现了这个问题，那么你可以尝试联系我，我会尽力解决这个问题。
+A common problem occurs when clicking links in the compiled application causes:
+- Opening a separate window
+- Launching the default browser to load the page
 
-请不要删除默认的脚本代码，如果你删除了，后果自负！
+**Solution Implemented:**
+The default JavaScript script already includes code to prevent this behavior. If you haven't modified the default scripts, this issue should not occur.
+
+**If you encounter this problem:**
+1. First verify you haven't removed/modified the default scripts
+2. If the issue persists, you may contact me for assistance
+
+⚠️ **Important Notice:**
+Do NOT remove the default script code. Any modifications to these scripts are made at your own risk!

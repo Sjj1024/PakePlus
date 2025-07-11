@@ -1,23 +1,25 @@
-# 其他问题
+# Other Issues
 
-一个功能性问题，可能 PakePlus 还没有完善，需要你提新的需求，后面会慢慢完善
+You may encounter functional limitations as PakePlus is still under active development. If you need features that aren't currently available:
+1. Please submit feature requests
+2. We'll gradually implement them in future updates
 
-# 支持的平台
-- Windows：支持win7及以上版本，要想在win7上运行，需要先自行安装微软webview2，下载地址：https://developer.microsoft.com/zh-cn/microsoft-edge/webview2
-- Macos：支持 Intel芯片 和 Apple M系列（ARM）芯片
-- Linux：支持常见的发行版，如 Ubuntu、Debian、Fedora、CentOS 等。
-- Android：支持 Android 7.0 及其以上版本，直接安装打包后apk即可。
-- iOS：支持 iOS 15.6 及其以上版本，打包后的ipa安装方式可以参考：[apk/ipa安装](./phone.md)
+# How to Delete Your PakePlus Repository
 
+If compilation fails due to repository issues, you may need to reset by deleting your PakePlus repository. Note: This will remove all your previously created projects.
 
-# 删除PakePlus仓库教程
+Step-by-step deletion guide:
+1. Open your PakePlus repository on GitHub
+2. Navigate to Settings → Scroll to bottom
+3. Click "Delete this repository"
+4. Confirm with "I want to delete this repository"
+5. Acknowledge by clicking "I have read and understand these effects"
+6. Enter your full repository name
+7. Finalize with "Delete this repository"
 
-如果遇到编译失败的问题，可能是因为你的 PakePlus 仓库中存在一些问题，导致编译失败。你可以尝试删除你的 PakePlus 仓库，然后重新打开 PakePlus，并填入 Token 重新走一遍流程。（该过程会删除你之前创建的项目）
+After deletion:
+- Restart PakePlus
+- Re-enter your GitHub Token
+- Follow the setup process again
 
--   打开你的 PakePlus 仓库
--   点击 Settings，并滑动到最底部
--   点击 Delete this repository
--   点击 I want to delete this repository
--   点击 I have read and understand these effects
--   然后填入你的 PakePlus 全名
--   点击 Delete this repository
+Alternative solution: Contact support before deleting if you want to preserve your projects.

@@ -1,18 +1,32 @@
-# 编译失败
+# Compilation Failed
 
-编译失败的原因有很多，常见的有：
+There are several common reasons for compilation failures:
 
-1. 项目没有按照规范的形式填写，虽然我已经尽力限制规范了，但是还是有可能会有遗漏。
-2. 项目的依赖没有安装好，可能是因为网络问题，或者是因为依赖的版本不兼容。
-3. 项目的配置文件没有填写好，可能是因为配置文件的格式不正确，或者是因为配置文件的路径不正确。
-4. token 权限没有配置正确，就会导致编译失败，403 等错误。
-5. PakePlus版本升级后，可能会导致编译失败等问题，可尝试重新填入token走流程试试。
+1. The project was not filled out in the standardized format. Although we've tried our best to enforce standardization, some oversights may still occur.
+2. Project dependencies were not properly installed, possibly due to network issues or version incompatibilities.
+3. The project configuration file was not properly filled out, either due to incorrect format or wrong file paths.
+4. Incorrect token permissions configuration may lead to compilation failures with 403 errors.
 
-## dispatch 错误: 404/422/403等等错误
+# "Cannot read properties of undefined (reading 'sha')"
 
-1. 确认 token 权限是否配置正确，然后重新填入 token 试试，往往是 token 权限配置错误导致的。或者点击首页头像然后同步一下试试。
-2. PakePlus版本升级后，可能会导致编译失败，需要重新填入token并重新创建项目试试。
+The most common causes for this error are:
 
-## Cannot read properties of undefined XXX
+1. Manually forked the PakePlus repository without unchecking "Copy the main branch only".
+2. This project automatically forks a template repository named PakePlus - do not delete this repository or GitHub compilation will fail.
+3. Do not delete or modify all contents in the PakePlus repository, as this may also cause the error.
+4. This error may occur after upgrading PakePlus versions.
 
-用最新版本的 PakePlus，然后填入 token 试试，能解决 99%的问题。或者点击首页头像然后同步一下试试。
+# Solutions
+
+1. The quickest solution is to delete your PakePlus repository, then reopen PakePlus and re-enter your Token to restart the process (this will delete your previously created projects).
+
+Steps to delete your PakePlus repository:
+- Open your PakePlus repository
+- Click Settings and scroll to the bottom
+- Click "Delete this repository"
+- Click "I want to delete this repository"
+- Click "I have read and understand these effects"
+- Enter your full PakePlus repository name
+- Click "Delete this repository"
+
+2. If the issue persists, contact me on WeChat: lanxingme, or join our support group to ask other users for help.
