@@ -1358,3 +1358,13 @@ export const syncAllBranch = async (
         }
     }
 }
+
+// creat device uuid
+export const creatDeviceid = () => {
+    let deviceId = localStorage.getItem('deviceId')
+    if (!deviceId) {
+        deviceId = Date.now() + ''
+        localStorage.setItem('deviceId', deviceId)
+    }
+    return deviceId
+}

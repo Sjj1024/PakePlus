@@ -2,7 +2,13 @@
 import { onMounted } from 'vue'
 import { locale as osLocale } from '@tauri-apps/plugin-os'
 import { useI18n } from 'vue-i18n'
-import { isTauri, isMobile, chageTheme, syncAllBranch } from './utils/common'
+import {
+    isTauri,
+    isMobile,
+    chageTheme,
+    syncAllBranch,
+    creatDeviceid,
+} from './utils/common'
 import Updater from './components/Updater.vue'
 import { usePPStore } from './store'
 
@@ -45,6 +51,7 @@ const disableRightClick = () => {
 }
 
 const initEnv = async () => {
+    creatDeviceid()
     // listen theme change
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     if (mediaQuery) {
