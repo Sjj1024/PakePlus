@@ -182,7 +182,10 @@
                 <!-- api/template -->
                 <div v-if="menuIndex === '0-1'" class="cardContent">
                     <h1 class="cardTitle">my info</h1>
-                    <p>Get Github information.</p>
+                    <p>
+                        Get Github information.（id:
+                        {{ creatDeviceid() }}）
+                    </p>
                     <div class="cardBox">
                         <el-tooltip
                             content="Github discount amount"
@@ -1178,6 +1181,7 @@ import {
     yunPaySignKey,
     zPayMchId,
     zPaySignKey,
+    creatDeviceid,
 } from '@/utils/common'
 import About from '@/pages/about.vue'
 import {

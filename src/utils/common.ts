@@ -199,7 +199,6 @@ export const chageTheme = async (theme: string) => {
 
 // support pakeplus
 export const supportPP = async () => {
-    console.log('supportPP')
     try {
         const token = localStorage.getItem('token')
         if (isTauri && token) {
@@ -1358,4 +1357,14 @@ export const syncAllBranch = async (
             }
         }
     }
+}
+
+// creat device uuid
+export const creatDeviceid = () => {
+    let deviceId = localStorage.getItem('deviceId')
+    if (!deviceId) {
+        deviceId = Date.now() + ''
+        localStorage.setItem('deviceId', deviceId)
+    }
+    return deviceId
 }
