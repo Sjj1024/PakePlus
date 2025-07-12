@@ -1829,8 +1829,8 @@ const reRunFailsJobs = async (repo: string, id: number, html_url: string) => {
     rerunCounts[repo] += 1
     if (rerunCounts[repo] >= 3) {
         console.log('rerun cancel', rerunCounts[repo])
-        // buildLoading.value = false
-        // buildTime = 0
+        buildTimer[repo] && clearInterval(buildTimer[repo])
+        checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
         warning.value = 'rerun cancel and rerun count > 3'
         createIssue(
             store.currentProject.name,
@@ -1843,8 +1843,6 @@ const reRunFailsJobs = async (repo: string, id: number, html_url: string) => {
         )
         openUrl(html_url)
         loadingText(t('failure'))
-        buildTimer[repo] && clearInterval(buildTimer[repo])
-        checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
     } else {
         const rerunRes: any = await githubApi.rerunFailedJobs(
             store.userInfo.login,
@@ -1854,12 +1852,10 @@ const reRunFailsJobs = async (repo: string, id: number, html_url: string) => {
         // 201 is success 403 is running
         if (rerunRes.status === 201 || rerunRes.status === 403) {
             console.log('rerun success')
-            if (rerunRes.status === 403) {
-                rerunCounts[repo] -= 1
-            }
         } else {
             reRunFailsJobs(repo, id, html_url)
         }
+        await new Promise((resolve) => setTimeout(resolve, 10000))
     }
 }
 
@@ -1880,6 +1876,9 @@ const checkBuildStatus = async (repo: string) => {
     console.log('checkBuildStatus', build_runs)
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
         if (status === 'completed' && conclusion === 'success') {
+            // clear timer
+            buildTimer[repo] && clearInterval(buildTimer[repo])
+            checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
             const now = new Date()
             localStorage.setItem('lastClickTime', now.toISOString())
             createIssue(
@@ -1895,13 +1894,13 @@ const checkBuildStatus = async (repo: string) => {
             store.setCurrentRelease()
             buildStatus[repo] = t('buildSuccess')
             buildRates[repo] = 100
-            // clear timer
-            buildTimer[repo] && clearInterval(buildTimer[repo])
-            checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
             // buildLoading.value = false
             // buildTime = 0
             // router.push('/history')
         } else if (status === 'completed' && conclusion === 'cancelled') {
+            // clear interval
+            buildTimer[repo] && clearInterval(buildTimer[repo])
+            checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
             createIssue(
                 store.currentProject.name,
                 store.currentProject.showName,
@@ -1914,9 +1913,6 @@ const checkBuildStatus = async (repo: string) => {
             buildStatus[repo] = t('cancelled')
             // buildLoading.value = false
             // buildTime = 0
-            // clear interval
-            buildTimer[repo] && clearInterval(buildTimer[repo])
-            checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
         } else if (status === 'failure' || conclusion === 'failure') {
             reRunFailsJobs(repo, id, html_url)
         } else if (status === 'completed' && conclusion === 'failure') {
@@ -1928,9 +1924,9 @@ const checkBuildStatus = async (repo: string) => {
         if (rerunCounts[repo] >= 2) {
             // buildTime = 0
             // buildLoading.value = false
-            openUrl(html_url)
             buildTimer[repo] && clearInterval(buildTimer[repo])
             checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
+            openUrl(html_url)
             // loadingText(t('failure'))
             buildStatus[repo] = t('failure')
             createIssue(

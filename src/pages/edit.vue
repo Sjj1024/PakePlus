@@ -1822,6 +1822,8 @@ let rerunCount = 0
 const reRunFailsJobs = async (id: number, html_url: string) => {
     rerunCount += 1
     if (rerunCount >= 3) {
+        buildSecondTimer && clearInterval(buildSecondTimer)
+        checkDispatchTimer && clearInterval(checkDispatchTimer)
         console.log('rerun cancel', rerunCount)
         buildLoading.value = false
         buildTime = 0
@@ -1831,15 +1833,13 @@ const reRunFailsJobs = async (id: number, html_url: string) => {
             store.currentProject.showName,
             store.currentProject.isHtml,
             html_url,
-            'failure',
+            'failure rerun ' + rerunCount,
             'build error',
             'PakePlus'
         )
         await new Promise((resolve) => setTimeout(resolve, 3000))
         openUrl(html_url)
         loadingText(t('failure'))
-        buildSecondTimer && clearInterval(buildSecondTimer)
-        checkDispatchTimer && clearInterval(checkDispatchTimer)
     } else {
         const rerunRes: any = await githubApi.rerunFailedJobs(
             store.userInfo.login,
@@ -1849,13 +1849,10 @@ const reRunFailsJobs = async (id: number, html_url: string) => {
         // 201 is success 403 is running
         if (rerunRes.status === 201 || rerunRes.status === 403) {
             console.log('rerun success')
-            if (rerunRes.status === 403) {
-                rerunCount -= 1
-            }
         } else {
             reRunFailsJobs(id, html_url)
         }
-        await new Promise((resolve) => setTimeout(resolve, 3000))
+        await new Promise((resolve) => setTimeout(resolve, 10000))
     }
 }
 
@@ -1875,6 +1872,9 @@ const checkBuildStatus = async () => {
     console.log('checkBuildStatus', build_runs)
     if (checkRes.status === 200 && checkRes.data.total_count > 0) {
         if (status === 'completed' && conclusion === 'success') {
+            // clear timer
+            buildSecondTimer && clearInterval(buildSecondTimer)
+            checkDispatchTimer && clearInterval(checkDispatchTimer)
             createIssue(
                 store.currentProject.name,
                 store.currentProject.showName,
@@ -1889,13 +1889,13 @@ const checkBuildStatus = async () => {
             await new Promise((resolve) => setTimeout(resolve, 3000))
             store.setCurrentRelease()
             loadingText(t('buildSuccess'))
-            // clear timer
-            buildSecondTimer && clearInterval(buildSecondTimer)
-            checkDispatchTimer && clearInterval(checkDispatchTimer)
             buildLoading.value = false
             buildTime = 0
             router.push('/history')
         } else if (status === 'completed' && conclusion === 'cancelled') {
+            // clear interval
+            buildSecondTimer && clearInterval(buildSecondTimer)
+            checkDispatchTimer && clearInterval(checkDispatchTimer)
             createIssue(
                 store.currentProject.name,
                 store.currentProject.showName,
@@ -1909,9 +1909,6 @@ const checkBuildStatus = async () => {
             loadingText(t('cancelled'))
             buildLoading.value = false
             buildTime = 0
-            // clear interval
-            buildSecondTimer && clearInterval(buildSecondTimer)
-            checkDispatchTimer && clearInterval(checkDispatchTimer)
         } else if (status === 'failure' || conclusion === 'failure') {
             reRunFailsJobs(id, html_url)
             await new Promise((resolve) => setTimeout(resolve, 3000))
@@ -1923,11 +1920,11 @@ const checkBuildStatus = async () => {
         }
     } else {
         if (rerunCount >= 2) {
+            buildSecondTimer && clearInterval(buildSecondTimer)
+            checkDispatchTimer && clearInterval(checkDispatchTimer)
             buildTime = 0
             buildLoading.value = false
             openUrl(html_url)
-            buildSecondTimer && clearInterval(buildSecondTimer)
-            checkDispatchTimer && clearInterval(checkDispatchTimer)
             loadingText(t('failure'))
         } else {
             reRunFailsJobs(id, html_url)
