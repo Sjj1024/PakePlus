@@ -199,7 +199,6 @@ export const chageTheme = async (theme: string) => {
 
 // support pakeplus
 export const supportPP = async () => {
-    console.log('supportPP')
     try {
         const token = localStorage.getItem('token')
         if (isTauri && token) {
