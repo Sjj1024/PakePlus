@@ -4,7 +4,7 @@ If there are problems, self-examination is often more effective.
 
 1. Self inspection in PP issues often yields results: https://github.com/Sjj1024/PakePlus/issues
 2. Check if you have modified the configuration or script files and try using the original configuration
-3. Check if the token permissions are given correctly, or try filling in the token again (do not manually create a repository with the same name as PakePlus)
+3. Check if the token permissions are given correctly, or try filling in the token again (do not manually create a repository with the same name as PakePlus/PakePlus-Android/PakePlus-iOS)
 4. Have you consulted in the group before? If not, try asking in the group first. [Join the group for communication] (../exchange/index. md)
 5. For network issues, please check if you are using a proxy or cloud computer. You can try switching the proxy or network.
 6. If certain features are not supported, they can be resolved through sponsoring PP for quick priority development.

@@ -4,7 +4,7 @@
 
 1. 到 PP issue 中自查，往往有效果：https://github.com/Sjj1024/PakePlus/issues
 2. 检查自己是否修改过配置或脚本文件，用最原始的配置试试
-3. 检查 token 权限是否给正确了，或者重新填写 token 再试试(不要手动创建 PakePlus 同名的仓库)
+3. 检查 token 权限是否给正确了，或者重新填写 token 再试试(不要手动创建 PakePlus/PakePlus-Android/PakePlus-iOS 同名的仓库)
 4. 是否有在群里咨询过，没有的话，先在群里问问试试，[进群交流](../exchange/index.md)
 5. 网络问题请检查是否使用了代理或者云电脑等，可以尝试开关代理或切换网络试试。
 6. 如果某些功能没有支持，可以通过赞助 PP 快速优先开发解决。
