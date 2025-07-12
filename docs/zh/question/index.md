@@ -4,11 +4,11 @@
 
 1. 到 PP issue 中自查，往往有效果：https://github.com/Sjj1024/PakePlus/issues
 2. 检查自己是否修改过配置或脚本文件，用最原始的配置试试
-3. 检查 token 权限是否给正确了，或者重新填写 token 再试试
+3. 检查 token 权限是否给正确了，或者重新填写 token 再试试(不要手动创建 PakePlus 同名的仓库)
 4. 是否有在群里咨询过，没有的话，先在群里问问试试，[进群交流](../exchange/index.md)
 5. 网络问题请检查是否使用了代理或者云电脑等，可以尝试开关代理或切换网络试试。
 6. 如果某些功能没有支持，可以通过赞助 PP 快速优先开发解决。
-7. windows用户请卸载掉流氓软件，比如360等国产监控软件，否则遇到问题请自己解决
+7. windows 用户请卸载掉流氓软件，比如 360 等国产监控软件，否则遇到问题请自己解决
 
 ## mac 提示 应用已随坏
 
@@ -33,7 +33,6 @@ sudo xattr -r -d com.apple.quarantine /Applications/你的软件名称.app
 
 ![](../../static/imgs/macallow.jpg)
 
-
 ## windows 提示无法在你电脑上运行
 
 ![](../../static/imgs/windowsError.jpg)
@@ -49,14 +48,14 @@ arm64 位下载下面两个结尾的文件：
 -   \_arm64-setup.exe
 -   \_arm64-setup.exe.sig
 
-
-## 请注意Github账户免费额度
+## 请注意 Github 账户免费额度
 
 如果打包失败，并提示：
-> The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings  
 
-说明你白嫖Github过渡，需要支付刀乐才可以使用了。  
-主意：每个Github每月有免费 2,000 分钟action使用额度，大约16刀，用超了就需要付费了！为了保证账户可用，PakePlus将会检测到账户使用达到上限之前，禁止使用，直到下个月恢复额度才可以使用。
+> The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings
+
+说明你白嫖 Github 过渡，需要支付刀乐才可以使用了。  
+主意：每个 Github 每月有免费 2,000 分钟 action 使用额度，大约 16 刀，用超了就需要付费了！为了保证账户可用，PakePlus 将会检测到账户使用达到上限之前，禁止使用，直到下个月恢复额度才可以使用。
 
 ## 无法拖拽文件或元素拖动
 
@@ -102,5 +101,3 @@ windows 平台: 在更多配置中，开启 dragDropEnabled 选项，然后重�
 ## 打包后页面缩放不正确
 
 默认使用的是标准的电脑显示比例，如何打开之后和你在网页中不一致，请确认你的网页是否进行了缩放，你的电脑屏幕分辨率是否设置正确。
-
-
