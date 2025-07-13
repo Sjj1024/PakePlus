@@ -1430,6 +1430,7 @@ import {
     version,
 } from '@tauri-apps/plugin-os'
 import http from '@/utils/http'
+import { confirm } from '@tauri-apps/plugin-dialog'
 import { readFile, writeFile } from '@tauri-apps/plugin-fs'
 import { usePPStore } from '@/store'
 
@@ -1822,11 +1823,7 @@ const windowFunc = async (func: string) => {
         case 'onCloseRequested':
             await currentWin.onCloseRequested(async (event) => {
                 console.log('user close requested')
-                const confirmed = confirm('Are you sure?')
-                if (!confirmed) {
-                    // user did not confirm closing the window; let's prevent it
-                    event.preventDefault()
-                }
+                event.preventDefault()
             })
             oneMessage.success('onCloseRequested')
             break
