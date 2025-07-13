@@ -1,6 +1,7 @@
 use crate::command::model::ServerState;
 use base64::prelude::*;
 use futures::StreamExt;
+use notify_rust::Notification;
 use reqwest::Client;
 use serde::Serialize;
 use std::env;
@@ -20,7 +21,6 @@ use tauri::{
     path::BaseDirectory, utils::config::WindowConfig, AppHandle, Emitter, LogicalSize, Manager,
 };
 use tauri_plugin_http::reqwest;
-use tauri_plugin_notification::NotificationExt;
 use tokio::time::{sleep, Duration};
 use walkdir::WalkDir;
 use warp::Filter;
@@ -662,13 +662,39 @@ pub struct NotificationParams {
 
 #[tauri::command]
 pub fn notification(app: AppHandle, params: NotificationParams) -> Result<(), String> {
-    app.notification()
-        .builder()
-        .title(&params.title)
-        .body(&params.body)
-        .icon(&params.icon)
-        .show()
-        .unwrap();
+    let mut notifi_app = Notification::new();
+    #[cfg(target_os = "macos")]
+    {
+        let _ = notify_rust::set_application(if tauri::is_dev() {
+            "com.apple.Terminal"
+        } else {
+            &app.config().identifier
+        });
+    }
+    #[cfg(windows)]
+    {
+        let exe = tauri::utils::platform::current_exe()?;
+        let exe_dir = exe.parent().expect("failed to get exe directory");
+        let curr_dir = exe_dir.display().to_string();
+        // set the notification's System.AppUserModel.ID only when running the installed app
+        if !(curr_dir.ends_with(format!("{SEP}target{SEP}debug").as_str())
+            || curr_dir.ends_with(format!("{SEP}target{SEP}release").as_str()))
+        {
+            notifi_app.app_id(&app.config().identifier);
+        }
+    }
+    if !params.icon.is_empty() {
+        notifi_app.icon(&params.icon);
+    } else {
+        notifi_app.auto_icon();
+    }
+    tauri::async_runtime::spawn(async move {
+        let _ = notifi_app
+            .summary(&params.title)
+            .body(&params.body)
+            .show()
+            .expect("show notification failed");
+    });
     Ok(())
 }
 

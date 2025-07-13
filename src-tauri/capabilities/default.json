@@ -46,7 +46,6 @@
         "core:window:allow-set-icon",
         "core:window:allow-set-always-on-top",
         "core:window:allow-create",
-        "notification:default",
         "core:app:allow-default-window-icon",
         "core:app:allow-app-hide",
         "core:app:allow-app-show",
