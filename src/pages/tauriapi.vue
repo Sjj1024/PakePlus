@@ -1021,19 +1021,21 @@
                             content="disable right click"
                             placement="bottom"
                         >
-                            <el-button>全局禁止右键</el-button>
+                            <el-button
+                                @click="executeCode(Codes.disRightClick)"
+                            >
+                                全局禁止右键
+                            </el-button>
                         </el-tooltip>
                         <el-tooltip
                             content="allow some right click"
                             placement="bottom"
                         >
-                            <el-button>允许部分右键</el-button>
-                        </el-tooltip>
-                        <el-tooltip
-                            content="enable right click"
-                            placement="bottom"
-                        >
-                            <el-button>允许右键</el-button>
+                            <el-button
+                                @click="executeCode(Codes.inputRightClick)"
+                            >
+                                允许部分右键
+                            </el-button>
                         </el-tooltip>
                     </div>
                     <div class="codeDemo">
@@ -1086,6 +1088,24 @@
                         <p class="description">
                             {{ t('autoOperationDesc') }}
                         </p>
+                    </div>
+                    <div class="codeDemo">
+                        <h2>全局禁止右键</h2>
+                        <p class="description">全局禁止右键</p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.disRightClick.trim()"
+                            :disabled="true"
+                        />
+                    </div>
+                    <div class="codeDemo">
+                        <h2>允许部分右键</h2>
+                        <p class="description">允许输入框或文本域部分右键</p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.inputRightClick.trim()"
+                            :disabled="true"
+                        />
                     </div>
                 </div>
                 <!-- api/listenData -->
@@ -2366,6 +2386,15 @@ listen('download_progress', (event: any) => {
         ((event.payload.downloaded / event.payload.total) * 100).toFixed(2)
     )
 })
+
+// execute code
+const executeCode = (code: string) => {
+    try {
+        eval(code)
+    } catch (error) {
+        console.error('execute code error', error)
+    }
+}
 
 onMounted(() => {
     if (isTauri()) {
