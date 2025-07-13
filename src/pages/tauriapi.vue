@@ -582,8 +582,32 @@
                             content="Set the window icon."
                             placement="bottom"
                         >
-                            <el-button @click="setWindowIcon">
+                            <el-button @click="windowFunc('setIcon')">
                                 setIcon
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Set the window title."
+                            placement="bottom"
+                        >
+                            <el-button @click="windowFunc('setTitle')">
+                                setTitle
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Maximize the window."
+                            placement="bottom"
+                        >
+                            <el-button @click="windowFunc('maximize')">
+                                maximize
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="Unmaximize the window."
+                            placement="bottom"
+                        >
+                            <el-button @click="windowFunc('unmaximize')">
+                                unmaximize
                             </el-button>
                         </el-tooltip>
                         <el-tooltip content="base64 to ico" placement="bottom">
@@ -1191,7 +1215,21 @@ import {
     Setting,
 } from '@element-plus/icons-vue'
 import { ArrowLeft } from '@element-plus/icons-vue'
-import { getCurrentWindow } from '@tauri-apps/api/window'
+import {
+    Window,
+    CloseRequestedEvent,
+    getCurrentWindow,
+    getAllWindows,
+    UserAttentionType,
+    Effect,
+    EffectState,
+    currentMonitor,
+    monitorFromPoint,
+    primaryMonitor,
+    availableMonitors,
+    cursorPosition,
+    ProgressBarStatus,
+} from '@tauri-apps/api/window'
 import {
     defaultWindowIcon,
     getName,
@@ -1213,6 +1251,7 @@ import {
     LogicalSize,
     PhysicalSize,
     PhysicalPosition,
+    Size,
 } from '@tauri-apps/api/dpi'
 import { emit, emitTo, listen, once } from '@tauri-apps/api/event'
 import {
@@ -1270,7 +1309,6 @@ import {
     getAllWebviews,
 } from '@tauri-apps/api/webview'
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow'
-import { Window } from '@tauri-apps/api/window'
 import { useI18n } from 'vue-i18n'
 import payApi from '@/apis/pay'
 import githubApi from '@/apis/github'
@@ -1497,14 +1535,273 @@ const osApis = async (func: string) => {
 }
 
 // seticon
-const setWindowIcon = async () => {
-    const selected: any = await openSelect(false, [])
-    console.log('selected', selected)
-    if (selected) {
-        await getCurrentWindow().setIcon(selected)
-        oneMessage.success(t('setWindowIconSuccess'))
-    } else {
-        oneMessage.error(t('selectWindowIcon'))
+const windowFunc = async (func: string) => {
+    const currentWin = await getCurrentWindow()
+    switch (func) {
+        case 'setIcon':
+            const selected: any = await openSelect(false, [])
+            console.log('selected', selected)
+            if (selected) {
+                currentWin.setIcon(selected)
+                oneMessage.success(t('windowFuncSuccess'))
+            } else {
+                oneMessage.error(t('selectWindowIcon'))
+            }
+            break
+        case 'setTitle':
+            if (textarea.value) {
+                await currentWin.setTitle(textarea.value)
+                oneMessage.success('设置标题成功')
+            } else {
+                oneMessage.error('请输入标题')
+            }
+            break
+        case 'maximize':
+            await currentWin.maximize()
+            oneMessage.success('最大化成功')
+            break
+        case 'unmaximize':
+            await currentWin.unmaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'minimize':
+            await currentWin.minimize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'unminimize':
+            await currentWin.unminimize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'show':
+            await currentWin.show()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'destroy':
+            await currentWin.destroy()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setDecorations(true)':
+            await currentWin.setDecorations(true)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setShadow(true)':
+            await currentWin.setShadow(true)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setShadow(false)':
+            await currentWin.setShadow(false)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setAlwaysOnTop(true)':
+            await currentWin.setAlwaysOnTop(true)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setAlwaysOnTop(false)':
+            await currentWin.setAlwaysOnTop(false)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setAlwaysOnBottom(false)':
+            await currentWin.setAlwaysOnBottom(false)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setAlwaysOnBottom(true)':
+            await currentWin.setAlwaysOnBottom(true)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setContentProtected':
+            await currentWin.setContentProtected(false)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setSize':
+            // await currentWin.setSize(new Size(LogicalSize()))
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setMinSize':
+            // await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setMaxSize':
+            // await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setPosition':
+            // await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setFullscreen(true)':
+            await currentWin.setFullscreen(true)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setFullscreen(false)':
+            await currentWin.setFullscreen(false)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setFocus':
+            await currentWin.setFocus()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setSkipTaskbar(false)':
+            await currentWin.setSkipTaskbar(false)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setSkipTaskbar(true)':
+            await currentWin.setSkipTaskbar(true)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setCursorGrab(true)':
+            await currentWin.setCursorGrab(true)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setCursorGrab(false)':
+            await currentWin.setCursorVisible(false)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setCursorVisible(true)':
+            await currentWin.setCursorVisible(true)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setCursorIcon':
+            // await currentWin.setCursorIcon()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setBackgroundColor':
+            // await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setCursorPosition':
+            // await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setIgnoreCursorEvents':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setBadgeCount':
+            await currentWin.setBadgeCount(6)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setBadgeLabel':
+            await currentWin.setBadgeLabel('hi')
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setOverlayIcon':
+            // await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setProgressBar':
+            await currentWin.setProgressBar({
+                status: ProgressBarStatus.Normal,
+                progress: 50,
+            })
+            oneMessage.success('取消最大化成功')
+            break
+        case 'setVisibleOnAllWorkspaces':
+            await currentWin.setVisibleOnAllWorkspaces(true)
+            oneMessage.success('取消最大化成功')
+            break
+        case 'onResized':
+            await currentWin.onResized(({ payload: size }) => {
+                console.log('size', size)
+                oneMessage.success('监听大小变化')
+            })
+            break
+        case 'onMoved':
+            await currentWin.onMoved(({ payload: position }) => {
+                console.log('position', position)
+                oneMessage.success('监听移动')
+            })
+            break
+        case 'onCloseRequested':
+            await currentWin.onCloseRequested(async (event) => {
+                const confirmed = await confirm('Are you sure?')
+                if (!confirmed) {
+                    // user did not confirm closing the window; let's prevent it
+                    event.preventDefault()
+                }
+            })
+            oneMessage.success('取消最大化成功')
+            break
+        case 'onDragDropEvent':
+            const unlisten = await getCurrentWindow().onDragDropEvent(
+                (event) => {
+                    if (event.payload.type === 'over') {
+                        console.log('User hovering', event.payload.position)
+                    } else if (event.payload.type === 'drop') {
+                        console.log('User dropped', event.payload.paths)
+                    } else {
+                        console.log('File drop cancelled')
+                    }
+                }
+            )
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+        case 'toggleMaximize':
+            await currentWin.toggleMaximize()
+            oneMessage.success('取消最大化成功')
+            break
+
+        default:
+            break
     }
 }
 

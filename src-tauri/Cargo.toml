@@ -30,6 +30,7 @@ walkdir = "2.5.0"
 machine-uid = "0.5.3"
 futures = "0.3.31"
 encoding_rs = "0.8"
+notify-rust = "4.11.7"
 tauri-plugin-os = "2.0.0"
 tauri-plugin-fs = "2.0.0"
 tauri-plugin-dialog = "2.0.0"
@@ -37,5 +38,4 @@ tauri-plugin-http = { version = "2", features = ["unsafe-headers"] }
 tauri-plugin-clipboard-manager = "2.0.0"
 tauri-plugin-store = "2.0.0"
 tauri-plugin-process = "2"
-tauri-plugin-notification = "2.0.0"
 tauri-plugin-updater = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v2" }
