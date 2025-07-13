@@ -1917,6 +1917,20 @@ const checkBuildStatus = async () => {
             await new Promise((resolve) => setTimeout(resolve, 3000))
         } else if (status === 'in_progress') {
             console.log('build in progress...')
+        } else {
+            buildSecondTimer && clearInterval(buildSecondTimer)
+            checkDispatchTimer && clearInterval(checkDispatchTimer)
+            createIssue(
+                store.currentProject.name,
+                store.currentProject.showName,
+                store.currentProject.isHtml,
+                html_url,
+                'unknown',
+                'build unknown ' + status,
+                'PakePlus'
+            )
+            buildLoading.value = false
+            buildTime = 0
         }
     } else {
         if (rerunCount >= 2) {
