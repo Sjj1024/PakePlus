@@ -673,9 +673,8 @@ pub fn notification(app: AppHandle, params: NotificationParams) -> Result<(), St
     }
     #[cfg(windows)]
     {
-        let exe = tauri::utils::platform::current_exe()?;
-        let exe_dir = exe.parent().expect("failed to get exe directory");
-        let curr_dir = exe_dir.display().to_string();
+        use std::path::MAIN_SEPARATOR as SEP;
+        let curr_dir = get_exe_dir(true);
         // set the notification's System.AppUserModel.ID only when running the installed app
         if !(curr_dir.ends_with(format!("{SEP}target{SEP}debug").as_str())
             || curr_dir.ends_with(format!("{SEP}target{SEP}release").as_str()))
