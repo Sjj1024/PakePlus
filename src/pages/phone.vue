@@ -1919,6 +1919,20 @@ const checkBuildStatus = async (repo: string) => {
             reRunFailsJobs(repo, id, html_url)
         } else if (status === 'in_progress') {
             console.log('build in progress...')
+        } else {
+            buildTimer[repo] && clearInterval(buildTimer[repo])
+            checkDispatchTimer[repo] && clearInterval(checkDispatchTimer[repo])
+            createIssue(
+                store.currentProject.name,
+                store.currentProject.showName,
+                store.currentProject.isHtml,
+                html_url,
+                'unknown',
+                'build unknown ' + status,
+                'PakePlus'
+            )
+            buildLoading.value = false
+            buildTime = 0
         }
     } else {
         if (rerunCounts[repo] >= 2) {
