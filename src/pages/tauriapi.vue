@@ -848,7 +848,8 @@
                     <h1 class="cardTitle">notification</h1>
                     <p>
                         Send native notifications to your user using the
-                        notification plugin.
+                        notification plugin. Please allow notification function
+                        in system settings
                     </p>
                     <div class="cardBox">
                         <el-tooltip
@@ -859,6 +860,15 @@
                                 {{ t('sendMessageNotification') }}
                             </el-button>
                         </el-tooltip>
+                    </div>
+                    <div class="codeDemo">
+                        <h2>发送通知</h2>
+                        <p class="description">调用系统通知API发送消息通知</p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.notification.trim()"
+                            :disabled="true"
+                        />
                     </div>
                 </div>
                 <!-- api/opener -->

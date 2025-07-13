@@ -118,5 +118,12 @@ document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
   }
 });
-    `
+    `,
+    notification: `
+const { invoke } = window.__TAURI__.core
+
+if ('__TAURI__' in window) {
+    invoke('notification', { title: 'test', body: 'notification body' })
+}
+    `,
 }
