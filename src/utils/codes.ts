@@ -131,4 +131,11 @@ if ('__TAURI__' in window) {
     invoke('notification', { title: 'test', body: 'notification body' })
 }
     `,
+    setTitle: `
+const { invoke } = window.__TAURI__.core
+
+if ('__TAURI__' in window) {
+    invoke('set_title', { title: 'test' })
+}
+    `,
 }
