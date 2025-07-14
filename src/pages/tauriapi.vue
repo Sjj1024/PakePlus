@@ -610,6 +610,80 @@
                                 unmaximize
                             </el-button>
                         </el-tooltip>
+                        <el-tooltip
+                            content="Toggle maximize the window."
+                            placement="bottom"
+                        >
+                            <el-button @click="windowFunc('toggleMaximize')">
+                                toggleMaximize
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="minimize the window."
+                            placement="bottom"
+                        >
+                            <el-button @click="windowFunc('minimize')">
+                                minimize
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="unminimize the window."
+                            placement="bottom"
+                        >
+                            <el-button @click="windowFunc('unminimize')">
+                                unminimize
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="show the window."
+                            placement="bottom"
+                        >
+                            <el-button @click="windowFunc('show')">
+                                show
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="destroy the window."
+                            placement="bottom"
+                        >
+                            <el-button @click="windowFunc('destroy')">
+                                destroy
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="onCloseRequested the window."
+                            placement="bottom"
+                        >
+                            <el-button @click="windowFunc('onCloseRequested')">
+                                onCloseRequested
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="onThemeChanged the window."
+                            placement="bottom"
+                        >
+                            <el-button @click="windowFunc('onThemeChanged')">
+                                onThemeChanged
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="setClosable(true) the window."
+                            placement="bottom"
+                        >
+                            <el-button @click="windowFunc('setClosable(true)')">
+                                setClosable(true)
+                            </el-button>
+                        </el-tooltip>
+                        <el-tooltip
+                            content="setClosable(false) the window."
+                            placement="bottom"
+                        >
+                            <el-button
+                                @click="windowFunc('setClosable(false)')"
+                            >
+                                setClosable(false)
+                            </el-button>
+                        </el-tooltip>
                         <el-tooltip content="base64 to ico" placement="bottom">
                             <el-button @click="base64ToIco">
                                 base64ToIco
@@ -848,7 +922,8 @@
                     <h1 class="cardTitle">notification</h1>
                     <p>
                         Send native notifications to your user using the
-                        notification plugin.
+                        notification plugin. Please allow notification function
+                        in system settings
                     </p>
                     <div class="cardBox">
                         <el-tooltip
@@ -859,6 +934,15 @@
                                 {{ t('sendMessageNotification') }}
                             </el-button>
                         </el-tooltip>
+                    </div>
+                    <div class="codeDemo">
+                        <h2>发送通知</h2>
+                        <p class="description">调用系统通知API发送消息通知</p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.notification.trim()"
+                            :disabled="true"
+                        />
                     </div>
                 </div>
                 <!-- api/opener -->
@@ -1011,19 +1095,21 @@
                             content="disable right click"
                             placement="bottom"
                         >
-                            <el-button>全局禁止右键</el-button>
+                            <el-button
+                                @click="executeCode(Codes.disRightClick)"
+                            >
+                                全局禁止右键
+                            </el-button>
                         </el-tooltip>
                         <el-tooltip
                             content="allow some right click"
                             placement="bottom"
                         >
-                            <el-button>允许部分右键</el-button>
-                        </el-tooltip>
-                        <el-tooltip
-                            content="enable right click"
-                            placement="bottom"
-                        >
-                            <el-button>允许右键</el-button>
+                            <el-button
+                                @click="executeCode(Codes.inputRightClick)"
+                            >
+                                允许部分右键
+                            </el-button>
                         </el-tooltip>
                     </div>
                     <div class="codeDemo">
@@ -1076,6 +1162,24 @@
                         <p class="description">
                             {{ t('autoOperationDesc') }}
                         </p>
+                    </div>
+                    <div class="codeDemo">
+                        <h2>全局禁止右键</h2>
+                        <p class="description">全局禁止右键</p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.disRightClick.trim()"
+                            :disabled="true"
+                        />
+                    </div>
+                    <div class="codeDemo">
+                        <h2>允许部分右键</h2>
+                        <p class="description">允许输入框或文本域部分右键</p>
+                        <CodeEdit
+                            lang="javascript"
+                            :code="Codes.inputRightClick.trim()"
+                            :disabled="true"
+                        />
                     </div>
                 </div>
                 <!-- api/listenData -->
@@ -1326,6 +1430,7 @@ import {
     version,
 } from '@tauri-apps/plugin-os'
 import http from '@/utils/http'
+import { confirm } from '@tauri-apps/plugin-dialog'
 import { readFile, writeFile } from '@tauri-apps/plugin-fs'
 import { usePPStore } from '@/store'
 
@@ -1534,9 +1639,9 @@ const osApis = async (func: string) => {
     }
 }
 
-// seticon
+// window api
 const windowFunc = async (func: string) => {
-    const currentWin = await getCurrentWindow()
+    const currentWin = getCurrentWindow()
     switch (func) {
         case 'setIcon':
             const selected: any = await openSelect(false, [])
@@ -1717,13 +1822,10 @@ const windowFunc = async (func: string) => {
             break
         case 'onCloseRequested':
             await currentWin.onCloseRequested(async (event) => {
-                const confirmed = await confirm('Are you sure?')
-                if (!confirmed) {
-                    // user did not confirm closing the window; let's prevent it
-                    event.preventDefault()
-                }
+                console.log('user close requested')
+                event.preventDefault()
             })
-            oneMessage.success('取消最大化成功')
+            oneMessage.success('onCloseRequested')
             break
         case 'onDragDropEvent':
             const unlisten = await getCurrentWindow().onDragDropEvent(
@@ -1739,67 +1841,164 @@ const windowFunc = async (func: string) => {
             )
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'onFocusChanged':
+            const unlistenFocus = currentWin.onFocusChanged(
+                ({ payload: focused }) => {
+                    console.log('Focus changed, window is focused? ' + focused)
+                }
+            )
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'onScaleChanged':
+            const unlistenScale = currentWin.onScaleChanged(({ payload }) => {
+                console.log('Scale changed', payload.scaleFactor, payload.size)
+            })
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'onThemeChanged':
+            const unlistenTheme = currentWin.onThemeChanged(
+                ({ payload: theme }) => {
+                    console.log('New theme: ' + theme)
+                }
+            )
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'setClosable(true)':
+            await currentWin.setClosable(true)
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'setClosable(false)':
+            await currentWin.setClosable(false)
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'setMinimizable(true)':
+            await currentWin.setMinimizable(true)
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'setMinimizable(false)':
+            await currentWin.setMinimizable(false)
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'setMaximizable(true)':
+            await currentWin.setMaximizable(true)
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'setMaximizable(false)':
+            await currentWin.setMaximizable(false)
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'isEnabled':
+            const isEnabled = await currentWin.isEnabled()
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'setEnabled(true)':
+            await currentWin.setEnabled(true)
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'setEnabled(false)':
+            await currentWin.setEnabled(false)
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'setResizable(true)':
+            await currentWin.setResizable(true)
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'setResizable(false)':
+            await currentWin.setResizable(false)
             oneMessage.success('取消最大化成功')
             break
-        case 'toggleMaximize':
-            await currentWin.toggleMaximize()
+        case 'center':
+            await currentWin.center()
             oneMessage.success('取消最大化成功')
             break
-
+        case 'isAlwaysOnTop':
+            const isOnTop = await currentWin.isAlwaysOnTop()
+            console.log('isAlwaysOnTop', isOnTop)
+            break
+        case 'theme':
+            const themeStr = await currentWin.theme()
+            console.log('themeStr', themeStr)
+            break
+        case 'title':
+            const titleStr = await currentWin.title()
+            console.log('titleStr', titleStr)
+            break
+        case 'isVisible':
+            const isVisibleBool = await currentWin.isVisible()
+            console.log('titleStr', isVisibleBool)
+            break
+        case 'isClosable':
+            const isClosableBool = await currentWin.isClosable()
+            console.log('isClosable', isClosableBool)
+            break
+        case 'isMinimizable':
+            const isMinimizableBool = await currentWin.isMinimizable()
+            console.log('isMinimizableBool', isMinimizableBool)
+            break
+        case 'isMaximizable':
+            const isMaximizableBool = await currentWin.isMaximizable()
+            console.log('isMaximizable', isMaximizableBool)
+            break
+        case 'isResizable':
+            const isResizableBool = await currentWin.isResizable()
+            console.log('isResizable', isResizableBool)
+            break
+        case 'isDecorated':
+            const isDecoratedBool = await currentWin.isDecorated()
+            console.log('isDecoratedBool', isDecoratedBool)
+            break
+        case 'isFocused':
+            const isFocusedBool = await currentWin.isFocused()
+            console.log('isFocusedBool', isFocusedBool)
+            break
+        case 'isMaximized':
+            const isMaximizedBool = await currentWin.isMaximized()
+            console.log('isDecoratedBool', isMaximizedBool)
+            break
+        case 'isMinimized':
+            const isMinimizedBool = await currentWin.isMinimized()
+            console.log('isMinimizedBool', isMinimizedBool)
+            break
+        case 'isFullscreen':
+            const isFullscreenBool = await currentWin.isFullscreen()
+            console.log('isFullscreenBool', isFullscreenBool)
+            break
+        case 'outerSize':
+            const outerSizeObj = await currentWin.outerSize()
+            console.log('isDecoratedBool', outerSizeObj)
+            break
+        case 'innerSize':
+            const innerSizeObj = await currentWin.innerSize()
+            console.log('innerSizeObj', innerSizeObj)
+            break
+        case 'outerPosition':
+            const outerPositionObj = await currentWin.outerPosition()
+            console.log('outerPositionObj', outerPositionObj)
+            break
+        case 'innerPosition':
+            const innerPositionObj = await currentWin.innerPosition()
+            console.log('innerPositionObj', innerPositionObj)
+            break
+        case 'scaleFactor':
+            const scaleFactor = await currentWin.scaleFactor()
+            console.log('scaleFactor', scaleFactor)
+            break
+        case 'emitTo':
+            // const isDecoratedBool = await currentWin.isDecorated()
+            console.log('isDecoratedBool')
+            break
+        case 'emit':
+            // const isDecoratedBool = await currentWin.isDecorated()
+            console.log('isDecoratedBool')
+            break
+        case 'once':
+            // const isDecoratedBool = await currentWin.isDecorated()
+            console.log('isDecoratedBool')
+            break
+        case 'listen':
+            // const isDecoratedBool = await currentWin.isDecorated()
+            console.log('isDecoratedBool')
+            break
         default:
             break
     }
@@ -2356,6 +2555,15 @@ listen('download_progress', (event: any) => {
         ((event.payload.downloaded / event.payload.total) * 100).toFixed(2)
     )
 })
+
+// execute code
+const executeCode = (code: string) => {
+    try {
+        eval(code)
+    } catch (error) {
+        console.error('execute code error', error)
+    }
+}
 
 onMounted(() => {
     if (isTauri()) {

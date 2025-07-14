@@ -8,6 +8,7 @@ import { join } from '@tauri-apps/api/path'
 import { ElMessage } from 'element-plus'
 import CryptoJS from 'crypto-js'
 import QRCode from 'qrcode'
+import Codes from '@/utils/codes'
 import { setTheme } from '@tauri-apps/api/app'
 
 // upstream repo info

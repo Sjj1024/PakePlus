@@ -9,6 +9,7 @@
             @change="codeChange"
         >
         </Codemirror>
+        <el-icon class="copyBtn" @click="copyCode"><CopyDocument /></el-icon>
     </el-scrollbar>
 </template>
 
@@ -19,6 +20,8 @@ import { json } from '@codemirror/lang-json'
 import { javascript } from '@codemirror/lang-javascript'
 import { oneDark } from '@codemirror/theme-one-dark'
 import { usePPStore } from '@/store'
+import { CopyDocument } from '@element-plus/icons-vue'
+import { copyText, oneMessage } from '@/utils/common'
 
 const props = defineProps({
     lang: {
@@ -53,6 +56,15 @@ const cmOptions = ref({
     line: true,
 })
 
+const copyCode = async () => {
+    try {
+        await copyText(code.value || '')
+        oneMessage.success('代码已复制！')
+    } catch (err) {
+        oneMessage.error('复制失败')
+    }
+}
+
 const codeChange = (code: string) => {
     console.log('codeChange!', code)
     store.currentProject.customJs = code
@@ -62,5 +74,20 @@ const codeChange = (code: string) => {
 <style scoped lang="scss">
 .codebox {
     height: v-bind(height);
+    position: relative;
+}
+
+.copyBtn {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    cursor: pointer;
+    color: var(--box-shadow);
+    transition: all 0.3s ease;
+
+    &:hover {
+        color: var(--text-color);
+        transform: scale(1.1);
+    }
 }
 </style>

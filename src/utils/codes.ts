@@ -109,7 +109,12 @@ document.body.appendChild(modal)
     modifyEle: `
 document.querySelector("#juejin > div.container.index-container > div > header > div > a > img.logo-img").src = "https://pakeplus.com/app.svg"
     `,
-    disableRightClick: `
+    disRightClick: `
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
+    `,
+    inputRightClick: `
 document.addEventListener('contextmenu', function(e) {
   const target = e.target;
   const isInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
@@ -118,5 +123,12 @@ document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
   }
 });
-    `
+    `,
+    notification: `
+const { invoke } = window.__TAURI__.core
+
+if ('__TAURI__' in window) {
+    invoke('notification', { title: 'test', body: 'notification body' })
+}
+    `,
 }
