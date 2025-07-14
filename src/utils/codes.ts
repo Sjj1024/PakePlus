@@ -132,10 +132,10 @@ if ('__TAURI__' in window) {
 }
     `,
     setTitle: `
-const { invoke } = window.__TAURI__.core
+const { getCurrentWindow } = window.__TAURI__.window
 
 if ('__TAURI__' in window) {
-    invoke('set_title', { title: 'test' })
+   await getCurrentWindow().setTitle('test')
 }
     `,
 }
