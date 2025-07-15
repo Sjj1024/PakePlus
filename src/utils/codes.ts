@@ -131,4 +131,11 @@ if ('__TAURI__' in window) {
     invoke('notification', { title: 'test', body: 'notification body' })
 }
     `,
+    setTitle: `
+const { getCurrentWindow } = window.__TAURI__.window
+
+if ('__TAURI__' in window) {
+   await getCurrentWindow().setTitle('test')
+}
+    `,
 }
