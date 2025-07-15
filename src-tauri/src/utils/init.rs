@@ -45,7 +45,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                 .unwrap();
         }
         // position
-        if config.center || (x == 0.0 && y == 0.0) {
+        if config.center || x <= 0.0 || y <= 0.0 {
             window.center().unwrap();
         } else {
             window
