@@ -176,8 +176,6 @@ pnpm run build
 
 All work is conducted openly on GitHub. Whether you are a core team member or an external contributor, all Pull Requests must go through the same review process.
 
-Please ensure that you have maintained at least one tauri project for at least one year
-
 ## Support
 
 1. wechat and group，my wechat is lanxingme，welcome to join the wechat group.
