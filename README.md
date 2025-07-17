@@ -156,7 +156,7 @@ sudo xattr -r -d com.apple.quarantine /Applications/YourAppName.app
 
 4. After you add the GitHub Token, PakePlus will fork a PakePlus repository into your own repository. All your future projects will rely on this repository for creation and compilation, so please do not delete your PakePlus repository.
 
-## Contribution Guidelines
+## Custom Development
 
 If you want to Contribution PakePlus, ensure your environment is prepared beforehand. Make sure Rust `>=1.63` and Node `>=16` (e.g., `16.18.1`) are installed on your computer. For installation guidance, please refer to the [Tauri Documentation](https://tauri.app/v1/guides/getting-started/prerequisites).
 
