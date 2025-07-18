@@ -24,13 +24,13 @@
                 <h1 class="title">MacOS</h1>
                 <div class="item">
                     <a :href="proxyGithub(macArm.browser_download_url)">
-                        ARM(M1/M2)
+                        Apple Silicon(Arm)
                     </a>
                     <a :href="macArm.browser_download_url"> Github </a>
                 </div>
                 <div class="item">
                     <a :href="proxyGithub(macX64.browser_download_url)">
-                        Intel chip
+                        Intel Chip(X64)
                     </a>
                     <a :href="macX64.browser_download_url"> Github </a>
                 </div>
