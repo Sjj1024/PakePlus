@@ -946,6 +946,7 @@ pub async fn build_local(
     man_json["window"] = serde_json::to_value(config).unwrap();
     man_json["debug"] = serde_json::to_value(debug).unwrap();
     man_json["name"] = serde_json::to_value(project_name).unwrap();
+    man_json["visible"] = serde_json::to_value(false).unwrap();
     #[cfg(target_os = "windows")]
     {
         if !base64_png.is_empty() {
