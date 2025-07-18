@@ -139,6 +139,10 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         window
             .set_size(tauri::PhysicalSize::new(width, height))
             .unwrap();
+    } else {
+        window
+            .set_size(tauri::PhysicalSize::new(1024, 720))
+            .unwrap();
     }
     // position
     if config.center || x <= 0.0 || y <= 0.0 {
