@@ -76,7 +76,7 @@ Tauri是否应在应用启动时创建此窗口。<br>
 窗口初始时是否获得焦点。<br>
 默认值：true</p>
 <p class="has-line-data" data-line-start="66" data-line-end="68">fullscreen: boolean<br>
-窗口启动时是否为全屏。</p>
+窗口启动时是否为全屏。不会保留最大化最小化和关闭按钮和标题栏，甚至会覆盖任务栏。要关闭软件的时候，需要打开任务管理器来关闭。</p>
 <p class="has-line-data" data-line-start="69" data-line-end="72">height: number (double格式)<br>
 窗口高度。<br>
 默认值：600</p>
@@ -98,7 +98,7 @@ macOS：禁用窗口标题栏中的&quot;缩放&quot;按钮。<br>
 Linux/iOS/Android：不支持。<br>
 默认值：true</p>
 <p class="has-line-data" data-line-start="95" data-line-end="97">maximized: boolean<br>
-窗口是否最大化。</p>
+窗口是否最大化。会保留最大化最小化和关闭按钮和标题栏。</p>
 <p class="has-line-data" data-line-start="98" data-line-end="100">maxWidth: number | null (double格式)<br>
 窗口最大宽度。</p>
 <p class="has-line-data" data-line-start="101" data-line-end="103">minHeight: number | null (double格式)<br>
