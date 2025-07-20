@@ -132,7 +132,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     if config.fullscreen
         || store
             .get("fullscreen")
-            .unwrap_or_default()
+            .unwrap_or(serde_json::Value::Bool(false))
             .as_bool()
             .unwrap()
     {
@@ -140,7 +140,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     } else if config.maximized
         || store
             .get("maximized")
-            .unwrap_or_default()
+            .unwrap_or(serde_json::Value::Bool(false))
             .as_bool()
             .unwrap()
     {
