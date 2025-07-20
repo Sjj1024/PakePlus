@@ -135,13 +135,11 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
             .is_some_and(|x| x.as_object().unwrap()["fullscreen"].as_bool().unwrap())
     {
         window.set_fullscreen(true).unwrap();
+    } else if config.maximized || store.get("maximized").is_some_and(|x| x.as_bool().unwrap()) {
+        window.maximize().unwrap();
     } else if width > 0.0 && height > 0.0 {
         window
             .set_size(tauri::PhysicalSize::new(width, height))
-            .unwrap();
-    } else {
-        window
-            .set_size(tauri::PhysicalSize::new(1024, 720))
             .unwrap();
     }
     // position
@@ -156,7 +154,17 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     window.on_window_event(move |event| {
         if let WindowEvent::Resized(size) = event {
             // println!("window_size: {:?}", size);
-            if size.width > 0 && size.height > 0 {
+            if window_clone.is_maximized().unwrap_or(false) {
+                let _ = store.set(
+                    "window_maximized",
+                    json!({
+                        "maximized": true
+                    }),
+                );
+            } else if size.width > 0
+                && size.height > 0
+                && !window_clone.is_minimized().unwrap_or(false)
+            {
                 let _ = store.set(
                     "window_size",
                     json!({
@@ -183,10 +191,16 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
             }
         } else if let WindowEvent::Moved(position) = event {
             // println!("window_position: {:?}", position);
-            let _ = store.set(
-                "window_position",
-                json!({ "x": position.x, "y": position.y }),
-            );
+            if position.x > 0
+                && position.y > 0
+                && !window_clone.is_minimized().unwrap_or(false)
+                && !window_clone.is_maximized().unwrap_or(false)
+            {
+                let _ = store.set(
+                    "window_position",
+                    json!({ "x": position.x, "y": position.y }),
+                );
+            }
         } else if let WindowEvent::DragDrop(drag_drop) = event {
             println!("drag_drop: {:?}", drag_drop);
         }
