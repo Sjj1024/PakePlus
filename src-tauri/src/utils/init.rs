@@ -123,12 +123,23 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     let window_position: Option<serde_json::Value> = store.get("window_position");
     let mut x = 0.0;
     let mut y = 0.0;
+
     // println!("windows_position: {:?}", window_position);
     if let Some(window_position) = window_position {
         let position = window_position.as_object().unwrap();
         x = position["x"].as_f64().unwrap();
         y = position["y"].as_f64().unwrap();
     }
+
+    // position
+    if config.center || x <= 0.0 || y <= 0.0 {
+        window.center().unwrap();
+    } else {
+        window
+            .set_position(tauri::PhysicalPosition::new(x, y))
+            .unwrap();
+    }
+
     if config.fullscreen
         || store
             .get("fullscreen")
@@ -148,14 +159,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     } else if width > 0.0 && height > 0.0 {
         window
             .set_size(tauri::PhysicalSize::new(width, height))
-            .unwrap();
-    }
-    // position
-    if config.center || x <= 0.0 || y <= 0.0 {
-        window.center().unwrap();
-    } else {
-        window
-            .set_position(tauri::PhysicalPosition::new(x, y))
             .unwrap();
     }
     let window_clone = window.clone();
