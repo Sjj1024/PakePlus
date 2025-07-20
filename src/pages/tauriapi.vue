@@ -1496,7 +1496,8 @@ const handleMenu = (index: string) => {
         if (index === '4') {
             router.push('/about')
         } else {
-            oneMessage.error(t('apiLimitClient'))
+            menuIndex.value = index
+            // oneMessage.error(t('apiLimitClient'))
         }
     }
     // ppclient and web
@@ -1589,11 +1590,6 @@ const sendEvent = async () => {
 const unlistenEvent = async () => {
     unlisten && unlisten()
     textarea.value = 'event:' + t('unlistenEvent')
-}
-
-// window:open window
-const openWindow = async () => {
-    console.log('window')
 }
 
 // os function
