@@ -131,7 +131,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     }
     if config.fullscreen
         || store
-            .get("window_fullscreen")
+            .get("fullscreen")
             .unwrap_or_default()
             .as_bool()
             .unwrap()
@@ -163,7 +163,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         if let WindowEvent::Resized(size) = event {
             // println!("window_size: {:?}", size);
             if window_clone.is_maximized().unwrap_or(false) {
-                let _ = store.set("window_maximized", true);
+                let _ = store.set("maximized", true);
             } else if size.width > 0
                 && size.height > 0
                 && !window_clone.is_minimized().unwrap_or(false)
@@ -175,13 +175,13 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                         "height": size.height
                     }),
                 );
-                let _ = store.set("window_maximized", false);
+                let _ = store.set("maximized", false);
             }
             if window_clone.is_fullscreen().unwrap_or(false) {
                 // println!("Window entered fullscreen mode.");
-                let _ = store.set("window_fullscreen", true);
+                let _ = store.set("fullscreen", true);
             } else {
-                let _ = store.set("window_fullscreen", false);
+                let _ = store.set("fullscreen", false);
             }
         } else if let WindowEvent::Moved(position) = event {
             // println!("window_position: {:?}", position);
