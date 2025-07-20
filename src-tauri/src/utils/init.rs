@@ -132,10 +132,18 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     if config.fullscreen
         || store
             .get("window_fullscreen")
-            .is_some_and(|x| x.as_object().unwrap()["fullscreen"].as_bool().unwrap())
+            .unwrap_or_default()
+            .as_bool()
+            .unwrap()
     {
         window.set_fullscreen(true).unwrap();
-    } else if config.maximized || store.get("maximized").is_some_and(|x| x.as_bool().unwrap()) {
+    } else if config.maximized
+        || store
+            .get("maximized")
+            .unwrap_or_default()
+            .as_bool()
+            .unwrap()
+    {
         window.maximize().unwrap();
     } else if width > 0.0 && height > 0.0 {
         window
@@ -155,12 +163,7 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
         if let WindowEvent::Resized(size) = event {
             // println!("window_size: {:?}", size);
             if window_clone.is_maximized().unwrap_or(false) {
-                let _ = store.set(
-                    "window_maximized",
-                    json!({
-                        "maximized": true
-                    }),
-                );
+                let _ = store.set("window_maximized", true);
             } else if size.width > 0
                 && size.height > 0
                 && !window_clone.is_minimized().unwrap_or(false)
@@ -172,22 +175,13 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                         "height": size.height
                     }),
                 );
+                let _ = store.set("window_maximized", false);
             }
             if window_clone.is_fullscreen().unwrap_or(false) {
                 // println!("Window entered fullscreen mode.");
-                let _ = store.set(
-                    "window_fullscreen",
-                    json!({
-                        "fullscreen": true
-                    }),
-                );
+                let _ = store.set("window_fullscreen", true);
             } else {
-                let _ = store.set(
-                    "window_fullscreen",
-                    json!({
-                        "fullscreen": false
-                    }),
-                );
+                let _ = store.set("window_fullscreen", false);
             }
         } else if let WindowEvent::Moved(position) = event {
             // println!("window_position: {:?}", position);
