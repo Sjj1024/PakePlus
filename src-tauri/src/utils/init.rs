@@ -105,8 +105,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                         json!({ "x": position.x, "y": position.y }),
                     );
                 }
-            } else if let WindowEvent::DragDrop(drag_drop) = event {
-                println!("drag_drop: {:?}", drag_drop);
             }
         });
     }
