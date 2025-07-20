@@ -16,7 +16,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
 
     if true {
         let store = app.store("app_data.json").unwrap();
-
         let window_size: Option<serde_json::Value> = store.get("window_size");
         let mut width = 0.0;
         let mut height = 0.0;
@@ -25,7 +24,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
             width = size["width"].as_f64().unwrap();
             height = size["height"].as_f64().unwrap();
         }
-
         let window_position: Option<serde_json::Value> = store.get("window_position");
         let mut x = 0.0;
         let mut y = 0.0;
@@ -36,7 +34,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
             x = position["x"].as_f64().unwrap();
             y = position["y"].as_f64().unwrap();
         }
-
         // position
         if config.center || x <= 0.0 || y <= 0.0 {
             window.center().unwrap();
