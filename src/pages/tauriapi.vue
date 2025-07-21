@@ -731,22 +731,33 @@
                 <div v-else-if="menuIndex === '3-14'" class="cardContent">
                     <h1 class="cardTitle">pay method</h1>
                     <p>provide pay method</p>
-                    <el-button @click="getPayJsCode('weixin')">
-                        wxpay pay1
-                    </el-button>
-                    <el-button @click="getPayJsCode('alipay')">
-                        alipay pay1
-                    </el-button>
-                    <el-button @click="getYunPayCode('weixin')">
-                        weixin pay2
-                    </el-button>
-                    <el-button @click="getZPayCode('alipay')">
-                        alipay pay2
-                    </el-button>
-                    <el-button @click="getPayJsCode('alipay')">
-                        paypal
-                    </el-button>
-                    <el-button @click="getPpApis"> ppapis </el-button>
+                    <div class="cardBox">
+                        <!-- no callback -->
+                        <el-button @click="getPayJsCode('weixin')">
+                            wxpay pay1
+                        </el-button>
+                        <el-button @click="getPayJsCode('alipay')">
+                            alipay pay1
+                        </el-button>
+                        <!-- callback -->
+                        <el-button @click="getPayJsCallback('weixin')">
+                            wxpay pay2
+                        </el-button>
+                        <el-button @click="getPayJsCallback('alipay')">
+                            alipay pay2
+                        </el-button>
+                        <!-- yun pay callback -->
+                        <el-button @click="getYunPayCode('weixin')">
+                            weixin pay3
+                        </el-button>
+                        <el-button @click="getZPayCode('alipay')">
+                            alipay pay3
+                        </el-button>
+                        <el-button @click="getPayJsCode('alipay')">
+                            paypal
+                        </el-button>
+                        <el-button @click="getPpApis"> ppapis </el-button>
+                    </div>
                 </div>
                 <!-- plugin-os api -->
                 <div v-else-if="menuIndex === '2-14'" class="cardContent">
@@ -2084,6 +2095,11 @@ const getPayJsCode = async (payMathod: string = 'weixin') => {
     qrCodeData.value = url
 }
 
+// get pay js callback
+const getPayJsCallback = async (payMathod: string = 'weixin') => {
+    console.log('getPayJsCallback')
+}
+
 // get ppapi json
 const getPpApis = async () => {
     const response = await payApi.getPpApis()
@@ -2175,13 +2191,13 @@ const getZPayCode = async (payMathod: string = 'alipay') => {
     formData.append('clientip', '192.168.1.100')
     formData.append('sign_type', 'MD5')
     formData.append('sign', getPaySign(formData, zPaySignKey))
-    const response: any = await payApi.getZPayCode2(formData)
-    // const response: any = await payApi.getZPayCode(order)
+    // const response: any = await payApi.getZPayCode2(formData)
+    const response: any = await payApi.getZPayCode(order)
     console.log('response----', response)
-    if (response.status === 200 && response.data.code === 1) {
+    if (response.code === 1) {
         dialogVisible.value = true
         startPayTime()
-        const url = await QRCode.toDataURL(response.data.payurl)
+        const url = await QRCode.toDataURL(response.payurl)
         console.log('url', url)
         qrCodeData.value = url
     } else {
