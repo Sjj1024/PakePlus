@@ -2097,7 +2097,40 @@ const getPayJsCode = async (payMathod: string = 'weixin') => {
 
 // get pay js callback
 const getPayJsCallback = async (payMathod: string = 'weixin') => {
-    console.log('getPayJsCallback')
+    payMethod.value = 'payjs'
+    payType.value = payMathod
+    let money = 10
+    try {
+        money = parseInt(textarea.value)
+        if (isNaN(money)) {
+            oneMessage.error(t('payAmountError'))
+            return
+        }
+    } catch (error) {
+        oneMessage.error(t('payAmountError'))
+        return
+    }
+    const order: any = {
+        mchid: payJsMchid,
+        out_trade_no: 'payjs_' + Date.now(),
+        total_fee: money,
+        body: 'PakePlus测试订单',
+        type: payMathod === 'weixin' ? null : 'alipay',
+    }
+    // get pay sign
+    order.sign = getPaySign(order, payJsSignKey)
+    const response: any = await payApi.getPayJsCallback(order)
+    console.log('payjs callback response----', response)
+    if (response.return_code === 1) {
+        dialogVisible.value = true
+        startPayTime()
+        payOrderNo.value = response.payjs_order_id
+        // const url = await QRCode.toDataURL(response.qrcode)
+        // console.log('url', url)
+        qrCodeData.value = response.qrcode
+    } else {
+        oneMessage.error(t('getPayCodeError'))
+    }
 }
 
 // get ppapi json
@@ -2180,18 +2213,6 @@ const getZPayCode = async (payMathod: string = 'alipay') => {
     // get pay sign
     order.sign = getPaySign(order, zPaySignKey)
     console.log('order----', order)
-    // formData post
-    const formData = new FormData()
-    formData.append('pid', zPayMchId)
-    formData.append('type', payMathod)
-    formData.append('out_trade_no', payOrderNo.value)
-    formData.append('notify_url', 'https://juejin.cn/')
-    formData.append('name', 'VIP会员')
-    formData.append('money', money.toString())
-    formData.append('clientip', '192.168.1.100')
-    formData.append('sign_type', 'MD5')
-    formData.append('sign', getPaySign(formData, zPaySignKey))
-    // const response: any = await payApi.getZPayCode2(formData)
     const response: any = await payApi.getZPayCode(order)
     console.log('response----', response)
     if (response.code === 1) {
@@ -2229,6 +2250,18 @@ const checkZPayStatus = async () => {
 const checkPayJsStatus = async () => {
     if (!payOrderNo.value) {
         return
+    } else {
+        const order: any = {
+            payjs_order_id: payOrderNo.value,
+        }
+        order.sign = getPaySign(order, payJsSignKey)
+        const response: any = await payApi.checkPayJsStatus(order)
+        console.log('payjs checkresponse----', response)
+        if (response.return_code === 1 && response.status === 1) {
+            oneMessage.success(t('paySuccess'))
+        } else {
+            oneMessage.error(t('payFail'))
+        }
     }
 }
 

@@ -30,10 +30,9 @@ const http = async (url: string, options: any = {}) => {
     if (!options.headers)
         options.headers = {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
-            'User-Agent': 'PostmanRuntime/7.41.2',
         }
-    if (options?.data) {
-        options.body = JSON.stringify(options.data)
+    if (options?.body) {
+        options.body = JSON.stringify(options.body)
     }
     // get params
     if (options?.params) {
