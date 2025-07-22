@@ -1,6 +1,6 @@
 <h4 align="right"> 
 <span href=".README.md">English</span> 
-<a href="https://ppofficial.netlify.app/" 
+<a href="https://ppofficial.netlify.app/zh/" 
 style="margin: 0 10px;" >简体中文</a> 
 <a href="https://github.com/Sjj1024/PakePlus/discussions/108">日本语</a>
 </h4>  
