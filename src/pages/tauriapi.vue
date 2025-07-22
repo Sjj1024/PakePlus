@@ -2125,9 +2125,8 @@ const getPayJsCallback = async (payMathod: string = 'weixin') => {
         dialogVisible.value = true
         startPayTime()
         payOrderNo.value = response.payjs_order_id
-        // const url = await QRCode.toDataURL(response.qrcode)
-        // console.log('url', url)
-        qrCodeData.value = response.qrcode
+        const url = await QRCode.toDataURL(response.code_url)
+        qrCodeData.value = url
     } else {
         oneMessage.error(t('getPayCodeError'))
     }
