@@ -19,7 +19,8 @@ style="margin: 0 10px;" >简体中文</a>
     <a href="https://hellogithub.com/repository/d148f8fac78b45fe9b94c82757c3f86b" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=d148f8fac78b45fe9b94c82757c3f86b&claim_uid=LXfeQOxRDEmSUGC&theme=small" alt="Featured｜HelloGitHub"></a>
 </p>
 
-<div align="left">PakePlus supports Mac, Windows, Linux, and Android & iOS. There’s no need to install complex dependencies locally, PakePlus is only about 10MB in size. For the latest version, please see the <a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">release page</a>. or visit: <a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>. Check the README for information on <a href="#popular-packages">popular packages</a> and <a href="#development">custom development</a>. Feel free to share your suggestions in the <a href="https://github.com/Sjj1024/PakePlus/discussions">discussion area</a>.</div>
+<div align="left">PakePlus supports Mac, Windows, Linux, and Android & iOS. There’s no need to install complex dependencies locally, PakePlus is only about 10MB in size. For the latest version, please see the <a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">release page</a>. or visit: <a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>. 
+Document: <a href="https://pakeplus.com/guide/" target="_blank">PakePlus Guide</a></div>
 
 https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
