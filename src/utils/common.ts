@@ -36,11 +36,6 @@ export const zPayDomain = import.meta.env.VITE_ZPAY_DOMAIN || ''
 export const zPayMchId = import.meta.env.VITE_ZPAY_MCHID || ''
 export const zPaySignKey = import.meta.env.VITE_ZPAY_SIGN_KEY || ''
 
-// Validate critical environment variables
-if (import.meta.env.PROD && (!ppApisDomain || !basePayjsUrl)) {
-    console.warn('Missing critical payment configuration in production environment')
-}
-
 // urlMap
 export const urlMap = {
     pakeplus: 'https://www.pakeplus.com',

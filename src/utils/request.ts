@@ -56,10 +56,6 @@ http.interceptors.response.use(
         if (rateLimit.used && rateLimit.used > 1000) {
             oneMessage.error(i18n.global.t('apiLimit'))
         }
-        // 如果接近限制，给出警告
-        if (rateLimit.remaining && rateLimit.remaining < 100) {
-            console.warn(`GitHub API rate limit warning: ${rateLimit.remaining} requests remaining`)
-        }
         return Promise.resolve(res)
     },
     (error) => {
@@ -69,40 +65,21 @@ http.interceptors.response.use(
             status: error.response?.status,
             message: error.message,
         })
-        
-        // Handle different types of errors more specifically
+
         if (error.response) {
             const status = error.response.status
             if (status >= 200 && status < 500) {
-                return Promise.resolve({ 
-                    status: status, 
-                    data: error.response.data || error.data 
+                return Promise.resolve({
+                    status: status,
+                    data: error.response.data || error.data,
                 })
-            }
-            
-            // Handle specific error codes
-            switch (status) {
-                case 401:
-                    oneMessage.error('Authentication failed. Please check your token.')
-                    break
-                case 403:
-                    oneMessage.error('Access forbidden. Rate limit exceeded or insufficient permissions.')
-                    break
-                case 404:
-                    oneMessage.error('Resource not found.')
-                    break
-                case 422:
-                    oneMessage.error('Validation failed. Please check your input.')
-                    break
-                default:
-                    oneMessage.error(`Request failed with status ${status}`)
             }
         } else if (error.request) {
             oneMessage.error('Network error. Please check your connection.')
         } else {
             oneMessage.error('Request configuration error.')
         }
-        
+
         return Promise.reject(error)
     }
 )
