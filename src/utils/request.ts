@@ -47,22 +47,62 @@ http.interceptors.request.use((config) => {
 http.interceptors.response.use(
     (res) => {
         const rateLimit = {
-            limit: res.headers['x-ratelimit-limit'],
-            remaining: res.headers['x-ratelimit-remaining'],
-            reset: res.headers['x-ratelimit-reset'],
-            used: res.headers['x-ratelimit-used'],
+            limit: parseInt(res.headers['x-ratelimit-limit']) || 0,
+            remaining: parseInt(res.headers['x-ratelimit-remaining']) || 0,
+            reset: parseInt(res.headers['x-ratelimit-reset']) || 0,
+            used: parseInt(res.headers['x-ratelimit-used']) || 0,
         }
         // 如果已使用超过1000次，显示错误
         if (rateLimit.used && rateLimit.used > 1000) {
             oneMessage.error(i18n.global.t('apiLimit'))
         }
+        // 如果接近限制，给出警告
+        if (rateLimit.remaining && rateLimit.remaining < 100) {
+            console.warn(`GitHub API rate limit warning: ${rateLimit.remaining} requests remaining`)
+        }
         return Promise.resolve(res)
     },
     (error) => {
-        console.log('axios error:', error)
-        if (200 <= error.status && error.status < 500) {
-            return Promise.resolve({ status: error.status, data: error.data })
+        console.error('HTTP request failed:', {
+            url: error.config?.url,
+            method: error.config?.method,
+            status: error.response?.status,
+            message: error.message,
+        })
+        
+        // Handle different types of errors more specifically
+        if (error.response) {
+            const status = error.response.status
+            if (status >= 200 && status < 500) {
+                return Promise.resolve({ 
+                    status: status, 
+                    data: error.response.data || error.data 
+                })
+            }
+            
+            // Handle specific error codes
+            switch (status) {
+                case 401:
+                    oneMessage.error('Authentication failed. Please check your token.')
+                    break
+                case 403:
+                    oneMessage.error('Access forbidden. Rate limit exceeded or insufficient permissions.')
+                    break
+                case 404:
+                    oneMessage.error('Resource not found.')
+                    break
+                case 422:
+                    oneMessage.error('Validation failed. Please check your input.')
+                    break
+                default:
+                    oneMessage.error(`Request failed with status ${status}`)
+            }
+        } else if (error.request) {
+            oneMessage.error('Network error. Please check your connection.')
+        } else {
+            oneMessage.error('Request configuration error.')
         }
+        
         return Promise.reject(error)
     }
 )
