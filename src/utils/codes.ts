@@ -86,13 +86,16 @@ const { invoke } = window.__TAURI__.core
 if ('__TAURI__' in window) {
     await invoke('download_file', {
         url: 'https://www.baidu.com/img/flexible/logo/pc/result.png',
-        savePath: 'test.png',
+        savePath: '',
         fileId: 'test',
     })
 }`,
     downProgress: `
+const { listen } = window.__TAURI__.event
+
+let downloadProgress = 0
 listen('download_progress', (event: any) => {
-    downloadProgress.value = Number(
+    downloadProgress = Number(
         ((event.payload.downloaded / event.payload.total) * 100).toFixed(2)
     )
 })
@@ -129,6 +132,13 @@ const { invoke } = window.__TAURI__.core
 
 if ('__TAURI__' in window) {
     invoke('notification', { title: 'test', body: 'notification body' })
+}
+    `,
+    setTitle: `
+const { getCurrentWindow } = window.__TAURI__.window
+
+if ('__TAURI__' in window) {
+   await getCurrentWindow().setTitle('test')
 }
     `,
 }

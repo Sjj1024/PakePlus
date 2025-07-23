@@ -23,18 +23,18 @@ export const devBranch = import.meta.env.VITE_DEV_BRANCH
 export const fileSizeLimit = import.meta.env.VITE_FILE_LIMIT_SIZE * 1024 * 1024
 export const fileLimitNumber = import.meta.env.VITE_FILE_LIMIT_NUMBER
 
-// pay info
-export const ppApisDomain = import.meta.env.VITE_PPAPI_DOMAIN
-export const basePayjsUrl = import.meta.env.VITE_PAYJS_DOMAIN
-export const payJsMchid = import.meta.env.VITE_PAYJS_MCHID
-export const payJsSignKey = import.meta.env.VITE_PAYJS_SIGN_KEY
-export const baseYunPayUrl = import.meta.env.VITE_YUNPAY_DOMAIN
-export const yunPayMchid = import.meta.env.VITE_YUNPAY_MCHID
-export const yunPaySignKey = import.meta.env.VITE_YUNPAY_SIGN_KEY
-export const rhExeUrl = import.meta.env.VITE_LOCAL_RHEXE
-export const zPayDomain = import.meta.env.VITE_ZPAY_DOMAIN
-export const zPayMchId = import.meta.env.VITE_ZPAY_MCHID
-export const zPaySignKey = import.meta.env.VITE_ZPAY_SIGN_KEY
+// pay info - ensure these are properly configured in environment
+export const ppApisDomain = import.meta.env.VITE_PPAPI_DOMAIN || ''
+export const basePayjsUrl = import.meta.env.VITE_PAYJS_DOMAIN || ''
+export const payJsMchid = import.meta.env.VITE_PAYJS_MCHID || ''
+export const payJsSignKey = import.meta.env.VITE_PAYJS_SIGN_KEY || ''
+export const baseYunPayUrl = import.meta.env.VITE_YUNPAY_DOMAIN || ''
+export const yunPayMchid = import.meta.env.VITE_YUNPAY_MCHID || ''
+export const yunPaySignKey = import.meta.env.VITE_YUNPAY_SIGN_KEY || ''
+export const rhExeUrl = import.meta.env.VITE_LOCAL_RHEXE || ''
+export const zPayDomain = import.meta.env.VITE_ZPAY_DOMAIN || ''
+export const zPayMchId = import.meta.env.VITE_ZPAY_MCHID || ''
+export const zPaySignKey = import.meta.env.VITE_ZPAY_SIGN_KEY || ''
 
 // urlMap
 export const urlMap = {
@@ -347,8 +347,13 @@ export const convertToLocalTime = (utcDateTime: string) => {
 
 // get qrcode
 export const getQrcode = async (data: string) => {
-    const qrcodeUrl = await QRCode.toDataURL(data)
-    return qrcodeUrl
+    try {
+        const qrcodeUrl = await QRCode.toDataURL(data)
+        return qrcodeUrl
+    } catch (error) {
+        console.error('Failed to generate QR code:', error)
+        return null
+    }
 }
 
 // base64 encode
@@ -989,10 +994,28 @@ export const getRelease = async (
 
 // copy text
 export const copyText = async (text: string) => {
-    if (isTauri) {
-        await writeText(text)
-    } else {
-        navigator.clipboard.writeText(text)
+    try {
+        if (isTauri) {
+            await writeText(text)
+        } else {
+            await navigator.clipboard.writeText(text)
+        }
+        console.log('Text copied to clipboard successfully')
+    } catch (error) {
+        console.error('Failed to copy text to clipboard:', error)
+        // Fallback method for older browsers
+        try {
+            const textArea = document.createElement('textarea')
+            textArea.value = text
+            document.body.appendChild(textArea)
+            textArea.select()
+            document.execCommand('copy')
+            document.body.removeChild(textArea)
+            console.log('Text copied using fallback method')
+        } catch (fallbackError) {
+            console.error('Fallback copy method also failed:', fallbackError)
+            throw new Error('Failed to copy text to clipboard')
+        }
     }
 }
 

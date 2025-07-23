@@ -371,6 +371,7 @@ import {
     isDev,
     syncAllBranch,
 } from '@/utils/common'
+import { confirm } from '@tauri-apps/plugin-dialog'
 import ppconfig from '@root/scripts/ppconfig.json'
 import ppIcon from '@/assets/images/pakeplus.png'
 import { useI18n } from 'vue-i18n'

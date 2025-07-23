@@ -18,6 +18,24 @@ export default {
             data: params,
         })
     },
+    getPayJsCallback(params: any) {
+        return http(`${basePayjsUrl}/api/native`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            params: params,
+        })
+    },
+    checkPayJsStatus(params: any) {
+        return http(`${basePayjsUrl}/api/check`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            params: params,
+        })
+    },
     getYunPayCode(params: any) {
         return request(`${baseYunPayUrl}/api/pay/wxpay/nativePay`, {
             method: 'post',

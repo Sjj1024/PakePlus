@@ -3,7 +3,8 @@
 ::: danger 注意
 使用桌面端 API 的前提是在更多配置中，开启全局 TauriApi，然后才可以打包发布使用！  
 :::
-桌面端API主要是集成了tauri2的所有api接口，还有PakePlus自定义的一些api接口，一定要开启全局TauriApi，然后才可以打包发布使用，否则不生效的。开发过程中，可以通过 window.__TAURI__ 来查看有哪些api接口，并可以查看接口类型。
+
+桌面端 API 主要是集成了 tauri2 的所有 api 接口，还有 PakePlus 自定义的一些 api 接口，一定要开启全局 TauriApi，然后才可以打包发布使用，否则不生效的。开发过程中，可以通过 window.**TAURI** 来查看有哪些 api 接口，并可以查看接口类型。
 
 ## JS 脚本中使用
 
@@ -138,7 +139,7 @@ pnpm install @tauri-apps/plugin-os
 
 ## PakePlusApi
 
-本章后面的API接口是PakePlus开发的一些rust后端接口，可以在js中直接调用使用，也仅仅只能在PakePlus项目中打包使用。请勿将此API用于原生的tauri项目。
+本章后面的 API 接口是 PakePlus 开发的一些 rust 后端接口，可以在 js 中直接调用使用，也仅仅只能在 PakePlus 项目中打包使用。请勿将此 API 用于原生的 tauri 项目。
 
 ## 打开 URL(本窗口)
 
@@ -205,21 +206,21 @@ webview.once('tauri://error', function (e) {
 ```js
 const { invoke } = window.__TAURI__.core
 const hookClick = (e) => {
-const origin = e.target.closest('a')
-const isBaseTargetBlank = document.querySelector(
-    'head base[target="_blank"]'
-)
-if (
-    (origin && origin.href && origin.target === '_blank') ||
-    (origin && origin.href && isBaseTargetBlank)
-) {
-    e.preventDefault()
-    invoke('open_url', { url: origin.href })
-}
+    const origin = e.target.closest('a')
+    const isBaseTargetBlank = document.querySelector(
+        'head base[target="_blank"]'
+    )
+    if (
+        (origin && origin.href && origin.target === '_blank') ||
+        (origin && origin.href && isBaseTargetBlank)
+    ) {
+        e.preventDefault()
+        invoke('open_url', { url: origin.href })
+    }
 }
 
 window.open = function (url, target, features) {
-invoke('open_url', { url: url })
+    invoke('open_url', { url: url })
 }
 
 document.addEventListener('click', hookClick, { capture: true })

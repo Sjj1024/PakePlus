@@ -30,10 +30,9 @@ const http = async (url: string, options: any = {}) => {
     if (!options.headers)
         options.headers = {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
-            'User-Agent': 'PostmanRuntime/7.41.2',
         }
-    if (options?.data) {
-        options.body = JSON.stringify(options.data)
+    if (options?.body) {
+        options.body = JSON.stringify(options.body)
     }
     // get params
     if (options?.params) {
@@ -43,17 +42,9 @@ const http = async (url: string, options: any = {}) => {
     console.log('request-------', buildFullPath(baseURL, url), options)
     return fetch(buildFullPath(baseURL, url), options)
         .then(async (response: any) => {
-            console.log('fetch success response', response.json())
+            console.log('fetch success response')
             // maybe response.body is null
-            const data = response.body ? await response.json() : {}
-            console.log('data----', data)
-            if (response.status >= 200 && response.status < 500) {
-                return Promise.resolve({ status: response.status, data: data })
-            }
-            return Promise.reject({
-                status: response.status,
-                data: data,
-            })
+            return await response.json()
         })
         .catch((error) => {
             console.error('fetch error', error)

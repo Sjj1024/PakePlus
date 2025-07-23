@@ -257,11 +257,13 @@ listen('download_progress', (event: any) => {
 })
 
 // download file
-let selectedDir: any = ref('')
+let selectedDir: any = ref(localStorage.getItem('selectedDir') || '')
 const downAssets = async (asset: any) => {
     selectedDir.value = await openSelect(true, [])
     if (!selectedDir.value) {
         return
+    } else {
+        localStorage.setItem('selectedDir', selectedDir.value)
     }
     const fileId = `${asset.id}`
     const url = asset.browser_download_url
