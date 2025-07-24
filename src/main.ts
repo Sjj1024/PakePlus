@@ -17,7 +17,9 @@ const pinia = createPinia()
 app.use(pinia)
 app.use(router)
 app.use(i18n)
-createGtag({
-    tagId: import.meta.env.VITE_GTAG_ID,
-})
+if (import.meta.env.VITE_GTAG_ID) {
+    createGtag({
+        tagId: import.meta.env.VITE_GTAG_ID,
+    });
+}
 app.mount('#app')
