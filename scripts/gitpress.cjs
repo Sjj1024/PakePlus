@@ -18,9 +18,6 @@ function copyStatic() {
     const staticPath = path.join(__dirname, '../docs/static')
     const distStaticPath = path.join(__dirname, '../docs/dist/static')
     fs.cpSync(staticPath, distStaticPath, { recursive: true })
-    // 将docs/index_zh.html 复制到 docs/dist/
-    // 将docs/index_en.html 复制到 docs/dist/
-    // 将docs/index_ja.html 复制到 docs/dist/
     const htmlFiles = ['index_zh.html', 'index_en.html', 'index_ja.html']
     htmlFiles.forEach((file) => {
         fs.cpSync(

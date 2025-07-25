@@ -7,7 +7,7 @@ hero:
     text: 'Turn Web into Desktop/Mobile Apps'
     tagline: Package Web/Vue/React projects into Desktop/Mobile Apps in minutes
     image:
-        src: ../pplogo.png
+        src: ./pplogo.png
         alt: PakePlus
     actions:
         - theme: brand
