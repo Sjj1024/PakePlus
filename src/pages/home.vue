@@ -398,7 +398,12 @@ const copyToken = () => {
 
 // logout
 const logout = async () => {
-    localStorage.clear()
+    localStorage.removeItem('token')
+    localStorage.removeItem('userInfo')
+    localStorage.removeItem('projectList')
+    localStorage.removeItem('releases')
+    localStorage.removeItem('currentProject')
+    localStorage.removeItem('shaInfo')
     store.$reset()
 }
 
