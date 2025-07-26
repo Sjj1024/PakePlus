@@ -757,6 +757,8 @@
                             paypal
                         </el-button>
                         <el-button @click="getPpApis"> ppapis </el-button>
+                        <el-button @click="getEncrypt"> encrypt加密 </el-button>
+                        <el-button @click="getDecrypt"> decrypt解密 </el-button>
                     </div>
                 </div>
                 <!-- plugin-os api -->
@@ -1322,6 +1324,8 @@ import {
     zPaySignKey,
     creatDeviceid,
     devPassword,
+    decryptData,
+    encryptData,
 } from '@/utils/common'
 import About from '@/pages/about.vue'
 import {
@@ -2143,6 +2147,20 @@ const getPpApis = async () => {
     } else {
         oneMessage.error(t('getPpApisError'))
     }
+}
+
+// get encrypt
+const getEncrypt = async () => {
+    const response = await encryptData(textarea.value)
+    console.log('response----', response)
+    textarea.value = response
+}
+
+// get decrypt
+const getDecrypt = async () => {
+    const response: any = await decryptData(textarea.value)
+    console.log('response----', response)
+    textarea.value = response
 }
 
 // get yun pay code
