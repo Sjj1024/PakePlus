@@ -36,6 +36,10 @@ export const zPayDomain = import.meta.env.VITE_ZPAY_DOMAIN || ''
 export const zPayMchId = import.meta.env.VITE_ZPAY_MCHID || ''
 export const zPaySignKey = import.meta.env.VITE_ZPAY_SIGN_KEY || ''
 
+// pakeplus dev info
+export const devPassword = import.meta.env.VITE_DEV_PASSWORD || ''
+export const encryptPassword = import.meta.env.VITE_ENCRYPT_PASSWORD || ''
+
 // urlMap
 export const urlMap = {
     pakeplus: 'https://www.pakeplus.com',
@@ -1352,13 +1356,8 @@ export const syncAllBranch = async (
                         sha: item.commit.sha,
                     }
                 })
-                .filter(
-                    (item: any) =>
-                        item.name === 'main' || item.name === webBranch
-                )
-            console.log('upBranchs', upBranchs)
+                .filter((item: any) => item.name === webBranch)
             const userRes: any = await githubApi.getAllBranchs(userName, repo)
-            console.log('user branchs Res', userRes)
             const userBranchs = userRes.data?.map((item: any) => {
                 return {
                     name: item.name,
@@ -1370,7 +1369,6 @@ export const syncAllBranch = async (
                 const userBranch = userBranchs.find(
                     (item: any) => item.name === branch.name
                 )
-                console.log('userBranchs---', userBranch)
                 if (userBranch && userBranch.sha !== branch.sha) {
                     // merge branch and commit(allways use upstream branch)
                     await mergeBranch(userName, repo, branch.name)
@@ -1391,4 +1389,109 @@ export const creatDeviceid = () => {
         localStorage.setItem('deviceId', deviceId)
     }
     return deviceId
+}
+
+// encrypt data
+export const encryptData = async (data: string) => {
+    // convert password to key
+    const encoder = new TextEncoder()
+    const passwordBuffer = encoder.encode(import.meta.env.VITE_ENCRYPT_PASSWORD)
+    const keyMaterial = await window.crypto.subtle.importKey(
+        'raw',
+        passwordBuffer,
+        { name: 'PBKDF2' },
+        false,
+        ['deriveBits', 'deriveKey']
+    )
+    // generate salt and iv
+    const salt = window.crypto.getRandomValues(new Uint8Array(16))
+    const iv = window.crypto.getRandomValues(new Uint8Array(12))
+
+    // derive key
+    const key = await window.crypto.subtle.deriveKey(
+        {
+            name: 'PBKDF2',
+            salt: salt,
+            iterations: 100000,
+            hash: 'SHA-256',
+        },
+        keyMaterial,
+        { name: 'AES-GCM', length: 256 },
+        false,
+        ['encrypt', 'decrypt']
+    )
+
+    // encrypt data
+    const encryptedData = await window.crypto.subtle.encrypt(
+        {
+            name: 'AES-GCM',
+            iv: iv,
+        },
+        key,
+        encoder.encode(data)
+    )
+
+    // combine result
+    const result = new Uint8Array(
+        salt.length + iv.length + encryptedData.byteLength
+    )
+    result.set(salt, 0)
+    result.set(iv, salt.length)
+    result.set(new Uint8Array(encryptedData), salt.length + iv.length)
+    return btoa(String.fromCharCode.apply(null, Array.from(result)))
+}
+
+// decrypt data
+export const decryptData = async (encryptedData: string) => {
+    // decode base64
+    const binaryString = atob(encryptedData)
+    const bytes = new Uint8Array(binaryString.length)
+    for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i)
+    }
+    // extract salt, iv and encrypted data
+    const salt = bytes.slice(0, 16)
+    const iv = bytes.slice(16, 28)
+    const data = bytes.slice(28)
+
+    // convert password to key
+    const encoder = new TextEncoder()
+    const passwordBuffer = encoder.encode(import.meta.env.VITE_ENCRYPT_PASSWORD)
+    const keyMaterial = await window.crypto.subtle.importKey(
+        'raw',
+        passwordBuffer,
+        { name: 'PBKDF2' },
+        false,
+        ['deriveBits', 'deriveKey']
+    )
+
+    // derive key
+    const key = await window.crypto.subtle.deriveKey(
+        {
+            name: 'PBKDF2',
+            salt: salt,
+            iterations: 100000,
+            hash: 'SHA-256',
+        },
+        keyMaterial,
+        { name: 'AES-GCM', length: 256 },
+        false,
+        ['encrypt', 'decrypt']
+    )
+
+    // decrypt data
+    try {
+        const decryptedData = await window.crypto.subtle.decrypt(
+            {
+                name: 'AES-GCM',
+                iv: iv,
+            },
+            key,
+            data
+        )
+        return new TextDecoder().decode(decryptedData)
+    } catch (e) {
+        console.error('decryptData error:', e)
+        return null
+    }
 }
