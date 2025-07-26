@@ -8,20 +8,20 @@ import { join } from '@tauri-apps/api/path'
 import { ElMessage } from 'element-plus'
 import CryptoJS from 'crypto-js'
 import QRCode from 'qrcode'
-import Codes from '@/utils/codes'
 import { setTheme } from '@tauri-apps/api/app'
 
 // upstream repo info
-export const upstreamUser = import.meta.env.VITE_UPSTREAM_USER
+export const upstreamUser = import.meta.env.VITE_UPSTREAM_USER || ''
 export const ppRepo: string[] = ['PakePlus', 'PakePlus-Android', 'PakePlus-iOS']
 
-export const mainBranch = import.meta.env.VITE_MAIN_BRANCH
-export const webBranch = import.meta.env.VITE_WEB_BRANCH
-export const devBranch = import.meta.env.VITE_DEV_BRANCH
+export const mainBranch = import.meta.env.VITE_MAIN_BRANCH || ''
+export const webBranch = import.meta.env.VITE_WEB_BRANCH || ''
+export const devBranch = import.meta.env.VITE_DEV_BRANCH || ''
 
 // global file size limit
-export const fileSizeLimit = import.meta.env.VITE_FILE_LIMIT_SIZE * 1024 * 1024
-export const fileLimitNumber = import.meta.env.VITE_FILE_LIMIT_NUMBER
+export const fileSizeLimit =
+    import.meta.env.VITE_FILE_LIMIT_SIZE * 1024 * 1024 || 0
+export const fileLimitNumber = import.meta.env.VITE_FILE_LIMIT_NUMBER || 0
 
 // pay info - ensure these are properly configured in environment
 export const ppApisDomain = import.meta.env.VITE_PPAPI_DOMAIN || ''
@@ -56,7 +56,7 @@ export const urlMap = {
     qq: '',
     email: '1024xiaoshen@gmail.com',
     website: '',
-    x: '',
+    x: '1024xiaoshen',
     google: '',
     csdn: 'https://xiaoshen.blog.csdn.net/',
     juejin: 'https://juejin.cn/user/70007368988926',
