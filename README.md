@@ -21,7 +21,7 @@ style="margin: 0 10px;" >简体中文</a>
 
 
 <div align="left">PakePlus supports Mac, Windows, Linux, and Android & iOS. There’s no need to install complex dependencies locally, PakePlus is only about 10MB in size. For the latest version, please see the <a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">release page</a>. or visit: <a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>. 
-Document: <a href="https://pakeplus.com/guide/" target="_blank">PakePlus Guide</a></div>
+Document: <a href="https://pakeplus.com/guide/" target="_blank">PakePlus Guide</a></div>  
 
 >  **PakePlus is entirely independently developed**—it uses no code, architecture, or design from [Pake](https://github.com/tw93/Pake), and all implementations are original.
 
