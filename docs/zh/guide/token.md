@@ -1,6 +1,11 @@
 # 获取 Token
 
+::: danger 关于 Token
 为什么要 Github Token？因为这个编译和打包流程全部依托在 github 平台上进行，所以需要使用 github token 来操作这些事情。Github 是一个开放的平台，任何人都可以创建账号，并获取到永久免费的 token。这里非常感谢 Github 提供的免费服务。获取 token 也很简单，没有账号的先注册一个 github 账号，然后到个人中心里面就可以创建 token。
+
+使用本软件时，请遵守相关法律法规，如果你使用 github
+token 使用本项目，默认会 star 本项目，并会统计项目编译结果是成功还是失败，用于改善项目和获取反馈。打包仅限个人使用，请勿传播或商业用途，打包资源会存储在你自己的 Github 开源仓库中，任何人都可以看得到，所以请严格遵守 Github 使用规范，否则后果自负。
+:::
 
 ## 注册 Github 步骤
 
@@ -36,7 +41,7 @@ Workflows：用来编译打包你的软件
 
     ![](../../static/imgs/token11.png)
     ![](../../static/imgs/token12.webp)  
-    然后将得到的 token 复制到 PakePlus 就可以了：
+     然后将得到的 token 复制到 PakePlus 就可以了：
 
     ![](../../static/imgs/token12.png)
 
@@ -44,7 +49,7 @@ Workflows：用来编译打包你的软件
    Fine-grained personal access tokens 获取操作：
 
     ![](../../static/imgs/token1.png)  
-    Generate new token：添写一个 token 的名字，然后选择过期时间为不过期，描述随便写，然后选择 All
+     Generate new token：添写一个 token 的名字，然后选择过期时间为不过期，描述随便写，然后选择 All
     repositories
 
     ![](../../static/imgs/token2.png)
@@ -66,7 +71,7 @@ Workflows：用来编译打包你的软件
     ![](../../static/imgs/token9.png)
 
 9. 测试 Token 是否正确  
-   打开 PakePlus，点击首页右上角的设置按钮，把第 7 步或者第 8 步得到的 token 复制进去，点击测试，会校验 token 是否正确并初始化，网络好的话转20秒左右就好了:
+   打开 PakePlus，点击首页右上角的设置按钮，把第 7 步或者第 8 步得到的 token 复制进去，点击测试，会校验 token 是否正确并初始化，网络好的话转 20 秒左右就好了:
 
     ![](../../static/imgs/token16.webp)
 
@@ -75,7 +80,6 @@ Workflows：用来编译打包你的软件
     ![](../../static/imgs/token15.webp)
 
     如果提示 Token 不可用或一直在转圈圈，可能 token 不正确或网络不好，需要重新获取 token，然后再试。
-
 
 ## 注意事项
 
