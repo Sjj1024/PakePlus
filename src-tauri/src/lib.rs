@@ -57,7 +57,7 @@ pub fn run() {
             command::cmds::update_init_rs,
             command::cmds::start_server,
             command::cmds::stop_server,
-            command::cmds::support_pp,
+            // command::cmds::support_pp,
             command::cmds::get_machine_uid,
             command::cmds::compress_folder,
             command::cmds::decompress_file,

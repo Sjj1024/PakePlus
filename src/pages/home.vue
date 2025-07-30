@@ -364,7 +364,6 @@ import {
     webBranch,
     mainBranch,
     getCustomJsFetch,
-    supportPP,
     getBuildYmlFetch,
     oneMessage,
     upstreamUser,
@@ -633,7 +632,6 @@ const commitShas = async (tips: boolean = true) => {
 // fork and start
 const forkStartShas = async (tips: boolean = true) => {
     testLoading.value = true
-    await supportPP()
     // fork action is async
     const forkRes: any = await Promise.all([
         forkPakePlus('PakePlus'),
