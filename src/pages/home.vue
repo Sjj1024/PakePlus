@@ -746,7 +746,6 @@ const creatProject = async () => {
         creatLoading.value = false
         return
     }
-    // token.value && (await uploadBuildYml())
     if (branchName.value && /^[A-Za-z][A-Za-z0-9]*$/.test(branchName.value)) {
         const customJs = await getCustomJsFetch()
         // check branch exist
