@@ -1,6 +1,6 @@
 {
     "version": "0.5.30",
-    "show": true,
+    "show": false,
     "pub_date": "2025-06-02T09:00:33.251Z",
     "zh": "PakePlus 不再支持 Github Token 方式打包，请使用本地打包的方式",
     "en": "PakePlus no longer supports Github Token packaging, please use local packaging instead",
