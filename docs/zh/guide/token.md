@@ -1,4 +1,6 @@
-# 获取 Token
+# 不再支持 Github Token 方式打包，请使用本地打包的方式
+
+<!-- # 获取 Token
 
 ::: danger 关于 Token
 为什么要 Github Token？因为这个编译和打包流程全部依托在 github 平台上进行，所以需要使用 github token 来操作这些事情。Github 是一个开放的平台，任何人都可以创建账号，并获取到永久免费的 token。这里非常感谢 Github 提供的免费服务。获取 token 也很简单，没有账号的先注册一个 github 账号，然后到个人中心里面就可以创建 token。
@@ -31,16 +33,16 @@ Workflows：用来编译打包你的软件
 3. 点击 `Settings` 按钮，进入设置页面。
 4. 在左侧菜单中，点击 `Developer settings` 按钮，进入开发者设置页面。
 5. 在左侧菜单中，点击 `Personal access tokens` 按钮，进入个人访问令牌页面。
-6. 点击 `Generate new token` 按钮，进入生成新令牌页面。  
-   github 提供两种 token 类型，任意一种都可以，点击下面链接直达:  
+6. 点击 `Generate new token` 按钮，进入生成新令牌页面。
+   github 提供两种 token 类型，任意一种都可以，点击下面链接直达:
    [Personal access tokens (classic)](https://github.com/settings/tokens)
-   或者  
+   或者
    [Fine-grained personal access tokens](https://github.com/settings/personal-access-tokens) 。
-7. Personal access tokens (classic) 获取操作：  
+7. Personal access tokens (classic) 获取操作：
    只需要勾选下面三个权限就可以了：<font color="red">repo 和 workflow 和 user</font>
 
     ![](../../static/imgs/token11.png)
-    ![](../../static/imgs/token12.webp)  
+    ![](../../static/imgs/token12.webp)
      然后将得到的 token 复制到 PakePlus 就可以了：
 
     ![](../../static/imgs/token12.png)
@@ -48,7 +50,7 @@ Workflows：用来编译打包你的软件
 8. <font color="red">(如果你通过第 7 步已经拿到了 token 就不用操作这个步骤了，直接看第 9 步)</font>
    Fine-grained personal access tokens 获取操作：
 
-    ![](../../static/imgs/token1.png)  
+    ![](../../static/imgs/token1.png)
      Generate new token：添写一个 token 的名字，然后选择过期时间为不过期，描述随便写，然后选择 All
     repositories
 
@@ -70,7 +72,7 @@ Workflows：用来编译打包你的软件
 
     ![](../../static/imgs/token9.png)
 
-9. 测试 Token 是否正确  
+9. 测试 Token 是否正确
    打开 PakePlus，点击首页右上角的设置按钮，把第 7 步或者第 8 步得到的 token 复制进去，点击测试，会校验 token 是否正确并初始化，网络好的话转 20 秒左右就好了:
 
     ![](../../static/imgs/token16.webp)
@@ -86,4 +88,4 @@ Workflows：用来编译打包你的软件
 -   github 生成的 token 只有一次机会查看，请妥善保管。
 -   PakePlus 填入的 token 只会仅存储在你电脑本地，请妥善保管。
 -   生成的 token 只能在有效期内使用(如果你设置的是有效期模式)，过期后需要重新生成。
--   当你填入 token 并验证成功后，会在右上角展示你的 github 头像，点击头像可以查看你的 github 昵称和 token，点击头像会跳转到你的 github 个人主页，点击 token 会将 token 复制到你的粘贴板。如果在使用过程中有遇到问题，[可以进交流群咨询](../exchange/index.md)。
+-   当你填入 token 并验证成功后，会在右上角展示你的 github 头像，点击头像可以查看你的 github 昵称和 token，点击头像会跳转到你的 github 个人主页，点击 token 会将 token 复制到你的粘贴板。如果在使用过程中有遇到问题，[可以进交流群咨询](../exchange/index.md)。 -->
