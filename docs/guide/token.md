@@ -1,6 +1,6 @@
 # Github Token packaging is no longer supported. Please use local packaging instead
 
-<!-- # Obtaining a Token
+# Obtaining a Token
 
 ::: danger Token
 Why do we need Github Token? Because this compilation and packaging process relies entirely on the GitHub platform, it is necessary to use GitHub tokens to operate these tasks. Github is an open platform where anyone can create an account and obtain permanently free tokens. Thank you very much for the free service provided by Github. Obtaining a token is also very simple. For those who do not have an account, first register a GitHub account, and then go to the personal center to create a token.
@@ -74,4 +74,4 @@ Workflows: Used to compile and package your software
 
 -   You can only view the token once after generation—**keep it secure**.
 -   The token should **only be stored locally on your computer**—do not share it.
--   If you set an expiration date, the token will only work within its validity period. You’ll need to generate a new one after it expires. -->
+-   If you set an expiration date, the token will only work within its validity period. You’ll need to generate a new one after it expires.

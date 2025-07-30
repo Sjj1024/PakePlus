@@ -1,6 +1,6 @@
 # 不再支持 Github Token 方式打包，请使用本地打包的方式
 
-<!-- # 获取 Token
+# 获取 Token
 
 ::: danger 关于 Token
 为什么要 Github Token？因为这个编译和打包流程全部依托在 github 平台上进行，所以需要使用 github token 来操作这些事情。Github 是一个开放的平台，任何人都可以创建账号，并获取到永久免费的 token。这里非常感谢 Github 提供的免费服务。获取 token 也很简单，没有账号的先注册一个 github 账号，然后到个人中心里面就可以创建 token。
@@ -43,7 +43,7 @@ Workflows：用来编译打包你的软件
 
     ![](../../static/imgs/token11.png)
     ![](../../static/imgs/token12.webp)
-     然后将得到的 token 复制到 PakePlus 就可以了：
+    然后将得到的 token 复制到 PakePlus 就可以了：
 
     ![](../../static/imgs/token12.png)
 
@@ -51,7 +51,7 @@ Workflows：用来编译打包你的软件
    Fine-grained personal access tokens 获取操作：
 
     ![](../../static/imgs/token1.png)
-     Generate new token：添写一个 token 的名字，然后选择过期时间为不过期，描述随便写，然后选择 All
+    Generate new token：添写一个 token 的名字，然后选择过期时间为不过期，描述随便写，然后选择 All
     repositories
 
     ![](../../static/imgs/token2.png)
@@ -88,4 +88,4 @@ Workflows：用来编译打包你的软件
 -   github 生成的 token 只有一次机会查看，请妥善保管。
 -   PakePlus 填入的 token 只会仅存储在你电脑本地，请妥善保管。
 -   生成的 token 只能在有效期内使用(如果你设置的是有效期模式)，过期后需要重新生成。
--   当你填入 token 并验证成功后，会在右上角展示你的 github 头像，点击头像可以查看你的 github 昵称和 token，点击头像会跳转到你的 github 个人主页，点击 token 会将 token 复制到你的粘贴板。如果在使用过程中有遇到问题，[可以进交流群咨询](../exchange/index.md)。 -->
+-   当你填入 token 并验证成功后，会在右上角展示你的 github 头像，点击头像可以查看你的 github 昵称和 token，点击头像会跳转到你的 github 个人主页，点击 token 会将 token 复制到你的粘贴板。如果在使用过程中有遇到问题，[可以进交流群咨询](../exchange/index.md)。
