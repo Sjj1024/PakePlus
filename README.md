@@ -124,6 +124,27 @@ PakePlus supports installation packages for both ARM and Intel architectures. Mo
 
 <a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>
 
+2. Configure GitHub token or use local packaging, create a new project, and set up the configurations. get token guide. (When using this software, please comply with relevant laws and regulations. If you use GitHub token to use this project, it will automatically star the project and the compilation results will be counted for success or failure to improve the project and obtain feedback. Packaging is for personal use only and should not be disseminated or used for commercial purposes. The packaged resources will be stored in your own Github open source repository and can be viewed by anyone. Therefore, please strictly follow the Github usage guidelines, otherwise you will be responsible for the consequences)
+
+<a href="https://sjj1024.github.io/PakePlus/index_en.html">English</a> <a href="https://pakeplus.com/zh/guide/token.html" style="margin: 0 50px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_ja.html">日本语</a>
+
+```
+Explanation of Github Token permissions:
+1. For the beta version, token permissions required:
+All repositories: Fork an original template repository
+Actions: Manage GitHub actions
+Administration: Fork and manage files in the repository
+Contents: Add, delete, modify, and find repository contents
+Issues: Submit issues to PakePlus
+
+1. For the classic version, token permissions required:
+repo: Fork and manage template code
+workflow: Compile and release your software
+```
+
+3. You can preview the app in a new window and click the publish button to package the app.
+4. You can download the app from the release page.
+
 ## FAQ
 
 1. Mac users may see an “App is damaged” warning on installation. click cancel and Run the following command, then reopen the app:（This is because the application requires an official signature to avoid the prompt of "The application is damaged" popping up after installation. However, the cost of the official signature is $99 per year... Therefore, it is necessary to manually bypass the signature to use it normally）
