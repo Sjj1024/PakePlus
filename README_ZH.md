@@ -38,9 +38,9 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 -   🎨 ui 界面更美观更友好对新手更实用，使用更舒适，支持中文名称打包
 -   📡 支持网页端直接使用，但是客户端功能更强大，更推荐客户端
 -   🔐 数据安全，你的 token 仅保存在你本地，不会上传服务器，你的项目也都在你自己的 git 中安全存储
--   🍔 支持本地打包，而且不需要安装任何依赖环境，本地打包仅需30秒
--   🥥 没有Github Token没关系，本地打包即简单又方便，还不需要Token
--   ⚔️ 支持在JS脚本中调用系统级API，例如下载文件/执行命令/打开新窗口等
+-   🍔 支持本地打包，而且不需要安装任何依赖环境，本地打包仅需 30 秒
+-   🥥 没有 Github Token 没关系，本地打包即简单又方便，还不需要 Token
+-   ⚔️ 支持在 JS 脚本中调用系统级 API，例如下载文件/执行命令/打开新窗口等
 -   🍀 支持静态文件打包，将 Vue/React 等项目编译后的 dist 目录或者 index.html 丢进来即可成为客户端，何必是网站
 -   🐞 支持 debug 调试模式，无论是预览阶段还是发布阶段，都可以找到 bug 并消灭 bug
 -   💬 如果在你使用过程中遇到问题，随时可以加入我们的技术交流群咨询
@@ -118,26 +118,6 @@ PakePlus支持arm和x64架构的安装包，流行的程序安装包仅仅包含
 1.从发布页面下载应用程序：https://github.com/Sjj1024/PakePlus/releases，  
 双击安装并运行应用程序。
 或者使用网页版：<a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>
-
-2.配置 Github Token，并创建一个新项目并进行配置。Token 获取方法:  
- <a href="https://sjj1024.github.io/PakePlus/index_en.html">English</a> <a href="https://sjj1024.github.io/PakePlus/index_zh.html" style="margin: 0 20px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_ja.html">日本语</a>
-
-```
-Github token权限说明：
-1.bate版本token需要的权限说明：
-All repositories：要fork一个原始模板仓库
-Actions：操作github action
-Administration：对仓库进行fork和文件管理
-Contents：对仓库内容进行添加/删除/修改/查找等操作
-Issues：向PakePlus提交问题
-
-2.classic版本需要的token权限说明：
-repo：fork和管理模板代码
-workflow：编译和发布你的软件
-```
-
-3.你可以在客户端中预览应用程序，点击发布按钮打包应用程序。  
-4.你可以从发布页面下载编译后的应用程序，并实现安装使用。
 
 ## 常见问题
 
