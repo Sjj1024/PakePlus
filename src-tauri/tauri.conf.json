@@ -1,13 +1,9 @@
 {
     "$schema": "https://schema.tauri.app/config/2",
-    "productName": "PakePlus",
-    "version": "0.1.0",
-    "identifier": "com.pakeplus.app",
-    "build": {
-        "frontendDist": "../src"
-    },
+    "productName": "Huorong Security Official Forum",
+    "version": "0.0.1",
+    "identifier": "com.HuorongSecurityOfficialForum.app",
     "app": {
-        "withGlobalTauri": true,
         "security": {
             "csp": null,
             "dangerousDisableAssetCspModification": true,
@@ -18,11 +14,12 @@
                     "requireLiteralLeadingDot": false
                 }
             }
-        }
+        },
+        "withGlobalTauri": false
     },
     "bundle": {
         "active": true,
-        "targets": "all",
+        "targets": ["deb", "appimage", "nsis", "app", "dmg"],
         "resources": ["./data/*"],
         "icon": [
             "icons/32x32.png",
