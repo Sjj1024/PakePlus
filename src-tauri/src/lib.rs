@@ -71,12 +71,12 @@ pub fn run() {
             command::cmds::linux_build,
             command::cmds::build_local,
         ])
-        .setup(|app| {
-            tauri::async_runtime::block_on(async move {
-                let _ = utils::init::resolve_setup(app).await;
-            });
-            Ok(())
-        })
-        .run(tauri::generate_context!())
+        // .setup(|app| {
+        //     tauri::async_runtime::block_on(async move {
+        //         let _ = utils::init::resolve_setup(app).await;
+        //     });
+        //     Ok(())
+        // })
+        // .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
