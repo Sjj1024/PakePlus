@@ -1,0 +1,43 @@
+/* 默认dark主题 */
+:root[theme='dark'] {
+    --bg-color: #292a2b;
+    --project-bg: #383838;
+    --project-border: rgba(255, 255, 255, 0.02);
+    --hover-color: #0d1117;
+    --text-color: #f0f6fc;
+    --box-shadow: #626262;
+    --input-color: black;
+    --menu-ative-bg: rgba(201, 211, 225, 0.08);
+    --scroll-thumb: rgba(255, 255, 255, 0.2);
+    --scroll-track: rgba(251, 249, 249, 0.1);
+    --api-process: #363637;
+    --filt-item: rgba(201, 211, 225, 0.08);
+    --avatar-shadow: #ffffff26;
+}
+
+/* light主题 */
+:root[theme='light'] {
+    --bg-color: #fafafa;
+    --project-bg: #eee;
+    --project-border: rgba(0, 0, 0, 0.02);
+    --hover-color: #ccc;
+    --text-color: #181818;
+    --box-shadow: #ccc;
+    --input-color: #181818;
+    --menu-ative-bg: rgba(9, 30, 66, 0.08);
+    --scroll-thumb: rgba(0, 0, 0, 0.2);
+    --scroll-track: rgba(0, 0, 0, 0.1);
+    --api-process: #cdcdcd;
+    --filt-item: #ecf5ff;
+    --avatar-shadow: #1f232826;
+}
+
+/* 统一字体大小 */
+:root {
+    --pp-title1: 24px;
+    --pp-title2: 20px;
+    --pp-title3: 18px;
+    --pp-title4: 16px;
+    --pp-title5: 14px;
+    --pp-title6: 12px;
+}
