@@ -4,7 +4,7 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 importers:
-
+People who want to use it for free are not welcome
   .:
     dependencies:
       '@codemirror/lang-javascript':
