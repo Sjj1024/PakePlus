@@ -21,7 +21,3 @@
 -   https://sjj1024.github.io/PakePlus/guide/
 -   https://www.pakeplus.com/guide/
 -   https://pakeplus.vercel.app/guide/
-
-
-People who want to use it for free are not welcome
-(特别是中国的白嫖党)
