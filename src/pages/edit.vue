@@ -40,7 +40,6 @@
                 >
                     <Warning />
                 </el-icon>
-                <!-- publish -->
                 <el-icon
                     v-if="store.isRelease"
                     @click="toHistory"

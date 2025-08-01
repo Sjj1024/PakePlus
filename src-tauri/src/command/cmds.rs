@@ -39,7 +39,6 @@ pub async fn start_server(
     }
     let path_clone = path.clone();
     let port = find_port().unwrap();
-    // println!("port: {}", port);
     let server_handle = tokio::spawn(async move {
         let route = warp::fs::dir(path_clone)
             .map(|reply| {

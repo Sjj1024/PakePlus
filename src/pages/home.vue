@@ -17,7 +17,6 @@
                     </span>
                 </div>
             </div>
-            <!-- set button -->
             <div class="toolBox">
                 <!-- theme change -->
                 <div class="theme">

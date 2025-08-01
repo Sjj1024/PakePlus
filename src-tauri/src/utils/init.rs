@@ -34,7 +34,6 @@ pub fn url_encode(input: &str) -> String {
         .collect()
 }
 
-// handle something when start app
 pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
     let args: Vec<String> = std::env::args().collect();
     let args_str = args[1..].join("|");
@@ -187,7 +186,6 @@ pub async fn resolve_setup(app: &mut App) -> Result<(), Error> {
                 let _ = store.set("fullscreen", false);
             }
         } else if let WindowEvent::Moved(position) = event {
-            // println!("window_position: {:?}", position);
             if position.x > 0
                 && position.y > 0
                 && !window_clone.is_minimized().unwrap_or(false)

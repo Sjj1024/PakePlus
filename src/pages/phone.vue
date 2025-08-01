@@ -19,7 +19,6 @@
             </div>
             <!-- tools -->
             <div class="setting">
-                <!-- warning -->
                 <el-icon
                     v-if="warning"
                     @click="showWarning"

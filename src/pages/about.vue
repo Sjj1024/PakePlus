@@ -322,10 +322,6 @@ const handleClose = () => {
     console.log('handleClose')
     dialogVisible.value = false
 }
-
-const goBack = () => {
-    router.go(-1)
-}
 </script>
 
 <style lang="scss" scoped>

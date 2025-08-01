@@ -1,8 +1,6 @@
-// 修改vitepress base
 const fs = require('fs')
 const path = require('path')
 
-// 修改vitepress base
 function gitBase() {
     console.log('gitBase')
     const base = '/PakePlus/'

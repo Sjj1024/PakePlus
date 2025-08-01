@@ -20,7 +20,6 @@
                 </div>
                 <div class="toolTips">
                     <div class="tipsBody">
-                        <!-- {{ t('releaseNotes') }} -->
                         {{ store.currentRelease?.body || t('releaseBody') }}
                     </div>
                 </div>
