@@ -20,7 +20,7 @@
 <div align="left">PakePlus 不仅支持 Mac、Windows 和 Linux，并且支持 Android 和 iOS。无需在本地安装任何依赖环境，只需要一个Github Token就可以了，而且PakePlus本身也才仅仅5M左右小大，最新版本下载请看：<a href="[#popular-packages](https://github.com/Sjj1024/PakePlus/releases)">发布地址</a>。或者访问网页版: <a href="https://pakeplus.pages.dev" target="_blank">PakePlus Web</a>。 查看 README 以获取<a href="#popular-packages">热门包</a>和<a href="#development">自定义开发</a>信息。欢迎在<a href="https://github.com/Sjj1024/PakePlus/discussions">讨论区</a>分享你的建议。进微信交流群：<a href="https://pakeplus.com/zh/exchange/">商业群聊</a></div>   
 <br>
 
-> **PakePlus 是完全独立开发的项目**，未使用 [Pake](https://github.com/tw93/Pake) 的任何代码、架构或设计，所有实现均为原创。我们尊重开源社区的知识产权，如有任何疑问，请随时与我们联系。
+> **PakePlus 是完全独立开发的项目**，未使用 [Pake](https://github.com/tw93/Pake) 的任何代码、架构或设计，所有实现均为原创。我们尊重开源社区的知识产权，如有任何疑问，请随时与我们联系
 
 https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 

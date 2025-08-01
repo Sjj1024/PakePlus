@@ -23,7 +23,7 @@ style="margin: 0 10px;" >简体中文</a>
 Document: <a href="https://pakeplus.com/guide/" target="_blank">PakePlus Guide</a></div>  
 <br>
 
-> **PakePlus is entirely independently developed**—it uses no code, architecture, or design from [Pake](https://github.com/tw93/Pake), and all implementations are original.
+> **PakePlus is entirely independently developed**—it uses no code, architecture, or design from [Pake](https://github.com/tw93/Pake), and all implementations are original
 
 https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 

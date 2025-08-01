@@ -176,7 +176,3 @@ pnpm run build
  <p align="center">
          <img src="https://github.com/Sjj1024/PakePlus/raw/main/docs/static/imgs/pay.webp" />
  </p>
-
-<!-- ## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=Sjj1024/PakePlus&type=Date)](https://www.star-history.com/#Sjj1024/PakePlus&Date) -->
