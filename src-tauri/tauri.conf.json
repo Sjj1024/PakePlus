@@ -79,7 +79,19 @@
     //         "dangerousDisableAssetCspModification": true
     //     },
     //     "withGlobalTauri": true
-    // },
+    //},
+    "app": {
+      "windows": [
+          {
+            "fullscreen": false,
+            "height": 600,
+            "resizable": true,
+            "title": "PakePlus",
+            "width": 800,
+            "allowFullscreen": true
+          }
+        ]
+      },
     "plugins": {
         "updater": {
             "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEI0MkI3NDVCOUM2NDE1QTgKUldTb0ZXU2NXM1FydEsrN29Edjg2c0kxZmk1YWpRa3ZUMjE1S2NLeGVFRkJRWW1SSnhXQ2F3S0EK",
