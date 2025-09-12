@@ -4,7 +4,8 @@
     "version": "../package.json",
     "identifier": "com.PacBao.app",
     "build": {
-        "frontendDist": "../dist"
+        "devUrl": "http://localhost:1420",
+        "frontendDist": "../src"
     },
     "app": {
         "security": {
