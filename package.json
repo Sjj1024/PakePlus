@@ -1,5 +1,5 @@
 {
-    "name": "PacBao",
+    "name": "pakeplus",
     "private": true,
     "version": "1.0.6",
     "type": "module",
@@ -7,6 +7,9 @@
         "tauri dev": "tauri dev",
         "tauri build": "tauri build",
         "tauri debug": "tauri build --debug",
+        "docs:dev": "vitepress dev docs",
+        "docs:build": "vitepress build docs",
+        "docs:preview": "vitepress preview docs",
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
         "preview": "vite preview",
@@ -62,6 +65,7 @@
         "unplugin-auto-import": "^19.1.1",
         "unplugin-vue-components": "^28.4.1",
         "vite": "^6.0.3",
+        "vitepress": "^1.6.4",
         "vue-tsc": "^2.1.10"
     }
 }
