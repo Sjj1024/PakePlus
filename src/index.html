@@ -1,22 +1,32 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <link rel="icon" type="image/svg+xml" href="/app.svg" />
+        <link rel="stylesheet" href="styles.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="/vconsole.min.js"></script>
-        <title>PacBao</title>
-      <script type="module" crossorigin src="/assets/index-1lhGTocU.js"></script>
-      <link rel="modulepreload" crossorigin href="/assets/vue-DVcE6Vrb.js">
-      <link rel="modulepreload" crossorigin href="/assets/largeLibrary-NIGUFBhG.js">
-      <link rel="modulepreload" crossorigin href="/assets/element-LDgzfVoC.js">
-      <link rel="modulepreload" crossorigin href="/assets/pinia-CaQtzhD5.js">
-      <link rel="modulepreload" crossorigin href="/assets/router-CHBfCZHI.js">
-      <link rel="modulepreload" crossorigin href="/assets/codemirror-CRD50hCS.js">
-      <link rel="stylesheet" crossorigin href="/assets/index-D9aqXSPT.css">
+        <title>PakePlus App</title>
+        <script type="module" src="/main.js" defer></script>
     </head>
 
     <body>
-        <div id="app"></div>
+        <main class="container">
+            <h1>Welcome to PakePlus</h1>
+            <form class="row" id="greet-form">
+                <input id="inputValue" placeholder="Enter a something..." />
+            </form>
+            <div class="resultBox">
+                <span>result: </span>
+                <span id="result"></span>
+            </div>
+            <div class="invokeBox">
+                <button id="openUrl">open_url_browser</button>
+                <button id="openUrlNew">open_url_new</button>
+                <button id="runCommand">run_command</button>
+                <button id="downloadFile">download_file</button>
+                <button id="getExeDir">get_exe_dir</button>
+                <button id="getEnvVar">get_env_var</button>
+                <button id="findPort">find_port</button>
+            </div>
+        </main>
     </body>
 </html>

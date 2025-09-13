@@ -11,8 +11,7 @@
     "tauriApi": false,
     "devbug": false,
     "version": "0.0.1",
-    "preview": "desktop",
-    "platform": ["1-1", "1-2", "2-1", "2-2"],
+    "platform": "desktop",
     "width": 800,
     "height": 600,
     "desc": "",
@@ -106,64 +105,43 @@
             "fontSize": 16,
             "fontWeight": "bold",
             "tabBarItem": []
-        },
-        "webview": {
-            "userAgent": "",
-            "javaScriptEnabled": true,
-            "domStorageEnabled": true,
-            "allowFileAccess": true,
-            "loadWithOverviewMode": true,
-            "setSupportZoom": true,
-            "clearCache": true
         }
     },
     "ios": {
-        "name": "PacBao",
-        "showName": "PacBao",
-        "version": "0.0.1",
-        "webUrl": "https://juejin.cn/",
-        "id": "com.xiaoshen.PacBao.ios",
-        "icon": "./app-icon.png",
-        "desc": "Package for personal use only, please do not use for commercial purposes（打包仅限个人使用，请勿传播或商业用途）",
-        "pubBody": "Package for personal use only, please do not use for commercial purposes（打包仅限个人使用，请勿传播或商业用途）",
-        "isHtml": false,
-        "debug": false
+        "name": "",
+        "appid": "",
+        "icon": ""
     },
     "android": {
-        "name": "PacBao",
-        "showName": "PacBao",
+        "name": "PakePlus",
+        "showName": "Pake Plus",
         "version": "0.0.1",
         "webUrl": "https://juejin.cn/",
-        "id": "com.xiaoshen.PacBao.android",
         "icon": "./app-icon.png",
         "input": "./app-icon.png",
         "output": "./res",
         "rounded": true,
         "copyTo": "./app/src/main/res",
         "androidResDir": "./app/src/main/res",
-        "desc": "Package for personal use only, please do not use for commercial purposes（打包仅限个人使用，请勿传播或商业用途）",
-        "pubBody": "Package for personal use only, please do not use for commercial purposes（打包仅限个人使用，请勿传播或商业用途）",
-        "isHtml": false,
-        "debug": false
+        "pubBody": "PakePlus PubBody"
     },
     "desktop": {
-        "name": "PacBao2",
-        "showName": "xiaoshen",
+        "name": "PakePlus2",
+        "showName": "oaikes",
         "version": "0.0.2",
-        "id": "com.xiaoshen.app",
-        "desc": "Package for personal use only, please do not use for commercial purposes（打包仅限个人使用，请勿传播或商业用途，否则后果自负）",
+        "id": "com.oaikes.app",
+        "tauriApi": true,
+        "desc": "PakePlus Desc2",
+        "debug": true,
         "webUrl": "https://juejin.cn/",
         "iconPath": "../app-icon.png",
         "inputPath": "../app-icon.png",
         "tempPath": "./processed-image.png",
         "icnsPath": "../src-tauri/icons/icon.icns",
-        "pubBody": "Package for personal use only, please do not use for commercial purposes（打包仅限个人使用，请勿传播或商业用途，否则后果自负）",
+        "pubBody": "PakePlus PubBody",
         "isHtml": false,
         "single": true,
         "state": true,
-        "injectJq": false,
-        "tauriApi": false,
-        "buildMethod": "local",
-        "debug": false
+        "injectJq": true
     }
 }

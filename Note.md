@@ -1,28 +1,17 @@
+## 我应该下载哪个版本？
+
 ### MacOS
 
--   MacOS intel: x64.dmg
--   MacOS apple: aarch64.dmg (popular / 最流行)
-
-### Windows
-
--   x64: x64-setup.exe (popular / 最流行)
--   arm64: arm64-setup.exe
+-   MacOS intel 芯片: x64.dmg
+-   MacOS apple M 芯片: aarch64.dmg
 
 ### Linux
 
--   Linux x64: amd64.deb/amd64.rpm (popular / 最流行)
+-   Linux 64 位: amd64.deb/amd64.rpm
 -   Linux arm64 architecture: arm64.deb/aarch64.rpm
--   Linux armv7: armhf.deb/armhfp.rpm
+-   Linux armv7 架构: armhf.deb/armhfp.rpm
 
-### Web beta
+### Windows
 
--   Not recommended as it is a beta version.（不推荐，因为是 beta 版本）
--   https://PacBao.pages.dev
--   https://PacBao.netlify.app
-
-### Document(使用文档)
-
--   https://ppofficial.netlify.app/guide/
--   https://sjj1024.github.io/PacBao/guide/
--   https://www.PacBao.com/guide/
--   https://PacBao.vercel.app/guide/
+-   64 位: x64-setup.exe
+-   arm64 架构: arm64-setup.exe
