@@ -166,9 +166,16 @@ pub async fn preview_from_config(
     if !resize {
         let pre_window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
             .unwrap()
+            .title(config.title)
             .initialization_script(contents.as_str())
             .build()
             .unwrap();
+        // set icon
+        // #[cfg(target_os = "windows")]
+        // if man_config.icon.len() > 0 {
+        //     let icon_base64 = BASE64_STANDARD.decode(man_config.icon.trim());
+        //     icon_bytes = icon_base64.unwrap();
+        // }
         pre_window.on_window_event(move |event| {
             if let WindowEvent::Destroyed = event {
                 handle.emit("stop_server", "0").unwrap();
