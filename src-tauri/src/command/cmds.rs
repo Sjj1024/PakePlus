@@ -173,7 +173,9 @@ pub async fn preview_from_config(
         // set icon
         #[cfg(target_os = "windows")]
         if icon_base64.len() > 0 {
-            let icon_decode = BASE64_STANDARD.decode(icon_base64.trim());
+            use tauri::image::Image;
+            let icon_decode =
+                BASE64_STANDARD.decode(icon_base64.replace("data:image/png;base64,", "").trim());
             let icon_bytes = icon_decode.unwrap();
             let png_image = Image::from_bytes(&icon_bytes).unwrap();
             pre_window.set_icon(png_image).unwrap();
