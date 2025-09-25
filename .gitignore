@@ -24,7 +24,7 @@ components.d.ts
 *.njsproj
 *.sln
 *.sw?
-dist
+docs/dist
 
 # IDE
 *.iml
