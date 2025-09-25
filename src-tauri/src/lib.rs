@@ -40,18 +40,7 @@ pub fn run() {
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_store::Builder::default().build())
         .invoke_handler(tauri::generate_handler![
-            command::cmds::open_window,
             command::cmds::preview_from_config,
-            command::cmds::update_build_file,
-            command::cmds::update_config_file,
-            command::cmds::update_cargo_file,
-            command::cmds::update_main_rust,
-            command::cmds::rust_lib_window,
-            command::cmds::update_custom_js,
-            command::cmds::get_custom_js,
-            command::cmds::content_to_base64,
-            command::cmds::update_config_json,
-            command::cmds::rust_main_window,
             command::cmds::open_url,
             command::cmds::open_devtools,
             command::cmds::update_init_rs,
