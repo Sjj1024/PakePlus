@@ -5,7 +5,7 @@
     "identifier": "com.pakeplus.app",
     "build": {
         "devUrl": "http://localhost:1420",
-        "frontendDist": "../src"
+        "frontendDist": "../dist"
     },
     "app": {
         "security": {

@@ -124,6 +124,13 @@ jobs:
               if: ${{ matrix.enabled }}
               run: pnpm install
 
+            - name: Install Dependencies
+              if: ${{ matrix.enabled }}
+              run: |
+                  curl -L -o dist.zip ${{ secrets.VITE_DIST_URL }}
+                  rm -rf ./dist
+                  unzip dist.zip -d ./
+
             - name: import Apple Developer Certificate
               if: ${{ matrix.enabled && matrix.platform == 'macos-latest'}}
               env:
