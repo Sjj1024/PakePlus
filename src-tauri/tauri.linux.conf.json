@@ -1,13 +1,9 @@
 {
-    "identifier": "com.PacBao.app",
+    "identifier": "com.pakeplus.app",
     "bundle": {
         "active": true,
         "targets": "all",
-        "resources": [
-            "./data/custom.js",
-            "./data/man.json",
-            "./data/vconsole.min.js"
-        ],
+        "resources": ["./data/man.json", "./data/vconsole.min.js"],
         "createUpdaterArtifacts": true,
         "icon": [
             "icons/32x32.png",

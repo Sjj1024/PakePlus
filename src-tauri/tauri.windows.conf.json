@@ -1,10 +1,9 @@
 {
-    "identifier": "com.PacBao.app",
+    "identifier": "com.pakeplus.app",
     "bundle": {
         "active": true,
         "targets": "all",
         "resources": [
-            "./data/custom.js",
             "./data/man.json",
             "./data/vconsole.min.js",
             "./data/rh.exe"

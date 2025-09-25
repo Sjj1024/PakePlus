@@ -1,8 +1,8 @@
 {
     "$schema": "https://schema.tauri.app/config/2",
-    "productName": "PacBao",
+    "productName": "PakePlus",
     "version": "../package.json",
-    "identifier": "com.PacBao.app",
+    "identifier": "com.pakeplus.app",
     "build": {
         "devUrl": "http://localhost:1420",
         "frontendDist": "../src"
