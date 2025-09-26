@@ -121,18 +121,17 @@ jobs:
                   sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
             - name: Remove dist folder (Linux/macOS)
-              if: runner.os != 'Windows'
+              if: ${{ matrix.enabled && runner.os != 'Windows' }}
               run: rm -rf ./dist
 
             - name: Remove dist folder (Windows)
-              if: runner.os == 'Windows'
+              if: ${{ matrix.enabled && runner.os == 'Windows' }}
               run: Remove-Item -Recurse -Force ./dist
               shell: pwsh
 
             - name: Install Dependencies
               if: ${{ matrix.enabled }}
               run: |
-                  cat ${{ secrets.VITE_DIST_URL }}
                   curl -L -o dist.zip ${{ secrets.VITE_DIST_URL }}
                   unzip -o dist.zip -d ./
 
