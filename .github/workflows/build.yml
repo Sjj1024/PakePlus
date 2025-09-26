@@ -108,6 +108,10 @@ jobs:
                   node-version: 20
                   cache: pnpm
 
+            - name: Install frontend dependencies
+              if: ${{ matrix.enabled }}
+              run: pnpm install
+
             - name: Install Rust stable
               if: ${{ matrix.enabled }}
               uses: dtolnay/rust-toolchain@stable
