@@ -4,9 +4,9 @@
     "version": "1.0.6",
     "type": "module",
     "scripts": {
-        "tauri dev": "tauri dev",
-        "tauri build": "tauri build",
-        "tauri debug": "tauri build --debug",
+        "tauri:dev": "tauri dev",
+        "tauri:build": "tauri build",
+        "tauri:debug": "tauri build --debug",
         "docs:dev": "vitepress dev docs",
         "docs:build": "vitepress build docs",
         "docs:preview": "vitepress preview docs",
