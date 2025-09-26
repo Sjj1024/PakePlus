@@ -1,0 +1,29 @@
+name: Release
+
+on:
+    workflow_dispatch:
+    push:
+        tags:
+            - 'v*'
+        # branches:
+        #     - 'main'
+
+jobs:
+    check-bats-version:
+        runs-on: [self-hosted, Windows, X64]
+        steps:
+            - uses: actions/checkout@v5
+
+            - name: Install frontend dependencies
+              run: pnpm install
+
+            - uses: tauri-apps/tauri-action@v0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tagName: 'PacBao-v__VERSION__'
+                  releaseName: 'PacBao v__VERSION__'
+                  body_path: ./Note.md
+                  releaseDraft: true
+                  prerelease: false
+                  args: ''
