@@ -7,14 +7,16 @@
         // create modal box element
         const modal = document.createElement('div')
         modal.className = 'modalBox'
-
-        // modal content
+        const isChinese = window.location.href.includes('zh')
+        const content = isChinese ? ppnotesJsonData.zh : ppnotesJsonData.en
+        const title = isChinese ? 'PackPlus公告' : 'PakePlus Notice'
+        const okText = isChinese ? '确定' : 'OK'
         modal.innerHTML = `
         <div class="modalContent">
-            <h1 class="modalTitle">PackPlus公告</h1>
-            <p class="modalNotes">${ppnotesJsonData.zh}</p>
+            <h1 class="modalTitle">${title}</h1>
+            <p class="modalNotes">${content}</p>
             <div class="modalButtons">
-                <button id="modalOk">确定</button>
+                <button id="modalOk">${okText}</button>
             </div>
         </div>
         `
