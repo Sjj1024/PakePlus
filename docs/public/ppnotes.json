@@ -1,12 +1,12 @@
 {
     "version": "0.5.30",
-    "show": false,
+    "show": true,
     "pub_date": "2025-06-02T09:00:33.251Z",
-    "zh": "PackPlus 不再支持 Github Token 方式打包，请使用本地打包的方式",
-    "en": "PackPlus no longer supports Github Token packaging, please use local packaging instead",
-    "ja": "PackPlus は Github Token 方式のパッケージングをサポートしなくなりました。ローカルパッケージングを使用してください",
-    "ko": "PackPlus 는 Github Token 방식의 패키징을 지원하지 않습니다. 로컬 패키징을 사용하세요",
-    "zhTw": "PackPlus 不再支持 Github Token 方式打包，请使用本地打包的方式",
+    "zh": "PakePlus正在优化升级，暂时无法使用云端打包，请使用本地打包的方式，感谢理解！",
+    "en": "PakePlus is optimizing and upgrading, please use local packaging instead，thank you for your understanding!",
+    "ja": "PakePlus は Github Token 方式のパッケージングをサポートしなくなりました。ローカルパッケージングを使用してください，感謝します！",
+    "ko": "PakePlus 는 Github Token 방식의 패키징을 지원하지 않습니다. 로컬 패키징을 사용하세요，感謝します！",
+    "zhTw": "PakePlus 正在优化升级，暂时无法使用云端打包，请使用本地打包的方式，感谢理解！",
     "openUrl": "",
     "overall": false
 }
