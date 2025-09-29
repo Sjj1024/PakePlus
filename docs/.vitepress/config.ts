@@ -2,8 +2,8 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-    title: 'PackPlus',
-    description: 'PackPlus Docs',
+    title: 'PakePlus',
+    description: 'PakePlus Docs',
     lastUpdated: false,
     base: '/',
     outDir: './dist',
@@ -28,7 +28,7 @@ export default defineConfig({
                 // 基础配置
                 logo: {
                     src: '../app.svg',
-                    alt: 'PackPlus',
+                    alt: 'PakePlus',
                 },
                 // 导航栏
                 nav: [
@@ -169,7 +169,7 @@ export default defineConfig({
                     // },
                     {
                         icon: 'github',
-                        link: 'https://github.com/Sjj1024/PackPlus',
+                        link: 'https://github.com/Sjj1024/PakePlus',
                     },
                 ],
                 // footer
@@ -186,7 +186,7 @@ export default defineConfig({
                 // 基础配置
                 logo: {
                     src: '../app.svg',
-                    alt: 'PackPlus',
+                    alt: 'PakePlus',
                 },
                 aside: true,
                 outlineTitle: '页面导航',
@@ -371,7 +371,7 @@ export default defineConfig({
                     // },
                     {
                         icon: 'github',
-                        link: 'https://github.com/Sjj1024/PackPlus',
+                        link: 'https://github.com/Sjj1024/PakePlus',
                     },
                 ],
                 // footer
@@ -440,7 +440,7 @@ export default defineConfig({
         // 基础配置
         logo: {
             src: './app.svg',
-            alt: 'PackPlus',
+            alt: 'PakePlus',
         },
     },
 })
