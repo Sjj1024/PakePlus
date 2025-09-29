@@ -66,13 +66,14 @@ features:
       details: 如果在你使用过程中遇到问题，随时可以加入我们的技术交流群咨询
       icon: 💬
 ---
-
+<Notes />
 <div :class="$style.buildInfo">
     <span :class="$style.buildTime">构建时间：{{ data.buildTime }}</span>
 </div>
 
 <script setup>
 import { data } from '../static/js/buildtime.data.ts'
+import Notes from "../widgets/notes.vue"
 </script>
 
 <style module>
