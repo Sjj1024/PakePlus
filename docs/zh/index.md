@@ -10,14 +10,14 @@ hero:
         alt: PackPlus
     actions:
         - theme: brand
-          text: 下载地址
-          link: /zh/download/
+          text: 使用指南
+          link: /zh/guide/
         - theme: brand
           text: WebBeta
           link: https://PackPlus.netlify.app/
         - theme: brand
-          text: 使用指南
-          link: /zh/guide/
+          text: 下载地址
+          link: /zh/download/
 
 features:
     - title: 开源免费

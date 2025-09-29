@@ -10,14 +10,14 @@ hero:
         alt: PackPlus
     actions:
         - theme: brand
-          text: Download
-          link: /download/
+          text: Guide
+          link: /guide/
         - theme: brand
           text: WebBeta
           link: https://PackPlus.netlify.app/
         - theme: brand
-          text: Guide
-          link: /guide/
+          text: Download
+          link: /download/
 
 features:
     - title: Open Source
