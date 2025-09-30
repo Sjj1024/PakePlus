@@ -6,12 +6,6 @@ layout: doc
 
 PackPlus is a packaging tool based on Tauri2 and GitHub. You can also call me PP or 2P🫣. you can package any website/Vue/React project's static `dist` files into a cross-platform desktop application. It’s compact (less than 5M) and high-performance, while PackPlus itself is only about 8M. <span style="color:red">in order to avoid excessive pressure on Github servers caused by excessive use, PackPlus has implemented restrictions: only one project can be created and published one hourly!</span>
 
-Compared to Pake, the advantages are:
-
-1. Pake requires installing a complex and bloated Rust and Node dependency environment locally, which can take up several GB of your computer's storage—my hard drive just can’t handle that...
-2. No need to understand command lines or complicated configurations. PackPlus offers a graphical interface where you can complete packaging tasks with just a few clicks, so easy that even a elementary school student could do it 😌.
-3. I also tried Tauri2 for mobile, but I couldn’t stand its bloat. Instead, I used native Android and iOS frameworks for packaging and compilation. It also allows releasing debug versions on mobile for easier development and testing.
-
 <video src="../static/videos/pakeplus.mp4" controls="controls" width="100%"></video>
 
 ## Features

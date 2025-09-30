@@ -12,13 +12,6 @@ PackPlus仅作为打包工具使用，不支持软件签名，打包后的软件
 </span> 
 
 <BiliBili />
-
-相比 Pake 优势在于：
-
-1. Pake 需要在本地安装复杂臃肿的 rust 和 node 依赖环境，动辄几个 G 的电脑存储就没有了，我的电脑硬盘根本不够用啊...
-2. 不需要懂命令行和各种复杂配置，PackPlus 界面化操作只需要点点点即可完成打包任务，而且软件名称支持中文，小学生来了都可以轻松上手 😌
-3. 我也尝试了 tauri2 的移动端，但我很难接受 tauri2 移动端的臃肿（打包30M左右），所以使用原生 Android 和 iOS 框架打包编译，结果仅5M不到，还可以在移动端发布 debug 版本，方便开发调试
-
 <!-- <video src="//player.bilibili.com/player.html?isOutside=true&aid=114585499602898&bvid=BV1WCjzz5Eao&cid=30198203272&p=1" controls="controls" width="100%"></video> -->
 
 ## 特性
