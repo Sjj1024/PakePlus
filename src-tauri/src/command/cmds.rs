@@ -109,7 +109,7 @@ pub async fn preview_from_config(
         let pre_window = tauri::WebviewWindowBuilder::from_config(&handle, &config)
             .unwrap()
             .title(config.title)
-            .initialization_script(contents.as_str())
+            .initialization_script_for_all_frames(contents.as_str())
             .build()
             .unwrap();
         // set icon
