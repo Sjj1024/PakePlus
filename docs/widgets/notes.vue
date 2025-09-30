@@ -55,7 +55,7 @@ const closeNotes = () => {
 }
 
 const initLang = () => {
-    const isFirst = localStorage.getItem('first_visit')
+    const isFirst = sessionStorage.getItem('first_visit')
     const browserLang = navigator.language
     console.log('browserLang-initLang', browserLang)
     if (isFirst) {
@@ -66,7 +66,7 @@ const initLang = () => {
         } else {
             window.location.href = '/'
         }
-        localStorage.setItem('first_visit', 'true')
+        sessionStorage.setItem('first_visit', 'true')
     }
 }
 
