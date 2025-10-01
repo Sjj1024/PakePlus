@@ -87,6 +87,7 @@ pub async fn preview_from_config(
                 Err(e) => eprintln!("Failed to resize window: {}", e),
             }
         } else {
+            // existing_window.eval(js)
             existing_window.close().unwrap();
             let start = Instant::now();
             while handle.get_webview_window(window_label).is_some() {

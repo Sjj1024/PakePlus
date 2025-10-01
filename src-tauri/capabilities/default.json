@@ -159,6 +159,10 @@
         "fs:allow-appconfig-write",
         "fs:allow-appconfig-write-recursive",
         "fs:allow-appdata-write",
-        "fs:allow-appdata-write-recursive"
+        "fs:allow-appdata-write-recursive",
+        "fs:allow-watch",
+        "fs:allow-unwatch",
+        "fs:allow-read-dir",
+        "fs:allow-copy-file"
     ]
 }
