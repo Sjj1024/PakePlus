@@ -581,6 +581,12 @@ pub async fn linux_build(
     custom_js: String,
     html_path: String,
 ) -> Result<(), String> {
+    println!("base_dir: {}", base_dir);
+    println!("exe_name: {}", exe_name);
+    println!("config: {}", config);
+    println!("base64_png: {}", base64_png);
+    println!("custom_js: {}", custom_js);
+    println!("html_path: {}", html_path);
     Ok(())
 }
 
