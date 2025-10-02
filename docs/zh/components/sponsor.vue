@@ -131,9 +131,9 @@ const copyToClipboard = (id: string) => {
     }
 }
 
-const imageError = (event) => {
+const imageError = (event: any) => {
     event.target.src =
-        'https://gh-proxy.com/github.com/Sjj1024/PackPlus/blob/main/docs/static/imgs/pay.webp'
+        'https://gh-proxy.com/github.com/Sjj1024/PakePlus/blob/main/docs/static/imgs/pay.webp'
 }
 </script>
 
