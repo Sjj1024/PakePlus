@@ -3,7 +3,7 @@ export default {
     async load() {
         return (
             await fetch(
-                'https://api.github.com/repos/Sjj1024/PackPlus/releases',
+                'https://api.github.com/repos/Sjj1024/PakePlus/releases',
                 {
                     method: 'GET',
                     headers: {

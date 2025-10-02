@@ -1,6 +1,6 @@
 <template>
     <div class="downBox">
-        <div class="title">Which version should I use?</div>
+        <div class="title">{{ langMap[lang].titleTips }}</div>
         <div class="platform mac">
             <div class="leftIcon">
                 <svg
@@ -145,56 +145,76 @@
             <div class="rightContent">
                 <h1 class="title">Web Version</h1>
                 <div class="item">
-                    <a href="https://PackPlus.pages.dev/">
-                        https://PackPlus.pages.dev/
+                    <a href="https://PakePlus.pages.dev/">
+                        https://PakePlus.pages.dev/
                     </a>
                 </div>
                 <div class="item">
-                    <a href="https://PackPlus.netlify.app/">
-                        https://PackPlus.netlify.app/
+                    <a href="https://PakePlus.netlify.app/">
+                        https://PakePlus.netlify.app/
                     </a>
                 </div>
                 <div class="item">
-                    <span>Not recommended, it's a beta version</span>
+                    <span>{{ langMap[lang].notRecommended }}</span>
                 </div>
             </div>
         </div>
         <!-- last release -->
         <div class="lastRelease">
-            <span>Last Release: {{ lastRelease.name }}</span>
-            <span>Last Time: {{ lastRelease.published_at }}</span>
+            <span>{{ langMap[lang].lastRelease }} {{ lastRelease.name }}</span>
+            <span>
+                {{ langMap[lang].lastTime }}
+                {{ lastRelease.published_at }}
+            </span>
         </div>
     </div>
 </template>
 
 <script setup>
 import { data } from '../static/js/releases.data.ts'
+import { useData } from 'vitepress'
 
-console.log('releases data', data)
+const vpData = useData()
+const lang = vpData.lang.value
+
+const langMap = {
+    zh: {
+        titleTips: '我应该使用哪个版本？',
+        lastRelease: '最后发布：',
+        lastTime: '最后时间：',
+        notRecommended: '不推荐，因为是 beta 版本',
+    },
+    en: {
+        titleTips: 'Which version should I use?',
+        lastRelease: 'Last Release: ',
+        lastTime: 'Last Time: ',
+        notRecommended: "Not recommended, it's a beta version",
+    },
+}
 
 const lastRelease = data[0] || {
-    url: 'https://api.github.com/repos/Sjj1024/PackPlus/releases/207589840',
+    url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/207589840',
     assets_url:
-        'https://api.github.com/repos/Sjj1024/PackPlus/releases/207589840/assets',
+        'https://api.github.com/repos/Sjj1024/PakePlus/releases/207589840/assets',
     upload_url:
-        'https://uploads.github.com/repos/Sjj1024/PackPlus/releases/207589840/assets{?name,label}',
+        'https://uploads.github.com/repos/Sjj1024/PakePlus/releases/207589840/assets{?name,label}',
     html_url:
-        'https://github.com/Sjj1024/PackPlus/releases/tag/PackPlus-v0.5.17',
+        'https://github.com/Sjj1024/PakePlus/releases/tag/PakePlus-v0.5.17',
     id: 207589840,
     node_id: 'RE_kwDOMvkdy84MX5HQ',
-    tag_name: 'PackPlus-v0.5.17',
+    tag_name: 'PakePlus-v0.5.17',
     target_commitish: '4fb9a11b57dccf84387ba9bfe83685f6c571cd41',
-    name: 'PackPlus v0.5.17',
+    name: 'PakePlus v0.5.17',
     draft: false,
     prerelease: false,
     created_at: '2025-03-22T05:21:55Z',
     published_at: '2025-03-22T05:48:09Z',
     assets: [
         {
-            url: 'https://api.github.com/repos/Sjj1024/PackPlus/releases/assets/239940761',
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239940761',
             id: 239940761,
             node_id: 'RA_kwDOMvkdy84OTTSZ',
-            name: 'PackPlus-0.5.17-1.x86_64.rpm',
+            name: 'PakePlus-0.5.17-1.x86_64.rpm',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -203,13 +223,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:56:49Z',
             updated_at: '2025-03-23T01:56:50Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PackPlus/releases/download/PackPlus-v0.5.17/PackPlus-0.5.17-1.x86_64.rpm',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus-0.5.17-1.x86_64.rpm',
         },
         {
-            url: 'https://api.github.com/repos/Sjj1024/PackPlus/releases/assets/239939962',
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939962',
             id: 239939962,
             node_id: 'RA_kwDOMvkdy84OTTF6',
-            name: 'PackPlus_0.5.17_aarch64.dmg',
+            name: 'PakePlus_0.5.17_aarch64.dmg',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -218,13 +238,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:52:29Z',
             updated_at: '2025-03-23T01:52:30Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PackPlus/releases/download/PackPlus-v0.5.17/PackPlus_0.5.17_aarch64.dmg',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_aarch64.dmg',
         },
         {
-            url: 'https://api.github.com/repos/Sjj1024/PackPlus/releases/assets/239940766',
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239940766',
             id: 239940766,
             node_id: 'RA_kwDOMvkdy84OTTSe',
-            name: 'PackPlus_0.5.17_amd64.AppImage',
+            name: 'PakePlus_0.5.17_amd64.AppImage',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -233,13 +253,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:56:50Z',
             updated_at: '2025-03-23T01:56:52Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PackPlus/releases/download/PackPlus-v0.5.17/PackPlus_0.5.17_amd64.AppImage',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_amd64.AppImage',
         },
         {
-            url: 'https://api.github.com/repos/Sjj1024/PackPlus/releases/assets/239940760',
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239940760',
             id: 239940760,
             node_id: 'RA_kwDOMvkdy84OTTSY',
-            name: 'PackPlus_0.5.17_amd64.deb',
+            name: 'PakePlus_0.5.17_amd64.deb',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -248,13 +268,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:56:48Z',
             updated_at: '2025-03-23T01:56:48Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PackPlus/releases/download/PackPlus-v0.5.17/PackPlus_0.5.17_amd64.deb',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_amd64.deb',
         },
         {
-            url: 'https://api.github.com/repos/Sjj1024/PackPlus/releases/assets/239941740',
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941740',
             id: 239941740,
             node_id: 'RA_kwDOMvkdy84OTThs',
-            name: 'PackPlus_0.5.17_arm64-setup.exe',
+            name: 'PakePlus_0.5.17_arm64-setup.exe',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -263,13 +283,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T02:01:43Z',
             updated_at: '2025-03-23T02:01:43Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PackPlus/releases/download/PackPlus-v0.5.17/PackPlus_0.5.17_arm64-setup.exe',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_arm64-setup.exe',
         },
         {
-            url: 'https://api.github.com/repos/Sjj1024/PackPlus/releases/assets/239941733',
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941733',
             id: 239941733,
             node_id: 'RA_kwDOMvkdy84OTThl',
-            name: 'PackPlus_0.5.17_arm64_en-US.msi',
+            name: 'PakePlus_0.5.17_arm64_en-US.msi',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -278,13 +298,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T02:01:42Z',
             updated_at: '2025-03-23T02:01:43Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PackPlus/releases/download/PackPlus-v0.5.17/PackPlus_0.5.17_arm64_en-US.msi',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_arm64_en-US.msi',
         },
         {
-            url: 'https://api.github.com/repos/Sjj1024/PackPlus/releases/assets/239941382',
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941382',
             id: 239941382,
             node_id: 'RA_kwDOMvkdy84OTTcG',
-            name: 'PackPlus_0.5.17_x64-setup.exe',
+            name: 'PakePlus_0.5.17_x64-setup.exe',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -293,13 +313,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T02:00:02Z',
             updated_at: '2025-03-23T02:00:03Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PackPlus/releases/download/PackPlus-v0.5.17/PackPlus_0.5.17_x64-setup.exe',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64-setup.exe',
         },
         {
-            url: 'https://api.github.com/repos/Sjj1024/PackPlus/releases/assets/239939963',
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939963',
             id: 239939963,
             node_id: 'RA_kwDOMvkdy84OTTF7',
-            name: 'PackPlus_0.5.17_x64.dmg',
+            name: 'PakePlus_0.5.17_x64.dmg',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -308,13 +328,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:52:29Z',
             updated_at: '2025-03-23T01:52:30Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PackPlus/releases/download/PackPlus-v0.5.17/PackPlus_0.5.17_x64.dmg',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64.dmg',
         },
         {
-            url: 'https://api.github.com/repos/Sjj1024/PackPlus/releases/assets/239941381',
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941381',
             id: 239941381,
             node_id: 'RA_kwDOMvkdy84OTTcF',
-            name: 'PackPlus_0.5.17_x64_en-US.msi',
+            name: 'PakePlus_0.5.17_x64_en-US.msi',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -323,13 +343,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T02:00:02Z',
             updated_at: '2025-03-23T02:00:02Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PackPlus/releases/download/PackPlus-v0.5.17/PackPlus_0.5.17_x64_en-US.msi',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64_en-US.msi',
         },
         {
-            url: 'https://api.github.com/repos/Sjj1024/PackPlus/releases/assets/239939968',
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939968',
             id: 239939968,
             node_id: 'RA_kwDOMvkdy84OTTGA',
-            name: 'PackPlus_aarch64.app.tar.gz',
+            name: 'PakePlus_aarch64.app.tar.gz',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -338,13 +358,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:52:31Z',
             updated_at: '2025-03-23T01:52:31Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PackPlus/releases/download/PackPlus-v0.5.17/PackPlus_aarch64.app.tar.gz',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_aarch64.app.tar.gz',
         },
         {
-            url: 'https://api.github.com/repos/Sjj1024/PackPlus/releases/assets/239939969',
+            url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939969',
             id: 239939969,
             node_id: 'RA_kwDOMvkdy84OTTGB',
-            name: 'PackPlus_x64.app.tar.gz',
+            name: 'PakePlus_x64.app.tar.gz',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -353,13 +373,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:52:31Z',
             updated_at: '2025-03-23T01:52:32Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PackPlus/releases/download/PackPlus-v0.5.17/PackPlus_x64.app.tar.gz',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_x64.app.tar.gz',
         },
     ],
     tarball_url:
-        'https://api.github.com/repos/Sjj1024/PackPlus/tarball/PackPlus-v0.5.17',
+        'https://api.github.com/repos/Sjj1024/PakePlus/tarball/PakePlus-v0.5.17',
     zipball_url:
-        'https://api.github.com/repos/Sjj1024/PackPlus/zipball/PackPlus-v0.5.17',
+        'https://api.github.com/repos/Sjj1024/PakePlus/zipball/PakePlus-v0.5.17',
     body: '## 我应该下载哪个版本？\r\n\r\n### MacOS\r\n\r\n-   MacOS intel 芯片: x64.dmg\r\n-   MacOS apple M 芯片: aarch64.dmg\r\n\r\n### Linux\r\n\r\n-   Linux 64 位: amd64.deb/amd64.rpm\r\n-   Linux arm64 architecture: arm64.deb/aarch64.rpm\r\n-   Linux armv7 架构: armhf.deb/armhfp.rpm\r\n\r\n### Windows\r\n\r\n-   64 位: x64-setup.exe\r\n-   arm64 架构: arm64-setup.exe',
 }
 
@@ -392,9 +412,9 @@ const linuxImage = lastRelease.assets.find((asset) =>
     asset.name.includes('amd64.AppImage')
 )
 
-// 替换github.com为github.PackPlus.com
+// 替换github.com为github.PakePlus.com
 const proxyGithub = (url) => {
-    const newURL = url.replace('github.com', 'github.PackPlus.com/gh')
+    const newURL = url.replace('github.com', 'github.PakePlus.com/gh')
     console.log('newURL', newURL)
     return newURL
 }
