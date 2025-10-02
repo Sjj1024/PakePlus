@@ -48,15 +48,15 @@ jobs:
             - name: Rename APK file
               run: |
                   cd app/build/outputs/apk/debug/
-                  mv app-debug.apk PacBao-v0.0.1.apk
+                  mv app-debug.apk PakePlus-v0.0.1.apk
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v2
               with:
                   files: app/build/outputs/apk/debug/*.apk
-                  tag_name: 'PacBao-v0.0.1'
-                  name: 'PacBao v0.0.1'
-                  body: 'PacBao ReleaseBody'
+                  tag_name: 'PakePlus-v0.0.1'
+                  name: 'PakePlus v0.0.1'
+                  body: 'PakePlus ReleaseBody'
                   draft: false
                   publish: true
               env:

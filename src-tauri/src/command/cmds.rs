@@ -554,8 +554,8 @@ pub async fn macos_build(
     let info_plist_source = exe_parent_dir.join("Info.plist");
     let info_plist_target = base_path.join("Contents/Info.plist");
     fs::copy(&info_plist_source, &info_plist_target).expect("copy info.plist failed");
-    let pp_app_target = base_path.join("Contents/MacOS/PacBao");
-    fs::copy(&exe_path, &pp_app_target).expect("copy PacBao app failed");
+    let pp_app_target = base_path.join("Contents/MacOS/PakePlus");
+    fs::copy(&exe_path, &pp_app_target).expect("copy PakePlus app failed");
     let man_path = base_path.join("Contents/MacOS/config/man");
     fs::write(man_path, config).expect("write man failed");
     if !base64_png.is_empty() {

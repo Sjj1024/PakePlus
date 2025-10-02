@@ -13,7 +13,7 @@
             "https://payjs.cn/*",
             "https://zpayz.cn/*",
             "https://api.pay.yungouos.com/*",
-            "https://apis.PacBao.com/*"
+            "https://apis.PakePlus.com/*"
         ]
     },
     "permissions": [
@@ -111,7 +111,7 @@
                     "url": "https://api.pay.yungouos.com/**"
                 },
                 {
-                    "url": "https://apis.PacBao.com/**"
+                    "url": "https://apis.PakePlus.com/**"
                 }
             ]
         },

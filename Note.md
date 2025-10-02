@@ -17,12 +17,12 @@
 ### Web beta
 
 -   Not recommended as it is a beta version.（不推荐，因为是 beta 版本）
--   https://PacBao.pages.dev
--   https://PacBao.netlify.app
+-   https://PakePlus.pages.dev
+-   https://PakePlus.netlify.app
 
 ### Document(使用文档)
 
 -   https://ppofficial.netlify.app/guide/
--   https://sjj1024.github.io/PacBao/guide/
--   https://www.PacBao.com/guide/
--   https://PacBao.vercel.app/guide/
+-   https://sjj1024.github.io/PakePlus/guide/
+-   https://www.PakePlus.com/guide/
+-   https://PakePlus.vercel.app/guide/

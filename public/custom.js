@@ -1,5 +1,5 @@
 console.log(
-    '%cbuild from PacBao： https://github.com/Sjj1024/PacBao',
+    '%cbuild from PakePlus https://github.com/Sjj1024/PakePlus',
     'color:orangered;font-weight:bolder'
 )
 

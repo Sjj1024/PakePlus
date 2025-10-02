@@ -77,7 +77,7 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  releaseName: 'PacBao Test'
+                  releaseName: 'PakePlus Test'
                   releaseBody: 'This is a draft version'
                   releaseDraft: true
                   prerelease: false

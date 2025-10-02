@@ -21,8 +21,8 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  tagName: 'PacBao-v__VERSION__'
-                  releaseName: 'PacBao v__VERSION__'
+                  tagName: 'PakePlus-v__VERSION__'
+                  releaseName: 'PakePlus v__VERSION__'
                   body_path: ./Note.md
                   releaseDraft: true
                   prerelease: false

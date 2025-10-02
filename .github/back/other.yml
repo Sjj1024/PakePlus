@@ -103,8 +103,8 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   tagName: ${{ github.ref_name }}
-                  releaseName: 'PacBao v__VERSION__'
-                  releaseBody: 'This is a workflow to help you automate the publishing of your PacBao project to GitHub Packages.'
+                  releaseName: 'PakePlus v__VERSION__'
+                  releaseBody: 'This is a workflow to help you automate the publishing of your PakePlus project to GitHub Packages.'
                   releaseDraft: true
                   prerelease: false
                   args: --target ${{ matrix.target }}

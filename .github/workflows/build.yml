@@ -195,8 +195,8 @@ jobs:
                   VITE_FILE_LIMIT_NUMBER: ${{ secrets.VITE_FILE_LIMIT_NUMBER }}
                   VITE_LOCAL_RHEXE: ${{ secrets.VITE_LOCAL_RHEXE }}
               with:
-                  tagName: 'PacBao-v__VERSION__'
-                  releaseName: 'PacBao v__VERSION__'
+                  tagName: 'PakePlus-v__VERSION__'
+                  releaseName: 'PakePlus v__VERSION__'
                   body_path: ./Note.md
                   releaseDraft: true
                   prerelease: false

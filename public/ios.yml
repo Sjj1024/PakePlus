@@ -46,12 +46,12 @@ jobs:
                   echo "Installing appicon tool..."
                   brew install Nonchalant/appicon/appicon
                   echo "Generating AppIcon..."
-                  appicon PacBao.png --output-path ./PacBao/Assets.xcassets/AppIcon.appiconset
+                  appicon PakePlus.png --output-path ./PakePlus/Assets.xcassets/AppIcon.appiconset
 
             - name: Update App Name
               run: |
                   echo "Updating App Name..."
-                  plutil -replace CFBundleDisplayName -string "派克Plus" ./PacBao/Info.plist
+                  plutil -replace CFBundleDisplayName -string "派克Plus" ./PakePlus/Info.plist
 
             - name: Build IPA Package
               run: |
@@ -70,8 +70,8 @@ jobs:
               uses: softprops/action-gh-release@v2
               with:
                   files: ${{ env.ipa_path }}
-                  tag_name: 'PacBao-v1.0.0'
-                  body: 'PacBao-v1.0.0'
+                  tag_name: 'PakePlus-v1.0.0'
+                  body: 'PakePlus-v1.0.0'
                   draft: false
                   publish: true
               env:

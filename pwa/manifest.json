@@ -1,6 +1,6 @@
 {
-    "short_name": "PacBao",
-    "name": "PacBao",
+    "short_name": "PakePlus",
+    "name": "PakePlus",
     "icons": [
         {
             "src": "./assets/128x128.png",
@@ -26,21 +26,21 @@
     "theme_color": "#3367D6",
     "shortcuts": [
         {
-            "name": "PacBao",
-            "short_name": "PacBao",
-            "description": "PacBao",
+            "name": "PakePlus",
+            "short_name": "PakePlus",
+            "description": "PakePlus",
             "url": "/",
             "icons": [{ "src": "./assets/128x128.png", "sizes": "128x128" }]
         },
         {
-            "name": "PacBao",
-            "short_name": "PacBao",
-            "description": "PacBao",
+            "name": "PakePlus",
+            "short_name": "PakePlus",
+            "description": "PakePlus",
             "url": "/",
             "icons": [{ "src": "./assets/128x128.png", "sizes": "128x128" }]
         }
     ],
-    "description": "PacBao",
+    "description": "PakePlus",
     "screenshots": [
         {
             "src": "./assets/128x128.png",
