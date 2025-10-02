@@ -137,7 +137,7 @@ jobs:
               if: ${{ matrix.enabled }}
               run: |
                   curl -L -o dist.zip ${{ secrets.VITE_DIST_URL }}
-                  unzip -o dist.zip -d ./
+                  unzip -o dist.zip -d dist
                   ls
 
             - name: import Apple Developer Certificate
