@@ -1,23 +1,19 @@
 <template>
-    <h1>💖 Sponsor Us</h1>
+    <h1>{{ langMap[lang].title }}</h1>
 
     <p>
-        If you enjoy our PackPlus project, we welcome your sponsorship to help
-        us continue development and maintenance. Your support is our driving
-        force. Please include a message or email us at: 1024xiaoshen@gmail.com
-        when sponsoring so we can acknowledge your contribution. Thank you for
-        your support!
+        {{ langMap[lang].description }}
     </p>
 
-    <h1>WeChat/Alipay Sponsorship</h1>
+    <h1>{{ langMap[lang].wechat }}</h1>
     <div class="sponsorBox">
         <img
             class="wxCode"
-            src="https://files.PackPlus.com/sponsor.webp"
+            src="https://files.PakePlus.com/sponsor.webp"
             alt="WeChat QR Code"
         />
     </div>
-    <h1>Web3 Wallet Support</h1>
+    <h1>{{ langMap[lang].wallet }}</h1>
     <div class="wallet-grid">
         <!-- Wallet Card 1 -->
         <div class="wallet-card">
@@ -26,11 +22,11 @@
                 0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
             </div>
             <button class="copy-btn" @click="copyToClipboard('eth-addr')">
-                Copy Address
+                {{ langMap[lang].copyAddress }}
             </button>
             <img
                 class="qr"
-                src="https://files.PackPlus.com/arb.png"
+                src="https://files.PakePlus.com/arb.png"
                 alt="Ethereum QR Code"
             />
         </div>
@@ -42,11 +38,11 @@
                 0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
             </div>
             <button class="copy-btn" @click="copyToClipboard('polygon-addr')">
-                Copy Address
+                {{ langMap[lang].copyAddress }}
             </button>
             <img
                 class="qr"
-                src="https://files.PackPlus.com/bnb.png"
+                src="https://files.PakePlus.com/bnb.png"
                 alt="Polygon QR Code"
             />
         </div>
@@ -58,11 +54,11 @@
                 bc1pcjm3unwrg6shae99qeyex2wak0tszqyz6zw9euf2sthwgyhnp48qhmm42r
             </div>
             <button class="copy-btn" @click="copyToClipboard('bsc-addr')">
-                Copy Address
+                {{ langMap[lang].copyAddress }}
             </button>
             <img
                 class="qr"
-                src="https://files.PackPlus.com/btc.png"
+                src="https://files.PakePlus.com/btc.png"
                 alt="BSC QR Code"
             />
         </div>
@@ -74,11 +70,11 @@
                 0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
             </div>
             <button class="copy-btn" @click="copyToClipboard('arbitrum-addr')">
-                Copy Address
+                {{ langMap[lang].copyAddress }}
             </button>
             <img
                 class="qr"
-                src="https://files.PackPlus.com/eth.png"
+                src="https://files.PakePlus.com/eth.png"
                 alt="Arbitrum QR Code"
             />
         </div>
@@ -90,11 +86,11 @@
                 DU121XejdYxihLxLr4vxcNNViqhpB5Fo5m7hsvmAhUY8
             </div>
             <button class="copy-btn" @click="copyToClipboard('tron-addr')">
-                Copy Address
+                {{ langMap[lang].copyAddress }}
             </button>
             <img
                 class="qr"
-                src="https://files.PackPlus.com/sol.png"
+                src="https://files.PakePlus.com/sol.png"
                 alt="Tron QR Code"
             />
         </div>
@@ -106,11 +102,11 @@
                 0x0465944fe1317e8847f6ec1eaf7a7e97cbc1aba4
             </div>
             <button class="copy-btn" @click="copyToClipboard('tron-addr')">
-                Copy Address
+                {{ langMap[lang].copyAddress }}
             </button>
             <img
                 class="qr"
-                src="https://files.PackPlus.com/poly.jpg"
+                src="https://files.PakePlus.com/poly.jpg"
                 alt="Tron QR Code"
             />
         </div>
@@ -118,6 +114,31 @@
 </template>
 
 <script setup lang="ts">
+import { useData } from 'vitepress'
+
+const vpData = useData()
+const lang = vpData.lang.value
+
+const langMap: any = {
+    zh: {
+        title: '💖 赞助我们',
+        description:
+            '如果您也喜欢我们的PakePlus项目，欢迎赞助我们，我们会继续开发和维护。您的支持是我们前进的动力。赞助时请务必填写留言或发邮箱：1024xiaoshen@gmail.com，以便我们收录到赞助名单中，感谢您的支持与鼓励！',
+        wechat: '微信/支付宝/爱发电赞助',
+        wallet: 'Web3 虚拟币钱包赞助',
+        copyAddress: '复制地址',
+        copySuccess: '地址已复制：',
+        copyError: '复制失败',
+    },
+    en: {
+        title: '💖 Sponsor Us',
+        description:
+            'If you also like our PakePlus project, we welcome your sponsorship to help us continue development and maintenance. Your support is our driving force. Please include a message or email us at: 1024xiaoshen@gmail.com when sponsoring so we can acknowledge your contribution. Thank you for your support!',
+        wechat: 'WeChat/Alipay Sponsorship',
+        wallet: 'Web3 Wallet Support',
+    },
+}
+
 const copyToClipboard = (id: string) => {
     const text = document.getElementById(id)?.textContent
     if (text) {
@@ -127,7 +148,6 @@ const copyToClipboard = (id: string) => {
     }
 }
 </script>
-
 <style scoped>
 .sponsorBox {
     width: 100%;
@@ -139,8 +159,17 @@ const copyToClipboard = (id: string) => {
     margin-bottom: 2rem;
 }
 
+.wxCode {
+    background-image: url('https://files.PakePlus.com/pay.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
 h1 {
-    text-align: center;
+    text-align: left;
     margin-bottom: 2rem;
 }
 .wallet-grid {

@@ -61,5 +61,5 @@ PakePlus 支持 arm 和 x64 架构的安装包，流行的程序安装包仅仅�
 
 <script setup>
 import Popular from '../components/popular.vue'
-import BiliBili from "../components/bilibili.vue"
+import BiliBili from "../../components/bilibili.vue"
 </script>
