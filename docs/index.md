@@ -69,12 +69,10 @@ features:
 
 <div :class="$style.buildInfo">
     <span :class="$style.buildTime">Built Time：{{ data.buildTime }}</span>
-    <Notes />
 </div>
 
 <script setup>
 import { data } from './static/js/buildtime.data.ts'
-import Notes from './widgets/notes.vue'
 </script>
 
 <style module>

@@ -27,7 +27,7 @@ export default defineConfig({
             themeConfig: {
                 // 基础配置
                 logo: {
-                    src: '../app.svg',
+                    src: 'https://files.pakeplus.com/app.svg',
                     alt: 'PakePlus',
                 },
                 // 导航栏
@@ -185,7 +185,7 @@ export default defineConfig({
             themeConfig: {
                 // 基础配置
                 logo: {
-                    src: '../app.svg',
+                    src: 'https://files.pakeplus.com/app.svg',
                     alt: 'PakePlus',
                 },
                 aside: true,
@@ -383,7 +383,7 @@ export default defineConfig({
         },
     },
     head: [
-        ['link', { rel: 'icon', href: './app.svg' }],
+        ['link', { rel: 'icon', href: 'https://files.pakeplus.com/app.svg' }],
         [
             'script',
             {},
@@ -439,7 +439,7 @@ export default defineConfig({
         },
         // 基础配置
         logo: {
-            src: './app.svg',
+            src: 'https://files.pakeplus.com/app.svg',
             alt: 'PakePlus',
         },
     },

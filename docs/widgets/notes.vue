@@ -14,7 +14,6 @@
 import { ref, onMounted } from 'vue'
 import { useData } from 'vitepress'
 
-const vpData = useData()
 const title = ref('')
 const content = ref('')
 const okText = ref('')
@@ -71,7 +70,6 @@ const initLang = () => {
 }
 
 onMounted(() => {
-    console.log('vpData-----', vpData)
     initLang()
     initNotes()
 })
