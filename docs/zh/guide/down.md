@@ -3,7 +3,7 @@
 </div>
 
 <script setup>
-import DownPage from '../components/down.vue'
+import DownPage from '../../components/down.vue'
 </script>
 
 <style module>

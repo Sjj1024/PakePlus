@@ -14,7 +14,7 @@
 
 ![](../../static/imgs/phone2.webp)
 
-激动人心的等待时刻：(当然也是最容易出错的时刻，需要耐心等待3分钟左右)
+激动人心的等待时刻：(当然也是最容易出错的时刻，需要耐心等待 3 分钟左右)
 
 ```
 成败在此一举
@@ -38,5 +38,5 @@
 -   安装说明文档：[ipa/apk 安装说明](../question/phone.md)
 
 <script setup>
-import BiliBili from "../components/bilibili.vue"
+import BiliBili from "../../components/bilibili.vue"
 </script>
