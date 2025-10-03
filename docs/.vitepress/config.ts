@@ -98,6 +98,10 @@ export default defineConfig({
                             collapsed: false,
                             items: [
                                 {
+                                    text: 'JavaScript Guide',
+                                    link: '/guide/script',
+                                },
+                                {
                                     text: 'Advanced Play',
                                     link: '/guide/superman',
                                 },
@@ -251,6 +255,10 @@ export default defineConfig({
                             text: '高级玩法',
                             collapsed: false,
                             items: [
+                                {
+                                    text: '脚本开发',
+                                    link: '/zh/guide/script',
+                                },
                                 {
                                     text: '桌面端API',
                                     link: '/zh/guide/desktopapi',
