@@ -68,6 +68,7 @@
     color: #fff;
     border: none;
     margin-top: 20px;
+    font-weight: bold;
 }
 
 .modalButtons button:hover {
