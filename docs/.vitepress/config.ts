@@ -142,6 +142,7 @@ export default defineConfig({
                     '/sponsor/': [
                         { text: 'Sponsor Us', link: '/sponsor/' },
                         { text: 'Sponsor List', link: '/sponsor/list' },
+                        { text: 'Sponsor Company', link: '/sponsor/company' },
                     ],
                 },
                 // 社交链接

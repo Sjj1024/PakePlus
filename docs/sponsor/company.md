@@ -1,6 +1,6 @@
-# 公司名单
+# List of Companies
 
-欢迎各位金主公司的支持！可以在官方 README 和下方的列表中添加自己的公司名称，让更多的人了解到贵公司对开源的支持，提升贵公司的知名度和影响力，并对开源社区产生积极的影响。
+We welcome the support from all our sponsor companies! You can add your company's name to the official README and the list below. This will help more people learn about your company's support for open source, enhance your company's visibility and influence, and make a positive impact on the open-source community.
 
 <VPTeamMembers size="small" :members />
 
