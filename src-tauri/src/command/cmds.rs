@@ -453,6 +453,9 @@ pub fn find_port() -> Result<u16, String> {
 // copy dir all
 #[tauri::command]
 pub fn copy_dir(src: &Path, dst: &Path) -> Result<(), String> {
+    if dst.starts_with(src) {
+        return Err("Destination cannot be inside source directory".into());
+    }
     if !dst.exists() {
         fs::create_dir_all(dst).expect("create dst dir failed");
     }
@@ -461,6 +464,10 @@ pub fn copy_dir(src: &Path, dst: &Path) -> Result<(), String> {
         let ty = entry
             .file_type()
             .expect("read src dir entry file type failed");
+        if ty.is_symlink() {
+            // skip symlink
+            continue;
+        }
         if ty.is_dir() {
             copy_dir(&entry.path(), &dst.join(entry.file_name()))?;
         } else {
