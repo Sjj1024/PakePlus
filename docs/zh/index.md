@@ -2,26 +2,26 @@
 layout: home
 
 hero:
-    name: 'PackPlus'
+    name: 'PakePlus'
     text: '何必是网站，秒变桌面应用和手机应用'
     tagline: 打包网页/Vue/React项目为桌面/手机应用只需几分钟
     image:
         src: ../pplogo.png
-        alt: PackPlus
+        alt: PakePlus
     actions:
         - theme: brand
           text: 使用指南
           link: /zh/guide/
         - theme: brand
           text: WebBeta
-          link: https://PackPlus.netlify.app/
+          link: https://PakePlus.netlify.app/
         - theme: brand
           text: 下载地址
           link: /zh/download/
 
 features:
     - title: 开源免费
-      details: PackPlus 是开源免费的，你可以在 GitHub 上找到它的源代码
+      details: PakePlus 是开源免费的，你可以在 GitHub 上找到它的源代码
       icon: 🐙
     - title: 跨平台
       details: Windows/macOS/Linux/Android/iOS等常用操作系统全支持
@@ -60,7 +60,7 @@ features:
       details: 支持debug调试模式，无论是预览阶段还是发布阶段，都可以找到bug并消灭bug
       icon: 🐞
     - title: 数据安全
-      details: PackPlus 不会上传你的任何数据，所有数据都保存在你的电脑上
+      details: PakePlus 不会上传你的任何数据，所有数据都保存在你的电脑上
       icon: 🔒
     - title: 技术支持
       details: 如果在你使用过程中遇到问题，随时可以加入我们的技术交流群咨询
