@@ -77,3 +77,39 @@
 .modalButtons button:active {
     background-color: #3688fa;
 }
+
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c0c4cc;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #909399;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #4e4e52;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #6d6d70;
+}
