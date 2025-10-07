@@ -145,13 +145,13 @@
             <div class="rightContent">
                 <h1 class="title">Web Version</h1>
                 <div class="item">
-                    <a href="https://PakePlus.pages.dev/">
-                        https://PakePlus.pages.dev/
+                    <a href="https://web.pakeplus.com/">
+                        https://web.pakeplus.com/
                     </a>
                 </div>
                 <div class="item">
-                    <a href="https://PakePlus.netlify.app/">
-                        https://PakePlus.netlify.app/
+                    <a href="https://pakeplus.netlify.app/">
+                        https://pakeplus.netlify.app/
                     </a>
                 </div>
                 <div class="item">
