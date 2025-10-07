@@ -253,8 +253,10 @@ const langMap = {
     },
 }
 
-// 判断是否是移动端
 const isMobile = () => {
+    if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+        return false
+    }
     return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
         navigator.userAgent.toLowerCase()
     )
