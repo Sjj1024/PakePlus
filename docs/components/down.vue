@@ -27,11 +27,15 @@
                     <a :href="proxyGithub(macArm.browser_download_url)">
                         Apple Silicon({{ langMap[lang].fastLink }})
                     </a>
-                    <a :href="macArm.browser_download_url" class="githubLink">
+                    <a
+                        v-if="!isMobile()"
+                        :href="macArm.browser_download_url"
+                        class="githubLink"
+                    >
                         {{ langMap[lang].gitlink }}
                     </a>
                 </div>
-                <div class="item">
+                <div v-if="!isMobile()" class="item">
                     <span>{{ langMap[lang].oldSystem }}</span>
                     <a :href="proxyGithub(macX64.browser_download_url)">
                         Intel X64({{ langMap[lang].fastLink }})
@@ -75,13 +79,14 @@
                         X64 ({{ langMap[lang].fastLink }})
                     </a>
                     <a
+                        v-if="!isMobile()"
                         :href="windowsX64.browser_download_url"
                         class="githubLink"
                     >
                         {{ langMap[lang].gitlink }}
                     </a>
                 </div>
-                <div class="item">
+                <div v-if="!isMobile()" class="item">
                     <span>{{ langMap[lang].rarelyUsed }}</span>
                     <a :href="proxyGithub(windowsArm64.browser_download_url)">
                         ARM64 ({{ langMap[lang].fastLink }})
@@ -126,11 +131,15 @@
                     <a :href="proxyGithub(linuxDeb.browser_download_url)">
                         deb({{ langMap[lang].fastLink }})
                     </a>
-                    <a :href="linuxDeb.browser_download_url" class="githubLink">
+                    <a
+                        v-if="!isMobile()"
+                        :href="linuxDeb.browser_download_url"
+                        class="githubLink"
+                    >
                         {{ langMap[lang].gitlink }}
                     </a>
                 </div>
-                <div class="item">
+                <div v-if="!isMobile()" class="item">
                     <span>{{ langMap[lang].mostPopular }}</span>
                     <a :href="proxyGithub(linuxRpm.browser_download_url)">
                         rpm({{ langMap[lang].fastLink }})
@@ -139,7 +148,7 @@
                         {{ langMap[lang].gitlink }}
                     </a>
                 </div>
-                <div class="item">
+                <div v-if="!isMobile()" class="item">
                     <span>{{ langMap[lang].largeVolume }}</span>
                     <a :href="proxyGithub(linuxImage.browser_download_url)">
                         AppImage({{ langMap[lang].fastLink }})
@@ -175,13 +184,23 @@
             <div class="rightContent">
                 <h1 class="title">Web Version</h1>
                 <div class="item">
+                    <span v-if="!isMobile()">地址一：</span>
                     <a href="https://web.pakeplus.com/">
-                        https://web.pakeplus.com/
+                        https://web.pakeplus.com
+                    </a>
+                    <span v-if="!isMobile()">地址二：</span>
+                    <a v-if="!isMobile()" href="https://pacbao.vercel.app/">
+                        https://pacbao.vercel.app/
                     </a>
                 </div>
-                <div class="item">
+                <div v-if="!isMobile()" class="item">
+                    <span>地址三：</span>
                     <a href="https://pakeplus.netlify.app/">
-                        https://pakeplus.netlify.app/
+                        https://pakeplus.netlify.app
+                    </a>
+                    <span>地址四：</span>
+                    <a href="https://ppweb.pages.dev/">
+                        https://ppweb.pages.dev/
                     </a>
                 </div>
                 <div class="item">
@@ -232,6 +251,13 @@ const langMap = {
         gitlink: 'Github Link',
         fastLink: 'Fast',
     },
+}
+
+// 判断是否是移动端
+const isMobile = () => {
+    return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+        navigator.userAgent.toLowerCase()
+    )
 }
 
 const lastRelease = data[0] || {
@@ -460,12 +486,6 @@ const proxyGithub = (url) => {
     console.log('newURL', newURL)
     return newURL
 }
-
-const isMobile = () => {
-    return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-        navigator.userAgent.toLowerCase()
-    )
-}
 </script>
 
 <style scoped lang="scss">
@@ -647,7 +667,7 @@ const isMobile = () => {
 
                 a {
                     color: var(--vp-c-brand-1);
-                    transition: all 0.5s ease;
+                    transition: all 0.2s ease;
                     min-width: 150px;
 
                     &:hover {
