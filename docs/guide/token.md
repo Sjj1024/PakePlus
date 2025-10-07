@@ -1,4 +1,4 @@
-# Github Token packaging is no longer supported. Please use local packaging instead
+# Github Token packaging will soon no longer be supported. Please use local packaging instead
 
 # Obtaining a Token
 
