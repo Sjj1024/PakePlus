@@ -23,16 +23,22 @@
             <div class="rightContent">
                 <h1 class="title">MacOS</h1>
                 <div class="item">
+                    <span>{{ langMap[lang].mostPopular }}</span>
                     <a :href="proxyGithub(macArm.browser_download_url)">
-                        Apple Silicon(Arm)
+                        Apple Silicon({{ langMap[lang].fastLink }})
                     </a>
-                    <a :href="macArm.browser_download_url"> Github </a>
+                    <a :href="macArm.browser_download_url" class="githubLink">
+                        {{ langMap[lang].gitlink }}
+                    </a>
                 </div>
                 <div class="item">
+                    <span>{{ langMap[lang].oldSystem }}</span>
                     <a :href="proxyGithub(macX64.browser_download_url)">
-                        Intel Chip(X64)
+                        Intel X64({{ langMap[lang].fastLink }})
                     </a>
-                    <a :href="macX64.browser_download_url"> Github </a>
+                    <a :href="macX64.browser_download_url" class="githubLink">
+                        {{ langMap[lang].gitlink }}
+                    </a>
                 </div>
             </div>
         </div>
@@ -64,16 +70,28 @@
             <div class="rightContent">
                 <h1 class="title">Windows</h1>
                 <div class="item">
+                    <span>{{ langMap[lang].mostPopular }}</span>
                     <a :href="proxyGithub(windowsX64.browser_download_url)">
-                        X64
+                        X64 ({{ langMap[lang].fastLink }})
                     </a>
-                    <a :href="windowsX64.browser_download_url"> Github </a>
+                    <a
+                        :href="windowsX64.browser_download_url"
+                        class="githubLink"
+                    >
+                        {{ langMap[lang].gitlink }}
+                    </a>
                 </div>
                 <div class="item">
+                    <span>{{ langMap[lang].rarelyUsed }}</span>
                     <a :href="proxyGithub(windowsArm64.browser_download_url)">
-                        ARM64
+                        ARM64 ({{ langMap[lang].fastLink }})
                     </a>
-                    <a :href="windowsArm64.browser_download_url"> Github </a>
+                    <a
+                        :href="windowsArm64.browser_download_url"
+                        class="githubLink"
+                    >
+                        {{ langMap[lang].gitlink }}
+                    </a>
                 </div>
             </div>
         </div>
@@ -104,22 +122,34 @@
             <div class="rightContent">
                 <h1 class="title">Linux</h1>
                 <div class="item">
+                    <span>{{ langMap[lang].mostPopular }}</span>
                     <a :href="proxyGithub(linuxDeb.browser_download_url)">
-                        deb
+                        deb({{ langMap[lang].fastLink }})
                     </a>
-                    <a :href="linuxDeb.browser_download_url"> Github </a>
+                    <a :href="linuxDeb.browser_download_url" class="githubLink">
+                        {{ langMap[lang].gitlink }}
+                    </a>
                 </div>
                 <div class="item">
+                    <span>{{ langMap[lang].mostPopular }}</span>
                     <a :href="proxyGithub(linuxRpm.browser_download_url)">
-                        rpm
+                        rpm({{ langMap[lang].fastLink }})
                     </a>
-                    <a :href="linuxRpm.browser_download_url"> Github </a>
+                    <a :href="linuxRpm.browser_download_url" class="githubLink">
+                        {{ langMap[lang].gitlink }}
+                    </a>
                 </div>
                 <div class="item">
+                    <span>{{ langMap[lang].largeVolume }}</span>
                     <a :href="proxyGithub(linuxImage.browser_download_url)">
-                        AppImage
+                        AppImage({{ langMap[lang].fastLink }})
                     </a>
-                    <a :href="linuxImage.browser_download_url"> Github </a>
+                    <a
+                        :href="linuxImage.browser_download_url"
+                        class="githubLink"
+                    >
+                        {{ langMap[lang].gitlink }}
+                    </a>
                 </div>
             </div>
         </div>
@@ -183,12 +213,24 @@ const langMap = {
         lastRelease: '最后发布：',
         lastTime: '最后时间：',
         notRecommended: '不推荐，因为是 beta 版本',
+        mostPopular: '最流行：',
+        oldSystem: '老系统：',
+        rarelyUsed: '很少用：',
+        largeVolume: '体积大：',
+        gitlink: 'Github 链接',
+        fastLink: '加速链接',
     },
     en: {
         titleTips: 'Which version should I use?',
         lastRelease: 'Last Release: ',
         lastTime: 'Last Time: ',
         notRecommended: "Not recommended, it's a beta version",
+        mostPopular: 'Most Popular: ',
+        oldSystem: 'Old System: ',
+        rarelyUsed: 'Rarely Used: ',
+        largeVolume: 'Large Volume: ',
+        gitlink: 'Github Link',
+        fastLink: 'Fast',
     },
 }
 
@@ -606,11 +648,17 @@ const isMobile = () => {
                 a {
                     color: var(--vp-c-brand-1);
                     transition: all 0.5s ease;
+                    min-width: 150px;
 
                     &:hover {
                         // color: rgb(58, 58, 254);
                         font-weight: bold;
+                        transform: translateY(-2px);
                     }
+                }
+
+                .githubLink {
+                    margin-left: 20px;
                 }
             }
         }

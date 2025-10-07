@@ -48,25 +48,7 @@ Workflows: Used to compile and package your software
    Then copy the generated token into PackPlus:
    ![](../static/imgs/token12.png)
 
-8. **<font color="red">(Skip this step if you already obtained a token in Step 7. Proceed to Step 9.)</font>**
-   **For Fine-grained personal access tokens:**
-   ![](../static/imgs/token1.png)
-
-    - Click `Generate new token`.
-    - Enter a token name, set expiration to "No expiration," and add an optional description.
-    - Select `All repositories`.
-      ![](../static/imgs/token2.png)
-    - **Configure permissions:** Grant the permissions marked in red boxes. Set **Access** to: `Read and write`.
-      ![](../static/imgs/token3.png)
-      ![](../static/imgs/token4.png)
-      ![](../static/imgs/token5.png)
-      ![](../static/imgs/token7.png)
-    - Click `Generate token` at the bottom to obtain your token:
-      ![](../static/imgs/token8.png)
-    - Copy the token into PackPlus to start using it:
-      ![](../static/imgs/token9.png)
-
-9. **Test the Token**
+8. **Test the Token**
    Open PackPlus, click the settings button in the top-right corner, paste the token obtained in Step 7 or 8, and click "Test." If it shows "Token is valid," you're all set!
    ![](../static/imgs/token13.png)
 
