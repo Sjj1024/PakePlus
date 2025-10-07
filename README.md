@@ -17,6 +17,7 @@ style="margin: 0 10px;" >简体中文</a>
     <a href="https://github.com/Sjj1024/PakePlus/stargazers"><img src="https://img.shields.io/github/forks/Sjj1024/PakePlus?style=flat-square&logo=github" alt="Forks"></a>
     <a href="https://github.com/Sjj1024/PakePlus/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/Sjj1024/PakePlus/build.yml?style=flat-square&logo=github" alt="Build"></a>
     <a href="https://github.com/Sjj1024/PakePlus/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Sjj1024/PakePlus?style=flat-square&logo=github" alt="License"></a>
+    <a href="https://app.netlify.com/projects/pakeplus/deploys"><img src="https://api.netlify.com/api/v1/badges/f8454a03-8724-4797-9fe4-e6c51dd90e3a/deploy-status" alt="License"></a>
     <!-- <a href="https://hellogithub.com/repository/d148f8fac78b45fe9b94c82757c3f86b" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=d148f8fac78b45fe9b94c82757c3f86b&claim_uid=LXfeQOxRDEmSUGC&theme=small" alt="Featured｜HelloGitHub"></a> -->
 </p>
 
