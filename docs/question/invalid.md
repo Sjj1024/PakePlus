@@ -1,16 +1,18 @@
-# Invalid Token  
+# Invalid Token
 
-This occurs because the GitHub token wasn't granted the required permissions during creation.  
+This occurs because the GitHub token wasn't granted the required permissions during creation.
 
-### Solution:  
-Follow the [GitHub Token Guide](../guide/token.md) to regenerate your token with proper permissions.  
+### Solution:
+
+Follow the [GitHub Token Guide](../guide/token.md) to regenerate your token with proper permissions.
 
 **Recommendation:**  
-While granting all permissions will work (and is safest), PackPlus actually only needs:  
-- `repo` (full control of private repositories)  
-- `workflow` (GitHub Actions access)  
-- `user` (read user profile data)  
+While granting all permissions will work (and is safest), PakePlus actually only needs:
 
-For security, only enable what's needed rather than all permissions.  
+-   `repo` (full control of private repositories)
+-   `workflow` (GitHub Actions access)
+-   `user` (read user profile data)
 
-> 🔍 *Tip: If you previously created a token, you may need to revoke and recreate it for new permissions to take effect.*
+For security, only enable what's needed rather than all permissions.
+
+> 🔍 _Tip: If you previously created a token, you may need to revoke and recreate it for new permissions to take effect._

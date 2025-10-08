@@ -23,8 +23,8 @@ token 权限说明：
 All repositories：要 fork 一个原始模板仓库
 Actions：操作 github action进行打包编译
 Administration：对仓库进行 fork 和文件管理
-Contents：对PackPlus仓库进行添加/删除/修改/查找等操作
-Issues：向 PackPlus 提交编译错误等问题
+Contents：对PakePlus仓库进行添加/删除/修改/查找等操作
+Issues：向 PakePlus 提交编译错误等问题
 Workflows：用来编译打包你的软件
 ```
 
@@ -43,12 +43,12 @@ Workflows：用来编译打包你的软件
 
     ![](../../static/imgs/token11.png)
     ![](../../static/imgs/token12.webp)
-    然后将得到的 token 复制到 PackPlus 就可以了：
+    然后将得到的 token 复制到 PakePlus 就可以了：
 
     ![](../../static/imgs/token12.png)
 
 8. 测试 Token 是否正确
-   打开 PackPlus，点击首页右上角的设置按钮，把第 7 步或者第 8 步得到的 token 复制进去，点击测试，会校验 token 是否正确并初始化，网络好的话转 20 秒左右就好了:
+   打开 PakePlus，点击首页右上角的设置按钮，把第 7 步或者第 8 步得到的 token 复制进去，点击测试，会校验 token 是否正确并初始化，网络好的话转 20 秒左右就好了:
 
     ![](../../static/imgs/token16.webp)
 
@@ -61,6 +61,6 @@ Workflows：用来编译打包你的软件
 ## 注意事项
 
 -   github 生成的 token 只有一次机会查看，请妥善保管。
--   PackPlus 填入的 token 只会仅存储在你电脑本地，请妥善保管。
+-   PakePlus 填入的 token 只会仅存储在你电脑本地，请妥善保管。
 -   生成的 token 只能在有效期内使用(如果你设置的是有效期模式)，过期后需要重新生成。
 -   当你填入 token 并验证成功后，会在右上角展示你的 github 头像，点击头像可以查看你的 github 昵称和 token，点击头像会跳转到你的 github 个人主页，点击 token 会将 token 复制到你的粘贴板。如果在使用过程中有遇到问题，[可以进交流群咨询](../exchange/index.md)。

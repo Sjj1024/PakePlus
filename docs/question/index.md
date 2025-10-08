@@ -2,9 +2,9 @@
 
 If there are problems, self-examination is often more effective.
 
-1. Self inspection in PP issues often yields results: https://github.com/Sjj1024/PackPlus/issues
+1. Self inspection in PP issues often yields results: https://github.com/Sjj1024/PakePlus/issues
 2. Check if you have modified the configuration or script files and try using the original configuration
-3. Check if the token permissions are given correctly, or try filling in the token again (do not manually create a repository with the same name as PackPlus/PackPlus-Android/PackPlus-iOS)
+3. Check if the token permissions are given correctly, or try filling in the token again (do not manually create a repository with the same name as PakePlus/PakePlus-Android/PakePlus-iOS)
 4. Have you consulted in the group before? If not, try asking in the group first. [Join the group for communication] (../exchange/index. md)
 5. For network issues, please check if you are using a proxy or cloud computer. You can try switching the proxy or network.
 6. If certain features are not supported, they can be resolved through sponsoring PP for quick priority development.
@@ -20,7 +20,7 @@ terms of settlement:
 1.  -   -   Mac users may see a warning saying 'App is damaged' during installation. \*\*Please click 'Cancel', run the following command, and then reopen the app: (This is because the app requires an official signature to avoid the prompt 'App is damaged' after installation, but the official signature fee is $99 per year... Therefore, you need to manually bypass the signature to use it normally)
 
 ```sh
-sudo xattr -r -d com.apple.quarantine /Applications/PackPlus.app
+sudo xattr -r -d com.apple.quarantine /Applications/PakePlus.app
 ```
 
 2.  -   -   When you package an application, Mac users may see a warning saying "the application is damaged" during installation. \*\*Please click 'Cancel', then run the following command, enter your computer password, and reopen the application:
@@ -54,4 +54,4 @@ Confirm if the token permissions are configured correctly, and then try filling 
 
 # Cannot read properties of undefined XXX
 
-Using the latest version of PackPlus and filling in the token can solve 99% of the problems.
+Using the latest version of PakePlus and filling in the token can solve 99% of the problems.

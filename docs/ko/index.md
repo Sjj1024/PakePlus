@@ -3,26 +3,26 @@
 layout: home
 
 hero:
-    name: 'PackPlus'
+    name: 'PakePlus'
     text: 'Turn Web into desktop & mobile apps'
     tagline: Package Web/Vue/React projects into desktop/mobile apps in minutes
     image:
         src: ../pplogo.png
-        alt: PackPlus
+        alt: PakePlus
     actions:
         - theme: brand
           text: Download
           link: /download/
         - theme: brand
           text: WebBeta
-          link: https://PackPlus.netlify.app/
+          link: https://PakePlus.netlify.app/
         - theme: brand
           text: Guide
           link: /guide/
 
 features:
     - title: Open Source
-      details: PackPlus is open source and you can find its source code on GitHub
+      details: PakePlus is open source and you can find its source code on GitHub
       icon: 🐙
     - title: Cross Platform
       details: Windows/macOS/Linux/Android/iOS are all supported
@@ -61,7 +61,7 @@ features:
       details: Support debug mode, whether in preview or release, you can find bugs
       icon: 🐞
     - title: Data Security
-      details: PackPlus will not upload any data, all data is stored on your computer
+      details: PakePlus will not upload any data, all data is stored on your computer
       icon: 🔒
     - title: Technical Support
       details: If you encounter any problems during use, you can chat with us

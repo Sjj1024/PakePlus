@@ -23,4 +23,4 @@
 -   解决问题的日志
 ```
 
-issue 地址： [PackPlus Issue](https://github.com/Sjj1024/PackPlus/issues)
+issue 地址： [PakePlus Issue](https://github.com/Sjj1024/PakePlus/issues)

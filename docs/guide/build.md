@@ -1,6 +1,6 @@
 # Compilation and Release
 
-This step instructs GitHub to compile your project into a cross-platform desktop application. Currently, PackPlus only supports desktop platforms (mobile support coming soon). You can choose between two release modes: 
+This step instructs GitHub to compile your project into a cross-platform desktop application. Currently, PakePlus only supports desktop platforms (mobile support coming soon). You can choose between two release modes:
 
 1. **Release Mode (Debug Disabled)** - For production use
 2. **Debug Mode** - Enables error logging in console when the app launches
@@ -19,10 +19,12 @@ If failed: An error notification will appear in the upper right corner - either 
 ![](../static/imgs/building1.webp)
 
 ## Successful Release:
+
 Congratulations 🎉🎉🎉! Your application has been successfully compiled. Click "Download" to get your software, or click the name to copy the download link for browser access.
 ![](../static/imgs/publish2.webp)
 
 ## Important Notes:
+
 1. **Release Modes**: Debug mode enables error logging visible in console (right-click → Inspect to view)
 2. **Release Notes**: Optional description of changes (can be skipped)
 3. **Failed Releases**: A red warning icon appears top-right with error details for troubleshooting

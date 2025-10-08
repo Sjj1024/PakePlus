@@ -8,15 +8,15 @@
 <Badge type="tip" text="More Custom Build Options" />
 :::
 
-If you are a developer and want to debug your frontend project, or if your `dist` directory is particularly large with many files, but PackPlus restricts file size and quantity due to GitHub API limitations, you can use advanced methods to sync your `dist` directory to a GitHub repository and achieve compilation and release.
+If you are a developer and want to debug your frontend project, or if your `dist` directory is particularly large with many files, but PakePlus restricts file size and quantity due to GitHub API limitations, you can use advanced methods to sync your `dist` directory to a GitHub repository and achieve compilation and release.
 
 ## Steps
 
-1. First, create a project on PackPlus, for example, a project named: `deepseek`.
+1. First, create a project on PakePlus, for example, a project named: `deepseek`.
 
-2. Then, clone your PackPlus repository to your local machine.  
-   After each user fills in and verifies their token on PackPlus, the PackPlus/PackPlus-Android/PackPlus-iOS repository is automatically forked to their GitHub account. You can find your PackPlus repository under your GitHub account and clone it locally.  
-   Note: If you want to build for desktop, clone `PackPlus`; if you want to build for mobile, clone `PackPlus-Android` or `PackPlus-iOS`.
+2. Then, clone your PakePlus repository to your local machine.  
+   After each user fills in and verifies their token on PakePlus, the PakePlus/PakePlus-Android/PakePlus-iOS repository is automatically forked to their GitHub account. You can find your PakePlus repository under your GitHub account and clone it locally.  
+   Note: If you want to build for desktop, clone `PakePlus`; if you want to build for mobile, clone `PakePlus-Android` or `PakePlus-iOS`.
 
 3. Use Git commands to pull all branches of your repository. There will definitely be a branch named: `deepseek`.  
    After switching to the `deepseek` branch, copy the contents of your `dist` folder into the `src` directory, then commit and push the changes to your repository.  
@@ -48,4 +48,4 @@ If you are a developer and want to debug your frontend project, or if your `dist
 4. After making the changes, push this branch to your repository, then trigger the compilation in GitHub Actions.  
    When triggering, remember to select the branch as `deepseek`, then click "Run workflow" and wait for the compilation to complete.
 
-5. After the release is complete, go to the PackPlus release page to download your software.
+5. After the release is complete, go to the PakePlus release page to download your software.

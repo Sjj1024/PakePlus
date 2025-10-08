@@ -15,8 +15,8 @@ const members = [
 ]
 </script>
 
-# PackPlus 平台帐号
+# PakePlus 平台帐号
 
-PackPlus 多平台帐号
+PakePlus 多平台帐号
 
 <VPTeamMembers size="small" :members />

@@ -4,7 +4,7 @@
 使用桌面端 API 的前提是在更多配置中，开启全局 TauriApi，然后才可以打包发布使用！  
 :::
 
-桌面端 API 主要是集成了 tauri2 的所有 api 接口，还有 PackPlus 自定义的一些 api 接口，一定要开启全局 TauriApi，然后才可以打包发布使用，否则不生效的。开发过程中，可以通过 window.**TAURI** 来查看有哪些 api 接口，并可以查看接口类型。
+桌面端 API 主要是集成了 tauri2 的所有 api 接口，还有 PakePlus 自定义的一些 api 接口，一定要开启全局 TauriApi，然后才可以打包发布使用，否则不生效的。开发过程中，可以通过 window.**TAURI** 来查看有哪些 api 接口，并可以查看接口类型。
 
 ## JS 脚本中使用
 
@@ -137,9 +137,9 @@ pnpm install @tauri-apps/plugin-os
 
 文档待更新......
 
-## PackPlusApi
+## PakePlusApi
 
-本章后面的 API 接口是 PackPlus 开发的一些 rust 后端接口，可以在 js 中直接调用使用，也仅仅只能在 PackPlus 项目中打包使用。请勿将此 API 用于原生的 tauri 项目。
+本章后面的 API 接口是 PakePlus 开发的一些 rust 后端接口，可以在 js 中直接调用使用，也仅仅只能在 PakePlus 项目中打包使用。请勿将此 API 用于原生的 tauri 项目。
 
 ## 打开 URL(本窗口)
 
@@ -176,13 +176,13 @@ document.addEventListener('click', hookClick, { capture: true })
 const { WebviewWindow } = window.__TAURI__.webviewWindow
 
 const webview = new WebviewWindow('my-label', {
-    url: 'https://PackPlus.com/',
+    url: 'https://PakePlus.com/',
     x: 500,
     y: 500,
     width: 800,
     height: 400,
     focus: true,
-    title: 'PackPlus Window',
+    title: 'PakePlus Window',
     alwaysOnTop: true,
     center: true,
     resizable: true,
