@@ -138,7 +138,6 @@ jobs:
               run: |
                   curl -L -o dist.zip ${{ secrets.VITE_DIST_URL }}
                   unzip -o dist.zip -d dist
-                  ls
 
             - name: import Apple Developer Certificate
               if: ${{ matrix.enabled && matrix.platform == 'macos-latest'}}
