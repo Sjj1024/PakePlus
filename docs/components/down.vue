@@ -184,7 +184,7 @@
             <div v-if="!isMobile()" class="rightContent">
                 <h1 class="title">Web Version</h1>
                 <div class="item">
-                    <span v-if="!isMobile()">地址一：</span>
+                    <span v-if="!isMobile()">{{ langMap[lang].web1 }}</span>
                     <a
                         target="_blank"
                         href="https://web.pakeplus.com/"
@@ -192,7 +192,7 @@
                     >
                         https://web.pakeplus.com
                     </a>
-                    <span v-if="!isMobile()">地址二：</span>
+                    <span v-if="!isMobile()">{{ langMap[lang].web2 }}</span>
                     <a
                         v-if="!isMobile()"
                         target="_blank"
@@ -202,7 +202,7 @@
                     </a>
                 </div>
                 <div v-if="!isMobile()" class="item">
-                    <span>地址三：</span>
+                    <span>{{ langMap[lang].web3 }}</span>
                     <a
                         class="cloudLink"
                         target="_blank"
@@ -210,7 +210,7 @@
                     >
                         https://pakeplus.netlify.app
                     </a>
-                    <span>地址四：</span>
+                    <span>{{ langMap[lang].web4 }}</span>
                     <a target="_blank" href="https://ppweb.pages.dev/">
                         https://ppweb.pages.dev/
                     </a>
@@ -250,6 +250,10 @@ const langMap = {
         largeVolume: '体积大：',
         gitlink: 'Github 链接',
         fastLink: '加速链接',
+        web1: '地址一：',
+        web2: '地址二：',
+        web3: '地址三：',
+        web4: '地址四：',
     },
     en: {
         titleTips: 'Which version should I use?',
@@ -263,6 +267,10 @@ const langMap = {
         largeVolume: 'Large Volume: ',
         gitlink: 'Github Link',
         fastLink: 'Fast',
+        web1: 'Address One: ',
+        web2: 'Address Two: ',
+        web3: 'Address Three: ',
+        web4: 'Address Four: ',
     },
 }
 

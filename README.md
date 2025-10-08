@@ -21,8 +21,8 @@ style="margin: 0 10px;" >简体中文</a>
     <!-- <a href="https://hellogithub.com/repository/d148f8fac78b45fe9b94c82757c3f86b" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=d148f8fac78b45fe9b94c82757c3f86b&claim_uid=LXfeQOxRDEmSUGC&theme=small" alt="Featured｜HelloGitHub"></a> -->
 </p>
 
-<div align="left">PacBao supports Mac, Windows, Linux, and Android & iOS. There’s no need to install complex dependencies locally, PacBao is only about 10MB in size. For the latest version, please see the <a href="[#popular-packages](https://github.com/Sjj1024/PacBao/releases)">release page</a>. or visit: <a href="https://PacBao.pages.dev" target="_blank">PacBao Web</a>. 
-Document: <a href="https://PacBao.com/guide/" target="_blank">PacBao Guide</a></div>  
+<div align="left">PacBao supports Mac, Windows, Linux, and Android & iOS. There’s no need to install complex dependencies locally, PacBao is only about 10MB in size. For the latest version, please see the <a href="[#popular-packages](https://github.com/Sjj1024/pakeplus/releases)">release page</a>. or visit: <a href="https://pakeplus.pages.dev" target="_blank">PacBao Web</a>. 
+Document: <a href="https://pakeplus.com/guide/" target="_blank">PacBao Guide</a></div>  
 <br>
 
 > Due to individuals using this project to package illegal software, which violates its intended purpose, the front-end code will no longer be open-source. If such behavior is found again, all code in this project will cease to be open-source. Please use this software legally and responsibly, or bear the consequences.
@@ -124,7 +124,7 @@ PacBao supports installation packages for both ARM and Intel architectures. Most
 1. Download the app from the release page：https://github.com/Sjj1024/PabBao/releases,  
    double-click to install, and run the app. or visit web:
 
-<a href="https://PacBao.pages.dev" target="_blank">PacBao Web</a>
+<a href="https://pakeplus.pages.dev" target="_blank">PacBao Web</a>
 
 2. Configure GitHub token or use local packaging, create a new project, and set up the configurations. get token guide. (When using this software, please comply with relevant laws and regulations. If you use GitHub token to use this project, it will automatically star the project and the compilation results will be counted for success or failure to improve the project and obtain feedback. Packaging is for personal use only and should not be disseminated or used for commercial purposes. The packaged resources will be stored in your own Github open source repository and can be viewed by anyone. Therefore, please strictly follow the Github usage guidelines, otherwise you will be responsible for the consequences)
 
