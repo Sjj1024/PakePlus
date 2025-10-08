@@ -181,25 +181,37 @@
                     ></path>
                 </svg>
             </div>
-            <div class="rightContent">
+            <div v-if="!isMobile()" class="rightContent">
                 <h1 class="title">Web Version</h1>
                 <div class="item">
                     <span v-if="!isMobile()">地址一：</span>
-                    <a href="https://web.pakeplus.com/">
+                    <a
+                        target="_blank"
+                        href="https://web.pakeplus.com/"
+                        class="cloudLink"
+                    >
                         https://web.pakeplus.com
                     </a>
                     <span v-if="!isMobile()">地址二：</span>
-                    <a v-if="!isMobile()" href="https://pacbao.vercel.app/">
+                    <a
+                        v-if="!isMobile()"
+                        target="_blank"
+                        href="https://pacbao.vercel.app/"
+                    >
                         https://pacbao.vercel.app/
                     </a>
                 </div>
                 <div v-if="!isMobile()" class="item">
                     <span>地址三：</span>
-                    <a href="https://pakeplus.netlify.app/">
+                    <a
+                        class="cloudLink"
+                        target="_blank"
+                        href="https://pakeplus.netlify.app/"
+                    >
                         https://pakeplus.netlify.app
                     </a>
                     <span>地址四：</span>
-                    <a href="https://ppweb.pages.dev/">
+                    <a target="_blank" href="https://ppweb.pages.dev/">
                         https://ppweb.pages.dev/
                     </a>
                 </div>
@@ -231,7 +243,7 @@ const langMap = {
         titleTips: '我应该使用哪个版本？',
         lastRelease: '最后发布：',
         lastTime: '最后时间：',
-        notRecommended: '不推荐，因为是 beta 版本',
+        notRecommended: '不推荐，因为是 beta 版本，且功能没有客户端版本完善',
         mostPopular: '最流行：',
         oldSystem: '老系统：',
         rarelyUsed: '很少用：',
@@ -243,7 +255,8 @@ const langMap = {
         titleTips: 'Which version should I use?',
         lastRelease: 'Last Release: ',
         lastTime: 'Last Time: ',
-        notRecommended: "Not recommended, it's a beta version",
+        notRecommended:
+            "Not recommended, it's a beta version，and the function is not as complete as the client version",
         mostPopular: 'Most Popular: ',
         oldSystem: 'Old System: ',
         rarelyUsed: 'Rarely Used: ',
@@ -681,6 +694,10 @@ const proxyGithub = (url) => {
 
                 .githubLink {
                     margin-left: 20px;
+                }
+
+                .cloudLink {
+                    min-width: 260px;
                 }
             }
         }
