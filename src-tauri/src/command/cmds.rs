@@ -113,8 +113,6 @@ pub async fn preview_from_config(
             .initialization_script_for_all_frames(contents.as_str())
             .build()
             .unwrap();
-        // set icon
-        #[cfg(target_os = "windows")]
         if icon_base64.len() > 0 {
             use tauri::image::Image;
             let icon_decode =
