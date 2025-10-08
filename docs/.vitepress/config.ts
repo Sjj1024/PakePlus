@@ -3,7 +3,8 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
     title: 'PakePlus',
-    description: 'PakePlus Docs',
+    description:
+        'Package Web/Vue/React projects into Desktop/Mobile Apps in minutes, 打包网页/Vue/React项目为桌面/手机应用只需几分钟',
     lastUpdated: false,
     base: '/',
     outDir: './dist',
