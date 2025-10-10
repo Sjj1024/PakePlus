@@ -139,6 +139,10 @@ export default defineConfig({
                             text: 'Github Discussion',
                             link: '/exchange/github',
                         },
+                        {
+                            text: 'Custom Development',
+                            link: '/exchange/custom',
+                        },
                     ],
                     '/sponsor/': [
                         { text: 'Sponsor Us', link: '/sponsor/' },
@@ -343,6 +347,7 @@ export default defineConfig({
                     ],
                     '/zh/exchange/': [
                         { text: '加入群聊', link: '/zh/exchange/' },
+                        { text: '定制开发', link: '/zh/exchange/custom' },
                         { text: '商业支持', link: '/zh/exchange/business' },
                         { text: 'Github讨论', link: '/zh/exchange/github' },
                     ],
