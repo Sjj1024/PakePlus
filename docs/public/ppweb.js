@@ -1,19 +1,13 @@
-console.log('ppweb.js loaded')
 const initLang = () => {
     const isFirst = sessionStorage.getItem('first_visit')
-    const browserLang = navigator.language
-    const isChinese = window.location.href.includes('zh')
-    console.log('isChinese', isChinese)
-    console.log('isFirst', isFirst)
-    console.log('browserLang', browserLang)
     if (isFirst) {
         console.log('cookieLang is not empty')
     } else {
+        const browserLang = navigator.language
+        const isChinese = window.location.href.includes('zh')
         if (browserLang === 'zh-CN' && !isChinese) {
-            const domain = window.location.host
             const path = window.location.pathname
             const newUrl = `/zh${path}`
-            console.log('newUrl', newUrl)
             window.location.href = newUrl
         } else {
             if (isChinese) {
