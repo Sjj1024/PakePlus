@@ -2,12 +2,13 @@
     "$schema": "../gen/schemas/desktop-schema.json",
     "identifier": "default",
     "description": "Capability for the main window",
-    "windows": ["main", "PreView"],
+    "windows": ["main", "PreView", "*"],
     "remote": {
         "urls": [
             "https://*",
             "file://*",
             "http://*",
+            "http://127.0.0.1:*",
             "asset://localhost/*",
             "https://api.github.com/*",
             "https://payjs.cn/*",
