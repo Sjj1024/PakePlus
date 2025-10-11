@@ -174,6 +174,6 @@ pnpm run build
 9. 群内禁止发任何涉及政治、宗教、暴力、色情、恐怖主义等内容的信息。
  <p align="center" style="display:flex; justify-content: flex-start;" >
     <img src="https://github.com/Sjj1024/PacBao/raw/main/docs/static/imgs/mywx.png" width=200/>
-    <img src="https://github.com/Sjj1024/PacBao/raw/main/docs/static/imgs/wxcode.png" width=200/>
+    <img src="https://github.com/Sjj1024/PacBao/raw/main/docs/static/imgs/wxcode.jpg" width=200/>
     <img src="https://github.com/Sjj1024/PacBao/raw/main/docs/static/imgs/qqpp3.jpg" width=200/>
  </p>
