@@ -8,9 +8,9 @@
         "icon": "tauri icon",
         "worker": "node ./scripts/ppworker.cjs",
         "restore": "git restore .",
-        "tauri dev": "tauri dev",
-        "tauri build": "tauri build",
-        "tauri debug": "tauri build --debug"
+        "tauri:dev": "tauri dev",
+        "tauri:build": "tauri build",
+        "tauri:debug": "tauri build --debug"
     },
     "devDependencies": {
         "@tauri-apps/cli": "^2",
