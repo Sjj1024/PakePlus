@@ -190,7 +190,7 @@ All work is conducted openly on GitHub. Whether you are a core team member or an
 1. wechat and group，my wechat is lanxingme，welcome to join the wechat group.
  <p align="center" style="display:flex; justify-content: flex-start;" >
     <img src="https://github.com/Sjj1024/PacBao-Doc/raw/main/static/imgs/mywx.png" width=200/>
-    <img src="https://github.com/Sjj1024/PacBao-Doc/raw/main/static/imgs/wxcode.png" width=200/>
+    <img src="https://github.com/Sjj1024/PacBao-Doc/raw/main/static/imgs/wxcode.jpg" width=200/>
     <img src="https://github.com/Sjj1024/PacBao-Doc/raw/main/static/imgs/qqpp3.jpg" width=200/>
  </p>
 
