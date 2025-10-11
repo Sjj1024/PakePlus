@@ -1,6 +1,6 @@
 <template>
     <div class="qunBox">
-        <img class="wxCode" src="../static/imgs/wxcode.png" alt="wx" />
+        <img class="wxCode" src="../static/imgs/wxcode.jpg" alt="wx" />
         <img class="wxCode" src="../static/imgs/mywx.png" alt="mywx" />
         <img class="wxCode" src="../static/imgs/qqpp3.jpg" alt="qqpp3" />
     </div>
