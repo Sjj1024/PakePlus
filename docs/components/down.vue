@@ -1,7 +1,7 @@
 <template>
     <div class="downBox">
         <div class="title">{{ langMap[lang].titleTips }}</div>
-        <div class="platform mac">
+        <div class="platform mac" :style="isDownPage() ? '' : 'width: 100%;'">
             <div class="leftIcon">
                 <svg
                     t="1742708135449"
@@ -46,7 +46,10 @@
                 </div>
             </div>
         </div>
-        <div class="platform windows">
+        <div
+            class="platform windows"
+            :style="isDownPage() ? '' : 'width: 100%;'"
+        >
             <div class="leftIcon">
                 <img
                     src="../static/imgs/windowslogo.png"
@@ -100,7 +103,7 @@
                 </div>
             </div>
         </div>
-        <div class="platform linux">
+        <div class="platform linux" :style="isDownPage() ? '' : 'width: 100%;'">
             <div class="leftIcon">
                 <img
                     src="../static/imgs/linuxlogo.png"
@@ -162,7 +165,7 @@
                 </div>
             </div>
         </div>
-        <div class="platform web">
+        <div class="platform web" :style="isDownPage() ? '' : 'width: 100%;'">
             <div class="leftIcon cloud-icon">
                 <svg
                     t="1742721374498"
@@ -192,7 +195,9 @@
                     >
                         https://web.pakeplus.com
                     </a>
-                    <span v-if="!isMobile()">{{ langMap[lang].web2 }}</span>
+                    <span v-if="!isMobile() && isDownPage()">
+                        {{ langMap[lang].web2 }}
+                    </span>
                     <a
                         v-if="!isMobile()"
                         target="_blank"
@@ -210,7 +215,9 @@
                     >
                         https://pakeplus.netlify.app
                     </a>
-                    <span>{{ langMap[lang].web4 }}</span>
+                    <span v-if="!isMobile() && isDownPage()">
+                        {{ langMap[lang].web4 }}
+                    </span>
                     <a target="_blank" href="https://ppweb.pages.dev/">
                         https://ppweb.pages.dev/
                     </a>
@@ -281,6 +288,10 @@ const isMobile = () => {
     return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
         navigator.userAgent.toLowerCase()
     )
+}
+
+const isDownPage = () => {
+    return window.location.pathname.includes('download')
 }
 
 const lastRelease = data[0] || {
