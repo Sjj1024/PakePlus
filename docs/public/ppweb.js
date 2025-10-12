@@ -5,10 +5,12 @@ const initLang = () => {
     } else {
         const browserLang = navigator.language
         const isChinese = window.location.href.includes('zh')
-        if (browserLang === 'zh-CN' && !isChinese) {
-            const path = window.location.pathname
-            const newUrl = `/zh${path}`
-            window.location.href = newUrl
+        if (browserLang === 'zh-CN') {
+            if (!isChinese) {
+                const path = window.location.pathname
+                const newUrl = `/zh${path}`
+                window.location.href = newUrl
+            }
         } else {
             if (isChinese) {
                 const path = window.location.pathname
