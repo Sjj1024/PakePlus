@@ -4,7 +4,7 @@
 
 # 支持的平台
 
--   Windows：支持 win10 以上操作系统，暂不支持 win7
+-   Windows：支持 win10 以上操作系统，如果需要 win7 或 xp 系统，可以定制开发（微信：lanxingme）
 -   Macos：支持 Intel 芯片 和 Apple M 系列（ARM）芯片
 -   Linux：支持常见的发行版，如 Ubuntu、Debian、Fedora、CentOS 等。
 -   Android：支持 Android 7.0 及其以上版本，直接安装打包后 apk 即可。
