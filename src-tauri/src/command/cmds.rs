@@ -100,10 +100,6 @@ pub async fn preview_from_config(
         }
     }
     let mut contents = String::new();
-    if devbug {
-        contents += include_str!("../../data/vconsole.min.js");
-        contents += "var vConsole = new window.VConsole();";
-    }
     // custom js
     contents += js_content.as_str();
     if !resize {
@@ -120,6 +116,9 @@ pub async fn preview_from_config(
             let icon_bytes = icon_decode.unwrap();
             let png_image = Image::from_bytes(&icon_bytes).unwrap();
             pre_window.set_icon(png_image).unwrap();
+        }
+        if devbug {
+            pre_window.open_devtools();
         }
         pre_window.on_window_event(move |event| {
             if let WindowEvent::Destroyed = event {
