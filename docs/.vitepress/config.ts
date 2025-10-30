@@ -108,6 +108,10 @@ export default defineConfig({
                                 },
                             ],
                         },
+                        {
+                            text: 'Privacy Policy',
+                            link: '/guide/policy',
+                        },
                     ],
                     '/question/': [
                         { text: 'Application Damaged', link: '/question/' },
@@ -278,6 +282,10 @@ export default defineConfig({
                                     link: '/zh/guide/custompack',
                                 },
                             ],
+                        },
+                        {
+                            text: '隐私政策',
+                            link: '/zh/guide/policy',
                         },
                     ],
                     '/zh/question/': [
