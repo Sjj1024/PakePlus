@@ -19,6 +19,8 @@ components.d.ts
 !.vscode/extensions.json
 .idea
 .DS_Store
+*.p8
+api_key.json
 *.suo
 *.ntvs*
 *.njsproj
@@ -43,6 +45,7 @@ docs/dist
 .cxx
 local.properties
 .src/assets/*.js
+
 
 # vitepress
 docs/.vitepress/dist

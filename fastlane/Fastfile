@@ -1,0 +1,20 @@
+lane :upload_screenshots_ios do
+  deliver(
+    screenshots_path:'./fastlane/ios/screenshots',
+    platform:'ios',
+    skip_binary_upload:true,
+    skip_metadata: true,
+  )
+end
+
+
+lane :upload_metadata_ios do
+  sh './ios/localized.sh'
+  deliver(
+    metadata_path:'./fastlane/ios/metadata',
+    platform:'ios',
+    skip_binary_upload:true,
+    skip_screenshots: true
+  )
+end
+

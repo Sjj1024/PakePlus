@@ -1,0 +1,137 @@
+en-US:
+  # 应用名称
+  name: "Dicom Browser"
+  # 应用副标题
+  subtitle: "Powerful DICOM Viewer Software"
+  # 隐私协议
+  privacy_url: "https://www.dicombrowser.com/privacy.html"
+  # 描述
+  description: "Dicom Browser is a professional medical imaging universal application, usable on both iPhone and Mac with a single purchase.\n\nOn iPhone, it focuses on routine image browsing and annotation: supports offline preview of DICOM series, window/level adjustment, basic measurements (length, angles, etc.), and arrow/shape/text annotations — meeting everyday on-the-go viewing and communication needs. The app runs entirely offline, requiring no network connection, ensuring data security and privacy.\n\nOn Mac, it provides a complete set of advanced features: including 3D image preview, Multi-Planar Reconstruction (MPR), multi-modal image fusion (e.g., CT/PET fusion), and other professional analysis tools — helping improve the efficiency and accuracy of image analysis.\n\nSuitable for radiologists, medical students, researchers, and other medical imaging users, it is a trustworthy tool for DICOM browsing and processing."
+  # 关键词
+  keywords: "dicom,dcm,viewer,medical,PACS,CT,PT,PET,MR,MRI,MPR,MIP,fusion,radiology,ultrasound,ai"
+  # 更新说明
+  release_notes: ""
+  # 支持的url
+
+  support_url: "https://www.dicombrowser.com"
+
+zh-Hans:
+  # 应用名称
+  name: "Dicom Browser"
+  # 应用副标题
+  subtitle: "功能强大的Dicom文件浏览器"
+  # 隐私协议
+  privacy_url: "https://www.dicombrowser.com/privacy.html"
+  # 描述
+  description: "Dicom Browser 是专业的医学影像通用应用，一次购买即可在 iPhone 与 Mac 上同时使用。\n\niPhone 端专注于常规影像浏览与标记：支持 DICOM 序列离线预览、调窗调位、基础测量（长度、角度等）与箭头/形状/文字标注，满足日常随身查看与沟通需求。应用完全离线运行，无需网络连接，确保数据安全与隐私。\n\nMac 端提供完整的高级功能：包含 3D 影像预览、多平面重建（MPR）、多模态影像融合（如 CT/PET 融合）等专业分析工具，助力提升影像分析效率与准确性。\n\n适用于放射科医生、医学生、研究人员等医学影像相关用户，是值得信赖的 DICOM 浏览与处理工具。"
+  # 关键词
+  keywords: "dicom,dcm,viewer,medical,PACS,CT,PT,PET,MR,MRI,MPR,MIP,fusion,radiology,ultrasound,ai,超声"
+  # 更新说明
+  release_notes: ""
+  # 支持的url
+  support_url: "https://www.dicombrowser.com"
+ja:
+  # 应用名称
+  name: "Dicom Browser"
+  # 应用副标题
+  subtitle: "機能豊富な DICOM ファイルブラウザ"
+  # 隐私协议
+  privacy_url: "https://www.dicombrowser.com/privacy.html"
+  # 描述
+  description: "Dicom Browser は、1 回の購入で iPhone と Mac の両方で使えるプロフェッショナル向け医用画像アプリです。\n\n iPhone では、日常的な画像閲覧とマーキングに特化。DICOM シリーズのオフラインプレビュー、ウィンドウ/レベル、基本計測（長さ・角度など）、矢印/図形/テキスト注釈をサポートし、外出先での閲覧やコミュニケーションに役立ちます。アプリは完全にオフラインで動作し、ネット接続不要でデータの安全性とプライバシーを確保します。\n\n Mac では、3D 画像プレビュー、多平面再構成（MPR）、マルチモダリティ融合（CT/PET など）を含む高度な機能を提供し、解析の効率と精度を高めます。\n\n 放射線科医、医学生、研究者など医用画像に関わるユーザーに適した、信頼できる DICOM 閲覧・処理ツールです。"
+  # 关键词
+  keywords: "dicom,dcm,viewer,medical,PACS,CT,PT,PET,MR,MRI,MPR,MIP,fusion,radiology,ultrasound,ai"
+  # 更新说明
+  release_notes: ""
+  # 支持的url
+  support_url: "https://www.dicombrowser.com"
+zh-Hant:
+  # 应用名称
+  name: "Dicom Browser"
+  # 应用副标题
+  subtitle: "功能強大的Dicom文件瀏覽器"
+  # 隐私协议
+  privacy_url: "https://www.dicombrowser.com/privacy.html"
+  # 描述
+  description: "Dicom Browser 是專業的醫學影像通用應用，一次購買即可在 iPhone 與 Mac 上同時使用。\n\n iPhone 端專注於常規影像瀏覽與標記：支援 DICOM 序列離線預覽、調窗調位、基礎測量（長度、角度等）與箭頭／形狀／文字標註，滿足日常隨身查看與溝通需求。應用完全離線運行，無需網路連線，確保資料安全與隱私。\n\n Mac 端提供完整的高級功能：包含 3D 影像預覽、多平面重建（MPR）、多模態影像融合（如 CT/PET 融合）等專業分析工具，助力提升影像分析效率與準確性。\n\n 適用於放射科醫師、醫學生、研究人員等醫學影像相關使用者，是值得信賴的 DICOM 瀏覽與處理工具。"
+  # 关键词
+  keywords: "dicom,dcm,viewer,medical,PACS,CT,PT,PET,MR,MRI,MPR,MIP,fusion,radiology,ultrasound,ai,超声"
+  # 更新说明
+  release_notes: ""
+  # 支持的url
+  support_url: "https://www.dicombrowser.com"
+es-ES:
+  # 应用名称
+  name: "Dicom Browser"
+  # 应用副标题
+  subtitle: "Visor de archivos DICOM"
+  # 隐私协议
+  privacy_url: "https://www.dicombrowser.com/privacy.html"
+  # 描述
+  description: "Dicom Browser es una aplicación universal profesional de imagen médica, utilizable en iPhone y Mac con una sola compra.\n\n En iPhone se centra en la visualización y el marcado rutinarios: admite vista previa sin conexión de series DICOM, ajuste de ventana/nivel, mediciones básicas (longitud, ángulos, etc.) y anotaciones con flechas/figuras/texto, cubriendo las necesidades diarias de consulta y comunicación en movilidad. La app funciona completamente sin conexión, sin requerir red, garantizando la seguridad y la privacidad de los datos.\n\n En Mac ofrece un conjunto completo de funciones avanzadas: incluye vista previa 3D, Reconstrucción Multiplanar (MPR), fusión multimodal (p. ej., fusión CT/PET) y otras herramientas de análisis profesional, ayudando a mejorar la eficiencia y la precisión del análisis.\n\n Adecuada para radiólogos, estudiantes de medicina, investigadores y otros usuarios de imagen médica, es una herramienta fiable para la navegación y el procesamiento de DICOM."
+  # 关键词
+  keywords: "dicom,dcm,viewer,medical,PACS,CT,PT,PET,MR,MRI,MPR,MIP,fusion,radiology,ultrasound,ai"
+  # 更新说明
+  release_notes: ""
+  # 支持的url
+  support_url: "https://www.dicombrowser.com"
+fr-FR:
+  # 应用名称
+  name: "Dicom Browser"
+  # 应用副标题
+  subtitle: "Visualiseur DICOM"
+  # 隐私协议
+  privacy_url: "https://www.dicombrowser.com/privacy.html"
+  # 描述
+  description: "Dicom Browser est une application universelle professionnelle d’imagerie médicale, utilisable sur iPhone et Mac avec un seul achat.\n\n Sur iPhone, elle se concentre sur la visualisation et l’annotation courantes : aperçu hors ligne des séries DICOM, réglage fenêtre/niveau, mesures de base (longueur, angles, etc.) et annotations flèche/forme/texte — répondant aux besoins quotidiens de consultation et de communication en mobilité. L’app fonctionne entièrement hors ligne, sans connexion réseau, garantissant la sécurité et la confidentialité des données.\n\n Sur Mac, elle offre un ensemble complet de fonctions avancées : aperçu 3D, reconstructions multi‑planaires (MPR), fusion multimodale (p. ex. fusion CT/PET) et autres outils d’analyse professionnels — améliorant l’efficacité et la précision de l’analyse.\n\n Adaptée aux radiologues, étudiants en médecine, chercheurs et autres utilisateurs de l’imagerie médicale, c’est un outil fiable pour la consultation et le traitement DICOM."
+  # 关键词
+  keywords: "dicom,dcm,viewer,medical,PACS,CT,PT,PET,MR,MRI,MPR,MIP,fusion,radiology,ultrasound,ai"
+  # 更新说明
+  release_notes: ""
+  # 支持的url
+  support_url: "https://www.dicombrowser.com"
+de-DE:
+  # 应用名称
+  name: "Dicom Browser"
+  # 应用副标题
+  subtitle: "DICOM-Dateibetrachter"
+  # 隐私协议
+  privacy_url: "https://www.dicombrowser.com/privacy.html"
+  # 描述
+  description: "Dicom Browser ist eine professionelle universelle Medizinbild-App, mit einem einzigen Kauf auf iPhone und Mac nutzbar.\n\n Auf dem iPhone liegt der Fokus auf der routinemäßigen Bildbetrachtung und Markierung: Offline‑Vorschau von DICOM‑Serien, Window/Level, Basis‑Messungen (Länge, Winkel usw.) sowie Pfeil/Form/Text‑Annotationen — ideal für die tägliche mobile Befundansicht und Kommunikation. Die App arbeitet vollständig offline, ohne Netzwerkverbindung, und gewährleistet Datensicherheit und Privatsphäre.\n\n Auf dem Mac steht ein kompletter Satz erweiterter Funktionen zur Verfügung: 3D‑Bildvorschau, Multiplanare Rekonstruktion (MPR), multimodale Bildfusion (z. B. CT/PET‑Fusion) sowie weitere professionelle Analysewerkzeuge — zur Steigerung von Effizienz und Genauigkeit der Bildanalyse.\n\n Geeignet für Radiologinnen und Radiologen, Medizinstudierende, Forschende und andere Anwender der medizinischen Bildgebung; ein verlässliches Werkzeug für DICOM‑Betrachtung und ‑Verarbeitung."
+  # 关键词
+  keywords: "dicom,dcm,viewer,medical,PACS,CT,PT,PET,MR,MRI,MPR,MIP,fusion,radiology,ultrasound,ai"
+  # 更新说明
+  release_notes: ""
+  # 支持的url
+  support_url: "https://www.dicombrowser.com"
+pt-PT:
+  # 应用名称
+  name: "Dicom Browser"
+  # 应用副标题
+  subtitle: "Visualizador DICOM"
+  # 隐私协议
+  privacy_url: "https://www.dicombrowser.com/privacy.html"
+  # 描述
+  description: "O Dicom Browser é uma aplicação universal profissional de imagiologia médica, utilizável no iPhone e no Mac com uma única compra.\n\n No iPhone, foca-se na visualização e anotação do dia a dia: suporta pré‑visualização offline de séries DICOM, ajuste de janela/nível, medições básicas (comprimento, ângulos, etc.) e anotações com seta/forma/texto — respondendo às necessidades diárias de consulta e comunicação em mobilidade. A app funciona totalmente offline, sem necessitar de ligação à rede, garantindo a segurança e a privacidade dos dados.\n\n No Mac, disponibiliza um conjunto completo de funcionalidades avançadas: pré‑visualização 3D, Reconstrução Multiplanar (MPR), fusão multimodal (p. ex., fusão CT/PET) e outras ferramentas de análise profissional — ajudando a melhorar a eficiência e a precisão da análise.\n\n Adequada para radiologistas, estudantes de medicina, investigadores e outros utilizadores de imagiologia médica; uma ferramenta fiável para navegação e processamento DICOM."
+  # 关键词
+  keywords: "dicom,dcm,viewer,medical,PACS,CT,PT,PET,MR,MRI,MPR,MIP,fusion,radiology,ultrasound,ai"
+  # 更新说明
+  release_notes: ""
+  # 支持的url
+  support_url: "https://www.dicombrowser.com"
+ko:
+  # 应用名称
+  name: "Dicom Browser"
+  # 应用副标题
+  subtitle: "강력한 DICOM 파일 뷰어"
+  # 隐私协议
+  privacy_url: "https://www.dicombrowser.com/privacy.html"
+  # 描述
+  description: "Dicom Browser는 한 번의 구매로 iPhone과 Mac에서 함께 사용할 수 있는 전문 의료 영상 통합 애플리케이션입니다.\n\n iPhone에서는 일상적인 영상 열람과 표시에 집중합니다: DICOM 시리즈 오프라인 미리보기, 윈도우/레벨, 기본 측정(길이, 각도 등), 화살표/도형/텍스트 주석을 지원하여 이동 중 조회와 커뮤니케이션 요구를 충족합니다. 앱은 완전 오프라인으로 동작하며 네트워크 연결이 필요 없어 데이터 보안과 개인정보 보호를 보장합니다.\n\n Mac에서는 고급 기능을 완비했습니다: 3D 영상 미리보기, 다평면 재구성(MPR), 다중 모달 융합(예: CT/PET 융합) 등 전문 분석 도구를 제공하여 분석 효율과 정확도를 높입니다.\n\n 방사선과 의사, 의대생, 연구자 등 의료 영상 사용자에게 적합한, 신뢰할 수 있는 DICOM 열람 및 처리 도구입니다."
+  # 关键词
+  keywords: "dicom,dcm,viewer,medical,PACS,CT,PT,PET,MR,MRI,MPR,MIP,fusion,radiology,ultrasound,ai"
+  # 更新说明
+  release_notes: ""
+  # 支持的url
+  support_url: "https://www.dicombrowser.com"

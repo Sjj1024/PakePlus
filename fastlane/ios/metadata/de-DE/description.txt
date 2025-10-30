@@ -1,0 +1,7 @@
+Dicom Browser ist eine professionelle universelle Medizinbild-App, mit einem einzigen Kauf auf iPhone und Mac nutzbar.
+
+ Auf dem iPhone liegt der Fokus auf der routinemäßigen Bildbetrachtung und Markierung: Offline‑Vorschau von DICOM‑Serien, Window/Level, Basis‑Messungen (Länge, Winkel usw.) sowie Pfeil/Form/Text‑Annotationen — ideal für die tägliche mobile Befundansicht und Kommunikation. Die App arbeitet vollständig offline, ohne Netzwerkverbindung, und gewährleistet Datensicherheit und Privatsphäre.
+
+ Auf dem Mac steht ein kompletter Satz erweiterter Funktionen zur Verfügung: 3D‑Bildvorschau, Multiplanare Rekonstruktion (MPR), multimodale Bildfusion (z. B. CT/PET‑Fusion) sowie weitere professionelle Analysewerkzeuge — zur Steigerung von Effizienz und Genauigkeit der Bildanalyse.
+
+ Geeignet für Radiologinnen und Radiologen, Medizinstudierende, Forschende und andere Anwender der medizinischen Bildgebung; ein verlässliches Werkzeug für DICOM‑Betrachtung und ‑Verarbeitung.

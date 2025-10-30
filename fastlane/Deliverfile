@@ -1,0 +1,5 @@
+submit_for_review false
+app_identifier "你的BundleId"
+precheck_include_in_app_purchases false
+force true
+api_key_path "./fastlane/api_key.json"
