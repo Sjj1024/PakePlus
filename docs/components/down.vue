@@ -291,7 +291,10 @@ const isMobile = () => {
 }
 
 const isDownPage = () => {
-    return window.location.pathname.includes('download')
+    return (
+        typeof window !== 'undefined' &&
+        window.location.pathname.includes('download')
+    )
 }
 
 const lastRelease = data[0] || {
