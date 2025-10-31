@@ -12,5 +12,7 @@
     <string>com.pakeplus.pacbao</string>
     <key>com.apple.developer.team-identifier</key>
     <string>3AM8N433R2</string>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
   </dict>
 </plist>
