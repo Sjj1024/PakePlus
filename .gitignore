@@ -58,3 +58,4 @@ docs/.vitepress/temp
 
 # tauri
 src-tauri/target
+target
