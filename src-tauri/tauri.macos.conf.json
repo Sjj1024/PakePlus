@@ -3,6 +3,7 @@
     "bundle": {
         "active": true,
         "targets": "all",
+        "category": "DeveloperTool",
         "resources": ["./data/man.json", "./data/vconsole.min.js"],
         "createUpdaterArtifacts": true,
         "icon": [
