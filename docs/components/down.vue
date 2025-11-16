@@ -1,7 +1,12 @@
 <template>
     <div class="downBox">
         <div class="title">{{ langMap[lang].titleTips }}</div>
-        <div class="platform mac" :style="isDownPage() ? '' : 'width: 100%;'">
+        <div
+            class="platform mac"
+            :style="
+                pageData.filePath.includes('download') ? '' : 'width: 100%;'
+            "
+        >
             <div class="leftIcon">
                 <svg
                     t="1742708135449"
@@ -48,7 +53,9 @@
         </div>
         <div
             class="platform windows"
-            :style="isDownPage() ? '' : 'width: 100%;'"
+            :style="
+                pageData.filePath.includes('download') ? '' : 'width: 100%;'
+            "
         >
             <div class="leftIcon">
                 <img
@@ -103,7 +110,12 @@
                 </div>
             </div>
         </div>
-        <div class="platform linux" :style="isDownPage() ? '' : 'width: 100%;'">
+        <div
+            class="platform linux"
+            :style="
+                pageData.filePath.includes('download') ? '' : 'width: 100%;'
+            "
+        >
             <div class="leftIcon">
                 <img
                     src="../static/imgs/linuxlogo.png"
@@ -165,7 +177,12 @@
                 </div>
             </div>
         </div>
-        <div class="platform web" :style="isDownPage() ? '' : 'width: 100%;'">
+        <div
+            class="platform web"
+            :style="
+                pageData.filePath.includes('download') ? '' : 'width: 100%;'
+            "
+        >
             <div class="leftIcon cloud-icon">
                 <svg
                     t="1742721374498"
@@ -244,6 +261,9 @@ import { useData } from 'vitepress'
 
 const vpData = useData()
 const lang = vpData.lang.value
+const pageData = vpData.page.value
+
+console.log('pageData', pageData)
 
 const langMap = {
     zh: {
