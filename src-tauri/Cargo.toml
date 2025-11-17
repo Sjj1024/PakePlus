@@ -1,6 +1,6 @@
 [package]
 name = "PakePlus"
-version = "2.1.2"
+version = "2.1.3"
 description = "Turn any webpage into a desktop app and mobile app with Rust."
 authors = ["1024xiaoshen"]
 edition = "2021"
