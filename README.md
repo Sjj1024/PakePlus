@@ -121,14 +121,14 @@ PacBao supports installation packages for both ARM and Intel architectures. Most
 
 ## Getting Started
 
-1. Download the app from the release page：https://github.com/Sjj1024/PabBao/releases,  
+1. Download the app from the release page：https://github.com/Sjj1024/PakePlus/releases,  
    double-click to install, and run the app. or visit web:
 
 <a href="https://pakeplus.pages.dev" target="_blank">PacBao Web</a>
 
 2. Configure GitHub token or use local packaging, create a new project, and set up the configurations. get token guide. (When using this software, please comply with relevant laws and regulations. If you use GitHub token to use this project, it will automatically star the project and the compilation results will be counted for success or failure to improve the project and obtain feedback. Packaging is for personal use only and should not be disseminated or used for commercial purposes. The packaged resources will be stored in your own Github open source repository and can be viewed by anyone. Therefore, please strictly follow the Github usage guidelines, otherwise you will be responsible for the consequences)
 
-<a href="https://sjj1024.github.io/PacBao/index_en.html">English</a> <a href="https://PacBao.com/zh/guide/token.html" style="margin: 0 50px;">简体中文</a><a href="https://sjj1024.github.io/PacBao/index_ja.html">日本语</a>
+<a href="https://sjj1024.github.io/PakePlus/index_en.html">English</a> <a href="https://PakePlus.com/zh/guide/token.html" style="margin: 0 50px;">简体中文</a><a href="https://sjj1024.github.io/PakePlus/index_ja.html">日本语</a>
 
 ```
 Explanation of Github Token permissions:
