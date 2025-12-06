@@ -16,6 +16,18 @@ The most common causes for this error are:
 3. Do not delete or modify all contents in the PakePlus repository, as this may also cause the error.
 4. This error may occur after upgrading PakePlus versions.
 
+## author_id does not have push access
+
+If an error similar to the one below occurs, it may be due to GitHub's misconduct. Wait a day and try filling in the token again. Or maybe there are too many restrictions on GitHub requests today
+
+```
+⚠️ GitHub release failed with status: 422
+[{"resource":"Release","code":"custom","field":"author_id","message":"author_id does not have push access to xxxxxxx/PakePlus"}]
+retrying... (0 retries remaining)
+❌ Too many retries. Aborting...
+Error: Too many retries.
+```
+
 # Solutions
 
 1. The quickest solution is to delete your PakePlus repository, then reopen PakePlus and re-enter your Token to restart the process (this will delete your previously created projects).

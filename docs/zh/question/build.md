@@ -13,6 +13,18 @@
 1. 确认 token 权限是否配置正确，然后重新填入 token 试试，往往是 token 权限配置错误导致的。或者点击首页头像然后同步一下试试。
 2. PakePlus 版本升级后，可能会导致编译失败，需要重新填入 token 并重新创建项目试试。
 
+## author_id does not have push access
+
+如果出现类似下面的错误，可能是 github 抽风，等过一天再填入 token 试试应该就可以了。或者是今天的 github 请求过多限制了
+
+```
+⚠️ GitHub release failed with status: 422
+[{"resource":"Release","code":"custom","field":"author_id","message":"author_id does not have push access to xxxxxxx/PakePlus"}]
+retrying... (0 retries remaining)
+❌ Too many retries. Aborting...
+Error: Too many retries.
+```
+
 ## Cannot read properties of undefined XXX
 
-用最新版本的 PakePlus，然后填入 token 试试，能解决 99%的问题。或者点击首页头像然后同步一下试试。
+用最新版本的 PakePlus，然后填入 token 试试，能解决 99%的问题。或者在 PakePlus 中首页头像点击进入个人中心，然后在最底部的尝试修复等同步一下试试。如果还有问题，可以进微信交流群问问
