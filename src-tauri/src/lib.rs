@@ -48,7 +48,6 @@ pub fn run() {
             command::cmds::get_machine_uid,
             command::cmds::compress_folder,
             command::cmds::decompress_file,
-            command::cmds::download_file,
             command::cmds::notification,
             command::cmds::run_command,
             command::cmds::get_env_var,
