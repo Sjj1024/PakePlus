@@ -1,7 +1,6 @@
 use crate::command::model::ServerState;
 use base64::prelude::*;
 use notify_rust::Notification;
-use serde::Serialize;
 use std::env;
 use std::fs;
 use std::fs::File;
