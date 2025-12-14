@@ -3,181 +3,239 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Apple ICNS 图标生成器</title>
+        <title>图片圆角与内边距处理</title>
         <style>
             body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI';
-                background: #f5f5f7;
-                padding: 30px;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                    Roboto, Helvetica, Arial, sans-serif;
+                background-color: #f0f0f5;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
+
             .container {
-                max-width: 720px;
-                margin: auto;
-                background: #fff;
-                padding: 24px;
+                background-color: #ffffff;
+                padding: 30px;
                 border-radius: 12px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
-            h1 {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 500px;
                 margin-bottom: 20px;
             }
-            label {
-                display: block;
-                margin-top: 12px;
-                font-weight: 600;
+
+            h1 {
+                color: #333;
+                text-align: center;
+                margin-bottom: 20px;
             }
-            input[type='range'] {
+
+            input[type='file'] {
+                display: block;
+                margin-bottom: 20px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            button {
+                background-color: #007aff;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s;
                 width: 100%;
             }
-            canvas {
-                margin-top: 20px;
-                background: repeating-conic-gradient(#eee 0% 25%, #fff 0% 50%)
-                    50% / 20px 20px;
-                border-radius: 12px;
+
+            button:hover {
+                background-color: #0056b3;
             }
-            button {
+
+            #preview-container {
+                text-align: center;
                 margin-top: 20px;
-                padding: 12px 18px;
-                font-size: 16px;
-                border: none;
-                border-radius: 10px;
-                background: #007aff;
-                color: #fff;
-                cursor: pointer;
+                border: 1px dashed #ccc;
+                padding: 10px;
+                border-radius: 8px;
             }
-            button:disabled {
-                opacity: 0.5;
+
+            #output-canvas {
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                max-width: 100%;
+                height: auto;
+                margin-top: 15px;
+            }
+
+            .note {
+                margin-top: 20px;
+                padding: 15px;
+                background-color: #fff3cd;
+                color: #856404;
+                border: 1px solid #ffeeba;
+                border-radius: 8px;
+                font-size: 14px;
             }
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>🍎 Apple ICNS 图标生成器</h1>
-
+            <h1> App Icon 预处理工具 (PNG)</h1>
             <input
                 title="选择图片"
                 type="file"
-                id="fileInput"
-                accept="image/*"
+                id="imageUploader"
+                accept="image/png, image/jpeg"
             />
+            <button id="processAndDownload" disabled>
+                处理图片并下载 (PNG)
+            </button>
 
-            <label>圆角半径 (rx)</label>
-            <input
-                title="圆角半径"
-                type="range"
-                id="radius"
-                min="0"
-                max="300"
-                value="250"
-            />
-
-            <label>Padding</label>
-            <input
-                title="Padding"
-                type="range"
-                id="padding"
-                min="0"
-                max="200"
-                value="120"
-            />
-
-            <canvas id="canvas" width="1264" height="1264"></canvas>
-
-            <button id="downloadBtn" disabled>下载 ICNS</button>
+            <div id="preview-container">
+                <h3>处理结果预览</h3>
+                <canvas id="output-canvas"></canvas>
+            </div>
         </div>
 
-        <!-- icnsjs 浏览器版本 -->
-        <script src="https://unpkg.com/icnsjs/dist/icns.js"></script>
+        <div class="note">
+            **⚠️ 注意：**<br />
+            纯浏览器环境无法直接生成 **ICNS** 文件。本工具模仿了您 Node.js
+            代码中的处理逻辑：<br />
+            1. **缩放/裁剪** (到 1024x1024)<br />
+            2. **添加圆角** (半径 250)<br />
+            3. **添加内边距** (120 像素)<br />
+            最终会下载一个经过处理的 **PNG 文件**。您需要将此 PNG 文件导入到如
+            **png2icons** 的 Node.js 环境或专业的图标工具中，才能生成最终的
+            `.icns` 文件。
+        </div>
 
         <script>
-            const fileInput = document.getElementById('fileInput')
-            const canvas = document.getElementById('canvas')
+            // 引入 FileSaver 库用于下载文件 (需要从 CDN 引入)
+            const script = document.createElement('script')
+            script.src =
+                'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js'
+            document.head.appendChild(script)
+
+            const uploader = document.getElementById('imageUploader')
+            const downloadButton = document.getElementById('processAndDownload')
+            const canvas = document.getElementById('output-canvas')
             const ctx = canvas.getContext('2d')
-            const radiusInput = document.getElementById('radius')
-            const paddingInput = document.getElementById('padding')
-            const downloadBtn = document.getElementById('downloadBtn')
 
-            let image = null
+            // 统一处理的目标尺寸和参数 (与您的 sharp 代码保持一致)
+            const TARGET_SIZE = 1024 // resize width/height
+            const CORNER_RADIUS = 250 // rx/ry
+            const PADDING = 120 // extend top/bottom/left/right
 
-            function draw() {
-                if (!image) return
+            let originalImage = null
 
-                const padding = +paddingInput.value
-                const radius = +radiusInput.value
-                const size = 1024
-                const total = size + padding * 2
+            // --- 核心绘图逻辑：添加圆角和内边距 ---
+            function drawRoundedImage(img) {
+                // 1. 设置 canvas 最终尺寸 (包含 padding)
+                const finalSize = TARGET_SIZE + PADDING * 2
+                canvas.width = finalSize
+                canvas.height = finalSize
+                ctx.clearRect(0, 0, finalSize, finalSize)
 
-                canvas.width = total
-                canvas.height = total
+                // 2. 绘制圆角遮罩路径 (Path for rounded corners)
+                // 裁剪区域 (不包含 padding)
+                const paddedX = PADDING
+                const paddedY = PADDING
+                const paddedW = TARGET_SIZE
+                const paddedH = TARGET_SIZE
+                const radius = CORNER_RADIUS
 
-                ctx.clearRect(0, 0, total, total)
-
-                ctx.save()
-                ctx.translate(padding, padding)
-
-                // 圆角路径
                 ctx.beginPath()
-                ctx.moveTo(radius, 0)
-                ctx.lineTo(size - radius, 0)
-                ctx.quadraticCurveTo(size, 0, size, radius)
-                ctx.lineTo(size, size - radius)
-                ctx.quadraticCurveTo(size, size, size - radius, size)
-                ctx.lineTo(radius, size)
-                ctx.quadraticCurveTo(0, size, 0, size - radius)
-                ctx.lineTo(0, radius)
-                ctx.quadraticCurveTo(0, 0, radius, 0)
+                // 左上角
+                ctx.moveTo(paddedX + radius, paddedY)
+                // 顶部边
+                ctx.lineTo(paddedX + paddedW - radius, paddedY)
+                // 右上角圆弧
+                ctx.arcTo(
+                    paddedX + paddedW,
+                    paddedY,
+                    paddedX + paddedW,
+                    paddedY + radius,
+                    radius
+                )
+                // 右边边
+                ctx.lineTo(paddedX + paddedW, paddedY + paddedH - radius)
+                // 右下角圆弧
+                ctx.arcTo(
+                    paddedX + paddedW,
+                    paddedY + paddedH,
+                    paddedX + paddedW - radius,
+                    paddedY + paddedH,
+                    radius
+                )
+                // 底部边
+                ctx.lineTo(paddedX + radius, paddedY + paddedH)
+                // 左下角圆弧
+                ctx.arcTo(
+                    paddedX,
+                    paddedY + paddedH,
+                    paddedX,
+                    paddedY + paddedH - radius,
+                    radius
+                )
+                // 左边边
+                ctx.lineTo(paddedX, paddedY + radius)
+                // 左上角圆弧
+                ctx.arcTo(paddedX, paddedY, paddedX + radius, paddedY, radius)
                 ctx.closePath()
+
+                // 3. 将遮罩路径设置为裁剪区域 (Destination In 模式模拟)
                 ctx.clip()
 
-                // 绘制图片（contain）
-                const scale = Math.min(size / image.width, size / image.height)
-                const w = image.width * scale
-                const h = image.height * scale
-                const x = (size - w) / 2
-                const y = (size - h) / 2
-
-                ctx.drawImage(image, x, y, w, h)
-                ctx.restore()
-
-                downloadBtn.disabled = false
+                // 4. 绘制图片 (Draw image)
+                // 图片需要缩放/裁剪到 1024x1024 (TARGET_SIZE x TARGET_SIZE)
+                // 并放置在 (PADDING, PADDING) 处
+                ctx.drawImage(img, PADDING, PADDING, TARGET_SIZE, TARGET_SIZE)
             }
 
-            fileInput.onchange = (e) => {
-                const file = e.target.files[0]
+            // --- 事件监听器 ---
+
+            uploader.addEventListener('change', (event) => {
+                const file = event.target.files[0]
                 if (!file) return
 
-                const img = new Image()
-                img.onload = () => {
-                    image = img
-                    draw()
+                const reader = new FileReader()
+                reader.onload = (e) => {
+                    const img = new Image()
+                    img.onload = () => {
+                        originalImage = img
+                        drawRoundedImage(originalImage)
+                        downloadButton.disabled = false
+                    }
+                    img.src = e.target.result
                 }
-                img.src = URL.createObjectURL(file)
-            }
+                reader.readAsDataURL(file)
+            })
 
-            radiusInput.oninput = draw
-            paddingInput.oninput = draw
+            downloadButton.addEventListener('click', () => {
+                if (!originalImage) return
 
-            downloadBtn.onclick = async () => {
-                // 导出 PNG
-                const pngBlob = await new Promise((res) =>
-                    canvas.toBlob(res, 'image/png')
-                )
+                // 将 canvas 内容导出为 Blob
+                canvas.toBlob((blob) => {
+                    if (blob) {
+                        // 使用 FileSaver.js 下载
+                        // 文件名可以自定义
+                        saveAs(blob, 'app-icon-processed.png')
+                        console.log('Processed PNG file downloaded.')
+                    } else {
+                        alert('无法生成图片Blob。')
+                    }
+                }, 'image/png')
+            })
 
-                const arrayBuffer = await pngBlob.arrayBuffer()
-
-                // 生成 ICNS（1024 足够）
-                const icns = new Icns.Icns()
-                icns.append(Icns.Image.fromPNG(arrayBuffer, 1024))
-
-                const icnsBlob = new Blob([icns.toBuffer()], {
-                    type: 'image/icns',
-                })
-
-                const a = document.createElement('a')
-                a.href = URL.createObjectURL(icnsBlob)
-                a.download = 'icon.icns'
-                a.click()
-            }
+            // 初始化时设置 canvas 尺寸，以便预览框有空间
+            canvas.width = TARGET_SIZE + PADDING * 2
+            canvas.height = TARGET_SIZE + PADDING * 2
         </script>
     </body>
 </html>
