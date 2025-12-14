@@ -274,14 +274,6 @@ pub async fn decompress_file(source: String, destination: String) -> Result<(), 
     unzip_file(&source, &destination).map_err(|e| e.to_string())
 }
 
-#[derive(Clone, Serialize)]
-#[serde(rename_all = "camelCase")]
-struct DownloadProgress {
-    file_id: String,
-    downloaded: u64,
-    total: u64,
-}
-
 #[derive(serde::Deserialize)]
 pub struct NotificationParams {
     title: String,
