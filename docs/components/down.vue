@@ -628,10 +628,16 @@ const macX64 = lastRelease.assets.find((asset) =>
 
 // 获取windows版本
 const windowsX64 = lastRelease.assets.find((asset) =>
-    asset.name.includes('x64-setup.exe')
+    // 获取exe版本
+    // asset.name.includes('x64-setup.exe')
+    // 获取msi版本
+    asset.name.includes('x64_en-US.msi')
 )
 const windowsArm64 = lastRelease.assets.find((asset) =>
-    asset.name.includes('arm64-setup.exe')
+    // 获取exe版本
+    // asset.name.includes('arm64-setup.exe')
+    // 获取msi版本
+    asset.name.includes('arm64_en-US.msi')
 )
 
 // 获取linux版本
