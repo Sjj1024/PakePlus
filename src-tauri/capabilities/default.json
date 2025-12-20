@@ -89,6 +89,7 @@
         "dialog:allow-message",
         "os:allow-locale",
         "os:allow-hostname",
+        "store:default",
         "clipboard-manager:allow-write-text",
         {
             "identifier": "http:default",
