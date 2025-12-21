@@ -34,21 +34,18 @@ Workflows：用来编译打包你的软件
 4. 在左侧菜单中，点击 `Developer settings` 按钮，进入开发者设置页面。
 5. 在左侧菜单中，点击 `Personal access tokens` 按钮，进入个人访问令牌页面。
 6. 点击 `Generate new token` 按钮，进入生成新令牌页面。
-   github 提供两种 token 类型，任意一种都可以，点击下面链接直达:
+   github 提供两种 token 类型，建议使用 classic Token，点击下面链接直达:
    [Personal access tokens (classic)](https://github.com/settings/tokens)
-   或者
-   [Fine-grained personal access tokens](https://github.com/settings/personal-access-tokens) 。
-7. Personal access tokens (classic) 获取操作：
+7. Personal access tokens (classic) 获取操作：  
    只需要勾选下面三个权限就可以了：<font color="red">repo 和 workflow 和 user</font>
+   ![](../../static/imgs/token11.png)
+   ![](../../static/imgs/token12.webp)
 
-    ![](../../static/imgs/token11.png)
-    ![](../../static/imgs/token12.webp)
-    然后将得到的 token 复制到 PakePlus 就可以了：
+    然后将得到的 token 复制，到 PakePlus 首页右上角设置按钮，复制进去就可以了：
 
     ![](../../static/imgs/token12.png)
 
-8. 测试 Token 是否正确
-   打开 PakePlus，点击首页右上角的设置按钮，把第 7 步或者第 8 步得到的 token 复制进去，点击测试，会校验 token 是否正确并初始化，网络好的话转 20 秒左右就好了:
+8. 点击 PakePlus 首页右上角的设置按钮，把第 7 步得到的 token 复制进去，点击测试，会校验 token 是否正确并初始化，网络好的话转 20 秒左右就好了:
 
     ![](../../static/imgs/token16.webp)
 
