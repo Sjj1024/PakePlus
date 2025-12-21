@@ -38,19 +38,21 @@ Workflows: Used to compile and package your software
 6. Click `Generate new token` to create a new token.
    GitHub offers two types of tokens—either will work. Use the links below to go directly:
    [Personal access tokens (classic)](https://github.com/settings/tokens)
-   or
-   [Fine-grained personal access tokens](https://github.com/settings/personal-access-tokens).
 
 7. **For Personal access tokens (classic):**
    Simply check the following three permissions: <font color="red">repo, workflow, and user</font>.
-   ![](../static/imgs/token11.png)
-   ![](../static/imgs/token12.webp)
-   Then copy the generated token into PakePlus:
-   ![](../static/imgs/token12.png)
+
+    ![](../static/imgs/token11.png)
+    ![](../static/imgs/token12.webp)
+
+    Then copy the generated token into PakePlus:
+
+    ![](../static/imgs/token12.png)
 
 8. **Test the Token**
-   Open PakePlus, click the settings button in the top-right corner, paste the token obtained in Step 7 or 8, and click "Test." If it shows "Token is valid," you're all set!
-   ![](../static/imgs/token13.png)
+   Open PakePlus, click the settings button in the top-right corner, paste the token obtained in Step 7, and click "Test." If it shows "Token is valid," you're all set!
+
+    ![](../static/imgs/token13.png)
 
 ## Important Notes
 
