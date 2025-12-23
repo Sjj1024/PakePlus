@@ -94,4 +94,14 @@ window.addEventListener('DOMContentLoaded', () => {
                 console.log('new webview error', e)
             })
         })
+    // input file get path
+    // document
+    //     .querySelector('#inputFilePath')
+    //     .addEventListener('click', async (e) => {
+    //         e.preventDefault()
+    //         console.log('input file get path')
+    //         const result = await invoke('input_file_get_path')
+    //         console.log('result', result)
+    //         resultElement.textContent = result
+    //     })
 })
