@@ -65,6 +65,7 @@
         "core:webview:allow-set-webview-position",
         "core:webview:allow-print",
         "core:webview:allow-set-webview-focus",
-        "core:webview:allow-set-webview-size"
+        "core:webview:allow-set-webview-size",
+        "dialog:default"
     ]
 }

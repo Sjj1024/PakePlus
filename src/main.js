@@ -1,4 +1,5 @@
 const { invoke } = window.__TAURI__.core
+const { ask } = window.__TAURI__.dialog
 const { WebviewWindow } = window.__TAURI__.webviewWindow
 
 let inputValue
@@ -94,14 +95,20 @@ window.addEventListener('DOMContentLoaded', () => {
                 console.log('new webview error', e)
             })
         })
-    // input file get path
-    // document
-    //     .querySelector('#inputFilePath')
-    //     .addEventListener('click', async (e) => {
-    //         e.preventDefault()
-    //         console.log('input file get path')
-    //         const result = await invoke('input_file_get_path')
-    //         console.log('result', result)
-    //         resultElement.textContent = result
-    //     })
+    // open dialog
+    document
+        .querySelector('#openAsDialog')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('open dialog')
+            const answer = await ask(
+                'This action cannot be reverted. Are you sure?',
+                {
+                    title: 'PakePlus',
+                    kind: 'warning',
+                }
+            )
+            console.log('answer', answer)
+            resultElement.textContent = answer
+        })
 })
