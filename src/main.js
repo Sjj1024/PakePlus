@@ -1,5 +1,5 @@
 const { invoke } = window.__TAURI__.core
-const { ask } = window.__TAURI__.dialog
+const { ask, confirm, message, open, save } = window.__TAURI__.dialog
 const { WebviewWindow } = window.__TAURI__.webviewWindow
 
 let inputValue
@@ -97,7 +97,7 @@ window.addEventListener('DOMContentLoaded', () => {
         })
     // open dialog
     document
-        .querySelector('#openAsDialog')
+        .querySelector('#openAskDialog')
         .addEventListener('click', async (e) => {
             e.preventDefault()
             console.log('open dialog')
@@ -110,5 +110,79 @@ window.addEventListener('DOMContentLoaded', () => {
             )
             console.log('answer', answer)
             resultElement.textContent = answer
+        })
+
+    // open confirm dialog
+    document
+        .querySelector('#openConfirmDialog')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('open confirm dialog')
+            const answer = await confirm(
+                'This action cannot be reverted. Are you sure?',
+                {
+                    title: 'PakePlus',
+                    kind: 'warning',
+                }
+            )
+            console.log('answer', answer)
+            resultElement.textContent = answer
+        })
+
+    // open message dialog
+    document
+        .querySelector('#openMessageDialog')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            await message('File not found', {
+                title: 'PakePlus',
+                kind: 'error',
+            })
+        })
+
+    // open file dialog
+    document
+        .querySelector('#openFileDialog')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('open file dialog')
+            // Open a dialog
+            const file = await open({
+                multiple: false,
+                directory: false,
+            })
+            console.log('file', file)
+            resultElement.textContent = file
+        })
+    // open directory dialog
+    document
+        .querySelector('#openDirDialog')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('open directory dialog')
+            const file = await open({
+                multiple: false,
+                directory: true,
+            })
+            console.log('file', file)
+            resultElement.textContent = file
+        })
+
+    // open save dialog
+    document
+        .querySelector('#openSaveDialog')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('open save dialog')
+            const path = await save({
+                filters: [
+                    {
+                        name: 'filesave',
+                        extensions: ['png', 'jpeg'],
+                    },
+                ],
+            })
+            console.log('path', path)
+            resultElement.textContent = path
         })
 })
