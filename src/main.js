@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const result = await invoke('download_file', {
                 url: inputValue
                     ? inputValue
-                    : 'https://gh-proxy.com/github.com/Sjj1024/PakePlus/releases/latest/download/PakePlus_0.5.30_x64-setup.exe',
+                    : 'https://hk.gh-proxy.org/https://github.com/Sjj1024/PakePlus/blob/main/app-icon.png',
                 savePath: '',
                 fileId: '1111',
             })
