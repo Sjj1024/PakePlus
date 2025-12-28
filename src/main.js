@@ -185,4 +185,29 @@ window.addEventListener('DOMContentLoaded', () => {
             console.log('path', path)
             resultElement.textContent = path
         })
+    // video test
+    document
+        .querySelector('#videoTest')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('video test')
+            // 当前页面url
+            window.location.href = 'https://hlsjs.video-dev.org/demo/'
+        })
 })
+
+function onFullscreenChange() {
+    const isFullscreen =
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+
+    console.log('fullscreen change', !!isFullscreen)
+}
+
+// 标准
+document.addEventListener('fullscreenchange', onFullscreenChange)
+
+// Safari 旧实现
+document.addEventListener('webkitfullscreenchange', onFullscreenChange)
