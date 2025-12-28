@@ -28,6 +28,8 @@
         "core:path:default",
         "core:resources:default",
         "core:tray:default",
+        "core:window:allow-set-position",
+        "core:window:allow-set-fullscreen",
         "core:window:allow-unminimize",
         "core:window:allow-set-focus",
         "core:window:allow-show",
