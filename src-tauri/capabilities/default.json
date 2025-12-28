@@ -48,6 +48,8 @@
         "core:window:allow-set-maximizable",
         "core:window:allow-set-minimizable",
         "core:window:allow-set-resizable",
+        "core:window:allow-set-fullscreen",
+        "core:window:allow-set-position",
         "core:app:allow-default-window-icon",
         "core:app:allow-app-hide",
         "core:app:allow-app-show",
