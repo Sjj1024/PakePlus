@@ -303,12 +303,25 @@ pub async fn download_file(
             .resolve(file_name, BaseDirectory::Download)
             .expect("failed to resolve resource");
         save_path = file_path.to_str().unwrap().to_string();
+    } else {
+        let file_path = Path::new(&save_path).join(file_name);
+        save_path = file_path.to_str().unwrap().to_string();
+    }
+    // if file exists, add number to file name
+    if Path::new(&save_path).exists() {
+        let mut i = 1;
+        while Path::new(&save_path).exists() {
+            save_path = save_path.split('.').nth(0).unwrap().to_string()
+                + &i.to_string()
+                + "."
+                + save_path.split('.').nth(1).unwrap();
+            i += 1;
+        }
     }
     let total_size = resp.content_length();
     let mut stream = resp.bytes_stream();
     let mut file = File::create(&save_path).map_err(|e| e.to_string())?;
     let mut downloaded: u64 = 0;
-
     while let Some(chunk) = stream.next().await {
         let chunk = chunk.map_err(|e| e.to_string())?;
         file.write_all(&chunk).map_err(|e| e.to_string())?;
