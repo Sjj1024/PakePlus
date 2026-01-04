@@ -19,7 +19,7 @@
             </tr>
         </tbody>
     </table>
-    <div class="updateTime">{{ langMap[lang].time }}2025-10-02 19:12:00</div>
+    <div class="updateTime">{{ langMap[lang].time }}2026-01-04 12:50:00</div>
 </template>
 
 <script setup lang="ts">
