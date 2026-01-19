@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-    title: 'PakePlus-官方开源免费打包工具',
+    title: 'PakePlus',
     description:
         'Package Web/Vue/React/HTML projects into Desktop/Mobile Apps in minutes, 官方开源免费打包工具，打包网页/Vue/React/HTML 项目为桌面/手机应用只需几分钟',
     lastUpdated: false,
