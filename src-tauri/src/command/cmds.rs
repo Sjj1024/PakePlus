@@ -31,13 +31,19 @@ use zip::ZipWriter;
 pub async fn start_server(
     state: tauri::State<'_, Arc<Mutex<ServerState>>>,
     path: String,
+    port: u16,
 ) -> Result<u16, String> {
     let mut state = state.lock().unwrap();
     if state.server_handle.is_some() {
         return Err("Server is already running".into());
     }
     let path_clone = path.clone();
-    let port = find_port().unwrap();
+    // if port is 0, find a free port
+    let port = if port == 0 {
+        find_port().unwrap()
+    } else {
+        port
+    };
     // println!("port: {}", port);
     let server_handle = tokio::spawn(async move {
         let route = warp::fs::dir(path_clone)
