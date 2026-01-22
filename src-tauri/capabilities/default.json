@@ -4,18 +4,7 @@
     "description": "Capability for the main window",
     "windows": ["main", "PreView", "*"],
     "remote": {
-        "urls": [
-            "https://*",
-            "file://*",
-            "http://*",
-            "http://127.0.0.1:*",
-            "asset://localhost/*",
-            "https://api.github.com/*",
-            "https://payjs.cn/*",
-            "https://zpayz.cn/*",
-            "https://api.pay.yungouos.com/*",
-            "https://apis.PakePlus.com/*"
-        ]
+        "urls": ["https://*:*", "file://*", "http://*:*", "asset://localhost/*"]
     },
     "permissions": [
         "core:default",
