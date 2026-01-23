@@ -101,7 +101,7 @@
                     "url": "http://*:*"
                 },
                 {
-                    "url": "asset://localhost/*:*"
+                    "url": "asset://localhost/*"
                 }
             ]
         },
