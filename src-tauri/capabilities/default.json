@@ -92,38 +92,23 @@
             "identifier": "http:default",
             "allow": [
                 {
-                    "url": "https://**"
+                    "url": "https://*:*"
                 },
                 {
-                    "url": "file://**"
+                    "url": "file://*:*"
                 },
                 {
-                    "url": "http://**"
+                    "url": "http://*:*"
                 },
                 {
-                    "url": "asset://localhost/**"
-                },
-                {
-                    "url": "https://api.github.com/**"
-                },
-                {
-                    "url": "https://payjs.cn/**"
-                },
-                {
-                    "url": "https://zpayz.cn/**"
-                },
-                {
-                    "url": "https://api.pay.yungouos.com/**"
-                },
-                {
-                    "url": "https://apis.PakePlus.com/**"
+                    "url": "asset://localhost/*:*"
                 }
             ]
         },
         {
             "identifier": "fs:scope",
             "allow": [
-                "**",
+                "*",
                 "$APPCONFIG/**",
                 "$APPLOCALDATA/**",
                 "$APPCACHE/**",
