@@ -32,7 +32,7 @@ futures = "0.3.31"
 encoding_rs = "0.8"
 notify-rust = "4.11.7"
 tauri-plugin-os = "2.0.0"
-tauri-plugin-fs = { version = "2.0.0-rc", features = ["watch"] }
+tauri-plugin-fs = { version = "2.4.5", features = ["watch"] }
 tauri-plugin-dialog = "2.0.0"
 tauri-plugin-http = { version = "2", features = ["unsafe-headers"] }
 tauri-plugin-clipboard-manager = "2.0.0"
