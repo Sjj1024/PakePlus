@@ -2,27 +2,55 @@
 <a href="https://github.com/Sjj1024/PacBao">English</a> 
 <span style="margin: 0 10px;" >中文</span> 
 <a href="https://github.com/Sjj1024/PacBao/discussions/108">日本语</a>
-</h4>  
+</h4>
 <p align="center">
     <img src="https://github.com/Sjj1024/PacBao/raw/main/docs/static/imgs/PacBao.png" width=138/>
-</p>  
-<h1 align="center">PacBao</h1>  
+</p>
+<h1 align="center">PacBao｜PakePlus</h1>  
 <p align="center"><strong>将任何网页变成桌面应用和移动应用仅需几分钟</strong></p>
 
 <p align="center">
-    <a href="https://github.com/Sjj1024/PacBao/releases"><img src="https://img.shields.io/github/v/release/Sjj1024/PacBao?style=flat-square&logo=github" alt="Release"></a>
-    <a href="https://github.com/Sjj1024/PacBao/stargazers"><img src="https://img.shields.io/github/stars/Sjj1024/PacBao?style=flat-square&logo=github" alt="Stars"></a>
-    <a href="https://github.com/Sjj1024/PacBao/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/Sjj1024/PacBao/build.yml?style=flat-square&logo=github" alt="Build"></a>
-    <a href="https://github.com/Sjj1024/PacBao/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Sjj1024/PacBao?style=flat-square&logo=github" alt="License"></a>
-    <a href="https://hellogithub.com/repository/d148f8fac78b45fe9b94c82757c3f86b" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=d148f8fac78b45fe9b94c82757c3f86b&claim_uid=LXfeQOxRDEmSUGC&theme=small" alt="Featured｜HelloGitHub"></a>
+    <a href="https://github.com/Sjj1024/PakePlus/releases"><img src="https://img.shields.io/github/v/release/Sjj1024/PakePlus?style=flat-square&logo=github" alt="Release"></a>
+    <a href="https://github.com/Sjj1024/PakePlus/stargazers"><img src="https://img.shields.io/github/stars/Sjj1024/PakePlus?style=flat-square&logo=github" alt="Stars"></a>
+    <a href="https://github.com/Sjj1024/PakePlus/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/Sjj1024/PakePlus/build.yml?style=flat-square&logo=github" alt="Build"></a>
+    <a href="https://github.com/Sjj1024/PakePlus/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Sjj1024/PakePlus?style=flat-square&logo=github" alt="License"></a>
 </p>
 
-<div align="left">PacBao 不仅支持 Mac、Windows 和 Linux，并且支持 Android 和 iOS。无需在本地安装任何依赖环境，只需要一个Github Token就可以了，而且PacBao本身也才仅仅5M左右小大，最新版本下载请看：<a href="[#popular-packages](https://github.com/Sjj1024/PacBao/releases)">发布地址</a>。或者访问网页版: <a href="https://PacBao.pages.dev" target="_blank">PacBao Web</a>。 查看 README 以获取<a href="#popular-packages">热门包</a>和<a href="#development">自定义开发</a>信息。欢迎在<a href="https://github.com/Sjj1024/PacBao/discussions">讨论区</a>分享你的建议。进微信交流群：<a href="https://PacBao.com/zh/exchange/">商业群聊</a></div>   
+<div align="left">PacBao 不仅支持 Mac、Windows 和 Linux，并且支持 Android 和 iOS。无需在本地安装任何依赖环境，只需要一个Github Token就可以了，而且PacBao本身也才仅仅5M左右小大，最新版本下载请看：<a href="[#popular-packages](https://github.com/Sjj1024/PacBao/releases)">发布地址</a>。或者访问网页版: <a href="https://pakeplus.pages.dev" target="_blank">PacBao Web</a>。 查看 README 以获取<a href="#popular-packages">热门包</a>和<a href="#development">自定义开发</a>信息。欢迎在<a href="https://github.com/Sjj1024/PacBao/discussions">讨论区</a>分享你的建议。进微信交流群：<a href="https://PacBao.com/zh/exchange/">商业群聊</a></div>   
 <br>
 
 > 因为有人使用本项目打包违法软件，违背了本项目的使用目的，所以本项目前端代码不再开源，如果再发现打包违法软件行为，本项目所有代码都将不再开源。请合法合规使用本软件，否则后果自负，且用且珍惜
 
 https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
+
+<h1 align="center">赞助商</h1>
+
+<p>
+PakePlus 是一个采用 MIT 许可证的开源项目，其持续开发完全得益于这些慷慨支持者的鼎力相助。如果您也想加入他们的行列，请考虑赞助 PakePlus 的开发。
+</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
+        <img style="border-radius: 1.5rem" src="https://files.pakeplus.com/finevoice.png" width="100"/>
+        <h3 style="margin: 10px 0"><a href="https://finevoice.ai/" target="_blank">FineVoice</a></h3>
+        <p style="margin: 0">创造您想象中的每一种声音</p>
+    </div>
+    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
+        <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/54536011?s=200&v=4" width="100"/>
+        <h3 style="margin: 10px 0"><a href="https://tauri.app/" target="_blank">Tauri</a></h3>
+        <p style="margin: 0">使用前端构建更小、更快的应用程序</p>
+    </div>
+    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
+        <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/126759922?s=200&v=4" width="100"/>
+        <h3 style="margin: 10px 0"><a href="https://cursor.com/agents" target="_blank">Cursor</a></h3>
+        <p style="margin: 0">使用人工智能进行编码的最佳方式</p>
+    </div>
+    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
+        <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/878437?s=200&v=4" width="100"/>
+        <h3 style="margin: 10px 0"><a href="https://www.jetbrains.com/idea/" target="_blank">JetBrains</a></h3>
+        <p style="margin: 0">专业开发领域的领先集成开发环境</p>
+    </div>
+</div>
 
 ## 特性
 
@@ -56,62 +84,6 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 -   想把某个网站变成自己的客户端，实现自定义功能，比如注入 js 实现自动化操作。
 -   网站广告太多？想把它隐藏起来，用无所不能的 js 来屏蔽它们吧。
 -   需要使用 tauri2 打包，但是依赖环境太复杂，本地电脑硬盘不够用，就用 PacBao
-
-## 热门包
-
-<img src=https://sjj1024.github.io/PacBao/static/imgs/preview.webp  width=1920/>
-PacBao支持arm和x64架构的安装包，流行的程序安装包仅仅包含了mac的arm和windows的x64架构，如果需要更多架构的安装包，请使用PacBao单独编译自己需要的安装包。
-
-<table>
-    <tr>
-        <td>DeepSeek
-            <a href="https://github.com/Sjj1024/PacBao/releases/download/OtherFiles/DeepSeek_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/Sjj1024/PacBao/releases/download/OtherFiles/DeepSeek_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/Sjj1024/PacBao/releases/download/OtherFiles/DeepSeek_0.0.1_amd64.deb">Linux</a>
-        </td>
-        <td>X (Twitter)
-            <a href="https://github.com/codegirle/PacBao/releases/download/X/X_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PacBao/releases/download/X/X_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PacBao/releases/download/X/x_0.0.1_amd64.deb">Linux</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src=https://sjj1024.github.io/PacBao/static/imgs/deepseek.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PacBao/static/imgs/xtwitter.png width=600/></td>
-    </tr>
-    <tr>
-        <td>YouTube
-            <a href="https://github.com/codegirle/PacBao/releases/download/YouTuBe/YouTube_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PacBao/releases/download/YouTuBe/YouTube_0.0.1_x64_en-US.msi">Windows</a>
-            <a href="https://github.com/codegirle/PacBao/releases/download/YouTuBe/you-tube_0.0.1_amd64.deb">Linux</a>
-        </td>
-        <td>小红书
-            <a href="https://github.com/Sjj1024/PacBao/releases/download/OtherFiles/_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/Sjj1024/PacBao/releases/download/OtherFiles/_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/Sjj1024/PacBao/releases/download/OtherFiles/_0.0.1_amd64.deb">Linux</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src=https://sjj1024.github.io/PacBao/static/imgs/youtube.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PacBao/static/imgs/hongshu.png width=600/></td>
-    </tr>
-        <tr>
-        <td>Tiktok
-            <a href="https://github.com/codegirle/PacBao/releases/download/TikTok/TikTok_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PacBao/releases/download/TikTok/TikTok_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PacBao/releases/download/TikTok/tik-tok_0.0.1_amd64.deb">Linux</a>
-        </td>
-        <td>抖音
-            <a href="https://github.com/codegirle/PacBao/releases/download/Douyin/_0.0.1_aarch64.dmg">Mac</a>
-            <a href="https://github.com/codegirle/PacBao/releases/download/Douyin/_0.0.1_x64-setup.exe">Windows</a>
-            <a href="https://github.com/codegirle/PacBao/releases/download/Douyin/_0.0.1_amd64.deb">Linux</a>
-        </td>
-    </tr>
-    <tr>
-        <td><img src=https://sjj1024.github.io/PacBao/static/imgs/tiktok.png width=600/></td>
-        <td><img src=https://sjj1024.github.io/PacBao/static/imgs/douyin.png width=600/></td>
-    </tr>
-</table>
 
 ## 开始之前
 

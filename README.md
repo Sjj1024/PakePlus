@@ -5,7 +5,7 @@ style="margin: 0 10px;" >简体中文</a>
 <a href="https://github.com/Sjj1024/PabBao/discussions/108">日本语</a>
 </h4>  
 <p align="center">
-    <img src="https://pakeplus.com/pplogo.png" width=300/>
+    <img src="https://github.com/Sjj1024/PacBao/raw/main/docs/static/imgs/PacBao.png" width=138/>
 </p>
 <h1 align="center">PacBao｜PakePlus</h1>  
 <p align="center"><strong>Turn any webpage/Vue/React and so on into desktop and mobile app under 5M with easy in few minutes</strong>
