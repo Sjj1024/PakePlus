@@ -4,7 +4,7 @@
 <a href="https://github.com/Sjj1024/PacBao/discussions/108">日本语</a>
 </h4>
 <p align="center">
-    <img src="https://github.com/Sjj1024/PacBao/raw/main/docs/static/imgs/PacBao.png" width=138/>
+    <img src="https://pakeplus.com/pplogo.png" width=300/>
 </p>
 <h1 align="center">PacBao｜PakePlus</h1>  
 <p align="center"><strong>将任何网页变成桌面应用和移动应用仅需几分钟</strong></p>

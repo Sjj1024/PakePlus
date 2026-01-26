@@ -4,7 +4,7 @@
 <span>日本语</span>
 </h4>   
 <p align="center">
-    <img src="https://github.com/Sjj1024/PacBao/raw/main/docs/static/imgs/PacBao.png" width=138/>
+    <img src="https://pakeplus.com/pplogo.png" width=300/>
 </p>  
 <h1 align="center">PacBao｜PakePlus</h1>  
 <p align="center"><strong>9分で任意のウェブページをデスクトップアプリやモバイルアプリに変換。シンプルで使いやすい。</strong></p>
