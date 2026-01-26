@@ -18,7 +18,6 @@ style="margin: 0 10px;" >简体中文</a>
     <a href="https://github.com/Sjj1024/PakePlus/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/Sjj1024/PakePlus/build.yml?style=flat-square&logo=github" alt="Build"></a>
     <a href="https://github.com/Sjj1024/PakePlus/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Sjj1024/PakePlus?style=flat-square&logo=github" alt="License"></a>
     <a href="https://app.netlify.com/projects/pakeplus/deploys"><img src="https://api.netlify.com/api/v1/badges/f8454a03-8724-4797-9fe4-e6c51dd90e3a/deploy-status" alt="License"></a>
-    <!-- <a href="https://hellogithub.com/repository/d148f8fac78b45fe9b94c82757c3f86b" target="_blank"><img src="https://api.hellogithub.com/v1/widgets/recommend.svg?rid=d148f8fac78b45fe9b94c82757c3f86b&claim_uid=LXfeQOxRDEmSUGC&theme=small" alt="Featured｜HelloGitHub"></a> -->
 </p>
 
 <div align="left">PacBao supports Mac, Windows, Linux, and Android & iOS. There’s no need to install complex dependencies locally, PacBao is only about 10MB in size. For the latest version, please see the <a href="[#popular-packages](https://github.com/Sjj1024/pakeplus/releases)">release page</a>. or visit: <a href="https://pakeplus.pages.dev" target="_blank">PacBao Web</a>. 
@@ -35,28 +34,30 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 PakePlus is an MIT-licensed open source project with its ongoing development made possible entirely by the support of these awesome backers. If you'd like to join them, please consider sponsoring PakePlus's development.
 </p>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
-        <img style="border-radius: 1.5rem" src="https://files.pakeplus.com/finevoice.png" width="100"/>
-        <h3 style="margin: 10px 0"><a href="https://finevoice.ai/" target="_blank">FineVoice</a></h3>
-        <p style="margin: 0">Create Every Voice You Imagine</p>
-    </div>
-    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
-        <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/54536011?s=200&v=4" width="100"/>
-        <h3 style="margin: 10px 0"><a href="https://tauri.app/" target="_blank">Tauri</a></h3>
-        <p style="margin: 0">Create cross-platform applications</p>
-    </div>
-    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
-        <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/126759922?s=200&v=4" width="100"/>
-        <h3 style="margin: 10px 0"><a href="https://cursor.com/agents" target="_blank">Cursor</a></h3>
-        <p style="margin: 0">Cursor is the best way to code with AI.</p>
-    </div>
-    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
-        <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/878437?s=200&v=4" width="100"/>
-        <h3 style="margin: 10px 0"><a href="https://www.jetbrains.com/idea/" target="_blank">JetBrains</a></h3>
-        <p style="margin: 0">The Leading IDE for Professional Development</p>
-    </div>
-</div>
+<table style="border-collapse: collapse; width: 100%; border: 1px solid #ddd;">
+    <tr>
+        <td align="center" style="border: 1px solid #ddd; padding: 20px;">
+            <img style="border-radius: 1.5rem" src="https://files.pakeplus.com/finevoice.png" width="100"/>
+            <h3 style="margin: 0"><a href="https://finevoice.ai/" target="_blank">FineVoice</a></h3>
+            <p style="margin: 0">Create Every Voice You Imagine</p>
+        </td>
+        <td align="center" style="border: 1px solid #ddd; padding: 20px;">
+            <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/54536011?s=200&v=4" width="100"/>
+            <h3 style="margin: 0"><a href="https://tauri.app/" target="_blank">Tauri</a></h3>
+            <p style="margin: 0">Create cross-platform applications</p>
+        </td>
+        <td align="center" style="border: 1px solid #ddd; padding: 20px;">
+            <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/126759922?s=200&v=4" width="100"/>
+            <h3 style="margin: 0"><a href="https://cursor.com/agents" target="_blank">Cursor</a></h3>
+            <p style="margin: 0">Cursor is the best way to code with AI.</p>
+        </td>
+        <td align="center" style="border: 1px solid #ddd; padding: 20px;">
+            <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/878437?s=200&v=4" width="100"/>
+            <h3 style="margin: 0"><a href="https://www.jetbrains.com/idea/" target="_blank">JetBrains</a></h3>
+            <p style="margin: 0">The Leading IDE for Professional Development</p>
+        </td>
+    </tr>
+</table>
 
 ## Features
 
