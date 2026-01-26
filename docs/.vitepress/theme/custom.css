@@ -114,3 +114,8 @@
 .dark ::-webkit-scrollbar-thumb:hover {
     background: #6d6d70;
 }
+
+/* 赞助商公司头像圆角 */
+.avatar-img {
+    border-radius: 10px !important;
+}

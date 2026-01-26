@@ -29,6 +29,35 @@ Document: <a href="https://pakeplus.com/guide/" target="_blank">PacBao Guide</a>
 
 https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 
+<h1 align="center">Sponsors</h1>
+
+<p>
+PakePlus is an MIT-licensed open source project with its ongoing development made possible entirely by the support of these awesome backers. If you'd like to join them, please consider sponsoring PakePlus's development.
+</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
+        <img style="border-radius: 1.5rem" src="https://files.pakeplus.com/finevoice.png" width="100"/>
+        <h3 style="margin: 10px 0"><a href="https://finevoice.ai/" target="_blank">FineVoice</a></h3>
+        <p style="margin: 0">Create Every Voice You Imagine</p>
+    </div>
+    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
+        <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/54536011?s=200&v=4" width="100"/>
+        <h3 style="margin: 10px 0"><a href="https://tauri.app/" target="_blank">Tauri</a></h3>
+        <p style="margin: 0">Create cross-platform applications</p>
+    </div>
+    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
+        <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/126759922?s=200&v=4" width="100"/>
+        <h3 style="margin: 10px 0"><a href="https://cursor.com/agents" target="_blank">Cursor</a></h3>
+        <p style="margin: 0">Cursor is the best way to code with AI.</p>
+    </div>
+    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
+        <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/878437?s=200&v=4" width="100"/>
+        <h3 style="margin: 10px 0"><a href="https://www.jetbrains.com/idea/" target="_blank">JetBrains</a></h3>
+        <p style="margin: 0">The Leading IDE for Professional Development</p>
+    </div>
+</div>
+
 ## Features
 
 -   💎 Approximately 20 times smaller than Electron (less than 5MB!) and 10 times faster.
