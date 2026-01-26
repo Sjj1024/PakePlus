@@ -361,8 +361,8 @@ export default defineConfig({
                     ],
                     '/zh/sponsor/': [
                         { text: '赞助我们', link: '/zh/sponsor/' },
-                        { text: '赞助名单', link: '/zh/sponsor/list' },
-                        { text: '公司名单', link: '/zh/sponsor/company' },
+                        { text: '赞助者列表', link: '/zh/sponsor/list' },
+                        { text: '赞助商名单', link: '/zh/sponsor/company' },
                     ],
                 },
                 // 社交链接
