@@ -16,7 +16,7 @@
     <a href="https://github.com/Sjj1024/PakePlus/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Sjj1024/PakePlus?style=flat-square&logo=github" alt="License"></a>
 </p>
 
-<div align="left">PacBao は Mac、Windows、および Linux に対応しており、Android と iOS も間もなくサポート予定です。ローカルに複雑な依存環境をインストールする必要はなく、Github トークンだけで利用できます。また、PacBao 自体のサイズはわずか約5MBです。最新バージョンについては<a href="[#popular-packages](https://github.com/Sjj1024/PacBao/releases)">リリースページ</a>をご確認ください。また、PacBao Web 版も利用できます。<a href="URL_ADDRESS また、PacBao Web 版も利用できます。<a href="https://PacBao.pages.dev" target="_blank">PacBao Web</a>。
+<div align="left">PacBao は Mac、Windows、および Linux に対応しており、Android と iOS も間もなくサポート予定です。ローカルに複雑な依存環境をインストールする必要はなく、Github トークンだけで利用できます。また、PacBao 自体のサイズはわずか約5MBです。最新バージョンについては<a href="[#popular-packages](https://github.com/Sjj1024/pakeplus/releases)">リリースページ</a>をご確認ください。また、PacBao Web 版も利用できます。<a href="URL_ADDRESS また、PacBao Web 版も利用できます。<a href="https://pakeplus.pages.dev" target="_blank">PacBao Web</a>。
 <a href="#popular-packages">人気パッケージ</a>や<a href="#development">カスタム開発</a>については README をご覧ください。<a href="https://github.com/Sjj1024/PacBao/discussions">ディスカッションエリア</a>でご意見をお待ちしています。</div>
 
 https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
@@ -27,7 +27,7 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 PakePlus is an MIT-licensed open source project with its ongoing development made possible entirely by the support of these awesome backers. If you'd like to join them, please consider sponsoring PakePlus's development.
 </p>
 
-<table style="border-collapse: collapse; width: 100%;">
+<table style="border-collapse: collapse; width: 100%; border: 1px solid #ddd;">
     <tr>
         <td align="center" style="border: 1px solid #ddd; padding: 20px;">
             <img style="border-radius: 1.5rem" src="https://files.pakeplus.com/finevoice.png" width="100"/>
@@ -39,8 +39,6 @@ PakePlus is an MIT-licensed open source project with its ongoing development mad
             <h3 style="margin: 0"><a href="https://tauri.app/" target="_blank">Tauri</a></h3>
             <p style="margin: 0">Create cross-platform applications</p>
         </td>
-    </tr>
-    <tr>
         <td align="center" style="border: 1px solid #ddd; padding: 20px;">
             <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/126759922?s=200&v=4" width="100"/>
             <h3 style="margin: 0"><a href="https://cursor.com/agents" target="_blank">Cursor</a></h3>

@@ -29,28 +29,30 @@ https://github.com/user-attachments/assets/b88bf541-0b26-4020-9eec-da79e1734fc9
 PakePlus 是一个采用 MIT 许可证的开源项目，其持续开发完全得益于这些慷慨支持者的鼎力相助。如果您也想加入他们的行列，请考虑赞助 PakePlus 的开发。
 </p>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
-        <img style="border-radius: 1.5rem" src="https://files.pakeplus.com/finevoice.png" width="100"/>
-        <h3 style="margin: 10px 0"><a href="https://finevoice.ai/" target="_blank">FineVoice</a></h3>
-        <p style="margin: 0">创造您想象中的每一种声音</p>
-    </div>
-    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
-        <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/54536011?s=200&v=4" width="100"/>
-        <h3 style="margin: 10px 0"><a href="https://tauri.app/" target="_blank">Tauri</a></h3>
-        <p style="margin: 0">使用前端构建更小、更快的应用程序</p>
-    </div>
-    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
-        <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/126759922?s=200&v=4" width="100"/>
-        <h3 style="margin: 10px 0"><a href="https://cursor.com/agents" target="_blank">Cursor</a></h3>
-        <p style="margin: 0">使用人工智能进行编码的最佳方式</p>
-    </div>
-    <div style="text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
-        <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/878437?s=200&v=4" width="100"/>
-        <h3 style="margin: 10px 0"><a href="https://www.jetbrains.com/idea/" target="_blank">JetBrains</a></h3>
-        <p style="margin: 0">专业开发领域的领先集成开发环境</p>
-    </div>
-</div>
+<table style="border-collapse: collapse; width: 100%; border: 1px solid #ddd;">
+    <tr>
+        <td align="center" style="border: 1px solid #ddd; padding: 20px;">
+            <img style="border-radius: 1.5rem" src="https://files.pakeplus.com/finevoice.png" width="100"/>
+            <h3 style="margin: 0"><a href="https://finevoice.ai/" target="_blank">FineVoice</a></h3>
+            <p style="margin: 0">创造您想象中的每一种声音</p>
+        </td>
+        <td align="center" style="border: 1px solid #ddd; padding: 20px;">
+            <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/54536011?s=200&v=4" width="100"/>
+            <h3 style="margin: 0"><a href="https://tauri.app/" target="_blank">Tauri</a></h3>
+            <p style="margin: 0">使用前端构建更小、更快的应用程序</p>
+        </td>
+        <td align="center" style="border: 1px solid #ddd; padding: 20px;">
+            <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/126759922?s=200&v=4" width="100"/>
+            <h3 style="margin: 0"><a href="https://cursor.com/agents" target="_blank">Cursor</a></h3>
+            <p style="margin: 0">使用人工智能进行编码的最佳方式</p>
+        </td>
+        <td align="center" style="border: 1px solid #ddd; padding: 20px;">
+            <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/878437?s=200&v=4" width="100"/>
+            <h3 style="margin: 0"><a href="https://www.jetbrains.com/idea/" target="_blank">JetBrains</a></h3>
+            <p style="margin: 0">专业开发领域的领先集成开发环境</p>
+        </td>
+    </tr>
+</table>
 
 ## 特性
 
