@@ -38,7 +38,7 @@ PakePlus is an MIT-licensed open source project with its ongoing development mad
     <tr>
         <td align="center" style="border: 1px solid #ddd; padding: 20px;">
             <img style="border-radius: 1.5rem" src="https://files.pakeplus.com/finevoice.png" width="100"/>
-            <h3 style="margin: 0"><a href="https://finevoice.ai/" target="_blank">FineVoice</a></h3>
+            <h3 style="margin: 0"><a href="https://finevoice.ai/?ref=pakeplus" target="_blank">FineVoice</a></h3>
             <p style="margin: 0">Create Every Voice You Imagine</p>
         </td>
         <td align="center" style="border: 1px solid #ddd; padding: 20px;">

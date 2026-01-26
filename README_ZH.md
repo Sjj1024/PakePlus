@@ -33,7 +33,7 @@ PakePlus 是一个采用 MIT 许可证的开源项目，其持续开发完全得
     <tr>
         <td align="center" style="border: 1px solid #ddd; padding: 20px;">
             <img style="border-radius: 1.5rem" src="https://files.pakeplus.com/finevoice.png" width="100"/>
-            <h3 style="margin: 0"><a href="https://finevoice.ai/" target="_blank">FineVoice</a></h3>
+            <h3 style="margin: 0"><a href="https://finevoice.ai/?ref=pakeplus" target="_blank">FineVoice</a></h3>
             <p style="margin: 0">创造您想象中的每一种声音</p>
         </td>
         <td align="center" style="border: 1px solid #ddd; padding: 20px;">
