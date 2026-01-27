@@ -126,7 +126,6 @@
             // 下载处理后的图片
             downloadBtn.addEventListener('click', function () {
                 if (!originalImage) return
-
                 const link = document.createElement('a')
                 link.download = 'apple-rounded-' + imageInput.files[0].name
                 link.href = canvas.toDataURL('image/png')
