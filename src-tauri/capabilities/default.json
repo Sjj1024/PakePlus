@@ -2,17 +2,9 @@
     "$schema": "../gen/schemas/desktop-schema.json",
     "identifier": "default",
     "description": "Capability for the main window",
-    "windows": ["main"],
+    "windows": ["main", "PreView", "*"],
     "remote": {
-        "urls": [
-            "https://*",
-            "file://*",
-            "http://*",
-            "asset://localhost/*",
-            "https://api.github.com/*",
-            "https://payjs.cn/*",
-            "https://zpayz.cn/*"
-        ]
+        "urls": ["https://*:*", "file://*", "http://*:*", "asset://localhost/*"]
     },
     "permissions": [
         "core:default",
@@ -25,6 +17,14 @@
         "core:path:default",
         "core:resources:default",
         "core:tray:default",
+        "core:tray:allow-new",
+        "core:tray:allow-set-icon",
+        "core:tray:allow-set-title",
+        "core:tray:allow-set-tooltip",
+        "core:tray:allow-set-menu",
+        "core:tray:allow-set-visible",
+        "core:window:allow-set-position",
+        "core:window:allow-set-fullscreen",
         "core:window:allow-unminimize",
         "core:window:allow-set-focus",
         "core:window:allow-show",
@@ -48,8 +48,6 @@
         "core:window:allow-set-maximizable",
         "core:window:allow-set-minimizable",
         "core:window:allow-set-resizable",
-        "core:window:allow-set-fullscreen",
-        "core:window:allow-set-position",
         "core:app:allow-default-window-icon",
         "core:app:allow-app-hide",
         "core:app:allow-app-show",
@@ -68,6 +66,88 @@
         "core:webview:allow-print",
         "core:webview:allow-set-webview-focus",
         "core:webview:allow-set-webview-size",
-        "dialog:default"
+        "process:default",
+        "process:allow-restart",
+        "process:allow-exit",
+        "http:allow-fetch",
+        "http:default",
+        "http:allow-fetch-cancel",
+        "http:allow-fetch-read-body",
+        "http:allow-fetch-send",
+        "dialog:default",
+        "dialog:allow-open",
+        "dialog:allow-save",
+        "dialog:allow-ask",
+        "dialog:allow-confirm",
+        "dialog:allow-message",
+        "os:allow-locale",
+        "os:allow-hostname",
+        "store:default",
+        {
+            "identifier": "http:default",
+            "allow": [
+                {
+                    "url": "https://*:*"
+                },
+                {
+                    "url": "file://*:*"
+                },
+                {
+                    "url": "http://*:*"
+                },
+                {
+                    "url": "asset://localhost/*"
+                }
+            ]
+        },
+        {
+            "identifier": "fs:scope",
+            "allow": [
+                "*",
+                "$APPCONFIG/**",
+                "$APPLOCALDATA/**",
+                "$APPCACHE/**",
+                "$APPDATA/**",
+                "$APPLOG/**",
+                "$AUDIO/**",
+                "$CACHE/**",
+                "$CONFIG/**",
+                "$DATA/**",
+                "$LOCALDATA/**",
+                "$DESKTOP/**",
+                "$DOCUMENT/**",
+                "$DOWNLOAD/**",
+                "$EXE/**",
+                "$FONT/**",
+                "$HOME/**",
+                "$PICTURE/**",
+                "$PUBLIC/**",
+                "$RUNTIME/**",
+                "$ASSETS/**",
+                "$VIDEO/**",
+                "$TEMP/**",
+                "$RESOURCE/../**",
+                "$ASSETS/**",
+                "$TEMPLATE/**",
+                "asset://localhost/**"
+            ]
+        },
+        "fs:allow-read-file",
+        "fs:allow-exists",
+        "fs:allow-write-file",
+        "fs:allow-app-write",
+        "fs:allow-app-read",
+        "fs:allow-app-read-recursive",
+        "fs:allow-app-write-recursive",
+        "fs:allow-appcache-write",
+        "fs:allow-appcache-write-recursive",
+        "fs:allow-appconfig-write",
+        "fs:allow-appconfig-write-recursive",
+        "fs:allow-appdata-write",
+        "fs:allow-appdata-write-recursive",
+        "fs:allow-watch",
+        "fs:allow-unwatch",
+        "fs:allow-read-dir",
+        "fs:allow-copy-file"
     ]
 }
