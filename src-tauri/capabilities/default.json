@@ -132,6 +132,8 @@
                 "asset://localhost/**"
             ]
         },
+        "fs:default",
+        "fs:allow-size",
         "fs:allow-read-file",
         "fs:allow-exists",
         "fs:allow-write-file",

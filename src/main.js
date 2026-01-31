@@ -23,6 +23,8 @@ const {
     lstat,
     size,
 } = window.__TAURI__.fs
+// join
+const { join, downloadDir } = window.__TAURI__.path
 // webview window
 const { WebviewWindow } = window.__TAURI__.webviewWindow
 
@@ -375,51 +377,54 @@ window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#size').addEventListener('click', async (e) => {
         e.preventDefault()
         console.log('size')
-        const size = await size('pakeplus.txt', {
-            baseDir: BaseDirectory.Download,
-        })
-        console.log('size', size)
-        resultElement.textContent = size
+        const downloadPath = await downloadDir()
+        const pptextPath = await join(downloadPath, 'pakeplus.txt')
+        console.log('pptextPath', pptextPath)
+        const sizeResult = await size(pptextPath)
+        console.log('size', sizeResult)
+        resultElement.textContent = sizeResult
     })
     // exists
     document.querySelector('#exists').addEventListener('click', async (e) => {
         e.preventDefault()
         console.log('exists')
-        const exists = await exists('pakeplus.txt', {
+        const existsResult = await exists('pakeplus.txt', {
             baseDir: BaseDirectory.Download,
         })
-        console.log('exists', exists)
-        resultElement.textContent = exists
+        console.log('exists', existsResult)
+        resultElement.textContent = existsResult
     })
     // remove
     document.querySelector('#remove').addEventListener('click', async (e) => {
         e.preventDefault()
         console.log('remove')
-        const remove = await remove('pakeplus.txt', {
+        const removeRes = await remove('pakeplus.txt', {
             baseDir: BaseDirectory.Download,
         })
-        console.log('remove', remove)
-        resultElement.textContent = remove
+        console.log('removeResult', removeRes)
+        resultElement.textContent = removeRes
     })
     // copy file
     document.querySelector('#copyFile').addEventListener('click', async (e) => {
         e.preventDefault()
         console.log('copy file')
-        const copy = await copyFile('pakeplus.txt', 'pakeplus_copy.txt', {
-            baseDir: BaseDirectory.Download,
+        const copyRes = await copyFile('pakeplus.txt', 'pakeplus_copy.txt', {
+            fromPathBaseDir: BaseDirectory.Download,
+            toPathBaseDir: BaseDirectory.Download,
         })
-        console.log('copy', copy)
-        resultElement.textContent = copy
+        console.log('copyResult', copyRes)
+        resultElement.textContent = copyRes
     })
     // rename
     document.querySelector('#rename').addEventListener('click', async (e) => {
         e.preventDefault()
         console.log('rename')
-        const rename = await rename('pakeplus.txt', 'pakeplus_new.txt', {
-            baseDir: BaseDirectory.Download,
+        const renameRes = await rename('pakeplus.txt', 'pakeplus_new.txt', {
+            oldPathBaseDir: BaseDirectory.Download,
+            newPathBaseDir: BaseDirectory.Download,
         })
-        console.log('rename', rename)
-        resultElement.textContent = rename
+        console.log('renameResult', renameRes)
+        resultElement.textContent = renameRes
     })
     // truncate
     document.querySelector('#truncate').addEventListener('click', async (e) => {
