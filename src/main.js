@@ -270,7 +270,7 @@ window.addEventListener('DOMContentLoaded', () => {
             // 绘制文字
             ctx.fillStyle = '#ffffff'
             ctx.font = '20px Arial'
-            ctx.fillText('Test', 30, 50)
+            ctx.fillText('PakePlus', 30, 50)
 
             // 转换为PNG并保存
             const blob = await new Promise((resolve) => {
