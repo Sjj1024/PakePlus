@@ -1,5 +1,29 @@
 const { invoke } = window.__TAURI__.core
 const { ask, confirm, message, open, save } = window.__TAURI__.dialog
+// file
+const {
+    create,
+    writeTextFile,
+    writeFile,
+    readTextFile,
+    BaseDirectory,
+    readFile,
+    open: openFile,
+    remove,
+    readDir,
+    copyFile,
+    stat,
+    exists,
+    readTextFileLines,
+    rename,
+    truncate,
+    mkdir,
+    watch,
+    watchImmediate,
+    lstat,
+    size,
+} = window.__TAURI__.fs
+// webview window
 const { WebviewWindow } = window.__TAURI__.webviewWindow
 
 let inputValue
@@ -194,6 +218,219 @@ window.addEventListener('DOMContentLoaded', () => {
             // 当前页面url
             window.location.href = 'https://hlsjs.video-dev.org/demo/'
         })
+    // create file
+    document
+        .querySelector('#createFile')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('create file')
+            const file = await create('pakeplus.txt', {
+                baseDir: BaseDirectory.Download,
+            })
+            await file.write(
+                new TextEncoder().encode('Hello PakePlus Create File Test')
+            )
+            await file.close()
+            console.log('file', file)
+        })
+    // write text file
+    document
+        .querySelector('#writeTextFile')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('write text file')
+            const file = await writeTextFile(
+                'pakeplus.txt',
+                'Hello PakePlus Write Text File Test',
+                {
+                    baseDir: BaseDirectory.Download,
+                }
+            )
+            console.log('file', file)
+            resultElement.textContent = file
+        })
+    // write binary file
+    document
+        .querySelector('#writeBinaryFile')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('write binary file')
+            // 创建Canvas
+            const canvas = document.createElement('canvas')
+            canvas.width = 100
+            canvas.height = 100
+            const ctx = canvas.getContext('2d')
+
+            // 绘制红色方块
+            ctx.fillStyle = '#ff0000'
+            ctx.fillRect(0, 0, 100, 100)
+
+            // 绘制文字
+            ctx.fillStyle = '#ffffff'
+            ctx.font = '20px Arial'
+            ctx.fillText('Test', 30, 50)
+
+            // 转换为PNG并保存
+            const blob = await new Promise((resolve) => {
+                canvas.toBlob(resolve, 'image/png', 1.0)
+            })
+
+            if (!blob) throw new Error('无法创建Blob')
+            const arrayBuffer = await blob.arrayBuffer()
+            const uint8Array = new Uint8Array(arrayBuffer)
+            console.log('uint8Array11', uint8Array)
+            const file = await writeFile('pakeplus_test.png', uint8Array, {
+                baseDir: BaseDirectory.Download,
+            })
+            console.log('file', file)
+            resultElement.textContent = file
+        })
+    // read text file
+    document
+        .querySelector('#readTextFile')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('read text file')
+            const file = await readTextFile('pakeplus.txt', {
+                baseDir: BaseDirectory.Download,
+            })
+            console.log('file', file)
+            resultElement.textContent = file
+        })
+    // read binary file
+    document
+        .querySelector('#readBinaryFile')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('read binary file')
+            const file = await readFile('pakeplus_test.png', {
+                baseDir: BaseDirectory.Download,
+            })
+            console.log('file', file)
+            resultElement.textContent = file
+        })
+    // read file
+    document.querySelector('#readFile').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('read file')
+        const file = await readFile('pakeplus.txt', {
+            baseDir: BaseDirectory.Download,
+        })
+        console.log('file', file)
+        resultElement.textContent = file
+    })
+    // open file
+    document.querySelector('#openFile').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('open file')
+        const file = await openFile('pakeplus.txt', {
+            read: true,
+            baseDir: BaseDirectory.Download,
+        })
+        console.log('file', file)
+        resultElement.textContent = file
+        await file.close()
+    })
+    // read directory
+    document.querySelector('#readDir').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('read directory')
+        const dir = await readDir('pakeplus', {
+            baseDir: BaseDirectory.Download,
+        })
+        console.log('dir', dir)
+        resultElement.textContent = dir
+    })
+    // mkdir
+    document.querySelector('#mkdir').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('mkdir')
+        const dir = await mkdir('pakeplus', {
+            baseDir: BaseDirectory.Download,
+        })
+        console.log('dir', dir)
+        resultElement.textContent = dir
+    })
+    // watch
+    document.querySelector('#watch').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('watch')
+        const watcher = await watch('pakeplus.txt', (event) => {
+            console.log('event', event)
+        })
+        console.log('watcher', watcher)
+    })
+    // watch immediate
+    document
+        .querySelector('#watchImmediate')
+        .addEventListener('click', async (e) => {
+            e.preventDefault()
+            console.log('watch immediate')
+            const watcher = await watchImmediate('pakeplus.txt', (event) => {
+                console.log('event', event)
+            })
+            console.log('watcher', watcher)
+        })
+    // size
+    document.querySelector('#size').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('size')
+        const size = await size('pakeplus.txt', {
+            baseDir: BaseDirectory.Download,
+        })
+        console.log('size', size)
+        resultElement.textContent = size
+    })
+    // exists
+    document.querySelector('#exists').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('exists')
+        const exists = await exists('pakeplus.txt', {
+            baseDir: BaseDirectory.Download,
+        })
+        console.log('exists', exists)
+        resultElement.textContent = exists
+    })
+    // remove
+    document.querySelector('#remove').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('remove')
+        const remove = await remove('pakeplus.txt', {
+            baseDir: BaseDirectory.Download,
+        })
+        console.log('remove', remove)
+        resultElement.textContent = remove
+    })
+    // copy file
+    document.querySelector('#copyFile').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('copy file')
+        const copy = await copyFile('pakeplus.txt', 'pakeplus_copy.txt', {
+            baseDir: BaseDirectory.Download,
+        })
+        console.log('copy', copy)
+        resultElement.textContent = copy
+    })
+    // rename
+    document.querySelector('#rename').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('rename')
+        const rename = await rename('pakeplus.txt', 'pakeplus_new.txt', {
+            baseDir: BaseDirectory.Download,
+        })
+        console.log('rename', rename)
+        resultElement.textContent = rename
+    })
+    // truncate
+    document.querySelector('#truncate').addEventListener('click', async (e) => {
+        e.preventDefault()
+        console.log('truncate')
+        const truncate = await truncate('pakeplus.txt', {
+            baseDir: BaseDirectory.Download,
+        })
+        console.log('truncate', truncate)
+        resultElement.textContent = truncate
+    })
 })
 
 function onFullscreenChange() {
