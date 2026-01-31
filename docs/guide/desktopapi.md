@@ -1,4 +1,4 @@
-# 桌面端 API
+# Desktop API
 
 ::: danger 注意
 使用桌面端 API 的前提是在更多配置中，开启全局 TauriApi，然后才可以打包发布使用！  
@@ -197,22 +197,6 @@ webview.once('tauri://error', function (e) {
     // an error happened creating the webview
     console.log('new webview error', e)
 })
-```
-
-## 命令行参数
-
-通过命令行启动并在前端获取启动参数
-
-```js
-// start app with command line arguments
-PakePlus.exe token=123456
-
-// get command line arguments from js
-const urlParams = new URLSearchParams(window.location.search)
-// get token arg from url params
-const tokenArg = urlParams.get('token') || 'No Param'
-// base64 decode params get value
-const tokenValue = atob(tokenArg)
 ```
 
 ## 打开 URL(默认浏览器)
