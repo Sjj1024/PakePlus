@@ -306,9 +306,6 @@ pub async fn download_file(
             .resolve(file_name, BaseDirectory::Download)
             .expect("failed to resolve resource");
         save_path = file_path.to_str().unwrap().to_string();
-    } else {
-        let file_path = Path::new(&save_path).join(file_name);
-        save_path = file_path.to_str().unwrap().to_string();
     }
     // if file exists, add number to file name
     if Path::new(&save_path).exists() {
