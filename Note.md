@@ -17,8 +17,9 @@
 ### Web beta
 
 -   Not recommended as it is a beta version.（不推荐，因为是 beta 版本）
--   https://PakePlus.pages.dev
+-   https://web.pakeplus.com
 -   https://PakePlus.netlify.app
+-   https://pacbao.vercel.app/
 
 ### Document(使用文档)
 
