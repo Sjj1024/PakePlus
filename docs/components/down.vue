@@ -286,6 +286,7 @@
         </div>
         <div
             class="platform web"
+            v-if="!isMobile()"
             :style="
                 pageData.filePath.includes('download') ? '' : 'width: 100%;'
             "
