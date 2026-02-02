@@ -46,13 +46,13 @@ PakePlus 仅作为打包工具使用，不支持软件签名，打包后的软�
 -   网站广告太多？想把它隐藏起来，用无所不能的 js 来屏蔽它们吧。
 -   需要使用 tauri2 打包，但是依赖环境太复杂，本地电脑硬盘不够用，就用 PakePlus
 
-## 热门包
+<!-- ## 热门包
 
 <img src="../../static/imgs/preview.webp"  width=1920/>
 
 PakePlus 支持 arm 和 x64 架构的安装包，流行的程序安装包仅仅包含了 mac 的 arm(M 芯片)版本 和 windows 的 x64 和 Linux 的 x64 版本，如果需要更多架构的安装包，请使用 PakePlus 单独编译自己需要的安装包。
 
-<Popular />
+<Popular /> -->
 
 ## Star History
 

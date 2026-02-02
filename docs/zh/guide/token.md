@@ -45,11 +45,11 @@ Workflows：用来编译打包你的软件
 
 8. 点击 PakePlus 首页右上角的设置按钮，把第 7 步得到的 token 复制进去，点击测试，会校验 token 是否正确并初始化，网络好的话转 20 秒左右就好了:
 
-    ![](../../static/imgs/token16.webp)
+    ![](../../static/imgs/token19.webp)
 
-    如果提示 Token 可用，说明成功了，并会展示 github 信息：
+    如果提示 Token 可用，说明成功了，并点击右上角头像，会进入个人信息页面，在这里可以看到你所拥有的权限信息：
 
-    ![](../../static/imgs/token15.webp)
+    ![](../../static/imgs/token20.webp)
 
     如果提示 Token 不可用或一直在转圈圈，可能 token 不正确或网络不好，需要重新获取 token，然后再试。
 
@@ -58,4 +58,5 @@ Workflows：用来编译打包你的软件
 -   github 生成的 token 只有一次机会查看，请妥善保管。
 -   PakePlus 填入的 token 只会仅存储在你电脑本地，请妥善保管。
 -   生成的 token 只能在有效期内使用(如果你设置的是有效期模式)，过期后需要重新生成。
+-   退出登陆 会删除并清空本地所有记录包括你的 token 和所有项目，请谨慎操作并妥善保管这些数据。
 -   当你填入 token 并验证成功后，会在右上角展示你的 github 头像，点击头像可以查看你的 github 昵称和 token，点击头像会跳转到你的 github 个人主页，点击 token 会将 token 复制到你的粘贴板。如果在使用过程中有遇到问题，[可以进交流群咨询](../exchange/index.md)。
