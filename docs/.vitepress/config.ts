@@ -322,7 +322,7 @@ export default defineConfig({
                             ],
                         },
                         {
-                            text: '桌面端问题',
+                            text: '调试模式',
                             collapsed: false,
                             items: [
                                 {
