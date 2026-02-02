@@ -26,9 +26,9 @@ encoding_rs = "0.8"
 futures = "0.3.31"
 tokio = { version = "1", features = ["full"] }
 reqwest = { version = "0.12", features = ["json", "stream"] }
-tauri-plugin-store = "2.0.0"
 tauri-plugin-dialog = "2"
 tauri-plugin-fs = "2.4.5"
 tauri-plugin-process = "2.3.1"
 tauri-plugin-http = "2.5.6"
 tauri-plugin-os = "2.3.2"
+tauri-plugin-store = "2.0.0"

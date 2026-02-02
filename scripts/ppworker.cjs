@@ -99,7 +99,7 @@ const updateCargoToml = async (name, version, desc, debug, single) => {
     if (single) {
         newCargoToml = newCargoToml.replace(
             'tauri-plugin-store = "2.0.0"',
-            'tauri-plugin-store = "2.0.0"\ntauri-plugin-single-instance = "2"'
+            'tauri-plugin-store = "2.0.0"\ntauri-plugin-single-instance = "2.3.7"'
         )
     }
     fs.writeFileSync(cargoTomlPath, newCargoToml)
