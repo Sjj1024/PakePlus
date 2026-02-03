@@ -4,7 +4,11 @@
         "active": true,
         "targets": "all",
         "category": "DeveloperTool",
-        "resources": ["./data/man.json", "./data/vconsole.min.js"],
+        "resources": [
+            "./data/man.json",
+            "./data/vconsole.min.js",
+            "./Info.plist"
+        ],
         "createUpdaterArtifacts": true,
         "icon": [
             "icons/32x32.png",
