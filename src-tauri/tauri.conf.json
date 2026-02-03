@@ -4,6 +4,7 @@
     "version": "../package.json",
     "identifier": "com.pakeplus.pacbao",
     "build": {
+        "devUrl": "http://localhost:1420",
         "frontendDist": "../dist"
     },
     "app": {
