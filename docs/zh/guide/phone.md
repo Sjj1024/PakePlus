@@ -29,12 +29,13 @@
 恭喜你 🎉🎉🎉，你的软件已经编译成功了，点击 apk 下载 android 版本，点击 ipa 下载 ios 版本。
 或者点击名称会复制下载链接，然后在浏览器打开即可下载。
 
-![](../../static/imgs/publish3.webp)
+![](../../static/imgs/publish4.webp)
 
 ## 注意事项
 
 -   ios 仅支持 15.6 版本以上系统
 -   android 仅支持 7.0 版本以上系统
+-   iOS 免签是安装描述文件的方式安装类 APP
 -   安装说明文档：[ipa/apk 安装说明](../question/phone.md)
 
 <script setup>
