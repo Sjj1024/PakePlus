@@ -9,7 +9,7 @@
     <div class="sponsorBox">
         <img
             class="wxCode"
-            src="https://files.PakePlus.com/sponsor.webp"
+            src="../static/imgs/pay.webp"
             alt="WeChat QR Code"
         />
     </div>
