@@ -57,6 +57,23 @@ PakePlus is an MIT-licensed open source project with its ongoing development mad
             <p style="margin: 0">The Leading IDE for Professional Development</p>
         </td>
     </tr>
+    <tr>
+        <td align="center" style="border: 1px solid #ddd; padding: 20px;">
+            <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/24789812?s=200&v=4" width="100"/>
+            <h3 style="margin: 0"><a href="https://bit.dev/?ref=pakeplus" target="_blank">Bit</a></h3>
+            <p style="margin: 0">AI-powered development workspaces</p>
+        </td>
+        <td align="center" style="border: 1px solid #ddd; padding: 20px;">
+            <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/17219288?s=200&v=4" width="100"/>
+            <h3 style="margin: 0"><a href="https://www.prisma.io/?ref=pakeplus" target="_blank">Prisma</a></h3>
+            <p style="margin: 0">Prisma makes working with data easy</p>
+        </td>
+        <td align="center" style="border: 1px solid #ddd; padding: 20px;">
+            <img style="border-radius: 1.5rem" src="https://avatars.githubusercontent.com/u/314135?s=200&v=4" width="100"/>
+            <h3 style="margin: 0"><a href="https://www.cloudflare.com/?ref=pakeplus" target="_blank">Cloudflare</a></h3>
+            <p style="margin: 0">Build and deploy AI Agents on Cloudflare</p>
+        </td>
+    </tr>
 </table>
 
 ## Features
