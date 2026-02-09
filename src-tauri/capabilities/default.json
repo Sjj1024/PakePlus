@@ -110,6 +110,9 @@
             "allow": [
                 {
                     "path": "**/*"
+                },
+                {
+                    "path": "asset://localhost/**"
                 }
             ]
         },
