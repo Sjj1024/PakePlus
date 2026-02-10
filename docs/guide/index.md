@@ -38,14 +38,6 @@ PakePlus is a packaging tool based on Tauri2 and GitHub. You can also call me PP
 -   Too many **annoying ads**? Block them with custom JS.
 -   Want to use **Tauri2 for packaging**, but your local environment is too bloated? **PakePlus saves disk space!**
 
-## Popular
-
-<img src="../static/imgs/preview.webp"  width=1920/>
-
-PakePlus supports installation packages for both ARM and Intel architectures. Popular program installation packages typically only include the ARM version (M-series chips) for Mac, the Intel (x64) version for Windows, and the x64 version for Linux. If you need installation packages for additional architectures, you can use PakePlus to compile custom packages tailored to your specific needs.
-
-<Popular />
-
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Sjj1024/PakePlus,Sjj1024/PakePlus-iOS,Sjj1024/PakePlus-Android&type=Date)](https://www.star-history.com/#Sjj1024/PakePlus&Sjj1024/PakePlus-iOS&Sjj1024/PakePlus-Android&Date)
