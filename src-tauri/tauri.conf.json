@@ -2,8 +2,9 @@
     "$schema": "https://schema.tauri.app/config/2",
     "productName": "PakePlus",
     "version": "0.0.1",
-    "identifier": "com.pakeplus.app",
+    "identifier": "com.pakeplus.web",
     "build": {
+        "devUrl": "https://pphtml.pages.dev/",
         "frontendDist": "../src"
     },
     "app": {
