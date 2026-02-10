@@ -14,10 +14,7 @@
             "dangerousDisableAssetCspModification": true,
             "assetProtocol": {
                 "enable": true,
-                "scope": {
-                    "allow": ["**/*"],
-                    "requireLiteralLeadingDot": false
-                }
+                "scope": ["**/*", "asset://localhost/**"]
             }
         }
     },
