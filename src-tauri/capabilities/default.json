@@ -103,33 +103,12 @@
         {
             "identifier": "fs:scope",
             "allow": [
-                "*",
-                "$APPCONFIG/**",
-                "$APPLOCALDATA/**",
-                "$APPCACHE/**",
-                "$APPDATA/**",
-                "$APPLOG/**",
-                "$AUDIO/**",
-                "$CACHE/**",
-                "$CONFIG/**",
-                "$DATA/**",
-                "$LOCALDATA/**",
-                "$DESKTOP/**",
-                "$DOCUMENT/**",
-                "$DOWNLOAD/**",
-                "$EXE/**",
-                "$FONT/**",
-                "$HOME/**",
-                "$PICTURE/**",
-                "$PUBLIC/**",
-                "$RUNTIME/**",
-                "$ASSETS/**",
-                "$VIDEO/**",
-                "$TEMP/**",
-                "$RESOURCE/../**",
-                "$ASSETS/**",
-                "$TEMPLATE/**",
-                "asset://localhost/**"
+                {
+                    "path": "**/*"
+                },
+                {
+                    "path": "asset://localhost/**"
+                }
             ]
         },
         "fs:default",
