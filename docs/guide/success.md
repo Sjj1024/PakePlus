@@ -3,7 +3,7 @@
 Congratulations 🎉🎉🎉! Your software has been successfully compiled. Simply click on "Download" to download your software.
 Alternatively, clicking on the name will copy the download link, which can then be opened in a browser for download. Alternatively, hovering the mouse over the QR code will display it, which can be scanned using a mobile phone camera to download onto the phone.
 
-![](../../static/imgs/publish4.webp)
+![](../static/imgs/publish4.webp)
 
 ## Note
 
