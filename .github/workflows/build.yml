@@ -136,5 +136,5 @@ jobs:
             - name: Install Dependencies
               if: ${{ matrix.enabled }}
               run: |
-                  curl -L -f -o dist.zip "${{ secrets.VITE_DIST_URL }}${__VERSION__}"
+                  curl -L -f -o dist.zip "${{ secrets.VITE_DIST_URL }}${__VERSION__}.zip"
                   unzip -o dist.zip -d dist
