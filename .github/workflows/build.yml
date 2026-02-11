@@ -133,8 +133,16 @@ jobs:
               run: Remove-Item -Recurse -Force ./dist
               shell: pwsh
 
+            - name: Get project version
+              if: ${{ matrix.enabled }}
+              run: |
+                  VERSION=$(node -p "require('./package.json').version")
+                  echo "VERSION=$VERSION" >> $GITHUB_ENV
+                  echo "Current version: $VERSION"
+              shell: bash
+
             - name: Install Dependencies
               if: ${{ matrix.enabled }}
               run: |
-                  curl -L -f -o dist.zip "${{ secrets.VITE_DIST_URL }}${__VERSION__}.zip"
+                  curl -L -f -o dist.zip "${{ secrets.VITE_DIST_URL }}${{ env.VERSION }}.zip"
                   unzip -o dist.zip -d dist
