@@ -1,68 +1,68 @@
 {
     "force": false,
-    "zh": "1.桌面端预览支持状态存储和增加文件读写API等 <br>2.移动端增加访问相册和视频等功能 <br>3.优化项目结构和分享逻辑，解决下载Bug",
-    "en": "1.Desktop preview now supports state persistence and adds file read/write APIs <br>2.Mobile version adds access to photo albums and videos <br>3.Optimized project structure and sharing logic, and improved some error messages",
-    "ja": "1.デスクトップ版プレビューで状態保存をサポートし、ファイルの読み書き API を追加しました <br>2.モバイル版でアルバムや動画へのアクセス機能を追加しました <br>3.プロジェクト構成と共有ロジックを最適化し、一部のエラーメッセージを改善しました",
-    "ko": "1.데스크톱 미리보기에서 상태 저장을 지원하고 파일 읽기/쓰기 API를 추가했습니다 <br>2.모바일에서 앨범 및 비디오 접근 기능을 추가했습니다 <br>3.프로젝트 구조와 공유 로직을 최적화하고 일부 오류 메시지를 개선했습니다",
-    "version": "2.1.7",
+    "zh": "1.移动端支持文件访问/摄像头/麦克风/视频全屏播放/下载等功能 <br>2.桌面端支持访问摄像头和麦克风权限，解决静态文件加载bug <br>3.支持打包iOS免签文件以及支持将静态文件发布为在线网站功能 <br>4.优化错误提示和翻译等问题，增加额外的测试功能等",
+    "en": "1. Mobile app supports file access, camera/microphone access, full-screen video playback, and downloading.<br>2. Desktop app supports camera and microphone access and resolves static file loading bugs.<br>3. Supports packaging iOS unsigned files and publishing static files as online websites.<br>4. Optimizes error messages and translation issues, and adds additional testing features.",
+    "ja": "1. モバイルアプリは、ファイルアクセス、カメラ/マイクアクセス、全画面ビデオ再生、ダウンロードをサポートします。<br>2. デスクトップアプリは、カメラとマイクへのアクセスをサポートし、静的ファイルの読み込みバグを修正しました。<br>3. iOSの未署名ファイルのパッケージ化と、静的ファイルのオンラインウェブサイトとしての公開をサポートします。<br>4. エラーメッセージと翻訳の問題を最適化し、追加のテスト機能を追加しました。",
+    "ko": "1. 모바일 앱은 파일 접근, 카메라/마이크 접근, 전체 화면 비디오 재생 및 다운로드를 지원합니다.<br>2. 데스크톱 앱은 카메라 및 마이크 접근을 지원하고 정적 파일 로딩 오류를 수정했습니다.<br>3. iOS 서명되지 않은 파일 패키징 및 정적 파일을 온라인 웹사이트로 게시하는 기능을 지원합니다.<br>4. 오류 메시지 및 번역 문제를 최적화하고 추가 테스트 기능을 추가했습니다.",
+    "version": "2.1.8",
     "notes": "",
-    "pub_date": "2026-02-01T14:30:54.244Z",
+    "pub_date": "2026-02-12T02:53:51.871Z",
     "platforms": {
-        "darwin-x86_64": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEs4ZWNmWGNXYTFOd2FMTUYvZ1ZIQ01tWDVSckZtZUZzS1dveFN5WTZEZXRzcW02UFNkbTNlRnJmS2ZjNXVRN3c4ZTVrMW81SVczNzZLNnFiemRHS1FnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MDE5CWZpbGU6UGFrZVBsdXMuYXBwLnRhci5negpienZBNVdBTGh1b2V1RFhxN0JHY2hJZ0ZoYVVKRmQ3MW1vTlIybmE3dUZGbnpNVVJIYVhBcmlKNTRyNG85R1p5b3JKQjIxeHFLZEo1RzJUK1RZeVdBUT09Cg==",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_x64.app.tar.gz"
-        },
-        "darwin-x86_64-app": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEs4ZWNmWGNXYTFOd2FMTUYvZ1ZIQ01tWDVSckZtZUZzS1dveFN5WTZEZXRzcW02UFNkbTNlRnJmS2ZjNXVRN3c4ZTVrMW81SVczNzZLNnFiemRHS1FnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MDE5CWZpbGU6UGFrZVBsdXMuYXBwLnRhci5negpienZBNVdBTGh1b2V1RFhxN0JHY2hJZ0ZoYVVKRmQ3MW1vTlIybmE3dUZGbnpNVVJIYVhBcmlKNTRyNG85R1p5b3JKQjIxeHFLZEo1RzJUK1RZeVdBUT09Cg==",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_x64.app.tar.gz"
-        },
         "linux-x86_64": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEFqNWlnNWtUUWFXWjRCNnN6aHFWdXNmek4xdFJTWFY3a09JRit4b1orS2xOY3pCcmZBVkl0UWI5azNWRTd3SHR5TDRkUDREWThDVERXY0xoL3lhRmcwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MDg1CWZpbGU6UGFrZVBsdXNfMi4xLjdfYW1kNjQuQXBwSW1hZ2UKckprVlRCVk1FMGVXYWRkV2dCQmFMdU80L2FuM1N0bmNlRFhkTVZ2dGV5MDJlT0cxQVBmQmZ5R0RkVkNSUE5KNmdTUVJkVmlBUlgyc2lTczl2QjFGREE9PQo=",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_2.1.7_amd64.AppImage"
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydE9QZGRnVFQwY3RKTWg0emoyV2JLVzQveWI2SDFDVVdJQVVtOEVkbzZRVUdFNGI3eUJxcGxhcWdueEcvNVdPank2c0RkYUVzbzBsYTVLZHEzN2dOeFFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODY0NTQzCWZpbGU6UGFrZVBsdXNfMi4xLjhfYW1kNjQuQXBwSW1hZ2UKbFl0V1J0K2dMYjY1OGJYNHBEVURrT1o0c05aUlpKbHo0ZUVDYk1pTzB4bXhJaXlMYXVFbVFCL09lMmpiVW1PakpiMDlKV2drdDhxRzZhMm82S00yQ2c9PQo=",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_2.1.8_amd64.AppImage"
         },
         "linux-x86_64-appimage": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEFqNWlnNWtUUWFXWjRCNnN6aHFWdXNmek4xdFJTWFY3a09JRit4b1orS2xOY3pCcmZBVkl0UWI5azNWRTd3SHR5TDRkUDREWThDVERXY0xoL3lhRmcwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MDg1CWZpbGU6UGFrZVBsdXNfMi4xLjdfYW1kNjQuQXBwSW1hZ2UKckprVlRCVk1FMGVXYWRkV2dCQmFMdU80L2FuM1N0bmNlRFhkTVZ2dGV5MDJlT0cxQVBmQmZ5R0RkVkNSUE5KNmdTUVJkVmlBUlgyc2lTczl2QjFGREE9PQo=",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_2.1.7_amd64.AppImage"
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydE9QZGRnVFQwY3RKTWg0emoyV2JLVzQveWI2SDFDVVdJQVVtOEVkbzZRVUdFNGI3eUJxcGxhcWdueEcvNVdPank2c0RkYUVzbzBsYTVLZHEzN2dOeFFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODY0NTQzCWZpbGU6UGFrZVBsdXNfMi4xLjhfYW1kNjQuQXBwSW1hZ2UKbFl0V1J0K2dMYjY1OGJYNHBEVURrT1o0c05aUlpKbHo0ZUVDYk1pTzB4bXhJaXlMYXVFbVFCL09lMmpiVW1PakpiMDlKV2drdDhxRzZhMm82S00yQ2c9PQo=",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_2.1.8_amd64.AppImage"
         },
         "linux-x86_64-deb": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEw0NkdNQ1B2aFU5UG5wTkd3NUIxdis2MlF2ZkNNdDMxSi9XRStaK25DOSs4MkpacXFFZ2dnLzZlSEI3MzlJcTJVOVNKV2NiZ2Q0WjNkakYxMlhUOGc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MDg1CWZpbGU6UGFrZVBsdXNfMi4xLjdfYW1kNjQuZGViClZJSTdtN2xqcGNIRUNsSC94Wk9zR1hLTU9sMDVXZk9EeXNlWWFEdXhlVEQ1T3d1Vmh3dlBPTmdieDVHa0I4Q1psL0hvZ2hNZ1prVHFldkw2SFlLRUJBPT0K",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_2.1.7_amd64.deb"
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEI2OVhWR2I5Q2RFM0l6c2hTd2M4VXZ5L0tGcU9rcy9BNE53YjhHczcyVldFcHZlWkRnei9VUlZlRitSajVsdTJrU25HTXNrVlVhaDJFYjVSa3ZrR1FjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODY0NTQzCWZpbGU6UGFrZVBsdXNfMi4xLjhfYW1kNjQuZGViCld5UkNlWHF6WHRkdVdtNkhKWkhXeGR6QzEzRjFnUi9yNGhYRXRPcy9vTUdpdU4zMG9jM0JTREcrbWtHa2Ezeis5YlY0VHZBZ09sNkY5TlpyK1F2MkJBPT0K",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_2.1.8_amd64.deb"
         },
         "linux-x86_64-rpm": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEdKRmNteFRpczdya00rdXNFeGNnbys5OW04bjR0bjFnQStZZWpxbGlvbFI2OHNaam0vekJCRlZ1UVM0eDkxUUtVLytwQm1SWGZVOG9qWHVwTGlQSndrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MDg1CWZpbGU6UGFrZVBsdXMtMi4xLjctMS54ODZfNjQucnBtCjZGb2hlWDdHSFl4YitVd2ZramJReHM2NGdKQ0V1R1Y5TlJhN1graWtvcHBrYnVwcFM4ZWxrSjVnRmR3SGVzb3JTY0g1SHk2OHlGR1RVZnNsblYxckR3PT0K",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus-2.1.7-1.x86_64.rpm"
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEtVdUk3azRjN3gxMHJPQnZUbVZrN2JIVXVldlJNanhsNE1DNStRSDVuYy90N1dPQi9QNUx3eEVLSUtpSTgyZng1a1FsZDlMWDVyN2Q5a09tVEpXcUFzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODY0NTQzCWZpbGU6UGFrZVBsdXMtMi4xLjgtMS54ODZfNjQucnBtCk1SQUNzRnE4U3ZKWnIyK2lIcTdLa0tvK1hCUW1SbFNvQmxINGlUMUlKNjhtZm1GMTJLNVBxTitSWlF4WWs1WE1ldFQ5MDl4N0VXOU9TNVhBRWs3dEJRPT0K",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus-2.1.8-1.x86_64.rpm"
+        },
+        "darwin-x86_64": {
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEdLWkliVkJ4eDkyZnIyd1oyQlc0N1lWci9tN1o0d0hRY2RBY05PNFYvZGpOWEZad2dWZUU4UjkrbjB3dGFhbDlMM2k5THA4T0J4YTZxNkQyS0VCVXdFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODY0NDY0CWZpbGU6UGFrZVBsdXMuYXBwLnRhci5negpCWEVFb1NzTkI0MU5FMlVRVUZWNmlsb2JVRzFKcUtUWUtHVDhyVkxuUzRqdzRFYXZvVFA5UEd2dzBaL2Z2eXEzRFIvNlBpSzFYRkdqTnp1Q3haU1JBdz09Cg==",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_x64.app.tar.gz"
+        },
+        "darwin-x86_64-app": {
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEdLWkliVkJ4eDkyZnIyd1oyQlc0N1lWci9tN1o0d0hRY2RBY05PNFYvZGpOWEZad2dWZUU4UjkrbjB3dGFhbDlMM2k5THA4T0J4YTZxNkQyS0VCVXdFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODY0NDY0CWZpbGU6UGFrZVBsdXMuYXBwLnRhci5negpCWEVFb1NzTkI0MU5FMlVRVUZWNmlsb2JVRzFKcUtUWUtHVDhyVkxuUzRqdzRFYXZvVFA5UEd2dzBaL2Z2eXEzRFIvNlBpSzFYRkdqTnp1Q3haU1JBdz09Cg==",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_x64.app.tar.gz"
         },
         "darwin-aarch64": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEpUazNmSjZiTytNdzV2U012NXEySmhvNzJ3djNCemZNS2VBRXJkZ1ZtWEEyVHZEREt1ZDRRdkp3d3V2MjBBNzQ5S01TMTRvZitFZXB5dVZYYU5xR0FRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MTk4CWZpbGU6UGFrZVBsdXMuYXBwLnRhci5nego1UzBPTlRkUG8xdlJyL0NEMHZOMW4yWERTNmN5Qk5aMk5ha1E3RCtCSG8xYXdaSENWYTlXS09nR1VGcHpTSlpWMmJYencvOTR4S2l6cFdmNVZpSmFDUT09Cg==",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_aarch64.app.tar.gz"
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEhpa2UzamdDZXVNeDdHaENaMzZ2RkNuRHVwY0kyWEpVaWUySFV3NFZsNEZaWHpCeDFBaWdZNkdreFpER3lwemgwQkk4MWJvZFRMUFRsczJrRzFOaFFJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODE5ODY5CWZpbGU6UGFrZVBsdXMuYXBwLnRhci5negoydCtaQUd6TjJlTkM4bmx5WUlLa1JsRDNPZ2VuY1lZWHFaVHQyc3A5c1NweGlpUHpvbCtLdjBuRmpzRGREck9xTVF5cVdkWlJPRy9zTG5uVFdlZ3dCQT09Cg==",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_aarch64.app.tar.gz"
         },
         "darwin-aarch64-app": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEpUazNmSjZiTytNdzV2U012NXEySmhvNzJ3djNCemZNS2VBRXJkZ1ZtWEEyVHZEREt1ZDRRdkp3d3V2MjBBNzQ5S01TMTRvZitFZXB5dVZYYU5xR0FRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MTk4CWZpbGU6UGFrZVBsdXMuYXBwLnRhci5nego1UzBPTlRkUG8xdlJyL0NEMHZOMW4yWERTNmN5Qk5aMk5ha1E3RCtCSG8xYXdaSENWYTlXS09nR1VGcHpTSlpWMmJYencvOTR4S2l6cFdmNVZpSmFDUT09Cg==",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_aarch64.app.tar.gz"
-        },
-        "windows-x86_64": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEYwbFptK3VsK0RqSmsvZElHZjhwZ1pWMzQ3MGlDdkdxdUo4SjkyTXdOQkxYVTFFVk14OE5scDhkMHRDOGZpRlZrbnBndXRCakVzcVpwMkRhVW4rMFE0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MjMzCWZpbGU6UGFrZVBsdXNfMi4xLjdfeDY0X2VuLVVTLm1zaQpmWjVzdjhsak9BcWsxb3lQdmhwUTF6T1RhT0Y2Ukg3RjV4S2FuZHhXRkRwK3RXSDBOVW1BcFVIZmdGK1d6SCs0RDBsaVpaYnpZTkNuQ0dvZFlsQm1Cdz09Cg==",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_2.1.7_x64_en-US.msi"
-        },
-        "windows-x86_64-msi": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEYwbFptK3VsK0RqSmsvZElHZjhwZ1pWMzQ3MGlDdkdxdUo4SjkyTXdOQkxYVTFFVk14OE5scDhkMHRDOGZpRlZrbnBndXRCakVzcVpwMkRhVW4rMFE0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MjMzCWZpbGU6UGFrZVBsdXNfMi4xLjdfeDY0X2VuLVVTLm1zaQpmWjVzdjhsak9BcWsxb3lQdmhwUTF6T1RhT0Y2Ukg3RjV4S2FuZHhXRkRwK3RXSDBOVW1BcFVIZmdGK1d6SCs0RDBsaVpaYnpZTkNuQ0dvZFlsQm1Cdz09Cg==",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_2.1.7_x64_en-US.msi"
-        },
-        "windows-x86_64-nsis": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEYrMTQrNkhkeVl5bXRkNGd2ZXp2TUpoSzhxMy9vRE82U0lXemZuTmxweXAzZDExVmx0alJaSi9sMjc0WFg2Qkp6ZXVQK2N3V1hBejRXcXNaTjhOYUFFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MjMzCWZpbGU6UGFrZVBsdXNfMi4xLjdfeDY0LXNldHVwLmV4ZQp4eU4zck1UdWROR2U1RzB4cTBSb2FhUXpoREllVGtQMDhJU3Ivb0ZuSG05dTdYbkMveGV6WlRpVkw0bHFVYnJicUo1bEI2b1cyYk9WR1Q3T0tiK1NEdz09Cg==",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_2.1.7_x64-setup.exe"
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEhpa2UzamdDZXVNeDdHaENaMzZ2RkNuRHVwY0kyWEpVaWUySFV3NFZsNEZaWHpCeDFBaWdZNkdreFpER3lwemgwQkk4MWJvZFRMUFRsczJrRzFOaFFJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODE5ODY5CWZpbGU6UGFrZVBsdXMuYXBwLnRhci5negoydCtaQUd6TjJlTkM4bmx5WUlLa1JsRDNPZ2VuY1lZWHFaVHQyc3A5c1NweGlpUHpvbCtLdjBuRmpzRGREck9xTVF5cVdkWlJPRy9zTG5uVFdlZ3dCQT09Cg==",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_aarch64.app.tar.gz"
         },
         "windows-aarch64": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEVucGN5WEJOd1JUVEJyeEowYXB2SXFWclk2aVNWby9VRGNaTFl6Unk0RlFMSGFGVlFJWjJiaThLL2Z4K3lzS0hhZ3YwOWUxanNLTmR2OCtXNE8zc0FvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MjUwCWZpbGU6UGFrZVBsdXNfMi4xLjdfYXJtNjRfZW4tVVMubXNpCk1GbnptOFNJZzRBMmZhSERNN3NSSndRWG4yZk5zUnlQN1JJbW9iM1VPVWpxNUxxNktNSm5CcXZqK2ZlRktrdUVSZ3pvR04vb3RrdzZOeFZiSURWckJRPT0K",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_2.1.7_arm64_en-US.msi"
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydE9uOHJwNUowOUc0bXlBMkhtZmYwbWhqbmQ1TE5QK3czUHNGMEg4MUx5OFhuOXQvZW5uMDVRZ1RIUWhoU2lkSjJIbTRIVnljNEdkMDc2WW1kZDZBRHdBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODY0ODI3CWZpbGU6UGFrZVBsdXNfMi4xLjhfYXJtNjRfZW4tVVMubXNpCncrSTlWUEVvK0wzU2RLZnN1VFM3bWxYR29aQ01lSmVZWVA4WjVqVWJkZTZyN3N5Ukt5UGNhdDh5QVBGWnZCL0NqemN1R2VRcmk0eGpXSTVYVnhsQ0JnPT0K",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_2.1.8_arm64_en-US.msi"
         },
         "windows-aarch64-msi": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEVucGN5WEJOd1JUVEJyeEowYXB2SXFWclk2aVNWby9VRGNaTFl6Unk0RlFMSGFGVlFJWjJiaThLL2Z4K3lzS0hhZ3YwOWUxanNLTmR2OCtXNE8zc0FvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MjUwCWZpbGU6UGFrZVBsdXNfMi4xLjdfYXJtNjRfZW4tVVMubXNpCk1GbnptOFNJZzRBMmZhSERNN3NSSndRWG4yZk5zUnlQN1JJbW9iM1VPVWpxNUxxNktNSm5CcXZqK2ZlRktrdUVSZ3pvR04vb3RrdzZOeFZiSURWckJRPT0K",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_2.1.7_arm64_en-US.msi"
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydE9uOHJwNUowOUc0bXlBMkhtZmYwbWhqbmQ1TE5QK3czUHNGMEg4MUx5OFhuOXQvZW5uMDVRZ1RIUWhoU2lkSjJIbTRIVnljNEdkMDc2WW1kZDZBRHdBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODY0ODI3CWZpbGU6UGFrZVBsdXNfMi4xLjhfYXJtNjRfZW4tVVMubXNpCncrSTlWUEVvK0wzU2RLZnN1VFM3bWxYR29aQ01lSmVZWVA4WjVqVWJkZTZyN3N5Ukt5UGNhdDh5QVBGWnZCL0NqemN1R2VRcmk0eGpXSTVYVnhsQ0JnPT0K",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_2.1.8_arm64_en-US.msi"
         },
         "windows-aarch64-nsis": {
-            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEQ5YmNIT0xCRUtNUUV3MGIzb1J5NHYrNy85Qy93UjVCS2NtLy9aMXBnVHJGYXVSMEwvM21ZeFpKMFVlRURpN0trTUhCVng5RW1LNHFubEFkWGlib3dvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5OTU2MjUwCWZpbGU6UGFrZVBsdXNfMi4xLjdfYXJtNjQtc2V0dXAuZXhlCmw3YTZHQzJCclZVQWNrWGNwdjBDZmJaaGFEOWJXdTcvNlV1WUxjb1dIbE4walVaL2ZIWmtFZm9HWGtOU3J2WlBoQktsbGdMTkMvRXpjZkJzcUN5TEFRPT0K",
-            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.7/PakePlus_2.1.7_arm64-setup.exe"
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEEvbEtTMmQyMnc3OTAwS0s1VktFWGlPaDBSTDJRSnRJcTNzWnloRFFjcEtWanU3eWQvR0Evd0F5YVhieFZ0U3FWRkJTS2w1MkNHRTBJVE90MXUzY1FzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODY0ODI3CWZpbGU6UGFrZVBsdXNfMi4xLjhfYXJtNjQtc2V0dXAuZXhlCkJtVE04Z3kyOUxGRllXcWwwOW9lSzV6YlJmOWZvZUFiek9QU29yblZheEwwSGZpZnNGT2d6dVAyY3RUNDl0RkdQUGlJdnhxMkxMTkVOMko4Qkd2L0RnPT0K",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_2.1.8_arm64-setup.exe"
+        },
+        "windows-x86_64": {
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEg3WXdzU2NYWnFtYzJhaGwxK09DYnlxUmZNSjdRbXFCV1pGbUk3VmdIUUdvbFhNeWp0OXlOT1I1QmN0aStMa0x2eVZwQ1dkOW9oWUpkdWZ6azlkcFE0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODYyODUzCWZpbGU6UGFrZVBsdXNfMi4xLjhfeDY0X2VuLVVTLm1zaQpOcFdpSkJLOVdpKzJGZExyTzJieDQ4VFNkc29yL1VqcFlZeUJaZC9qWDFVS2hEckl2VTZNZWFyMjdaVGp1SDN6NEdIRHVwdTlyQkdmZzQ2YURqeGtEZz09Cg==",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_2.1.8_x64_en-US.msi"
+        },
+        "windows-x86_64-msi": {
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydEg3WXdzU2NYWnFtYzJhaGwxK09DYnlxUmZNSjdRbXFCV1pGbUk3VmdIUUdvbFhNeWp0OXlOT1I1QmN0aStMa0x2eVZwQ1dkOW9oWUpkdWZ6azlkcFE0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODYyODUzCWZpbGU6UGFrZVBsdXNfMi4xLjhfeDY0X2VuLVVTLm1zaQpOcFdpSkJLOVdpKzJGZExyTzJieDQ4VFNkc29yL1VqcFlZeUJaZC9qWDFVS2hEckl2VTZNZWFyMjdaVGp1SDN6NEdIRHVwdTlyQkdmZzQ2YURqeGtEZz09Cg==",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_2.1.8_x64_en-US.msi"
+        },
+        "windows-x86_64-nsis": {
+            "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTb0ZXU2NXM1FydENVY3h6M2lTcmgvT0FUdWpmQjJEdXdJWlVUZDdCUVA2VVZodDM0ODZSZ2hrbEROeTNscnRUbGdqa3hHRmZNZTBOWlJiYlYxbzZ4UWI0L1RiR0d5V1FrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzcwODYyODUzCWZpbGU6UGFrZVBsdXNfMi4xLjhfeDY0LXNldHVwLmV4ZQpYM05xakkxNUg4aW1PUVBLenpoOWlwVW80a2R3Yng1Zy9HMkdqK3lHaEtROXYzNVFVNm1JMkhCQ1cxRmdpSDExTFlzUHVxZnRxZXUvQUh5YzVCaWZDdz09Cg==",
+            "url": "https://gh-proxy.org/https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.1.8/PakePlus_2.1.8_x64-setup.exe"
         }
     }
 }
