@@ -6,6 +6,7 @@ This step instructs GitHub to compile your project into a cross-platform desktop
 2. **Debug Mode** - Enables error logging in console when the app launches
 
 You may optionally add release notes describing the changes in this version. After finalizing all configurations, click "Confirm" to begin the packaging process. The compilation typically takes about 10 minutes to complete...
+
 ![](../static/imgs/publish1.webp)
 
 The moment of truth (and the most error-prone stage):
@@ -21,7 +22,8 @@ If failed: An error notification will appear in the upper right corner - either 
 ## Successful Release:
 
 Congratulations 🎉🎉🎉! Your application has been successfully compiled. Click "Download" to get your software, or click the name to copy the download link for browser access.
-![](../static/imgs/publish2.webp)
+
+![](../static/imgs/publish4.webp)
 
 ## Important Notes:
 
