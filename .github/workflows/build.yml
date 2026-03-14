@@ -41,8 +41,11 @@ on:
 
 jobs:
     publish-tauri:
+        if: matrix.enabled || startsWith(github.ref, 'refs/tags/v')
+
         permissions:
             contents: write
+
         strategy:
             fail-fast: false
             matrix:
@@ -76,6 +79,7 @@ jobs:
 
         runs-on: ${{ matrix.platform }}
         timeout-minutes: 60
+
         steps:
             - name: Checkout Repository
               if: ${{ matrix.enabled }}
