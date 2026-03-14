@@ -41,8 +41,6 @@ on:
 
 jobs:
     publish-tauri:
-        if: matrix.enabled || startsWith(github.ref, 'refs/tags/v')
-
         permissions:
             contents: write
 
