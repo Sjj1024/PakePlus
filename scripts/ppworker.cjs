@@ -95,7 +95,7 @@ const updateCargoToml = async (
     const cargoTomlPath = path.join(__dirname, '../src-tauri/Cargo.toml')
     const cargoToml = fs.readFileSync(cargoTomlPath, 'utf-8')
     // update feature
-    const features = '"protocol-asset"'
+    let features = '"protocol-asset"'
     if (debug) {
         features += ', "devtools"'
     }
