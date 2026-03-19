@@ -83,19 +83,31 @@ const isAlphanumeric = (showName) => {
 }
 
 // update Cargo.toml
-const updateCargoToml = async (name, version, desc, debug, single) => {
+const updateCargoToml = async (
+    name,
+    version,
+    desc,
+    debug,
+    single,
+    proxyUrl
+) => {
     console.log('updateCargoToml......')
     const cargoTomlPath = path.join(__dirname, '../src-tauri/Cargo.toml')
     const cargoToml = fs.readFileSync(cargoTomlPath, 'utf-8')
+    // update feature
+    const features = '"protocol-asset"'
+    if (debug) {
+        features += ', "devtools"'
+    }
+    if (proxyUrl) {
+        features += ', "macos-proxy"'
+    }
     // 更新 name, version, desc, debug, single
     let newCargoToml = cargoToml
         .replace('PakePLus', name)
         .replace('0.0.1', version)
         .replace('Project Desc', desc)
-        .replace(
-            '"protocol-asset"',
-            debug ? '"protocol-asset", "devtools"' : '"protocol-asset"'
-        )
+        .replace('"protocol-asset"', features)
     if (single) {
         newCargoToml = newCargoToml.replace(
             'tauri-plugin-store = "2.0.0"',
@@ -215,6 +227,7 @@ const main = async () => {
         single,
         state,
     } = ppconfig.desktop
+    // get windows config
     const winConfig = ppconfig.more.windows
     console.log('iconPath, tempPath, icnsPath', iconPath, tempPath, icnsPath)
     // 输入 PNG 文件路径
@@ -226,7 +239,7 @@ const main = async () => {
     // 创建 icon
     await createIcon(inputPath, tempOutputPath, icnsOutputPath)
     // 更新 cargo.toml
-    updateCargoToml(name, version, desc, debug, single)
+    updateCargoToml(name, version, desc, debug, single, winConfig.proxyUrl)
     // 更新 tauri.conf.json
     updateTauriConfig(showName, version, id, tauriApi)
     // 更新 init.rs
