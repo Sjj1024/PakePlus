@@ -241,7 +241,12 @@ export default defineConfig({
                                 { text: '获取Token', link: '/zh/guide/token' },
                                 { text: '创建项目', link: '/zh/guide/creat' },
                                 { text: '简单配置', link: '/zh/guide/config' },
+                                {
+                                    text: 'Electron',
+                                    link: '/zh/guide/electron',
+                                },
                                 { text: 'APP配置', link: '/zh/guide/phone' },
+                                // { text: 'iOS免签', link: '/zh/guide/webclip' },
                                 {
                                     text: '本地打包',
                                     link: '/zh/guide/easylocal',
