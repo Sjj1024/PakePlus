@@ -4,7 +4,7 @@ version = 4
 
 [[package]]
 name = "PakePlus"
-version = "2.1.8"
+version = "2.2.1"
 dependencies = [
  "base64 0.22.1",
  "encoding_rs",
