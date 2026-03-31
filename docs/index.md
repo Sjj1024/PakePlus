@@ -1,4 +1,6 @@
 ---
+title: PakePlus
+titleTemplate: Turn Web into Desktop/Mobile Apps in Minutes
 layout: home
 
 hero:
