@@ -32,5 +32,6 @@ Congratulations 🎉🎉🎉! Your application has been successfully compiled. C
 3. **Failed Releases**: A red warning icon appears top-right with error details for troubleshooting
 4. **GitHub Build Failures**: Redirects to GitHub's build page with specific error messages
 5. **Persistent Issues**: Contact us via WeChat: lanxingme or join our support group for assistance
+6. **Electron**: Support Windows7 and xp system, but size is big
 
 (Note: All image paths have been updated from ../static to ../static as requested)
