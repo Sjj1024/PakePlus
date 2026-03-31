@@ -1,3 +1,9 @@
+---
+title: PakePlus
+titleTemplate: 网站秒变桌面应用和手机应用 | 获取Token教程
+layout: doc
+---
+
 # 获取 Token
 
 ::: danger 关于 Token
