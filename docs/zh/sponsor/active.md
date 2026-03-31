@@ -1,0 +1,22 @@
+# 开通权限
+
+赞助我们后，邮箱或微信联系我们，即可开通更多使用权限，开通的权限包括：私密项目、增加项目数量、取消时间限制、ios 免签、分享下载、支持 Win7 和绿色免安装版本、支持配置 APP 启动图等等。
+
+## 激活码
+
+拿到激活码之后，到 PakePlus 软件首页右上角，点击头像进入 我的信息 页面:
+
+![](../../static/imgs/active1.webp)
+
+然后点击升级按钮，填入激活码：
+
+![](../../static/imgs/active3.webp)
+
+私密项目以及 Windows7 和 xp 等国产 Linux Arm 系统支持需要再单独点击同意才可以使用：
+
+![](../../static/imgs/active4.webp)
+
+私密项目：打包的内容会存储在你的 Github 私密仓库中，只有你自己可以访问，别人无法看到。  
+支持 Win7 和 xp：可以支持打包 Electron 版本，并且支持 Windows7 系统以及国产 Linux Arm 系统，发布时候选择 Electron 版本即可：
+
+![](../../static/imgs/electron2.webp)
