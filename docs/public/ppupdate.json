@@ -1,6 +1,6 @@
 {
     "force": false,
-    "zh": "1.移动端打包支持配置APP启动图 <br>2.桌面端支持Electron版本打包Win7+LinuxArm系统 <br>3.优化打包逻辑和修复已知bug",
+    "zh": "1.移动端打包支持配置APP启动图 <br>2.桌面端支持Electron版本打包Win7+国产系统 <br>3.优化打包逻辑和修复已知bug",
     "en": "1. Mobile packaging supports configuration of APP launch screens.<br>2. Desktop supports Electron version packaging for Win7+LinuxArm systems.<br>3. Optimize packaging logic and fix known bugs.",
     "ja": "1.モバイルパッケージングではアプリのスプラッシュ画面の設定に対応。<br>2. デスクトップ版では Electron による Win7+LinuxArm システム向けパッケージングに対応。<br>3.パッケージングロジックを最適化し、既知の不具合を修正",
     "ko": "1. 모바일 패키징 시 APP 시작 화면 설정을 지원합니다.<br>2. 데스크톱은 Electron 버전으로 Win7+LinuxArm 시스템 패키징을 지원합니다.<br>3. 패키징 로직을 최적화하고 알려진 버그를 수정합니다.",
