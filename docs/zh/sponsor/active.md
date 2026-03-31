@@ -20,3 +20,9 @@
 支持 Win7 和 xp：可以支持打包 Electron 版本，并且支持 Windows7 系统以及国产 Linux Arm 系统，发布时候选择 Electron 版本即可：
 
 ![](../../static/imgs/electron2.webp)
+
+## 注意
+
+私密项目打包后，只能本地下载，不支持分享下载链接。  
+ios 免签只支持打包在线网站，不支持静态文件，不支持 APP 更多配置，不支持启动图配置。  
+Electron 版本中不支持使用 Tauri 和 PakePlus 的 api，更多配置中有些配置还不生效。
