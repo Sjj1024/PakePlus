@@ -8,7 +8,7 @@
         "tauri:build": "tauri build",
         "tauri:debug": "tauri build --debug",
         "docs:dev": "vitepress dev docs",
-        "docs:build": "vitepress build docs",
+        "docs:build": "vitepress build docs && node scripts/docsseo.cjs",
         "docs:preview": "vitepress preview docs",
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
