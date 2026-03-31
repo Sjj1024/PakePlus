@@ -38,6 +38,15 @@ features:
     - title: Simultaneous Compilation
       details: Just minutes, one click to compile multiple platforms, no environment and time anxiety
       icon: 🧘‍♀️
+    - title: Windows7
+      details: Support packaging Windows 7 and XP systems, as well as green no-install versions
+      icon: 💽
+    - title: Website
+      details: Support publishing static files to Github Pages, with permanent free access worldwide
+      icon: 🌐
+    - title: Electron
+      details: Support Electron version for packaging to ensure uniformity and stability
+      icon: 👩🏿‍💻
     - title: Internationalization
       details: Support internationalization, friendly to global users
       icon: 🌍

@@ -24,7 +24,7 @@ features:
       details: PakePlus 是开源免费的，你可以在 GitHub 上找到它的源代码
       icon: 🐙
     - title: 跨平台
-      details: Windows/macOS/Linux/Android/iOS等常用操作系统全支持
+      details: Windows/macOS/Linux/Android/iOS免签/统信等系统全支持
       icon: 💻
     - title: 小体积
       details: 体积比 Electron 包小约 20 倍（小于5M!），性能快 10 倍
@@ -38,6 +38,15 @@ features:
     - title: 同时编译
       details: 只需几分钟，一键同时编译多平台安装包，不再有环境和时间焦虑
       icon: 🧘‍♀️
+    - title: 支持Win7
+      details: 支持打包Windows7+系统和Xp系统，还可以打包绿色免安装版本
+      icon: 💽
+    - title: 在线网站
+      details: 支持将你的静态文件发布到Github Pages中，全球永久免费访问
+      icon: 🌐
+    - title: 国产系统
+      details: 支持打包统信、麒麟等国产 Linux Arm 系统，全端 UI 统一
+      icon: 🇨🇳
     - title: 国际化
       details: 支持国际化，对全球用户都友好，并且会自动跟随你的电脑系统语言
       icon: 🌍
@@ -60,7 +69,7 @@ features:
       details: 支持debug调试模式，无论是预览阶段还是发布阶段，都可以找到bug并消灭bug
       icon: 🐞
     - title: 数据安全
-      details: PakePlus 不会上传你的任何数据，所有数据都保存在你的电脑上
+      details: PakePlus 不会上传你的任何数据，所有数据都保存在你的Github和电脑里
       icon: 🔒
     - title: 技术支持
       details: 如果在你使用过程中遇到问题，随时可以加入我们的技术交流群咨询
