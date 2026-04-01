@@ -252,6 +252,7 @@ export default defineConfig({
                                     link: '/zh/guide/easylocal',
                                 },
                                 { text: '云端打包', link: '/zh/guide/build' },
+                                { text: '在线网站', link: '/zh/guide/gitpage' },
                                 { text: '发布成功', link: '/zh/guide/success' },
                             ],
                         },
