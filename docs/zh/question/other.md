@@ -2,7 +2,7 @@
 
 一个功能性问题，可能 PakePlus 还没有完善，需要你提新的需求，后面会慢慢完善
 
-# 支持的平台
+## 支持的平台
 
 -   Windows：支持 xp 以及 win7 以上操作系统，也支持国产统信、麒麟等 linux arm 系统
 -   Macos：支持 Intel 芯片 和 Apple M 系列（ARM）芯片
@@ -10,7 +10,7 @@
 -   Android：支持 Android 7.0 及其以上版本，直接安装打包后 apk 即可。
 -   iOS：支持 iOS 15.6 及其以上版本，打包后的 ipa 安装方式可以参考：[apk/ipa 安装](./phone.md)
 
-# 删除 PakePlus 仓库教程
+## 删除 PakePlus 仓库教程
 
 如果遇到编译失败的问题，可能是因为你的 PakePlus 仓库中存在一些问题，导致编译失败。你可以尝试删除你的 PakePlus 仓库，然后重新打开 PakePlus，并填入 Token 重新走一遍流程。（该过程会删除你之前创建的项目）
 
