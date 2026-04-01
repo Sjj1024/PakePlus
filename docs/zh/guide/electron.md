@@ -17,3 +17,7 @@ Electron 版本最大的优势就是支持 win7 和国产统信、麒麟等 linu
 ![](../../static/imgs/electron3.webp)
 
 其中 exe 结尾的就是支持 win7 和 xp 系统的包，带 Setup 的是安装包，不带 Setup 的绿色免安装版本。arm64.dep 结尾的就是支持国产系统的安装包，例如麒麟、统信等系统。
+
+## 注意
+
+如果不是非常在意软件体积，非常推荐打包 Electron 版本的，因为更稳定更好用。
