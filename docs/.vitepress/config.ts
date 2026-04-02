@@ -407,7 +407,7 @@ export default defineConfig({
                 // footer
                 footer: {
                     message: 'Released under the MIT License.',
-                    copyright: 'Copyright © 2019-present 1024小神',
+                    copyright: 'Copyright © 2025-present 1024xiaoshen',
                 },
             },
         },
