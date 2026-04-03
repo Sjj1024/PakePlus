@@ -371,8 +371,6 @@ const vpData = useData()
 const lang = vpData.lang.value
 const pageData = vpData.page.value
 
-console.log('pageData', pageData)
-
 const langMap = {
     zh: {
         titleTips: '我应该使用哪个版本？',
