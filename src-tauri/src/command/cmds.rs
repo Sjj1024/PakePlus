@@ -35,8 +35,9 @@ pub async fn start_server(
     port: u16,
 ) -> Result<u16, String> {
     let mut state = state.lock().unwrap();
-    if state.server_handle.is_some() {
-        return Err("Server is already running".into());
+    // if server is running, stop it
+    if let Some(handle) = state.server_handle.take() {
+        handle.abort();
     }
     let path_clone = path.clone();
     // if port is 0, find a free port
@@ -70,6 +71,7 @@ pub async fn start_server(
                 ))
             });
 
+        // routes
         let routes = oauth_callback
             .or(static_files)
             .map(|reply| {
@@ -83,6 +85,7 @@ pub async fn start_server(
             .map(|reply| warp::reply::with_header(reply, "Surrogate-Control", "no-store"))
             .map(|reply| warp::reply::with_header(reply, "Pragma", "no-cache"))
             .map(|reply| warp::reply::with_header(reply, "Expires", "0"));
+        // start server
         warp::serve(routes).run(([127, 0, 0, 1], port)).await;
     });
     state.server_handle = Some(server_handle);
