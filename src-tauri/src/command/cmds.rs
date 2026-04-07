@@ -29,6 +29,7 @@ use zip::ZipWriter;
 
 #[tauri::command]
 pub async fn start_server(
+    app: AppHandle,
     state: tauri::State<'_, Arc<Mutex<ServerState>>>,
     path: String,
     port: u16,
@@ -46,7 +47,31 @@ pub async fn start_server(
     };
     // println!("port: {}", port);
     let server_handle = tokio::spawn(async move {
-        let route = warp::fs::dir(path_clone)
+        let static_files = warp::fs::dir(path_clone);
+
+        let oauth_callback = warp::path("callback")
+            .and(warp::query::<std::collections::HashMap<String, String>>())
+            .map(move |params: std::collections::HashMap<String, String>| {
+                // println!("OAuth params: {:?}", params);
+                let _ = app.emit("callback", serde_json::json!(params));
+                // return a simple page
+                warp::reply::html(format!(
+                    r#"
+                <html>
+                    <body>
+                        <h2>Login Success ✅</h2>
+                        <p>You can close this window.</p>
+                        <script>
+                            window.close();
+                        </script>
+                    </body>
+                </html>
+                "#
+                ))
+            });
+
+        let routes = oauth_callback
+            .or(static_files)
             .map(|reply| {
                 warp::reply::with_header(
                     reply,
@@ -58,7 +83,7 @@ pub async fn start_server(
             .map(|reply| warp::reply::with_header(reply, "Surrogate-Control", "no-store"))
             .map(|reply| warp::reply::with_header(reply, "Pragma", "no-cache"))
             .map(|reply| warp::reply::with_header(reply, "Expires", "0"));
-        warp::serve(route).run(([127, 0, 0, 1], port)).await;
+        warp::serve(routes).run(([127, 0, 0, 1], port)).await;
     });
     state.server_handle = Some(server_handle);
     Ok(port)
