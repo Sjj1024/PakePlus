@@ -325,6 +325,10 @@ export default defineConfig({
                                     link: '/zh/question/vue',
                                 },
                                 { text: '窗口跳转', link: '/zh/question/jump' },
+                                {
+                                    text: '功能测试',
+                                    link: '/zh/question/webDemo',
+                                },
                             ],
                         },
                         {
