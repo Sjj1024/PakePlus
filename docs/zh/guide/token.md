@@ -33,12 +33,12 @@ Workflows：用来编译打包你的软件
 ```
 
 1. 登录 Github 账号。
-2. 点击右上角的头像，进入个人中心。
+2. 点击右上角的头像，会展示菜单选项。
 3. 点击 `Settings` 按钮，进入设置页面。
-4. 在左侧菜单中，点击 `Developer settings` 按钮，进入开发者设置页面。
-5. 在左侧菜单中，点击 `Personal access tokens` 按钮，进入个人访问令牌页面。
-6. 点击 `Generate new token` 按钮，进入生成新令牌页面。
-   github 提供两种 token 类型，建议使用 classic Token，点击下面链接直达:
+4. 在左侧菜单最底部，点击 `Developer settings` 按钮，进入开发者设置页面。
+5. 在左侧菜单最底部，点击 `Personal access tokens` 按钮，点击 `Tokens(clssic)` 选项。
+6. 在右侧页面中，点击 `Generate new token(clssic)` 按钮，进入生成新令牌页面。
+   github 提供两种 token 类型，使用 classic Token，点击下面链接直达:
    [Personal access tokens (classic)](https://github.com/settings/tokens)
 7. Personal access tokens (classic) 获取操作：  
    只需要勾选下面三个权限就可以了：<font color="red">repo 和 workflow 和 user</font>
