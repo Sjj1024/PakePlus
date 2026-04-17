@@ -12,7 +12,7 @@ export default {
             }
         )
         const data = await getReleases.json()
-        console.log('getReleases data', JSON.stringify(data, null, 2))
+        console.log('getReleases data', JSON.stringify(data))
         return data
     },
 }
