@@ -1,9 +1,11 @@
-# 测试网站
+# 演示网站
 
-对于不太清楚 PakePlus 可以实现哪些操作的朋友，可以访问我们的在线测试网站，里面包含了桌面端和移动端两个页面，页面中有很多已经实现的代码，可以作为参考，比如如何访问摄像头、如何访问麦克风、如何访问位置、如何下载文件、如下写入文件等。  
+对于不太清楚 PakePlus 可以实现哪些操作的朋友，可以访问我们的在线演示网站，里面包含了桌面端和移动端两个页面，页面中有很多已经实现的代码，可以作为参考，比如如何访问摄像头、如何访问麦克风、如何访问位置、如何下载文件、如下写入文件等。  
 测试站的源代码可以下载参考：[https://self.pakeplus.com/PakePlusDemo.zip](https://self.pakeplus.com/PakePlusDemo.zip)
 
-## 桌面端测试站
+只需要将下面的网站地址填入打包 url 中，就可以测试打包后的效果。
+
+## 桌面端演示站
 
 测试站：[https://pphtml.pages.dev/](https://pphtml.pages.dev/)
 
@@ -11,7 +13,7 @@
 
 ![](../../static/imgs/webdemo1.webp)
 
-## 移动端测试站
+## 移动端演示站
 
 测试站：[https://pphtml.pages.dev/app](https://pphtml.pages.dev/app)
 

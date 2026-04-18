@@ -425,6 +425,7 @@ const isDownPage = () => {
     )
 }
 
+// get last release
 const lastRelease = data[0] || {
     url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/207589840',
     assets_url:
@@ -432,12 +433,12 @@ const lastRelease = data[0] || {
     upload_url:
         'https://uploads.github.com/repos/Sjj1024/PakePlus/releases/207589840/assets{?name,label}',
     html_url:
-        'https://github.com/Sjj1024/PakePlus/releases/tag/PakePlus-v0.5.17',
+        'https://github.com/Sjj1024/PakePlus/releases/tag/PakePlus-v2.2.3',
     id: 207589840,
     node_id: 'RE_kwDOMvkdy84MX5HQ',
-    tag_name: 'PakePlus-v0.5.17',
+    tag_name: 'PakePlus-v2.2.3',
     target_commitish: '4fb9a11b57dccf84387ba9bfe83685f6c571cd41',
-    name: 'PakePlus v0.5.17',
+    name: 'PakePlus v2.2.3',
     draft: false,
     prerelease: false,
     created_at: '2025-03-22T05:21:55Z',
@@ -447,7 +448,7 @@ const lastRelease = data[0] || {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239940761',
             id: 239940761,
             node_id: 'RA_kwDOMvkdy84OTTSZ',
-            name: 'PakePlus-0.5.17-1.x86_64.rpm',
+            name: 'PakePlus-2.2.3-1.x86_64.rpm',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -456,13 +457,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:56:49Z',
             updated_at: '2025-03-23T01:56:50Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus-0.5.17-1.x86_64.rpm',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.3/PakePlus-2.2.3-1.x86_64.rpm',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939962',
             id: 239939962,
             node_id: 'RA_kwDOMvkdy84OTTF6',
-            name: 'PakePlus_0.5.17_aarch64.dmg',
+            name: 'PakePlus_2.2.3_aarch64.dmg',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -471,13 +472,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:52:29Z',
             updated_at: '2025-03-23T01:52:30Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_aarch64.dmg',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.3/PakePlus_2.2.3_aarch64.dmg',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239940766',
             id: 239940766,
             node_id: 'RA_kwDOMvkdy84OTTSe',
-            name: 'PakePlus_0.5.17_amd64.AppImage',
+            name: 'PakePlus_2.2.3_amd64.AppImage',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -486,13 +487,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:56:50Z',
             updated_at: '2025-03-23T01:56:52Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_amd64.AppImage',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.3/PakePlus_2.2.3_amd64.AppImage',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239940760',
             id: 239940760,
             node_id: 'RA_kwDOMvkdy84OTTSY',
-            name: 'PakePlus_0.5.17_amd64.deb',
+            name: 'PakePlus_2.2.3_amd64.deb',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -501,13 +502,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:56:48Z',
             updated_at: '2025-03-23T01:56:48Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_amd64.deb',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.3/PakePlus_2.2.3_amd64.deb',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941740',
             id: 239941740,
             node_id: 'RA_kwDOMvkdy84OTThs',
-            name: 'PakePlus_0.5.17_arm64-setup.exe',
+            name: 'PakePlus_2.2.3_arm64-setup.exe',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -516,13 +517,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T02:01:43Z',
             updated_at: '2025-03-23T02:01:43Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_arm64-setup.exe',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.3/PakePlus_2.2.3_arm64-setup.exe',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941733',
             id: 239941733,
             node_id: 'RA_kwDOMvkdy84OTThl',
-            name: 'PakePlus_0.5.17_arm64_en-US.msi',
+            name: 'PakePlus_2.2.3_arm64_en-US.msi',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -531,13 +532,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T02:01:42Z',
             updated_at: '2025-03-23T02:01:43Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_arm64_en-US.msi',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.3/PakePlus_2.2.3_arm64_en-US.msi',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941382',
             id: 239941382,
             node_id: 'RA_kwDOMvkdy84OTTcG',
-            name: 'PakePlus_0.5.17_x64-setup.exe',
+            name: 'PakePlus_2.2.3_x64-setup.exe',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -546,13 +547,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T02:00:02Z',
             updated_at: '2025-03-23T02:00:03Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64-setup.exe',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.3/PakePlus_2.2.3_x64-setup.exe',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939963',
             id: 239939963,
             node_id: 'RA_kwDOMvkdy84OTTF7',
-            name: 'PakePlus_0.5.17_x64.dmg',
+            name: 'PakePlus_2.2.3_x64.dmg',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -561,13 +562,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:52:29Z',
             updated_at: '2025-03-23T01:52:30Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64.dmg',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.3/PakePlus_2.2.3_x64.dmg',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941381',
             id: 239941381,
             node_id: 'RA_kwDOMvkdy84OTTcF',
-            name: 'PakePlus_0.5.17_x64_en-US.msi',
+            name: 'PakePlus_2.2.3_x64_en-US.msi',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -576,7 +577,7 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T02:00:02Z',
             updated_at: '2025-03-23T02:00:02Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64_en-US.msi',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.3/PakePlus_2.2.3_x64_en-US.msi',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939968',
@@ -591,7 +592,7 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:52:31Z',
             updated_at: '2025-03-23T01:52:31Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_aarch64.app.tar.gz',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.3/PakePlus_aarch64.app.tar.gz',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939969',
@@ -606,13 +607,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:52:31Z',
             updated_at: '2025-03-23T01:52:32Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_x64.app.tar.gz',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.3/PakePlus_x64.app.tar.gz',
         },
     ],
     tarball_url:
-        'https://api.github.com/repos/Sjj1024/PakePlus/tarball/PakePlus-v0.5.17',
+        'https://api.github.com/repos/Sjj1024/PakePlus/tarball/PakePlus-v2.2.3',
     zipball_url:
-        'https://api.github.com/repos/Sjj1024/PakePlus/zipball/PakePlus-v0.5.17',
+        'https://api.github.com/repos/Sjj1024/PakePlus/zipball/PakePlus-v2.2.3',
     body: '## 我应该下载哪个版本？\r\n\r\n### MacOS\r\n\r\n-   MacOS intel 芯片: x64.dmg\r\n-   MacOS apple M 芯片: aarch64.dmg\r\n\r\n### Linux\r\n\r\n-   Linux 64 位: amd64.deb/amd64.rpm\r\n-   Linux arm64 architecture: arm64.deb/aarch64.rpm\r\n-   Linux armv7 架构: armhf.deb/armhfp.rpm\r\n\r\n### Windows\r\n\r\n-   64 位: x64-setup.exe\r\n-   arm64 架构: arm64-setup.exe',
 }
 
