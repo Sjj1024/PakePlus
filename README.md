@@ -1,6 +1,6 @@
 <h4 align="right"> 
 <span href=".README.md">English</span> 
-<a href="https://ppofficial.netlify.app/zh/" 
+<a href="https://pakeplus.com/zh/"
 style="margin: 0 10px;" >简体中文</a> 
 <a href="https://github.com/Sjj1024/PabBao/discussions/108">日本语</a>
 </h4>  
@@ -20,7 +20,7 @@ style="margin: 0 10px;" >简体中文</a>
     <a href="https://app.netlify.com/projects/pakeplus/deploys"><img src="https://api.netlify.com/api/v1/badges/f8454a03-8724-4797-9fe4-e6c51dd90e3a/deploy-status" alt="License"></a>
 </p>
 
-<div align="left">PacBao supports Mac, Windows, Linux, and Android & iOS. There’s no need to install complex dependencies locally, PacBao is only about 10MB in size. For the latest version, please see the <a href="[#popular-packages](https://github.com/Sjj1024/pakeplus/releases)">release page</a>. or visit: <a href="https://pakeplus.pages.dev" target="_blank">PacBao Web</a>. 
+<div align="left">PacBao supports Mac, Windows, Linux, and Android & iOS. There’s no need to install complex dependencies locally, PacBao is only about 10MB in size. For the latest version, please see the <a href="https://github.com/Sjj1024/PakePlus/releases">release page</a>. or visit: <a href="https://pakeplus.pages.dev" target="_blank">PacBao Web</a>.
 Document: <a href="https://pakeplus.com/guide/" target="_blank">PacBao Guide</a></div>  
 <br>
 
